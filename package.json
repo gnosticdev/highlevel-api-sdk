@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "openapi-fetch": "^0.7.10"
+  },
+  "devDependencies": {
+    "bun-types": "^1.0.6",
+    "openapi-typescript": "7.0.0-next.2"
+  }
+}

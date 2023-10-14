@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "outDir": "dist",
+        "module": "ESNext",
+        "strict": true,
+        "moduleResolution": "Bundler",
+        "moduleDetection": "force",
+        "noUncheckedIndexedAccess": true,
+        "types": ["bun-types"],
+        "esModuleInterop": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"],
+            "@schemas/*": ["./api/schemas/openapi/*"],
+            "@api/*": ["./api/*"],
+            "@scripts/*": ["./scripts/*"],
+            "@typings/*": ["endpoints-old/*"]
+        }
+    }
+}

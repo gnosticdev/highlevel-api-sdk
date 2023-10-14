@@ -1,0 +1,868 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "users API",
+        "description": "Documentation for users API",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "Users",
+            "description": "Documentation for users API"
+        },
+        {
+            "name": "Search",
+            "description": "Documentation for users API"
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://services.leadconnectorhq.com"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "type": "http"
+            }
+        },
+        "schemas": {
+            "BadRequestDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 400
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Bad Request"
+                    }
+                }
+            },
+            "UnauthorizedDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 401
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid token: access token is invalid"
+                    },
+                    "error": {
+                        "type": "string",
+                        "example": "Unauthorized"
+                    }
+                }
+            },
+            "PermissionsDto": {
+                "type": "object",
+                "properties": {
+                    "campaignsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "campaignsReadOnly": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "contactsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "workflowsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "workflowsReadOnly": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "triggersEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "funnelsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "websitesEnabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "opportunitiesEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "dashboardStatsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "bulkRequestsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "appointmentsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "reviewsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "onlineListingsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "phoneCallEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "conversationsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "assignedDataOnly": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "adwordsReportingEnabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "membershipEnabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "facebookAdsReportingEnabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "attributionsReportingEnabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "settingsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "tagsEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "leadValueEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "marketingEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "agentReportingEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "botService": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "socialPlanner": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "bloggingEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "invoiceEnabled": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                }
+            },
+            "RoleSchema": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "account"
+                    },
+                    "role": {
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "locationIds": {
+                        "example": [
+                            "ve9EPM428h8vShlRW1KT"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "UserSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "0IHuJvc2ofPAAA8GzTRi"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Deo"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Deo"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "john@deo.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+1 808-868-8888"
+                    },
+                    "extension": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "permissions": {
+                        "$ref": "#/components/schemas/PermissionsDto"
+                    },
+                    "roles": {
+                        "$ref": "#/components/schemas/RoleSchema"
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                }
+            },
+            "LocationSuccessfulResponseDto": {
+                "type": "object",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserSchema"
+                        }
+                    }
+                }
+            },
+            "UserSuccessfulResponseDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "0IHuJvc2ofPAAA8GzTRi"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Deo"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Deo"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "john@deo.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+1 808-868-8888"
+                    },
+                    "extension": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "permissions": {
+                        "$ref": "#/components/schemas/PermissionsDto"
+                    },
+                    "roles": {
+                        "$ref": "#/components/schemas/RoleSchema"
+                    }
+                }
+            },
+            "unprocessableDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 422
+                    },
+                    "message": {
+                        "example": [
+                            "Unprocessable Entity"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "error": {
+                        "type": "string",
+                        "example": "Unprocessable Entity"
+                    }
+                }
+            },
+            "CreateUserDto": {
+                "type": "object",
+                "properties": {
+                    "companyId": {
+                        "type": "string",
+                        "example": "ve9EPM428h8vShlRW1KT"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Deo"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "john@deo.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "*******"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+18832327657"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "account"
+                    },
+                    "role": {
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "locationIds": {
+                        "example": [
+                            "C2QujeCh8ZnC7al2InWR"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "permissions": {
+                        "$ref": "#/components/schemas/PermissionsDto"
+                    },
+                    "profilePhoto": {
+                        "type": "string",
+                        "example": "https://img.png"
+                    }
+                },
+                "required": [
+                    "companyId",
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "password",
+                    "type",
+                    "role",
+                    "locationIds",
+                    "permissions"
+                ]
+            },
+            "UpdateUserDto": {
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Deo"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "john@deo.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "*******"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+18832327657"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "account"
+                    },
+                    "role": {
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "locationIds": {
+                        "example": [
+                            "C2QujeCh8ZnC7al2InWR"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "permissions": {
+                        "$ref": "#/components/schemas/PermissionsDto"
+                    },
+                    "profilePhoto": {
+                        "type": "string",
+                        "example": "https://img.png"
+                    }
+                }
+            },
+            "DeleteUserSuccessfulResponseDto": {
+                "type": "object",
+                "properties": {
+                    "succeded": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Queued deleting user with e-mail john@deo.com and name John Deo. Will take effect in a few minutes."
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/users/{userId}": {
+            "get": {
+                "operationId": "get-user",
+                "summary": "Get User",
+                "description": "Get User",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "description": "User Id",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unprocessableDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Users"
+                ]
+            },
+            "put": {
+                "operationId": "update-user",
+                "summary": "Update User",
+                "description": "Update User",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "description": "User Id",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unprocessableDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Users"
+                ]
+            },
+            "delete": {
+                "operationId": "delete-user",
+                "summary": "Delete User",
+                "description": "Delete User",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "description": "User Id",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteUserSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unprocessableDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Users"
+                ]
+            }
+        },
+        "/users/": {
+            "get": {
+                "operationId": "get-user-by-location",
+                "summary": "Get User by Location",
+                "description": "Get User by Location",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "locationId",
+                        "required": true,
+                        "in": "query",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Users"
+                ]
+            },
+            "post": {
+                "operationId": "create-user",
+                "summary": "Create User",
+                "description": "Create User",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unprocessableDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Users"
+                ]
+            }
+        }
+    }
+}

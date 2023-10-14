@@ -1,0 +1,1597 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Conversations API",
+        "description": "Documentation for Conversations API",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "Conversations",
+            "description": "Documentation for Conversations API"
+        },
+        {
+            "name": "Search",
+            "description": "Documentation for Conversations API"
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://services.leadconnectorhq.com"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "type": "http"
+            }
+        },
+        "schemas": {
+            "BadRequestDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 400
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Bad Request"
+                    }
+                }
+            },
+            "UnauthorizedDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 401
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid token: access token is invalid"
+                    },
+                    "error": {
+                        "type": "string",
+                        "example": "Unauthorized"
+                    }
+                }
+            },
+            "ConversationSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Conversation Id",
+                        "example": "ABCHkzuJQ8ZMd4Te84GK"
+                    },
+                    "contactId": {
+                        "type": "string",
+                        "description": "Contact Id",
+                        "example": "ABCHkzuJQ8ZMd4Te84GK"
+                    },
+                    "locationId": {
+                        "type": "string",
+                        "description": "Location Id",
+                        "example": "ABCHkzuJQ8ZMd4Te84GK"
+                    },
+                    "lastMessageBody": {
+                        "type": "string",
+                        "description": "Last Message Body of the conversation",
+                        "example": "This is a sample message body"
+                    },
+                    "lastMessageType": {
+                        "type": "string",
+                        "description": "Last message type of the conversation",
+                        "example": "TYPE_SMS",
+                        "enum": [
+                            "TYPE_CALL",
+                            "TYPE_SMS",
+                            "TYPE_EMAIL",
+                            "TYPE_SMS_REVIEW_REQUEST",
+                            "TYPE_WEBCHAT",
+                            "TYPE_SMS_NO_SHOW_REQUEST",
+                            "TYPE_CAMPAIGN_SMS",
+                            "TYPE_CAMPAIGN_CALL",
+                            "TYPE_CAMPAIGN_EMAIL",
+                            "TYPE_CAMPAIGN_VOICEMAIL",
+                            "TYPE_FACEBOOK",
+                            "TYPE_CAMPAIGN_FACEBOOK",
+                            "TYPE_CAMPAIGN_MANUAL_CALL",
+                            "TYPE_CAMPAIGN_MANUAL_SMS",
+                            "TYPE_GMB",
+                            "TYPE_CAMPAIGN_GMB",
+                            "TYPE_REVIEW",
+                            "TYPE_INSTAGRAM",
+                            "TYPE_WHATSAPP",
+                            "TYPE_CUSTOM_SMS",
+                            "TYPE_CUSTOM_EMAIL"
+                        ]
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of the conversation",
+                        "example": "TYPE_PHONE",
+                        "enum": [
+                            "TYPE_PHONE",
+                            "TYPE_EMAIL",
+                            "TYPE_FB_MESSENGER",
+                            "TYPE_REVIEW"
+                        ]
+                    },
+                    "unreadCount": {
+                        "type": "number",
+                        "description": "Unread count of the messages in the conversation",
+                        "example": 1
+                    },
+                    "fullName": {
+                        "type": "string",
+                        "description": "Full name of the contact",
+                        "example": "John Doe"
+                    },
+                    "contactName": {
+                        "type": "string",
+                        "description": "Name of the contact in case the Full Name is missing, may contain the company name or the contact email",
+                        "example": "John Doe Company"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Email of the contact",
+                        "example": "johndoe@mailingdomain.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "Phone number of the contact",
+                        "example": "+15550001234"
+                    }
+                },
+                "required": [
+                    "id",
+                    "contactId",
+                    "locationId",
+                    "lastMessageBody",
+                    "lastMessageType",
+                    "type",
+                    "unreadCount",
+                    "fullName",
+                    "contactName",
+                    "email",
+                    "phone"
+                ]
+            },
+            "SendConversationResponseDto": {
+                "type": "object",
+                "properties": {
+                    "conversations": {
+                        "description": "The list of all conversations found for the given query",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ConversationSchema"
+                        }
+                    },
+                    "total": {
+                        "type": "number",
+                        "description": "Total Number of results found for the given query",
+                        "example": 100
+                    }
+                },
+                "required": [
+                    "conversations",
+                    "total"
+                ]
+            },
+            "CreateConversationDto": {
+                "type": "object",
+                "properties": {
+                    "locationId": {
+                        "type": "string",
+                        "description": "Location ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6"
+                    },
+                    "contactId": {
+                        "type": "string",
+                        "description": "Contact ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6"
+                    }
+                },
+                "required": [
+                    "locationId",
+                    "contactId"
+                ]
+            },
+            "ConversationDto": {
+                "type": "object",
+                "properties": {
+                    "locationId": {
+                        "type": "string",
+                        "description": "Location ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6"
+                    },
+                    "contactId": {
+                        "type": "string",
+                        "description": "Contact ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6"
+                    },
+                    "assignedTo": {
+                        "type": "string",
+                        "description": "Assigned User ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "description": "User ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6"
+                    },
+                    "lastMessageBody": {
+                        "type": "string",
+                        "description": "Last message body as string",
+                        "example": "Hello, this is the message body"
+                    },
+                    "lastMessageDate": {
+                        "type": "string",
+                        "description": "Last message date as UTC",
+                        "example": "1628008053263"
+                    },
+                    "lastMessageType": {
+                        "type": "string",
+                        "description": "Type of the last message sent/receieved in the conversation.",
+                        "enum": [
+                            "TYPE_CALL",
+                            "TYPE_SMS",
+                            "TYPE_EMAIL",
+                            "TYPE_SMS_REVIEW_REQUEST",
+                            "TYPE_WEBCHAT",
+                            "TYPE_SMS_NO_SHOW_REQUEST",
+                            "TYPE_CAMPAIGN_SMS",
+                            "TYPE_CAMPAIGN_CALL",
+                            "TYPE_CAMPAIGN_EMAIL",
+                            "TYPE_CAMPAIGN_VOICEMAIL",
+                            "TYPE_FACEBOOK",
+                            "TYPE_CAMPAIGN_FACEBOOK",
+                            "TYPE_CAMPAIGN_MANUAL_CALL",
+                            "TYPE_CAMPAIGN_MANUAL_SMS",
+                            "TYPE_GMB",
+                            "TYPE_CAMPAIGN_GMB",
+                            "TYPE_REVIEW",
+                            "TYPE_INSTAGRAM",
+                            "TYPE_WHATSAPP",
+                            "TYPE_CUSTOM_SMS",
+                            "TYPE_CUSTOM_EMAIL"
+                        ],
+                        "example": "TYPE_CALL"
+                    },
+                    "unreadCount": {
+                        "type": "number",
+                        "description": "Count of unread messages in the conversation",
+                        "example": 1
+                    },
+                    "inbox": {
+                        "type": "boolean",
+                        "description": "Inbox status of the conversation.",
+                        "example": true
+                    },
+                    "starred": {
+                        "type": "boolean",
+                        "description": "Starred status of the conversation.",
+                        "example": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "description": "Deleted status of the conversation.",
+                        "example": false
+                    }
+                },
+                "required": [
+                    "locationId",
+                    "contactId",
+                    "deleted"
+                ]
+            },
+            "GetConversationSuccessfulResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "Boolean value as the API response.",
+                        "example": true
+                    },
+                    "conversation": {
+                        "description": "Conversation data of the provided conversation ID.",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ConversationDto"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "success",
+                    "conversation"
+                ]
+            },
+            "UpdateConversationDto": {
+                "type": "object",
+                "properties": {
+                    "locationId": {
+                        "type": "string",
+                        "description": "Location ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6"
+                    },
+                    "unreadCount": {
+                        "type": "number",
+                        "description": "Count of unread messages in the conversation",
+                        "example": 1
+                    },
+                    "starred": {
+                        "type": "boolean",
+                        "description": "Starred status of the conversation.",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "locationId"
+                ]
+            },
+            "DeleteConversationSuccessfulResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "Boolean value as the API response.",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "success"
+                ]
+            },
+            "CancelScheduledResponseDto": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "number",
+                        "description": "HTTP Status code of the request",
+                        "example": 404
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Error message of the request",
+                        "example": "Failed cancel the scheduled message"
+                    }
+                },
+                "required": [
+                    "status",
+                    "message"
+                ]
+            },
+            "SendMessageBodyDto": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "SMS",
+                            "Email",
+                            "WhatsApp",
+                            "GMB",
+                            "IG",
+                            "FB"
+                        ]
+                    },
+                    "contactId": {
+                        "type": "string"
+                    },
+                    "appointmentId": {
+                        "type": "string"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "emailFrom": {
+                        "type": "string"
+                    },
+                    "html": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "templateId": {
+                        "type": "string"
+                    },
+                    "scheduledTimestamp": {
+                        "type": "number",
+                        "description": "UTC Timestamp (in seconds) at which the message should be scheduled",
+                        "example": 1669287863
+                    }
+                },
+                "required": [
+                    "type",
+                    "contactId"
+                ]
+            },
+            "SendMessageResponseDto": {
+                "type": "object",
+                "properties": {
+                    "conversationId": {
+                        "type": "string",
+                        "description": "Conversation ID.",
+                        "example": "ABC12h2F6uBrIkfXYazb"
+                    },
+                    "emailMessageId": {
+                        "type": "string",
+                        "description": "This contains the email message id (only for Email type). Use this ID to send inbound replies to GHL to create a threaded email.",
+                        "example": "rnGyqh2F6uBrIkfhFo9A"
+                    },
+                    "messageId": {
+                        "type": "string",
+                        "description": "This is the main Message ID",
+                        "example": "t22c6DQcTDf3MjRhwf77"
+                    },
+                    "messageIds": {
+                        "description": "When sending via the GMB channel, we will be returning list of `messageIds` instead of single `messageId`.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "msg": {
+                        "type": "string",
+                        "description": "Additional response message when sending a workflow message",
+                        "example": "Message queued successfully."
+                    }
+                },
+                "required": [
+                    "conversationId",
+                    "messageId"
+                ]
+            },
+            "ProcessMessageBodyDto": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Message Type",
+                        "example": "SMS",
+                        "enum": [
+                            "SMS",
+                            "Email",
+                            "WhatsApp",
+                            "GMB",
+                            "IG",
+                            "FB"
+                        ]
+                    },
+                    "attachments": {
+                        "description": "Array of attachments",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Message Body"
+                    },
+                    "conversationId": {
+                        "type": "string",
+                        "description": "Conversation Id",
+                        "example": "ve9EPM428h8vShlRW1KT"
+                    },
+                    "conversationProviderId": {
+                        "type": "string",
+                        "description": "Conversation Provider Id",
+                        "example": "61d6d1f9cdac7612faf80753"
+                    },
+                    "html": {
+                        "type": "string",
+                        "description": "HTML Body of Email"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "description": "Subject of the Email"
+                    },
+                    "emailFrom": {
+                        "type": "string",
+                        "description": "From Email Address"
+                    },
+                    "emailTo": {
+                        "type": "string",
+                        "description": "To Email Address"
+                    },
+                    "emailMessageId": {
+                        "type": "string",
+                        "description": "Send the email message id for which this email should be threaded. This is for replying to a specific email"
+                    }
+                },
+                "required": [
+                    "type",
+                    "conversationId",
+                    "conversationProviderId"
+                ]
+            },
+            "UploadFilesDto": {
+                "type": "object",
+                "properties": {
+                    "conversationId": {
+                        "type": "string",
+                        "description": "Conversation Id",
+                        "example": "ve9EPM428h8vShlRW1KT"
+                    }
+                },
+                "required": [
+                    "conversationId"
+                ]
+            },
+            "UploadFilesResponseDto": {
+                "type": "object",
+                "properties": {
+                    "uploadedFiles": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "uploadedFiles"
+                ]
+            },
+            "UploadFilesErrorResponseDto": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "number",
+                        "description": "HTTP Status code of the request",
+                        "example": 413,
+                        "enum": [
+                            400,
+                            413,
+                            415
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Error message of the request",
+                        "example": "Failed to upload the files"
+                    }
+                },
+                "required": [
+                    "status",
+                    "message"
+                ]
+            },
+            "ErrorDto": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Error Code",
+                        "example": "1"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Error Type",
+                        "example": "saas"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Error Message",
+                        "example": "There was an error from the provider"
+                    }
+                },
+                "required": [
+                    "code",
+                    "type",
+                    "message"
+                ]
+            },
+            "UpdateMessageStatusDto": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Message status",
+                        "example": "read",
+                        "enum": [
+                            "read",
+                            "pending",
+                            "delivered",
+                            "failed"
+                        ]
+                    },
+                    "error": {
+                        "description": "Error object from the conversation provider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ErrorDto"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "status"
+                ]
+            }
+        }
+    },
+    "paths": {
+        "/conversations/search": {
+            "get": {
+                "operationId": "search-conversation",
+                "summary": "Search Conversations",
+                "description": "Returns a list of all conversations matching the search criteria along with the sort and filter options selected.",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "locationId",
+                        "required": true,
+                        "in": "query",
+                        "description": "Location Id",
+                        "example": "ABCHkzuJQ8ZMd4Te84GK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contactId",
+                        "required": false,
+                        "in": "query",
+                        "description": "Contact Id",
+                        "example": "9VEmS0si86GW6gXWU89b",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "assignedTo",
+                        "required": false,
+                        "in": "query",
+                        "description": "Assigned to user Id. Multiple values are comma separated. \"unassigned\" is used to fetch all unassigned conversations",
+                        "example": "ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "query",
+                        "required": false,
+                        "in": "query",
+                        "description": "Search paramater as a string",
+                        "example": "Search string",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "required": false,
+                        "in": "query",
+                        "description": "Sort paramater - asc or desc",
+                        "example": "asc",
+                        "schema": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "startAfterDate",
+                        "required": false,
+                        "in": "query",
+                        "description": "Search to begin after the specified date - should contain the sort value of the last document",
+                        "example": 1600854,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "required": false,
+                        "in": "query",
+                        "description": "Id of the conversation",
+                        "example": "ABCHkzuJQ8ZMd4Te84GK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Limit of conversations - Default is 20",
+                        "example": 20,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "lastMessageType",
+                        "required": false,
+                        "in": "query",
+                        "description": "Type of the last message in the conversation as a string",
+                        "example": "TYPE_SMS",
+                        "schema": {
+                            "enum": [
+                                "TYPE_CALL",
+                                "TYPE_SMS",
+                                "TYPE_EMAIL",
+                                "TYPE_SMS_REVIEW_REQUEST",
+                                "TYPE_WEBCHAT",
+                                "TYPE_SMS_NO_SHOW_REQUEST",
+                                "TYPE_CAMPAIGN_SMS",
+                                "TYPE_CAMPAIGN_CALL",
+                                "TYPE_CAMPAIGN_EMAIL",
+                                "TYPE_CAMPAIGN_VOICEMAIL",
+                                "TYPE_FACEBOOK",
+                                "TYPE_CAMPAIGN_FACEBOOK",
+                                "TYPE_CAMPAIGN_MANUAL_CALL",
+                                "TYPE_CAMPAIGN_MANUAL_SMS",
+                                "TYPE_GMB",
+                                "TYPE_CAMPAIGN_GMB",
+                                "TYPE_REVIEW",
+                                "TYPE_INSTAGRAM",
+                                "TYPE_WHATSAPP",
+                                "TYPE_CUSTOM_SMS",
+                                "TYPE_CUSTOM_EMAIL"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lastMessageAction",
+                        "required": false,
+                        "in": "query",
+                        "description": "Action of the last outbound message in the conversation as string.",
+                        "example": "manual",
+                        "schema": {
+                            "enum": [
+                                "automated",
+                                "manual"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lastMessageDirection",
+                        "required": false,
+                        "in": "query",
+                        "description": "Direction of the last message in the conversation as string.",
+                        "example": "inbound",
+                        "schema": {
+                            "enum": [
+                                "inbound",
+                                "outbound"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "required": false,
+                        "in": "query",
+                        "description": "The status of the conversation to be filtered - all, read, unread, starred ",
+                        "example": "all",
+                        "schema": {
+                            "enum": [
+                                "all",
+                                "read",
+                                "unread",
+                                "starred"
+                            ],
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched the conversations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SendConversationResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Search"
+                ]
+            }
+        },
+        "/conversations/{conversationId}": {
+            "get": {
+                "operationId": "get-conversation",
+                "summary": "Get Conversation",
+                "description": "Get the conversation details based on the conversation ID",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "conversationId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Conversation ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetConversationSuccessfulResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Conversations"
+                ]
+            },
+            "put": {
+                "operationId": "update-conversation",
+                "summary": "Update Conversation",
+                "description": "Update the conversation details based on the conversation ID",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "conversationId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Conversation ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateConversationDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetConversationSuccessfulResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Conversations"
+                ]
+            },
+            "delete": {
+                "operationId": "delete-conversation",
+                "summary": "Delete Conversation",
+                "description": "Delete the conversation details based on the conversation ID",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "conversationId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Conversation ID as string",
+                        "example": "tDtDnQdgm2LXpyiqYvZ6",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteConversationSuccessfulResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Conversations"
+                ]
+            }
+        },
+        "/conversations/messages/email/{emailMessageId}/schedule": {
+            "delete": {
+                "operationId": "cancel-scheduled-email-message",
+                "summary": "Cancel a scheduled email message.",
+                "description": "Post the messageId for the API to delete a scheduled email message. <br />",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "emailMessageId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Email Message Id",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The scheduled email message was cancelled successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CancelScheduledResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Email"
+                ]
+            }
+        },
+        "/conversations/messages": {
+            "post": {
+                "operationId": "send-a-new-message",
+                "summary": "Send a new message",
+                "description": "Post the necessary fields for the API to send a new message.",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendMessageBodyDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created the message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SendMessageResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Messages"
+                ]
+            }
+        },
+        "/conversations/messages/inbound": {
+            "post": {
+                "operationId": "add-an-inbound-message",
+                "summary": "Add an inbound message",
+                "description": "Post the necessary fields for the API to add a new inbound message. <br />",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProcessMessageBodyDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created the message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SendMessageResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Messages"
+                ]
+            }
+        },
+        "/conversations/messages/{messageId}/schedule": {
+            "delete": {
+                "operationId": "cancel-scheduled-message",
+                "summary": "Cancel a scheduled message.",
+                "description": "Post the messageId for the API to delete a scheduled message. <br />",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Message Id",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The scheduled message was cancelled successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CancelScheduledResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Messages"
+                ]
+            }
+        },
+        "/conversations/messages/upload": {
+            "post": {
+                "operationId": "upload-file-attachments",
+                "summary": "Upload file attachments",
+                "description": "Post the necessary fields for the API to upload files. The files need to be a buffer with the key \"fileAttachment\" <br /><br /> The API will return an object with the URLs",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UploadFilesDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Uploaded the file successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadFilesResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "413": {
+                        "description": "Payload Too Large",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadFilesErrorResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "415": {
+                        "description": "Unsupported Media Type",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadFilesErrorResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Messages"
+                ]
+            }
+        },
+        "/conversations/messages/{messageId}/status": {
+            "put": {
+                "operationId": "update-message-status",
+                "summary": "Update message status",
+                "description": "Post the necessary fields for the API to update message status.",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Message Id",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMessageStatusDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created the message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SendMessageResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Messages"
+                ]
+            }
+        },
+        "/conversations/": {
+            "post": {
+                "operationId": "create-conversation",
+                "summary": "Create Conversation",
+                "description": "Creates a new conversation with the data provided",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateConversationDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetConversationSuccessfulResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Conversations"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,676 @@
+{
+    "businesses": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /businesses",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /businesses/:businessId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /businesses",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /businesses/:businessId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /businesses/:businessId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "calendars": {
+        "write": [
+            {
+                "methodAndEndpoint": "POST /calendars/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /calendars/:calendarId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /calendars/:calendarId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /calendars/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /calendars/:calendarId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /calendars/:calendarId/free-slots",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "calendars/groups": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /calendars/groups",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /calendars/groups",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /calendars/groups/validate-slug",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /calendars/groups/:groupId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /calendars/groups/:groupId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /calendars/groups/:groupId/status",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "calendars/events": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /calendars/events/appointments/:eventId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "DELETE /calendars/events/:eventId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /calendars/events/block-slots",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /calendars/events/block-slots/:eventId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /calendars/events/appointments",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /calendars/events/appointments /:eventId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "campaigns": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /campaigns/",
+                "webhookEvents": "CampaignStatusUpdate",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "contacts": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /contacts/:contactId",
+                "webhookEvents": "ContactCreate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /contacts/:contactId/tasks",
+                "webhookEvents": "ContactDelete",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /contacts/:contactId/tasks/:taskId",
+                "webhookEvents": "ContactDndUpdate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /contacts/:contactId/notes",
+                "webhookEvents": "ContactTagUpdate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /contacts/:contactId/notes/:id",
+                "webhookEvents": "NoteCreate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /contacts/:contactId/appointments",
+                "webhookEvents": "NoteDelete",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /contacts/",
+                "webhookEvents": "TaskCreate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /contacts/business/:businessId",
+                "webhookEvents": "TaskDelete",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /contacts/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /contacts/:contactId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /contacts/:contactId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /contacts/:contactId/tasks",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /contacts/:contactId/tasks/:taskId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /contacts/:contactId/tasks/:taskId/completed",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /contacts/:contactId/tasks/:taskId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /contacts/:contactId/tags",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /contacts/:contactId/tags",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /contacts/:contactId/notes",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /contacts/:contactId/notes/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /contacts/:contactId/notes/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /contacts/:contactId/campaigns/:campaignId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /contacts/:contactId/campaigns/removeAll",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /contacts/:contactId/campaigns/:campaignId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /contacts/:contactId/workflow/:workflowId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /contacts/:contactId/workflow/:workflowId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "conversations": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /conversations/:conversationsId",
+                "webhookEvents": "ConversationUnreadWebhook",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /conversations/search",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /conversations/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /conversations/:conversationsId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /conversations/:conversationsId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "conversations/message": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET conversations/messages/:messageId/locations/:locationId/recording",
+                "webhookEvents": "InboundMessage",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /conversations/messages",
+                "webhookEvents": "ConversationProviderOutboundMessage",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /conversations/messages/inbound",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /conversations/messages/upload",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /conversations/messages/:messageId/status",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /conversations/messages/:messageId/schedule",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /conversations/messages/email/:emailMessageId/schedule",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "forms": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /forms/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /forms/submissions",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "links": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /links/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /links/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /links/:linkId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /links/:linkId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "locations": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /locations/:locationId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account, Company"]
+            },
+            {
+                "methodAndEndpoint": "GET /locations/search",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account, Company"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /locations/",
+                "webhookEvents": "",
+                "accessType": ["Company"]
+            },
+            {
+                "methodAndEndpoint": "PUT /locations/:locationId",
+                "webhookEvents": "",
+                "accessType": ["Company"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /locations/:locationId",
+                "webhookEvents": "",
+                "accessType": ["Company"]
+            }
+        ]
+    },
+    "locations/customValues": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /locations/:locationId/customValues",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /locations/:locationId/customValues/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /locations/:locationId/customValues",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /locations/:locationId/customValues/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /locations/:locationId/customValues/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "locations/customFields": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /locations/:locationId/customFields",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /locations/:locationId/customFields/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /locations/:locationId/customFields",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /locations/:locationId/customFields/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /locations/:locationId/customFields/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "locations/tags": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /locations/:locationId/tags",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /locations/:locationId/tags/:tagId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /locations/:locationId/tags/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /locations/:locationId/tags/:tagId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /locations/:locationId/tags/:tagId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "locations/templates": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /locations/:locationId/templates",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "locations/tasks": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "POST /locations/:locationId/tasks/search",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "medias": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /medias/files",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /medias/upload-file",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /medias/:fileId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "opportunities": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /opportunities/search",
+                "webhookEvents": "OpportunityCreate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /opportunities/:id",
+                "webhookEvents": "OpportunityDelete",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /opportunities/pipelines",
+                "webhookEvents": "OpportunityStageUpdate",
+                "accessType": ["Sub-Account"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "DELETE /opportunities/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /opportunities/:id/status",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "POST /opportunities",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "PUT /opportunities/:id",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "oauth": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /oauth/installedLocations",
+                "webhookEvents": "",
+                "accessType": ["Company"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /oauth/locationToken",
+                "webhookEvents": "",
+                "accessType": ["Company"]
+            }
+        ]
+    },
+    "snapshots": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /snapshots",
+                "webhookEvents": "",
+                "accessType": ["Company"]
+            }
+        ]
+    },
+    "surveys": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /surveys/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "GET /surveys/submissions",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    },
+    "users": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /users/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account, Company"]
+            },
+            {
+                "methodAndEndpoint": "GET /users/:userId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account, Company"]
+            }
+        ],
+        "write": [
+            {
+                "methodAndEndpoint": "POST /users/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account, Company"]
+            },
+            {
+                "methodAndEndpoint": "DELETE /users/:userId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account, Company"]
+            },
+            {
+                "methodAndEndpoint": "PUT /users/:userId",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account, Company"]
+            }
+        ]
+    },
+    "workflows": {
+        "readonly": [
+            {
+                "methodAndEndpoint": "GET /workflows/",
+                "webhookEvents": "",
+                "accessType": ["Sub-Account"]
+            }
+        ]
+    }
+}

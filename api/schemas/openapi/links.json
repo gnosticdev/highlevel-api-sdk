@@ -1,0 +1,506 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "links API",
+        "description": "Documentation for links API",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "Trigger Links",
+            "description": "Documentation for links API"
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://services.leadconnectorhq.com"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "type": "http"
+            }
+        },
+        "schemas": {
+            "BadRequestDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 400
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Bad Request"
+                    }
+                }
+            },
+            "UnauthorizedDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 401
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid token: access token is invalid"
+                    },
+                    "error": {
+                        "type": "string",
+                        "example": "Unauthorized"
+                    }
+                }
+            },
+            "LinkSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "n4AriwEnFrGh3tu08W0U"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "first tag"
+                    },
+                    "redirectTo": {
+                        "type": "string",
+                        "example": "https://www.google.com/"
+                    },
+                    "fieldKey": {
+                        "type": "string",
+                        "example": "{{trigger_link.n4AriwEnFrGh3tu08W0U}}"
+                    },
+                    "locationId": {
+                        "type": "string",
+                        "example": "ve9EPM428h8vShlRW1KT"
+                    }
+                }
+            },
+            "GetLinksSuccessfulResponseDto": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LinkSchema"
+                        }
+                    }
+                }
+            },
+            "LinksDto": {
+                "type": "object",
+                "properties": {
+                    "locationId": {
+                        "type": "string",
+                        "example": "ve9EPM428h8vShlRW1KT"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "first tag"
+                    },
+                    "redirectTo": {
+                        "type": "string",
+                        "example": "https://www.google.com/"
+                    }
+                },
+                "required": [
+                    "locationId",
+                    "name",
+                    "redirectTo"
+                ]
+            },
+            "GetLinkSuccessfulResponseDto": {
+                "type": "object",
+                "properties": {
+                    "link": {
+                        "$ref": "#/components/schemas/LinkSchema"
+                    }
+                }
+            },
+            "unprocessableDto": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "number",
+                        "example": 422
+                    },
+                    "message": {
+                        "example": [
+                            "Unprocessable Entity"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "error": {
+                        "type": "string",
+                        "example": "Unprocessable Entity"
+                    }
+                }
+            },
+            "LinkUpdateDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "first tag"
+                    },
+                    "redirectTo": {
+                        "type": "string",
+                        "example": "https://www.google.com/"
+                    }
+                },
+                "required": [
+                    "name",
+                    "redirectTo"
+                ]
+            },
+            "DeleteLinksSuccessfulResponseDto": {
+                "type": "object",
+                "properties": {
+                    "succeded": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/links/{linkId}": {
+            "put": {
+                "operationId": "update-link",
+                "summary": "Update Link",
+                "description": "Update Link",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "linkId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Link Id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LinkUpdateDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLinkSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unprocessableDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Trigger Links"
+                ]
+            },
+            "delete": {
+                "operationId": "delete-link",
+                "summary": "Delete Link",
+                "description": "Delete Link",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "linkId",
+                        "required": true,
+                        "in": "path",
+                        "description": "Link Id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteLinksSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unprocessableDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Trigger Links"
+                ]
+            }
+        },
+        "/links/": {
+            "get": {
+                "operationId": "get-links",
+                "summary": "Get Links",
+                "description": "Get Links",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    },
+                    {
+                        "name": "locationId",
+                        "required": true,
+                        "in": "query",
+                        "example": "ve9EPM428h8vShlRW1KT",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLinksSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Trigger Links"
+                ]
+            },
+            "post": {
+                "operationId": "create-link",
+                "summary": "Create Link",
+                "description": "Create Link",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Access Token"
+                        }
+                    },
+                    {
+                        "name": "Version",
+                        "in": "header",
+                        "description": "Api Version",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2021-04-15"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LinksDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLinkSuccessfulResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/unprocessableDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Trigger Links"
+                ]
+            }
+        }
+    }
+}
