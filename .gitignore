@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# build outputs
+.next
+out
+dist
+.astro
+
+# Cursor related files
+.vscode-test
+.vscode/tasks.json
+
+# Bun
+bun.lockb

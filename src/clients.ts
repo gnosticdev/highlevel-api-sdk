@@ -1,14 +1,14 @@
 import createClient from 'openapi-fetch'
 
-import { paths as contactPaths } from 'api/types/contacts'
-import { paths as locationPaths } from '@api/types/locations'
+import { type paths as contactPaths } from '@api/types/contacts'
+import { type paths as locationPaths } from '@api/types/locations'
 
 export const LocationsClient = createClient<locationPaths>({
-    baseUrl: 'https://services.leadconnectorhq.com'
+    baseUrl: Bun.env.API_BASE_URL
 })
 
 export const ContactsClient = createClient<contactPaths>({
-    baseUrl: 'https://services.leadconnectorhq.com'
+    baseUrl: Bun.env.API_BASE_URL
 })
 
 export async function getLocations() {
@@ -32,8 +32,8 @@ export async function getLocations() {
     return data
 }
 
-export async function getContacts() {
-    const locationId = '5Y0ggcxwYThSdHUAgiIN'
+// peninsula locationId = '5Y0ggcxwYThSdHUAgiIN'
+export async function getContacts(locationId: string) {
     const last30Days = Date.now() - 1000 * 60 * 60 * 24 * 30
 
     const authToken = process.env.AUTH_TOKEN

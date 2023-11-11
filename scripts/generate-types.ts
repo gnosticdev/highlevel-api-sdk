@@ -1,47 +1,30 @@
-import { getOpenApiReader, getTypeScriptWriter, makeConverter } from 'typeconv'
-import fs from 'fs/promises'
+import fs from 'fs'
+import path from 'path'
+import openapiTS, { astToString } from 'openapi-typescript'
+import { CoolConsole, coolConsole } from '@gnosticdev/cool-console'
 
-async function createTypes() {
-    const reader = getOpenApiReader()
-    const writer = getTypeScriptWriter({
-        declaration: true,
-        namespaces: 'all',
-        filename: `types/${import.meta.path}.ts`
-    })
-    const { convert } = makeConverter(reader, writer)
-    const { data } = await convert({
-        data: './specs/contacts.json',
-        cwd: import.meta.dir
-    })
-    console.log(data)
-}
+await generateTypes()
 
-export async function iterateThroughOpenApiSchemas() {
-    const SCHEMAS_DIR = './schemas'
-    const TYPES_DIR = './typings'
-
-    const files = await fs.readdir(SCHEMAS_DIR)
-    try {
-        await fs.access(TYPES_DIR)
-    } catch {
-        await fs.mkdir(TYPES_DIR, { recursive: true })
+async function generateTypes() {
+    const SCHEMAS_DIR = path.join(process.cwd(), 'api/schemas/openapi')
+    const TYPES_DIR = path.join(process.cwd(), 'api/types')
+    const exists = await fs.promises.exists(TYPES_DIR)
+    if (!exists) {
+        await fs.promises.mkdir(TYPES_DIR)
     }
-    for (const file of files) {
-        const openApiJson = await fs.readFile(`${SCHEMAS_DIR}/${file}`, 'utf8')
-
-        const reader = getOpenApiReader()
-        const writer = getTypeScriptWriter()
-        const { convert } = makeConverter(reader, writer)
-        const { data } = await convert({
-            data: openApiJson,
-            cwd: import.meta.dir
+    if (!TYPES_DIR) throw new Error('Could not create directories')
+    // example 1: load [object] as schema (JSON only)
+    const schemaFiles = await fs.promises.readdir(SCHEMAS_DIR)
+    for await (const fileName of schemaFiles) {
+        const fileUrl = Bun.pathToFileURL(path.join(SCHEMAS_DIR, fileName))
+        console.log(fileUrl)
+        const output = await openapiTS(fileUrl, {
+            exportType: true
         })
+        const data = astToString(output)
 
-        await fs.writeFile(`types/${file.split('.json')[0]}.ts`, data, {
-            flag: 'w'
-        })
-        console.log(`added types for ${file}`)
+        const outFile = path.join(TYPES_DIR, `${fileName.split('.json')[0]}.ts`)
+        await Bun.write(outFile, data)
+        coolConsole.green(`added types for ${fileName}`)
     }
 }
-
-iterateThroughOpenApiSchemas()

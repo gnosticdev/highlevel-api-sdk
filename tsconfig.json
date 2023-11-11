@@ -9,6 +9,7 @@
         "noUncheckedIndexedAccess": true,
         "types": ["bun-types"],
         "esModuleInterop": true,
+        "verbatimModuleSyntax": true,
         "allowJs": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
