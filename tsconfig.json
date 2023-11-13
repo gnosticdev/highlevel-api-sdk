@@ -1,26 +1,31 @@
 {
     "compilerOptions": {
         "target": "ESNext",
-        "outDir": "dist",
         "module": "ESNext",
         "strict": true,
+        "noEmit": true,
         "moduleResolution": "Bundler",
         "moduleDetection": "force",
         "noUncheckedIndexedAccess": true,
         "types": ["bun-types"],
         "esModuleInterop": true,
+        "skipDefaultLibCheck": true,
         "verbatimModuleSyntax": true,
         "allowJs": true,
         "skipLibCheck": true,
+        "preserveSymlinks": true,
+        "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
-        "resolveJsonModule": true,
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["./src/*"],
-            "@schemas/*": ["./api/schemas/openapi/*"],
-            "@api/*": ["./api/*"],
-            "@scripts/*": ["./scripts/*"],
-            "@typings/*": ["endpoints-old/*"]
-        }
-    }
+        "resolveJsonModule": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "tests/**/*.ts",
+        "scripts/**/*.ts",
+        "schemas/**/*.json"
+    ],
+    "exclude": [
+        "node_modules",
+        "/Users/divinelight/code/utilities/cool-console"
+    ]
 }

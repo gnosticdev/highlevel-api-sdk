@@ -1,21 +1,28 @@
 {
-  "name": "gohighlevel-api",
-  "private": true,
-  "version": "1.0.0",
-  "license": "Apache-2.0",
-  "description": "HighLevel API",
-  "main": "src/index.ts",
-  "type": "module",
-  "scripts": {
-    "build": "bun run scripts/generate-types.ts",
-    "dev": "bun run src/auth.ts"
-  },
-  "dependencies": {
-    "nanostores": "^0.9.4",
-    "openapi-fetch": "^0.7.10"
-  },
-  "devDependencies": {
-    "bun-types": "^1.0.10",
-    "openapi-typescript": "7.0.0-next.2"
-  }
+    "name": "gohighlevel-api",
+    "private": true,
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "description": "HighLevel API",
+    "exports": {
+        ".": "./dist/client/index.js",
+        "./*": "./dist/api/generated/*"
+    },
+    "type": "module",
+    "scripts": {
+        "generate:openapi": "bun run scripts/build-openapi.ts",
+        "generate:client": "bun run scripts/build-client.ts",
+        "generate:types": "tsc -p tsconfig.build.json",
+        "generate:all": "bun run generate:openapi && bun run generate:client && bun run generate:types"
+    },
+    "dependencies": {
+        "@gnosticdev/cool-console": "link:@gnosticdev/cool-console",
+        "nanostores": "^0.9.4",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "bun-types": "^1.0.10",
+        "openapi-fetch": "^0.8.1",
+        "openapi-typescript": "7.0.0-next.2"
+    }
 }

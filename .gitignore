@@ -14,5 +14,7 @@ dist
 .vscode-test
 .vscode/tasks.json
 
+.env
+
 # Bun
 bun.lockb

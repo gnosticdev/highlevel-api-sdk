@@ -1,11 +1,9 @@
-import scopesSchema from '@api/schemas/scopes.json'
+import scopesSchema from '../api/schemas/scopes.json'
 
 /**
  * use the accessType to determine the scopes. Assume that all scopes for a sub-account are also available for a company
  */
-export function generateScopes(
-    accessType: 'Sub-Account' | 'Company' = 'Sub-Account'
-) {
+export function generateScopes(accessType: 'Sub-Account' | 'Company') {
     let scopeString = ''
     for (const scope of Object.keys(scopesSchema)) {
         if (scope.includes(accessType)) {
@@ -19,15 +17,17 @@ export function generateScopes(
  * Generate the url to redirect to for the user to authorize the app
  * @param redirectUri - the url to redirect to after the user has authorized the app
  * @param CLIENT_ID - the client id of the app
- * @param accessType - the type of access to request (Sub-Account or Company)
+ * @param accessType - the type of access to request
+ *  - Sub-Account (same as Location)
+ *  - Company (same as Agency))
  * @returns
  */
 export function generateRedirectUrl(
     redirectUri: string,
     CLIENT_ID: string,
-    accessType: 'Sub-Account' | 'Company' = 'Sub-Account'
+    scopeOrAccess: 'Sub-Account' | 'Company'
 ) {
-    const scopes = generateScopes(accessType)
+    const scopes = generateScopes(scopeOrAccess)
 
     const baseUrl = 'https://marketplace.gohighlevel.com/oauth/chooselocation'
     const params = new URLSearchParams({
@@ -38,4 +38,15 @@ export function generateRedirectUrl(
     })
 
     return `${baseUrl}?${params.toString()}`
+}
+
+export function objectKeys<T extends { [K in keyof T]: T[K] }>(
+    obj: T
+): (keyof T)[] {
+    return Object.keys(obj) as (keyof T)[]
+}
+export function objectEntries<T extends { [K in keyof T]: T[K] }>(
+    obj: T
+): [keyof T, T[keyof T]][] {
+    return Object.entries(obj) as [keyof T, T[keyof T]][]
 }

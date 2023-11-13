@@ -143,11 +143,7 @@
                         "description": "Last updation time"
                     }
                 },
-                "required": [
-                    "id",
-                    "name",
-                    "locationId"
-                ]
+                "required": ["id", "name", "locationId"]
             },
             "GetBusinessByLocationResponseDto": {
                 "type": "object",
@@ -160,9 +156,7 @@
                         }
                     }
                 },
-                "required": [
-                    "businesses"
-                ]
+                "required": ["businesses"]
             },
             "CreateBusinessDto": {
                 "type": "object",
@@ -212,10 +206,7 @@
                         "example": "business description"
                     }
                 },
-                "required": [
-                    "name",
-                    "locationId"
-                ]
+                "required": ["name", "locationId"]
             },
             "UpdateBusinessResponseDto": {
                 "type": "object",
@@ -234,10 +225,7 @@
                         ]
                     }
                 },
-                "required": [
-                    "success",
-                    "buiseness"
-                ]
+                "required": ["success", "buiseness"]
             },
             "UnprocessableDTO": {
                 "type": "object",
@@ -247,9 +235,7 @@
                         "example": 422
                     },
                     "message": {
-                        "example": [
-                            "Unprocessable Entity"
-                        ],
+                        "example": ["Unprocessable Entity"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -315,9 +301,7 @@
                         "example": true
                     }
                 },
-                "required": [
-                    "success"
-                ]
+                "required": ["success"]
             },
             "GetBusinessByIdResponseDto": {
                 "type": "object",
@@ -331,9 +315,7 @@
                         ]
                     }
                 },
-                "required": [
-                    "business"
-                ]
+                "required": ["business"]
             }
         }
     },
@@ -426,9 +408,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Businesses"
-                ]
+                "tags": ["Businesses"]
             },
             "delete": {
                 "operationId": "delete-Business",
@@ -507,9 +487,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Businesses"
-                ]
+                "tags": ["Businesses"]
             },
             "get": {
                 "operationId": "get-business",
@@ -588,9 +566,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Businesses"
-                ]
+                "tags": ["Businesses"]
             }
         },
         "/businesses/": {
@@ -661,9 +637,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Businesses"
-                ]
+                "tags": ["Businesses"]
             },
             "post": {
                 "operationId": "create-business",
@@ -743,9 +717,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Businesses"
-                ]
+                "tags": ["Businesses"]
             }
         }
     }
