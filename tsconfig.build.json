@@ -1,11 +1,18 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "noEmit": false,
         "outDir": "./dist",
         "declaration": true,
-        "rootDirs": ["./src/api/generated", "./src/api/schemas", "./src/client"]
+        "rootDirs": [
+            "./src/api/generated",
+            "./src/api/schemas",
+            "./src/client"
+        ],
+        "rootDir": "./src/"
     },
-    "include": ["./src/**/*.ts"],
+    "include": ["./src/api/generated/**/*.ts", "./src/client/*.ts"],
     "exclude": ["./src/lib/**/*"]
 }

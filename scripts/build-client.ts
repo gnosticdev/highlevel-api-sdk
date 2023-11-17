@@ -7,5 +7,6 @@ const entrypoints = fs.readdirSync('src/client')
 await Bun.build({
     entrypoints,
     outdir: 'dist',
-    target: 'bun'
+    root: 'src/client',
+    sourcemap: 'inline'
 })

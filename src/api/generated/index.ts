@@ -13,4 +13,19 @@ import * as Opportunities from './opportunities'
 import * as Calendars from './calendars'
 import * as Contacts from './contacts'
 
-export { Locations, Conversations, Surveys, Businesses, Snapshots, Links, Workflows, Campaigns, Users, Oauth, Forms, Opportunities, Calendars, Contacts }
+export {
+    Locations,
+    Conversations,
+    Surveys,
+    Businesses,
+    Snapshots,
+    Links,
+    Workflows,
+    Campaigns,
+    Users,
+    Oauth,
+    Forms,
+    Opportunities,
+    Calendars,
+    Contacts
+}

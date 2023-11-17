@@ -395,12 +395,12 @@
             {
                 "methodAndEndpoint": "GET /locations/:locationId",
                 "webhookEvents": "",
-                "accessType": ["Sub-Account, Company"]
+                "accessType": ["Sub-Account", "Company"]
             },
             {
                 "methodAndEndpoint": "GET /locations/search",
                 "webhookEvents": "",
-                "accessType": ["Sub-Account, Company"]
+                "accessType": ["Sub-Account", "Company"]
             }
         ],
         "write": [
@@ -638,29 +638,29 @@
             {
                 "methodAndEndpoint": "GET /users/",
                 "webhookEvents": "",
-                "accessType": ["Sub-Account, Company"]
+                "accessType": ["Sub-Account", "Company"]
             },
             {
                 "methodAndEndpoint": "GET /users/:userId",
                 "webhookEvents": "",
-                "accessType": ["Sub-Account, Company"]
+                "accessType": ["Sub-Account", "Company"]
             }
         ],
         "write": [
             {
                 "methodAndEndpoint": "POST /users/",
                 "webhookEvents": "",
-                "accessType": ["Sub-Account, Company"]
+                "accessType": ["Sub-Account", "Company"]
             },
             {
                 "methodAndEndpoint": "DELETE /users/:userId",
                 "webhookEvents": "",
-                "accessType": ["Sub-Account, Company"]
+                "accessType": ["Sub-Account", "Company"]
             },
             {
                 "methodAndEndpoint": "PUT /users/:userId",
                 "webhookEvents": "",
-                "accessType": ["Sub-Account, Company"]
+                "accessType": ["Sub-Account", "Company"]
             }
         ]
     },

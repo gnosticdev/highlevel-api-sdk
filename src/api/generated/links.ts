@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
     "/links/{linkId}": {
         parameters: {
             query?: never;
@@ -47,9 +47,9 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
-};
+}
 export type webhooks = Record<string, never>;
-export type components = {
+export interface components {
     schemas: {
         BadRequestDto: {
             /** @example 400 */
@@ -117,7 +117,7 @@ export type components = {
     requestBodies: never;
     headers: never;
     pathItems: never;
-};
+}
 export type $defs = Record<string, never>;
 export interface operations {
     "update-link": {

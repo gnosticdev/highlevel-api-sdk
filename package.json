@@ -1,28 +1,29 @@
 {
-    "name": "gohighlevel-api",
-    "private": true,
-    "version": "1.0.0",
-    "license": "Apache-2.0",
-    "description": "HighLevel API",
-    "exports": {
-        ".": "./dist/client/index.js",
-        "./*": "./dist/api/generated/*"
-    },
-    "type": "module",
-    "scripts": {
-        "generate:openapi": "bun run scripts/build-openapi.ts",
-        "generate:client": "bun run scripts/build-client.ts",
-        "generate:types": "tsc -p tsconfig.build.json",
-        "generate:all": "bun run generate:openapi && bun run generate:client && bun run generate:types"
-    },
-    "dependencies": {
-        "@gnosticdev/cool-console": "link:@gnosticdev/cool-console",
-        "nanostores": "^0.9.4",
-        "zod": "^3.22.4"
-    },
-    "devDependencies": {
-        "bun-types": "^1.0.10",
-        "openapi-fetch": "^0.8.1",
-        "openapi-typescript": "7.0.0-next.2"
-    }
+  "name": "gohighlevel-api",
+  "private": true,
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "description": "HighLevel API",
+  "exports": {
+    ".": "./dist/client/index.js",
+    "./types": "./dist/api/generated/index.d.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "generate:api": "bun run scripts/build-api.ts",
+    "generate:client": "bun run scripts/build-client.ts",
+    "package": "tsc -p tsconfig.build.json",
+    "generate:all": "bun run generate:api && bun run generate:client && bun run package"
+  },
+  "dependencies": {
+    "@gnosticdev/cool-console": "link:@gnosticdev/cool-console",
+    "nanostores": "^0.9.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "bun-types": "^1.0.10",
+    "openapi-fetch": "^0.8.1",
+    "openapi-typescript": "7.0.0-next.2",
+    "typescript": "^5.2.2"
+  }
 }

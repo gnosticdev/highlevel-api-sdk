@@ -16,7 +16,8 @@
         "preserveSymlinks": true,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "strictNullChecks": true
     },
     "include": [
         "src/**/*.ts",
