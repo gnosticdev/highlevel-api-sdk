@@ -1,194 +1,183 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Snapshots API",
-        "description": "Documentation for Snapshots API",
-        "version": "1.0",
-        "contact": {}
-    },
-    "tags": [
-        {
-            "name": "Snapshots",
-            "description": "Documentation for Snapshots API"
-        }
-    ],
-    "servers": [
-        {
-            "url": "https://services.leadconnectorhq.com"
-        }
-    ],
-    "components": {
-        "securitySchemes": {
-            "bearer": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Location",
-                "type": "http"
-            },
-            "Location-Access": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Location",
-                "type": "http"
-            },
-            "Agency-Access": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Company",
-                "type": "http"
-            }
-        },
-        "schemas": {
-            "BadRequestDTO": {
-                "type": "object",
-                "properties": {
-                    "statusCode": {
-                        "type": "number",
-                        "example": 400
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Bad Request"
-                    }
-                }
-            },
-            "UnauthorizedDTO": {
-                "type": "object",
-                "properties": {
-                    "statusCode": {
-                        "type": "number",
-                        "example": 401
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Invalid token: access token is invalid"
-                    },
-                    "error": {
-                        "type": "string",
-                        "example": "Unauthorized"
-                    }
-                }
-            },
-            "SnapshotsSchema": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "example": "1eM2UgkfaECOYyUdCo9Pa",
-                        "description": "Snapshot Id."
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "Martial Arts Snapshot",
-                        "description": "Name of the snapshot"
-                    },
-                    "type": {
-                        "type": "string",
-                        "example": "own",
-                        "description": "Type of snapshot - own or imported."
-                    }
-                }
-            },
-            "GetSnapshotsSuccessfulResponseDto": {
-                "type": "object",
-                "properties": {
-                    "snapshots": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/SnapshotsSchema"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "paths": {
-        "/snapshots/": {
-            "get": {
-                "operationId": "get-custom-snapshots",
-                "summary": "Get Snapshots",
-                "description": "Get a list of all own and imported Snapshots",
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Access Token",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
-                        }
-                    },
-                    {
-                        "name": "Version",
-                        "in": "header",
-                        "description": "API Version",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
-                        }
-                    },
-                    {
-                        "name": "companyId",
-                        "required": true,
-                        "in": "query",
-                        "example": "5D112kQsiKESj6rash",
-                        "description": "Company Id",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GetSnapshotsSuccessfulResponseDto"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDTO"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Snapshots"
-                ],
-                "security": [
-                    {
-                        "Agency-Access": []
-                    }
-                ]
-            }
-        }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Snapshots API",
+    "description": "Documentation for Snapshots API",
+    "version": "1.0",
+    "contact": {},
+    "license": {
+      "name": "",
+      "url": "https://opensource.org/licenses/MIT"
     }
+  },
+  "tags": [
+    {
+      "name": "Snapshots",
+      "description": "Documentation for Snapshots API"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "$ref": "oauth.json#/components/securitySchemes/bearer"
+      },
+      "Location-Access": {
+        "$ref": "oauth.json#/components/securitySchemes/Location-Access"
+      },
+      "Agency-Access": {
+        "$ref": "oauth.json#/components/securitySchemes/Agency-Access"
+      }
+    },
+    "schemas": {
+      "BadRequestDTO": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad Request"
+          }
+        }
+      },
+      "UnauthorizedDTO": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 401
+          },
+          "message": {
+            "type": "string",
+            "example": "Invalid token: access token is invalid"
+          },
+          "error": {
+            "type": "string",
+            "example": "Unauthorized"
+          }
+        }
+      },
+      "SnapshotsSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1eM2UgkfaECOYyUdCo9Pa",
+            "description": "Snapshot Id."
+          },
+          "name": {
+            "type": "string",
+            "example": "Martial Arts Snapshot",
+            "description": "Name of the snapshot"
+          },
+          "type": {
+            "type": "string",
+            "example": "own",
+            "description": "Type of snapshot - own or imported."
+          }
+        }
+      },
+      "GetSnapshotsSuccessfulResponseDto": {
+        "type": "object",
+        "properties": {
+          "snapshots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SnapshotsSchema"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/snapshots": {
+      "get": {
+        "operationId": "get-custom-snapshots",
+        "summary": "Get Snapshots",
+        "description": "Get a list of all own and imported Snapshots",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access Token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+            }
+          },
+          {
+            "name": "Version",
+            "in": "header",
+            "description": "API Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "2021-07-28"
+              ]
+            }
+          },
+          {
+            "name": "companyId",
+            "required": true,
+            "in": "query",
+            "example": "5D112kQsiKESj6rash",
+            "description": "Company Id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSnapshotsSuccessfulResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Snapshots"
+        ],
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ]
+      }
+    }
+  }
 }

@@ -4,7 +4,11 @@
         "title": "OAuth 2.0",
         "description": "Documentation for OAuth 2.0 API",
         "version": "1.0",
-        "contact": {}
+        "contact": {},
+        "license": {
+            "name": "",
+            "url": "https://opensource.org/licenses/MIT"
+        }
     },
     "tags": [
         {
@@ -19,28 +23,74 @@
     ],
     "components": {
         "securitySchemes": {
+            "Location-Access": {
+                "type": "oauth2",
+                "flows": {
+                    "authorizationCode": {
+                        "authorizationUrl": "https://marketplace.gohighlevel.com/oauth/chooselocation",
+                        "tokenUrl": "https://services.leadconnectorhq.com/oauth/locationToken",
+                        "scopes": {
+                            "businesses.readonly": "readonly access to businesses",
+                            "businesses.write": "write access to businesses",
+                            "calendars.write": "write access to calendars",
+                            "calendars.readonly": "readonly access to calendars",
+                            "calendars/groups.readonly": "readonly access to calendars groups",
+                            "calendars/groups.write": "write access to calendars groups",
+                            "calendars/events.readonly": "readonly access to calendars events",
+                            "calendars/events.write": "write access to calendars events",
+                            "campaigns.readonly": "readonly access to campaigns",
+                            "contacts.readonly": "readonly access to contacts",
+                            "contacts.write": "write access to contacts",
+                            "conversations.readonly": "readonly access to conversations",
+                            "conversations.write": "write access to conversations",
+                            "conversations/message.readonly": "readonly access to conversations message",
+                            "conversations/message.write": "write access to conversations message",
+                            "forms.readonly": "readonly access to forms",
+                            "links.readonly": "readonly access to links",
+                            "links.write": "write access to links",
+                            "locations.readonly": "readonly access to locations",
+                            "locations/customValues.readonly": "readonly access to locations customValues",
+                            "locations/customValues.write": "write access to locations customValues",
+                            "locations/customFields.readonly": "readonly access to locations customFields",
+                            "locations/customFields.write": "write access to locations customFields",
+                            "locations/tags.readonly": "readonly access to locations tags",
+                            "locations/tags.write": "write access to locations tags",
+                            "locations/templates.readonly": "readonly access to locations templates",
+                            "locations/tasks.readonly": "readonly access to locations tasks",
+                            "medias.readonly": "readonly access to medias",
+                            "medias.write": "write access to medias",
+                            "opportunities.readonly": "readonly access to opportunities",
+                            "opportunities.write": "write access to opportunities",
+                            "surveys.readonly": "readonly access to surveys",
+                            "users.readonly": "readonly access to users",
+                            "users.write": "write access to users",
+                            "workflows.readonly": "readonly access to workflows"
+                        }
+                    }
+                }
+            },
+            "Agency-Access": {
+                "type": "oauth2",
+                "flows": {
+                    "authorizationCode": {
+                        "authorizationUrl": "https://marketplace.gohighlevel.com/oauth/chooselocation",
+                        "tokenUrl": "https://services.leadconnectorhq.com/oauth/token",
+                        "scopes": {
+                            "locations.readonly": "Read access to locations",
+                            "locations.write": "Write access to locations",
+                            "oauth.readonly": "Read access to OAuth configuration",
+                            "oauth.write": "Write access to OAuth configuration",
+                            "snapshots.readonly": "Read access to snapshots",
+                            "users.readonly": "Read access to user data",
+                            "users.write": "Write access to user data"
+                        }
+                    }
+                }
+            },
             "bearer": {
                 "scheme": "bearer",
                 "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
                 "description": "Use the Access Token generated with user type as Location",
-                "type": "http"
-            },
-            "Location-Access": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Location",
-                "type": "http"
-            },
-            "Agency-Access": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Company",
                 "type": "http"
             }
         },
@@ -87,10 +137,7 @@
                     },
                     "grant_type": {
                         "type": "string",
-                        "enum": [
-                            "authorization_code",
-                            "refresh_token"
-                        ]
+                        "enum": ["authorization_code", "refresh_token"]
                     },
                     "code": {
                         "type": "string"
@@ -102,10 +149,7 @@
                         "type": "string",
                         "description": "The type of token to be requested",
                         "example": "Location",
-                        "enum": [
-                            "Company",
-                            "Location"
-                        ]
+                        "enum": ["Company", "Location"]
                     },
                     "redirect_uri": {
                         "type": "string",
@@ -113,11 +157,7 @@
                         "example": "https://myapp.com/oauth/callback/gohighlevel"
                     }
                 },
-                "required": [
-                    "client_id",
-                    "client_secret",
-                    "grant_type"
-                ]
+                "required": ["client_id", "client_secret", "grant_type"]
             },
             "GetAccessCodeSuccessfulResponseDto": {
                 "type": "object",
@@ -158,21 +198,19 @@
                     },
                     "approvedLocations": {
                         "description": "Approved locations to generate location access token",
-                        "example": [
-                            "l1C08ntBrFjLS0elLIYU"
-                        ],
+                        "example": ["l1C08ntBrFjLS0elLIYU"],
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
-                    "hashedCompanyId": {
+                    "userId": {
                         "type": "string",
-                        "description": "Hashed companyId - Deprecated (will be removed by July 2023)",
-                        "example": "7db63a0b08e8ac3e5f43f5fef96adc0ce5bef033380c486a9b41c612e4627b7e",
-                        "deprecated": true
+                        "description": "USER ID - Represent user id of person who performed installation",
+                        "example": "l1C08ntBrFjLS0elLIYU"
                     }
-                }
+                },
+                "required": ["userId"]
             },
             "UnprocessableDTO": {
                 "type": "object",
@@ -182,9 +220,7 @@
                         "example": 422
                     },
                     "message": {
-                        "example": [
-                            "Unprocessable Entity"
-                        ],
+                        "example": ["Unprocessable Entity"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -208,10 +244,7 @@
                         "description": "The location ID for which you want to obtain accessToken"
                     }
                 },
-                "required": [
-                    "companyId",
-                    "locationId"
-                ]
+                "required": ["companyId", "locationId"]
             },
             "GetLocationAccessTokenSuccessfulResponseDto": {
                 "type": "object",
@@ -239,8 +272,14 @@
                         "type": "string",
                         "description": "Location ID - Present only for Sub-Account Access Token",
                         "example": "l1C08ntBrFjLS0elLIYU"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "description": "USER ID - Represent user id of person who performed installation",
+                        "example": "l1C08ntBrFjLS0elLIYU"
                     }
-                }
+                },
+                "required": ["userId"]
             },
             "InstalledLocationSchema": {
                 "type": "object",
@@ -266,11 +305,7 @@
                         "description": "Check if the requested app is installed for following location"
                     }
                 },
-                "required": [
-                    "_id",
-                    "name",
-                    "address"
-                ]
+                "required": ["_id", "name", "address"]
             },
             "GetInstalledLocationsSuccessfulResponseDto": {
                 "type": "object",
@@ -295,6 +330,14 @@
             "post": {
                 "operationId": "get-access-token",
                 "summary": "Get Access Token",
+                "security": [
+                    {
+                        "Agency-Access": []
+                    },
+                    {
+                        "Location-Access": []
+                    }
+                ],
                 "description": "Use Access Tokens to access GoHighLevel resources on behalf of an authenticated location/company.",
                 "parameters": [],
                 "requestBody": {
@@ -349,9 +392,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "OAuth 2.0"
-                ]
+                "tags": ["OAuth 2.0"]
             }
         },
         "/oauth/locationToken": {
@@ -367,9 +408,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     }
                 ],
@@ -425,9 +464,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "OAuth 2.0"
-                ],
+                "tags": ["OAuth 2.0"],
                 "security": [
                     {
                         "Agency-Access": []
@@ -510,9 +547,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     }
                 ],
@@ -558,9 +593,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "OAuth 2.0"
-                ],
+                "tags": ["OAuth 2.0"],
                 "security": [
                     {
                         "Agency-Access": []

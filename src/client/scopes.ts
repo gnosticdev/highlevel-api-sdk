@@ -1,73 +1,107 @@
-import { coolConsole } from '@gnosticdev/cool-console'
-import { z } from 'zod'
 import { objectEntries } from '../lib/utils'
+import type { HighLevelConfig } from './base'
 import {
-    scopesSchema,
     type AccessType,
+    type ScopeLiterals,
+    type FilteredScopeNames,
     type ReadWrite,
-    type ScopeNames,
-    type ScopesSchema
+    scopesSchema
 } from './scopes-schema'
 
-export class HighLevelClient {
-    /** valid scope names for a given access type */
-    private _scopes: `${ScopeNames}.${ReadWrite}`[] = []
-    private _scopesSchema: Partial<ScopesSchema>
-    public accessType: AccessType
-    public all: () => Partial<ScopesSchema>[]
+export class ScopesBuilder<T extends AccessType> {
+    /** the access level for your app. Sub-Account is same as Location. Company same as Agency. */
+    public accessType: T
+    /** an array of the scopes that have been added so far */
+    public collection = new Set<ScopeLiterals<T>>()
 
     /**
      * @constructor
-     * @param appAccessType - the type of app access needed. 'Sub-Account' is same as 'Location' and 'Company' is same as Agency
+     * @param accessType - the type of app access needed. 'Sub-Account' is same as 'Location' and 'Company' is same as Agency
      */
-    constructor(appAccessType: AccessType) {
-        this.accessType = appAccessType
-        this._scopesSchema = scopesSchema
-        this.all = () => {
-            for (const [key, val] of objectEntries(scopesSchema)) {
-            }
-        }
+    constructor(config: Pick<HighLevelConfig<T>, 'accessType'>) {
+        this.accessType = config.accessType
     }
 
     /** add a scope from the available scopes for this access type */
-    public add<T extends AccessType>(scopeName: ScopeNames, type: ReadWrite) {
-        if (Object.hasOwn(this._scopes[scopeName], type)) {
-            this._scopes.push(`${scopeName}.${type}`)
+    public add(scopes: ScopeLiterals<T>): this
+    public add(scopes: ScopeLiterals<T>[]): this
+    public add(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): this {
+        if (Array.isArray(scopes)) {
+            this.collection = new Set([...this.collection, ...scopes])
+        } else {
+            this.collection.add(scopes)
         }
         return this
     }
 
-    get() {
-        return this._scopes
+    /** Get the scope parts for the given access type
+     * @paramm type - the scope part to return
+     * @param array - return the scopes as an array instead of a string
+     * - `names` - return the scope names only (e.g. "businesses" instead of "businesses.read")
+     * - `readWrite` - return scope names with the access type (e.g. "read" or "write")
+     * - `literals` - (same as `all()` method) returns all scopes available to the given accessType in the format required by the authorization redirect uri. e.g. "businesses.read businesses.write locations.read..."
+     */
+    private _allAvailable(
+        type: 'names' | 'readWrite' | 'literals' = 'literals',
+        array?: boolean
+    ) {
+        const names: Array<FilteredScopeNames<T>> = []
+        const readWrite: Array<ReadWrite<FilteredScopeNames<T>>> = []
+        const literals: Array<ScopeLiterals<T>> = []
+        for (const [scopeName, scopeValue] of objectEntries(scopesSchema)) {
+            for (const [access, endpoints] of objectEntries(scopeValue)) {
+                for (const endpoint of endpoints) {
+                    if (
+                        (endpoint.accessType as readonly AccessType[]).includes(
+                            this.accessType
+                        )
+                    ) {
+                        readWrite.push(
+                            access as ReadWrite<FilteredScopeNames<T>>
+                        )
+                        literals.push(
+                            `${scopeName}.${access}` as ScopeLiterals<T>
+                        )
+                        names.push(
+                            scopeName.replace('/', ' ') as FilteredScopeNames<T>
+                        )
+                    }
+                }
+            }
+        }
+
+        switch (type) {
+            case 'names':
+                return names
+            case 'readWrite':
+                return readWrite
+            case 'literals':
+                return array ? literals : literals.join(' ')
+        }
     }
 
     /**
-     * Generate the url to redirect to for the user to authorize the app
-     * @param redirectUri - the url to redirect to after the user has authorized the app
-     * @param CLIENT_ID - the client id of the app
-     * @param accessType - the type of access to request
-     *  - Sub-Account (same as Location)
-     *  - Company (same as Agency))
-     * @returns
+     * Get all scopes added so far, as a string for use in the authorization redirect uri
+     * @returns a string of the scopes joined by a space
      */
-    generateRedirectUrl(
-        redirectUri: string,
-        CLIENT_ID: string,
-        scopeOrAccess: 'Sub-Account' | 'Company'
-    ) {
-        const scopes = generateScopes(scopeOrAccess)
+    public get() {
+        return Array.from(this.collection).join(' ') as ScopeLiterals<T>
+    }
 
-        const baseUrl =
-            'https://marketplace.gohighlevel.com/oauth/chooselocation'
-        const params = new URLSearchParams({
-            response_type: 'code',
-            redirect_uri: redirectUri,
-            client_id: CLIENT_ID,
-            scope: scopes.trim()
-        })
+    public has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]) {
+        if (!scopes) {
+            return this.collection.size > 0
+        }
+        if (Array.isArray(scopes)) {
+            return scopes.every((scope) => this.collection.has(scope))
+        }
+        return this.collection.has(scopes)
+    }
 
-        return `${baseUrl}?${params.toString()}`
+    /** Get all scopes for the given access type
+     * - returns scopes as a string for use in the authorization redirect uri
+     */
+    public all() {
+        return this._allAvailable('literals', true) as ScopeLiterals<T>[]
     }
 }
-
-// --- tests ---

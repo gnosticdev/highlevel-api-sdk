@@ -1,455 +1,467 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Surveys API",
-        "description": "Documentation for surveys API",
-        "version": "1.0",
-        "contact": {}
-    },
-    "tags": [
-        {
-            "name": "Surveys",
-            "description": "Documentation for surveys API"
-        }
-    ],
-    "servers": [
-        {
-            "url": "https://services.leadconnectorhq.com"
-        }
-    ],
-    "components": {
-        "securitySchemes": {
-            "bearer": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "type": "http"
-            }
-        },
-        "schemas": {
-            "BadRequestDTO": {
-                "type": "object",
-                "properties": {
-                    "statusCode": {
-                        "type": "number",
-                        "example": 400
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Bad Request"
-                    }
-                }
-            },
-            "UnauthorizedDTO": {
-                "type": "object",
-                "properties": {
-                    "statusCode": {
-                        "type": "number",
-                        "example": 401
-                    },
-                    "message": {
-                        "type": "string",
-                        "example": "Invalid token: access token is invalid"
-                    },
-                    "error": {
-                        "type": "string",
-                        "example": "Unauthorized"
-                    }
-                }
-            },
-            "GetSurveysSchema": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "example": "I5GFa3d3cKjojpe4VVUx"
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "Survey 1"
-                    },
-                    "locationId": {
-                        "type": "string",
-                        "example": "ve9EPM428h8vShlRW1KT"
-                    }
-                }
-            },
-            "GetSurveysSuccessfulResponseDto": {
-                "type": "object",
-                "properties": {
-                    "surveys": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/GetSurveysSchema"
-                        }
-                    },
-                    "total": {
-                        "type": "number",
-                        "example": 20,
-                        "description": "Number of surveys"
-                    }
-                }
-            },
-            "pageDetailsSchema": {
-                "type": "object",
-                "properties": {
-                    "url": {
-                        "type": "string",
-                        "example": "https://www.gohighlevel.com/"
-                    },
-                    "source": {
-                        "type": "string",
-                        "example": "Social Media"
-                    },
-                    "referrer": {
-                        "type": "string",
-                        "example": "http://m.facebook.com"
-                    },
-                    "fbclid": {
-                        "type": "string",
-                        "example": "IwAR1JoTTltt3EKJE3O-MrQij_lTeA6BKGTy8M2wKepSzs4oUbTYhL2Lns18w"
-                    }
-                }
-            },
-            "SubmissionSchema": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "example": "be759b9a-c3ec-4b29-ba07-fc3c89c77673"
-                    },
-                    "contactId": {
-                        "type": "string",
-                        "example": "9NkT25Vor1v4aQatFsv2"
-                    },
-                    "__submissions_other_field__": {
-                        "type": "string",
-                        "example": "john@deo.com"
-                    },
-                    "__custom_field_id__": {
-                        "type": "string",
-                        "example": "20"
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "example": "2020-11-01T18:02:21.000Z"
-                    },
-                    "surveyId": {
-                        "type": "string",
-                        "example": "jjusM6EOngDExnbo2DbU"
-                    },
-                    "pageDetails": {
-                        "$ref": "#/components/schemas/pageDetailsSchema"
-                    }
-                }
-            },
-            "metaSchema": {
-                "type": "object",
-                "properties": {
-                    "total": {
-                        "type": "number",
-                        "example": 1
-                    },
-                    "currentPage": {
-                        "type": "number",
-                        "example": 1
-                    },
-                    "nextPage": {
-                        "type": "number",
-                        "example": null,
-                        "nullable": true
-                    },
-                    "prevPage": {
-                        "type": "number",
-                        "example": null,
-                        "nullable": true
-                    }
-                }
-            },
-            "GetSurveysSubmissionSuccessfulResponseDto": {
-                "type": "object",
-                "properties": {
-                    "submissions": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/SubmissionSchema"
-                        }
-                    },
-                    "meta": {
-                        "$ref": "#/components/schemas/metaSchema"
-                    }
-                }
-            },
-            "UnprocessableDTO": {
-                "type": "object",
-                "properties": {
-                    "statusCode": {
-                        "type": "number",
-                        "example": 422
-                    },
-                    "message": {
-                        "example": [
-                            "Unprocessable Entity"
-                        ],
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "error": {
-                        "type": "string",
-                        "example": "Unprocessable Entity"
-                    }
-                }
-            }
-        }
-    },
-    "paths": {
-        "/surveys/submissions": {
-            "get": {
-                "operationId": "get-surveys-submissions",
-                "summary": "Get Surveys Submissions",
-                "description": "Get Surveys Submissions",
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Access Token",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "Access Token"
-                        }
-                    },
-                    {
-                        "name": "Version",
-                        "in": "header",
-                        "description": "Api Version",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "2021-04-15"
-                        }
-                    },
-                    {
-                        "name": "locationId",
-                        "required": true,
-                        "in": "query",
-                        "example": "ve9EPM428h8vShlRW1KT",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "required": false,
-                        "in": "query",
-                        "example": 1,
-                        "description": "Page No. By default it will be 1",
-                        "schema": {
-                            "default": 1,
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "limit",
-                        "required": false,
-                        "in": "query",
-                        "example": 20,
-                        "description": "Limit Per Page records count. will allow maximum up to 100 and default will be 20",
-                        "schema": {
-                            "default": 20,
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "surveyId",
-                        "required": false,
-                        "in": "query",
-                        "example": "jjusM6EOngDExnbo2DbU",
-                        "description": "Filter submission by survey id",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "q",
-                        "required": false,
-                        "in": "query",
-                        "example": "john@deo.com",
-                        "description": "Filter by contactId, name, email or phone no.",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "startAt",
-                        "required": false,
-                        "in": "query",
-                        "example": "2020-11-14",
-                        "description": "Get submission by starting of this date. By default it will be same date of last month(YYYY-MM-DD).",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "endAt",
-                        "required": false,
-                        "in": "query",
-                        "example": "2020-12-14",
-                        "description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD).",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GetSurveysSubmissionSuccessfulResponseDto"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDTO"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDTO"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnprocessableDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Surveys"
-                ]
-            }
-        },
-        "/surveys/": {
-            "get": {
-                "operationId": "get-surveys",
-                "summary": "Get Surveys",
-                "description": "Get Surveys",
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Access Token",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "Access Token"
-                        }
-                    },
-                    {
-                        "name": "Version",
-                        "in": "header",
-                        "description": "Api Version",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "2021-04-15"
-                        }
-                    },
-                    {
-                        "name": "locationId",
-                        "required": true,
-                        "in": "query",
-                        "example": "ve9EPM428h8vShlRW1KT",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "skip",
-                        "required": false,
-                        "in": "query",
-                        "example": 0,
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "limit",
-                        "required": false,
-                        "in": "query",
-                        "example": 20,
-                        "description": "Limit Per Page records count. will allow maximum up to 50 and default will be 10",
-                        "schema": {
-                            "default": 10,
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "type",
-                        "required": false,
-                        "in": "query",
-                        "example": "folder",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GetSurveysSuccessfulResponseDto"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDTO"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDTO"
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Surveys"
-                ]
-            }
-        }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Surveys API",
+    "description": "Documentation for surveys API",
+    "version": "1.0",
+    "contact": {},
+    "license": {
+      "name": "",
+      "url": "https://opensource.org/licenses/MIT"
     }
+  },
+  "tags": [
+    {
+      "name": "Surveys",
+      "description": "Documentation for surveys API"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "$ref": "oauth.json#/components/securitySchemes/bearer"
+      }
+    },
+    "schemas": {
+      "BadRequestDTO": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad Request"
+          }
+        }
+      },
+      "UnauthorizedDTO": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 401
+          },
+          "message": {
+            "type": "string",
+            "example": "Invalid token: access token is invalid"
+          },
+          "error": {
+            "type": "string",
+            "example": "Unauthorized"
+          }
+        }
+      },
+      "GetSurveysSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "I5GFa3d3cKjojpe4VVUx"
+          },
+          "name": {
+            "type": "string",
+            "example": "Survey 1"
+          },
+          "locationId": {
+            "type": "string",
+            "example": "ve9EPM428h8vShlRW1KT"
+          }
+        }
+      },
+      "GetSurveysSuccessfulResponseDto": {
+        "type": "object",
+        "properties": {
+          "surveys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetSurveysSchema"
+            }
+          },
+          "total": {
+            "type": "number",
+            "example": 20,
+            "description": "Number of surveys"
+          }
+        }
+      },
+      "pageDetailsSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "example": "https://www.gohighlevel.com/"
+          },
+          "source": {
+            "type": "string",
+            "example": "Social Media"
+          },
+          "referrer": {
+            "type": "string",
+            "example": "http://m.facebook.com"
+          },
+          "fbclid": {
+            "type": "string",
+            "example": "IwAR1JoTTltt3EKJE3O-MrQij_lTeA6BKGTy8M2wKepSzs4oUbTYhL2Lns18w"
+          }
+        }
+      },
+      "SubmissionSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "be759b9a-c3ec-4b29-ba07-fc3c89c77673"
+          },
+          "contactId": {
+            "type": "string",
+            "example": "9NkT25Vor1v4aQatFsv2"
+          },
+          "__submissions_other_field__": {
+            "type": "string",
+            "example": "john@deo.com"
+          },
+          "__custom_field_id__": {
+            "type": "string",
+            "example": "20"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2020-11-01T18:02:21.000Z"
+          },
+          "surveyId": {
+            "type": "string",
+            "example": "jjusM6EOngDExnbo2DbU"
+          },
+          "pageDetails": {
+            "$ref": "#/components/schemas/pageDetailsSchema"
+          }
+        }
+      },
+      "metaSchema": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 1
+          },
+          "currentPage": {
+            "type": "number",
+            "example": 1
+          },
+          "nextPage": {
+            "type": "number",
+            "example": null,
+            "nullable": true
+          },
+          "prevPage": {
+            "type": "number",
+            "example": null,
+            "nullable": true
+          }
+        }
+      },
+      "GetSurveysSubmissionSuccessfulResponseDto": {
+        "type": "object",
+        "properties": {
+          "submissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubmissionSchema"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/metaSchema"
+          }
+        }
+      },
+      "UnprocessableDTO": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 422
+          },
+          "message": {
+            "example": [
+              "Unprocessable Entity"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "error": {
+            "type": "string",
+            "example": "Unprocessable Entity"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/surveys/submissions": {
+      "get": {
+        "operationId": "get-surveys-submissions",
+        "summary": "Get Surveys Submissions",
+        "description": "Get Surveys Submissions",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access Token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Access Token"
+            }
+          },
+          {
+            "name": "Version",
+            "in": "header",
+            "description": "Api Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2021-04-15"
+            }
+          },
+          {
+            "name": "locationId",
+            "required": true,
+            "in": "query",
+            "example": "ve9EPM428h8vShlRW1KT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "example": 1,
+            "description": "Page No. By default it will be 1",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 20,
+            "description": "Limit Per Page records count. will allow maximum up to 100 and default will be 20",
+            "schema": {
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "surveyId",
+            "required": false,
+            "in": "query",
+            "example": "jjusM6EOngDExnbo2DbU",
+            "description": "Filter submission by survey id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "example": "john@deo.com",
+            "description": "Filter by contactId, name, email or phone no.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startAt",
+            "required": false,
+            "in": "query",
+            "example": "2020-11-14",
+            "description": "Get submission by starting of this date. By default it will be same date of last month(YYYY-MM-DD).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endAt",
+            "required": false,
+            "in": "query",
+            "example": "2020-12-14",
+            "description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSurveysSubmissionSuccessfulResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Surveys"
+        ]
+      }
+    },
+    "/surveys": {
+      "get": {
+        "operationId": "get-surveys",
+        "summary": "Get Surveys",
+        "description": "Get Surveys",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access Token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Access Token"
+            }
+          },
+          {
+            "name": "Version",
+            "in": "header",
+            "description": "Api Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2021-04-15"
+            }
+          },
+          {
+            "name": "locationId",
+            "required": true,
+            "in": "query",
+            "example": "ve9EPM428h8vShlRW1KT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "example": 0,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 20,
+            "description": "Limit Per Page records count. will allow maximum up to 50 and default will be 10",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "example": "folder",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSurveysSuccessfulResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Surveys"
+        ]
+      }
+    }
+  }
 }

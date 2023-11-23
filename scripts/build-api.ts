@@ -1,29 +1,28 @@
 import fs from 'fs'
 import path from 'path'
-import openapiTS, {
-    astToString,
-    type SchemaObject,
-    type TransformNodeOptions
-} from 'openapi-typescript'
+import openapiTS, { astToString } from 'openapi-typescript'
 import { coolConsole } from '@gnosticdev/cool-console'
+
+const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/api/schemas/openapi')
+const OUT_DIR = path.join(process.cwd(), 'src/api/test')
 
 if (import.meta.main) {
     switch (process.argv[2]) {
         case 'generate':
             generateApi()
             break
+        case 'create-root':
+            createRootFile()
+            break
         default:
             console.log('no command')
     }
 }
 
-const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/api/schemas/openapi')
 /**
  * Generate types from openapi schemas, and compile them into a single index.ts file
  */
 async function generateApi() {
-    const OUT_DIR = path.join(process.cwd(), 'src/api/generated')
-
     const typesExists = await fs.promises.exists(OUT_DIR)
     if (!typesExists) {
         await fs.promises.mkdir(OUT_DIR)
@@ -40,13 +39,14 @@ async function generateApi() {
 
     // create each type file
     for await (const jsonFile of schemaFiles) {
+        if (path.extname(jsonFile) !== '.json') continue
         const fileUrl = Bun.pathToFileURL(path.join(SCHEMAS_DIR, jsonFile))
         const typeTitle = createTitle(jsonFile)
 
         console.log('creating types for', jsonFile)
         const fileName = path.parse(jsonFile).name
 
-        const output = await openapiTS(fileUrl)
+        const output = await openapiTS(fileUrl, { version: 3.0 })
         const data = astToString(output)
 
         const outFile = path.join(OUT_DIR, `${fileName}.ts`)
@@ -75,4 +75,54 @@ function createTitle(filePath: string) {
     const fileName = path.parse(filePath).name
     const typeTitle = filePath.charAt(0).toUpperCase() + fileName.slice(1)
     return typeTitle
+}
+
+// Start with a base structure for your root OpenAPI file
+
+async function createRootFile() {
+    const rootOpenApi = {
+        openapi: '3.0.0',
+        info: {
+            title: 'HighLevel API Documentation',
+            description: 'Combined documentation for all APIs',
+            version: '1.0',
+            contact: {},
+            license: {
+                name: 'MIT',
+                url: 'https://opensource.org/licenses/MIT'
+            }
+        },
+        tags: [],
+        servers: [
+            {
+                url: 'https://services.leadconnectorhq.com'
+            }
+        ],
+        components: {
+            schemas: {},
+            securitySchemes: {}
+        },
+        paths: {} as Record<string, any>
+    }
+
+    // Read the directory containing the endpoint files
+    const files = await fs.promises.readdir(SCHEMAS_DIR)
+
+    // Filter JSON files and construct the paths object
+    for await (const file of files) {
+        if (path.extname(file) !== '.json') continue
+        coolConsole.orange('parsing file ' + file)
+        const json = await Bun.file(path.join(SCHEMAS_DIR, file)).json()
+
+        for (const key in json.paths) {
+            rootOpenApi.paths[key] = {
+                $ref: `./${path.basename(file)}#/paths${key}`
+            }
+        }
+    }
+    // Write the root OpenAPI file to disk
+    await Bun.write(
+        path.join(SCHEMAS_DIR, 'api.json'),
+        JSON.stringify(rootOpenApi)
+    )
 }

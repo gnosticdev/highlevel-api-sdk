@@ -4,7 +4,11 @@
         "title": "Business API",
         "description": "Documentation for business API",
         "version": "1.0",
-        "contact": {}
+        "contact": {},
+        "license": {
+            "name": "",
+            "url": "https://opensource.org/licenses/MIT"
+        }
     },
     "tags": [
         {
@@ -20,9 +24,7 @@
     "components": {
         "securitySchemes": {
             "bearer": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "type": "http"
+                "$ref": "oauth.json#/components/securitySchemes/bearer"
             }
         },
         "schemas": {
@@ -408,7 +410,12 @@
                         }
                     }
                 },
-                "tags": ["Businesses"]
+                "tags": ["Businesses"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "delete": {
                 "operationId": "delete-Business",
@@ -487,7 +494,12 @@
                         }
                     }
                 },
-                "tags": ["Businesses"]
+                "tags": ["Businesses"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "get": {
                 "operationId": "get-business",
@@ -566,10 +578,15 @@
                         }
                     }
                 },
-                "tags": ["Businesses"]
+                "tags": ["Businesses"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
-        "/businesses/": {
+        "/businesses": {
             "get": {
                 "operationId": "get-businesses-by-location",
                 "summary": "Get Businesses by Location",
@@ -637,7 +654,12 @@
                         }
                     }
                 },
-                "tags": ["Businesses"]
+                "tags": ["Businesses"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             },
             "post": {
                 "operationId": "create-business",
@@ -717,7 +739,12 @@
                         }
                     }
                 },
-                "tags": ["Businesses"]
+                "tags": ["Businesses"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         }
     }

@@ -1,18 +1,14 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "module": "ES2022",
+        "moduleResolution": "Bundler",
         "noEmit": false,
         "outDir": "./dist",
         "declaration": true,
-        "rootDirs": [
-            "./src/api/generated",
-            "./src/api/schemas",
-            "./src/client"
-        ],
+        "rootDirs": ["./src/api/types", "./src/api/schemas", "./src/client"],
         "rootDir": "./src/"
     },
-    "include": ["./src/api/generated/**/*.ts", "./src/client/*.ts"],
+    "include": ["./src/api/types/**/*.ts", "./src/client/*.ts"],
     "exclude": ["./src/lib/**/*"]
 }

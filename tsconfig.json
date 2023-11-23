@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "hono/jsx",
         "target": "ESNext",
         "module": "ESNext",
         "strict": true,
@@ -23,7 +25,12 @@
         "src/**/*.ts",
         "tests/**/*.ts",
         "scripts/**/*.ts",
-        "schemas/**/*.json"
+        "schemas/**/*.json",
+        "playwright/*.ts",
+        "build.ts",
+        "src/auth/*.tsx",
+        "playwright/webhooks/scrape.ts",
+        "playwright/webhooks/build-types.ts"
     ],
     "exclude": [
         "node_modules",

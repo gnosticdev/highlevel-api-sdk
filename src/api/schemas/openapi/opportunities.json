@@ -4,7 +4,11 @@
         "title": "Opportunities API",
         "description": "Documentation for Opportunities API",
         "version": "1.0",
-        "contact": {}
+        "contact": {},
+        "license": {
+            "name": "",
+            "url": "https://opensource.org/licenses/MIT"
+        }
     },
     "tags": [
         {
@@ -22,6 +26,10 @@
         {
             "name": "Export",
             "description": "Documentation for Opportunities API"
+        },
+        {
+            "name": "Pipiline Search",
+            "description": "Documentation for Opportunities API"
         }
     ],
     "servers": [
@@ -32,13 +40,17 @@
     "components": {
         "securitySchemes": {
             "bearer": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "type": "http"
+                "$ref": "oauth.json#/components/securitySchemes/bearer"
+            },
+            "Location-Access": {
+                "$ref": "oauth.json#/components/securitySchemes/Location-Access"
+            },
+            "Agency-Access": {
+                "$ref": "oauth.json#/components/securitySchemes/Agency-Access"
             }
         },
         "schemas": {
-            "BadRequestDto": {
+            "BadRequestDTO": {
                 "type": "object",
                 "properties": {
                     "statusCode": {
@@ -51,7 +63,7 @@
                     }
                 }
             },
-            "UnauthorizedDto": {
+            "UnauthorizedDTO": {
                 "type": "object",
                 "properties": {
                     "statusCode": {
@@ -68,7 +80,7 @@
                     }
                 }
             },
-            "unprocessableDto": {
+            "UnprocessableDTO": {
                 "type": "object",
                 "properties": {
                     "statusCode": {
@@ -76,9 +88,7 @@
                         "example": 422
                     },
                     "message": {
-                        "example": [
-                            "Unprocessable Entity"
-                        ],
+                        "example": ["Unprocessable Entity"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -121,6 +131,39 @@
                     }
                 }
             },
+            "CustomFieldResponseSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "MgobCB14YMVKuE4Ka8p1"
+                    },
+                    "fieldValue": {
+                        "description": "The value of the custom field",
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "required": ["id", "fieldValue"]
+            },
             "SearchOpportunitiesResponseSchema": {
                 "type": "object",
                 "properties": {
@@ -160,6 +203,10 @@
                         "type": "string",
                         "example": "2021-08-03T04:55:17.355Z"
                     },
+                    "lastStageChangeAt": {
+                        "type": "string",
+                        "example": "2021-08-03T04:55:17.355Z"
+                    },
                     "lastActionDate": {
                         "type": "string",
                         "example": "2021-08-03T04:55:17.355Z"
@@ -186,6 +233,30 @@
                     },
                     "contact": {
                         "$ref": "#/components/schemas/SearchOpportunitiesContactResponseSchema"
+                    },
+                    "notes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "calendarEvents": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CustomFieldResponseSchema"
+                        }
                     }
                 }
             },
@@ -239,19 +310,6 @@
                     }
                 }
             },
-            "StagesSchema": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "example": "38704eb0-6b4f-4c3e-8919-4835d51de0c8"
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "test"
-                    }
-                }
-            },
             "PipelinesResponseSchema": {
                 "type": "object",
                 "properties": {
@@ -266,8 +324,20 @@
                     "stages": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/StagesSchema"
+                            "type": "array"
                         }
+                    },
+                    "showInFunnel": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "showInPieChart": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "locationId": {
+                        "type": "string",
+                        "example": "dsjddjkndadqaja"
                     }
                 }
             },
@@ -304,18 +374,68 @@
                 "properties": {
                     "status": {
                         "type": "string",
-                        "enum": [
-                            "open",
-                            "won",
-                            "lost",
-                            "abandoned",
-                            "all"
-                        ]
+                        "enum": ["open", "won", "lost", "abandoned", "all"]
                     }
                 },
-                "required": [
-                    "status"
-                ]
+                "required": ["status"]
+            },
+            "OppCustomFieldsInputArraySchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "6dvNaf7VhkQ9snc5vnjJ"
+                    },
+                    "key": {
+                        "type": "string",
+                        "example": "my_custom_field"
+                    },
+                    "field_value": {
+                        "example": ["test", "test2"],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": ["id"]
+            },
+            "customFieldsInputObjectSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "6dvNaf7VhkQ9snc5vnjJ"
+                    },
+                    "key": {
+                        "type": "string",
+                        "example": "my_custom_field"
+                    },
+                    "field_value": {
+                        "type": "object",
+                        "example": {}
+                    }
+                },
+                "required": ["id"]
+            },
+            "customFieldsInputStringSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "6dvNaf7VhkQ9snc5vnjJ",
+                        "description": "Pass either `id` or `key` of custom field"
+                    },
+                    "key": {
+                        "type": "string",
+                        "example": "my_custom_field",
+                        "description": "Pass either `id` or `key` of custom field"
+                    },
+                    "field_value": {
+                        "type": "string",
+                        "example": "9039160788"
+                    }
+                }
             },
             "CreateDto": {
                 "type": "object",
@@ -339,13 +459,7 @@
                     },
                     "status": {
                         "type": "string",
-                        "enum": [
-                            "open",
-                            "won",
-                            "lost",
-                            "abandoned",
-                            "all"
-                        ]
+                        "enum": ["open", "won", "lost", "abandoned", "all"]
                     },
                     "contactId": {
                         "type": "string",
@@ -358,13 +472,29 @@
                     "assignedTo": {
                         "type": "string",
                         "example": "082goXVW3lIExEQPOnd3"
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "description": "Add custom fields to opportunities.",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/customFieldsInputStringSchema"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/OppCustomFieldsInputArraySchema"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/customFieldsInputObjectSchema"
+                                }
+                            ]
+                        }
                     }
                 },
                 "required": [
                     "pipelineId",
                     "locationId",
                     "name",
-                    "pipelineStageId",
                     "status",
                     "contactId"
                 ]
@@ -387,13 +517,7 @@
                     },
                     "status": {
                         "type": "string",
-                        "enum": [
-                            "open",
-                            "won",
-                            "lost",
-                            "abandoned",
-                            "all"
-                        ]
+                        "enum": ["open", "won", "lost", "abandoned", "all"]
                     },
                     "monetaryValue": {
                         "type": "number",
@@ -402,6 +526,23 @@
                     "assignedTo": {
                         "type": "string",
                         "example": "082goXVW3lIExEQPOnd3"
+                    },
+                    "customFields": {
+                        "type": "array",
+                        "description": "Update custom fields to opportunities.",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/customFieldsInputStringSchema"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/OppCustomFieldsInputArraySchema"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/customFieldsInputObjectSchema"
+                                }
+                            ]
+                        }
                     }
                 }
             },
@@ -430,13 +571,7 @@
                     },
                     "status": {
                         "type": "string",
-                        "enum": [
-                            "open",
-                            "won",
-                            "lost",
-                            "abandoned",
-                            "all"
-                        ]
+                        "enum": ["open", "won", "lost", "abandoned", "all"]
                     },
                     "pipelineStageId": {
                         "type": "string",
@@ -451,11 +586,7 @@
                         "example": "082goXVW3lIExEQPOnd3"
                     }
                 },
-                "required": [
-                    "pipelineId",
-                    "locationId",
-                    "contactId"
-                ]
+                "required": ["pipelineId", "locationId", "contactId"]
             },
             "UpsertOpportunitySuccessfulResponseDto": {
                 "type": "object",
@@ -469,10 +600,7 @@
                         "example": true
                     }
                 },
-                "required": [
-                    "opportunity",
-                    "new"
-                ]
+                "required": ["opportunity", "new"]
             }
         }
     },
@@ -490,17 +618,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -557,13 +685,7 @@
                         "required": false,
                         "in": "query",
                         "schema": {
-                            "enum": [
-                                "open",
-                                "won",
-                                "lost",
-                                "abandoned",
-                                "all"
-                            ],
+                            "enum": ["open", "won", "lost", "abandoned", "all"],
                             "type": "string"
                         }
                     },
@@ -672,6 +794,36 @@
                             "default": 20,
                             "type": "number"
                         }
+                    },
+                    {
+                        "name": "getTasks",
+                        "required": false,
+                        "in": "query",
+                        "description": "get Tasks in contact",
+                        "example": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "getNotes",
+                        "required": false,
+                        "in": "query",
+                        "description": "get Notes in contact",
+                        "example": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "getCalendarEvents",
+                        "required": false,
+                        "in": "query",
+                        "description": "get Calender event in contact",
+                        "example": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
                     }
                 ],
                 "responses": {
@@ -690,7 +842,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -700,7 +852,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
@@ -710,14 +862,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/unprocessableDto"
+                                    "$ref": "#/components/schemas/UnprocessableDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Search"
+                "tags": ["Search"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             }
         },
@@ -734,17 +889,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -773,7 +928,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -783,14 +938,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Pipelines"
+                "tags": ["Pipelines"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             }
         },
@@ -807,17 +965,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -847,7 +1005,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -857,7 +1015,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
@@ -867,14 +1025,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/unprocessableDto"
+                                    "$ref": "#/components/schemas/UnprocessableDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Opportunities"
+                "tags": ["Opportunities"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             },
             "delete": {
@@ -889,17 +1050,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -929,7 +1090,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -939,7 +1100,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
@@ -949,14 +1110,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/unprocessableDto"
+                                    "$ref": "#/components/schemas/UnprocessableDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Opportunities"
+                "tags": ["Opportunities"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             },
             "put": {
@@ -971,17 +1135,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1021,7 +1185,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -1031,7 +1195,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
@@ -1041,14 +1205,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/unprocessableDto"
+                                    "$ref": "#/components/schemas/UnprocessableDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Opportunities"
+                "tags": ["Opportunities"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             }
         },
@@ -1065,17 +1232,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1115,7 +1282,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -1125,7 +1292,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
@@ -1135,14 +1302,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/unprocessableDto"
+                                    "$ref": "#/components/schemas/UnprocessableDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Opportunities"
+                "tags": ["Opportunities"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             }
         },
@@ -1159,17 +1329,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     }
                 ],
@@ -1199,7 +1369,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -1209,7 +1379,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
@@ -1219,18 +1389,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/unprocessableDto"
+                                    "$ref": "#/components/schemas/UnprocessableDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Opportunities"
+                "tags": ["Opportunities"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             }
         },
-        "/opportunities/": {
+        "/opportunities": {
             "post": {
                 "operationId": "create-opportunity",
                 "summary": "Create Opportunity",
@@ -1243,17 +1416,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "Access Token"
+                            "example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
                         }
                     },
                     {
                         "name": "Version",
                         "in": "header",
-                        "description": "Api Version",
+                        "description": "API Version",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "2021-04-15"
+                            "enum": ["2021-07-28"]
                         }
                     }
                 ],
@@ -1283,7 +1456,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestDto"
+                                    "$ref": "#/components/schemas/BadRequestDTO"
                                 }
                             }
                         }
@@ -1293,7 +1466,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedDto"
+                                    "$ref": "#/components/schemas/UnauthorizedDTO"
                                 }
                             }
                         }
@@ -1303,14 +1476,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/unprocessableDto"
+                                    "$ref": "#/components/schemas/UnprocessableDTO"
                                 }
                             }
                         }
                     }
                 },
-                "tags": [
-                    "Opportunities"
+                "tags": ["Opportunities"],
+                "security": [
+                    {
+                        "bearer": []
+                    }
                 ]
             }
         }

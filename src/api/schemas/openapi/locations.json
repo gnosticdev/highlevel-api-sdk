@@ -4,7 +4,11 @@
         "title": "Location API",
         "description": "Documentation for location API",
         "version": "1.0",
-        "contact": {}
+        "contact": {},
+        "license": {
+            "name": "",
+            "url": "https://opensource.org/licenses/MIT"
+        }
     },
     "tags": [
         {
@@ -68,28 +72,13 @@
     "components": {
         "securitySchemes": {
             "bearer": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Location",
-                "type": "http"
+                "$ref": "oauth.json#/components/securitySchemes/bearer"
             },
             "Location-Access": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Location",
-                "type": "http"
+                "$ref": "oauth.json#/components/securitySchemes/Location-Access"
             },
             "Agency-Access": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Use the Access Token generated with user type as Company",
-                "type": "http"
+                "$ref": "oauth.json#/components/securitySchemes/Agency-Access"
             }
         },
         "schemas": {
@@ -131,9 +120,7 @@
                         "example": 422
                     },
                     "message": {
-                        "example": [
-                            "Unprocessable Entity"
-                        ],
+                        "example": ["Unprocessable Entity"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -302,7 +289,7 @@
                     }
                 }
             },
-            "SearchSuccessfulResponseDto": {
+            "LocationSearchSuccessfulResponseDto": {
                 "type": "object",
                 "properties": {
                     "locations": {
@@ -458,11 +445,7 @@
                         "example": "john.doe@mail.com"
                     }
                 },
-                "required": [
-                    "firstName",
-                    "lastName",
-                    "email"
-                ]
+                "required": ["firstName", "lastName", "email"]
             },
             "TwilioSchema": {
                 "type": "object",
@@ -478,10 +461,7 @@
                         "example": "77_XXXXXXXXXXX"
                     }
                 },
-                "required": [
-                    "sid",
-                    "authToken"
-                ]
+                "required": ["sid", "authToken"]
             },
             "MailgunSchema": {
                 "type": "object",
@@ -497,10 +477,7 @@
                         "example": "replies.yourdomain.com"
                     }
                 },
-                "required": [
-                    "apiKey",
-                    "domain"
-                ]
+                "required": ["apiKey", "domain"]
             },
             "CreateLocationDto": {
                 "type": "object",
@@ -538,7 +515,256 @@
                     "country": {
                         "type": "string",
                         "example": "US",
-                        "description": "The 2 letter country-code in which the business is present for which sub-account is created"
+                        "description": "The 2 letter country-code in which the business is present for which sub-account is created",
+                        "enum": [
+                            "AF",
+                            "AX",
+                            "AL",
+                            "DZ",
+                            "AS",
+                            "AD",
+                            "AO",
+                            "AI",
+                            "AQ",
+                            "AG",
+                            "AR",
+                            "AM",
+                            "AW",
+                            "AU",
+                            "AT",
+                            "AZ",
+                            "BS",
+                            "BH",
+                            "BD",
+                            "BB",
+                            "BY",
+                            "BE",
+                            "BZ",
+                            "BJ",
+                            "BM",
+                            "BT",
+                            "BO",
+                            "BA",
+                            "BW",
+                            "BV",
+                            "BR",
+                            "IO",
+                            "BN",
+                            "BG",
+                            "BF",
+                            "BI",
+                            "KH",
+                            "CM",
+                            "CA",
+                            "CV",
+                            "KY",
+                            "CF",
+                            "TD",
+                            "CL",
+                            "CN",
+                            "CX",
+                            "CC",
+                            "CO",
+                            "KM",
+                            "CG",
+                            "CD",
+                            "CK",
+                            "CR",
+                            "CI",
+                            "HR",
+                            "CU",
+                            "CY",
+                            "CZ",
+                            "DK",
+                            "DJ",
+                            "DM",
+                            "DO",
+                            "EC",
+                            "EG",
+                            "SV",
+                            "GQ",
+                            "ER",
+                            "EE",
+                            "ET",
+                            "FK",
+                            "FO",
+                            "FJ",
+                            "FI",
+                            "FR",
+                            "GF",
+                            "PF",
+                            "TF",
+                            "GA",
+                            "GM",
+                            "GE",
+                            "DE",
+                            "GH",
+                            "GI",
+                            "GR",
+                            "GL",
+                            "GD",
+                            "GP",
+                            "GU",
+                            "GT",
+                            "GG",
+                            "GN",
+                            "GW",
+                            "GY",
+                            "HT",
+                            "HM",
+                            "VA",
+                            "HN",
+                            "HK",
+                            "HU",
+                            "IS",
+                            "IN",
+                            "ID",
+                            "IR",
+                            "IQ",
+                            "IE",
+                            "IM",
+                            "IL",
+                            "IT",
+                            "JM",
+                            "JP",
+                            "JE",
+                            "JO",
+                            "KZ",
+                            "KE",
+                            "KI",
+                            "KP",
+                            "KR",
+                            "XK",
+                            "KW",
+                            "KG",
+                            "LA",
+                            "LV",
+                            "LB",
+                            "LS",
+                            "LR",
+                            "LY",
+                            "LI",
+                            "LT",
+                            "LU",
+                            "MO",
+                            "MK",
+                            "MG",
+                            "MW",
+                            "MY",
+                            "MV",
+                            "ML",
+                            "MT",
+                            "MH",
+                            "MQ",
+                            "MR",
+                            "MU",
+                            "YT",
+                            "MX",
+                            "FM",
+                            "MD",
+                            "MC",
+                            "MN",
+                            "ME",
+                            "MS",
+                            "MA",
+                            "MZ",
+                            "MM",
+                            "NA",
+                            "NR",
+                            "NP",
+                            "NL",
+                            "AN",
+                            "NC",
+                            "NZ",
+                            "NI",
+                            "NE",
+                            "NG",
+                            "NU",
+                            "NF",
+                            "MP",
+                            "NO",
+                            "OM",
+                            "PK",
+                            "PW",
+                            "PS",
+                            "PA",
+                            "PG",
+                            "PY",
+                            "PE",
+                            "PH",
+                            "PN",
+                            "PL",
+                            "PT",
+                            "PR",
+                            "QA",
+                            "RE",
+                            "RO",
+                            "RU",
+                            "RW",
+                            "SH",
+                            "KN",
+                            "LC",
+                            "MF",
+                            "PM",
+                            "VC",
+                            "WS",
+                            "SM",
+                            "ST",
+                            "SA",
+                            "SN",
+                            "RS",
+                            "SC",
+                            "SL",
+                            "SG",
+                            "SX",
+                            "SK",
+                            "SI",
+                            "SB",
+                            "SO",
+                            "ZA",
+                            "GS",
+                            "ES",
+                            "LK",
+                            "SD",
+                            "SR",
+                            "SJ",
+                            "SZ",
+                            "SE",
+                            "CH",
+                            "SY",
+                            "TW",
+                            "TJ",
+                            "TZ",
+                            "TH",
+                            "TL",
+                            "TG",
+                            "TK",
+                            "TO",
+                            "TT",
+                            "TN",
+                            "TR",
+                            "TM",
+                            "TC",
+                            "TV",
+                            "UG",
+                            "GB",
+                            "UA",
+                            "AE",
+                            "US",
+                            "UM",
+                            "UY",
+                            "UZ",
+                            "VU",
+                            "VE",
+                            "VN",
+                            "VG",
+                            "VI",
+                            "WF",
+                            "EH",
+                            "YE",
+                            "ZM",
+                            "ZW"
+                        ]
                     },
                     "postalCode": {
                         "type": "string",
@@ -605,10 +831,7 @@
                         "example": "XXXXXXXXXXX"
                     }
                 },
-                "required": [
-                    "name",
-                    "companyId"
-                ]
+                "required": ["name", "companyId"]
             },
             "CreateLocationSuccessfulResponseDto": {
                 "type": "object",
@@ -656,7 +879,256 @@
                     "country": {
                         "type": "string",
                         "example": "US",
-                        "description": "The country in which the business is present for which sub-account is created"
+                        "description": "The country in which the business is present for which sub-account is created",
+                        "enum": [
+                            "AF",
+                            "AX",
+                            "AL",
+                            "DZ",
+                            "AS",
+                            "AD",
+                            "AO",
+                            "AI",
+                            "AQ",
+                            "AG",
+                            "AR",
+                            "AM",
+                            "AW",
+                            "AU",
+                            "AT",
+                            "AZ",
+                            "BS",
+                            "BH",
+                            "BD",
+                            "BB",
+                            "BY",
+                            "BE",
+                            "BZ",
+                            "BJ",
+                            "BM",
+                            "BT",
+                            "BO",
+                            "BA",
+                            "BW",
+                            "BV",
+                            "BR",
+                            "IO",
+                            "BN",
+                            "BG",
+                            "BF",
+                            "BI",
+                            "KH",
+                            "CM",
+                            "CA",
+                            "CV",
+                            "KY",
+                            "CF",
+                            "TD",
+                            "CL",
+                            "CN",
+                            "CX",
+                            "CC",
+                            "CO",
+                            "KM",
+                            "CG",
+                            "CD",
+                            "CK",
+                            "CR",
+                            "CI",
+                            "HR",
+                            "CU",
+                            "CY",
+                            "CZ",
+                            "DK",
+                            "DJ",
+                            "DM",
+                            "DO",
+                            "EC",
+                            "EG",
+                            "SV",
+                            "GQ",
+                            "ER",
+                            "EE",
+                            "ET",
+                            "FK",
+                            "FO",
+                            "FJ",
+                            "FI",
+                            "FR",
+                            "GF",
+                            "PF",
+                            "TF",
+                            "GA",
+                            "GM",
+                            "GE",
+                            "DE",
+                            "GH",
+                            "GI",
+                            "GR",
+                            "GL",
+                            "GD",
+                            "GP",
+                            "GU",
+                            "GT",
+                            "GG",
+                            "GN",
+                            "GW",
+                            "GY",
+                            "HT",
+                            "HM",
+                            "VA",
+                            "HN",
+                            "HK",
+                            "HU",
+                            "IS",
+                            "IN",
+                            "ID",
+                            "IR",
+                            "IQ",
+                            "IE",
+                            "IM",
+                            "IL",
+                            "IT",
+                            "JM",
+                            "JP",
+                            "JE",
+                            "JO",
+                            "KZ",
+                            "KE",
+                            "KI",
+                            "KP",
+                            "KR",
+                            "XK",
+                            "KW",
+                            "KG",
+                            "LA",
+                            "LV",
+                            "LB",
+                            "LS",
+                            "LR",
+                            "LY",
+                            "LI",
+                            "LT",
+                            "LU",
+                            "MO",
+                            "MK",
+                            "MG",
+                            "MW",
+                            "MY",
+                            "MV",
+                            "ML",
+                            "MT",
+                            "MH",
+                            "MQ",
+                            "MR",
+                            "MU",
+                            "YT",
+                            "MX",
+                            "FM",
+                            "MD",
+                            "MC",
+                            "MN",
+                            "ME",
+                            "MS",
+                            "MA",
+                            "MZ",
+                            "MM",
+                            "NA",
+                            "NR",
+                            "NP",
+                            "NL",
+                            "AN",
+                            "NC",
+                            "NZ",
+                            "NI",
+                            "NE",
+                            "NG",
+                            "NU",
+                            "NF",
+                            "MP",
+                            "NO",
+                            "OM",
+                            "PK",
+                            "PW",
+                            "PS",
+                            "PA",
+                            "PG",
+                            "PY",
+                            "PE",
+                            "PH",
+                            "PN",
+                            "PL",
+                            "PT",
+                            "PR",
+                            "QA",
+                            "RE",
+                            "RO",
+                            "RU",
+                            "RW",
+                            "SH",
+                            "KN",
+                            "LC",
+                            "MF",
+                            "PM",
+                            "VC",
+                            "WS",
+                            "SM",
+                            "ST",
+                            "SA",
+                            "SN",
+                            "RS",
+                            "SC",
+                            "SL",
+                            "SG",
+                            "SX",
+                            "SK",
+                            "SI",
+                            "SB",
+                            "SO",
+                            "ZA",
+                            "GS",
+                            "ES",
+                            "LK",
+                            "SD",
+                            "SR",
+                            "SJ",
+                            "SZ",
+                            "SE",
+                            "CH",
+                            "SY",
+                            "TW",
+                            "TJ",
+                            "TZ",
+                            "TH",
+                            "TL",
+                            "TG",
+                            "TK",
+                            "TO",
+                            "TT",
+                            "TN",
+                            "TR",
+                            "TM",
+                            "TC",
+                            "TV",
+                            "UG",
+                            "GB",
+                            "UA",
+                            "AE",
+                            "US",
+                            "UM",
+                            "UY",
+                            "UZ",
+                            "VU",
+                            "VE",
+                            "VN",
+                            "VG",
+                            "VI",
+                            "WF",
+                            "EH",
+                            "YE",
+                            "ZM",
+                            "ZW"
+                        ]
                     },
                     "postalCode": {
                         "type": "string",
@@ -706,9 +1178,7 @@
                         "default": false
                     }
                 },
-                "required": [
-                    "id"
-                ]
+                "required": ["id"]
             },
             "UpdateLocationDto": {
                 "type": "object",
@@ -746,7 +1216,256 @@
                     "country": {
                         "type": "string",
                         "example": "US",
-                        "description": "The country in which the business is present for which sub-account is created"
+                        "description": "The country in which the business is present for which sub-account is created",
+                        "enum": [
+                            "AF",
+                            "AX",
+                            "AL",
+                            "DZ",
+                            "AS",
+                            "AD",
+                            "AO",
+                            "AI",
+                            "AQ",
+                            "AG",
+                            "AR",
+                            "AM",
+                            "AW",
+                            "AU",
+                            "AT",
+                            "AZ",
+                            "BS",
+                            "BH",
+                            "BD",
+                            "BB",
+                            "BY",
+                            "BE",
+                            "BZ",
+                            "BJ",
+                            "BM",
+                            "BT",
+                            "BO",
+                            "BA",
+                            "BW",
+                            "BV",
+                            "BR",
+                            "IO",
+                            "BN",
+                            "BG",
+                            "BF",
+                            "BI",
+                            "KH",
+                            "CM",
+                            "CA",
+                            "CV",
+                            "KY",
+                            "CF",
+                            "TD",
+                            "CL",
+                            "CN",
+                            "CX",
+                            "CC",
+                            "CO",
+                            "KM",
+                            "CG",
+                            "CD",
+                            "CK",
+                            "CR",
+                            "CI",
+                            "HR",
+                            "CU",
+                            "CY",
+                            "CZ",
+                            "DK",
+                            "DJ",
+                            "DM",
+                            "DO",
+                            "EC",
+                            "EG",
+                            "SV",
+                            "GQ",
+                            "ER",
+                            "EE",
+                            "ET",
+                            "FK",
+                            "FO",
+                            "FJ",
+                            "FI",
+                            "FR",
+                            "GF",
+                            "PF",
+                            "TF",
+                            "GA",
+                            "GM",
+                            "GE",
+                            "DE",
+                            "GH",
+                            "GI",
+                            "GR",
+                            "GL",
+                            "GD",
+                            "GP",
+                            "GU",
+                            "GT",
+                            "GG",
+                            "GN",
+                            "GW",
+                            "GY",
+                            "HT",
+                            "HM",
+                            "VA",
+                            "HN",
+                            "HK",
+                            "HU",
+                            "IS",
+                            "IN",
+                            "ID",
+                            "IR",
+                            "IQ",
+                            "IE",
+                            "IM",
+                            "IL",
+                            "IT",
+                            "JM",
+                            "JP",
+                            "JE",
+                            "JO",
+                            "KZ",
+                            "KE",
+                            "KI",
+                            "KP",
+                            "KR",
+                            "XK",
+                            "KW",
+                            "KG",
+                            "LA",
+                            "LV",
+                            "LB",
+                            "LS",
+                            "LR",
+                            "LY",
+                            "LI",
+                            "LT",
+                            "LU",
+                            "MO",
+                            "MK",
+                            "MG",
+                            "MW",
+                            "MY",
+                            "MV",
+                            "ML",
+                            "MT",
+                            "MH",
+                            "MQ",
+                            "MR",
+                            "MU",
+                            "YT",
+                            "MX",
+                            "FM",
+                            "MD",
+                            "MC",
+                            "MN",
+                            "ME",
+                            "MS",
+                            "MA",
+                            "MZ",
+                            "MM",
+                            "NA",
+                            "NR",
+                            "NP",
+                            "NL",
+                            "AN",
+                            "NC",
+                            "NZ",
+                            "NI",
+                            "NE",
+                            "NG",
+                            "NU",
+                            "NF",
+                            "MP",
+                            "NO",
+                            "OM",
+                            "PK",
+                            "PW",
+                            "PS",
+                            "PA",
+                            "PG",
+                            "PY",
+                            "PE",
+                            "PH",
+                            "PN",
+                            "PL",
+                            "PT",
+                            "PR",
+                            "QA",
+                            "RE",
+                            "RO",
+                            "RU",
+                            "RW",
+                            "SH",
+                            "KN",
+                            "LC",
+                            "MF",
+                            "PM",
+                            "VC",
+                            "WS",
+                            "SM",
+                            "ST",
+                            "SA",
+                            "SN",
+                            "RS",
+                            "SC",
+                            "SL",
+                            "SG",
+                            "SX",
+                            "SK",
+                            "SI",
+                            "SB",
+                            "SO",
+                            "ZA",
+                            "GS",
+                            "ES",
+                            "LK",
+                            "SD",
+                            "SR",
+                            "SJ",
+                            "SZ",
+                            "SE",
+                            "CH",
+                            "SY",
+                            "TW",
+                            "TJ",
+                            "TZ",
+                            "TH",
+                            "TL",
+                            "TG",
+                            "TK",
+                            "TO",
+                            "TT",
+                            "TN",
+                            "TR",
+                            "TM",
+                            "TC",
+                            "TV",
+                            "UG",
+                            "GB",
+                            "UA",
+                            "AE",
+                            "US",
+                            "UM",
+                            "UY",
+                            "UZ",
+                            "VU",
+                            "VE",
+                            "VN",
+                            "VG",
+                            "VI",
+                            "WF",
+                            "EH",
+                            "YE",
+                            "ZM",
+                            "ZW"
+                        ]
                     },
                     "postalCode": {
                         "type": "string",
@@ -816,9 +1535,7 @@
                         ]
                     }
                 },
-                "required": [
-                    "companyId"
-                ]
+                "required": ["companyId"]
             },
             "LocationDeletedSuccessfulResponseDto": {
                 "type": "object",
@@ -834,10 +1551,7 @@
                         "example": "Deleted location with id: ve9EPM428h8vShlRW1KT"
                     }
                 },
-                "required": [
-                    "success",
-                    "message"
-                ]
+                "required": ["success", "message"]
             },
             "LocationTagsSchema": {
                 "type": "object",
@@ -884,9 +1598,7 @@
                         "example": "Tag"
                     }
                 },
-                "required": [
-                    "name"
-                ]
+                "required": ["name"]
             },
             "LocationTagDeleteSuccessfulResponseDto": {
                 "type": "object",
@@ -918,9 +1630,7 @@
                     },
                     "assignedTo": {
                         "description": "Assigned User Ids",
-                        "example": [
-                            "0004Mtfsd11SBU1mBPgd"
-                        ],
+                        "example": ["0004Mtfsd11SBU1mBPgd"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -961,7 +1671,7 @@
                     }
                 }
             },
-            "CustomFieldSchema": {
+            "LocationCustomFieldSchema": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -989,9 +1699,7 @@
                         "example": 0
                     },
                     "picklistOptions": {
-                        "example": [
-                            "first option"
-                        ],
+                        "example": ["first option"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -1019,6 +1727,12 @@
                     "locationId": {
                         "type": "string",
                         "example": "3sv6UEo51C9Bmpo1cKTq"
+                    },
+                    "model": {
+                        "type": "string",
+                        "description": "Model of the custom field",
+                        "example": "opportunity",
+                        "enum": ["contact", "opportunity"]
                     }
                 }
             },
@@ -1028,7 +1742,7 @@
                     "customFields": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/CustomFieldSchema"
+                            "$ref": "#/components/schemas/LocationCustomFieldSchema"
                         }
                     }
                 }
@@ -1037,7 +1751,7 @@
                 "type": "object",
                 "properties": {
                     "customField": {
-                        "$ref": "#/components/schemas/CustomFieldSchema"
+                        "$ref": "#/components/schemas/LocationCustomFieldSchema"
                     }
                 }
             },
@@ -1070,11 +1784,7 @@
                         "example": "Placeholder Text"
                     },
                     "acceptedFormat": {
-                        "example": [
-                            ".pdf",
-                            ".docx",
-                            ".jpeg"
-                        ],
+                        "example": [".pdf", ".docx", ".jpeg"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -1105,12 +1815,15 @@
                         "type": "number",
                         "example": 0,
                         "default": 0
+                    },
+                    "model": {
+                        "type": "string",
+                        "description": "Model of the custom field you want to create",
+                        "example": "opportunity",
+                        "enum": ["contact", "opportunity"]
                     }
                 },
-                "required": [
-                    "name",
-                    "dataType"
-                ]
+                "required": ["name", "dataType"]
             },
             "UpdateCustomFieldsDTO": {
                 "type": "object",
@@ -1124,11 +1837,7 @@
                         "example": "Placeholder Text"
                     },
                     "acceptedFormat": {
-                        "example": [
-                            ".pdf",
-                            ".docx",
-                            ".jpeg"
-                        ],
+                        "example": [".pdf", ".docx", ".jpeg"],
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -1159,11 +1868,15 @@
                         "type": "number",
                         "example": 0,
                         "default": 0
+                    },
+                    "model": {
+                        "type": "string",
+                        "description": "Model of the custom field you want to update",
+                        "example": "opportunity",
+                        "enum": ["contact", "opportunity"]
                     }
                 },
-                "required": [
-                    "name"
-                ]
+                "required": ["name"]
             },
             "CustomFieldDeleteSuccessfulResponseDto": {
                 "type": "object",
@@ -1230,10 +1943,7 @@
                         "example": "Value"
                     }
                 },
-                "required": [
-                    "name",
-                    "value"
-                ]
+                "required": ["name", "value"]
             },
             "CustomValueDeleteSuccessfulResponseDto": {
                 "type": "object",
@@ -1358,6 +2068,10 @@
                                 }
                             ]
                         }
+                    },
+                    "totalCount": {
+                        "type": "number",
+                        "example": 100
                     }
                 }
             }
@@ -1387,9 +2101,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1451,7 +2163,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SearchSuccessfulResponseDto"
+                                    "$ref": "#/components/schemas/LocationSearchSuccessfulResponseDto"
                                 }
                             }
                         }
@@ -1487,9 +2199,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location Search"
-                ],
+                "tags": ["Location Search"],
                 "security": [
                     {
                         "Agency-Access": []
@@ -1523,9 +2233,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1581,9 +2289,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location"
-                ],
+                "tags": ["Location"],
                 "security": [
                     {
                         "Location-Access": []
@@ -1615,9 +2321,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1673,9 +2377,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location"
-                ],
+                "tags": ["Location"],
                 "security": [
                     {
                         "Agency-Access": []
@@ -1704,9 +2406,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1762,9 +2462,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location"
-                ],
+                "tags": ["Location"],
                 "security": [
                     {
                         "Agency-Access": []
@@ -1795,9 +2493,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1853,9 +2549,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location Tags"
-                ],
+                "tags": ["Location Tags"],
                 "security": [
                     {
                         "bearer": []
@@ -1884,9 +2578,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -1952,9 +2644,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location Tags"
-                ],
+                "tags": ["Location Tags"],
                 "security": [
                     {
                         "bearer": []
@@ -1985,9 +2675,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2053,9 +2741,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location Tags"
-                ],
+                "tags": ["Location Tags"],
                 "security": [
                     {
                         "bearer": []
@@ -2084,9 +2770,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2162,9 +2846,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location Tags"
-                ],
+                "tags": ["Location Tags"],
                 "security": [
                     {
                         "bearer": []
@@ -2193,9 +2875,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2261,9 +2941,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location Tags"
-                ],
+                "tags": ["Location Tags"],
                 "security": [
                     {
                         "bearer": []
@@ -2294,9 +2972,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2362,9 +3038,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location Tasks Search"
-                ],
+                "tags": ["Location Tasks Search"],
                 "security": [
                     {
                         "bearer": []
@@ -2395,9 +3069,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2407,6 +3079,17 @@
                         "description": "Location Id",
                         "example": "ve9EPM428h8vShlRW1KT",
                         "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "model",
+                        "required": false,
+                        "in": "query",
+                        "description": "Model of the custom field you want to retrieve",
+                        "example": "opportunity",
+                        "schema": {
+                            "enum": ["contact", "opportunity", "all"],
                             "type": "string"
                         }
                     }
@@ -2453,9 +3136,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Field"
-                ],
+                "tags": ["Custom Field"],
                 "security": [
                     {
                         "bearer": []
@@ -2484,9 +3165,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2552,9 +3231,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Field"
-                ],
+                "tags": ["Custom Field"],
                 "security": [
                     {
                         "bearer": []
@@ -2585,9 +3262,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2653,9 +3328,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Field"
-                ],
+                "tags": ["Custom Field"],
                 "security": [
                     {
                         "bearer": []
@@ -2684,9 +3357,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2762,9 +3433,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Field"
-                ],
+                "tags": ["Custom Field"],
                 "security": [
                     {
                         "bearer": []
@@ -2793,9 +3462,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2861,9 +3528,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Field"
-                ],
+                "tags": ["Custom Field"],
                 "security": [
                     {
                         "bearer": []
@@ -2894,9 +3559,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -2942,9 +3605,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Value"
-                ],
+                "tags": ["Custom Value"],
                 "security": [
                     {
                         "bearer": []
@@ -2973,9 +3634,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -3041,9 +3700,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Value"
-                ],
+                "tags": ["Custom Value"],
                 "security": [
                     {
                         "bearer": []
@@ -3074,9 +3731,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -3142,9 +3797,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Value"
-                ],
+                "tags": ["Custom Value"],
                 "security": [
                     {
                         "bearer": []
@@ -3173,9 +3826,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -3251,9 +3902,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Value"
-                ],
+                "tags": ["Custom Value"],
                 "security": [
                     {
                         "bearer": []
@@ -3282,9 +3931,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -3350,9 +3997,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Custom Value"
-                ],
+                "tags": ["Custom Value"],
                 "security": [
                     {
                         "bearer": []
@@ -3383,9 +4028,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     },
                     {
@@ -3423,11 +4066,7 @@
                         "required": false,
                         "in": "query",
                         "schema": {
-                            "enum": [
-                                "sms",
-                                "email",
-                                "whatsapp"
-                            ],
+                            "enum": ["sms", "email", "whatsapp"],
                             "type": "string"
                         }
                     },
@@ -3484,9 +4123,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Template"
-                ],
+                "tags": ["Template"],
                 "security": [
                     {
                         "bearer": []
@@ -3494,7 +4131,7 @@
                 ]
             }
         },
-        "/locations/": {
+        "/locations": {
             "post": {
                 "operationId": "create-location",
                 "summary": "Create Location",
@@ -3517,9 +4154,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": [
-                                "2021-07-28"
-                            ]
+                            "enum": ["2021-07-28"]
                         }
                     }
                 ],
@@ -3565,9 +4200,7 @@
                         }
                     }
                 },
-                "tags": [
-                    "Location"
-                ],
+                "tags": ["Location"],
                 "security": [
                     {
                         "Agency-Access": []
