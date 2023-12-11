@@ -4,14 +4,14 @@ import {
     type AccessType,
     type ScopeLiterals,
     type FilteredScopeNames,
-    type ReadWrite,
-    scopesSchema
+    type ReadWrite
 } from './scopes-schema'
+import { scopesSchema } from '../schema/types/scopes'
 
 export class ScopesBuilder<T extends AccessType> {
     /** the access level for your app. Sub-Account is same as Location. Company same as Agency. */
     public accessType: T
-    /** an array of the scopes that have been added so far */
+    /** a Set containing the scopes that have been added so far */
     public collection = new Set<ScopeLiterals<T>>()
 
     /**
@@ -23,8 +23,6 @@ export class ScopesBuilder<T extends AccessType> {
     }
 
     /** add a scope from the available scopes for this access type */
-    public add(scopes: ScopeLiterals<T>): this
-    public add(scopes: ScopeLiterals<T>[]): this
     public add(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): this {
         if (Array.isArray(scopes)) {
             this.collection = new Set([...this.collection, ...scopes])
@@ -36,18 +34,18 @@ export class ScopesBuilder<T extends AccessType> {
 
     /** Get the scope parts for the given access type
      * @paramm type - the scope part to return
-     * @param array - return the scopes as an array instead of a string
-     * - `names` - return the scope names only (e.g. "businesses" instead of "businesses.read")
-     * - `readWrite` - return scope names with the access type (e.g. "read" or "write")
-     * - `literals` - (same as `all()` method) returns all scopes available to the given accessType in the format required by the authorization redirect uri. e.g. "businesses.read businesses.write locations.read..."
+     * @param {boolean} array - return the scopes as an array instead of a string
+     * - `names` - return the scope names only (e.g. `businesses` from `businesses.readonly`)
+     * - `readWrite` - return only the `readonly` or `write` from a scope
+     * - `literals` - (used by `all()` method) returns all scopes available to the given accessType in the format required by the authorization redirect uri. e.g. "businesses.read businesses.write locations.read..."
      */
-    private _allAvailable(
+    public _allAvailable(
         type: 'names' | 'readWrite' | 'literals' = 'literals',
         array?: boolean
     ) {
-        const names: Array<FilteredScopeNames<T>> = []
-        const readWrite: Array<ReadWrite<FilteredScopeNames<T>>> = []
-        const literals: Array<ScopeLiterals<T>> = []
+        const names = new Set<FilteredScopeNames<T>>()
+        const readWrite = new Set<ReadWrite<FilteredScopeNames<T>>>()
+        const literals = new Set<ScopeLiterals<T>>()
         for (const [scopeName, scopeValue] of objectEntries(scopesSchema)) {
             for (const [access, endpoints] of objectEntries(scopeValue)) {
                 for (const endpoint of endpoints) {
@@ -56,13 +54,13 @@ export class ScopesBuilder<T extends AccessType> {
                             this.accessType
                         )
                     ) {
-                        readWrite.push(
+                        readWrite.add(
                             access as ReadWrite<FilteredScopeNames<T>>
                         )
-                        literals.push(
+                        literals.add(
                             `${scopeName}.${access}` as ScopeLiterals<T>
                         )
-                        names.push(
+                        names.add(
                             scopeName.replace('/', ' ') as FilteredScopeNames<T>
                         )
                     }
@@ -72,20 +70,21 @@ export class ScopesBuilder<T extends AccessType> {
 
         switch (type) {
             case 'names':
-                return names
+                return array ? [...names] : names
             case 'readWrite':
-                return readWrite
+                return array ? [...readWrite] : readWrite
             case 'literals':
-                return array ? literals : literals.join(' ')
+                return array ? [...literals] : [...literals].join(' ')
         }
     }
 
     /**
-     * Get all scopes added so far, as a string for use in the authorization redirect uri
+     * get a string of all scopes added to the builder so far.\
+     * - for use in the authorization redirect uri
      * @returns a string of the scopes joined by a space
      */
     public get() {
-        return Array.from(this.collection).join(' ') as ScopeLiterals<T>
+        return [...this.collection].join(' ')
     }
 
     public has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]) {

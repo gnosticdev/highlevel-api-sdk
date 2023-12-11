@@ -23,14 +23,10 @@
     },
     "include": [
         "src/**/*.ts",
-        "tests/**/*.ts",
+        "__tests__/**/*.ts",
         "scripts/**/*.ts",
-        "schemas/**/*.json",
-        "playwright/*.ts",
-        "build.ts",
-        "src/auth/*.tsx",
-        "playwright/webhooks/scrape.ts",
-        "playwright/webhooks/build-types.ts"
+        "src/**/*.json",
+        "src/auth/*.tsx"
     ],
     "exclude": [
         "node_modules",

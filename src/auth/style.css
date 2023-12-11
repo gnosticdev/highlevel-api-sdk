@@ -36,6 +36,15 @@ body {
             background: #334cda;
             color: #ffffff;
             text-decoration: none;
+
+            &:hover {
+                background: #1e2f8e;
+            }
+
+            &.copied {
+                background: rgb(24, 142, 134);
+                transition: background 0.2s ease;
+            }
         }
     }
 }

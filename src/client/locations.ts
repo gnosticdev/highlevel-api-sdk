@@ -1,8 +1,7 @@
 import createClient from 'openapi-fetch'
-import type { paths, operations } from '../api/types/locations'
+import type { paths, operations } from '../schema/types/locations'
 import type { HighLevelConfig } from './base'
 import type { AccessType } from './scopes-schema'
-import { OauthClient } from './oauth'
 
 type SearchLocationsParams = {
     /** key terms to search for when looking up a location */

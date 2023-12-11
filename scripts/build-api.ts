@@ -3,16 +3,16 @@ import path from 'path'
 import openapiTS, { astToString } from 'openapi-typescript'
 import { coolConsole } from '@gnosticdev/cool-console'
 
-const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/api/schemas/openapi')
-const OUT_DIR = path.join(process.cwd(), 'src/api/test')
+const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/schema/openapi')
+const OUT_DIR = path.join(process.cwd(), 'src/api/updates')
 
 if (import.meta.main) {
     switch (process.argv[2]) {
         case 'generate':
-            generateApi()
+            await generateApi()
             break
         case 'create-root':
-            createRootFile()
+            await createRootFile()
             break
         default:
             console.log('no command')

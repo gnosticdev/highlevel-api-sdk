@@ -1,4 +1,6 @@
+import scopes from '../src/schema/schemas/scopes.json'
 import path from 'path'
+
 type Scopes = {
     [key: string]: {
         readonly: {
@@ -14,19 +16,11 @@ type Scopes = {
     }
 }
 
-const jsonFile = import.meta.resolveSync('../src/api/schemas/scopes.json')
-const scopesJson = await Bun.file(jsonFile).json()
-
-function replacer(key: string, value: any) {
-    if (key === 'accessType' && value.toString() === 'Sub-Account, Company') {
-        return ['Sub-Account', 'Company']
-    }
-    return value
-}
-
-const newScopes = JSON.stringify(scopesJson, replacer, 4)
-
-await Bun.write(
-    path.join(process.cwd(), 'src/api/schemas/new-scopes.json'),
-    newScopes
-)
+// replacer to add 'as const' to the end of accessType arrays
+const scopesBuild =
+    'export const scopesSchema = ' +
+    JSON.stringify(scopes, null, 4).replace(
+        /"accessType": \[([^\]]+)\]/g,
+        '"accessType": [$1] as const'
+    )
+await Bun.write('src/api/types/scopes.ts', scopesBuild)

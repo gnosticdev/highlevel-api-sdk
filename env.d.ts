@@ -1,3 +1,5 @@
+///<reference types="bun-types" />
+
 declare module 'bun' {
     interface Env {
         CLIENT_ID: string

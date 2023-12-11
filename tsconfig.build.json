@@ -9,6 +9,6 @@
         "rootDirs": ["./src/api/types", "./src/api/schemas", "./src/client"],
         "rootDir": "./src/"
     },
-    "include": ["./src/api/types/**/*.ts", "./src/client/*.ts"],
+    "include": ["./src/schema/types/**/*.ts", "./src/client/*.ts"],
     "exclude": ["./src/lib/**/*"]
 }

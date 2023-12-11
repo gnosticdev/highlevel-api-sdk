@@ -315,6 +315,11 @@
                 "methodAndEndpoint": "GET conversations/messages/:messageId/locations/:locationId/recording",
                 "webhookEvents": "InboundMessage",
                 "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "",
+                "webhookEvents": "OutboundMessage",
+                "accessType": ["Sub-Account"]
             }
         ],
         "write": [
@@ -568,6 +573,16 @@
             {
                 "methodAndEndpoint": "GET /opportunities/pipelines",
                 "webhookEvents": "OpportunityStageUpdate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "",
+                "webhookEvents": "OpportunityStatusUpdate",
+                "accessType": ["Sub-Account"]
+            },
+            {
+                "methodAndEndpoint": "",
+                "webhookEvents": "OpportunityMonetaryValueUpdate",
                 "accessType": ["Sub-Account"]
             }
         ],
