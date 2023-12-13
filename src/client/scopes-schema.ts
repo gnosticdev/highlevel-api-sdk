@@ -1,25 +1,25 @@
-import { scopesSchema } from "../schema/types/scopes";
+import { scopesSchema } from "../schema/types/scopes"
 /**
  * This file is used to generate the types for the scopes schema.
  * By changing the accessType to 'Sub-Account' or 'Company' autocomplete will update with the available types for that accessType.
  */
 
-export type AccessType = "Sub-Account" | "Company";
-type ScopesSchema = typeof scopesSchema;
+export type AccessType = "Sub-Account" | "Company"
+type ScopesSchema = typeof scopesSchema
 
 type Endpoint<A extends AccessType> = {
-	methodAndEndpoint: string;
-	webhookEvents: string;
-	accessType: readonly A[];
-};
+	methodAndEndpoint: string
+	webhookEvents: string
+	accessType: readonly A[]
+}
 
 type KeysOfUnion<ObjectType> = ObjectType extends unknown
 	? keyof ObjectType
-	: never;
+	: never
 
 export type ReadWrite<N extends keyof ScopesSchema> = KeysOfUnion<
 	ScopesSchema[N]
->;
+>
 
 export type ScopeLiterals<A extends AccessType> = A extends ScopeAccess<
 	infer Name,
@@ -30,7 +30,7 @@ export type ScopeLiterals<A extends AccessType> = A extends ScopeAccess<
 			? `${Name}.${RW}`
 			: never
 		: never
-	: never;
+	: never
 
 export type ScopeAccess<
 	N extends keyof ScopesSchema,
@@ -39,10 +39,10 @@ export type ScopeAccess<
 	? ScopesSchema[N][R] extends Endpoint<infer A>[]
 		? A
 		: never
-	: never;
+	: never
 
 // Test out the autocomplete
-const access: ScopeAccess<"businesses", "readonly"> = "Sub-Account";
+const access: ScopeAccess<"businesses", "readonly"> = "Sub-Account"
 
 export type FilteredScopeNames<T extends AccessType> = {
 	[K in keyof ScopesSchema]: ScopeAccess<
@@ -54,8 +54,8 @@ export type FilteredScopeNames<T extends AccessType> = {
 			: Accessible extends readonly T[]
 			  ? K
 			  : never
-		: never;
-}[keyof ScopesSchema];
+		: never
+}[keyof ScopesSchema]
 
 export type FilteredScopesSchema<T extends AccessType> = {
 	[K in FilteredScopeNames<T>]: {
@@ -63,9 +63,9 @@ export type FilteredScopesSchema<T extends AccessType> = {
 			? A extends T
 				? Endpoint<A>[]
 				: never
-			: never;
-	};
-};
+			: never
+	}
+}
 
 // Test out the autocomplete
-const tester: ScopeAccess<"campaigns", "readonly"> = "Sub-Account";
+const tester: ScopeAccess<"campaigns", "readonly"> = "Sub-Account"

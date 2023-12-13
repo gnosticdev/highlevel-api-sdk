@@ -1,32 +1,29 @@
 /** @jsx jsx */
 /** @jsxImportSource hono/jsx */
 
-import { coolConsole } from "@gnosticdev/cool-console";
-import type { Serve } from "bun";
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import { raw } from "hono/html";
-import type { FC } from "hono/jsx";
-import { logger } from "hono/logger";
-import {
-	type BaseConfig,
-	type HighLevelConfig,
-	generateAccessToken,
-} from "../client/base";
-import { ScopesBuilder } from "../client/scopes";
+import { coolConsole } from "@gnosticdev/cool-console"
+import type { Serve } from "bun"
+import { Hono } from "hono"
+import { cors } from "hono/cors"
+import { raw } from "hono/html"
+import type { FC } from "hono/jsx"
+import { logger } from "hono/logger"
+import { LocationsClient, OauthClient } from "../client"
+import { ScopesBuilder } from "../client/scopes"
+import { HighLevelClient, type HighLevelConfig } from "../client/sdk"
 
-const cssFilePath = import.meta.resolveSync("./style.css");
+const cssFilePath = import.meta.resolveSync("./style.css")
 
 type HLVariables = HighLevelConfig<"Sub-Account"> & {
-	loggedIn: boolean;
-	accessToken: string;
-};
+	loggedIn: boolean
+	accessToken: string
+}
 
-const app = new Hono<{ Variables: HLVariables }>();
+const app = new Hono<{ Variables: HLVariables }>()
 
 const Layout: FC = async (props) => {
-	const cssFile = Bun.pathToFileURL(cssFilePath);
-	const cssText = await Bun.file(cssFile).text();
+	const cssFile = Bun.pathToFileURL(cssFilePath)
+	const cssText = await Bun.file(cssFile).text()
 	return (
 		<html lang="en">
 			<head>
@@ -40,11 +37,11 @@ const Layout: FC = async (props) => {
 			</head>
 			<body>{props.children}</body>
 		</html>
-	);
-};
+	)
+}
 
 const Home: FC<{ buttonLink?: string; copyCode?: string }> = (props: {
-	buttonLink?: string;
+	buttonLink?: string
 }) => {
 	return (
 		<Layout>
@@ -57,12 +54,12 @@ const Home: FC<{ buttonLink?: string; copyCode?: string }> = (props: {
 				</div>
 			</main>
 		</Layout>
-	);
-};
+	)
+}
 
 const Result: FC<{ message: string; code?: string }> = (props: {
-	message: string;
-	code?: string;
+	message: string
+	code?: string
 }) => {
 	return (
 		<Layout>
@@ -90,61 +87,58 @@ const Result: FC<{ message: string; code?: string }> = (props: {
                         setTimeout(() => {
                             copyBtn.classList.remove('copied')
                             copyBtn.innerText = 'Copy'
-                        }, 2000)
+                        }, 1500)
                     })
                 `}
 				</script>
 			</main>
 		</Layout>
-	);
-};
+	)
+}
 
-const scopes = new ScopesBuilder({ accessType: "Sub-Account" });
-
-const client = generateAccessToken({
+const scopes = new ScopesBuilder({ accessType: "Sub-Account" })
+const auth = new OauthClient({
 	accessType: "Sub-Account",
 	clientId: process.env.CLIENT_ID!,
 	clientSecret: process.env.CLIENT_SECRET!,
 	scopes: scopes.all(),
 	redirectUri: "http://localhost:3000/auth/callback",
-});
-
-app.use("*", cors());
-app.use("*", logger());
+})
+const client = new HighLevelClient(auth)
+app.use("*", cors())
+app.use("*", logger())
 // start the login flow
 app.get("/", async (c) => {
 	// button to start the login flow
 	if (c.req.path === "/") {
-		return c.html(<Home buttonLink={client.authUrl} />);
+		return c.html(<Home buttonLink={client.oauth.authUrl} />)
 	}
-});
+})
 /**
  * OAuth callback Middleware
  * - intercept the auth code from the query string
  * - exchange it for an access token
  */
 app.get("/auth/callback", async (c, next) => {
-	coolConsole.magenta("auth/callback queries:").obj(c.req.queries());
-
-	const authCode = c.req.query("code");
+	const authCode = c.req.query("code")
 	if (!authCode) {
-		coolConsole.red("No auth code found!");
-		return c.html(<Result message="Invalid auth code" />);
+		coolConsole.red("No auth code found!")
+		return c.html(<Result message="Invalid auth code" />)
 	}
-	coolConsole.blue(`authCode: ${authCode}`);
 
-	const token = await client.exchangeCodeForToken(authCode);
-	coolConsole.blue(`token: ${token}`);
+	const token = await client.oauth.getAccessToken(authCode)
+
 	if (!token) {
-		coolConsole.red("No token found!");
-		return c.html(<Result message="Couldnt get accessToken" />);
+		coolConsole.red("No token found!")
+		return c.html(<Result message="Couldnt get accessToken" />)
 	}
-	c.set("accessToken", token);
-	return next();
-});
+
+	c.set("accessToken", token)
+	return next()
+})
 
 app.get("/auth/callback", async (c) => {
-	const accessToken = c.get("accessToken");
+	const accessToken = c.get("accessToken")
 	return c.html(
 		<Result
 			message={
@@ -154,10 +148,12 @@ app.get("/auth/callback", async (c) => {
 			}
 			code={accessToken}
 		/>,
-	);
-});
+	)
+})
+
+app.get("/locations/installed", async (c) => {})
 
 export default ({
 	fetch: app.fetch,
 	port: 3000,
-} satisfies Serve);
+} satisfies Serve)

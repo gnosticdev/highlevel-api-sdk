@@ -3,6 +3,12 @@
     "organizeImports": {
         "enabled": true
     },
+    "javascript": {
+        "formatter": {
+            "semicolons": "asNeeded",
+            "quoteStyle": "single"
+        }
+    },
     "linter": {
         "enabled": true,
         "rules": {

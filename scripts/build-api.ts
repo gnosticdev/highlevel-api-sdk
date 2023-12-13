@@ -1,69 +1,76 @@
 import fs from 'fs'
 import path from 'path'
-import openapiTS, { astToString } from 'openapi-typescript'
 import { coolConsole } from '@gnosticdev/cool-console'
+import openapiTS, { astToString } from 'openapi-typescript'
 
 const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/schema/openapi')
-const OUT_DIR = path.join(process.cwd(), 'src/api/updates')
+const OUT_DIR = path.join(process.cwd(), 'src/schema/updates')
 
 if (import.meta.main) {
-    switch (process.argv[2]) {
-        case 'generate':
-            await generateApi()
-            break
-        case 'create-root':
-            await createRootFile()
-            break
-        default:
-            console.log('no command')
-    }
+	switch (process.argv[2]) {
+		case 'generate':
+			await generateApi()
+			break
+		default:
+			console.log('no command')
+	}
+}
+
+async function getSchemaFileUrls() {
+	const tsGlob = new Bun.Glob('*.json')
+	const files = await Array.fromAsync(
+		tsGlob.scan({ cwd: 'src/schema/openapi', absolute: true }),
+	)
+	return files
 }
 
 /**
- * Generate types from openapi schemas, and compile them into a single index.ts file
+ * Generate types from openapi schemas.
  */
 async function generateApi() {
-    const typesExists = await fs.promises.exists(OUT_DIR)
-    if (!typesExists) {
-        await fs.promises.mkdir(OUT_DIR)
-    }
-    if (!OUT_DIR) throw new Error('Could not create directories')
+	const typesExists = await fs.promises.exists(OUT_DIR)
+	if (!typesExists) {
+		await fs.promises.mkdir(OUT_DIR)
+	}
 
-    // example 1: load [object] as schema (JSON only)
-    const schemaFiles = await fs.promises.readdir(SCHEMAS_DIR)
+	// example 1: load [object] as schema (JSON only)
+	const schemaFiles = await getSchemaFileUrls()
 
-    // index file will export all types
-    const indexFile = path.join(OUT_DIR, 'index.ts')
-    let importData = ''
-    let exportData = []
+	// index file will export all types
+	const indexFile = path.join(OUT_DIR, 'index.ts')
+	let importData = ''
+	const exportData = []
 
-    // create each type file
-    for await (const jsonFile of schemaFiles) {
-        if (path.extname(jsonFile) !== '.json') continue
-        const fileUrl = Bun.pathToFileURL(path.join(SCHEMAS_DIR, jsonFile))
-        const typeTitle = createTitle(jsonFile)
+	// create each type file
+	for await (const schemaFile of schemaFiles) {
+		const { fileName, upperTitle, absFilePath, fileUrl } = parseFile(schemaFile)
 
-        console.log('creating types for', jsonFile)
-        const fileName = path.parse(jsonFile).name
+		console.log('creating types for', fileName)
 
-        const output = await openapiTS(fileUrl, { version: 3.0 })
-        const data = astToString(output)
+		const output = await openapiTS(fileUrl, {
+			version: 3.0,
+			enum: true,
+			defaultNonNullable: true,
+			exportType: true,
+		})
 
-        const outFile = path.join(OUT_DIR, `${fileName}.ts`)
-        await Bun.write(outFile, data)
-        // capitalize the filename and use as export name
+		const data = astToString(output, { fileName })
 
-        importData += `import * as ${typeTitle} from './${fileName}'\n`
-        // now export the type
-        exportData.push(typeTitle)
-        coolConsole.green(`added types for ${typeTitle}`)
-    }
-    // add export statement
-    importData += `\nexport { ${exportData.join(', ')} \n}`
+		const outFile = path.join(OUT_DIR, `${fileName}.ts`)
+		await Bun.write(outFile, data)
+		// capitalize the filename and use as export name
 
-    // create index file
-    await Bun.write(indexFile, importData)
-    coolConsole.green('created index file')
+		importData += `import * as ${upperTitle} from './${fileName}'\n`
+		// now export the type
+		exportData.push(upperTitle)
+		coolConsole.green(`added types for ${upperTitle}`)
+	}
+	// add export statement
+	importData += `\nexport { ${exportData.join(', ')} \n}`
+
+	// create index file
+	await Bun.write(indexFile, importData)
+	coolConsole.green('created index file')
 }
 
 /**
@@ -71,58 +78,12 @@ async function generateApi() {
  * @param jsonFile
  * @returns
  */
-function createTitle(filePath: string) {
-    const fileName = path.parse(filePath).name
-    const typeTitle = filePath.charAt(0).toUpperCase() + fileName.slice(1)
-    return typeTitle
+function parseFile(absFilePath: string) {
+	const fileUrl = Bun.pathToFileURL(absFilePath)
+	const parsed = path.parse(absFilePath)
+	const fileName = parsed.name
+	const upperTitle = fileName.charAt(0).toUpperCase() + fileName.slice(1)
+	return { fileName, upperTitle, absFilePath, fileUrl }
 }
 
 // Start with a base structure for your root OpenAPI file
-
-async function createRootFile() {
-    const rootOpenApi = {
-        openapi: '3.0.0',
-        info: {
-            title: 'HighLevel API Documentation',
-            description: 'Combined documentation for all APIs',
-            version: '1.0',
-            contact: {},
-            license: {
-                name: 'MIT',
-                url: 'https://opensource.org/licenses/MIT'
-            }
-        },
-        tags: [],
-        servers: [
-            {
-                url: 'https://services.leadconnectorhq.com'
-            }
-        ],
-        components: {
-            schemas: {},
-            securitySchemes: {}
-        },
-        paths: {} as Record<string, any>
-    }
-
-    // Read the directory containing the endpoint files
-    const files = await fs.promises.readdir(SCHEMAS_DIR)
-
-    // Filter JSON files and construct the paths object
-    for await (const file of files) {
-        if (path.extname(file) !== '.json') continue
-        coolConsole.orange('parsing file ' + file)
-        const json = await Bun.file(path.join(SCHEMAS_DIR, file)).json()
-
-        for (const key in json.paths) {
-            rootOpenApi.paths[key] = {
-                $ref: `./${path.basename(file)}#/paths${key}`
-            }
-        }
-    }
-    // Write the root OpenAPI file to disk
-    await Bun.write(
-        path.join(SCHEMAS_DIR, 'api.json'),
-        JSON.stringify(rootOpenApi)
-    )
-}
