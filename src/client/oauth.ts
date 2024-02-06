@@ -1,15 +1,15 @@
-import { coolConsole } from "@gnosticdev/cool-console"
-import createClient, { type BodySerializer } from "openapi-fetch"
-import type { operations, paths as OauthPaths } from "../schema/types/oauth"
-import { ScopesBuilder } from "./scopes"
-import type { AccessType } from "./scopes-schema"
-import type { HighLevelConfig } from "./sdk"
+import { coolConsole } from '@gnosticdev/cool-console'
+import createClient, { type BodySerializer } from 'openapi-fetch'
+import type { paths as OauthPaths, operations } from '../schema/types/oauth'
+import { ScopesBuilder } from './scopes'
+import type { AccessType } from './scopes.types'
+import type { HighLevelConfig } from './sdk'
 
 type AccessTokenRequest =
-	operations["get-access-token"]["requestBody"]["content"]["application/x-www-form-urlencoded"]
+	operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded']
 
 export type AuthUrlParams = {
-	response_type: "code"
+	response_type: 'code'
 	redirect_uri: string
 	client_id: string
 	scope: string
@@ -17,37 +17,37 @@ export type AuthUrlParams = {
 
 export type TokenParams = AuthCodeParams | RefreshTokenParams
 type AuthCodeParams<
-	GrantType extends AccessTokenRequest["grant_type"] = "authorization_code",
+	GrantType extends AccessTokenRequest['grant_type'] = 'authorization_code',
 > = {
 	[K in keyof Pick<
 		AccessTokenRequest,
-		"client_id" | "client_secret" | "code"
+		'client_id' | 'client_secret' | 'code'
 	>]: AccessTokenRequest[K]
 } & {
 	grant_type: GrantType
-	user_type: "Company" | "Location"
+	user_type: 'Company' | 'Location'
 }
 type RefreshTokenParams<
-	GrantType extends AccessTokenRequest["grant_type"] = "refresh_token",
+	GrantType extends AccessTokenRequest['grant_type'] = 'refresh_token',
 > = {
 	[K in keyof Pick<
 		AccessTokenRequest,
-		"client_id" | "client_secret" | "refresh_token"
+		'client_id' | 'client_secret' | 'refresh_token'
 	>]: AccessTokenRequest[K]
 } & {
 	grant_type: GrantType
-	user_type: "Company" | "Location"
+	user_type: 'Company' | 'Location'
 }
 
 type LocationTokenParams =
-	operations["get-location-access-token"]["requestBody"]["content"]["application/x-www-form-urlencoded"]
+	operations['get-location-access-token']['requestBody']['content']['application/x-www-form-urlencoded']
 
 type SearchInstalledLocationParams = {
-	query: operations["get-installed-location"]["parameters"]["query"]
+	query: operations['get-installed-location']['parameters']['query']
 }
 
 type TokenResponse = Required<
-	operations["get-access-token"]["responses"]["200"]["content"]["application/json"]
+	operations['get-access-token']['responses']['200']['content']['application/json']
 >
 
 export async function createOauthClient<T extends AccessType>(
@@ -59,11 +59,11 @@ export async function createOauthClient<T extends AccessType>(
 }
 
 const DEFAULTS = {
-	baseUrl: "https://services.leadconnectorhq.com",
-	baseAuthUrl: "https://marketplace.gohighlevel.com/oauth/chooselocation",
+	baseUrl: 'https://services.leadconnectorhq.com',
+	baseAuthUrl: 'https://marketplace.gohighlevel.com/oauth/chooselocation',
 } as const satisfies Pick<
 	HighLevelConfig<AccessType>,
-	"baseUrl" | "baseAuthUrl"
+	'baseUrl' | 'baseAuthUrl'
 >
 
 const tokenSerializer: BodySerializer<TokenParams> = (
@@ -71,7 +71,7 @@ const tokenSerializer: BodySerializer<TokenParams> = (
 ) => {
 	if (!body) return undefined
 	const params = new URLSearchParams(body)
-	coolConsole.pink("Token Serializer /POST body:").obj(params)
+	coolConsole.pink('Token Serializer /POST body:').obj(params)
 	return params
 }
 /**
@@ -99,9 +99,9 @@ export class OauthClient<T extends AccessType> {
 		this.baseUrl = config.baseUrl ?? DEFAULTS.baseUrl
 		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULTS.baseAuthUrl
 		this.userType =
-			config.accessType === "Sub-Account"
-				? ("Location" as const)
-				: ("Company" as const)
+			config.accessType === 'Sub-Account'
+				? ('Location' as const)
+				: ('Company' as const)
 		const baseClient = createClient<OauthPaths>({
 			baseUrl: config.baseUrl,
 		})
@@ -113,11 +113,11 @@ export class OauthClient<T extends AccessType> {
 			get: (_, key: keyof typeof baseClient) => {
 				// logic to handle accessTokens
 				const newClient = createClient<OauthPaths>({
-					bodySerializer: key === "POST" ? tokenSerializer : undefined,
+					bodySerializer: key === 'POST' ? tokenSerializer : undefined,
 					baseUrl: this.baseUrl,
 					headers: {
-						"Content-Type": "application/x-www-form-urlencoded",
-						Accept: "application/json",
+						'Content-Type': 'application/x-www-form-urlencoded',
+						Accept: 'application/json',
 						...(this.accessToken && {
 							Authorization: `Bearer ${this.accessToken}`,
 						}),
@@ -143,7 +143,7 @@ export class OauthClient<T extends AccessType> {
 			client_id: this.config.clientId,
 			redirect_uri: this.config.redirectUri,
 			scope: this.scopes.get(),
-			response_type: "code",
+			response_type: 'code',
 		}
 		const searchParams = new URLSearchParams(requiredParams)
 		url.search = searchParams.toString()
@@ -161,7 +161,7 @@ export class OauthClient<T extends AccessType> {
 		this.refreshToken = refresh_token
 		this.expiresAt = Date.now() + expires_in * 1000
 		this.tokenData = data
-		coolConsole.pink("token set!").obj({
+		coolConsole.pink('token set!').obj({
 			approvedLocations: data.approvedLocations,
 			locationId: data.locationId,
 			userId: data.userId,
@@ -192,10 +192,10 @@ export class OauthClient<T extends AccessType> {
 	 * @returns The access token.
 	 */
 	public async getAccessToken(authCode?: string): Promise<string> {
-		coolConsole.pink("getting token...").gold("authCode:").obj(authCode)
+		coolConsole.pink('getting token...').gold('authCode:').obj(authCode)
 		if (!authCode && !this.refreshToken) {
 			throw new Error(
-				"No refresh token available, need an auth token to initiate the flow.",
+				'No refresh token available, need an auth token to initiate the flow.',
 			)
 		}
 
@@ -227,7 +227,7 @@ export class OauthClient<T extends AccessType> {
 			client_id: this.config.clientId,
 			client_secret: this.config.clientSecret,
 			code: authCode,
-			grant_type: "authorization_code",
+			grant_type: 'authorization_code',
 			user_type: this.userType,
 		}
 		return this.requestToken(tokenParams)
@@ -239,13 +239,13 @@ export class OauthClient<T extends AccessType> {
 	 */
 	private async refreshAccessToken(): Promise<TokenResponse> {
 		if (!this.refreshToken) {
-			throw new Error("No refresh token available.")
+			throw new Error('No refresh token available.')
 		}
 		const tokenParams: RefreshTokenParams = {
 			client_id: this.config.clientId,
 			client_secret: this.config.clientSecret,
 			refresh_token: this.refreshToken,
-			grant_type: "refresh_token",
+			grant_type: 'refresh_token',
 			user_type: this.userType,
 		}
 		return this.requestToken(tokenParams)
@@ -257,18 +257,18 @@ export class OauthClient<T extends AccessType> {
 	 * @returns The token response from the server.
 	 */
 	private async requestToken(tokenParams: TokenParams): Promise<TokenResponse> {
-		const { data, error } = await this.client.POST("/oauth/token", {
+		const { data, error } = await this.client.POST('/oauth/token', {
 			body: tokenParams,
 		})
 
 		if (error) {
-			console.error("error getting token", error)
+			console.error('error getting token', error)
 			throw new Error(error.message?.toString())
 		}
 
 		if (!data.access_token || !data.expires_in) {
 			console.error(data)
-			throw new Error("no accessToken or expires_in received")
+			throw new Error('no accessToken or expires_in received')
 		}
 
 		return data as TokenResponse
@@ -283,7 +283,7 @@ export class OauthClient<T extends AccessType> {
 		companyId,
 		locationId,
 	}: LocationTokenParams) {
-		const { data, error } = await this.client.POST("/oauth/locationToken", {
+		const { data, error } = await this.client.POST('/oauth/locationToken', {
 			body: {
 				companyId,
 				locationId,
@@ -300,14 +300,14 @@ export class OauthClient<T extends AccessType> {
 	 * @param query - search for installed locations using any of these properties
 	 */
 	public async getInstalledLocations(query: SearchInstalledLocationParams) {
-		const { data, error } = await this.client.GET("/oauth/installedLocations", {
+		const { data, error } = await this.client.GET('/oauth/installedLocations', {
 			params: {
 				query,
 			},
 		})
 
 		if (error) {
-			console.error("error getting installed locations", error)
+			console.error('error getting installed locations', error)
 			throw new Error(error.message?.toString())
 		}
 

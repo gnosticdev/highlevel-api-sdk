@@ -1,12 +1,12 @@
-import { objectEntries } from "../lib/utils"
-import { scopesSchema } from "../schema/types/scopes"
+import { objectEntries } from '../lib/utils'
+import { scopesSchema } from '../schema/types/scopes'
 import {
 	type AccessType,
 	type FilteredScopeNames,
 	type ReadWrite,
 	type ScopeLiterals,
-} from "./scopes-schema"
-import type { HighLevelConfig } from "./sdk"
+} from './scopes.types'
+import type { HighLevelConfig } from './sdk'
 
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Company same as Agency. */
@@ -18,7 +18,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * @constructor
 	 * @param accessType - the type of app access needed. 'Sub-Account' is same as 'Location' and 'Company' is same as Agency
 	 */
-	constructor(config: Pick<HighLevelConfig<T>, "accessType">) {
+	constructor(config: Pick<HighLevelConfig<T>, 'accessType'>) {
 		this.accessType = config.accessType
 	}
 
@@ -40,7 +40,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * - `literals` - (used by `all()` method) returns all scopes available to the given accessType in the format required by the authorization redirect uri. e.g. "businesses.read businesses.write locations.read..."
 	 */
 	public _allAvailable(
-		type: "names" | "readWrite" | "literals" = "literals",
+		type: 'names' | 'readWrite' | 'literals' = 'literals',
 		array?: boolean,
 	) {
 		const names = new Set<FilteredScopeNames<T>>()
@@ -56,19 +56,19 @@ export class ScopesBuilder<T extends AccessType> {
 					) {
 						readWrite.add(access as ReadWrite<FilteredScopeNames<T>>)
 						literals.add(`${scopeName}.${access}` as ScopeLiterals<T>)
-						names.add(scopeName.replace("/", " ") as FilteredScopeNames<T>)
+						names.add(scopeName.replace('/', ' ') as FilteredScopeNames<T>)
 					}
 				}
 			}
 		}
 
 		switch (type) {
-			case "names":
+			case 'names':
 				return array ? [...names] : names
-			case "readWrite":
+			case 'readWrite':
 				return array ? [...readWrite] : readWrite
-			case "literals":
-				return array ? [...literals] : [...literals].join(" ")
+			case 'literals':
+				return array ? [...literals] : [...literals].join(' ')
 		}
 	}
 
@@ -84,7 +84,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * ```
 	 */
 	public get() {
-		return [...this.collection].join(" ")
+		return [...this.collection].join(' ')
 	}
 
 	public has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]) {
@@ -101,6 +101,6 @@ export class ScopesBuilder<T extends AccessType> {
 	 * - returns scopes as a string for use in the authorization redirect uri
 	 */
 	public all() {
-		return this._allAvailable("literals", true) as ScopeLiterals<T>[]
+		return this._allAvailable('literals', true) as ScopeLiterals<T>[]
 	}
 }

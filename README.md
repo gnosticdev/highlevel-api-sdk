@@ -23,7 +23,7 @@ scopes.add([
 ])
 ```
 
-1.  Run the following in the developer console from the Highlevel Marketplace dashboard for your app:
+1. Run the following in the developer console from the Highlevel Marketplace dashboard for your app:
 
     ```ts
     // https://marketplace.gohighlevel.com/apps/<your app_id>/settings
@@ -32,8 +32,8 @@ scopes.add([
         .toSorted()
     ```
 
-2.  Copy the resulting array
-3.  Create a new ScopesBuilder instance and paste the scopes to it.
+2. Copy the resulting array
+3. Create a new ScopesBuilder instance and paste the scopes to it.
 
     ```ts
     const scopes = new ScopesBuilder()
@@ -45,7 +45,7 @@ scopes.add([
     ])
     ```
 
-4.  Call the `get` method to get the scopes string.
+4. Call the `get` method to get the scopes string.
 
     ```ts
     scopes.get()

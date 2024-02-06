@@ -1,6 +1,6 @@
-import { LocationsClient } from "./locations"
-import { OauthClient } from "./oauth"
-import type { AccessType, ScopeLiterals } from "./scopes-schema"
+import { LocationsClient } from './locations'
+import { OauthClient } from './oauth'
+import type { AccessType, ScopeLiterals } from './scopes.types'
 
 export type HighLevelConfig<T extends AccessType> = {
 	/** client_id from app settings in marketplace.

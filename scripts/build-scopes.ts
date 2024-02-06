@@ -1,4 +1,4 @@
-import scopes from "../src/schema/scopes.json"
+import scopes from '../src/schema/scopes/scopes.json'
 
 type Scopes = {
 	[key: string]: {
@@ -21,4 +21,4 @@ const scopesBuild = `export const scopesSchema = ${JSON.stringify(
 	null,
 	4,
 ).replace(/"accessType": \[([^\]]+)\]/g, '"accessType": [$1] as const')}`
-await Bun.write("src/api/types/scopes.ts", scopesBuild)
+await Bun.write('src/api/types/scopes.ts', scopesBuild)
