@@ -7,17 +7,19 @@
     "main": "dist/main.js",
     "exports": {
         ".": "./dist/client/index.js",
+        "./client": "./dist/client/index.js",
         "./types": "./dist/schema/types/index.d.ts"
     },
     "type": "module",
     "scripts": {
-        "generate:api": "bun scripts/build-api.ts -- generate",
-        "generate:client": "bun scripts/build-client.ts",
-        "generate:scopes": "bun scripts/build-scopes.ts",
+        "generate:api": "bun 'scripts/api.gen.ts' -- generate",
+        "generate:client": "bun 'scripts/client.build.ts'",
+        "generate:scopes": "bun 'scripts/scopes.gen.ts'",
         "build": "bun run generate:client && bun run package",
         "package": "tsc -p tsconfig.build.json",
-        "auth": "bun --hot run src/auth/index.tsx",
-        "test": "bun test --watch"
+        "start:auth": "bun --hot run src/auth/index.tsx",
+        "start:test": "bun test --hot",
+        "debug:auth": "bun --inspect-brk run src/auth/index.tsx"
     },
     "dependencies": {
         "@gnosticdev/cool-console": "link:@gnosticdev/cool-console",
@@ -29,11 +31,11 @@
         "@apidevtools/swagger-parser": "^10.1.0",
         "@biomejs/biome": "^1.4.1",
         "@redocly/cli": "latest",
+        "@types/bun": "^1.0.4",
         "@types/js-yaml": "^4.0.9",
-        "bun-types": "^1.0.15",
         "js-yaml": "^4.1.0",
         "openapi-fetch": "^0.8.1",
-        "openapi-typescript": "7.0.0-next.2",
+        "openapi-typescript": "7.0.0-next.7",
         "typescript": "^5.2.2"
     }
 }

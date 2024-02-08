@@ -1,5 +1,6 @@
 import { LocationsClient } from './locations'
 import { OauthClient } from './oauth'
+import type { TokenData } from './oauth.types'
 import type { AccessType, ScopeLiterals } from './scopes.types'
 
 export type HighLevelConfig<T extends AccessType> = {
@@ -43,7 +44,7 @@ export type HighLevelConfig<T extends AccessType> = {
 	 */
 	readonly scopes?: ScopeLiterals<T>[]
 	/**
-	 * base url used to build the redirect uri. no need to change unless you are proxying requests.
+	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
 	 * @default 'https://marketplace.gohighlevel.com/oauth/chooselocation
 	 */
 	readonly baseAuthUrl?: string
@@ -53,14 +54,45 @@ export type HighLevelConfig<T extends AccessType> = {
 	 * @see https://highlevel.stoplight.io/docs/integrations/
 	 */
 	readonly authCode?: string
+	/**
+	 * Store the token data in your database or cache
+	 * @param fn - The function to use for storing the token data
+	 * @default stores the token data in memory on the oauth client
+	 */
+	storageFunction?: (tokenData: TokenData) => Promise<TokenData>
 }
 
-export class HighLevelClient<T extends AccessType> {
+export const createHighLevelClient = <T extends AccessType>(
+	config: HighLevelConfig<T>,
+) => {
+	const oauth = new OauthClient(config)
+	return new HighLevelClient(oauth)
+}
+
+interface IHighLevelClient<T extends AccessType> {
+	locations: () => LocationsClient<T>
+	oauth: () => OauthClient<T>
+}
+
+/**
+ * You can use this class to build your own HighLevel API client. You can use the pre-configured client with `createHighLevelClient`.
+ */
+export class HighLevelClient<T extends AccessType>
+	implements IHighLevelClient<T>
+{
 	/** the locations client for accessing location endpoints */
-	public locations: LocationsClient<T>
-	public oauth: OauthClient<T>
+	public locations: () => LocationsClient<T>
+	/** the oauth client for accessing oauth endpoints */
+	public oauth: () => OauthClient<T>
+	public readonly config: HighLevelConfig<T>
+	/**
+	 * creates a new HighLevel API client
+	 * @constructor
+	 * @param oauth - the oauth client created from the OauthClient class
+	 */
 	constructor(oauth: OauthClient<T>) {
-		this.locations = new LocationsClient(oauth.config)
-		this.oauth = oauth
+		this.locations = () => new LocationsClient(oauth.config)
+		this.oauth = () => oauth
+		this.config = oauth.config
 	}
 }

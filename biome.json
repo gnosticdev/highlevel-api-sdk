@@ -1,12 +1,27 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-    "organizeImports": {
-        "enabled": true
+    "$schema": "https://biomejs.dev/schemas/1.5.2/schema.json",
+    "files": {
+        "ignore": ["node_modules", "**/_![__tests__]*.ts"],
+        "include": [
+            "src/**/*.{ts|js|json}",
+            "__tests__/**/*.ts",
+            "./*.{ts|js|json}"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": true
     },
     "javascript": {
         "formatter": {
-            "semicolons": "asNeeded",
-            "quoteStyle": "single"
+            "quoteStyle": "single",
+            "semicolons": "asNeeded"
+        }
+    },
+    "json": {
+        "parser": {
+            "allowComments": true,
+            "allowTrailingCommas": false
         }
     },
     "linter": {
@@ -16,7 +31,9 @@
             "style": {
                 "noNonNullAssertion": "off"
             }
-        },
-        "ignore": ["node_modules"]
+        }
+    },
+    "organizeImports": {
+        "enabled": true
     }
 }

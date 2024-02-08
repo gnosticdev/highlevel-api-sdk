@@ -21,3 +21,5 @@ bun.lockb
 
 # scrape storage
 storage
+
+*.sqlite

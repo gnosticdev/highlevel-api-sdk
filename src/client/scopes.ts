@@ -32,7 +32,8 @@ export class ScopesBuilder<T extends AccessType> {
 		return this
 	}
 
-	/** Get the scope parts for the given access type
+	/** Utility method to get all available scopes broken down by the scope portion
+	 * `businesses.readonly` => name: `businesses`, readwrite: `readonly`
 	 * @paramm type - the scope part to return
 	 * @param {boolean} array - return the scopes as an array instead of a string
 	 * - `names` - return the scope names only (e.g. `businesses` from `businesses.readonly`)

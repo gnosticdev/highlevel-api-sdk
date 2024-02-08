@@ -1,5 +1,7 @@
 import createClient from 'openapi-fetch'
 import type { operations, paths } from '../schema/types/locations'
+import { DEFAULTS } from './oauth'
+import { ScopesBuilder } from './scopes'
 import type { AccessType } from './scopes.types'
 import type { HighLevelConfig } from './sdk'
 
@@ -15,10 +17,34 @@ type GetLocationsParams = {
 }
 
 export class LocationsClient<T extends AccessType> {
-	private client
-	constructor(private config: HighLevelConfig<T>) {
+	/**
+	 * The client contains all endpoints for the locations API
+	 */
+	public client
+	public readonly config: HighLevelConfig<T>
+	private readonly baseUrl: string
+	public readonly userType: 'Location' | 'Company'
+	public readonly scopes: ScopesBuilder<T>
+	/**
+	 * creates a new locations client for use with the HighLevel API
+	 * @constructor
+	 * @param config - configuration for your app
+	 * @see https://highlevel.stoplight.io/docs/integrations/location-api
+	 */
+	constructor(config: HighLevelConfig<T>) {
+		this.config = config
+		this.baseUrl = config.baseUrl ?? DEFAULTS.baseUrl
+		this.userType =
+			config.accessType === 'Sub-Account'
+				? ('Location' as const)
+				: ('Company' as const)
+
+		this.scopes = new ScopesBuilder(this.config)
+		if (config.scopes && config.scopes.length > 0) {
+			this.scopes.add(config.scopes)
+		}
 		this.client = createClient<paths>({
-			baseUrl: config.baseUrl,
+			baseUrl: this.baseUrl,
 		})
 	}
 	/**
@@ -31,12 +57,13 @@ export class LocationsClient<T extends AccessType> {
 		const { data, error } = await this.client.GET('/locations/search', {
 			params: {
 				header: {
-					Authorization: accessToken,
+					Authorization: `Bearer ${accessToken}`,
 					Version: '2021-07-28',
 				},
 				query,
 			},
 		})
+
 		if (error) {
 			throw new Error(error.message?.toString() ?? String(error))
 		}
@@ -48,24 +75,29 @@ export class LocationsClient<T extends AccessType> {
 	 * Get a location by its id
 	 * @param accessToken - the access token for the location
 	 * @param locationId - the id of the location
-	 * @see https://highlevel.stoplight.io/docs/integrations/0443d7d1a4bd0-overview
+	 * @see https://highlevel.stoplight.io/docs/integrations/d777490312af4-get-location
 	 */
 	public async getLocationById(params: GetLocationsParams) {
 		const { accessToken, locationId } = params
-		const { data, error } = await this.client.GET('/locations/{locationId}', {
-			params: {
-				header: {
-					Authorization: accessToken,
-					Version: '2021-07-28',
-				},
-				path: {
-					locationId,
+		const { data, error, response } = await this.client.GET(
+			'/locations/{locationId}',
+			{
+				params: {
+					header: {
+						Authorization: `Bearer ${accessToken}`,
+						Version: '2021-07-28',
+					},
+					path: {
+						locationId,
+					},
 				},
 			},
-		})
+		)
 
 		if (error) {
-			throw new Error(error.message?.toString() ?? 'Unknown error')
+			throw new Error(
+				`Locations Error: ${error.message?.toString()}` ?? 'Unknown error',
+			)
 		}
 
 		return data

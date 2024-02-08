@@ -1,7 +1,7 @@
-import fs from 'fs'
-import path from 'path'
 import { coolConsole } from '@gnosticdev/cool-console'
+import fs from 'fs'
 import openapiTS, { astToString } from 'openapi-typescript'
+import path from 'path'
 
 const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/schema/openapi')
 const OUT_DIR = path.join(process.cwd(), 'src/schema/updates')
@@ -33,13 +33,13 @@ async function generateApi() {
 		await fs.promises.mkdir(OUT_DIR)
 	}
 
-	// example 1: load [object] as schema (JSON only)
+	// use bun glob to get all the schema files
 	const schemaFiles = await getSchemaFileUrls()
 
 	// index file will export all types
 	const indexFile = path.join(OUT_DIR, 'index.ts')
 	let importData = ''
-	const exportData = []
+	const exportData: string[] = []
 
 	// create each type file
 	for await (const schemaFile of schemaFiles) {

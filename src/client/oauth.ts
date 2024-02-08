@@ -1,64 +1,20 @@
 import { coolConsole } from '@gnosticdev/cool-console'
-import createClient, { type BodySerializer } from 'openapi-fetch'
-import type { paths as OauthPaths, operations } from '../schema/types/oauth'
+import createClient from 'openapi-fetch'
+import type { Oauth } from '../schema/types'
+import type {
+	AccessTokenResponse,
+	AuthUrlParams,
+	IOauthClient,
+	LocationTokenParams,
+	SearchInstalledLocationParams,
+	TokenData,
+	TokenParams,
+} from './oauth.types'
 import { ScopesBuilder } from './scopes'
-import type { AccessType } from './scopes.types'
-import type { HighLevelConfig } from './sdk'
+import { type AccessType } from './scopes.types'
+import { type HighLevelConfig } from './sdk'
 
-type AccessTokenRequest =
-	operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded']
-
-export type AuthUrlParams = {
-	response_type: 'code'
-	redirect_uri: string
-	client_id: string
-	scope: string
-}
-
-export type TokenParams = AuthCodeParams | RefreshTokenParams
-type AuthCodeParams<
-	GrantType extends AccessTokenRequest['grant_type'] = 'authorization_code',
-> = {
-	[K in keyof Pick<
-		AccessTokenRequest,
-		'client_id' | 'client_secret' | 'code'
-	>]: AccessTokenRequest[K]
-} & {
-	grant_type: GrantType
-	user_type: 'Company' | 'Location'
-}
-type RefreshTokenParams<
-	GrantType extends AccessTokenRequest['grant_type'] = 'refresh_token',
-> = {
-	[K in keyof Pick<
-		AccessTokenRequest,
-		'client_id' | 'client_secret' | 'refresh_token'
-	>]: AccessTokenRequest[K]
-} & {
-	grant_type: GrantType
-	user_type: 'Company' | 'Location'
-}
-
-type LocationTokenParams =
-	operations['get-location-access-token']['requestBody']['content']['application/x-www-form-urlencoded']
-
-type SearchInstalledLocationParams = {
-	query: operations['get-installed-location']['parameters']['query']
-}
-
-type TokenResponse = Required<
-	operations['get-access-token']['responses']['200']['content']['application/json']
->
-
-export async function createOauthClient<T extends AccessType>(
-	config: HighLevelConfig<T>,
-) {
-	const client = new OauthClient(config)
-	await client.getAccessToken(config.authCode)
-	return client
-}
-
-const DEFAULTS = {
+export const DEFAULTS = {
 	baseUrl: 'https://services.leadconnectorhq.com',
 	baseAuthUrl: 'https://marketplace.gohighlevel.com/oauth/chooselocation',
 } as const satisfies Pick<
@@ -66,29 +22,24 @@ const DEFAULTS = {
 	'baseUrl' | 'baseAuthUrl'
 >
 
-const tokenSerializer: BodySerializer<TokenParams> = (
-	body: TokenParams | undefined,
-) => {
-	if (!body) return undefined
-	const params = new URLSearchParams(body)
-	coolConsole.pink('Token Serializer /POST body:').obj(params)
-	return params
-}
 /**
  * A client for accessing all endpoints with oauth
  * @see https://highlevel.stoplight.io/docs/integrations/
  */
-export class OauthClient<T extends AccessType> {
-	private expiresAt: number | undefined
+export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	private accessToken: string | undefined
 	private refreshToken: string | undefined
 	private readonly userType
 	private client
+
+	private _expiresAt: number | undefined
 	public readonly scopes: ScopesBuilder<T>
 	public readonly config: HighLevelConfig<T>
 	private readonly baseUrl: string
 	private readonly baseOauthUrl: string
-	public tokenData: TokenResponse | undefined
+	private _tokenData: TokenData | undefined
+	public storeTokenFn?: (tokenData: TokenData) => Promise<TokenData> = undefined
+
 	/**
 	 * creates a new oauth client for use with the HighLevel API
 	 * @constructor
@@ -102,42 +53,64 @@ export class OauthClient<T extends AccessType> {
 			config.accessType === 'Sub-Account'
 				? ('Location' as const)
 				: ('Company' as const)
-		const baseClient = createClient<OauthPaths>({
-			baseUrl: config.baseUrl,
-		})
+
 		this.scopes = new ScopesBuilder(this.config)
 		if (config.scopes && config.scopes.length > 0) {
 			this.scopes.add(config.scopes)
 		}
-		const oauthClient = new Proxy(baseClient, {
-			get: (_, key: keyof typeof baseClient) => {
-				// logic to handle accessTokens
-				const newClient = createClient<OauthPaths>({
-					bodySerializer: key === 'POST' ? tokenSerializer : undefined,
-					baseUrl: this.baseUrl,
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded',
-						Accept: 'application/json',
-						...(this.accessToken && {
-							Authorization: `Bearer ${this.accessToken}`,
-						}),
-					},
-				})
-				return newClient[key]
-			},
+		if (config.storageFunction) {
+			this.storeTokenFn = config.storageFunction
+		}
+		const oauthClient = createClient<Oauth.paths>({
+			baseUrl: this.baseUrl,
 		})
+
 		this.client = oauthClient
 	}
 
+	get expiresAt() {
+		if (!this._expiresAt) throw new Error('expiresAt not set')
+		return this._expiresAt
+	}
+
+	setExpiresAt(expires_in: number) {
+		this._expiresAt = Date.now() + expires_in * 1000
+	}
+
+	setTokenData(tokenData: TokenData) {
+		this._tokenData = tokenData
+	}
+
+	updateTokenData(updatedTokenData: Partial<TokenData>) {
+		const newTokenData = Object.assign({}, this._tokenData)
+		for (const key in updatedTokenData) {
+			const _key = key as keyof typeof updatedTokenData
+			if (
+				updatedTokenData[key as keyof typeof updatedTokenData] === undefined
+			) {
+				continue
+			}
+			// @ts-expect-error - we know the key is valid
+			newTokenData[_key] =
+				updatedTokenData[key as keyof typeof updatedTokenData]!
+		}
+		this.setTokenData(newTokenData)
+	}
+
+	get tokenData() {
+		if (!this._tokenData) throw new Error('tokenData not set')
+		return this._tokenData
+	}
+
 	/**
-     * Auto generates the authorization url for your app.
+     * generates the authorization url for your app using the baseAuthUrl, clientId, redirectUri, and scopes.
      * @see https://highlevel.stoplight.io/docs/integrations/a04191c0fabf9-authorization
      * @example
      * ```ts
         https://marketplace.gohighlevel.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
      * ```
      */
-	public get authUrl() {
+	public get getAuthorizationURL() {
 		const url = new URL(this.baseOauthUrl)
 		const requiredParams: AuthUrlParams = {
 			client_id: this.config.clientId,
@@ -152,23 +125,37 @@ export class OauthClient<T extends AccessType> {
 	}
 
 	/**
-	 * Stores the accessToken, refreshToken, and calculates the expiresAt date in ms for use in later requests
-	 * @param data - the token response from the server
+	 * Stores everything form the Token response including the accessToken, refreshToken, locationID, and adds the expiresAt time (in ms).
+	 * **NOTE**: You can add a `storageFunction` to the config to store the token data in your database or cache.
+	 * @param tokenData - the token response from the server
+	 * @returns the token data with the `expiresAt` time added
 	 */
-	private storeTokenResponse(data: TokenResponse) {
-		const { access_token, expires_in, refresh_token } = data
+
+	public async storeTokenData<T>(
+		tokenData: T extends Required<AccessTokenResponse> ? T : never,
+	) {
+		const { access_token, expires_in, refresh_token } = tokenData
+
 		this.accessToken = access_token
 		this.refreshToken = refresh_token
-		this.expiresAt = Date.now() + expires_in * 1000
-		this.tokenData = data
-		coolConsole.pink('token set!').obj({
-			approvedLocations: data.approvedLocations,
-			locationId: data.locationId,
-			userId: data.userId,
-			userType: data.userType,
+		this.setExpiresAt(expires_in)
+		this.setTokenData({ ...tokenData, expiresAt: this.expiresAt })
+
+		coolConsole.pink('stored tokenData to memory:').obj({
+			approvedLocations: tokenData.approvedLocations,
+			companyId: tokenData.companyId,
+			locationId: tokenData.locationId,
+			userId: tokenData.userId,
+			userType: tokenData.userType,
 			expires: new Date(this.expiresAt).toLocaleString(),
 		})
-		return data
+
+		if (typeof this.storeTokenFn !== 'function') {
+			return this.tokenData
+		}
+
+		coolConsole.pink('storing token with custom store function')
+		return this.storeTokenFn({ ...tokenData, expiresAt: this.expiresAt })
 	}
 
 	/**
@@ -176,79 +163,89 @@ export class OauthClient<T extends AccessType> {
 	 * @returns true if the token is expired or if we need to refresh it
 	 */
 	private isTokenExpired() {
-		coolConsole.orange(
-			`need new token? ${!this.refreshToken || !this.expiresAt}`,
-		)
-		// if we dont have a refreshToken, we can't refresh the token
-		// if we dont have an expiresAt, we can't check if the token is expired
-		if (!this.refreshToken || !this.expiresAt) return true
 		// if the token expires in the next 5 minutes, we should refresh it
-		return this.expiresAt <= Date.now() + 5 * 60 * 1000
+		const isExpired = this.expiresAt <= Date.now() + 5 * 60 * 1000
+		coolConsole.cyan(`need new token? ${!this.refreshToken || !this.expiresAt}`)
+		// if we dont have a refreshToken, we can't refresh the token
+		// if we dont have an expires_at, we can't check if the token is expired
+		if (!this.refreshToken || !this.expiresAt) return true
+
+		// otherwise return if the token is expired
+		return isExpired
 	}
 
 	/**
-	 * Gets a new access token using an authorization code or refreshes the current token.
+	 * Returns a valid access token by either refreshing the token or exchanging the auth code for a new token.
 	 * @param authCode - The authorization code received from the OAuth provider.
 	 * @returns The access token.
 	 */
-	public async getAccessToken(authCode?: string): Promise<string> {
-		coolConsole.pink('getting token...').gold('authCode:').obj(authCode)
-		if (!authCode && !this.refreshToken) {
-			throw new Error(
-				'No refresh token available, need an auth token to initiate the flow.',
-			)
+	public async getAccessToken(authCode?: string) {
+		// Directly return the valid accessToken if available
+		if (this.accessToken && this.isTokenExpired() === false) {
+			return this.accessToken
 		}
 
-		// If an auth code is provided, use it to get a new token
 		if (authCode) {
-			const tokenResponse = await this.generateAccessToken(authCode)
-			this.storeTokenResponse(tokenResponse)
-			return this.accessToken!
+			const tokenResponse = await this.exchangeToken(authCode)
+			if (!tokenResponse) throw new Error('No token response received')
+
+			const storedToken = await this.storeTokenData(tokenResponse)
+			return storedToken.access_token
 		}
 
-		// If we have a refresh token and the current token is expired, refresh it
-		if (!this.refreshToken && this.isTokenExpired()) {
+		if (this.refreshToken) {
 			const tokenResponse = await this.refreshAccessToken()
-			this.storeTokenResponse(tokenResponse)
-			return this.accessToken!
+			const storedToken = await this.storeTokenData(tokenResponse)
+			return storedToken.access_token
 		}
 
-		// If the token is still valid, return it
-		return this.accessToken!
+		return null
 	}
 
 	/**
-	 * Generates a new access token using the provided authorization code.
+	 * Generates a new access token using the provided authorization code. \
+	 * **NOTE**: This method does not save the token data to the client.
+	 * To store the token:
+	 * - `storeTokenData` - saves the token data.
+	 * - `getAccessToken` - fetches and stores the token data.
 	 * @param authCode - Parameters required to generate a new token.
 	 * @returns The token response from the server.
 	 */
-	private async generateAccessToken(authCode: string): Promise<TokenResponse> {
-		const tokenParams: AuthCodeParams = {
+	public async exchangeToken(authCode: string) {
+		const tokenParams: TokenParams = {
 			client_id: this.config.clientId,
 			client_secret: this.config.clientSecret,
 			code: authCode,
 			grant_type: 'authorization_code',
 			user_type: this.userType,
 		}
-		return this.requestToken(tokenParams)
+		const token = await this.fetchAccessToken(tokenParams)
+
+		return token
 	}
 
 	/**
 	 * Refreshes the current access token.
+	 * **NOTE**: This method does not save the token data to the client.
+	 * To store the token:
+	 * - `storeTokenData` - saves the token data.
+	 * - `getAccessToken` - fetches and stores the token data.
 	 * @returns The token response from the server.
 	 */
-	private async refreshAccessToken(): Promise<TokenResponse> {
+	public async refreshAccessToken() {
 		if (!this.refreshToken) {
 			throw new Error('No refresh token available.')
 		}
-		const tokenParams: RefreshTokenParams = {
+		const tokenParams: TokenParams = {
 			client_id: this.config.clientId,
 			client_secret: this.config.clientSecret,
 			refresh_token: this.refreshToken,
 			grant_type: 'refresh_token',
 			user_type: this.userType,
 		}
-		return this.requestToken(tokenParams)
+		const token = await this.fetchAccessToken(tokenParams)
+
+		return token
 	}
 
 	/**
@@ -256,9 +253,16 @@ export class OauthClient<T extends AccessType> {
 	 * @param tokenParams - Auth code params or refresh token params
 	 * @returns The token response from the server.
 	 */
-	private async requestToken(tokenParams: TokenParams): Promise<TokenResponse> {
+	private async fetchAccessToken(tokenParams: TokenParams) {
 		const { data, error } = await this.client.POST('/oauth/token', {
 			body: tokenParams,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				Accept: 'application/json',
+			},
+			bodySerializer(body) {
+				return new URLSearchParams(body).toString()
+			},
 		})
 
 		if (error) {
@@ -266,12 +270,9 @@ export class OauthClient<T extends AccessType> {
 			throw new Error(error.message?.toString())
 		}
 
-		if (!data.access_token || !data.expires_in) {
-			console.error(data)
-			throw new Error('no accessToken or expires_in received')
-		}
+		const validatedData = this.validate(data)
 
-		return data as TokenResponse
+		return validatedData
 	}
 
 	/**
@@ -283,16 +284,31 @@ export class OauthClient<T extends AccessType> {
 		companyId,
 		locationId,
 	}: LocationTokenParams) {
-		const { data, error } = await this.client.POST('/oauth/locationToken', {
-			body: {
-				companyId,
-				locationId,
+		const { data, error, response } = await this.client.POST(
+			'/oauth/locationToken',
+			{
+				body: {
+					companyId,
+					locationId,
+				},
+				bodySerializer(body) {
+					return new URLSearchParams(body).toString()
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					Accept: 'application/json',
+				},
 			},
-		})
+		)
+
 		if (error) {
+			console.error(await response.text())
 			throw new Error(error.message?.toString() ?? String(error))
 		}
-		return data
+
+		const validatedData = this.validate(data)
+
+		return validatedData
 	}
 
 	/**
@@ -307,10 +323,21 @@ export class OauthClient<T extends AccessType> {
 		})
 
 		if (error) {
-			console.error('error getting installed locations', error)
+			console.error('Error: installed locations', error)
 			throw new Error(error.message?.toString())
 		}
 
-		return data
+		const validatedData = this.validate(data)
+
+		return validatedData
+	}
+
+	private validate<T>(data: T): Required<T> {
+		for (const key in data) {
+			if (data[key as keyof typeof data] === undefined) {
+				throw new Error('Invalid data received from server')
+			}
+		}
+		return data as Required<T>
 	}
 }
