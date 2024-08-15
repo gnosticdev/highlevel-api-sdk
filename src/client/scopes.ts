@@ -1,10 +1,10 @@
 import { objectEntries } from '../lib/utils'
 import { scopesSchema } from '../schema/types/scopes'
-import {
-	type AccessType,
-	type FilteredScopeNames,
-	type ReadWrite,
-	type ScopeLiterals,
+import type {
+	AccessType,
+	FilteredScopeNames,
+	ReadWrite,
+	ScopeLiterals,
 } from './scopes.types'
 import type { HighLevelConfig } from './sdk'
 

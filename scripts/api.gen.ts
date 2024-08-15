@@ -1,7 +1,7 @@
-import { coolConsole } from '@gnosticdev/cool-console'
-import fs from 'fs'
+import fs from 'node:fs'
+import path from 'node:path'
+import kleur from 'kleur'
 import openapiTS, { astToString } from 'openapi-typescript'
-import path from 'path'
 
 const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/schema/openapi')
 const OUT_DIR = path.join(process.cwd(), 'src/schema/updates')
@@ -63,14 +63,14 @@ async function generateApi() {
 		importData += `import * as ${upperTitle} from './${fileName}'\n`
 		// now export the type
 		exportData.push(upperTitle)
-		coolConsole.green(`added types for ${upperTitle}`)
+		console.log(kleur.green(`added types for ${upperTitle}`))
 	}
 	// add export statement
 	importData += `\nexport { ${exportData.join(', ')} \n}`
 
 	// create index file
 	await Bun.write(indexFile, importData)
-	coolConsole.green('created index file')
+	console.log(kleur.green('created index file'))
 }
 
 /**

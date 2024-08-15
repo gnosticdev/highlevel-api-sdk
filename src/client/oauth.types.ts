@@ -1,4 +1,4 @@
-import { Oauth } from '../schema/types'
+import type { Oauth } from '../schema/types'
 import type { ScopesBuilder } from './scopes'
 import type { AccessType } from './scopes.types'
 import type { HighLevelConfig } from './sdk'

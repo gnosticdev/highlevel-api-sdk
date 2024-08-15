@@ -1,10 +1,10 @@
-import { scopesSchema } from "../schema/types/scopes"
+import type { scopesSchema } from '../schema/types/scopes'
 /**
  * This file is used to generate the types for the scopes schema.
  * By changing the accessType to 'Sub-Account' or 'Company' autocomplete will update with the available types for that accessType.
  */
 
-export type AccessType = "Sub-Account" | "Company"
+export type AccessType = 'Sub-Account' | 'Company'
 type ScopesSchema = typeof scopesSchema
 
 type Endpoint<A extends AccessType> = {
@@ -42,7 +42,7 @@ export type ScopeAccess<
 	: never
 
 // Test out the autocomplete
-const access: ScopeAccess<"businesses", "readonly"> = "Sub-Account"
+const access: ScopeAccess<'businesses', 'readonly'> = 'Sub-Account'
 
 export type FilteredScopeNames<T extends AccessType> = {
 	[K in keyof ScopesSchema]: ScopeAccess<
@@ -52,8 +52,8 @@ export type FilteredScopeNames<T extends AccessType> = {
 		? Accessible extends T
 			? K
 			: Accessible extends readonly T[]
-			  ? K
-			  : never
+				? K
+				: never
 		: never
 }[keyof ScopesSchema]
 
@@ -68,4 +68,4 @@ export type FilteredScopesSchema<T extends AccessType> = {
 }
 
 // Test out the autocomplete
-const tester: ScopeAccess<"campaigns", "readonly"> = "Sub-Account"
+const tester: ScopeAccess<'campaigns', 'readonly'> = 'Sub-Account'

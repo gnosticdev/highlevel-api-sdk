@@ -1,4 +1,4 @@
-import { coolConsole } from '@gnosticdev/cool-console'
+import kleur from 'kleur'
 import createClient from 'openapi-fetch'
 import type { Oauth } from '../schema/types'
 import type {
@@ -11,8 +11,8 @@ import type {
 	TokenParams,
 } from './oauth.types'
 import { ScopesBuilder } from './scopes'
-import { type AccessType } from './scopes.types'
-import { type HighLevelConfig } from './sdk'
+import type { AccessType } from './scopes.types'
+import type { HighLevelConfig } from './sdk'
 
 export const DEFAULTS = {
 	baseUrl: 'https://services.leadconnectorhq.com',
@@ -141,7 +141,8 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 		this.setExpiresAt(expires_in)
 		this.setTokenData({ ...tokenData, expiresAt: this.expiresAt })
 
-		coolConsole.pink('stored tokenData to memory:').obj({
+		console.log(kleur.red('stored tokenData to memory:'))
+		console.log({
 			approvedLocations: tokenData.approvedLocations,
 			companyId: tokenData.companyId,
 			locationId: tokenData.locationId,
@@ -154,7 +155,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 			return this.tokenData
 		}
 
-		coolConsole.pink('storing token with custom store function')
+		console.log(kleur.red('storing token with custom store function'))
 		return this.storeTokenFn({ ...tokenData, expiresAt: this.expiresAt })
 	}
 
@@ -165,7 +166,9 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	private isTokenExpired() {
 		// if the token expires in the next 5 minutes, we should refresh it
 		const isExpired = this.expiresAt <= Date.now() + 5 * 60 * 1000
-		coolConsole.cyan(`need new token? ${!this.refreshToken || !this.expiresAt}`)
+		console.log(
+			kleur.cyan(`need new token? ${!this.refreshToken || !this.expiresAt}`),
+		)
 		// if we dont have a refreshToken, we can't refresh the token
 		// if we dont have an expires_at, we can't check if the token is expired
 		if (!this.refreshToken || !this.expiresAt) return true
