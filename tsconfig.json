@@ -25,7 +25,7 @@
 		"__tests__/**/*.ts",
 		"scripts/**/*.ts",
 		"src/**/*.json",
-		"src/auth/*.tsx"
+		"src/examples/*.tsx"
 	],
 	"exclude": ["node_modules", "/Users/divinelight/code/utilities/cool-console"]
 }

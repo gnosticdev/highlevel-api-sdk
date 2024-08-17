@@ -79,20 +79,17 @@ export class LocationsClient<T extends AccessType> {
 	 */
 	public async getLocationById(params: GetLocationsParams) {
 		const { accessToken, locationId } = params
-		const { data, error, response } = await this.client.GET(
-			'/locations/{locationId}',
-			{
-				params: {
-					header: {
-						Authorization: `Bearer ${accessToken}`,
-						Version: '2021-07-28',
-					},
-					path: {
-						locationId,
-					},
+		const { data, error } = await this.client.GET('/locations/{locationId}', {
+			params: {
+				header: {
+					Authorization: `Bearer ${accessToken}`,
+					Version: '2021-07-28',
+				},
+				path: {
+					locationId,
 				},
 			},
-		)
+		})
 
 		if (error) {
 			throw new Error(
