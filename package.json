@@ -18,7 +18,6 @@
 		"generate-api": "bun 'scripts/api.gen.ts' -- generate",
 		"generate-client": "bun 'scripts/client.build.ts'",
 		"generate-schemas": "bun 'scripts/generate-schemas.ts'",
-		"generate:schemas": "bun 'scripts/generate-schemas.ts'",
 		"generate-scopes": "bun 'scripts/scopes.gen.ts'",
 		"build": "bun run generate:client && bun run package",
 		"package": "tsc -p tsconfig.build.json",
