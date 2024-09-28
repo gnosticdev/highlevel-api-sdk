@@ -20,11 +20,11 @@ export class LocationsClient<T extends AccessType> {
 	/**
 	 * The client contains all endpoints for the locations API
 	 */
-	public client
-	public readonly config: HighLevelConfig<T>
+	client
+	readonly config: HighLevelConfig<T>
 	private readonly baseUrl: string
-	public readonly userType: 'Location' | 'Company'
-	public readonly scopes: ScopesBuilder<T>
+	readonly userType: 'Location' | 'Company'
+	readonly scopes: ScopesBuilder<T>
 	/**
 	 * creates a new locations client for use with the HighLevel API
 	 * @constructor
@@ -52,7 +52,7 @@ export class LocationsClient<T extends AccessType> {
 	 * @param authToken - the access token for the location
 	 * @param query - the search query
 	 */
-	public async searchLocations({ query, accessToken }: SearchLocationsParams) {
+	async searchLocations({ query, accessToken }: SearchLocationsParams) {
 		accessToken
 		const { data, error } = await this.client.GET('/locations/search', {
 			params: {
@@ -77,7 +77,7 @@ export class LocationsClient<T extends AccessType> {
 	 * @param locationId - the id of the location
 	 * @see https://highlevel.stoplight.io/docs/integrations/d777490312af4-get-location
 	 */
-	public async getLocationById(params: GetLocationsParams) {
+	async getLocationById(params: GetLocationsParams) {
 		const { accessToken, locationId } = params
 		const { data, error } = await this.client.GET('/locations/{locationId}', {
 			params: {

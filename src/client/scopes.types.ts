@@ -7,30 +7,28 @@ import type { scopesSchema } from '../schema/types/scopes'
 export type AccessType = 'Sub-Account' | 'Company'
 type ScopesSchema = typeof scopesSchema
 
-type Endpoint<A extends AccessType> = {
+type Endpoint<TAccessType extends AccessType> = {
 	methodAndEndpoint: string
 	webhookEvents: string
-	accessType: readonly A[]
+	accessType: readonly TAccessType[]
 }
 
 type KeysOfUnion<ObjectType> = ObjectType extends unknown
 	? keyof ObjectType
 	: never
 
-export type ReadWrite<N extends keyof ScopesSchema> = KeysOfUnion<
-	ScopesSchema[N]
+export type ReadWrite<TScopes extends keyof ScopesSchema> = KeysOfUnion<
+	ScopesSchema[TScopes]
 >
 
-export type ScopeLiterals<A extends AccessType> = A extends ScopeAccess<
-	infer Name,
-	infer RW
->
-	? Name extends FilteredScopeNames<A>
-		? RW extends ReadWrite<Name>
-			? `${Name}.${RW}`
+export type ScopeLiterals<TAccessType extends AccessType> =
+	TAccessType extends ScopeAccess<infer TName, infer TReadWrite>
+		? TName extends FilteredScopeNames<TAccessType>
+			? TReadWrite extends ReadWrite<TName>
+				? `${TName}.${TReadWrite}`
+				: never
 			: never
 		: never
-	: never
 
 export type ScopeAccess<
 	N extends keyof ScopesSchema,
@@ -68,4 +66,4 @@ export type FilteredScopesSchema<T extends AccessType> = {
 }
 
 // Test out the autocomplete
-const tester: ScopeAccess<'campaigns', 'readonly'> = 'Sub-Account'
+// const tester: ScopeAccess<'campaigns', 'readonly'> = 'Sub-Account'

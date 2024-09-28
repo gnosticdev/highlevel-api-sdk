@@ -81,10 +81,10 @@ export class HighLevelClient<T extends AccessType>
 	implements IHighLevelClient<T>
 {
 	/** the locations client for accessing location endpoints */
-	public locations: () => LocationsClient<T>
+	locations: () => LocationsClient<T>
 	/** the oauth client for accessing oauth endpoints */
-	public oauth: () => OauthClient<T>
-	public readonly config: HighLevelConfig<T>
+	oauth: () => OauthClient<T>
+	readonly config: HighLevelConfig<T>
 	/**
 	 * creates a new HighLevel API client
 	 * @constructor

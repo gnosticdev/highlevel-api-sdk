@@ -1,1 +1,0 @@
-// TODO: use playwright to get the latest schemas from https://highlevel.stoplight.io/docs/integrations/ - then use json-diff to check for any breaking changes. If there are breaking changes, notify user, if not, write the new schemas to src/schema/latest-schemas.json

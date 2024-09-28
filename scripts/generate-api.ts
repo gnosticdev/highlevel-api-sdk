@@ -3,7 +3,6 @@ import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, { astToString } from 'openapi-typescript'
 
-const SCHEMAS_DIR = path.resolve(process.cwd(), 'src/schema/openapi')
 const OUT_DIR = path.join(process.cwd(), 'src/schema/updates')
 
 if (import.meta.main) {
@@ -85,5 +84,3 @@ function parseFile(absFilePath: string) {
 	const upperTitle = fileName.charAt(0).toUpperCase() + fileName.slice(1)
 	return { fileName, upperTitle, absFilePath, fileUrl }
 }
-
-// Start with a base structure for your root OpenAPI file

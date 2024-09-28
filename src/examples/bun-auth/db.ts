@@ -1,5 +1,5 @@
 import type { Database } from 'bun:sqlite'
-import type { AccessTokenResponse } from '../client/oauth.types'
+import type { AccessTokenResponse } from '../../client/oauth.types'
 
 type DBColumns = {
 	id?: number
@@ -20,11 +20,21 @@ type InsertDBRow = Omit<
 	'$id'
 >
 
+/**
+ * Get the access token from the database
+ * @param db - The database instance
+ * @returns - The access token
+ */
 const getAccessToken = (sqlite: Database) => {
 	const token = sqlite.query<DBColumns, []>('SELECT * FROM tokens_table').get()
 	return token
 }
 
+/**
+ * Save a token response to the database
+ * @param db - The database instance
+ * @param dbRow - The token response to save
+ */
 const saveTokenResponse = (sqlite: Database, dbRow: DBColumns) => {
 	sqlite
 		.prepare<DBColumns, InsertDBRow>(
@@ -53,6 +63,11 @@ const getTokenByUserId = (sqlite: Database, userId: string) =>
 		)
 		.get({ $userId: userId })
 
+/**
+ * Create a database for storing tokens
+ * @param db - The database instance
+ * @returns - An object with methods for interacting with the database
+ */
 export const createTokensDB = (db: Database) => {
 	db.run(`CREATE TABLE IF NOT EXISTS tokens_table (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

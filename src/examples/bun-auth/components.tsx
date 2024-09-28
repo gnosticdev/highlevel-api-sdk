@@ -8,7 +8,10 @@ const Layout: FC = async (props) => {
     <html lang='en'>
       <head>
         <title>Get Your Authorization Code</title>
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css' />
+        <link
+          rel='stylesheet'
+          href='https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css'
+        />
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: */}
         <style dangerouslySetInnerHTML={{ __html: cssText }} />
       </head>
@@ -26,7 +29,10 @@ export const Home: FC<{ buttonLink?: string; notice?: string }> = (props: {
         <h1>Get Your Authorization Code</h1>
         <pre>{props.notice ? <code>{props.notice}</code> : null}</pre>
         <div class='container'>
-          <a class='btn' href={props.buttonLink}>
+          <a
+            class='btn'
+            href={props.buttonLink}
+          >
             Get Auth Code
           </a>
         </div>
@@ -53,10 +59,17 @@ export const Result: FC<{
           <details>
             <summary>Access Token</summary>
             <div class='copy container'>
-              <div id='copy-text' class='copy-text'>
+              <div
+                id='copy-text'
+                class='copy-text'
+              >
                 {props.accessToken}
               </div>
-              <button type='button' id='copy-btn' class='btn'>
+              <button
+                type='button'
+                id='copy-btn'
+                class='btn'
+              >
                 Copy
               </button>
             </div>

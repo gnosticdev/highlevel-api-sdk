@@ -10,9 +10,9 @@ import type { HighLevelConfig } from './sdk'
 
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Company same as Agency. */
-	public accessType: T
+	accessType: T
 	/** a Set containing the scopes that have been added so far */
-	public collection = new Set<ScopeLiterals<T>>()
+	collection = new Set<ScopeLiterals<T>>()
 
 	/**
 	 * @constructor
@@ -23,7 +23,7 @@ export class ScopesBuilder<T extends AccessType> {
 	}
 
 	/** add a scope from the available scopes for this access type */
-	public add(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): this {
+	add(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): this {
 		if (Array.isArray(scopes)) {
 			this.collection = new Set([...this.collection, ...scopes])
 		} else {
@@ -40,7 +40,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * - `readWrite` - return only the `readonly` or `write` from a scope
 	 * - `literals` - (used by `all()` method) returns all scopes available to the given accessType in the format required by the authorization redirect uri. e.g. "businesses.read businesses.write locations.read..."
 	 */
-	public _allAvailable(
+	_allAvailable(
 		type: 'names' | 'readWrite' | 'literals' = 'literals',
 		array?: boolean,
 	) {
@@ -84,11 +84,11 @@ export class ScopesBuilder<T extends AccessType> {
 	 * client.scopes.get() // "businesses.read businesses.write"
 	 * ```
 	 */
-	public get() {
+	get() {
 		return [...this.collection].join(' ')
 	}
 
-	public has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]) {
+	has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]) {
 		if (!scopes) {
 			return this.collection.size > 0
 		}
@@ -101,7 +101,7 @@ export class ScopesBuilder<T extends AccessType> {
 	/** Get all scopes for the given access type
 	 * - returns scopes as a string for use in the authorization redirect uri
 	 */
-	public all() {
+	all() {
 		return this._allAvailable('literals', true) as ScopeLiterals<T>[]
 	}
 }

@@ -51,4 +51,7 @@ scopes.add([
     scopes.get()
     ```
 
-## URI Generator
+## TODO
+
+- [ ] Allow custom fetch handler in clients
+- [ ] Add client for each schema type

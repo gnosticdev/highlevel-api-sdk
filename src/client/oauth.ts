@@ -33,12 +33,12 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	private client
 
 	private _expiresAt: number | undefined
-	public readonly scopes: ScopesBuilder<T>
-	public readonly config: HighLevelConfig<T>
+	readonly scopes: ScopesBuilder<T>
+	readonly config: HighLevelConfig<T>
 	private readonly baseUrl: string
 	private readonly baseOauthUrl: string
 	private _tokenData: TokenData | undefined
-	public storeTokenFn?: (tokenData: TokenData) => Promise<TokenData> = undefined
+	storeTokenFn?: (tokenData: TokenData) => Promise<TokenData> = undefined
 
 	/**
 	 * creates a new oauth client for use with the HighLevel API
@@ -110,7 +110,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
         https://marketplace.gohighlevel.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
      * ```
      */
-	public get getAuthorizationURL() {
+	get getAuthorizationURL() {
 		const url = new URL(this.baseOauthUrl)
 		const requiredParams: AuthUrlParams = {
 			client_id: this.config.clientId,
@@ -131,7 +131,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	 * @returns the token data with the `expiresAt` time added
 	 */
 
-	public async storeTokenData<T>(
+	async storeTokenData<T>(
 		tokenData: T extends Required<AccessTokenResponse> ? T : never,
 	) {
 		const { access_token, expires_in, refresh_token } = tokenData
@@ -182,7 +182,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	 * @param authCode - The authorization code received from the OAuth provider.
 	 * @returns The access token.
 	 */
-	public async getAccessToken(authCode?: string) {
+	async getAccessToken(authCode?: string) {
 		// Directly return the valid accessToken if available
 		if (this.accessToken && this.isTokenExpired() === false) {
 			return this.accessToken
@@ -214,7 +214,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	 * @param authCode - Parameters required to generate a new token.
 	 * @returns The token response from the server.
 	 */
-	public async exchangeToken(authCode: string) {
+	async exchangeToken(authCode: string) {
 		const tokenParams: TokenParams = {
 			client_id: this.config.clientId,
 			client_secret: this.config.clientSecret,
@@ -235,7 +235,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	 * - `getAccessToken` - fetches and stores the token data.
 	 * @returns The token response from the server.
 	 */
-	public async refreshAccessToken() {
+	async refreshAccessToken() {
 		if (!this.refreshToken) {
 			throw new Error('No refresh token available.')
 		}
@@ -283,10 +283,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	 * @param companyId - your agency id
 	 * @param locationId - The locationId is the locationId of the location you want to get a token for
 	 */
-	public async generateLocationToken({
-		companyId,
-		locationId,
-	}: LocationTokenParams) {
+	async generateLocationToken({ companyId, locationId }: LocationTokenParams) {
 		const { data, error, response } = await this.client.POST(
 			'/oauth/locationToken',
 			{
@@ -318,7 +315,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	 * Get all locations under your agency that have installed your app
 	 * @param query - search for installed locations using any of these properties
 	 */
-	public async getInstalledLocations(query: SearchInstalledLocationParams) {
+	async getInstalledLocations(query: SearchInstalledLocationParams) {
 		const { data, error } = await this.client.GET('/oauth/installedLocations', {
 			params: {
 				query,

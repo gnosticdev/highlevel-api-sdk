@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
 
 	"files": {
 		"ignore": [
@@ -7,7 +7,6 @@
 			"**/_![__tests__]",
 			"dist",
 			".wrangler",
-			".astro",
 			".vscode"
 		],
 		"include": ["**/*[.js,.jsx,.ts,.tsx,.astro,.css,.json,.jsonc]"]
@@ -21,8 +20,7 @@
 			"quoteStyle": "single",
 			"semicolons": "asNeeded",
 			"jsxQuoteStyle": "single"
-		},
-		"globals": ["Astro"]
+		}
 	},
 	"json": {
 		"parser": {
@@ -48,7 +46,6 @@
 			},
 			"nursery": {
 				"useSortedClasses": "warn",
-				"noDuplicateJsonKeys": "warn",
 				"recommended": true
 			},
 			"correctness": { "useJsxKeyInIterable": "off" }
@@ -67,26 +64,6 @@
 			"include": ["./**/*.js"],
 			"linter": {
 				"enabled": false
-			}
-		},
-		{
-			"include": ["./**/*.astro"],
-			"formatter": {
-				"indentWidth": 2,
-				"indentStyle": "space",
-				"formatWithErrors": true,
-				"enabled": true,
-				"lineWidth": 120,
-				"attributePosition": "multiline"
-			},
-			"linter": {
-				"enabled": true,
-				"rules": {
-					"recommended": true,
-					"style": {
-						"noNonNullAssertion": "off"
-					}
-				}
 			}
 		},
 		{

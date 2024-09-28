@@ -1,6 +1,6 @@
 import { Database } from 'bun:sqlite'
 import { describe, expect, it } from 'bun:test'
-import { createTokensDB } from '../src/examples/db'
+import { createTokensDB } from '../src/examples/bun-auth/db'
 
 const testDB = new Database(':memory:', { create: true })
 const db = createTokensDB(testDB)
