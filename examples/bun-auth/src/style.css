@@ -1,0 +1,88 @@
+body {
+	display: grid;
+	place-items: center;
+	& main {
+		display: grid;
+		grid-template-rows: auto auto auto;
+		place-items: center;
+		text-align: center;
+		min-width: 33vw;
+		grid-gap: 1rem;
+		padding: 1rem;
+		color: #fff;
+
+		& .container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			max-width: 60vw;
+			overflow-wrap: anywhere;
+			overflow-y: hidden;
+
+			& .copy-text {
+				height: 200px;
+				overflow-y: scroll;
+				margin-bottom: 2rem;
+				border: 1px solid white;
+				padding: 1rem;
+				border-radius: 0.5rem;
+				background: #2c2c2c;
+			}
+		}
+
+		& .btn {
+			display: inline-block;
+			padding: 0.5rem 1rem;
+			border-radius: 0.5rem;
+			background: #334cda;
+			color: #ffffff;
+			text-decoration: none;
+
+			&:hover {
+				background: #1e2f8e;
+			}
+
+			&.copied {
+				background: rgb(24, 142, 134);
+				transition: background 0.2s ease;
+			}
+		}
+
+		& ul.route-links {
+			justify-content: center;
+			align-items: center;
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			width: 100%;
+			margin-block: 0.5rem;
+
+			& li {
+				width: 100%;
+				background-color: rgb(33, 19, 126);
+				margin: 0 0.5rem;
+				text-align: left;
+				list-style: none;
+				margin-block: 0.5rem;
+				padding: 0.5rem;
+
+				& a {
+					color: #fff;
+					text-decoration: none;
+					&:hover {
+						color: #334cda;
+					}
+				}
+			}
+		}
+	}
+}
+
+.success {
+	color: #1fc145;
+}
+
+.failed {
+	color: #ff4d4d;
+}

@@ -1,0 +1,14 @@
+{
+	"dependencies": {
+		"@gnosticdev/highlevel-sdk": "file:../..",
+		"hono": "^4.6.3"
+	},
+	"license": "MIT",
+	"name": "@gnosticdev/highlevel-bun-auth",
+	"private": false,
+	"scripts": {
+		"debug-auth": "bun --inspect-brk run src/index.tsx",
+		"dev": "bun run src/index.ts"
+	},
+	"version": "0.0.1"
+}
