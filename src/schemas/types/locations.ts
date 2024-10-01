@@ -1,4 +1,4 @@
-export interface paths {
+export type paths = {
 	'/locations/search': {
 		parameters: {
 			query?: never
@@ -7,8 +7,8 @@ export interface paths {
 			cookie?: never
 		}
 		/**
-		 * Search Locations
-		 * @description Search Locations
+		 * Search
+		 * @description Search Sub-Account (Formerly Location)
 		 */
 		get: operations['search-locations']
 		put?: never
@@ -27,19 +27,19 @@ export interface paths {
 			cookie?: never
 		}
 		/**
-		 * Get Location
-		 * @description Get details of a location by passing the location id
+		 * Get Sub-Account (Formerly Location)
+		 * @description Get details of a Sub-Account (Formerly Location) by passing the sub-account id
 		 */
 		get: operations['get-location']
 		/**
-		 * Put Location
-		 * @description Update a location/sub-account based on the data provided
+		 * Put Sub-Account (Formerly Location)
+		 * @description Update a Sub-Account (Formerly Location) based on the data provided
 		 */
 		put: operations['put-location']
 		post?: never
 		/**
-		 * Delete Location
-		 * @description Delete a location/sub-account from the company
+		 * Delete Sub-Account (Formerly Location)
+		 * @description Delete a Sub-Account (Formerly Location) from the Agency
 		 */
 		delete: operations['delete-location']
 		options?: never
@@ -55,8 +55,8 @@ export interface paths {
 			cookie?: never
 		}
 		/**
-		 * Get Location Tags
-		 * @description Get Location Tags
+		 * Get Tags
+		 * @description Get Sub-Account (Formerly Location) Tags
 		 */
 		get: operations['get-location-tags']
 		put?: never
@@ -171,6 +171,26 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/locations/{locationId}/customFields/upload': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Uploads File to customFields
+		 * @description Uploads File to customFields
+		 */
+		post: operations['upload-file-customFields']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/locations/{locationId}/customValues': {
 		parameters: {
 			query?: never
@@ -223,6 +243,26 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/locations/{locationId}/timezones': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Fetch Timezones
+		 * @description Fetch the available timezones
+		 */
+		get: operations['get-timezones']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/locations/{locationId}/templates': {
 		parameters: {
 			query?: never
@@ -243,7 +283,27 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
-	'/locations': {
+	'/locations/{locationId}/templates/{id}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post?: never
+		/**
+		 * DELETE an email/sms template
+		 * @description DELETE an email/sms template
+		 */
+		delete: operations['DELETE-an-email-sms-template']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/locations/': {
 		parameters: {
 			query?: never
 			header?: never
@@ -253,8 +313,31 @@ export interface paths {
 		get?: never
 		put?: never
 		/**
-		 * Create Location
-		 * @description Create a new location/sub-account based on the data provided
+		 * Create Sub-Account (Formerly Location)
+		 * @description <div>
+		 *                       <p>Create a new Sub-Account (Formerly Location) based on the data provided</p>
+		 *                       <div>
+		 *                         <span style= "display: inline-block;
+		 *                                     width: 25px; height: 25px;
+		 *                                     background-color: yellow;
+		 *                                     color: black;
+		 *                                     font-weight: bold;
+		 *                                     font-size: 24px;
+		 *                                     text-align: center;
+		 *                                     line-height: 22px;
+		 *                                     border: 2px solid black;
+		 *                                     border-radius: 10%;
+		 *                                     margin-right: 10px;">
+		 *                                     !
+		 *                           </span>
+		 *                           <span>
+		 *                             <strong>
+		 *                               This feature is only available on Agency Pro ($497) plan.
+		 *                             </strong>
+		 *                           </span>
+		 *                       </div>
+		 *                     </div>
+		 *
 		 */
 		post: operations['create-location']
 		delete?: never
@@ -265,7 +348,7 @@ export interface paths {
 	}
 }
 export type webhooks = Record<string, never>
-export interface components {
+export type components = {
 	schemas: {
 		BadRequestDTO: {
 			/** @example 400 */
@@ -419,7 +502,7 @@ export interface components {
 			/** @description The social media links for location */
 			social?: components['schemas']['SocialSchema']
 		}
-		LocationSearchSuccessfulResponseDto: {
+		SearchSuccessfulResponseDto: {
 			locations?: components['schemas']['GetLocationSchema'][]
 		}
 		BusinessSchema: {
@@ -449,6 +532,8 @@ export interface components {
 			companyId?: string
 			/** @example dentist */
 			name?: string
+			/** @example test.msgsndr.com */
+			domain?: string
 			/** @example ganthi nagar, gyanbabu chauk motihati */
 			address?: string
 			/** @example motihari */
@@ -558,254 +643,7 @@ export interface components {
 			 * @example US
 			 * @enum {string}
 			 */
-			country?:
-				| 'AF'
-				| 'AX'
-				| 'AL'
-				| 'DZ'
-				| 'AS'
-				| 'AD'
-				| 'AO'
-				| 'AI'
-				| 'AQ'
-				| 'AG'
-				| 'AR'
-				| 'AM'
-				| 'AW'
-				| 'AU'
-				| 'AT'
-				| 'AZ'
-				| 'BS'
-				| 'BH'
-				| 'BD'
-				| 'BB'
-				| 'BY'
-				| 'BE'
-				| 'BZ'
-				| 'BJ'
-				| 'BM'
-				| 'BT'
-				| 'BO'
-				| 'BA'
-				| 'BW'
-				| 'BV'
-				| 'BR'
-				| 'IO'
-				| 'BN'
-				| 'BG'
-				| 'BF'
-				| 'BI'
-				| 'KH'
-				| 'CM'
-				| 'CA'
-				| 'CV'
-				| 'KY'
-				| 'CF'
-				| 'TD'
-				| 'CL'
-				| 'CN'
-				| 'CX'
-				| 'CC'
-				| 'CO'
-				| 'KM'
-				| 'CG'
-				| 'CD'
-				| 'CK'
-				| 'CR'
-				| 'CI'
-				| 'HR'
-				| 'CU'
-				| 'CY'
-				| 'CZ'
-				| 'DK'
-				| 'DJ'
-				| 'DM'
-				| 'DO'
-				| 'EC'
-				| 'EG'
-				| 'SV'
-				| 'GQ'
-				| 'ER'
-				| 'EE'
-				| 'ET'
-				| 'FK'
-				| 'FO'
-				| 'FJ'
-				| 'FI'
-				| 'FR'
-				| 'GF'
-				| 'PF'
-				| 'TF'
-				| 'GA'
-				| 'GM'
-				| 'GE'
-				| 'DE'
-				| 'GH'
-				| 'GI'
-				| 'GR'
-				| 'GL'
-				| 'GD'
-				| 'GP'
-				| 'GU'
-				| 'GT'
-				| 'GG'
-				| 'GN'
-				| 'GW'
-				| 'GY'
-				| 'HT'
-				| 'HM'
-				| 'VA'
-				| 'HN'
-				| 'HK'
-				| 'HU'
-				| 'IS'
-				| 'IN'
-				| 'ID'
-				| 'IR'
-				| 'IQ'
-				| 'IE'
-				| 'IM'
-				| 'IL'
-				| 'IT'
-				| 'JM'
-				| 'JP'
-				| 'JE'
-				| 'JO'
-				| 'KZ'
-				| 'KE'
-				| 'KI'
-				| 'KP'
-				| 'KR'
-				| 'XK'
-				| 'KW'
-				| 'KG'
-				| 'LA'
-				| 'LV'
-				| 'LB'
-				| 'LS'
-				| 'LR'
-				| 'LY'
-				| 'LI'
-				| 'LT'
-				| 'LU'
-				| 'MO'
-				| 'MK'
-				| 'MG'
-				| 'MW'
-				| 'MY'
-				| 'MV'
-				| 'ML'
-				| 'MT'
-				| 'MH'
-				| 'MQ'
-				| 'MR'
-				| 'MU'
-				| 'YT'
-				| 'MX'
-				| 'FM'
-				| 'MD'
-				| 'MC'
-				| 'MN'
-				| 'ME'
-				| 'MS'
-				| 'MA'
-				| 'MZ'
-				| 'MM'
-				| 'NA'
-				| 'NR'
-				| 'NP'
-				| 'NL'
-				| 'AN'
-				| 'NC'
-				| 'NZ'
-				| 'NI'
-				| 'NE'
-				| 'NG'
-				| 'NU'
-				| 'NF'
-				| 'MP'
-				| 'NO'
-				| 'OM'
-				| 'PK'
-				| 'PW'
-				| 'PS'
-				| 'PA'
-				| 'PG'
-				| 'PY'
-				| 'PE'
-				| 'PH'
-				| 'PN'
-				| 'PL'
-				| 'PT'
-				| 'PR'
-				| 'QA'
-				| 'RE'
-				| 'RO'
-				| 'RU'
-				| 'RW'
-				| 'SH'
-				| 'KN'
-				| 'LC'
-				| 'MF'
-				| 'PM'
-				| 'VC'
-				| 'WS'
-				| 'SM'
-				| 'ST'
-				| 'SA'
-				| 'SN'
-				| 'RS'
-				| 'SC'
-				| 'SL'
-				| 'SG'
-				| 'SX'
-				| 'SK'
-				| 'SI'
-				| 'SB'
-				| 'SO'
-				| 'ZA'
-				| 'GS'
-				| 'ES'
-				| 'LK'
-				| 'SD'
-				| 'SR'
-				| 'SJ'
-				| 'SZ'
-				| 'SE'
-				| 'CH'
-				| 'SY'
-				| 'TW'
-				| 'TJ'
-				| 'TZ'
-				| 'TH'
-				| 'TL'
-				| 'TG'
-				| 'TK'
-				| 'TO'
-				| 'TT'
-				| 'TN'
-				| 'TR'
-				| 'TM'
-				| 'TC'
-				| 'TV'
-				| 'UG'
-				| 'GB'
-				| 'UA'
-				| 'AE'
-				| 'US'
-				| 'UM'
-				| 'UY'
-				| 'UZ'
-				| 'VU'
-				| 'VE'
-				| 'VN'
-				| 'VG'
-				| 'VI'
-				| 'WF'
-				| 'EH'
-				| 'YE'
-				| 'ZM'
-				| 'ZW'
+			country?: CreateLocationDtoCountry
 			/**
 			 * @description The postal code of the business for which sub-account is created
 			 * @example 567654
@@ -882,259 +720,14 @@ export interface components {
 			 * @example Illinois
 			 */
 			state?: string
+			/** @example test.msgsndr.com */
+			domain?: string
 			/**
 			 * @description The country in which the business is present for which sub-account is created
 			 * @example US
 			 * @enum {string}
 			 */
-			country?:
-				| 'AF'
-				| 'AX'
-				| 'AL'
-				| 'DZ'
-				| 'AS'
-				| 'AD'
-				| 'AO'
-				| 'AI'
-				| 'AQ'
-				| 'AG'
-				| 'AR'
-				| 'AM'
-				| 'AW'
-				| 'AU'
-				| 'AT'
-				| 'AZ'
-				| 'BS'
-				| 'BH'
-				| 'BD'
-				| 'BB'
-				| 'BY'
-				| 'BE'
-				| 'BZ'
-				| 'BJ'
-				| 'BM'
-				| 'BT'
-				| 'BO'
-				| 'BA'
-				| 'BW'
-				| 'BV'
-				| 'BR'
-				| 'IO'
-				| 'BN'
-				| 'BG'
-				| 'BF'
-				| 'BI'
-				| 'KH'
-				| 'CM'
-				| 'CA'
-				| 'CV'
-				| 'KY'
-				| 'CF'
-				| 'TD'
-				| 'CL'
-				| 'CN'
-				| 'CX'
-				| 'CC'
-				| 'CO'
-				| 'KM'
-				| 'CG'
-				| 'CD'
-				| 'CK'
-				| 'CR'
-				| 'CI'
-				| 'HR'
-				| 'CU'
-				| 'CY'
-				| 'CZ'
-				| 'DK'
-				| 'DJ'
-				| 'DM'
-				| 'DO'
-				| 'EC'
-				| 'EG'
-				| 'SV'
-				| 'GQ'
-				| 'ER'
-				| 'EE'
-				| 'ET'
-				| 'FK'
-				| 'FO'
-				| 'FJ'
-				| 'FI'
-				| 'FR'
-				| 'GF'
-				| 'PF'
-				| 'TF'
-				| 'GA'
-				| 'GM'
-				| 'GE'
-				| 'DE'
-				| 'GH'
-				| 'GI'
-				| 'GR'
-				| 'GL'
-				| 'GD'
-				| 'GP'
-				| 'GU'
-				| 'GT'
-				| 'GG'
-				| 'GN'
-				| 'GW'
-				| 'GY'
-				| 'HT'
-				| 'HM'
-				| 'VA'
-				| 'HN'
-				| 'HK'
-				| 'HU'
-				| 'IS'
-				| 'IN'
-				| 'ID'
-				| 'IR'
-				| 'IQ'
-				| 'IE'
-				| 'IM'
-				| 'IL'
-				| 'IT'
-				| 'JM'
-				| 'JP'
-				| 'JE'
-				| 'JO'
-				| 'KZ'
-				| 'KE'
-				| 'KI'
-				| 'KP'
-				| 'KR'
-				| 'XK'
-				| 'KW'
-				| 'KG'
-				| 'LA'
-				| 'LV'
-				| 'LB'
-				| 'LS'
-				| 'LR'
-				| 'LY'
-				| 'LI'
-				| 'LT'
-				| 'LU'
-				| 'MO'
-				| 'MK'
-				| 'MG'
-				| 'MW'
-				| 'MY'
-				| 'MV'
-				| 'ML'
-				| 'MT'
-				| 'MH'
-				| 'MQ'
-				| 'MR'
-				| 'MU'
-				| 'YT'
-				| 'MX'
-				| 'FM'
-				| 'MD'
-				| 'MC'
-				| 'MN'
-				| 'ME'
-				| 'MS'
-				| 'MA'
-				| 'MZ'
-				| 'MM'
-				| 'NA'
-				| 'NR'
-				| 'NP'
-				| 'NL'
-				| 'AN'
-				| 'NC'
-				| 'NZ'
-				| 'NI'
-				| 'NE'
-				| 'NG'
-				| 'NU'
-				| 'NF'
-				| 'MP'
-				| 'NO'
-				| 'OM'
-				| 'PK'
-				| 'PW'
-				| 'PS'
-				| 'PA'
-				| 'PG'
-				| 'PY'
-				| 'PE'
-				| 'PH'
-				| 'PN'
-				| 'PL'
-				| 'PT'
-				| 'PR'
-				| 'QA'
-				| 'RE'
-				| 'RO'
-				| 'RU'
-				| 'RW'
-				| 'SH'
-				| 'KN'
-				| 'LC'
-				| 'MF'
-				| 'PM'
-				| 'VC'
-				| 'WS'
-				| 'SM'
-				| 'ST'
-				| 'SA'
-				| 'SN'
-				| 'RS'
-				| 'SC'
-				| 'SL'
-				| 'SG'
-				| 'SX'
-				| 'SK'
-				| 'SI'
-				| 'SB'
-				| 'SO'
-				| 'ZA'
-				| 'GS'
-				| 'ES'
-				| 'LK'
-				| 'SD'
-				| 'SR'
-				| 'SJ'
-				| 'SZ'
-				| 'SE'
-				| 'CH'
-				| 'SY'
-				| 'TW'
-				| 'TJ'
-				| 'TZ'
-				| 'TH'
-				| 'TL'
-				| 'TG'
-				| 'TK'
-				| 'TO'
-				| 'TT'
-				| 'TN'
-				| 'TR'
-				| 'TM'
-				| 'TC'
-				| 'TV'
-				| 'UG'
-				| 'GB'
-				| 'UA'
-				| 'AE'
-				| 'US'
-				| 'UM'
-				| 'UY'
-				| 'UZ'
-				| 'VU'
-				| 'VE'
-				| 'VN'
-				| 'VG'
-				| 'VI'
-				| 'WF'
-				| 'EH'
-				| 'YE'
-				| 'ZM'
-				| 'ZW'
+			country?: CreateLocationSuccessfulResponseDtoCountry
 			/**
 			 * @description The postal code of the business for which sub-account is created
 			 * @example 567654
@@ -1204,254 +797,7 @@ export interface components {
 			 * @example US
 			 * @enum {string}
 			 */
-			country?:
-				| 'AF'
-				| 'AX'
-				| 'AL'
-				| 'DZ'
-				| 'AS'
-				| 'AD'
-				| 'AO'
-				| 'AI'
-				| 'AQ'
-				| 'AG'
-				| 'AR'
-				| 'AM'
-				| 'AW'
-				| 'AU'
-				| 'AT'
-				| 'AZ'
-				| 'BS'
-				| 'BH'
-				| 'BD'
-				| 'BB'
-				| 'BY'
-				| 'BE'
-				| 'BZ'
-				| 'BJ'
-				| 'BM'
-				| 'BT'
-				| 'BO'
-				| 'BA'
-				| 'BW'
-				| 'BV'
-				| 'BR'
-				| 'IO'
-				| 'BN'
-				| 'BG'
-				| 'BF'
-				| 'BI'
-				| 'KH'
-				| 'CM'
-				| 'CA'
-				| 'CV'
-				| 'KY'
-				| 'CF'
-				| 'TD'
-				| 'CL'
-				| 'CN'
-				| 'CX'
-				| 'CC'
-				| 'CO'
-				| 'KM'
-				| 'CG'
-				| 'CD'
-				| 'CK'
-				| 'CR'
-				| 'CI'
-				| 'HR'
-				| 'CU'
-				| 'CY'
-				| 'CZ'
-				| 'DK'
-				| 'DJ'
-				| 'DM'
-				| 'DO'
-				| 'EC'
-				| 'EG'
-				| 'SV'
-				| 'GQ'
-				| 'ER'
-				| 'EE'
-				| 'ET'
-				| 'FK'
-				| 'FO'
-				| 'FJ'
-				| 'FI'
-				| 'FR'
-				| 'GF'
-				| 'PF'
-				| 'TF'
-				| 'GA'
-				| 'GM'
-				| 'GE'
-				| 'DE'
-				| 'GH'
-				| 'GI'
-				| 'GR'
-				| 'GL'
-				| 'GD'
-				| 'GP'
-				| 'GU'
-				| 'GT'
-				| 'GG'
-				| 'GN'
-				| 'GW'
-				| 'GY'
-				| 'HT'
-				| 'HM'
-				| 'VA'
-				| 'HN'
-				| 'HK'
-				| 'HU'
-				| 'IS'
-				| 'IN'
-				| 'ID'
-				| 'IR'
-				| 'IQ'
-				| 'IE'
-				| 'IM'
-				| 'IL'
-				| 'IT'
-				| 'JM'
-				| 'JP'
-				| 'JE'
-				| 'JO'
-				| 'KZ'
-				| 'KE'
-				| 'KI'
-				| 'KP'
-				| 'KR'
-				| 'XK'
-				| 'KW'
-				| 'KG'
-				| 'LA'
-				| 'LV'
-				| 'LB'
-				| 'LS'
-				| 'LR'
-				| 'LY'
-				| 'LI'
-				| 'LT'
-				| 'LU'
-				| 'MO'
-				| 'MK'
-				| 'MG'
-				| 'MW'
-				| 'MY'
-				| 'MV'
-				| 'ML'
-				| 'MT'
-				| 'MH'
-				| 'MQ'
-				| 'MR'
-				| 'MU'
-				| 'YT'
-				| 'MX'
-				| 'FM'
-				| 'MD'
-				| 'MC'
-				| 'MN'
-				| 'ME'
-				| 'MS'
-				| 'MA'
-				| 'MZ'
-				| 'MM'
-				| 'NA'
-				| 'NR'
-				| 'NP'
-				| 'NL'
-				| 'AN'
-				| 'NC'
-				| 'NZ'
-				| 'NI'
-				| 'NE'
-				| 'NG'
-				| 'NU'
-				| 'NF'
-				| 'MP'
-				| 'NO'
-				| 'OM'
-				| 'PK'
-				| 'PW'
-				| 'PS'
-				| 'PA'
-				| 'PG'
-				| 'PY'
-				| 'PE'
-				| 'PH'
-				| 'PN'
-				| 'PL'
-				| 'PT'
-				| 'PR'
-				| 'QA'
-				| 'RE'
-				| 'RO'
-				| 'RU'
-				| 'RW'
-				| 'SH'
-				| 'KN'
-				| 'LC'
-				| 'MF'
-				| 'PM'
-				| 'VC'
-				| 'WS'
-				| 'SM'
-				| 'ST'
-				| 'SA'
-				| 'SN'
-				| 'RS'
-				| 'SC'
-				| 'SL'
-				| 'SG'
-				| 'SX'
-				| 'SK'
-				| 'SI'
-				| 'SB'
-				| 'SO'
-				| 'ZA'
-				| 'GS'
-				| 'ES'
-				| 'LK'
-				| 'SD'
-				| 'SR'
-				| 'SJ'
-				| 'SZ'
-				| 'SE'
-				| 'CH'
-				| 'SY'
-				| 'TW'
-				| 'TJ'
-				| 'TZ'
-				| 'TH'
-				| 'TL'
-				| 'TG'
-				| 'TK'
-				| 'TO'
-				| 'TT'
-				| 'TN'
-				| 'TR'
-				| 'TM'
-				| 'TC'
-				| 'TV'
-				| 'UG'
-				| 'GB'
-				| 'UA'
-				| 'AE'
-				| 'US'
-				| 'UM'
-				| 'UY'
-				| 'UZ'
-				| 'VU'
-				| 'VE'
-				| 'VN'
-				| 'VG'
-				| 'VI'
-				| 'WF'
-				| 'EH'
-				| 'YE'
-				| 'ZM'
-				| 'ZW'
+			country?: UpdateLocationDtoCountry
 			/**
 			 * @description The postal code of the business for which sub-account is created
 			 * @example 567654
@@ -1568,7 +914,7 @@ export interface components {
 		LocationTaskListSuccessfulResponseDto: {
 			tasks?: unknown[][]
 		}
-		LocationCustomFieldSchema: {
+		CustomFieldSchema: {
 			/** @example 3sv6UEo51C9Bmpo1cKTq */
 			id?: string
 			/** @example pincode */
@@ -1600,13 +946,13 @@ export interface components {
 			 * @example opportunity
 			 * @enum {string}
 			 */
-			model?: 'contact' | 'opportunity'
+			model?: CustomFieldSchemaModel
 		}
 		CustomFieldsListSuccessfulResponseDto: {
-			customFields?: components['schemas']['LocationCustomFieldSchema'][]
+			customFields?: components['schemas']['CustomFieldSchema'][]
 		}
 		CustomFieldSuccessfulResponseDto: {
-			customField?: components['schemas']['LocationCustomFieldSchema']
+			customField?: components['schemas']['CustomFieldSchema']
 		}
 		textBoxListOptionsSchema: {
 			/** @example First */
@@ -1645,7 +991,7 @@ export interface components {
 			 * @example opportunity
 			 * @enum {string}
 			 */
-			model?: 'contact' | 'opportunity'
+			model?: CreateCustomFieldsDTOModel
 		}
 		UpdateCustomFieldsDTO: {
 			/** @example Custom Field */
@@ -1676,11 +1022,46 @@ export interface components {
 			 * @example opportunity
 			 * @enum {string}
 			 */
-			model?: 'contact' | 'opportunity'
+			model?: UpdateCustomFieldsDTOModel
 		}
 		CustomFieldDeleteSuccessfulResponseDto: {
 			/** @example true */
 			succeded?: boolean
+		}
+		FileUploadBody: {
+			/**
+			 * @description Id(Contact Id/Opportunity Id/Custom Field Id)
+			 * @example aWdODOBVOlH1RUFKWQke
+			 */
+			id?: string
+			/**
+			 * @description Max number of files
+			 * @example 15
+			 */
+			maxFiles?: string
+		}
+		FileUploadResponseDto: {
+			/**
+			 * @description Uploaded files
+			 * @example {
+			 *       "FileName.csv": "https://highlevel-private-staging.storage.googleapis.com/location/Ar4JQgIyuzRsVuwD9RSK/custom-Field/UpZLmohmKEQYn0ymqplY/56e0d7fc-085c-4a07-9e1d-6d8fdac7e710.csv"
+			 *     }
+			 */
+			uploadedFiles?: Record<string, never>
+			/**
+			 * @description Meta data of uploaded files
+			 * @example [
+			 *       {
+			 *         "fieldname": "FileName.csv",
+			 *         "originalname": "FileName.csv",
+			 *         "encoding": "7bit",
+			 *         "mimetype": "text/csv",
+			 *         "size": 2061,
+			 *         "url": "https://highlevel-private-staging.storage.googleapis.com/location/Ar4JQgIyuzRsVuwD9RSK/custom-Field/UpZLmohmKEQYn0ymqplY/56e0d7fc-085c-4a07-9e1d-6d8fdac7e710.csv"
+			 *       }
+			 *     ]
+			 */
+			meta?: string[]
 		}
 		CustomValueSchema: {
 			/** @example rWQ709Pb62syqGLceg1x */
@@ -1799,7 +1180,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsSearchGetParametersHeaderVersion
 			}
 			path?: never
 			cookie?: never
@@ -1812,7 +1193,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['LocationSearchSuccessfulResponseDto']
+					'application/json': components['schemas']['SearchSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -1851,7 +1232,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -1909,7 +1290,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdPutParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -1968,7 +1349,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdDeleteParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2017,7 +1398,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdTagsGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2075,7 +1456,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdTagsPostParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2137,7 +1518,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdTagsTagIdGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2200,7 +1581,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdTagsTagIdPutParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2267,7 +1648,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdTagsTagIdDeleteParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2330,7 +1711,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdTasksSearchPostParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2392,13 +1773,13 @@ export interface operations {
 				 * @description Model of the custom field you want to retrieve
 				 * @example opportunity
 				 */
-				model?: 'contact' | 'opportunity' | 'all'
+				model?: PathsLocationsLocationIdCustomFieldsGetParametersQueryModel
 			}
 			header: {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomFieldsGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2456,7 +1837,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomFieldsPostParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2518,7 +1899,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomFieldsIdGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2581,7 +1962,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomFieldsIdPutParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2648,7 +2029,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomFieldsIdDeleteParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2704,6 +2085,64 @@ export interface operations {
 			}
 		}
 	}
+	'upload-file-customFields': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: PathsLocationsLocationIdCustomFieldsUploadPostParametersHeaderVersion
+			}
+			path: {
+				locationId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'multipart/form-data': components['schemas']['FileUploadBody']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['FileUploadResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'get-custom-values': {
 		parameters: {
 			query?: never
@@ -2711,7 +2150,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomValuesGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2760,7 +2199,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomValuesPostParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2822,7 +2261,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomValuesIdGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2885,7 +2324,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomValuesIdPutParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -2952,7 +2391,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdCustomValuesIdDeleteParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -3008,22 +2447,77 @@ export interface operations {
 			}
 		}
 	}
+	'get-timezones': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: PathsLocationsLocationIdTimezonesGetParametersHeaderVersion
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'GET-all-or-email-sms-templates': {
 		parameters: {
-			query?: {
+			query: {
 				/** @example false */
 				deleted?: boolean
 				/** @example 1 */
 				skip?: string
 				/** @example 25 */
 				limit?: string
-				type?: 'sms' | 'email' | 'whatsapp'
+				type?: PathsLocationsLocationIdTemplatesGetParametersQueryType
+				/**
+				 * @description Origin Id
+				 * @example ve9EPM428h8vShlRW1KT
+				 */
+				originId: string
 			}
 			header: {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsLocationIdTemplatesGetParametersHeaderVersion
 			}
 			path: {
 				/**
@@ -3074,6 +2568,66 @@ export interface operations {
 			}
 		}
 	}
+	'DELETE-an-email-sms-template': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: PathsLocationsLocationIdTemplatesIdDeleteParametersHeaderVersion
+			}
+			path: {
+				/**
+				 * @description Location Id
+				 * @example ve9EPM428h8vShlRW1KT
+				 */
+				locationId: string
+				/**
+				 * @description Template Id
+				 * @example ve9EPM428h8vShlRW1KT
+				 */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'create-location': {
 		parameters: {
 			query?: never
@@ -3081,7 +2635,7 @@ export interface operations {
 				/** @description Access Token */
 				Authorization: string
 				/** @description API Version */
-				Version: '2021-07-28'
+				Version: PathsLocationsPostParametersHeaderVersion
 			}
 			path?: never
 			cookie?: never
@@ -3121,4 +2675,848 @@ export interface operations {
 			}
 		}
 	}
+}
+export enum PathsLocationsSearchGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdPutParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdDeleteParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTagsGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTagsPostParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTagsTagIdGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTagsTagIdPutParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTagsTagIdDeleteParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTasksSearchPostParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomFieldsGetParametersQueryModel {
+	contact = 'contact',
+	opportunity = 'opportunity',
+	all = 'all',
+}
+export enum PathsLocationsLocationIdCustomFieldsGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomFieldsPostParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomFieldsIdGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomFieldsIdPutParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomFieldsIdDeleteParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomFieldsUploadPostParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomValuesGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomValuesPostParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomValuesIdGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomValuesIdPutParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdCustomValuesIdDeleteParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTimezonesGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTemplatesGetParametersQueryType {
+	sms = 'sms',
+	email = 'email',
+	whatsapp = 'whatsapp',
+}
+export enum PathsLocationsLocationIdTemplatesGetParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsLocationIdTemplatesIdDeleteParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum PathsLocationsPostParametersHeaderVersion {
+	Value2021_07_28 = '2021-07-28',
+}
+export enum CreateLocationDtoCountry {
+	AF = 'AF',
+	AX = 'AX',
+	AL = 'AL',
+	DZ = 'DZ',
+	AS = 'AS',
+	AD = 'AD',
+	AO = 'AO',
+	AI = 'AI',
+	AQ = 'AQ',
+	AG = 'AG',
+	AR = 'AR',
+	AM = 'AM',
+	AW = 'AW',
+	AU = 'AU',
+	AT = 'AT',
+	AZ = 'AZ',
+	BS = 'BS',
+	BH = 'BH',
+	BD = 'BD',
+	BB = 'BB',
+	BY = 'BY',
+	BE = 'BE',
+	BZ = 'BZ',
+	BJ = 'BJ',
+	BM = 'BM',
+	BT = 'BT',
+	BO = 'BO',
+	BA = 'BA',
+	BW = 'BW',
+	BV = 'BV',
+	BR = 'BR',
+	IO = 'IO',
+	BN = 'BN',
+	BG = 'BG',
+	BF = 'BF',
+	BI = 'BI',
+	KH = 'KH',
+	CM = 'CM',
+	CA = 'CA',
+	CV = 'CV',
+	KY = 'KY',
+	CF = 'CF',
+	TD = 'TD',
+	CL = 'CL',
+	CN = 'CN',
+	CX = 'CX',
+	CC = 'CC',
+	CO = 'CO',
+	KM = 'KM',
+	CG = 'CG',
+	CD = 'CD',
+	CK = 'CK',
+	CR = 'CR',
+	CI = 'CI',
+	HR = 'HR',
+	CU = 'CU',
+	CY = 'CY',
+	CZ = 'CZ',
+	DK = 'DK',
+	DJ = 'DJ',
+	DM = 'DM',
+	DO = 'DO',
+	EC = 'EC',
+	EG = 'EG',
+	SV = 'SV',
+	GQ = 'GQ',
+	ER = 'ER',
+	EE = 'EE',
+	ET = 'ET',
+	FK = 'FK',
+	FO = 'FO',
+	FJ = 'FJ',
+	FI = 'FI',
+	FR = 'FR',
+	GF = 'GF',
+	PF = 'PF',
+	TF = 'TF',
+	GA = 'GA',
+	GM = 'GM',
+	GE = 'GE',
+	DE = 'DE',
+	GH = 'GH',
+	GI = 'GI',
+	GR = 'GR',
+	GL = 'GL',
+	GD = 'GD',
+	GP = 'GP',
+	GU = 'GU',
+	GT = 'GT',
+	GG = 'GG',
+	GN = 'GN',
+	GW = 'GW',
+	GY = 'GY',
+	HT = 'HT',
+	HM = 'HM',
+	VA = 'VA',
+	HN = 'HN',
+	HK = 'HK',
+	HU = 'HU',
+	IS = 'IS',
+	IN = 'IN',
+	ID = 'ID',
+	IR = 'IR',
+	IQ = 'IQ',
+	IE = 'IE',
+	IM = 'IM',
+	IL = 'IL',
+	IT = 'IT',
+	JM = 'JM',
+	JP = 'JP',
+	JE = 'JE',
+	JO = 'JO',
+	KZ = 'KZ',
+	KE = 'KE',
+	KI = 'KI',
+	KP = 'KP',
+	KR = 'KR',
+	XK = 'XK',
+	KW = 'KW',
+	KG = 'KG',
+	LA = 'LA',
+	LV = 'LV',
+	LB = 'LB',
+	LS = 'LS',
+	LR = 'LR',
+	LY = 'LY',
+	LI = 'LI',
+	LT = 'LT',
+	LU = 'LU',
+	MO = 'MO',
+	MK = 'MK',
+	MG = 'MG',
+	MW = 'MW',
+	MY = 'MY',
+	MV = 'MV',
+	ML = 'ML',
+	MT = 'MT',
+	MH = 'MH',
+	MQ = 'MQ',
+	MR = 'MR',
+	MU = 'MU',
+	YT = 'YT',
+	MX = 'MX',
+	FM = 'FM',
+	MD = 'MD',
+	MC = 'MC',
+	MN = 'MN',
+	ME = 'ME',
+	MS = 'MS',
+	MA = 'MA',
+	MZ = 'MZ',
+	MM = 'MM',
+	NA = 'NA',
+	NR = 'NR',
+	NP = 'NP',
+	NL = 'NL',
+	AN = 'AN',
+	NC = 'NC',
+	NZ = 'NZ',
+	NI = 'NI',
+	NE = 'NE',
+	NG = 'NG',
+	NU = 'NU',
+	NF = 'NF',
+	MP = 'MP',
+	NO = 'NO',
+	OM = 'OM',
+	PK = 'PK',
+	PW = 'PW',
+	PS = 'PS',
+	PA = 'PA',
+	PG = 'PG',
+	PY = 'PY',
+	PE = 'PE',
+	PH = 'PH',
+	PN = 'PN',
+	PL = 'PL',
+	PT = 'PT',
+	PR = 'PR',
+	QA = 'QA',
+	RE = 'RE',
+	RO = 'RO',
+	RU = 'RU',
+	RW = 'RW',
+	SH = 'SH',
+	KN = 'KN',
+	LC = 'LC',
+	MF = 'MF',
+	PM = 'PM',
+	VC = 'VC',
+	WS = 'WS',
+	SM = 'SM',
+	ST = 'ST',
+	SA = 'SA',
+	SN = 'SN',
+	RS = 'RS',
+	SC = 'SC',
+	SL = 'SL',
+	SG = 'SG',
+	SX = 'SX',
+	SK = 'SK',
+	SI = 'SI',
+	SB = 'SB',
+	SO = 'SO',
+	ZA = 'ZA',
+	GS = 'GS',
+	ES = 'ES',
+	LK = 'LK',
+	SD = 'SD',
+	SR = 'SR',
+	SJ = 'SJ',
+	SZ = 'SZ',
+	SE = 'SE',
+	CH = 'CH',
+	SY = 'SY',
+	TW = 'TW',
+	TJ = 'TJ',
+	TZ = 'TZ',
+	TH = 'TH',
+	TL = 'TL',
+	TG = 'TG',
+	TK = 'TK',
+	TO = 'TO',
+	TT = 'TT',
+	TN = 'TN',
+	TR = 'TR',
+	TM = 'TM',
+	TC = 'TC',
+	TV = 'TV',
+	UG = 'UG',
+	GB = 'GB',
+	UA = 'UA',
+	AE = 'AE',
+	US = 'US',
+	UM = 'UM',
+	UY = 'UY',
+	UZ = 'UZ',
+	VU = 'VU',
+	VE = 'VE',
+	VN = 'VN',
+	VG = 'VG',
+	VI = 'VI',
+	WF = 'WF',
+	EH = 'EH',
+	YE = 'YE',
+	ZM = 'ZM',
+	ZW = 'ZW',
+}
+export enum CreateLocationSuccessfulResponseDtoCountry {
+	AF = 'AF',
+	AX = 'AX',
+	AL = 'AL',
+	DZ = 'DZ',
+	AS = 'AS',
+	AD = 'AD',
+	AO = 'AO',
+	AI = 'AI',
+	AQ = 'AQ',
+	AG = 'AG',
+	AR = 'AR',
+	AM = 'AM',
+	AW = 'AW',
+	AU = 'AU',
+	AT = 'AT',
+	AZ = 'AZ',
+	BS = 'BS',
+	BH = 'BH',
+	BD = 'BD',
+	BB = 'BB',
+	BY = 'BY',
+	BE = 'BE',
+	BZ = 'BZ',
+	BJ = 'BJ',
+	BM = 'BM',
+	BT = 'BT',
+	BO = 'BO',
+	BA = 'BA',
+	BW = 'BW',
+	BV = 'BV',
+	BR = 'BR',
+	IO = 'IO',
+	BN = 'BN',
+	BG = 'BG',
+	BF = 'BF',
+	BI = 'BI',
+	KH = 'KH',
+	CM = 'CM',
+	CA = 'CA',
+	CV = 'CV',
+	KY = 'KY',
+	CF = 'CF',
+	TD = 'TD',
+	CL = 'CL',
+	CN = 'CN',
+	CX = 'CX',
+	CC = 'CC',
+	CO = 'CO',
+	KM = 'KM',
+	CG = 'CG',
+	CD = 'CD',
+	CK = 'CK',
+	CR = 'CR',
+	CI = 'CI',
+	HR = 'HR',
+	CU = 'CU',
+	CY = 'CY',
+	CZ = 'CZ',
+	DK = 'DK',
+	DJ = 'DJ',
+	DM = 'DM',
+	DO = 'DO',
+	EC = 'EC',
+	EG = 'EG',
+	SV = 'SV',
+	GQ = 'GQ',
+	ER = 'ER',
+	EE = 'EE',
+	ET = 'ET',
+	FK = 'FK',
+	FO = 'FO',
+	FJ = 'FJ',
+	FI = 'FI',
+	FR = 'FR',
+	GF = 'GF',
+	PF = 'PF',
+	TF = 'TF',
+	GA = 'GA',
+	GM = 'GM',
+	GE = 'GE',
+	DE = 'DE',
+	GH = 'GH',
+	GI = 'GI',
+	GR = 'GR',
+	GL = 'GL',
+	GD = 'GD',
+	GP = 'GP',
+	GU = 'GU',
+	GT = 'GT',
+	GG = 'GG',
+	GN = 'GN',
+	GW = 'GW',
+	GY = 'GY',
+	HT = 'HT',
+	HM = 'HM',
+	VA = 'VA',
+	HN = 'HN',
+	HK = 'HK',
+	HU = 'HU',
+	IS = 'IS',
+	IN = 'IN',
+	ID = 'ID',
+	IR = 'IR',
+	IQ = 'IQ',
+	IE = 'IE',
+	IM = 'IM',
+	IL = 'IL',
+	IT = 'IT',
+	JM = 'JM',
+	JP = 'JP',
+	JE = 'JE',
+	JO = 'JO',
+	KZ = 'KZ',
+	KE = 'KE',
+	KI = 'KI',
+	KP = 'KP',
+	KR = 'KR',
+	XK = 'XK',
+	KW = 'KW',
+	KG = 'KG',
+	LA = 'LA',
+	LV = 'LV',
+	LB = 'LB',
+	LS = 'LS',
+	LR = 'LR',
+	LY = 'LY',
+	LI = 'LI',
+	LT = 'LT',
+	LU = 'LU',
+	MO = 'MO',
+	MK = 'MK',
+	MG = 'MG',
+	MW = 'MW',
+	MY = 'MY',
+	MV = 'MV',
+	ML = 'ML',
+	MT = 'MT',
+	MH = 'MH',
+	MQ = 'MQ',
+	MR = 'MR',
+	MU = 'MU',
+	YT = 'YT',
+	MX = 'MX',
+	FM = 'FM',
+	MD = 'MD',
+	MC = 'MC',
+	MN = 'MN',
+	ME = 'ME',
+	MS = 'MS',
+	MA = 'MA',
+	MZ = 'MZ',
+	MM = 'MM',
+	NA = 'NA',
+	NR = 'NR',
+	NP = 'NP',
+	NL = 'NL',
+	AN = 'AN',
+	NC = 'NC',
+	NZ = 'NZ',
+	NI = 'NI',
+	NE = 'NE',
+	NG = 'NG',
+	NU = 'NU',
+	NF = 'NF',
+	MP = 'MP',
+	NO = 'NO',
+	OM = 'OM',
+	PK = 'PK',
+	PW = 'PW',
+	PS = 'PS',
+	PA = 'PA',
+	PG = 'PG',
+	PY = 'PY',
+	PE = 'PE',
+	PH = 'PH',
+	PN = 'PN',
+	PL = 'PL',
+	PT = 'PT',
+	PR = 'PR',
+	QA = 'QA',
+	RE = 'RE',
+	RO = 'RO',
+	RU = 'RU',
+	RW = 'RW',
+	SH = 'SH',
+	KN = 'KN',
+	LC = 'LC',
+	MF = 'MF',
+	PM = 'PM',
+	VC = 'VC',
+	WS = 'WS',
+	SM = 'SM',
+	ST = 'ST',
+	SA = 'SA',
+	SN = 'SN',
+	RS = 'RS',
+	SC = 'SC',
+	SL = 'SL',
+	SG = 'SG',
+	SX = 'SX',
+	SK = 'SK',
+	SI = 'SI',
+	SB = 'SB',
+	SO = 'SO',
+	ZA = 'ZA',
+	GS = 'GS',
+	ES = 'ES',
+	LK = 'LK',
+	SD = 'SD',
+	SR = 'SR',
+	SJ = 'SJ',
+	SZ = 'SZ',
+	SE = 'SE',
+	CH = 'CH',
+	SY = 'SY',
+	TW = 'TW',
+	TJ = 'TJ',
+	TZ = 'TZ',
+	TH = 'TH',
+	TL = 'TL',
+	TG = 'TG',
+	TK = 'TK',
+	TO = 'TO',
+	TT = 'TT',
+	TN = 'TN',
+	TR = 'TR',
+	TM = 'TM',
+	TC = 'TC',
+	TV = 'TV',
+	UG = 'UG',
+	GB = 'GB',
+	UA = 'UA',
+	AE = 'AE',
+	US = 'US',
+	UM = 'UM',
+	UY = 'UY',
+	UZ = 'UZ',
+	VU = 'VU',
+	VE = 'VE',
+	VN = 'VN',
+	VG = 'VG',
+	VI = 'VI',
+	WF = 'WF',
+	EH = 'EH',
+	YE = 'YE',
+	ZM = 'ZM',
+	ZW = 'ZW',
+}
+export enum UpdateLocationDtoCountry {
+	AF = 'AF',
+	AX = 'AX',
+	AL = 'AL',
+	DZ = 'DZ',
+	AS = 'AS',
+	AD = 'AD',
+	AO = 'AO',
+	AI = 'AI',
+	AQ = 'AQ',
+	AG = 'AG',
+	AR = 'AR',
+	AM = 'AM',
+	AW = 'AW',
+	AU = 'AU',
+	AT = 'AT',
+	AZ = 'AZ',
+	BS = 'BS',
+	BH = 'BH',
+	BD = 'BD',
+	BB = 'BB',
+	BY = 'BY',
+	BE = 'BE',
+	BZ = 'BZ',
+	BJ = 'BJ',
+	BM = 'BM',
+	BT = 'BT',
+	BO = 'BO',
+	BA = 'BA',
+	BW = 'BW',
+	BV = 'BV',
+	BR = 'BR',
+	IO = 'IO',
+	BN = 'BN',
+	BG = 'BG',
+	BF = 'BF',
+	BI = 'BI',
+	KH = 'KH',
+	CM = 'CM',
+	CA = 'CA',
+	CV = 'CV',
+	KY = 'KY',
+	CF = 'CF',
+	TD = 'TD',
+	CL = 'CL',
+	CN = 'CN',
+	CX = 'CX',
+	CC = 'CC',
+	CO = 'CO',
+	KM = 'KM',
+	CG = 'CG',
+	CD = 'CD',
+	CK = 'CK',
+	CR = 'CR',
+	CI = 'CI',
+	HR = 'HR',
+	CU = 'CU',
+	CY = 'CY',
+	CZ = 'CZ',
+	DK = 'DK',
+	DJ = 'DJ',
+	DM = 'DM',
+	DO = 'DO',
+	EC = 'EC',
+	EG = 'EG',
+	SV = 'SV',
+	GQ = 'GQ',
+	ER = 'ER',
+	EE = 'EE',
+	ET = 'ET',
+	FK = 'FK',
+	FO = 'FO',
+	FJ = 'FJ',
+	FI = 'FI',
+	FR = 'FR',
+	GF = 'GF',
+	PF = 'PF',
+	TF = 'TF',
+	GA = 'GA',
+	GM = 'GM',
+	GE = 'GE',
+	DE = 'DE',
+	GH = 'GH',
+	GI = 'GI',
+	GR = 'GR',
+	GL = 'GL',
+	GD = 'GD',
+	GP = 'GP',
+	GU = 'GU',
+	GT = 'GT',
+	GG = 'GG',
+	GN = 'GN',
+	GW = 'GW',
+	GY = 'GY',
+	HT = 'HT',
+	HM = 'HM',
+	VA = 'VA',
+	HN = 'HN',
+	HK = 'HK',
+	HU = 'HU',
+	IS = 'IS',
+	IN = 'IN',
+	ID = 'ID',
+	IR = 'IR',
+	IQ = 'IQ',
+	IE = 'IE',
+	IM = 'IM',
+	IL = 'IL',
+	IT = 'IT',
+	JM = 'JM',
+	JP = 'JP',
+	JE = 'JE',
+	JO = 'JO',
+	KZ = 'KZ',
+	KE = 'KE',
+	KI = 'KI',
+	KP = 'KP',
+	KR = 'KR',
+	XK = 'XK',
+	KW = 'KW',
+	KG = 'KG',
+	LA = 'LA',
+	LV = 'LV',
+	LB = 'LB',
+	LS = 'LS',
+	LR = 'LR',
+	LY = 'LY',
+	LI = 'LI',
+	LT = 'LT',
+	LU = 'LU',
+	MO = 'MO',
+	MK = 'MK',
+	MG = 'MG',
+	MW = 'MW',
+	MY = 'MY',
+	MV = 'MV',
+	ML = 'ML',
+	MT = 'MT',
+	MH = 'MH',
+	MQ = 'MQ',
+	MR = 'MR',
+	MU = 'MU',
+	YT = 'YT',
+	MX = 'MX',
+	FM = 'FM',
+	MD = 'MD',
+	MC = 'MC',
+	MN = 'MN',
+	ME = 'ME',
+	MS = 'MS',
+	MA = 'MA',
+	MZ = 'MZ',
+	MM = 'MM',
+	NA = 'NA',
+	NR = 'NR',
+	NP = 'NP',
+	NL = 'NL',
+	AN = 'AN',
+	NC = 'NC',
+	NZ = 'NZ',
+	NI = 'NI',
+	NE = 'NE',
+	NG = 'NG',
+	NU = 'NU',
+	NF = 'NF',
+	MP = 'MP',
+	NO = 'NO',
+	OM = 'OM',
+	PK = 'PK',
+	PW = 'PW',
+	PS = 'PS',
+	PA = 'PA',
+	PG = 'PG',
+	PY = 'PY',
+	PE = 'PE',
+	PH = 'PH',
+	PN = 'PN',
+	PL = 'PL',
+	PT = 'PT',
+	PR = 'PR',
+	QA = 'QA',
+	RE = 'RE',
+	RO = 'RO',
+	RU = 'RU',
+	RW = 'RW',
+	SH = 'SH',
+	KN = 'KN',
+	LC = 'LC',
+	MF = 'MF',
+	PM = 'PM',
+	VC = 'VC',
+	WS = 'WS',
+	SM = 'SM',
+	ST = 'ST',
+	SA = 'SA',
+	SN = 'SN',
+	RS = 'RS',
+	SC = 'SC',
+	SL = 'SL',
+	SG = 'SG',
+	SX = 'SX',
+	SK = 'SK',
+	SI = 'SI',
+	SB = 'SB',
+	SO = 'SO',
+	ZA = 'ZA',
+	GS = 'GS',
+	ES = 'ES',
+	LK = 'LK',
+	SD = 'SD',
+	SR = 'SR',
+	SJ = 'SJ',
+	SZ = 'SZ',
+	SE = 'SE',
+	CH = 'CH',
+	SY = 'SY',
+	TW = 'TW',
+	TJ = 'TJ',
+	TZ = 'TZ',
+	TH = 'TH',
+	TL = 'TL',
+	TG = 'TG',
+	TK = 'TK',
+	TO = 'TO',
+	TT = 'TT',
+	TN = 'TN',
+	TR = 'TR',
+	TM = 'TM',
+	TC = 'TC',
+	TV = 'TV',
+	UG = 'UG',
+	GB = 'GB',
+	UA = 'UA',
+	AE = 'AE',
+	US = 'US',
+	UM = 'UM',
+	UY = 'UY',
+	UZ = 'UZ',
+	VU = 'VU',
+	VE = 'VE',
+	VN = 'VN',
+	VG = 'VG',
+	VI = 'VI',
+	WF = 'WF',
+	EH = 'EH',
+	YE = 'YE',
+	ZM = 'ZM',
+	ZW = 'ZW',
+}
+export enum CustomFieldSchemaModel {
+	contact = 'contact',
+	opportunity = 'opportunity',
+}
+export enum CreateCustomFieldsDTOModel {
+	contact = 'contact',
+	opportunity = 'opportunity',
+}
+export enum UpdateCustomFieldsDTOModel {
+	contact = 'contact',
+	opportunity = 'opportunity',
 }

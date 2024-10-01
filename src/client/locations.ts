@@ -1,5 +1,10 @@
 import createClient from 'openapi-fetch'
-import type { operations, paths } from '../schemas/types/locations'
+import {
+	PathsLocationsLocationIdGetParametersHeaderVersion,
+	PathsLocationsSearchGetParametersHeaderVersion,
+	type operations,
+	type paths,
+} from '../schemas/types/locations'
 import { DEFAULTS } from './oauth'
 import { ScopesBuilder } from './scopes'
 import type { AccessType } from './scopes.types'
@@ -58,7 +63,8 @@ export class LocationsClient<T extends AccessType> {
 			params: {
 				header: {
 					Authorization: `Bearer ${accessToken}`,
-					Version: '2021-07-28',
+					Version:
+						PathsLocationsSearchGetParametersHeaderVersion.Value2021_07_28,
 				},
 				query,
 			},
@@ -83,7 +89,8 @@ export class LocationsClient<T extends AccessType> {
 			params: {
 				header: {
 					Authorization: `Bearer ${accessToken}`,
-					Version: '2021-07-28',
+					Version:
+						PathsLocationsLocationIdGetParametersHeaderVersion.Value2021_07_28,
 				},
 				path: {
 					locationId,

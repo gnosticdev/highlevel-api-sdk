@@ -1,6 +1,7 @@
 import kleur from 'kleur'
 import createClient from 'openapi-fetch'
 import type { Oauth } from '../schemas/types'
+import { PathsLocationsLocationIdGetParametersHeaderVersion } from '../schemas/types/locations'
 import type {
 	AccessTokenResponse,
 	AuthUrlParams,
@@ -291,6 +292,12 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 					companyId,
 					locationId,
 				},
+				params: {
+					header: {
+						Version:
+							PathsLocationsLocationIdGetParametersHeaderVersion.Value2021_07_28,
+					},
+				},
 				bodySerializer(body) {
 					return new URLSearchParams(body).toString()
 				},
@@ -314,11 +321,21 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 	/**
 	 * Get all locations under your agency that have installed your app
 	 * @param query - search for installed locations using any of these properties
+	 * @param appId - the appId of your app
+	 * @param companyId - the companyId of your agency
 	 */
-	async getInstalledLocations(query: SearchInstalledLocationParams) {
+	async getInstalledLocations(query: SearchInstalledLocationParams['query']) {
 		const { data, error } = await this.client.GET('/oauth/installedLocations', {
 			params: {
-				query,
+				query: {
+					...query,
+					appId: query.appId,
+					companyId: query.companyId,
+				},
+				header: {
+					Version:
+						PathsLocationsLocationIdGetParametersHeaderVersion.Value2021_07_28,
+				},
 			},
 		})
 

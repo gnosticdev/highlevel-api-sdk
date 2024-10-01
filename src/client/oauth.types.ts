@@ -91,7 +91,7 @@ export interface IOauthClient<T extends AccessType> {
 	 * @returns
 	 *  */
 	getInstalledLocations(
-		query: SearchInstalledLocationParams,
+		query: SearchInstalledLocationParams['query'],
 	): Promise<
 		Oauth.operations['get-installed-location']['responses']['200']['content']['application/json']
 	>
