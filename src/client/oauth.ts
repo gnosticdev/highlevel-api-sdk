@@ -1,7 +1,8 @@
 import kleur from 'kleur'
 import createClient from 'openapi-fetch'
-import type { Oauth } from '../schemas/types'
-import { PathsLocationsLocationIdGetParametersHeaderVersion } from '../schemas/types/locations'
+import type { AccessType } from '../lib/scopes-types'
+import type { Oauth } from '../types'
+import type { HighLevelConfig } from './main'
 import type {
 	AccessTokenResponse,
 	AuthUrlParams,
@@ -10,10 +11,8 @@ import type {
 	SearchInstalledLocationParams,
 	TokenData,
 	TokenParams,
-} from './oauth.types'
+} from './oauth-types'
 import { ScopesBuilder } from './scopes'
-import type { AccessType } from './scopes.types'
-import type { HighLevelConfig } from './sdk'
 
 export const DEFAULTS = {
 	baseUrl: 'https://services.leadconnectorhq.com',
@@ -294,8 +293,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 				},
 				params: {
 					header: {
-						Version:
-							PathsLocationsLocationIdGetParametersHeaderVersion.Value2021_07_28,
+						Version: '2021-07-28',
 					},
 				},
 				bodySerializer(body) {
@@ -333,8 +331,7 @@ export class OauthClient<T extends AccessType> implements IOauthClient<T> {
 					companyId: query.companyId,
 				},
 				header: {
-					Version:
-						PathsLocationsLocationIdGetParametersHeaderVersion.Value2021_07_28,
+					Version: '2021-07-28',
 				},
 			},
 		})

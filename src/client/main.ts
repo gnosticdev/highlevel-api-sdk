@@ -1,7 +1,7 @@
+import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
 import { LocationsClient } from './locations'
 import { OauthClient } from './oauth'
-import type { TokenData } from './oauth.types'
-import type { AccessType, ScopeLiterals } from './scopes.types'
+import type { TokenData } from './oauth-types'
 
 export type HighLevelConfig<T extends AccessType> = {
 	/** client_id from app settings in marketplace.
@@ -62,6 +62,11 @@ export type HighLevelConfig<T extends AccessType> = {
 	storageFunction?: (tokenData: TokenData) => Promise<TokenData>
 }
 
+/**
+ * Creates a new HighLevel API client.
+ * @param config - The configuration for the client
+ * @returns A new HighLevel API client
+ */
 export const createHighLevelClient = <T extends AccessType>(
 	config: HighLevelConfig<T>,
 ) => {

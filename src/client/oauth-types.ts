@@ -1,9 +1,12 @@
-import type { Oauth } from '../schemas/types'
+import type { AccessType } from '../lib/scopes-types'
+import type { Oauth } from '../types/openapi'
+import type { HighLevelConfig } from './main'
 import type { ScopesBuilder } from './scopes'
-import type { AccessType } from './scopes.types'
-import type { HighLevelConfig } from './sdk'
 
 type AccessTokenRequest =
+	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded']
+
+type RefreshTokenRequest =
 	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded']
 
 export type AuthUrlParams = {
@@ -13,21 +16,10 @@ export type AuthUrlParams = {
 	scope: string
 }
 
-export type TokenParams = AuthCodeParams | RefreshTokenParams
+export type TokenParams = AuthCodeParams | RefreshTokenRequest
 
 export type AuthCodeParams<
 	GrantType extends AccessTokenRequest['grant_type'] = 'authorization_code',
-> = {
-	[K in keyof Pick<
-		AccessTokenRequest,
-		'client_id' | 'client_secret' | 'code'
-	>]: AccessTokenRequest[K]
-} & {
-	grant_type: GrantType
-	user_type: 'Company' | 'Location'
-}
-type RefreshTokenParams<
-	GrantType extends AccessTokenRequest['grant_type'] = 'refresh_token',
 > = {
 	[K in keyof Pick<
 		AccessTokenRequest,

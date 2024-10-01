@@ -1,12 +1,12 @@
-import { objectEntries } from '../lib/utils'
-import { scopesSchema } from '../schemas/types/scopes'
 import type {
 	AccessType,
 	FilteredScopeNames,
 	ReadWrite,
 	ScopeLiterals,
-} from './scopes.types'
-import type { HighLevelConfig } from './sdk'
+} from '../lib/scopes-types'
+import { objectEntries } from '../lib/utils'
+import { scopesSchema } from '../types/scopes'
+import type { HighLevelConfig } from './main'
 
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Company same as Agency. */
@@ -40,10 +40,16 @@ export class ScopesBuilder<T extends AccessType> {
 	 * - `readWrite` - return only the `readonly` or `write` from a scope
 	 * - `literals` - (used by `all()` method) returns all scopes available to the given accessType in the format required by the authorization redirect uri. e.g. "businesses.read businesses.write locations.read..."
 	 */
-	_allAvailable(
+	getAllScopes(
 		type: 'names' | 'readWrite' | 'literals' = 'literals',
+		/**
+		 * @default false
+		 */
 		array?: boolean,
-	) {
+	):
+		| Set<FilteredScopeNames<T>>
+		| Set<ReadWrite<FilteredScopeNames<T>>>
+		| ScopeLiterals<T>[] {
 		const names = new Set<FilteredScopeNames<T>>()
 		const readWrite = new Set<ReadWrite<FilteredScopeNames<T>>>()
 		const literals = new Set<ScopeLiterals<T>>()
@@ -74,7 +80,7 @@ export class ScopesBuilder<T extends AccessType> {
 	}
 
 	/**
-	 * Get a string of all scopes added to the builder so far.\
+	 * Returns a string of all scopes added to the builder so far.\
 	 * For use in the authorization redirect uri
 	 * @returns a string of the scopes joined by a space
 	 * @example
@@ -85,7 +91,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * ```
 	 */
 	get() {
-		return [...this.collection].join(' ')
+		return this.getAllScopes('literals', true) as ScopeLiterals<T>[]
 	}
 
 	has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]) {
@@ -101,7 +107,7 @@ export class ScopesBuilder<T extends AccessType> {
 	/** Get all scopes for the given access type
 	 * - returns scopes as a string for use in the authorization redirect uri
 	 */
-	all() {
-		return this._allAvailable('literals', true) as ScopeLiterals<T>[]
+	all(): ScopeLiterals<T>[] {
+		return this.getAllScopes('literals', true) as ScopeLiterals<T>[]
 	}
 }
