@@ -1,4 +1,4 @@
-import type { scopesSchema } from '../schema/types/scopes'
+import type { scopesSchema } from '../schemas/types/scopes'
 /**
  * This file is used to generate the types for the scopes schema.
  * By changing the accessType to 'Sub-Account' or 'Company' autocomplete will update with the available types for that accessType.

@@ -1,25 +1,18 @@
-import fs from 'node:fs'
 import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, { astToString } from 'openapi-typescript'
 
-const OUT_DIR = path.join(process.cwd(), 'src/schema/updates')
+const OUT_DIR = path.join(process.cwd(), '/src/schemas/types')
 
 if (import.meta.main) {
-	switch (process.argv[2]) {
-		case 'generate':
-			await generateApi()
-			break
-		default:
-			console.log('no command')
-	}
+	await generateApi()
 }
 
 async function getSchemaFileUrls() {
-	const tsGlob = new Bun.Glob('*.json')
-	const files = await Array.fromAsync(
-		tsGlob.scan({ cwd: 'src/schema/openapi', absolute: true }),
+	const glob = new Bun.Glob(
+		path.join(process.cwd(), '/src/schemas/openapi/*.json'),
 	)
+	const files = await Array.fromAsync(glob.scan())
 	return files
 }
 
@@ -27,10 +20,7 @@ async function getSchemaFileUrls() {
  * Generate types from openapi schemas.
  */
 async function generateApi() {
-	const typesExists = await fs.promises.exists(OUT_DIR)
-	if (!typesExists) {
-		await fs.promises.mkdir(OUT_DIR)
-	}
+	await Bun.$`mkdir -p ${OUT_DIR}`.quiet()
 
 	// use bun glob to get all the schema files
 	const schemaFiles = await getSchemaFileUrls()
@@ -42,7 +32,7 @@ async function generateApi() {
 
 	// create each type file
 	for await (const schemaFile of schemaFiles) {
-		const { fileName, upperTitle, absFilePath, fileUrl } = parseFile(schemaFile)
+		const { fileName, upperTitle, fileUrl } = parseFile(schemaFile)
 
 		console.log('creating types for', fileName)
 

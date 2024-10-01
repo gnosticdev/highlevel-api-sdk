@@ -1,23 +1,24 @@
 import * as fs from 'node:fs/promises'
 import * as path from 'node:path'
 
-let API_URL = 'https://highlevel-v2-api.gnosticai.workers.dev'
-if (process.env.NODE_ENV === 'development') {
-	API_URL = 'http://localhost:8787'
-}
-
+const API_URL = 'https://highlevel-v2-api.gnosticai.workers.dev'
 const USERNAME = process.env.DOCS_USERNAME
 const PASSWORD = process.env.DOCS_PASSWORD
-const OUTPUT_DIR = './src/openapi' // Directory to save downloaded schemas
+/**
+ * Directory to save downloaded schemas
+ */
+const OUTPUT_DIR = './src/openapi'
 
 const authHeaders = {
 	Authorization: `Basic ${Buffer.from(`${USERNAME}:${PASSWORD}`).toString('base64')}`,
 }
 
+/**
+ * Fetch the list of schemas from the API.
+ */
 async function fetchSchemaList() {
 	const response = await fetch(`${API_URL}/list-schemas`, {
 		headers: authHeaders,
-		verbose: true,
 	})
 	if (!response.ok) {
 		throw new Error(`Failed to fetch schema list: ${response.statusText}`)
@@ -26,6 +27,9 @@ async function fetchSchemaList() {
 	return data.schemas
 }
 
+/**
+ * Download a schema from the API.
+ */
 async function downloadSchema(schemaName: string) {
 	const response = await fetch(`${API_URL}/${schemaName}`)
 	if (!response.ok) {

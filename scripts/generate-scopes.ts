@@ -1,4 +1,4 @@
-import scopesJSON from '../src/schema/scopes/scopes.json'
+import scopesJSON from '../src/schemas/openapi/scopes.json'
 
 const scopes = (await Bun.file(
 	'src/schema/scopes/scopes.json',

@@ -1,5 +1,5 @@
 import createClient from 'openapi-fetch'
-import type { operations, paths } from '../schema/types/locations'
+import type { operations, paths } from '../schemas/types/locations'
 import { DEFAULTS } from './oauth'
 import { ScopesBuilder } from './scopes'
 import type { AccessType } from './scopes.types'

@@ -1,6 +1,6 @@
 import kleur from 'kleur'
 import createClient from 'openapi-fetch'
-import type { Oauth } from '../schema/types'
+import type { Oauth } from '../schemas/types'
 import type {
 	AccessTokenResponse,
 	AuthUrlParams,

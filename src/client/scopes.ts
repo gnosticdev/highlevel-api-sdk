@@ -1,5 +1,5 @@
 import { objectEntries } from '../lib/utils'
-import { scopesSchema } from '../schema/types/scopes'
+import { scopesSchema } from '../schemas/types/scopes'
 import type {
 	AccessType,
 	FilteredScopeNames,
