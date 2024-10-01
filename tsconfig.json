@@ -18,16 +18,17 @@
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
-		"strictNullChecks": true
+		"strictNullChecks": true,
+		"baseUrl": ".",
+		"paths": {
+			"src/*": ["./src/*"]
+		}
 	},
 	"include": [
 		"src/**/*.ts",
 		"__tests__/**/*.ts",
 		"scripts/**/*.ts",
-		"src/**/*.json",
-		"src/examples/*.tsx",
-		"src/examples/bun-auth/components.tsx",
-		"src/examples/bun-auth/index.tsx"
+		"src/**/*.json"
 	],
-	"exclude": ["node_modules", "/Users/divinelight/code/utilities/cool-console"]
+	"exclude": ["node_modules"]
 }

@@ -1,48 +1,41 @@
 {
-	"name": "highlevel-api-sdk",
-	"private": false,
+	"name": "@gnosticdev/highlevel-sdk",
 	"version": "1.0.0",
-	"license": "MIT",
 	"repository": "github:gnosticdev/highlevel-api-sdk",
-	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
-	"packageManager": "bun@1.21.1",
-	"description": "SDK for HighLevel API in typescript.",
-	"main": "dist/main.js",
+	"main": "dist/client/index.js",
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.2",
+		"@types/bun": "^1.1.6",
+		"kleur": "^4.1.5",
+		"lefthook": "^1.7.17",
+		"openapi-fetch": "^0.12.2",
+		"openapi-typescript": "7.4.1",
+		"release-it": "^17.6.0",
+		"typescript": "^5.5.4"
+	},
+	"types": "./dist/schema/types/index.d.ts",
 	"exports": {
 		".": "./dist/client/index.js",
 		"./client": "./dist/client/index.js",
-		"./types": "./dist/schema/types/index.d.ts"
+		"./types": "./dist/schemas/types/index.js",
+		"./scopes": "./dist/client/scopes.js"
 	},
-	"type": "module",
+	"description": "SDK for the HighLevel API",
+	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
+	"license": "MIT",
+	"packageManager": "bun@1.21.1",
+	"private": false,
 	"scripts": {
-		"generate-api": "bun 'scripts/generate-api.ts' -- generate",
-		"generate-client": "bun 'scripts/generate-client.ts'",
-		"generate-schemas": "bun 'scripts/generate-schemas.ts'",
-		"generate-scopes": "bun 'scripts/generate-scopes.ts'",
-		"build": "bun run generate-client && bun run package",
+		"generate-client": "bun scripts/generate-client.ts",
+		"generate-api-json": "bun scripts/generate-api-json.ts",
+		"generate-api-types": "bun scripts/generate-api-types.ts",
+		"generate-other-types": "bun scripts/generate-other-types.ts",
+		"build": "bun run generate-client && bun run generate-api-json && bun run generate-api-types && bun run generate-other-types && bun run package",
 		"package": "tsc -p tsconfig.build.json",
 		"start-auth": "bun --hot run src/auth/index.tsx",
 		"lint": "biome check . --write --unsafe",
-		"tsc": "tsc",
-		"start-test": "bun test --hot",
-		"debug-auth": "bun --inspect-brk run src/auth/index.tsx"
+		"release": "release-it",
+		"start-test": "bun test --hot"
 	},
-	"dependencies": {
-		"hono": "^4.5.5",
-		"json-diff-ts": "^2.2.1",
-		"kleur": "^4.1.5",
-		"zod": "^3.23.8"
-	},
-	"devDependencies": {
-		"@apidevtools/swagger-parser": "^10.1.0",
-		"@biomejs/biome": "^1.9.2",
-		"@redocly/cli": "latest",
-		"@types/bun": "^1.1.6",
-		"@types/js-yaml": "^4.0.9",
-		"js-yaml": "^4.1.0",
-		"lefthook": "^1.7.17",
-		"openapi-fetch": "^0.12.2",
-		"openapi-typescript": "7.0.0-next.7",
-		"typescript": "^5.5.4"
-	}
+	"type": "module"
 }

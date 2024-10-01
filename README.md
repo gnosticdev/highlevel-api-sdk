@@ -23,7 +23,9 @@ scopes.add([
 ])
 ```
 
-1. Run the following in the developer console from the Highlevel Marketplace dashboard for your app:
+### Collecting Scopes Helper
+
+1. Once you have added your scopes to your app, you can collect them from the dev console on your app's settings page in the Highlevel Marketplace:
 
     ```ts
     // https://marketplace.gohighlevel.com/apps/<your app_id>/settings

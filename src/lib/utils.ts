@@ -1,7 +1,7 @@
-export function objectEntries<
-	TOuter extends { [K in keyof TOuter]: TOuter[K] },
->(obj: TOuter): [keyof TOuter, TOuter[keyof TOuter]][] {
-	return Object.entries(obj) as [keyof TOuter, TOuter[keyof TOuter]][]
+export function objectEntries<TObj extends object, TKey extends keyof TObj>(
+	obj: TObj,
+): [TKey, TObj[TKey]][] {
+	return Object.entries(obj) as [TKey, TObj[TKey]][]
 }
 
 /**
