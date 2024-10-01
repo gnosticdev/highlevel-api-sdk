@@ -1,9 +1,15 @@
 import { describe, expect, it } from 'bun:test'
 import { ScopesBuilder } from '../src/client'
 
-const scopes = new ScopesBuilder({ accessType: 'Sub-Account' })
+const MockCompanyScopesBuilder = class extends ScopesBuilder<'Company'> {}
+const MockSubAccountScopesBuilder = class extends ScopesBuilder<'Sub-Account'> {
+	getAllScopes(type?: 'names' | 'readWrite' | 'literals', array?: boolean) {
+		return super.getAllScopes(type, array)
+	}
+}
 
 describe('ScopesBuilder', () => {
+	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })
 	it('should have an accessType property', () => {
 		expect(scopes.accessType).toBe('Sub-Account')
 	})
@@ -12,6 +18,7 @@ describe('ScopesBuilder', () => {
 	})
 })
 describe('add', () => {
+	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })
 	it('should add a scope to the collection', () => {
 		scopes.add('businesses.readonly')
 		expect(scopes.has('businesses.readonly')).toBe(true)
@@ -27,16 +34,17 @@ describe('add', () => {
 })
 
 describe('allAvailable', () => {
+	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })
 	it('should return all available scopes', () => {
 		expect(scopes.all()).toBeArrayOfSize(35)
 	})
 	it('should return all available scope names', () => {
-		expect(scopes._allAvailable('names', true)).toBeArrayOfSize(21)
+		expect(scopes.getAllScopes('names', true)).toBeArrayOfSize(21)
 	})
 	it('should return all available scope names with access type', () => {
-		expect(scopes._allAvailable('readWrite', true)).toBeArrayOfSize(2)
+		expect(scopes.getAllScopes('readWrite', true)).toBeArrayOfSize(2)
 	})
 	it('should return all available scope literals', () => {
-		expect(scopes._allAvailable('literals')).toBeTypeOf('string')
+		expect(scopes.getAllScopes('literals')).toBeTypeOf('string')
 	})
 })
