@@ -1,0 +1,3842 @@
+{
+	"openapi": "3.0.0",
+	"paths": {
+		"/calendars/groups": {
+			"get": {
+				"operationId": "get-groups",
+				"summary": "Get Groups",
+				"description": "Get all calendar groups in a location.",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "locationId",
+						"required": true,
+						"in": "query",
+						"description": "Location Id",
+						"example": "ve9EPM428h8vShlRW1KT",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GroupsGetSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Groups"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			},
+			"post": {
+				"operationId": "create-calendar-group",
+				"summary": "Create Calendar Group",
+				"description": "Create Calendar Group",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GroupDTO"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GroupCreateSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Groups"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/groups/validate-slug": {
+			"post": {
+				"operationId": "validate-groups-slug",
+				"summary": "Validate group slug",
+				"description": "Validate if group slug is available or not.",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ValidateGroupSlugPostBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateGroupSlugSuccessResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Groups"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/groups/{groupId}": {
+			"delete": {
+				"operationId": "delete-group",
+				"summary": "Delete Group",
+				"description": "Delete Group",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "groupId",
+						"required": true,
+						"in": "path",
+						"description": "Group Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GroupSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Groups"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			},
+			"put": {
+				"operationId": "edit-group",
+				"summary": "Edit Group",
+				"description": "Edit Group",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "groupId",
+						"required": true,
+						"in": "path",
+						"description": "Group Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GroupUpdateDTO"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GroupCreateSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Groups"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/groups/{groupId}/status": {
+			"put": {
+				"operationId": "disable-group",
+				"summary": "Disable Group",
+				"description": "Disable Group",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "groupId",
+						"required": true,
+						"in": "path",
+						"description": "Group Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GroupStatusUpdateParams"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GroupSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Groups"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/events": {
+			"get": {
+				"operationId": "get-calendar-events",
+				"summary": "Get Calendar Events",
+				"description": "Get Calendar Events",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "locationId",
+						"required": true,
+						"in": "query",
+						"description": "Location Id",
+						"example": "0007BWpSzSwfiuSl0tR2",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "userId",
+						"required": false,
+						"in": "query",
+						"description": "User Id - Owner of an appointment. Either of userId, groupId or calendarId is required",
+						"example": "CVokAlI8fgw4WYWoCtQz",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "calendarId",
+						"required": false,
+						"in": "query",
+						"description": "Either of calendarId, userId or groupId is required",
+						"example": "BqTwX8QFwXzpegMve9EQ",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "groupId",
+						"required": false,
+						"in": "query",
+						"description": "Either of groupId, calendarId or userId is required",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "startTime",
+						"required": true,
+						"in": "query",
+						"description": "Start Time (in millis)",
+						"example": "1680373800000",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "endTime",
+						"required": true,
+						"in": "query",
+						"description": "End Time (in millis)",
+						"example": "1680978599999",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetCalendarEventsSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/blocked-slots": {
+			"get": {
+				"operationId": "get-blocked-slots",
+				"summary": "Get Blocked Slots",
+				"description": "Get Blocked Slots",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "locationId",
+						"required": true,
+						"in": "query",
+						"description": "Location Id",
+						"example": "0007BWpSzSwfiuSl0tR2",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "userId",
+						"required": false,
+						"in": "query",
+						"description": "User Id - Owner of an appointment. Either of userId, groupId or calendarId is required",
+						"example": "CVokAlI8fgw4WYWoCtQz",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "calendarId",
+						"required": false,
+						"in": "query",
+						"description": "Either of calendarId, userId or groupId is required",
+						"example": "BqTwX8QFwXzpegMve9EQ",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "groupId",
+						"required": false,
+						"in": "query",
+						"description": "Either of groupId, calendarId or userId is required",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "startTime",
+						"required": true,
+						"in": "query",
+						"description": "Start Time (in millis)",
+						"example": "1680373800000",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "endTime",
+						"required": true,
+						"in": "query",
+						"description": "End Time (in millis)",
+						"example": "1680978599999",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetCalendarEventsSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/{calendarId}/free-slots": {
+			"get": {
+				"operationId": "get-slots",
+				"summary": "Get Free Slots",
+				"description": "Get free slots for a calendar between a date range. Optionally a consumer can also request free slots in a particular timezone and also for a particular user.",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "calendarId",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "startDate",
+						"required": true,
+						"in": "query",
+						"description": "Start Date",
+						"example": 1548898600000,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "endDate",
+						"required": true,
+						"in": "query",
+						"description": "End Date",
+						"example": 1601490599999,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "timezone",
+						"required": false,
+						"in": "query",
+						"description": "The timezone in which the free slots are returned",
+						"example": "America/Chihuahua",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "userId",
+						"required": false,
+						"in": "query",
+						"description": "The user for whom the free slots are returned",
+						"example": "082goXVW3lIExEQPOnd3",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "userIds",
+						"required": false,
+						"in": "query",
+						"description": "The users for whom the free slots are returned",
+						"example": "[082goXVW3lIExEQPOnd3]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetSlotsSuccessfulResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendars"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/{calendarId}": {
+			"put": {
+				"operationId": "update-calendar",
+				"summary": "Update Calendar",
+				"description": "Update calendar by ID.",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "calendarId",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CalendarUpdateDTO"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CalendarByIdSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendars"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			},
+			"get": {
+				"operationId": "get-calendar",
+				"summary": "Get Calendar",
+				"description": "Get calendar by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "calendarId",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CalendarByIdSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendars"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			},
+			"delete": {
+				"operationId": "delete-calendar",
+				"summary": "Delete Calendar",
+				"description": "Delete calendar by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "calendarId",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CalendarDeleteSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendars"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/events/appointments/{eventId}": {
+			"get": {
+				"operationId": "get-appointment",
+				"summary": "Get Appointment",
+				"description": "Get appointment by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "eventId",
+						"required": true,
+						"in": "path",
+						"description": "Event Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetCalendarEventSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			},
+			"put": {
+				"operationId": "edit-appointment",
+				"summary": "Edit Appointment",
+				"description": "Edit appointment by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "eventId",
+						"required": true,
+						"in": "path",
+						"description": "Event Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AppointmentEditSchema"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AppointmentSchemaResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/events/appointments": {
+			"post": {
+				"operationId": "create-appointment",
+				"summary": "Create Appointment",
+				"description": "Create appointment",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AppointmentCreateSchema"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AppointmentSchemaResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/events/block-slots": {
+			"post": {
+				"operationId": "create-block-slot",
+				"summary": "Create Block Slot",
+				"description": "Create block slot",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/BlockSlotCreateSchema"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateBookedSlotSuccessfulResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/events/block-slots/{eventId}": {
+			"put": {
+				"operationId": "edit-block-slot",
+				"summary": "Edit Block Slot",
+				"description": "Edit block slot by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "eventId",
+						"required": true,
+						"in": "path",
+						"description": "Event Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/BlockSlotEditSchema"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateBookedSlotSuccessfulResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/events/{eventId}": {
+			"delete": {
+				"operationId": "delete-event",
+				"summary": "Delete Event",
+				"description": "Delete event by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "eventId",
+						"required": true,
+						"in": "path",
+						"description": "Event Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteAppointmentSchema"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteEventSuccessfulResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Events"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
+		"/calendars/resources/{resourceType}/{id}": {
+			"get": {
+				"operationId": "get-calendar-resource",
+				"summary": "Get Calendar Resource",
+				"description": "Get calendar resource by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "resourceType",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource Type",
+						"schema": {
+							"enum": ["equipments", "rooms"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource ID",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Calendar resource fetched"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Resources: Rooms & Equipments"],
+				"security": [
+					{
+						"Location-Access": []
+					}
+				]
+			},
+			"put": {
+				"operationId": "update-calendar-resource",
+				"summary": "Update Calendar Resource",
+				"description": "Update calendar resource by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "resourceType",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource Type",
+						"schema": {
+							"enum": ["equipments", "rooms"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource ID",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateCalendarResourceDTO"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Calendar resource updated"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Resources: Rooms & Equipments"],
+				"security": [
+					{
+						"Location-Access": []
+					}
+				]
+			},
+			"delete": {
+				"operationId": "delete-calendar-resource",
+				"summary": "Delete Calendar Resource",
+				"description": "Delete calendar resource by ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "resourceType",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource Type",
+						"schema": {
+							"enum": ["equipments", "rooms"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource ID",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Calendar resource deleted"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Resources: Rooms & Equipments"],
+				"security": [
+					{
+						"Location-Access": []
+					}
+				]
+			}
+		},
+		"/calendars/resources/{resourceType}": {
+			"get": {
+				"operationId": "fetch-calendar-resources",
+				"summary": "List Calendar Resources",
+				"description": "List calendar resources by resource type and location ID",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "resourceType",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource Type",
+						"schema": {
+							"enum": ["equipments", "rooms"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "locationId",
+						"required": true,
+						"in": "query",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "limit",
+						"required": true,
+						"in": "query",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "skip",
+						"required": true,
+						"in": "query",
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Calendar resources listed"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Resources: Rooms & Equipments"],
+				"security": [
+					{
+						"Location-Access": []
+					}
+				]
+			},
+			"post": {
+				"operationId": "create-calendar-resource",
+				"summary": "Create Calendar Resource",
+				"description": "Create calendar resource by resource type",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "resourceType",
+						"required": true,
+						"in": "path",
+						"description": "Calendar Resource Type",
+						"schema": {
+							"enum": ["equipments", "rooms"],
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateCalendarResourceDTO"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Calendar resource created"
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendar Resources: Rooms & Equipments"],
+				"security": [
+					{
+						"Location-Access": []
+					}
+				]
+			}
+		},
+		"/calendars/": {
+			"get": {
+				"operationId": "get-calendars",
+				"summary": "Get Calendars",
+				"description": "Get all calendars in a location.",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					},
+					{
+						"name": "locationId",
+						"required": true,
+						"in": "query",
+						"description": "Location Id",
+						"example": "ve9EPM428h8vShlRW1KT",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "groupId",
+						"required": false,
+						"in": "query",
+						"description": "Group Id",
+						"example": "BqTwX8QFwXzpegMve9EQ",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "showDrafted",
+						"required": false,
+						"in": "query",
+						"description": "Show drafted",
+						"example": false,
+						"schema": {
+							"default": true,
+							"type": "boolean"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CalendarsGetSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendars"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			},
+			"post": {
+				"operationId": "create-calendar",
+				"summary": "Create Calendar",
+				"description": "Create calendar in a location.",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-04-15"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CalendarCreateDTO"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CalendarByIdSuccessfulResponseDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Calendars"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		}
+	},
+	"info": {
+		"title": "Calendars API",
+		"description": "Documentation for Calendars API",
+		"version": "1.0",
+		"contact": {}
+	},
+	"tags": [
+		{
+			"name": "Calendars",
+			"description": "Documentation for Calendars API"
+		}
+	],
+	"servers": [
+		{
+			"url": "https://services.leadconnectorhq.com"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"bearer": {
+				"scheme": "bearer",
+				"bearerFormat": "JWT",
+				"name": "Authorization",
+				"in": "header",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"type": "http"
+			},
+			"Location-Access": {
+				"scheme": "bearer",
+				"bearerFormat": "JWT",
+				"name": "Authorization",
+				"in": "header",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"type": "http"
+			},
+			"Agency-Access": {
+				"scheme": "bearer",
+				"bearerFormat": "JWT",
+				"name": "Authorization",
+				"in": "header",
+				"description": "Use the Access Token generated with user type as Agency.",
+				"type": "http"
+			}
+		},
+		"schemas": {
+			"BadRequestDTO": {
+				"type": "object",
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"example": 400
+					},
+					"message": {
+						"type": "string",
+						"example": "Bad Request"
+					}
+				}
+			},
+			"UnauthorizedDTO": {
+				"type": "object",
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"example": 401
+					},
+					"message": {
+						"type": "string",
+						"example": "Invalid token: access token is invalid"
+					},
+					"error": {
+						"type": "string",
+						"example": "Unauthorized"
+					}
+				}
+			},
+			"GroupSchema": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"example": "0TkCdp9PfvLeWKYRRvIz"
+					},
+					"locationId": {
+						"type": "string",
+						"example": "ocQHyuzHvysMo5N5VsXc"
+					},
+					"name": {
+						"type": "string",
+						"example": "my-team"
+					},
+					"isActive": {
+						"type": "boolean",
+						"example": true
+					},
+					"description": {
+						"type": "string",
+						"example": "my-team"
+					},
+					"slug": {
+						"type": "string",
+						"example": "my-team"
+					}
+				}
+			},
+			"GroupsGetSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"groups": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/GroupSchema"
+						}
+					}
+				}
+			},
+			"ValidateGroupSlugPostBody": {
+				"type": "object",
+				"properties": {
+					"locationId": {
+						"type": "string",
+						"description": "Location Id",
+						"example": "ve9EPM428h8vShlRW1KT"
+					},
+					"slug": {
+						"type": "string",
+						"description": "Slug",
+						"example": "calendar-1"
+					}
+				},
+				"required": ["locationId", "slug"]
+			},
+			"ValidateGroupSlugSuccessResponseDTO": {
+				"type": "object",
+				"properties": {
+					"available": {
+						"type": "boolean"
+					}
+				},
+				"required": ["available"]
+			},
+			"GroupDTO": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"example": "ocQHyuzHvysMo5N5VsXc"
+					},
+					"locationId": {
+						"type": "string",
+						"example": "ocQHyuzHvysMo5N5VsXc"
+					},
+					"name": {
+						"type": "string",
+						"example": "group a"
+					},
+					"description": {
+						"type": "string",
+						"example": "group description"
+					},
+					"slug": {
+						"type": "string",
+						"example": "15-mins"
+					},
+					"isActive": {
+						"type": "boolean",
+						"example": true
+					},
+					"dateAdded": {
+						"type": "object"
+					},
+					"dateUpdated": {
+						"type": "object"
+					}
+				},
+				"required": ["locationId", "name", "description", "slug"]
+			},
+			"GroupCreateSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"group": {
+						"$ref": "#/components/schemas/GroupDTO"
+					}
+				}
+			},
+			"GroupSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean",
+						"description": "Success",
+						"example": "true"
+					}
+				}
+			},
+			"GroupStatusUpdateParams": {
+				"type": "object",
+				"properties": {
+					"isActive": {
+						"type": "boolean",
+						"description": "Is Active?",
+						"example": true
+					}
+				},
+				"required": ["isActive"]
+			},
+			"GroupUpdateDTO": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"example": "ocQHyuzHvysMo5N5VsXc"
+					},
+					"name": {
+						"type": "string",
+						"example": "group a"
+					},
+					"description": {
+						"type": "string",
+						"example": "group description"
+					},
+					"slug": {
+						"type": "string",
+						"example": "15-mins"
+					}
+				},
+				"required": ["name", "description", "slug"]
+			},
+			"CalendarEventDTO": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "Calendar Event ID",
+						"example": "0007BWpSzSwfiuSl0tR2"
+					},
+					"address": {
+						"type": "string",
+						"description": "Calendar Event address",
+						"example": "https://meet.google.com/yqp-gogr-wve"
+					},
+					"title": {
+						"type": "string",
+						"description": "Calendar Event title",
+						"example": "Appointment with GHL Dev team"
+					},
+					"calendarId": {
+						"type": "string",
+						"description": "Calendar ID",
+						"example": "BqTwX8QFwXzpegMve9EQ"
+					},
+					"locationId": {
+						"type": "string",
+						"description": "Location ID",
+						"example": "0007BWpSzSwfiuSl0tR2"
+					},
+					"contactId": {
+						"type": "string",
+						"description": "Contact ID",
+						"example": "9NkT25Vor1v4aQatFsv2"
+					},
+					"groupId": {
+						"type": "string",
+						"description": "Group ID",
+						"example": "9NkT25Vor1v4aQatFsv2"
+					},
+					"appointmentStatus": {
+						"type": "string",
+						"description": "Appointment Status",
+						"example": "confirmed"
+					},
+					"assignedUserId": {
+						"type": "string",
+						"description": "AssignedUser - the primary owner of an appointment",
+						"example": "YlWd2wuCAZQzh2cH1fVZ"
+					},
+					"users": {
+						"description": "Users - the secondary owners of an appointment.",
+						"example": ["YlWd2wuCAZQzh2cH1fVZ", "9NkT25Vor1v4aQatFsv2"],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"notes": {
+						"type": "string",
+						"description": "Notes",
+						"example": "Some dummy note"
+					},
+					"startTime": {
+						"type": "object",
+						"description": "Start Time",
+						"example": "2023-09-25T16:00:00+05:30"
+					},
+					"endTime": {
+						"type": "object",
+						"description": "End Time",
+						"example": "2023-09-25T16:00:00+05:30"
+					},
+					"dateAdded": {
+						"type": "object",
+						"description": "Date Added",
+						"example": "2023-09-25T16:00:00+05:30"
+					},
+					"dateUpdated": {
+						"type": "object",
+						"description": "Date Updated",
+						"example": "2023-09-25T16:00:00+05:30"
+					},
+					"assignedResources": {
+						"description": "Ids of associated resources rooms and/or equipments",
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"calendarId",
+					"locationId",
+					"contactId",
+					"groupId",
+					"appointmentStatus",
+					"assignedUserId",
+					"users",
+					"startTime",
+					"endTime",
+					"dateAdded",
+					"dateUpdated"
+				]
+			},
+			"GetCalendarEventsSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"events": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/CalendarEventDTO"
+						}
+					}
+				}
+			},
+			"SlotsSchema": {
+				"type": "object",
+				"properties": {
+					"slots": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				},
+				"required": ["slots"]
+			},
+			"GetSlotsSuccessfulResponseDto": {
+				"type": "object",
+				"properties": {
+					"_dates_": {
+						"$ref": "#/components/schemas/SlotsSchema"
+					}
+				},
+				"required": ["_dates_"]
+			},
+			"CalendarNotification": {
+				"type": "object",
+				"properties": {
+					"type": {
+						"type": "string",
+						"description": "Calendar Notification",
+						"example": "email",
+						"enum": ["email"],
+						"default": "email"
+					},
+					"shouldSendToContact": {
+						"type": "boolean"
+					},
+					"shouldSendToGuest": {
+						"type": "boolean"
+					},
+					"shouldSendToUser": {
+						"type": "boolean"
+					},
+					"shouldSendToSelectedUsers": {
+						"type": "boolean"
+					},
+					"selectedUsers": {
+						"type": "string",
+						"description": "Comma separated emails",
+						"example": "user1@testemail.com,user2@testemail.com"
+					}
+				},
+				"required": [
+					"shouldSendToContact",
+					"shouldSendToGuest",
+					"shouldSendToUser",
+					"shouldSendToSelectedUsers",
+					"selectedUsers"
+				]
+			},
+			"TeamMember": {
+				"type": "object",
+				"properties": {
+					"userId": {
+						"type": "string",
+						"example": "ocQHyuzHvysMo5N5VsXc"
+					},
+					"priority": {
+						"type": "number",
+						"default": 0.5,
+						"enum": [0, 0.5, 1]
+					},
+					"meetingLocationType": {
+						"type": "string",
+						"description": "Meeting Location Type. For class booking only the following types are allowed 'custom', 'phone', 'address'. ",
+						"example": "custom",
+						"default": "custom",
+						"enum": ["custom", "zoom", "gmeet", "phone", "address"]
+					},
+					"meetingLocation": {
+						"type": "string"
+					},
+					"isPrimary": {
+						"type": "boolean",
+						"description": "Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary."
+					}
+				},
+				"required": ["userId"]
+			},
+			"Hour": {
+				"type": "object",
+				"properties": {
+					"openHour": {
+						"type": "number",
+						"minimum": 0,
+						"maximum": 23
+					},
+					"openMinute": {
+						"type": "number",
+						"minimum": 0,
+						"maximum": 60
+					},
+					"closeHour": {
+						"type": "number",
+						"minimum": 0,
+						"maximum": 23
+					},
+					"closeMinute": {
+						"type": "number",
+						"minimum": 0,
+						"maximum": 60
+					}
+				},
+				"required": ["openHour", "openMinute", "closeHour", "closeMinute"]
+			},
+			"OpenHour": {
+				"type": "object",
+				"properties": {
+					"daysOfTheWeek": {
+						"type": "array",
+						"items": {
+							"type": "number",
+							"maximum": 6,
+							"minimum": 0
+						}
+					},
+					"hours": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Hour"
+						}
+					}
+				},
+				"required": ["daysOfTheWeek", "hours"]
+			},
+			"Recurring": {
+				"type": "object",
+				"properties": {
+					"freq": {
+						"type": "string",
+						"enum": ["DAILY", "WEEKLY", "MONTHLY"]
+					},
+					"count": {
+						"type": "number",
+						"description": "Number of recurrences",
+						"maximum": 24
+					},
+					"bookingOption": {
+						"type": "string",
+						"description": "This setting contols what to do incase a recurring slot is unavailable",
+						"enum": ["skip", "continue", "book_next"]
+					},
+					"bookingOverlapDefaultStatus": {
+						"type": "string",
+						"description": "This setting contols what to do incase a recurring slot is unavailable",
+						"enum": ["confirmed", "new"]
+					}
+				}
+			},
+			"Availability": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "The ID of the custom availability object. It is required while updating or deleting the existing custom date availability"
+					},
+					"date": {
+						"type": "string",
+						"description": "Formulate the date string in the format of `<YYYY-MM-DD in local timezone>T00:00:00.000Z`.",
+						"example": "2023-09-24T00:00:00.000Z"
+					},
+					"hours": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Hour"
+						}
+					},
+					"deleted": {
+						"type": "boolean",
+						"default": false
+					}
+				},
+				"required": ["date", "hours"]
+			},
+			"CalendarDTO": {
+				"type": "object",
+				"properties": {
+					"isActive": {
+						"type": "boolean",
+						"description": "Should the created calendar be active or draft",
+						"default": true
+					},
+					"notifications": {
+						"description": "Calendar Notifications",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/CalendarNotification"
+						}
+					},
+					"locationId": {
+						"type": "string",
+						"example": "ocQHyuzHvysMo5N5VsXc"
+					},
+					"groupId": {
+						"type": "string",
+						"description": "Group Id",
+						"example": "BqTwX8QFwXzpegMve9EQ"
+					},
+					"teamMembers": {
+						"description": "Team members are required for calendars of type: Round Robin, Collective, Class, Service.",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TeamMember"
+						}
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"RoundRobin_OptimizeForAvailability",
+							"RoundRobin_OptimizeForEqualDistribution"
+						],
+						"default": "RoundRobin_OptimizeForAvailability"
+					},
+					"name": {
+						"type": "string",
+						"example": "test calendar"
+					},
+					"description": {
+						"type": "string",
+						"example": "this is used for testing"
+					},
+					"slug": {
+						"type": "string",
+						"example": "test1"
+					},
+					"widgetSlug": {
+						"type": "string",
+						"example": "test1"
+					},
+					"calendarType": {
+						"type": "string",
+						"enum": [
+							"round_robin",
+							"event",
+							"class_booking",
+							"collective",
+							"service_booking"
+						]
+					},
+					"widgetType": {
+						"type": "string",
+						"description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout.",
+						"example": "classic",
+						"enum": ["default", "classic"],
+						"default": "classic"
+					},
+					"eventTitle": {
+						"type": "string",
+						"default": "{{contact.name}}"
+					},
+					"eventColor": {
+						"type": "string",
+						"default": "#039be5"
+					},
+					"meetingLocation": {
+						"type": "string"
+					},
+					"slotDuration": {
+						"type": "number",
+						"description": "This controls the duration of the meeting",
+						"default": 30
+					},
+					"slotDurationUnit": {
+						"type": "string",
+						"description": "Unit for slot duration.",
+						"enum": ["mins", "hours"]
+					},
+					"slotInterval": {
+						"type": "number",
+						"description": "Slot interval reflects the amount of time the between booking slots that will be shown in the calendar.",
+						"default": 30
+					},
+					"slotIntervalUnit": {
+						"type": "string",
+						"description": "Unit for slot interval.",
+						"enum": ["mins", "hours"]
+					},
+					"slotBuffer": {
+						"type": "number",
+						"description": "Slot-Buffer is additional time that can be added after an appointment, allowing for extra time to wrap up"
+					},
+					"slotBufferUnit": {
+						"type": "string",
+						"description": "Unit for slot buffer.",
+						"enum": ["mins", "hours"]
+					},
+					"preBuffer": {
+						"type": "number",
+						"description": "Pre-Buffer is additional time that can be added before an appointment, allowing for extra time to get ready"
+					},
+					"preBufferUnit": {
+						"type": "string",
+						"description": "Unit for pre-buffer.",
+						"enum": ["mins", "hours"]
+					},
+					"appoinmentPerSlot": {
+						"type": "number",
+						"default": 1,
+						"description": "Maximum bookings per slot (per user). Maximum seats per slot in case of Class Booking Calendar."
+					},
+					"appoinmentPerDay": {
+						"type": "number",
+						"description": "Number of appointments that can be booked for a given day"
+					},
+					"allowBookingAfter": {
+						"type": "number",
+						"description": "Minimum scheduling notice for events"
+					},
+					"allowBookingAfterUnit": {
+						"type": "string",
+						"description": "Unit for minimum scheduling notice",
+						"enum": ["hours", "days", "weeks", "months"],
+						"example": "days"
+					},
+					"allowBookingFor": {
+						"type": "number",
+						"description": "Minimum number of days/weeks/months for which to allow booking events"
+					},
+					"allowBookingForUnit": {
+						"type": "string",
+						"description": "Unit for controlling the duration for which booking would be allowed for",
+						"enum": ["days", "weeks", "months"],
+						"example": "days"
+					},
+					"openHours": {
+						"description": "This is only to set the standard availability. For custom availability, use the availabilities property",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/OpenHour"
+						}
+					},
+					"enableRecurring": {
+						"type": "boolean",
+						"description": "Enable recurring appointments for the calendars. Please note that only one member should be added in the calendar to enable this",
+						"default": false
+					},
+					"recurring": {
+						"$ref": "#/components/schemas/Recurring"
+					},
+					"formId": {
+						"type": "string"
+					},
+					"stickyContact": {
+						"type": "boolean"
+					},
+					"isLivePaymentMode": {
+						"type": "boolean"
+					},
+					"autoConfirm": {
+						"type": "boolean",
+						"default": true
+					},
+					"shouldSendAlertEmailsToAssignedMember": {
+						"type": "boolean"
+					},
+					"alertEmail": {
+						"type": "string"
+					},
+					"googleInvitationEmails": {
+						"type": "boolean",
+						"default": false
+					},
+					"allowReschedule": {
+						"type": "boolean",
+						"default": true
+					},
+					"allowCancellation": {
+						"type": "boolean",
+						"default": true
+					},
+					"shouldAssignContactToTeamMember": {
+						"type": "boolean"
+					},
+					"shouldSkipAssigningContactForExisting": {
+						"type": "boolean"
+					},
+					"notes": {
+						"type": "string"
+					},
+					"pixelId": {
+						"type": "string"
+					},
+					"formSubmitType": {
+						"type": "string",
+						"default": "ThankYouMessage",
+						"enum": ["RedirectURL", "ThankYouMessage"]
+					},
+					"formSubmitRedirectURL": {
+						"type": "string"
+					},
+					"formSubmitThanksMessage": {
+						"type": "string"
+					},
+					"availabilityType": {
+						"type": "number",
+						"default": 0,
+						"enum": [0, 1]
+					},
+					"availabilities": {
+						"description": "This is only to set the custom availability. For standard availability, use the openHours property",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Availability"
+						}
+					},
+					"guestType": {
+						"type": "string",
+						"enum": ["count_only", "collect_detail"]
+					},
+					"consentLabel": {
+						"type": "string"
+					},
+					"calendarCoverImage": {
+						"type": "string",
+						"example": "https://path-to-image.com"
+					},
+					"id": {
+						"type": "string",
+						"example": "0TkCdp9PfvLeWKYRRvIz"
+					}
+				},
+				"required": ["locationId", "name", "id"]
+			},
+			"CalendarsGetSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"calendars": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/CalendarDTO"
+						}
+					}
+				}
+			},
+			"CalendarCreateDTO": {
+				"type": "object",
+				"properties": {
+					"isActive": {
+						"type": "boolean",
+						"description": "Should the created calendar be active or draft",
+						"default": true
+					},
+					"notifications": {
+						"description": "Calendar Notifications",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/CalendarNotification"
+						}
+					},
+					"locationId": {
+						"type": "string",
+						"example": "ocQHyuzHvysMo5N5VsXc"
+					},
+					"groupId": {
+						"type": "string",
+						"description": "Group Id",
+						"example": "BqTwX8QFwXzpegMve9EQ"
+					},
+					"teamMembers": {
+						"description": "Team members are required for calendars of type: Round Robin, Collective, Class, Service.",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TeamMember"
+						}
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"RoundRobin_OptimizeForAvailability",
+							"RoundRobin_OptimizeForEqualDistribution"
+						],
+						"default": "RoundRobin_OptimizeForAvailability"
+					},
+					"name": {
+						"type": "string",
+						"example": "test calendar"
+					},
+					"description": {
+						"type": "string",
+						"example": "this is used for testing"
+					},
+					"slug": {
+						"type": "string",
+						"example": "test1"
+					},
+					"widgetSlug": {
+						"type": "string",
+						"example": "test1"
+					},
+					"calendarType": {
+						"type": "string",
+						"enum": [
+							"round_robin",
+							"event",
+							"class_booking",
+							"collective",
+							"service_booking"
+						]
+					},
+					"widgetType": {
+						"type": "string",
+						"description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout.",
+						"example": "classic",
+						"enum": ["default", "classic"],
+						"default": "classic"
+					},
+					"eventTitle": {
+						"type": "string",
+						"default": "{{contact.name}}"
+					},
+					"eventColor": {
+						"type": "string",
+						"default": "#039be5"
+					},
+					"meetingLocation": {
+						"type": "string"
+					},
+					"slotDuration": {
+						"type": "number",
+						"description": "This controls the duration of the meeting",
+						"default": 30
+					},
+					"slotDurationUnit": {
+						"type": "string",
+						"description": "Unit for slot duration.",
+						"enum": ["mins", "hours"]
+					},
+					"slotInterval": {
+						"type": "number",
+						"description": "Slot interval reflects the amount of time the between booking slots that will be shown in the calendar.",
+						"default": 30
+					},
+					"slotIntervalUnit": {
+						"type": "string",
+						"description": "Unit for slot interval.",
+						"enum": ["mins", "hours"]
+					},
+					"slotBuffer": {
+						"type": "number",
+						"description": "Slot-Buffer is additional time that can be added after an appointment, allowing for extra time to wrap up"
+					},
+					"slotBufferUnit": {
+						"type": "string",
+						"description": "Unit for slot buffer.",
+						"enum": ["mins", "hours"]
+					},
+					"preBuffer": {
+						"type": "number",
+						"description": "Pre-Buffer is additional time that can be added before an appointment, allowing for extra time to get ready"
+					},
+					"preBufferUnit": {
+						"type": "string",
+						"description": "Unit for pre-buffer.",
+						"enum": ["mins", "hours"]
+					},
+					"appoinmentPerSlot": {
+						"type": "number",
+						"default": 1,
+						"description": "Maximum bookings per slot (per user). Maximum seats per slot in case of Class Booking Calendar."
+					},
+					"appoinmentPerDay": {
+						"type": "number",
+						"description": "Number of appointments that can be booked for a given day"
+					},
+					"allowBookingAfter": {
+						"type": "number",
+						"description": "Minimum scheduling notice for events"
+					},
+					"allowBookingAfterUnit": {
+						"type": "string",
+						"description": "Unit for minimum scheduling notice",
+						"enum": ["hours", "days", "weeks", "months"],
+						"example": "days"
+					},
+					"allowBookingFor": {
+						"type": "number",
+						"description": "Minimum number of days/weeks/months for which to allow booking events"
+					},
+					"allowBookingForUnit": {
+						"type": "string",
+						"description": "Unit for controlling the duration for which booking would be allowed for",
+						"enum": ["days", "weeks", "months"],
+						"example": "days"
+					},
+					"openHours": {
+						"description": "This is only to set the standard availability. For custom availability, use the availabilities property",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/OpenHour"
+						}
+					},
+					"enableRecurring": {
+						"type": "boolean",
+						"description": "Enable recurring appointments for the calendars. Please note that only one member should be added in the calendar to enable this",
+						"default": false
+					},
+					"recurring": {
+						"$ref": "#/components/schemas/Recurring"
+					},
+					"formId": {
+						"type": "string"
+					},
+					"stickyContact": {
+						"type": "boolean"
+					},
+					"isLivePaymentMode": {
+						"type": "boolean"
+					},
+					"autoConfirm": {
+						"type": "boolean",
+						"default": true
+					},
+					"shouldSendAlertEmailsToAssignedMember": {
+						"type": "boolean"
+					},
+					"alertEmail": {
+						"type": "string"
+					},
+					"googleInvitationEmails": {
+						"type": "boolean",
+						"default": false
+					},
+					"allowReschedule": {
+						"type": "boolean",
+						"default": true
+					},
+					"allowCancellation": {
+						"type": "boolean",
+						"default": true
+					},
+					"shouldAssignContactToTeamMember": {
+						"type": "boolean"
+					},
+					"shouldSkipAssigningContactForExisting": {
+						"type": "boolean"
+					},
+					"notes": {
+						"type": "string"
+					},
+					"pixelId": {
+						"type": "string"
+					},
+					"formSubmitType": {
+						"type": "string",
+						"default": "ThankYouMessage",
+						"enum": ["RedirectURL", "ThankYouMessage"]
+					},
+					"formSubmitRedirectURL": {
+						"type": "string"
+					},
+					"formSubmitThanksMessage": {
+						"type": "string"
+					},
+					"availabilityType": {
+						"type": "number",
+						"default": 0,
+						"enum": [0, 1]
+					},
+					"availabilities": {
+						"description": "This is only to set the custom availability. For standard availability, use the openHours property",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Availability"
+						}
+					},
+					"guestType": {
+						"type": "string",
+						"enum": ["count_only", "collect_detail"]
+					},
+					"consentLabel": {
+						"type": "string"
+					},
+					"calendarCoverImage": {
+						"type": "string",
+						"example": "https://path-to-image.com"
+					}
+				},
+				"required": ["locationId", "name"]
+			},
+			"CalendarByIdSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"calendar": {
+						"$ref": "#/components/schemas/CalendarDTO"
+					}
+				},
+				"required": ["calendar"]
+			},
+			"CalendarUpdateDTO": {
+				"type": "object",
+				"properties": {
+					"notifications": {
+						"description": "Calendar Notifications",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/CalendarNotification"
+						}
+					},
+					"groupId": {
+						"type": "string",
+						"description": "Group Id",
+						"example": "BqTwX8QFwXzpegMve9EQ"
+					},
+					"teamMembers": {
+						"description": "Team members",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TeamMember"
+						}
+					},
+					"eventType": {
+						"type": "string",
+						"enum": [
+							"RoundRobin_OptimizeForAvailability",
+							"RoundRobin_OptimizeForEqualDistribution"
+						]
+					},
+					"name": {
+						"type": "string",
+						"example": "test calendar"
+					},
+					"description": {
+						"type": "string",
+						"example": "this is used for testing"
+					},
+					"slug": {
+						"type": "string",
+						"example": "test1"
+					},
+					"widgetSlug": {
+						"type": "string",
+						"example": "test1"
+					},
+					"widgetType": {
+						"type": "string",
+						"description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout.",
+						"example": "classic",
+						"enum": ["default", "classic"],
+						"default": "classic"
+					},
+					"eventTitle": {
+						"type": "string"
+					},
+					"eventColor": {
+						"type": "string",
+						"default": "#039be5"
+					},
+					"meetingLocation": {
+						"type": "string"
+					},
+					"slotDuration": {
+						"type": "number",
+						"description": "This controls the duration of the meeting",
+						"default": 30
+					},
+					"slotDurationUnit": {
+						"type": "string",
+						"description": "Unit for slot duration.",
+						"enum": ["mins", "hours"]
+					},
+					"preBufferUnit": {
+						"type": "string",
+						"description": "Unit for pre-buffer.",
+						"enum": ["mins", "hours"]
+					},
+					"slotInterval": {
+						"type": "number",
+						"description": "Slot interval reflects the amount of time the between booking slots that will be shown in the calendar.",
+						"default": 30
+					},
+					"slotIntervalUnit": {
+						"type": "string",
+						"description": "Unit for slot interval.",
+						"enum": ["mins", "hours"]
+					},
+					"slotBuffer": {
+						"type": "number",
+						"description": "Slot-Buffer is additional time that can be added after an appointment, allowing for extra time to wrap up"
+					},
+					"preBuffer": {
+						"type": "number",
+						"description": "Pre-Buffer is additional time that can be added before an appointment, allowing for extra time to get ready"
+					},
+					"appoinmentPerSlot": {
+						"type": "number"
+					},
+					"appoinmentPerDay": {
+						"type": "number",
+						"description": "Number of appointments that can be booked for a given day"
+					},
+					"allowBookingAfter": {
+						"type": "number",
+						"description": "Minimum scheduling notice for events"
+					},
+					"allowBookingAfterUnit": {
+						"type": "string",
+						"description": "Unit for minimum scheduling notice",
+						"enum": ["hours", "days", "weeks", "months"],
+						"example": "days"
+					},
+					"allowBookingFor": {
+						"type": "number",
+						"description": "Minimum number of days/weeks/months for which to allow booking events"
+					},
+					"allowBookingForUnit": {
+						"type": "string",
+						"description": "Unit for controlling the duration for which booking would be allowed for",
+						"enum": ["days", "weeks", "months"],
+						"example": "days"
+					},
+					"openHours": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/OpenHour"
+						}
+					},
+					"enableRecurring": {
+						"type": "boolean",
+						"description": "Enable recurring appointments for the calendars. Please note that only one member should be added in the calendar to enable this",
+						"default": false
+					},
+					"recurring": {
+						"$ref": "#/components/schemas/Recurring"
+					},
+					"formId": {
+						"type": "string"
+					},
+					"stickyContact": {
+						"type": "boolean"
+					},
+					"isLivePaymentMode": {
+						"type": "boolean"
+					},
+					"autoConfirm": {
+						"type": "boolean"
+					},
+					"shouldSendAlertEmailsToAssignedMember": {
+						"type": "boolean"
+					},
+					"alertEmail": {
+						"type": "string"
+					},
+					"googleInvitationEmails": {
+						"type": "boolean"
+					},
+					"allowReschedule": {
+						"type": "boolean"
+					},
+					"allowCancellation": {
+						"type": "boolean"
+					},
+					"shouldAssignContactToTeamMember": {
+						"type": "boolean"
+					},
+					"shouldSkipAssigningContactForExisting": {
+						"type": "boolean"
+					},
+					"notes": {
+						"type": "string"
+					},
+					"pixelId": {
+						"type": "string"
+					},
+					"formSubmitType": {
+						"type": "string",
+						"default": "ThankYouMessage",
+						"enum": ["RedirectURL", "ThankYouMessage"]
+					},
+					"formSubmitRedirectURL": {
+						"type": "string"
+					},
+					"formSubmitThanksMessage": {
+						"type": "string"
+					},
+					"availabilityType": {
+						"type": "number",
+						"default": 0,
+						"enum": [0, 1]
+					},
+					"availabilities": {
+						"description": "This is only to set the custom availability. For standard availability, use the openHours property",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Availability"
+						}
+					},
+					"guestType": {
+						"type": "string",
+						"enum": ["count_only", "collect_detail"]
+					},
+					"consentLabel": {
+						"type": "string"
+					},
+					"calendarCoverImage": {
+						"type": "string"
+					}
+				}
+			},
+			"CalendarDeleteSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean",
+						"description": "Success",
+						"example": "true"
+					}
+				},
+				"required": ["success"]
+			},
+			"GetCalendarEventSuccessfulResponseDTO": {
+				"type": "object",
+				"properties": {
+					"event": {
+						"$ref": "#/components/schemas/CalendarEventDTO"
+					}
+				}
+			},
+			"AppointmentCreateSchema": {
+				"type": "object",
+				"properties": {
+					"calendarId": {
+						"type": "string",
+						"description": "Calendar Id",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					},
+					"locationId": {
+						"type": "string",
+						"description": "Location Id",
+						"example": "C2QujeCh8ZnC7al2InWR"
+					},
+					"contactId": {
+						"type": "string",
+						"description": "Contact Id",
+						"example": "0007BWpSzSwfiuSl0tR2"
+					},
+					"startTime": {
+						"type": "string",
+						"description": "Start Time",
+						"example": "2021-06-23T03:30:00+05:30"
+					},
+					"endTime": {
+						"type": "string",
+						"description": "End Time",
+						"example": "2021-06-23T04:30:00+05:30"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "Test Event"
+					},
+					"appointmentStatus": {
+						"type": "string",
+						"example": "confirmed",
+						"enum": [
+							"new",
+							"confirmed",
+							"cancelled",
+							"showed",
+							"noshow",
+							"invalid"
+						]
+					},
+					"assignedUserId": {
+						"type": "string",
+						"description": "Assigned User Id",
+						"example": "0007BWpSzSwfiuSl0tR2"
+					},
+					"address": {
+						"type": "string",
+						"description": "Appointment Address",
+						"example": "Zoom"
+					},
+					"ignoreDateRange": {
+						"type": "boolean",
+						"description": "If set to true, the minimum scheduling notice and date range would be ignored",
+						"example": false
+					},
+					"toNotify": {
+						"type": "boolean",
+						"description": "If set to false, the automations will not run",
+						"example": false
+					}
+				},
+				"required": ["calendarId", "locationId", "contactId", "startTime"]
+			},
+			"AppointmentSchemaResponse": {
+				"type": "object",
+				"properties": {
+					"calendarId": {
+						"type": "string",
+						"description": "Calendar Id",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					},
+					"locationId": {
+						"type": "string",
+						"description": "Location Id",
+						"example": "C2QujeCh8ZnC7al2InWR"
+					},
+					"contactId": {
+						"type": "string",
+						"description": "Contact Id",
+						"example": "0007BWpSzSwfiuSl0tR2"
+					},
+					"startTime": {
+						"type": "string",
+						"description": "Start Time",
+						"example": "2021-06-23T03:30:00+05:30"
+					},
+					"endTime": {
+						"type": "string",
+						"description": "End Time",
+						"example": "2021-06-23T04:30:00+05:30"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "Test Event"
+					},
+					"appointmentStatus": {
+						"type": "string",
+						"example": "confirmed",
+						"enum": [
+							"new",
+							"confirmed",
+							"cancelled",
+							"showed",
+							"noshow",
+							"invalid"
+						]
+					},
+					"assignedUserId": {
+						"type": "string",
+						"description": "Assigned User Id",
+						"example": "0007BWpSzSwfiuSl0tR2"
+					},
+					"address": {
+						"type": "string",
+						"description": "Appointment Address",
+						"example": "Zoom"
+					},
+					"id": {
+						"type": "string",
+						"description": "Id",
+						"example": "0TkCdp9PfvLeWKYRRvIz"
+					}
+				},
+				"required": ["calendarId", "locationId", "contactId", "id"]
+			},
+			"AppointmentEditSchema": {
+				"type": "object",
+				"properties": {
+					"calendarId": {
+						"type": "string",
+						"description": "Calendar Id",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					},
+					"startTime": {
+						"type": "string",
+						"description": "Start Time",
+						"example": "2021-06-23T03:30:00+05:30"
+					},
+					"endTime": {
+						"type": "string",
+						"description": "End Time",
+						"example": "2021-06-23T04:30:00+05:30"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "Test Event"
+					},
+					"appointmentStatus": {
+						"type": "string",
+						"example": "confirmed",
+						"enum": [
+							"new",
+							"confirmed",
+							"cancelled",
+							"showed",
+							"noshow",
+							"invalid"
+						]
+					},
+					"address": {
+						"type": "string",
+						"description": "Appointment Address",
+						"example": "Zoom"
+					},
+					"ignoreDateRange": {
+						"type": "boolean",
+						"description": "If set to true, the minimum scheduling notice and date range would be ignored",
+						"example": false
+					},
+					"toNotify": {
+						"type": "boolean",
+						"description": "If set to false, the automations will not run",
+						"example": false
+					}
+				}
+			},
+			"BlockSlotCreateSchema": {
+				"type": "object",
+				"properties": {
+					"calendarId": {
+						"type": "string",
+						"description": "Calendar Id (Block Slot can only be created on simple/event calendars)",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					},
+					"locationId": {
+						"type": "string",
+						"description": "Location Id",
+						"example": "C2QujeCh8ZnC7al2InWR"
+					},
+					"startTime": {
+						"type": "string",
+						"description": "Start Time",
+						"example": "2021-06-23T03:30:00+05:30"
+					},
+					"endTime": {
+						"type": "string",
+						"description": "End Time",
+						"example": "2021-06-23T04:30:00+05:30"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "Test Event"
+					},
+					"assignedUserId": {
+						"type": "string",
+						"description": "Assigned User Id",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					}
+				},
+				"required": ["locationId", "startTime", "endTime"]
+			},
+			"CreateBookedSlotSuccessfulResponseDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "Id",
+						"example": "0TkCdp9PfvLeWKYRRvIz"
+					},
+					"locationId": {
+						"type": "string",
+						"description": "Location Id",
+						"example": "C2QujeCh8ZnC7al2InWR"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "My event"
+					},
+					"startTime": {
+						"type": "string",
+						"description": "Start Time",
+						"example": "2021-06-23T03:30:00+05:30"
+					},
+					"endTime": {
+						"type": "string",
+						"description": "End Time",
+						"example": "2021-06-23T04:30:00+05:30"
+					},
+					"calendarId": {
+						"type": "string",
+						"description": "Calendar id",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					},
+					"assignedUserId": {
+						"type": "string",
+						"description": "Assigned User Id",
+						"example": "0007BWpSzSwfiuSl0tR2"
+					}
+				},
+				"required": ["id", "locationId", "title", "startTime", "endTime"]
+			},
+			"BlockSlotEditSchema": {
+				"type": "object",
+				"properties": {
+					"calendarId": {
+						"type": "string",
+						"description": "Calendar Id",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					},
+					"startTime": {
+						"type": "string",
+						"description": "Start Time",
+						"example": "2021-06-23T03:30:00+05:30"
+					},
+					"endTime": {
+						"type": "string",
+						"description": "End Time",
+						"example": "2021-06-23T04:30:00+05:30"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "Test Event"
+					},
+					"assignedUserId": {
+						"type": "string",
+						"description": "Assigned User Id",
+						"example": "CVokAlI8fgw4WYWoCtQz"
+					}
+				}
+			},
+			"DeleteAppointmentSchema": {
+				"type": "object",
+				"properties": {}
+			},
+			"DeleteEventSuccessfulResponseDto": {
+				"type": "object",
+				"properties": {
+					"succeeded": {
+						"type": "boolean",
+						"example": true
+					}
+				}
+			},
+			"UpdateCalendarResourceDTO": {
+				"type": "object",
+				"properties": {
+					"locationId": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"quantity": {
+						"type": "number",
+						"description": "Quantity of the equipment."
+					},
+					"outOfService": {
+						"type": "number",
+						"description": "Quantity of the out of service equipment."
+					},
+					"capacity": {
+						"type": "number",
+						"description": "Capacity of the room."
+					},
+					"calendarIds": {
+						"description": "Service calendar IDs to be mapped with the resource.\n\n    One equipment can only be mapped with one service calendar.\n    \nOne room can be mapped with multiple service calendars.",
+						"maxItems": 100,
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"isActive": {
+						"type": "boolean"
+					},
+					"deleted": {
+						"type": "boolean"
+					}
+				},
+				"required": ["deleted"]
+			},
+			"CreateCalendarResourceDTO": {
+				"type": "object",
+				"properties": {
+					"locationId": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"quantity": {
+						"type": "number",
+						"description": "Quantity of the equipment."
+					},
+					"outOfService": {
+						"type": "number",
+						"description": "Quantity of the out of service equipment."
+					},
+					"capacity": {
+						"type": "number",
+						"description": "Capacity of the room."
+					},
+					"calendarIds": {
+						"description": "Service calendar IDs to be mapped with the resource.\n\n    One equipment can only be mapped with one service calendar.\n    \nOne room can be mapped with multiple service calendars.",
+						"maxItems": 100,
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"isActive": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"locationId",
+					"name",
+					"description",
+					"quantity",
+					"outOfService",
+					"capacity",
+					"calendarIds",
+					"isActive"
+				]
+			}
+		}
+	}
+}

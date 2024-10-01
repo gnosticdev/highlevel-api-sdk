@@ -1,0 +1,6361 @@
+{
+	"openapi": "3.0.0",
+	"paths": {
+		"/invoices/template": {
+			"post": {
+				"operationId": "create-invoice-template",
+				"summary": "Create template",
+				"description": "API to create a template",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateInvoiceTemplateDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateInvoiceTemplateResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Template"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"get": {
+				"operationId": "list-invoice-templates",
+				"summary": "List templates",
+				"description": "API to get list of templates",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "status",
+						"required": false,
+						"in": "query",
+						"description": "status to be filtered",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "startAt",
+						"required": false,
+						"in": "query",
+						"description": "startAt in YYYY-MM-DD format",
+						"example": "2023-01-01",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "endAt",
+						"required": false,
+						"in": "query",
+						"description": "endAt in YYYY-MM-DD format",
+						"example": "2023-01-01",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "search",
+						"required": false,
+						"in": "query",
+						"description": "To search for an invoice by id / name / email / phoneNo",
+						"example": "Alex",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "paymentMode",
+						"required": false,
+						"in": "query",
+						"description": "payment mode",
+						"example": "live",
+						"schema": {
+							"enum": ["default", "live"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "limit",
+						"required": true,
+						"in": "query",
+						"description": "Limit the number of items to return",
+						"example": 10,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "offset",
+						"required": true,
+						"in": "query",
+						"description": "Number of items to skip",
+						"example": 10,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ListTemplatesResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Template"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/template/{templateId}": {
+			"get": {
+				"operationId": "get-invoice-template",
+				"summary": "Get an template",
+				"description": "API to get an template by template id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "templateId",
+						"required": true,
+						"in": "path",
+						"description": "Template Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetTemplateResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Template"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"put": {
+				"operationId": "update-invoice-template",
+				"summary": "Update template",
+				"description": "API to update an template by template id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "templateId",
+						"required": true,
+						"in": "path",
+						"description": "Template Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateInvoiceTemplateDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateInvoiceTemplateResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Template"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"delete": {
+				"operationId": "delete-invoice-template",
+				"summary": "Delete template",
+				"description": "API to update an template by template id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "templateId",
+						"required": true,
+						"in": "path",
+						"description": "Template Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteInvoiceTemplateResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Template"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/schedule": {
+			"post": {
+				"operationId": "create-invoice-schedule",
+				"summary": "Create Invoice Schedule",
+				"description": "API to create an invoice Schedule",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateInvoiceScheduleDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateInvoiceScheduleResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"get": {
+				"operationId": "list-invoice-schedules",
+				"summary": "List schedules",
+				"description": "API to get list of schedules",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "status",
+						"required": false,
+						"in": "query",
+						"description": "status to be filtered",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "startAt",
+						"required": false,
+						"in": "query",
+						"description": "startAt in YYYY-MM-DD format",
+						"example": "2023-01-01",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "endAt",
+						"required": false,
+						"in": "query",
+						"description": "endAt in YYYY-MM-DD format",
+						"example": "2023-01-01",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "search",
+						"required": false,
+						"in": "query",
+						"description": "To search for an invoice by id / name / email / phoneNo",
+						"example": "Alex",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "paymentMode",
+						"required": false,
+						"in": "query",
+						"description": "payment mode",
+						"example": "live",
+						"schema": {
+							"enum": ["default", "live"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "limit",
+						"required": true,
+						"in": "query",
+						"description": "Limit the number of items to return",
+						"example": 10,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "offset",
+						"required": true,
+						"in": "query",
+						"description": "Number of items to skip",
+						"example": 10,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ListSchedulesResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/schedule/{scheduleId}": {
+			"get": {
+				"operationId": "get-invoice-schedule",
+				"summary": "Get an schedule",
+				"description": "API to get an schedule by schedule id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "scheduleId",
+						"required": true,
+						"in": "path",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetScheduleResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"put": {
+				"operationId": "update-invoice-schedule",
+				"summary": "Update schedule",
+				"description": "API to update an schedule by schedule id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "scheduleId",
+						"required": true,
+						"in": "path",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateInvoiceScheduleDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateInvoiceScheduleResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"delete": {
+				"operationId": "delete-invoice-schedule",
+				"summary": "Delete schedule",
+				"description": "API to delete an schedule by schedule id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "scheduleId",
+						"required": true,
+						"in": "path",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteInvoiceScheduleResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/schedule/{scheduleId}/schedule": {
+			"post": {
+				"operationId": "schedule-invoice-schedule",
+				"summary": "Schedule an schedule invoice",
+				"description": "API to schedule an schedule invoice to start sending to the customer",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "scheduleId",
+						"required": true,
+						"in": "path",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ScheduleInvoiceScheduleDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ScheduleInvoiceScheduleResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/schedule/{scheduleId}/auto-payment": {
+			"post": {
+				"operationId": "auto-payment-invoice-schedule",
+				"summary": "Manage Auto payment for an schedule invoice",
+				"description": "API to manage auto payment for a schedule",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "scheduleId",
+						"required": true,
+						"in": "path",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AutoPaymentScheduleDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AutoPaymentInvoiceScheduleResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/schedule/{scheduleId}/cancel": {
+			"post": {
+				"operationId": "cancel-invoice-schedule",
+				"summary": "Cancel an scheduled invoice",
+				"description": "API to cancel a scheduled invoice by schedule id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "scheduleId",
+						"required": true,
+						"in": "path",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CancelInvoiceScheduleDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CancelInvoiceScheduleResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Schedule"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/text2pay": {
+			"post": {
+				"operationId": "text2pay-invoice",
+				"summary": "Create & Send",
+				"description": "API to create or update a text2pay invoice",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Text2PayDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Text2PayInvoiceResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Text2Pay"],
+				"security": [
+					{
+						"Location-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/generate-invoice-number": {
+			"get": {
+				"operationId": "generate-invoice-number",
+				"summary": "Generate Invoice Number",
+				"description": "Get the next invoice number for the given location",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "Location Id",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GenerateInvoiceNumberResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/{invoiceId}": {
+			"get": {
+				"operationId": "get-invoice",
+				"summary": "Get invoice",
+				"description": "API to get invoice by invoice id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "invoiceId",
+						"required": true,
+						"in": "path",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetInvoiceResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"put": {
+				"operationId": "update-invoice",
+				"summary": "Update invoice",
+				"description": "API to update invoice by invoice id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "invoiceId",
+						"required": true,
+						"in": "path",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateInvoiceDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateInvoiceResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"delete": {
+				"operationId": "delete-invoice",
+				"summary": "Delete invoice",
+				"description": "API to delete invoice by invoice id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "invoiceId",
+						"required": true,
+						"in": "path",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteInvoiceResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"examples": {
+									"UnableToFindInvoiceResponse": {
+										"value": {
+											"statusCode": 400,
+											"message": "Unable to find an invoice with the given invoice id"
+										}
+									},
+									"DeleteDraftInvoiceBadResponse": {
+										"value": {
+											"statusCode": 400,
+											"message": "Invoice status need to be draft to delete an invoice"
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/{invoiceId}/void": {
+			"post": {
+				"operationId": "void-invoice",
+				"summary": "Void invoice",
+				"description": "API to delete invoice by invoice id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "invoiceId",
+						"required": true,
+						"in": "path",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VoidInvoiceDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/VoidInvoiceResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"examples": {
+									"UnableToFindInvoiceResponse": {
+										"value": {
+											"statusCode": 400,
+											"message": "Unable to find an invoice with the given invoice id"
+										}
+									},
+									"VoidDraftInvoiceBadResponse": {
+										"value": {
+											"statusCode": 400,
+											"message": "Can not void draft invoice. You can delete draft invoice!"
+										}
+									},
+									"VoidProviderInvoiceBadResponse": {
+										"value": {
+											"statusCode": 400,
+											"message": "To void an invoice which has received payment through the payment provider, the corresponding transaction needs to be refunded first"
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/{invoiceId}/send": {
+			"post": {
+				"operationId": "send-invoice",
+				"summary": "Send invoice",
+				"description": "API to send invoice by invoice id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "invoiceId",
+						"required": true,
+						"in": "path",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SendInvoiceDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SendInvoicesResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/{invoiceId}/record-payment": {
+			"post": {
+				"operationId": "record-invoice",
+				"summary": "Record a manual payment for an invoice",
+				"description": "API to record manual payment for an invoice by invoice id",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "invoiceId",
+						"required": true,
+						"in": "path",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RecordPaymentDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RecordPaymentResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		},
+		"/invoices/": {
+			"post": {
+				"operationId": "create-invoice",
+				"summary": "Create Invoice",
+				"description": "API to create an invoice",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateInvoiceDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateInvoiceResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			},
+			"get": {
+				"operationId": "list-invoices",
+				"summary": "List invoices",
+				"description": "API to get list of invoices",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"description": "Access Token",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe"
+						}
+					},
+					{
+						"name": "Version",
+						"in": "header",
+						"description": "API Version",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": ["2021-07-28"]
+						}
+					},
+					{
+						"name": "altId",
+						"required": true,
+						"in": "query",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "altType",
+						"required": true,
+						"in": "query",
+						"description": "Alt Type",
+						"example": "location",
+						"schema": {
+							"enum": ["location"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "status",
+						"required": false,
+						"in": "query",
+						"description": "status to be filtered",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "startAt",
+						"required": false,
+						"in": "query",
+						"description": "startAt in YYYY-MM-DD format",
+						"example": "2023-01-01",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "endAt",
+						"required": false,
+						"in": "query",
+						"description": "endAt in YYYY-MM-DD format",
+						"example": "2023-01-01",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "search",
+						"required": false,
+						"in": "query",
+						"description": "To search for an invoice by id / name / email / phoneNo",
+						"example": "Alex",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "paymentMode",
+						"required": false,
+						"in": "query",
+						"description": "payment mode",
+						"example": "live",
+						"schema": {
+							"enum": ["default", "live"],
+							"type": "string"
+						}
+					},
+					{
+						"name": "contactId",
+						"required": false,
+						"in": "query",
+						"description": "Contact ID for the invoice",
+						"example": "AmuzcoPBpgKeccNsFlib",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "limit",
+						"required": true,
+						"in": "query",
+						"description": "Limit the number of items to return",
+						"example": 10,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "offset",
+						"required": true,
+						"in": "query",
+						"description": "Number of items to skip",
+						"example": 10,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ListInvoicesResponseDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Invoice"],
+				"security": [
+					{
+						"Location-Access": []
+					},
+					{
+						"Agency-Access": []
+					}
+				]
+			}
+		}
+	},
+	"info": {
+		"title": "Invoice API",
+		"description": "Documentation for invoice API",
+		"version": "1.0",
+		"contact": {}
+	},
+	"tags": [
+		{
+			"name": "Invoice",
+			"description": "Documentation for invoice API"
+		}
+	],
+	"servers": [
+		{
+			"url": "https://services.leadconnectorhq.com"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"bearer": {
+				"scheme": "bearer",
+				"bearerFormat": "JWT",
+				"name": "Authorization",
+				"in": "header",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"type": "http"
+			},
+			"Location-Access": {
+				"scheme": "bearer",
+				"bearerFormat": "JWT",
+				"name": "Authorization",
+				"in": "header",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"type": "http"
+			},
+			"Agency-Access": {
+				"scheme": "bearer",
+				"bearerFormat": "JWT",
+				"name": "Authorization",
+				"in": "header",
+				"description": "Use the Access Token generated with user type as Agency.",
+				"type": "http"
+			}
+		},
+		"schemas": {
+			"BadRequestDTO": {
+				"type": "object",
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"example": 400
+					},
+					"message": {
+						"type": "string",
+						"example": "Bad Request"
+					}
+				}
+			},
+			"UnauthorizedDTO": {
+				"type": "object",
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"example": 401
+					},
+					"message": {
+						"type": "string",
+						"example": "Invalid token: access token is invalid"
+					},
+					"error": {
+						"type": "string",
+						"example": "Unauthorized"
+					}
+				}
+			},
+			"AddressDto": {
+				"type": "object",
+				"properties": {
+					"addressLine1": {
+						"type": "string",
+						"description": "Address Line 1",
+						"example": "9931 Beechwood"
+					},
+					"addressLine2": {
+						"type": "string",
+						"description": "Address Line 2",
+						"example": "Beechwood"
+					},
+					"city": {
+						"type": "string",
+						"description": "City",
+						"example": "St. Houston"
+					},
+					"state": {
+						"type": "string",
+						"description": "State",
+						"example": "TX"
+					},
+					"countryCode": {
+						"type": "string",
+						"description": "Country Code",
+						"example": "US"
+					},
+					"postalCode": {
+						"type": "string",
+						"description": "Postal Code",
+						"example": "559-6993"
+					}
+				}
+			},
+			"BusinessDetailsDto": {
+				"type": "object",
+				"properties": {
+					"logoUrl": {
+						"type": "string",
+						"description": "Business Logo URL",
+						"example": "https://example.com/logo.png"
+					},
+					"name": {
+						"type": "string",
+						"description": "Business Name",
+						"example": "ABC Corp."
+					},
+					"phoneNo": {
+						"type": "string",
+						"description": "Business Phone Number",
+						"example": "+1-214-559-6993"
+					},
+					"address": {
+						"description": "Business Address",
+						"example": "9931 Beechwood, TX",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/AddressDto"
+							}
+						]
+					},
+					"website": {
+						"type": "string",
+						"description": "Business Website Link",
+						"example": "wwww.example.com"
+					},
+					"customValues": {
+						"description": "Custom Values",
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"ItemTaxDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"rate": {
+						"type": "number"
+					},
+					"calculation": {
+						"type": "string",
+						"enum": ["exclusive"]
+					},
+					"description": {
+						"type": "string"
+					},
+					"taxId": {
+						"type": "string"
+					}
+				},
+				"required": ["_id", "name", "rate", "calculation"]
+			},
+			"InvoiceItemDto": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "Invoice Item Name",
+						"example": "ABC Product"
+					},
+					"description": {
+						"type": "string",
+						"description": "Invoice descriptions",
+						"example": "ABC Corp."
+					},
+					"productId": {
+						"type": "string",
+						"description": "Product Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"priceId": {
+						"type": "string",
+						"description": "Price Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"amount": {
+						"type": "number",
+						"description": "Product amount",
+						"example": 999
+					},
+					"qty": {
+						"type": "number",
+						"description": "Product Quantity",
+						"example": 1
+					},
+					"taxes": {
+						"description": "Tax",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemTaxDto"
+						}
+					}
+				},
+				"required": ["name", "currency", "amount", "qty"]
+			},
+			"DiscountDto": {
+				"type": "object",
+				"properties": {
+					"value": {
+						"type": "number",
+						"description": "Discount Value",
+						"example": 10,
+						"default": 0
+					},
+					"type": {
+						"type": "string",
+						"description": "Discount type",
+						"enum": ["percentage", "fixed"],
+						"example": "percentage",
+						"default": "percentage"
+					}
+				},
+				"required": ["type"]
+			},
+			"CreateInvoiceTemplateDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"internal": {
+						"type": "boolean"
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the template",
+						"example": "New Template"
+					},
+					"businessDetails": {
+						"$ref": "#/components/schemas/BusinessDetailsDto"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/InvoiceItemDto"
+						}
+					},
+					"discount": {
+						"$ref": "#/components/schemas/DiscountDto"
+					},
+					"termsNotes": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string",
+						"description": "Template title",
+						"example": "New Template"
+					}
+				},
+				"required": [
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"currency",
+					"items"
+				]
+			},
+			"CreateInvoiceTemplateResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Template Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the Template",
+						"example": "New Template"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"currency",
+					"items",
+					"total",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"UnprocessableDTO": {
+				"type": "object",
+				"properties": {
+					"statusCode": {
+						"type": "number",
+						"example": 422
+					},
+					"message": {
+						"example": ["Unprocessable Entity"],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"error": {
+						"type": "string",
+						"example": "Unprocessable Entity"
+					}
+				}
+			},
+			"GetTemplateResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Template Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the Template",
+						"example": "New Template"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"currency",
+					"items",
+					"total",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"ListTemplatesResponseDto": {
+				"type": "object",
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/GetTemplateResponseDto"
+						}
+					},
+					"totalCount": {
+						"type": "number",
+						"description": "Total number of Templates",
+						"example": 100
+					}
+				},
+				"required": ["data", "totalCount"]
+			},
+			"UpdateInvoiceTemplateDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"internal": {
+						"type": "boolean"
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the template",
+						"example": "New Template"
+					},
+					"businessDetails": {
+						"$ref": "#/components/schemas/BusinessDetailsDto"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/InvoiceItemDto"
+						}
+					},
+					"discount": {
+						"$ref": "#/components/schemas/DiscountDto"
+					},
+					"termsNotes": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string",
+						"description": "Template title",
+						"example": "New Template"
+					}
+				},
+				"required": [
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"currency",
+					"items"
+				]
+			},
+			"UpdateInvoiceTemplateResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Template Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the Template",
+						"example": "New Template"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"currency",
+					"items",
+					"total",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"DeleteInvoiceTemplateResponseDto": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean",
+						"description": "success",
+						"example": true
+					}
+				},
+				"required": ["success"]
+			},
+			"AdditionalEmailsDto": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string",
+						"example": "alex@example.com"
+					}
+				},
+				"required": ["email"]
+			},
+			"ContactDetailsDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "Contact ID",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"name": {
+						"type": "string",
+						"description": "Contact Name",
+						"example": "Alex"
+					},
+					"phoneNo": {
+						"type": "string",
+						"description": "Contact Phone Number",
+						"example": "+1-214-559-6993"
+					},
+					"email": {
+						"type": "string",
+						"description": "Contact Email",
+						"example": "alex@example.com"
+					},
+					"additionalEmails": {
+						"description": "Secondary email addresses for the contact to be saved",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/AdditionalEmailsDto"
+						}
+					},
+					"companyName": {
+						"type": "string",
+						"description": "Contact Company Name",
+						"example": "ABC Corp."
+					},
+					"address": {
+						"$ref": "#/components/schemas/AddressDto"
+					},
+					"customFields": {
+						"description": "Custom Values",
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				},
+				"required": ["id", "name"]
+			},
+			"CustomRRuleOptionsDto": {
+				"type": "object",
+				"properties": {
+					"intervalType": {
+						"type": "string",
+						"enum": [
+							"yearly",
+							"monthly",
+							"weekly",
+							"daily",
+							"hourly",
+							"minutely",
+							"secondly"
+						],
+						"example": "monthly"
+					},
+					"interval": {
+						"type": "number",
+						"example": 2
+					},
+					"startDate": {
+						"type": "string",
+						"description": "Start date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"startTime": {
+						"type": "string",
+						"description": "Start time in HH:mm:ss format",
+						"example": "20:45:00"
+					},
+					"endDate": {
+						"type": "string",
+						"description": "End date in YYYY-MM-DD format",
+						"example": "2029-11-01"
+					},
+					"endTime": {
+						"type": "string",
+						"description": "End time in HH:mm:ss format",
+						"example": "18:45:00"
+					},
+					"dayOfMonth": {
+						"type": "number",
+						"description": "-1, 1, 2, 3, ..., 27, 28",
+						"example": 15
+					},
+					"dayOfWeek": {
+						"type": "string",
+						"enum": ["mo", "tu", "we", "th", "fr", "sa", "su"],
+						"example": "mo"
+					},
+					"numOfWeek": {
+						"type": "number",
+						"description": "-1, 1, 2, 3, 4",
+						"example": -1
+					},
+					"monthOfYear": {
+						"type": "string",
+						"enum": [
+							"jan",
+							"feb",
+							"mar",
+							"apr",
+							"may",
+							"jun",
+							"jul",
+							"aug",
+							"sep",
+							"oct",
+							"nov",
+							"dec"
+						],
+						"example": "jan"
+					},
+					"count": {
+						"type": "number",
+						"description": "Max number of task executions",
+						"example": 10
+					},
+					"daysBefore": {
+						"type": "number",
+						"description": "Execute task number of days before",
+						"example": 5
+					}
+				},
+				"required": ["intervalType", "interval", "startDate"]
+			},
+			"ScheduleOptionsDto": {
+				"type": "object",
+				"properties": {
+					"executeAt": {
+						"type": "string"
+					},
+					"rrule": {
+						"$ref": "#/components/schemas/CustomRRuleOptionsDto"
+					}
+				}
+			},
+			"CreateInvoiceScheduleDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"name": {
+						"type": "string"
+					},
+					"contactDetails": {
+						"$ref": "#/components/schemas/ContactDetailsDto"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"liveMode": {
+						"type": "boolean"
+					},
+					"businessDetails": {
+						"$ref": "#/components/schemas/BusinessDetailsDto"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/InvoiceItemDto"
+						}
+					},
+					"discount": {
+						"$ref": "#/components/schemas/DiscountDto"
+					},
+					"termsNotes": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"altId",
+					"altType",
+					"name",
+					"contactDetails",
+					"schedule",
+					"liveMode",
+					"businessDetails",
+					"currency",
+					"items",
+					"discount"
+				]
+			},
+			"DefaultInvoiceResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "string",
+						"description": "Invoice Status",
+						"example": "draft",
+						"enum": [
+							"draft",
+							"sent",
+							"payment_processing",
+							"paid",
+							"void",
+							"partially_paid"
+						]
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"amountPaid": {
+						"type": "number",
+						"description": "Amount Paid",
+						"example": 0
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "number",
+						"description": "Invoice Number",
+						"example": "19"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"invoiceItems": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"amountDue": {
+						"type": "number",
+						"description": "Total Amount Due",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"amountPaid",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"invoiceNumber",
+					"currency",
+					"contactDetails",
+					"issueDate",
+					"dueDate",
+					"invoiceItems",
+					"total",
+					"title",
+					"amountDue",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"CreateInvoiceScheduleResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "object",
+						"description": "Schedule Status",
+						"example": "draft"
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"invoices": {
+						"description": "List of invoices",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+						}
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes",
+						"example": "Confidential"
+					},
+					"compiledTermsNotes": {
+						"type": "string",
+						"description": "Compiled terms notes",
+						"example": "Confidential"
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"altId",
+					"altType",
+					"name",
+					"invoices",
+					"businessDetails",
+					"currency",
+					"contactDetails",
+					"items",
+					"total",
+					"title",
+					"termsNotes",
+					"compiledTermsNotes",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"GetScheduleResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "object",
+						"description": "Schedule Status",
+						"example": "draft"
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"invoices": {
+						"description": "List of invoices",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+						}
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes",
+						"example": "Confidential"
+					},
+					"compiledTermsNotes": {
+						"type": "string",
+						"description": "Compiled terms notes",
+						"example": "Confidential"
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"altId",
+					"altType",
+					"name",
+					"invoices",
+					"businessDetails",
+					"currency",
+					"contactDetails",
+					"items",
+					"total",
+					"title",
+					"termsNotes",
+					"compiledTermsNotes",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"ListSchedulesResponseDto": {
+				"type": "object",
+				"properties": {
+					"schedules": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/GetScheduleResponseDto"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total number of Schedules",
+						"example": 100
+					}
+				},
+				"required": ["schedules", "total"]
+			},
+			"UpdateInvoiceScheduleDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"name": {
+						"type": "string"
+					},
+					"contactDetails": {
+						"$ref": "#/components/schemas/ContactDetailsDto"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"liveMode": {
+						"type": "boolean"
+					},
+					"businessDetails": {
+						"$ref": "#/components/schemas/BusinessDetailsDto"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/InvoiceItemDto"
+						}
+					},
+					"discount": {
+						"$ref": "#/components/schemas/DiscountDto"
+					},
+					"termsNotes": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"altId",
+					"altType",
+					"name",
+					"contactDetails",
+					"schedule",
+					"liveMode",
+					"businessDetails",
+					"currency",
+					"items",
+					"discount"
+				]
+			},
+			"UpdateInvoiceScheduleResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "object",
+						"description": "Schedule Status",
+						"example": "draft"
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"invoices": {
+						"description": "List of invoices",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+						}
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes",
+						"example": "Confidential"
+					},
+					"compiledTermsNotes": {
+						"type": "string",
+						"description": "Compiled terms notes",
+						"example": "Confidential"
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"altId",
+					"altType",
+					"name",
+					"invoices",
+					"businessDetails",
+					"currency",
+					"contactDetails",
+					"items",
+					"total",
+					"title",
+					"termsNotes",
+					"compiledTermsNotes",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"DeleteInvoiceScheduleResponseDto": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean",
+						"description": "success",
+						"example": true
+					}
+				},
+				"required": ["success"]
+			},
+			"CardDto": {
+				"type": "object",
+				"properties": {
+					"brand": {
+						"type": "string"
+					},
+					"last4": {
+						"type": "string"
+					}
+				},
+				"required": ["brand", "last4"]
+			},
+			"USBankAccountDto": {
+				"type": "object",
+				"properties": {
+					"bank_name": {
+						"type": "string"
+					},
+					"last4": {
+						"type": "string"
+					}
+				},
+				"required": ["bank_name", "last4"]
+			},
+			"AutoPaymentDetailsDto": {
+				"type": "object",
+				"properties": {
+					"enable": {
+						"type": "boolean"
+					},
+					"type": {
+						"type": "string"
+					},
+					"paymentMethodId": {
+						"type": "string"
+					},
+					"customerId": {
+						"type": "string"
+					},
+					"card": {
+						"$ref": "#/components/schemas/CardDto"
+					},
+					"usBankAccount": {
+						"$ref": "#/components/schemas/USBankAccountDto"
+					}
+				},
+				"required": ["enable"]
+			},
+			"ScheduleInvoiceScheduleDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"liveMode": {
+						"type": "boolean"
+					},
+					"autoPayment": {
+						"description": "auto-payment configuration",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/AutoPaymentDetailsDto"
+							}
+						]
+					}
+				},
+				"required": ["altId", "altType", "liveMode"]
+			},
+			"ScheduleInvoiceScheduleResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "object",
+						"description": "Schedule Status",
+						"example": "draft"
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"invoices": {
+						"description": "List of invoices",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+						}
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes",
+						"example": "Confidential"
+					},
+					"compiledTermsNotes": {
+						"type": "string",
+						"description": "Compiled terms notes",
+						"example": "Confidential"
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"altId",
+					"altType",
+					"name",
+					"invoices",
+					"businessDetails",
+					"currency",
+					"contactDetails",
+					"items",
+					"total",
+					"title",
+					"termsNotes",
+					"compiledTermsNotes",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"AutoPaymentScheduleDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"id": {
+						"type": "string"
+					},
+					"autoPayment": {
+						"description": "auto-payment configuration",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/AutoPaymentDetailsDto"
+							}
+						]
+					}
+				},
+				"required": ["altId", "altType", "id", "autoPayment"]
+			},
+			"AutoPaymentInvoiceScheduleResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "object",
+						"description": "Schedule Status",
+						"example": "draft"
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"invoices": {
+						"description": "List of invoices",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+						}
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes",
+						"example": "Confidential"
+					},
+					"compiledTermsNotes": {
+						"type": "string",
+						"description": "Compiled terms notes",
+						"example": "Confidential"
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"altId",
+					"altType",
+					"name",
+					"invoices",
+					"businessDetails",
+					"currency",
+					"contactDetails",
+					"items",
+					"total",
+					"title",
+					"termsNotes",
+					"compiledTermsNotes",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"CancelInvoiceScheduleDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					}
+				},
+				"required": ["altId", "altType"]
+			},
+			"CancelInvoiceScheduleResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Schedule Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "object",
+						"description": "Schedule Status",
+						"example": "draft"
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"schedule": {
+						"$ref": "#/components/schemas/ScheduleOptionsDto"
+					},
+					"invoices": {
+						"description": "List of invoices",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+						}
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"items": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes",
+						"example": "Confidential"
+					},
+					"compiledTermsNotes": {
+						"type": "string",
+						"description": "Compiled terms notes",
+						"example": "Confidential"
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"altId",
+					"altType",
+					"name",
+					"invoices",
+					"businessDetails",
+					"currency",
+					"contactDetails",
+					"items",
+					"total",
+					"title",
+					"termsNotes",
+					"compiledTermsNotes",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"SentToDto": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"description": "Email Address",
+						"example": ["alex@example.com"],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"emailCc": {
+						"description": "cc to be kept in any sent out emails",
+						"example": ["alex@example.com"],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"emailBcc": {
+						"description": "bcc to be kept in any sent out emails",
+						"example": ["alex@example.com"],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"phoneNo": {
+						"description": "Contact Phone Number",
+						"example": ["+1-214-559-6993"],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				},
+				"required": ["email"]
+			},
+			"Text2PayDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"name": {
+						"type": "string",
+						"description": "Invoice Name",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"$ref": "#/components/schemas/BusinessDetailsDto"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency code",
+						"example": "USD"
+					},
+					"items": {
+						"description": "An array of items for the invoice.",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/InvoiceItemDto"
+						}
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes, Also supports HTML markups",
+						"example": "<p>This is a default terms.</p>"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title for the invoice",
+						"example": "INVOICE"
+					},
+					"contactDetails": {
+						"description": "Contact information to send the invoice to",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "string",
+						"description": "Invoice Number",
+						"example": "1001"
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-14"
+					},
+					"sentTo": {
+						"$ref": "#/components/schemas/SentToDto"
+					},
+					"liveMode": {
+						"type": "boolean"
+					},
+					"id": {
+						"type": "string",
+						"description": "id of invoice to update. If skipped, a new invoice will be created"
+					},
+					"includeTermsNote": {
+						"type": "boolean",
+						"description": "include terms & notes with receipts",
+						"example": true
+					},
+					"action": {
+						"type": "string",
+						"description": "create invoice in draft mode or send mode",
+						"example": "draft",
+						"enum": ["draft", "send"]
+					},
+					"userId": {
+						"type": "string",
+						"description": "id of user generating invoice"
+					},
+					"discount": {
+						"$ref": "#/components/schemas/DiscountDto"
+					}
+				},
+				"required": [
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"currency",
+					"items",
+					"contactDetails",
+					"issueDate",
+					"sentTo",
+					"liveMode",
+					"action",
+					"userId"
+				]
+			},
+			"Text2PayInvoiceResponseDto": {
+				"type": "object",
+				"properties": {
+					"invoice": {
+						"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+					},
+					"invoiceUrl": {
+						"type": "string",
+						"description": "preview url of generated invoice"
+					}
+				},
+				"required": ["invoice", "invoiceUrl"]
+			},
+			"GenerateInvoiceNumberResponseDto": {
+				"type": "object",
+				"properties": {
+					"invoiceNumber": {
+						"type": "number",
+						"description": "Invoice Number",
+						"example": "19"
+					}
+				}
+			},
+			"CreateInvoiceDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"name": {
+						"type": "string",
+						"description": "Invoice Name",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"$ref": "#/components/schemas/BusinessDetailsDto"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency code",
+						"example": "USD"
+					},
+					"items": {
+						"description": "An array of items for the invoice.",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/InvoiceItemDto"
+						}
+					},
+					"discount": {
+						"$ref": "#/components/schemas/DiscountDto"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes, Also supports HTML markups",
+						"example": "<p>This is a default terms.</p>"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title for the invoice",
+						"example": "INVOICE"
+					},
+					"contactDetails": {
+						"description": "Contact information to send the invoice to",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "string",
+						"description": "Invoice Number",
+						"example": "1001"
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-14"
+					},
+					"sentTo": {
+						"$ref": "#/components/schemas/SentToDto"
+					},
+					"liveMode": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"currency",
+					"items",
+					"discount",
+					"contactDetails",
+					"issueDate",
+					"sentTo",
+					"liveMode"
+				]
+			},
+			"OldCreateInvoiceDTO": {
+				"type": "object",
+				"properties": {}
+			},
+			"CreateInvoiceResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "string",
+						"description": "Invoice Status",
+						"example": "draft",
+						"enum": [
+							"draft",
+							"sent",
+							"payment_processing",
+							"paid",
+							"void",
+							"partially_paid"
+						]
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"amountPaid": {
+						"type": "number",
+						"description": "Amount Paid",
+						"example": 0
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "number",
+						"description": "Invoice Number",
+						"example": "19"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"invoiceItems": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"amountDue": {
+						"type": "number",
+						"description": "Total Amount Due",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"amountPaid",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"invoiceNumber",
+					"currency",
+					"contactDetails",
+					"issueDate",
+					"dueDate",
+					"invoiceItems",
+					"total",
+					"title",
+					"amountDue",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"TotalSummaryDto": {
+				"type": "object",
+				"properties": {
+					"subTotal": {
+						"type": "number",
+						"description": "subTotal",
+						"example": 999
+					},
+					"discount": {
+						"type": "number",
+						"description": "discount",
+						"example": 0
+					}
+				},
+				"required": ["subTotal", "discount"]
+			},
+			"GetInvoiceResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "string",
+						"description": "Invoice Status",
+						"example": "draft",
+						"enum": [
+							"draft",
+							"sent",
+							"payment_processing",
+							"paid",
+							"void",
+							"partially_paid"
+						]
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"amountPaid": {
+						"type": "number",
+						"description": "Amount Paid",
+						"example": 0
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "number",
+						"description": "Invoice Number",
+						"example": "19"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"invoiceItems": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"amountDue": {
+						"type": "number",
+						"description": "Total Amount Due",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"totalSummary": {
+						"$ref": "#/components/schemas/TotalSummaryDto"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"amountPaid",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"invoiceNumber",
+					"currency",
+					"contactDetails",
+					"issueDate",
+					"dueDate",
+					"invoiceItems",
+					"total",
+					"title",
+					"amountDue",
+					"createdAt",
+					"updatedAt",
+					"totalSummary"
+				]
+			},
+			"ListInvoicesResponseDto": {
+				"type": "object",
+				"properties": {
+					"invoices": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/GetInvoiceResponseDto"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total number of invoices",
+						"example": 100
+					}
+				},
+				"required": ["invoices", "total"]
+			},
+			"UpdateInvoiceDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"name": {
+						"type": "string",
+						"description": "Name to be updated",
+						"example": "New Invoice"
+					},
+					"title": {
+						"type": "string",
+						"description": "Title for the invoice",
+						"example": "INVOICE"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"description": {
+						"type": "string",
+						"description": "Description",
+						"example": "ABC Corp payments"
+					},
+					"businessDetails": {
+						"description": "Business details which need to be updated",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "string",
+						"description": "Invoice Number",
+						"example": "1001"
+					},
+					"contactId": {
+						"type": "string",
+						"description": "Id of the contact which you need to send the invoice",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"contactDetails": {
+						"$ref": "#/components/schemas/ContactDetailsDto"
+					},
+					"termsNotes": {
+						"type": "string",
+						"description": "Terms notes, Also supports HTML markups",
+						"example": "<p>This is a default terms.</p>"
+					},
+					"discount": {
+						"$ref": "#/components/schemas/DiscountDto"
+					},
+					"invoiceItems": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/InvoiceItemDto"
+						}
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Payment mode"
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-14"
+					}
+				},
+				"required": [
+					"altId",
+					"altType",
+					"name",
+					"currency",
+					"invoiceItems",
+					"issueDate",
+					"dueDate"
+				]
+			},
+			"UpdateInvoiceResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "string",
+						"description": "Invoice Status",
+						"example": "draft",
+						"enum": [
+							"draft",
+							"sent",
+							"payment_processing",
+							"paid",
+							"void",
+							"partially_paid"
+						]
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"amountPaid": {
+						"type": "number",
+						"description": "Amount Paid",
+						"example": 0
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "number",
+						"description": "Invoice Number",
+						"example": "19"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"invoiceItems": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"amountDue": {
+						"type": "number",
+						"description": "Total Amount Due",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"amountPaid",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"invoiceNumber",
+					"currency",
+					"contactDetails",
+					"issueDate",
+					"dueDate",
+					"invoiceItems",
+					"total",
+					"title",
+					"amountDue",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"DeleteInvoiceResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "string",
+						"description": "Invoice Status",
+						"example": "draft",
+						"enum": [
+							"draft",
+							"sent",
+							"payment_processing",
+							"paid",
+							"void",
+							"partially_paid"
+						]
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"amountPaid": {
+						"type": "number",
+						"description": "Amount Paid",
+						"example": 0
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "number",
+						"description": "Invoice Number",
+						"example": "19"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"invoiceItems": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"amountDue": {
+						"type": "number",
+						"description": "Total Amount Due",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"amountPaid",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"invoiceNumber",
+					"currency",
+					"contactDetails",
+					"issueDate",
+					"dueDate",
+					"invoiceItems",
+					"total",
+					"title",
+					"amountDue",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"VoidInvoiceDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					}
+				},
+				"required": ["altId", "altType"]
+			},
+			"VoidInvoiceResponseDto": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Invoice Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"status": {
+						"type": "string",
+						"description": "Invoice Status",
+						"example": "draft",
+						"enum": [
+							"draft",
+							"sent",
+							"payment_processing",
+							"paid",
+							"void",
+							"partially_paid"
+						]
+					},
+					"liveMode": {
+						"type": "boolean",
+						"description": "Live Mode",
+						"example": false
+					},
+					"amountPaid": {
+						"type": "number",
+						"description": "Amount Paid",
+						"example": 0
+					},
+					"altId": {
+						"type": "string",
+						"description": "Location Id or Agency Id",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"enum": ["location"]
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the invoice",
+						"example": "New Invoice"
+					},
+					"businessDetails": {
+						"description": "Business Details",
+						"example": {
+							"name": "Alex",
+							"address": {
+								"addressLine1": "9931 Beechwood",
+								"city": "St. Houston",
+								"state": "TX",
+								"countryCode": "USA",
+								"postalCode": "559-6993"
+							},
+							"phoneNo": "+1-214-559-6993",
+							"website": "www.example.com"
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/BusinessDetailsDto"
+							}
+						]
+					},
+					"invoiceNumber": {
+						"type": "number",
+						"description": "Invoice Number",
+						"example": "19"
+					},
+					"currency": {
+						"type": "string",
+						"description": "Currency",
+						"example": "USD"
+					},
+					"contactDetails": {
+						"description": "Contact Details",
+						"example": {
+							"id": "c6tZZU0rJBf30ZXx9Gli",
+							"phoneNo": "+1-214-559-6993",
+							"email": "alex@example.com",
+							"customFields": [],
+							"name": "Alex",
+							"address": {
+								"countryCode": "US"
+							}
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/ContactDetailsDto"
+							}
+						]
+					},
+					"issueDate": {
+						"type": "string",
+						"description": "Issue date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"dueDate": {
+						"type": "string",
+						"description": "Due date in YYYY-MM-DD format",
+						"example": "2023-01-01"
+					},
+					"discount": {
+						"description": "Discount",
+						"example": {
+							"type": "percentage",
+							"value": 0
+						},
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/DiscountDto"
+							}
+						]
+					},
+					"invoiceItems": {
+						"description": "Invoice Items",
+						"example": [
+							{
+								"taxes": [],
+								"_id": "c6tZZU0rJBf30ZXx9Gli",
+								"productId": "c6tZZU0rJBf30ZXx9Gli",
+								"priceId": "c6tZZU0rJBf30ZXx9Gli",
+								"currency": "USD",
+								"name": "Macbook Pro",
+								"qty": 1,
+								"amount": 999
+							}
+						],
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"total": {
+						"type": "number",
+						"description": "Total Amount",
+						"example": 999
+					},
+					"title": {
+						"type": "string",
+						"description": "Title",
+						"example": "INVOICE"
+					},
+					"amountDue": {
+						"type": "number",
+						"description": "Total Amount Due",
+						"example": 999
+					},
+					"createdAt": {
+						"type": "string",
+						"description": "created at",
+						"example": "2023-12-12T09:27:42.355Z"
+					},
+					"updatedAt": {
+						"type": "string",
+						"description": "updated at",
+						"example": "2023-12-12T09:27:42.355Z"
+					}
+				},
+				"required": [
+					"_id",
+					"status",
+					"liveMode",
+					"amountPaid",
+					"altId",
+					"altType",
+					"name",
+					"businessDetails",
+					"invoiceNumber",
+					"currency",
+					"contactDetails",
+					"issueDate",
+					"dueDate",
+					"invoiceItems",
+					"total",
+					"title",
+					"amountDue",
+					"createdAt",
+					"updatedAt"
+				]
+			},
+			"InvoiceSettingsSenderConfigurationDto": {
+				"type": "object",
+				"properties": {
+					"fromName": {
+						"type": "string",
+						"description": "Sender name to be used while sending invoice",
+						"example": "Alex"
+					},
+					"fromEmail": {
+						"type": "string",
+						"description": "Email id to be used while sending out invoices",
+						"example": "alex@example.com"
+					}
+				}
+			},
+			"SendInvoiceDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"userId": {
+						"type": "string",
+						"description": "Please ensure that the UserId corresponds to an authorized personnel, either by an employee ID or agency ID, to access this location. This account will serve as the primary channel for all future communications and updates.",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"action": {
+						"type": "string",
+						"enum": ["sms_and_email", "send_manually", "email", "sms"]
+					},
+					"liveMode": {
+						"type": "boolean"
+					},
+					"sentFrom": {
+						"description": "sender details for invoice, valid only if invoice is not sent manually",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/InvoiceSettingsSenderConfigurationDto"
+							}
+						]
+					}
+				},
+				"required": ["altId", "altType", "userId", "action", "liveMode"]
+			},
+			"SendInvoicesResponseDto": {
+				"type": "object",
+				"properties": {
+					"invoice": {
+						"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+					},
+					"smsData": {
+						"type": "object"
+					},
+					"emailData": {
+						"type": "object"
+					}
+				},
+				"required": ["invoice", "smsData", "emailData"]
+			},
+			"ChequeDto": {
+				"type": "object",
+				"properties": {
+					"number": {
+						"type": "string",
+						"description": "check number",
+						"example": "129-129-129-912"
+					}
+				},
+				"required": ["number"]
+			},
+			"RecordPaymentDto": {
+				"type": "object",
+				"properties": {
+					"altId": {
+						"type": "string",
+						"description": "location Id / company Id based on altType",
+						"example": "6578278e879ad2646715ba9c"
+					},
+					"altType": {
+						"type": "string",
+						"description": "Alt Type",
+						"enum": ["location"],
+						"example": "location"
+					},
+					"mode": {
+						"type": "string",
+						"description": "manual payment method",
+						"enum": ["cash", "card", "cheque", "bank_transfer", "other"],
+						"example": "card"
+					},
+					"card": {
+						"$ref": "#/components/schemas/CardDto"
+					},
+					"cheque": {
+						"$ref": "#/components/schemas/ChequeDto"
+					},
+					"notes": {
+						"type": "string",
+						"description": "Any note to be recorded with the transaction",
+						"example": "This was a direct payment"
+					},
+					"amount": {
+						"type": "number",
+						"description": "Amount to be paid against the invoice.",
+						"example": 999
+					}
+				},
+				"required": ["altId", "altType", "mode", "card", "cheque", "notes"]
+			},
+			"RecordPaymentResponseDto": {
+				"type": "object",
+				"properties": {
+					"success": {
+						"type": "boolean",
+						"description": "status",
+						"example": true
+					},
+					"invoice": {
+						"$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+					}
+				},
+				"required": ["success", "invoice"]
+			}
+		}
+	}
+}
