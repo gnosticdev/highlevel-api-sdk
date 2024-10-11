@@ -1,12 +1,8 @@
 import { describe, expect, it } from 'bun:test'
 import { ScopesBuilder } from '../src/client'
 
-const MockCompanyScopesBuilder = class extends ScopesBuilder<'Company'> {}
-const MockSubAccountScopesBuilder = class extends ScopesBuilder<'Sub-Account'> {
-	getAllScopes(type?: 'names' | 'readWrite' | 'literals', array?: boolean) {
-		return super.getAllScopes(type, array)
-	}
-}
+const MockAgencyScopesBuilder = ScopesBuilder<'Agency'>
+const MockSubAccountScopesBuilder = ScopesBuilder<'Sub-Account'>
 
 describe('ScopesBuilder', () => {
 	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })
@@ -20,7 +16,7 @@ describe('ScopesBuilder', () => {
 describe('add', () => {
 	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })
 	it('should add a scope to the collection', () => {
-		scopes.add('businesses.readonly')
+		scopes.add(['businesses.readonly'])
 		expect(scopes.has('businesses.readonly')).toBe(true)
 	})
 	it('should add an array of scopes to the collection', () => {
@@ -34,17 +30,18 @@ describe('add', () => {
 })
 
 describe('allAvailable', () => {
-	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })
-	it('should return all available scopes', () => {
-		expect(scopes.all()).toBeArrayOfSize(35)
+	const agencyScopes = new MockAgencyScopesBuilder({ accessType: 'Agency' })
+	const subAccountScopes = new MockSubAccountScopesBuilder({
+		accessType: 'Sub-Account',
 	})
-	it('should return all available scope names', () => {
-		expect(scopes.getAllScopes('names', true)).toBeArrayOfSize(21)
+	it('should return all available scopes for agency', () => {
+		expect(agencyScopes.allAvailable()).toBeString()
+		expect(agencyScopes.allAvailable()).not.toBeEmpty()
+		expect(agencyScopes.allAvailable()).toInclude('oauth.write')
 	})
-	it('should return all available scope names with access type', () => {
-		expect(scopes.getAllScopes('readWrite', true)).toBeArrayOfSize(2)
-	})
-	it('should return all available scope literals', () => {
-		expect(scopes.getAllScopes('literals')).toBeTypeOf('string')
+	it('should return all available scopes for sub-account', () => {
+		expect(subAccountScopes.allAvailable()).toBeString()
+		expect(subAccountScopes.allAvailable()).not.toBeEmpty()
+		expect(subAccountScopes.allAvailable()).toInclude('businesses.readonly')
 	})
 })
