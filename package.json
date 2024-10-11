@@ -1,6 +1,6 @@
 {
   "name": "@gnosticdev/highlevel-sdk",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "repository": {
     "url": "https://github.com/gnosticdev/highlevel-api-sdk",
     "type": "git"
