@@ -5,6 +5,9 @@ const packageJsonPath = './package.json'
 const generatedTypesPath = './dist/generated/v2/openapi'
 const clientDistPath = './dist/client'
 
+// Ensure dist directory is removed
+await Bun.$`rm -rf dist`.catch(() => {})
+
 // run tsc to ensure types are built
 await Bun.$`tsc -p tsconfig.build.json`.catch((err) => {
 	console.error('Error building types:', err)
@@ -31,8 +34,8 @@ const clientFiles = fs
 // Create exports object
 const exports: Record<string, { import: string; types: string }> = {
 	'.': {
-		import: './dist/client/index.js',
-		types: './dist/client/index.d.ts',
+		import: './dist/client/main.js',
+		types: './dist/client/main.d.ts',
 	},
 }
 

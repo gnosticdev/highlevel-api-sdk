@@ -1,5 +1,0 @@
-export * from '../lib/scopes-types'
-export * from './locations'
-export * from './main'
-export * from './oauth'
-export * from './scopes'

@@ -16,6 +16,14 @@ Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build y
 bun add @gnosticdev/highlevel-sdk
 ```
 
+## Usage
+
+Use the types for each endpoint by importing them directly:
+
+```ts
+import type { Locations } from "@gnosticdev/highlevel-sdk/types/locations"
+```
+
 ## Scopes Builder
 
 You can use the scopes builder to add scopes in a typesafe way, making sure your marketplace app and code match.
