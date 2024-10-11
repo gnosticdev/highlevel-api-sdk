@@ -14,7 +14,7 @@ const OTHER_FILES = ['scopes.json', 'webhooks.json']
 
 const TEMP_DIR = path.join(process.cwd(), 'temp-schemas-json')
 const FINAL_OPENAPI_DIR = path.join(process.cwd(), 'schemas', 'openapi')
-const FINAL_OTHER_DIR = 'schemas/other'
+const FINAL_OTHER_DIR = path.join(process.cwd(), 'schemas', 'other')
 
 if (import.meta.main) {
 	main().catch((error) => {

@@ -1,4 +1,7 @@
+import path from 'node:path'
 import type { OpenAPI3, SchemaObject } from 'openapi-typescript'
+import { objectEntries } from 'src/lib/utils'
+import { OTHER_SCHEMAS_DIR, OTHER_TYPES_DIR } from '../src/lib/constants'
 
 interface WebhookSchema {
 	title: string
@@ -49,33 +52,15 @@ export function convertWebhooksToOpenAPI(webhooks: WebhookSchema[]): OpenAPI3 {
 				properties: webhook.jsonSchema.properties,
 			}
 		}
-
-		openAPISchema.paths![`/webhooks/${schemaName}`] = {
-			post: {
-				summary: `Receive ${webhook.title} webhook`,
-				requestBody: {
-					content: {
-						'application/json': {
-							schema: {
-								$ref: `#/components/schemas/${schemaName}`,
-							},
-						},
-					},
-				},
-				responses: {
-					'200': {
-						description: 'Webhook received successfully',
-					},
-				},
-			},
-		}
 	}
 
 	return openAPISchema
 }
 
 if (import.meta.main) {
-	const webhooksJSON = await Bun.file('schemas/other/webhooks.json').json()
+	const webhooksJSON = await Bun.file(
+		path.join(OTHER_SCHEMAS_DIR, 'webhooks.json'),
+	).json()
 	if (!Array.isArray(webhooksJSON)) {
 		throw new Error('Webhooks JSON is not an array')
 	}
@@ -90,8 +75,29 @@ if (import.meta.main) {
 	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)
 
 	await Bun.write(
-		'schemas/webhooks-openapi.json',
+		path.join(OTHER_SCHEMAS_DIR, 'webhooks-openapi.json'),
 		JSON.stringify(openAPISchema, null, 2),
 	)
+
+	await generateWebhooksModules(openAPISchema)
+
 	console.log('Generated OpenAPI schema for webhooks')
+}
+
+export async function generateWebhooksModules(openapiJSON: OpenAPI3) {
+	const webhooksComponents = openapiJSON.components?.schemas
+
+	if (!webhooksComponents) {
+		throw new Error('No components found in webhooks OpenAPI schema')
+	}
+
+	const webhooksModules: string[] = []
+
+	for (const [key] of objectEntries(webhooksComponents)) {
+		const webhookName = key.replace(/\s+/g, '')
+		const webhookModule = `export type ${webhookName} = import('./webhooks-openapi').components['schemas']['${webhookName}']`
+		webhooksModules.push(webhookModule)
+	}
+
+	return webhooksModules.join('\n')
 }
