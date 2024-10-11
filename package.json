@@ -1,6 +1,6 @@
 {
 	"name": "@gnosticdev/highlevel-sdk",
-	"version": "1.0.0",
+	"version": "1.1.1",
 	"repository": {
 		"url": "https://github.com/gnosticdev/highlevel-api-sdk",
 		"type": "git"
@@ -170,5 +170,9 @@
 		"start-test": "bun test --hot"
 	},
 	"type": "module",
-	"files": ["dist", "README.md", "LICENSE"]
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	]
 }
