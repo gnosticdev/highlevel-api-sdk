@@ -2,8 +2,8 @@
 /** @jsxImportSource hono/jsx */
 
 import { Database } from 'bun:sqlite'
+import { type HighLevelConfig, createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
-import { type HighLevelConfig, createHighLevelClient } from '@gnosticdev/highlevel-sdk/sdk'
 import type { Serve } from 'bun'
 import { Hono, type MiddlewareHandler } from 'hono'
 import { cors } from 'hono/cors'
@@ -22,13 +22,50 @@ type HLVariables = HighLevelConfig<'Sub-Account'> & {
 const app = new Hono<{ Variables: HLVariables }>()
 
 const scopes = new ScopesBuilder({ accessType: 'Sub-Account' })
+scopes.add([
+  'businesses.readonly',
+  'businesses.write',
+  'calendars.readonly',
+  'calendars.write',
+  'calendars/events.readonly',
+  'calendars/events.write',
+  'calendars/groups.readonly',
+  'calendars/groups.write',
+  'campaigns.readonly',
+  'contacts.readonly',
+  'contacts.write',
+  'conversations.readonly',
+  'conversations.write',
+  'conversations/message.readonly',
+  'conversations/message.write',
+  'forms.readonly',
+  'links.readonly',
+  'links.write',
+  'locations.readonly',
+  'locations/customFields.readonly',
+  'locations/customFields.write',
+  'locations/customValues.readonly',
+  'locations/customValues.write',
+  'locations/tags.readonly',
+  'locations/tags.write',
+  'locations/tasks.readonly',
+  'locations/templates.readonly',
+  'medias.readonly',
+  'medias.write',
+  'opportunities.readonly',
+  'opportunities.write',
+  'surveys.readonly',
+  'users.readonly',
+  'users.write',
+  'workflows.readonly',
+])
 
 // const client = new HighLevelClient(auth)
 const client = createHighLevelClient({
   accessType: 'Sub-Account',
   clientId: process.env.CLIENT_ID!,
   clientSecret: process.env.CLIENT_SECRET!,
-  scopes: scopes.all(),
+  scopes: scopes.get(),
   redirectUri: 'http://localhost:3000/auth/callback',
   storageFunction: async (tokenData) => {
     db.saveTokenResponse({
@@ -53,7 +90,7 @@ const checkForAccessToken: MiddlewareHandler = async (c, next) => {
     let accessToken = await client.oauth().getAccessToken()
     const _storedToken = db.getAccessToken()
     if (_storedToken) {
-      console.log(kleur.blue(`${_storedToken}`))
+      console.log(kleur.blue(`${Bun.inspect(_storedToken)}`))
       client.oauth().updateTokenData(_storedToken)
       accessToken = _storedToken.access_token
     }
@@ -67,10 +104,11 @@ const checkForAccessToken: MiddlewareHandler = async (c, next) => {
 }
 
 // Global Middleware
-app.use('*', cors(), prettyJSON(), logger())
-
-// redirect to /auth if no access token is found, except for /auth and /auth/callback
-app.use('*', checkForAccessToken)
+app.use('*', cors(), prettyJSON(), logger(), checkForAccessToken)
+app.onError((err, c) => {
+  console.error(err)
+  return c.html(<Result message='An error occurred' />)
+})
 
 // start the login flow
 app.get('/auth', async (c) => {
@@ -118,7 +156,7 @@ app.get('/auth/callback', async (c) => {
 })
 
 app.get('/authorized', async (c) => {
-  const accessToken = c.get('accessToken')
+  const accessToken = db.getAccessToken()?.access_token
   return c.html(
     <Result
       message={accessToken ? 'You are authorized' : 'No token found!'}

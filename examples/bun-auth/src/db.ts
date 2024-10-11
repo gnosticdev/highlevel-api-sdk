@@ -1,5 +1,5 @@
 import type { Database } from 'bun:sqlite'
-import type { AccessTokenResponse } from '@gnosticdev/highlevel-sdk/types'
+import type { AccessTokenResponse } from '@gnosticdev/highlevel-sdk'
 
 type DBColumns = {
 	id?: number
