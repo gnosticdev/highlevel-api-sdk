@@ -10,5 +10,8 @@
 		"debug-auth": "bun --inspect-brk run src/index.tsx",
 		"dev": "bun --hot src/index.tsx"
 	},
-	"version": "0.0.1"
+	"version": "0.0.1",
+	"devDependencies": {
+		"@types/bun": "^1.1.11"
+	}
 }

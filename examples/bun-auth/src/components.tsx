@@ -1,6 +1,6 @@
 import { raw } from 'hono/html'
 import type { FC } from 'hono/jsx'
-const cssFilePath = Bun.pathToFileURL(import.meta.resolveSync('./style.css'))
+const cssFilePath = Bun.pathToFileURL(import.meta.resolve('./style.css'))
 
 const Layout: FC = async (props) => {
   const cssText = await Bun.file(cssFilePath).text()
