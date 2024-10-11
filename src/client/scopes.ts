@@ -1,22 +1,17 @@
-import type {
-	AccessType,
-	FilteredScopeNames,
-	ReadWrite,
-	ScopeLiterals,
-} from '../lib/scopes-types'
-import { objectEntries } from '../lib/utils'
-import { scopesSchema } from '../types/scopes'
+import { objectEntries } from 'src/lib/utils'
+import { ScopesSchema } from '../generated/other/scopes'
+import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
 import type { HighLevelConfig } from './main'
 
 export class ScopesBuilder<T extends AccessType> {
-	/** the access level for your app. Sub-Account is same as Location. Company same as Agency. */
+	/** the access level for your app. Sub-Account is same as Location. Agency same as Company. */
 	accessType: T
 	/** a Set containing the scopes that have been added so far */
 	collection = new Set<ScopeLiterals<T>>()
 
 	/**
 	 * @constructor
-	 * @param accessType - the type of app access needed. 'Sub-Account' is same as 'Location' and 'Company' is same as Agency
+	 * @param accessType - the type of app access needed. 'Sub-Account' is same as 'Location' and 'Agency' is same as Agency
 	 */
 	constructor(config: Pick<HighLevelConfig<T>, 'accessType'>) {
 		this.accessType = config.accessType
@@ -32,51 +27,35 @@ export class ScopesBuilder<T extends AccessType> {
 		return this
 	}
 
-	/** Utility method to get all available scopes broken down by the scope portion
-	 * `businesses.readonly` => name: `businesses`, readwrite: `readonly`
-	 * @paramm type - the scope part to return
-	 * @param {boolean} array - return the scopes as an array instead of a string
-	 * - `names` - return the scope names only (e.g. `businesses` from `businesses.readonly`)
-	 * - `readWrite` - return only the `readonly` or `write` from a scope
-	 * - `literals` - (used by `all()` method) returns all scopes available to the given accessType in the format required by the authorization redirect uri. e.g. "businesses.read businesses.write locations.read..."
+	/**
+	 * Get all available scopes for the given access type
+	 * @returns an array of all scopes available to the given accessType
 	 */
-	getAllScopes(
-		type: 'names' | 'readWrite' | 'literals' = 'literals',
-		/**
-		 * @default false
-		 */
-		array?: boolean,
-	):
-		| Set<FilteredScopeNames<T>>
-		| Set<ReadWrite<FilteredScopeNames<T>>>
-		| ScopeLiterals<T>[] {
-		const names = new Set<FilteredScopeNames<T>>()
-		const readWrite = new Set<ReadWrite<FilteredScopeNames<T>>>()
+	private getAllScopes(): ScopeLiterals<T>[] {
 		const literals = new Set<ScopeLiterals<T>>()
-		for (const [scopeName, scopeValue] of objectEntries(scopesSchema)) {
-			for (const [access, endpoints] of objectEntries(scopeValue)) {
+
+		for (const [scopeName, scopeValue] of objectEntries(ScopesSchema)) {
+			for (const [access, endpoints] of Object.entries(scopeValue)) {
 				for (const endpoint of endpoints) {
 					if (
-						(endpoint.accessType as readonly AccessType[]).includes(
-							this.accessType,
-						)
+						Array.isArray(endpoint.accessType) &&
+						endpoint.accessType.includes(this.accessType)
 					) {
-						readWrite.add(access as ReadWrite<FilteredScopeNames<T>>)
 						literals.add(`${scopeName}.${access}` as ScopeLiterals<T>)
-						names.add(scopeName.replace('/', ' ') as FilteredScopeNames<T>)
 					}
 				}
 			}
 		}
 
-		switch (type) {
-			case 'names':
-				return array ? [...names] : names
-			case 'readWrite':
-				return array ? [...readWrite] : readWrite
-			case 'literals':
-				return array ? [...literals] : [...literals].join(' ')
-		}
+		return Array.from(literals) as ScopeLiterals<T>[]
+	}
+
+	/**
+	 * Get all available scopes for the given access type as a string
+	 * @returns a string of all scopes available to the given accessType
+	 */
+	allAvailable(): ScopeLiterals<T> {
+		return this.getAllScopes().join(' ') as ScopeLiterals<T>
 	}
 
 	/**
@@ -90,11 +69,11 @@ export class ScopesBuilder<T extends AccessType> {
 	 * client.scopes.get() // "businesses.read businesses.write"
 	 * ```
 	 */
-	get() {
-		return this.getAllScopes('literals', true) as ScopeLiterals<T>[]
+	get(): string {
+		return Array.from(this.collection).join(' ')
 	}
 
-	has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]) {
+	has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]): boolean {
 		if (!scopes) {
 			return this.collection.size > 0
 		}
@@ -102,12 +81,5 @@ export class ScopesBuilder<T extends AccessType> {
 			return scopes.every((scope) => this.collection.has(scope))
 		}
 		return this.collection.has(scopes)
-	}
-
-	/** Get all scopes for the given access type
-	 * - returns scopes as a string for use in the authorization redirect uri
-	 */
-	all(): ScopeLiterals<T>[] {
-		return this.getAllScopes('literals', true) as ScopeLiterals<T>[]
 	}
 }

@@ -1,5 +1,5 @@
 export const OPENAPI_SCHEMAS_DIR = 'schemas/openapi'
 export const OTHER_SCHEMAS_DIR = 'schemas/other'
-export const API_TYPES_DIR = 'src/types'
-export const OPENAPI_TYPES_DIR = 'src/types/openapi'
-export const OTHER_TYPES_DIR = 'src/types/other'
+export const OPENAPI_TYPES_DIR = 'src/generated/openapi'
+export const SCOPES_OUTPUT_FILE = 'src/generated/other/scopes.ts'
+export const OTHER_TYPES_DIR = 'src/generated/other'

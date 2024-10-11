@@ -1,6 +1,6 @@
 import createClient from 'openapi-fetch'
-import type { AccessType } from '../lib/scopes-types'
-import type { operations, paths } from '../types/locations'
+import type { operations, paths } from '../generated/openapi/locations'
+import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
 import type { HighLevelConfig } from './main'
 import { DEFAULTS } from './oauth'
 import { ScopesBuilder } from './scopes'
@@ -23,7 +23,7 @@ export class LocationsClient<T extends AccessType> {
 	client
 	readonly config: HighLevelConfig<T>
 	private readonly baseUrl: string
-	readonly userType: 'Location' | 'Company'
+	readonly userType: 'Location' | 'Agency'
 	readonly scopes: ScopesBuilder<T>
 	/**
 	 * creates a new locations client for use with the HighLevel API
@@ -37,11 +37,11 @@ export class LocationsClient<T extends AccessType> {
 		this.userType =
 			config.accessType === 'Sub-Account'
 				? ('Location' as const)
-				: ('Company' as const)
+				: ('Agency' as const)
 
 		this.scopes = new ScopesBuilder(this.config)
 		if (config.scopes && config.scopes.length > 0) {
-			this.scopes.add(config.scopes)
+			this.scopes.add(config.scopes as ScopeLiterals<T> | ScopeLiterals<T>[])
 		}
 		this.client = createClient<paths>({
 			baseUrl: this.baseUrl,
@@ -93,7 +93,7 @@ export class LocationsClient<T extends AccessType> {
 
 		if (error) {
 			throw new Error(
-				`Locations Error: ${error.message?.toString()}` ?? 'Unknown error',
+				`Locations Error: ${error.message?.toString() ?? 'Unknown error'}`,
 			)
 		}
 

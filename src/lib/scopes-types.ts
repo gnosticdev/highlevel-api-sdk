@@ -1,14 +1,16 @@
-import type { scopesSchema } from '../types/other/scopes'
-/**
+import type { ScopesSchema } from '../generated/other/scopes'
+/*
  * This file is used to generate the types for the scopes schema.
- * By changing the accessType to 'Sub-Account' or 'Company' autocomplete will update with the available types for that accessType.
+ * By changing the accessType to 'Sub-Account' or 'Agency' autocomplete will update with the available types for that accessType.
  *
- * _NOTE: The scopes schema are not OpenAPI schemas, which is why they are separated.
+ * _NOTE: The scopes schema are not OpenAPI schemas, which is why they are separated._
  */
+export type AccessType = 'Sub-Account' | 'Agency'
+type Scopes = typeof ScopesSchema
 
-export type AccessType = 'Sub-Account' | 'Company'
-type ScopesSchema = typeof scopesSchema
-
+/**
+ * An endpoint with permission levels for a given access type.
+ */
 type Endpoint<TAccessType extends AccessType> = {
 	methodAndEndpoint: string
 	webhookEvents: string
@@ -19,53 +21,54 @@ type KeysOfUnion<ObjectType> = ObjectType extends unknown
 	? keyof ObjectType
 	: never
 
-export type ReadWrite<TScopes extends keyof ScopesSchema> = KeysOfUnion<
-	ScopesSchema[TScopes]
+/**
+ * A permission level for a scope name. Pass in a scope name to get the available permissions.
+ * @example `readonly`, `write`
+ */
+export type Permission<TScopes extends keyof Scopes> = KeysOfUnion<
+	Scopes[TScopes]
 >
 
-export type ScopeLiterals<TAccessType extends AccessType> =
-	TAccessType extends ScopeAccess<infer TName, infer TReadWrite>
-		? TName extends FilteredScopeNames<TAccessType>
-			? TReadWrite extends ReadWrite<TName>
-				? `${TName}.${TReadWrite}`
-				: never
-			: never
-		: never
+/**
+ * A scope with permission level for a given access type.
+ * @example `businesses.readonly`, `locations.write`
+ */
+export type ScopeLiterals<TAccessType extends AccessType> = {
+	[K in FilteredScopeNames<TAccessType>]: `${K}.${Permission<K>}`
+}[FilteredScopeNames<TAccessType>]
 
+/**
+ * The access type available for a given scope name and permission level.
+ */
 export type ScopeAccess<
-	N extends keyof ScopesSchema,
-	R extends ReadWrite<N>,
-> = R extends keyof ScopesSchema[N]
-	? ScopesSchema[N][R] extends Endpoint<infer A>[]
+	N extends keyof Scopes,
+	R extends Permission<N>,
+> = R extends keyof Scopes[N]
+	? Scopes[N][R] extends Endpoint<infer A>[]
 		? A
 		: never
 	: never
 
-// Test out the autocomplete
-const access: ScopeAccess<'businesses', 'readonly'> = 'Sub-Account'
-
+/**
+ * A scope name for a given access type.
+ * @example `businesses`, `locations`
+ */
 export type FilteredScopeNames<T extends AccessType> = {
-	[K in keyof ScopesSchema]: ScopeAccess<
-		K,
-		ReadWrite<K>
-	> extends infer Accessible
-		? Accessible extends T
+	[K in keyof Scopes]: ScopeAccess<K, Permission<K>> extends infer TAccess
+		? TAccess extends T
 			? K
-			: Accessible extends readonly T[]
+			: TAccess extends readonly T[]
 				? K
 				: never
 		: never
-}[keyof ScopesSchema]
+}[keyof Scopes]
 
-export type FilteredScopesSchema<T extends AccessType> = {
+export type FilteredScopes<T extends AccessType> = {
 	[K in FilteredScopeNames<T>]: {
-		[R in ReadWrite<K>]: ScopesSchema[K][R] extends Endpoint<infer A>[]
+		[R in Permission<K>]: Scopes[K][R] extends Endpoint<infer A>[]
 			? A extends T
 				? Endpoint<A>[]
 				: never
 			: never
 	}
 }
-
-// Test out the autocomplete
-// const tester: ScopeAccess<'campaigns', 'readonly'> = 'Sub-Account'

@@ -1,4 +1,4 @@
-export const scopesSchema = {
+export const ScopesSchema = {
 	businesses: {
 		readonly: [
 			{

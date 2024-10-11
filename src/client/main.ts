@@ -1,7 +1,7 @@
 import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
 import { LocationsClient } from './locations'
+import type { TokenData } from './oauth'
 import { OauthClient } from './oauth'
-import type { TokenData } from './oauth-types'
 
 export type HighLevelConfig<T extends AccessType> = {
 	/** client_id from app settings in marketplace.
@@ -42,7 +42,7 @@ export type HighLevelConfig<T extends AccessType> = {
 	 * @see https://marketplace.gohighlevel.com/apps
 	 * @default []
 	 */
-	readonly scopes?: ScopeLiterals<T>[]
+	readonly scopes?: ScopeLiterals<T> | ScopeLiterals<T>[] | (string & {})
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
 	 * @default 'https://marketplace.gohighlevel.com/oauth/chooselocation
