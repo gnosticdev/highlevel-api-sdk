@@ -1,14 +1,24 @@
 {
 	"$schema": "https://unpkg.com/release-it/schema/release-it.json",
 	"git": {
+		"changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}",
+		"commit": true,
 		"commitMessage": "chore(release): release ${version}",
+		"push": true,
+		"tag": true,
+		"tagAnnotation": "Release ${version}",
 		"tagName": "v${version}"
 	},
 	"github": {
+		"makeLatest": true,
 		"release": true
 	},
 	"npm": {
 		"access": "public",
-		"publish": true
+		"publish": true,
+		"publishConfig": {
+			"registry": "https://registry.npmjs.org/"
+		},
+		"publishArgs": [""]
 	}
 }

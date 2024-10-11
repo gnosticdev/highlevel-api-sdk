@@ -4,3 +4,4 @@ pre-commit:
     lint:
       glob: '**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css,astro}'
       run: bun biome check {staged_files} --write --unsafe --no-errors-on-unmatched --files-ignore-unknown=true && git update-index --again
+      stage_fixed: true
