@@ -1,6 +1,6 @@
 import kleur from 'kleur'
 import createClient from 'openapi-fetch'
-import type { Oauth } from '../generated/openapi'
+import type { Oauth } from '../generated/v2/openapi'
 import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
 import type { HighLevelConfig } from './main'
 import { ScopesBuilder } from './scopes'

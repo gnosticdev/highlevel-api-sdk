@@ -1,13 +1,22 @@
 import fs from 'node:fs'
+import kleur from 'kleur'
 
 const packageJsonPath = './package.json'
-const generatedTypesPath = './dist/generated/openapi'
+const generatedTypesPath = './dist/generated/v2/openapi'
 const clientDistPath = './dist/client'
+
+// run tsc to ensure types are built
+await Bun.$`tsc -p tsconfig.build.json`.catch((err) => {
+	console.error('Error building types:', err)
+	process.exit(1)
+})
+
+console.log(kleur.green('Types built successfully'))
 
 // Read package.json
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
-// Get all type files from dist/generated/openapi
+// Get all type files from dist/generated/v2/openapi
 const typeFiles = fs
 	.readdirSync(generatedTypesPath)
 	.filter((file) => file.endsWith('.d.ts'))
@@ -30,8 +39,8 @@ const exports: Record<string, { import: string; types: string }> = {
 // Add type exports
 for (const file of typeFiles) {
 	exports[`./types/${file}`] = {
-		import: `./dist/generated/openapi/${file}.d.ts`,
-		types: `./dist/generated/openapi/${file}.d.ts`,
+		import: `./dist/generated/v2/openapi/${file}.d.ts`,
+		types: `./dist/generated/v2/openapi/${file}.d.ts`,
 	}
 }
 
@@ -50,4 +59,4 @@ packageJson.exports = exports
 // Write updated package.json
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
 
-console.log('package.json exports updated successfully!')
+console.log(kleur.green('package.json exports updated'))
