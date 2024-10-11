@@ -15,10 +15,10 @@
 	},
 	"npm": {
 		"access": "public",
+		"allowSameVersion": true,
 		"publish": true,
 		"publishConfig": {
 			"registry": "https://registry.npmjs.org/"
-		},
-		"publishArgs": [""]
+		}
 	}
 }

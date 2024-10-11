@@ -1,0 +1,12 @@
+.env*
+.gitignore
+.npmrc
+.release-it.json
+lefthook.yml
+scripts/
+src/
+tests/
+*.log
+*.test.ts
+*.spec.ts
+tsconfig.json
