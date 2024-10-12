@@ -37,6 +37,25 @@ export type ScopeLiterals<TAccessType extends AccessType> = {
 	[K in FilteredScopeNames<TAccessType>]: `${K}.${Permission<K>}`
 }[FilteredScopeNames<TAccessType>]
 
+type SubAccountScopeNames = ScopeLiterals<'Sub-Account'> extends infer T
+	? T extends `${string}/${string}`
+		? never
+		: T extends `${infer S}.${string}`
+			? S
+			: never
+	: never
+
+type AgencyScopeNames = ScopeLiterals<'Agency'> extends infer T
+	? T extends `${string}/${string}`
+		? never
+		: T extends `${infer S}.${string}`
+			? S
+			: never
+	: never
+
+export type BaseScopeNames<T extends AccessType> = T extends 'Sub-Account'
+	? SubAccountScopeNames
+	: AgencyScopeNames
 /**
  * The access type available for a given scope name and permission level.
  */

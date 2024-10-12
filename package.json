@@ -1,14 +1,62 @@
 {
 	"name": "@gnosticdev/highlevel-sdk",
 	"version": "1.1.2",
-	"repository": {
-		"url": "https://github.com/gnosticdev/highlevel-api-sdk",
-		"type": "git"
-	},
 	"author": {
 		"name": "gnosticdev",
 		"url": "https://github.com/gnosticdev"
 	},
+	"repository": {
+		"url": "https://github.com/gnosticdev/highlevel-api-sdk",
+		"type": "git"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.2",
+		"@types/bun": "^1.1.6",
+		"kleur": "^4.1.5",
+		"lefthook": "^1.7.17",
+		"openapi-typescript": "7.4.1",
+		"release-it": "^17.6.0",
+		"tsup": "^8.3.0",
+		"typescript": "^5.6.3"
+	},
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"default": "./dist/index.js",
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./webhooks": {
+			"default": "./dist/webhooks.js",
+			"import": "./dist/webhooks.js",
+			"types": "./dist/webhooks.d.ts"
+		},
+		"./types/*": {
+			"types": "./dist/types/*.d.ts"
+		},
+		"./oauth": {
+			"default": "./dist/oauth.js",
+			"import": "./dist/oauth.js",
+			"types": "./dist/oauth.d.ts"
+		},
+		"./scopes": {
+			"default": "./dist/scopes.js",
+			"import": "./dist/scopes.js",
+			"types": "./dist/scopes.d.ts"
+		},
+		"./client": {
+			"default": "./dist/client/index.js",
+			"import": "./dist/client/index.js",
+			"types": "./dist/client/index.d.ts"
+		},
+		"./client/*": {
+			"import": "./dist/client/*.js",
+			"types": "./dist/client/*.d.ts"
+		}
+	},
+	"description": "SDK for the HighLevel API",
+	"files": ["dist", "README.md", "LICENSE"],
+	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
 	"keywords": [
 		"highlevel",
 		"api",
@@ -19,137 +67,6 @@
 		"crm",
 		"marketing"
 	],
-	"devDependencies": {
-		"@biomejs/biome": "^1.9.2",
-		"@types/bun": "^1.1.6",
-		"kleur": "^4.1.5",
-		"lefthook": "^1.7.17",
-		"openapi-fetch": "^0.12.2",
-		"openapi-typescript": "7.4.1",
-		"release-it": "^17.6.0",
-		"typescript": "^5.6.3"
-	},
-	"types": "./dist/types/index.d.ts",
-	"exports": {
-		".": {
-			"import": "./dist/client/main.js",
-			"types": "./dist/client/main.d.ts"
-		},
-		"./types/locations": {
-			"import": "./dist/generated/v2/openapi/locations.d.ts",
-			"types": "./dist/generated/v2/openapi/locations.d.ts"
-		},
-		"./types/conversations": {
-			"import": "./dist/generated/v2/openapi/conversations.d.ts",
-			"types": "./dist/generated/v2/openapi/conversations.d.ts"
-		},
-		"./types/surveys": {
-			"import": "./dist/generated/v2/openapi/surveys.d.ts",
-			"types": "./dist/generated/v2/openapi/surveys.d.ts"
-		},
-		"./types/invoices": {
-			"import": "./dist/generated/v2/openapi/invoices.d.ts",
-			"types": "./dist/generated/v2/openapi/invoices.d.ts"
-		},
-		"./types/businesses": {
-			"import": "./dist/generated/v2/openapi/businesses.d.ts",
-			"types": "./dist/generated/v2/openapi/businesses.d.ts"
-		},
-		"./types/snapshots": {
-			"import": "./dist/generated/v2/openapi/snapshots.d.ts",
-			"types": "./dist/generated/v2/openapi/snapshots.d.ts"
-		},
-		"./types/saas-api": {
-			"import": "./dist/generated/v2/openapi/saas-api.d.ts",
-			"types": "./dist/generated/v2/openapi/saas-api.d.ts"
-		},
-		"./types/links": {
-			"import": "./dist/generated/v2/openapi/links.d.ts",
-			"types": "./dist/generated/v2/openapi/links.d.ts"
-		},
-		"./types/workflows": {
-			"import": "./dist/generated/v2/openapi/workflows.d.ts",
-			"types": "./dist/generated/v2/openapi/workflows.d.ts"
-		},
-		"./types/users": {
-			"import": "./dist/generated/v2/openapi/users.d.ts",
-			"types": "./dist/generated/v2/openapi/users.d.ts"
-		},
-		"./types/campaigns": {
-			"import": "./dist/generated/v2/openapi/campaigns.d.ts",
-			"types": "./dist/generated/v2/openapi/campaigns.d.ts"
-		},
-		"./types/funnels": {
-			"import": "./dist/generated/v2/openapi/funnels.d.ts",
-			"types": "./dist/generated/v2/openapi/funnels.d.ts"
-		},
-		"./types/oauth": {
-			"import": "./dist/generated/v2/openapi/oauth.d.ts",
-			"types": "./dist/generated/v2/openapi/oauth.d.ts"
-		},
-		"./types/medias": {
-			"import": "./dist/generated/v2/openapi/medias.d.ts",
-			"types": "./dist/generated/v2/openapi/medias.d.ts"
-		},
-		"./types/courses": {
-			"import": "./dist/generated/v2/openapi/courses.d.ts",
-			"types": "./dist/generated/v2/openapi/courses.d.ts"
-		},
-		"./types/payments": {
-			"import": "./dist/generated/v2/openapi/payments.d.ts",
-			"types": "./dist/generated/v2/openapi/payments.d.ts"
-		},
-		"./types/companies": {
-			"import": "./dist/generated/v2/openapi/companies.d.ts",
-			"types": "./dist/generated/v2/openapi/companies.d.ts"
-		},
-		"./types/forms": {
-			"import": "./dist/generated/v2/openapi/forms.d.ts",
-			"types": "./dist/generated/v2/openapi/forms.d.ts"
-		},
-		"./types/products": {
-			"import": "./dist/generated/v2/openapi/products.d.ts",
-			"types": "./dist/generated/v2/openapi/products.d.ts"
-		},
-		"./types/opportunities": {
-			"import": "./dist/generated/v2/openapi/opportunities.d.ts",
-			"types": "./dist/generated/v2/openapi/opportunities.d.ts"
-		},
-		"./types/index": {
-			"import": "./dist/generated/v2/openapi/index.d.ts",
-			"types": "./dist/generated/v2/openapi/index.d.ts"
-		},
-		"./types/social-media-posting": {
-			"import": "./dist/generated/v2/openapi/social-media-posting.d.ts",
-			"types": "./dist/generated/v2/openapi/social-media-posting.d.ts"
-		},
-		"./types/calendars": {
-			"import": "./dist/generated/v2/openapi/calendars.d.ts",
-			"types": "./dist/generated/v2/openapi/calendars.d.ts"
-		},
-		"./types/contacts": {
-			"import": "./dist/generated/v2/openapi/contacts.d.ts",
-			"types": "./dist/generated/v2/openapi/contacts.d.ts"
-		},
-		"./scopes": {
-			"import": "./dist/client/scopes.js",
-			"types": "./dist/client/scopes.d.ts"
-		},
-		"./main": {
-			"import": "./dist/client/main.js",
-			"types": "./dist/client/main.d.ts"
-		},
-		"./oauth": {
-			"import": "./dist/client/oauth.js",
-			"types": "./dist/client/oauth.d.ts"
-		},
-		"./locations": {
-			"import": "./dist/client/locations.js",
-			"types": "./dist/client/locations.d.ts"
-		}
-	},
-	"description": "SDK for the HighLevel API",
-	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
 	"license": "MIT",
 	"packageManager": "bun@1.21.1",
 	"private": false,
@@ -157,8 +74,8 @@
 		"access": "public"
 	},
 	"scripts": {
-		"build-package": "bun scripts/update-package-exports.ts",
-		"prepack": "bun run build-package",
+		"build-package": "bun --bun tsup --tsconfig tsconfig.build.json",
+		"prepack": "bun test && bun run build-package",
 		"generate-api-json": "bun scripts/generate-api-json.ts",
 		"generate-api-types": "bun scripts/generate-api-types.ts",
 		"generate-webhook-types": "bun scripts/generate-webhook-types.ts",
@@ -169,5 +86,7 @@
 		"start-test": "bun test --hot"
 	},
 	"type": "module",
-	"files": ["dist", "README.md", "LICENSE"]
+	"peerDependencies": {
+		"openapi-fetch": "^0.12.2"
+	}
 }

@@ -1,3 +1,5 @@
+import type { OperationObject } from 'openapi-typescript'
+
 export function objectEntries<TObj extends object>(
 	obj: TObj,
 ): [keyof TObj, TObj[keyof TObj]][] {
@@ -16,3 +18,5 @@ export async function getAuthCodeFromClient() {
 	}
 	return authCode
 }
+
+export type GetParams<T extends OperationObject> = T['requestBody']

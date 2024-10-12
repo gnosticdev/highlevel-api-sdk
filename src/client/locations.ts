@@ -1,9 +1,8 @@
 import createClient from 'openapi-fetch'
+import { DEFAULT_BASE_URL } from 'src/lib/constants'
 import type { operations, paths } from '../generated/v2/openapi/locations'
-import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
-import type { HighLevelConfig } from './main'
-import { DEFAULTS } from './oauth'
-import { ScopesBuilder } from './scopes'
+import type { HighLevelConfig } from '../types/highlevel-client'
+import type { AccessType } from '../types/scopes-builder'
 
 type SearchLocationsParams = {
 	/** key terms to search for when looking up a location */
@@ -24,7 +23,6 @@ export class LocationsClient<T extends AccessType> {
 	readonly config: HighLevelConfig<T>
 	private readonly baseUrl: string
 	readonly userType: 'Location' | 'Agency'
-	readonly scopes: ScopesBuilder<T>
 	/**
 	 * creates a new locations client for use with the HighLevel API
 	 * @constructor
@@ -33,16 +31,12 @@ export class LocationsClient<T extends AccessType> {
 	 */
 	constructor(config: HighLevelConfig<T>) {
 		this.config = config
-		this.baseUrl = config.baseUrl ?? DEFAULTS.baseUrl
+		this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL
 		this.userType =
 			config.accessType === 'Sub-Account'
 				? ('Location' as const)
 				: ('Agency' as const)
 
-		this.scopes = new ScopesBuilder(this.config)
-		if (config.scopes && config.scopes.length > 0) {
-			this.scopes.add(config.scopes as ScopeLiterals<T> | ScopeLiterals<T>[])
-		}
 		this.client = createClient<paths>({
 			baseUrl: this.baseUrl,
 		})

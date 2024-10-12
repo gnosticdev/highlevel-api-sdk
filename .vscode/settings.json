@@ -1,0 +1,6 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.experimental.updateImportsOnPaste": true,
+  "typescript.preferences.importModuleSpecifier": "project-relative"
+
+}

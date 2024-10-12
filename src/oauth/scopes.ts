@@ -1,7 +1,7 @@
 import { objectEntries } from 'src/lib/utils'
+import type { HighLevelConfig } from 'src/types/highlevel-client'
 import { ScopesSchema } from '../generated/v2/other/scopes'
-import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
-import type { HighLevelConfig } from './main'
+import type { AccessType, ScopeLiterals } from '../types/scopes-builder'
 
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Agency same as Company. */
@@ -17,7 +17,7 @@ export class ScopesBuilder<T extends AccessType> {
 		this.accessType = config.accessType
 	}
 
-	/** add a scope from the available scopes for this access type */
+	/** add a scope or an array of scopes from the available scopes for this access type */
 	add(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): this {
 		if (Array.isArray(scopes)) {
 			this.collection = new Set([...this.collection, ...scopes])
@@ -28,10 +28,10 @@ export class ScopesBuilder<T extends AccessType> {
 	}
 
 	/**
-	 * Get all available scopes for the given access type
+	 * Get **ALL** available scopes for the given access type
 	 * @returns an array of all scopes available to the given accessType
 	 */
-	private getAllScopes(): ScopeLiterals<T>[] {
+	all(): ScopeLiterals<T>[] {
 		const literals = new Set<ScopeLiterals<T>>()
 
 		for (const [scopeName, scopeValue] of objectEntries(ScopesSchema)) {
@@ -51,32 +51,26 @@ export class ScopesBuilder<T extends AccessType> {
 	}
 
 	/**
-	 * Get all available scopes for the given access type as a string
-	 * @returns a string of all scopes available to the given accessType
-	 */
-	allAvailable(): ScopeLiterals<T> {
-		return this.getAllScopes().join(' ') as ScopeLiterals<T>
-	}
-
-	/**
 	 * Returns a string of all scopes added to the builder so far.\
 	 * For use in the authorization redirect uri
 	 * @returns a string of the scopes joined by a space
 	 * @example
 	 * ```ts
-	 * client.scopes.add("businesses.read")
-	 * client.scopes.add("businesses.write")
-	 * client.scopes.get() // "businesses.read businesses.write"
+	 * client.scopes.add('businesses.read')
+	 * client.scopes.add(['calendars.write', 'workflows.readonly'])
+	 * client.scopes.get() // "businesses.read calendars.write workflows.readonly"
 	 * ```
 	 */
 	get(): string {
 		return Array.from(this.collection).join(' ')
 	}
 
-	has(scopes?: ScopeLiterals<T> | ScopeLiterals<T>[]): boolean {
-		if (!scopes) {
-			return this.collection.size > 0
-		}
+	/**
+	 * Check if the builder has a scope or an array of scopes
+	 * @param scopes - a single scope or an array of scopes
+	 * @returns true if the builder has the scope or scopes, false otherwise
+	 */
+	has(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): boolean {
 		if (Array.isArray(scopes)) {
 			return scopes.every((scope) => this.collection.has(scope))
 		}

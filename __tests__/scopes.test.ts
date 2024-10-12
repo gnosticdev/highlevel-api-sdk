@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test'
-import { ScopesBuilder } from '../src/client/scopes'
+import { ScopesBuilder } from '../src/oauth/scopes'
 
 const MockAgencyScopesBuilder = ScopesBuilder<'Agency'>
 const MockSubAccountScopesBuilder = ScopesBuilder<'Sub-Account'>
@@ -29,19 +29,21 @@ describe('add', () => {
 	})
 })
 
-describe('allAvailable', () => {
+describe('allAvailableScopes', () => {
 	const agencyScopes = new MockAgencyScopesBuilder({ accessType: 'Agency' })
 	const subAccountScopes = new MockSubAccountScopesBuilder({
 		accessType: 'Sub-Account',
 	})
 	it('should return all available scopes for agency', () => {
-		expect(agencyScopes.allAvailable()).toBeString()
-		expect(agencyScopes.allAvailable()).not.toBeEmpty()
-		expect(agencyScopes.allAvailable()).toInclude('oauth.write')
+		const scopesString = agencyScopes.all().join(' ')
+		expect(scopesString).toBeString()
+		expect(scopesString).not.toBeEmpty()
+		expect(scopesString).toInclude('oauth.readonly oauth.write')
 	})
 	it('should return all available scopes for sub-account', () => {
-		expect(subAccountScopes.allAvailable()).toBeString()
-		expect(subAccountScopes.allAvailable()).not.toBeEmpty()
-		expect(subAccountScopes.allAvailable()).toInclude('businesses.readonly')
+		const scopesArray = subAccountScopes.all()
+		expect(scopesArray).toBeArray()
+		expect(scopesArray).not.toBeEmpty()
+		expect(scopesArray).toContain('businesses.readonly')
 	})
 })

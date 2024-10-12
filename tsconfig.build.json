@@ -1,13 +1,12 @@
 {
 	"compilerOptions": {
-		"declaration": true,
 		"module": "ES2022",
 		"moduleResolution": "Bundler",
 		"noEmit": false,
 		"outDir": "./dist",
 		"rootDir": "./src"
 	},
-	"exclude": ["./src/lib/**/*", "node_modules"],
+	"exclude": ["./src/lib", "node_modules"],
 	"extends": "./tsconfig.json",
-	"include": ["./src/schema/types/**/*.ts", "./src/client/*.ts"]
+	"include": ["./src/**/*"]
 }

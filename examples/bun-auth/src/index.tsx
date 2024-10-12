@@ -2,8 +2,7 @@
 /** @jsxImportSource hono/jsx */
 
 import { Database } from 'bun:sqlite'
-import { type HighLevelConfig, createHighLevelClient } from '@gnosticdev/highlevel-sdk'
-import type {} from '@gnosticdev/highlevel-sdk'
+import { type HighLevelConfig, OauthClient, createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
 import type { Serve } from 'bun'
 import { Hono, type MiddlewareHandler } from 'hono'

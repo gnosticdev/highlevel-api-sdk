@@ -1,16 +1,18 @@
-import type { AccessType, ScopeLiterals } from '../lib/scopes-types'
-import { LocationsClient } from './locations'
-import type { TokenData } from './oauth'
-import { OauthClient } from './oauth'
+import { HighLevelClient } from '../client'
+import type { OauthClient } from '../oauth'
+import type { TokenData } from './oauth-client'
+import type { AccessType, ScopeLiterals } from './scopes-builder'
 
 export type HighLevelConfig<T extends AccessType> = {
-	/** client_id from app settings in marketplace.
+	/**
+	 * client_id from app settings in marketplace.
 	 *
 	 * **Important:** Your client_id and client_secret must have been created after your scopes were added to your app.
 	 * @see https://marketplace.gohighlevel.com/apps
 	 */
 	readonly clientId: string
-	/** client_secret from app settings in marketplace.
+	/**
+	 * client_secret from app settings in marketplace.
 	 *
 	 * **Important:** Your client_id and client_secret must have been created after your scopes were added to your app.
 	 * @see https://marketplace.gohighlevel.com/apps
@@ -31,6 +33,7 @@ export type HighLevelConfig<T extends AccessType> = {
 	readonly redirectUri: string
 	/**
 	 * base url for the api. no need to change unless you are proxying requests.
+	 * @see {@link OAUTH_DEFAULTS.baseUrl}
 	 * @default 'https://services.leadconnectorhq.com'
 	 */
 	readonly baseUrl?: string
@@ -62,42 +65,16 @@ export type HighLevelConfig<T extends AccessType> = {
 	storageFunction?: (tokenData: TokenData) => Promise<TokenData>
 }
 
-/**
- * Creates a new HighLevel API client.
- * @param config - The configuration for the client
- * @returns A new HighLevel API client
- */
-export const createHighLevelClient = <T extends AccessType>(
-	config: HighLevelConfig<T>,
-) => {
-	const oauth = new OauthClient(config)
-	return new HighLevelClient(oauth)
-}
-
-interface IHighLevelClient<T extends AccessType> {
-	locations: () => LocationsClient<T>
-	oauth: () => OauthClient<T>
-}
-
-/**
- * You can use this class to build your own HighLevel API client. You can use the pre-configured client with `createHighLevelClient`.
- */
-export class HighLevelClient<T extends AccessType>
-	implements IHighLevelClient<T>
-{
-	/** the locations client for accessing location endpoints */
-	locations: () => LocationsClient<T>
-	/** the oauth client for accessing oauth endpoints */
-	oauth: () => OauthClient<T>
-	readonly config: HighLevelConfig<T>
-	/**
-	 * creates a new HighLevel API client
-	 * @constructor
-	 * @param oauth - the oauth client created from the OauthClient class
-	 */
-	constructor(oauth: OauthClient<T>) {
-		this.locations = () => new LocationsClient(oauth.config)
-		this.oauth = () => oauth
-		this.config = oauth.config
+export function createHighLevelClient<
+	T extends AccessType,
+	TOauth extends OauthClient<T> = never,
+>(
+	config: HighLevelConfig<T> & { oauthClient?: TOauth },
+): HighLevelClient<T> | (HighLevelClient<T> & { oauth: () => TOauth }) {
+	if (config.oauthClient) {
+		return Object.assign(new HighLevelClient(config), {
+			oauth: () => config.oauthClient,
+		})
 	}
+	return new HighLevelClient(config)
 }
