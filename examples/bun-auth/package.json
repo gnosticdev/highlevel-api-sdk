@@ -3,15 +3,16 @@
 		"@gnosticdev/highlevel-sdk": "file:../..",
 		"hono": "^4.6.3"
 	},
+	"devDependencies": {
+		"@types/bun": "^1.1.11"
+	},
 	"license": "MIT",
 	"name": "@gnosticdev/highlevel-bun-auth",
 	"private": false,
 	"scripts": {
+		"clean-install": "rm -rf node_modules && bun install",
 		"debug-auth": "bun --inspect-brk run src/index.tsx",
 		"dev": "bun --hot src/index.tsx"
 	},
-	"version": "0.0.1",
-	"devDependencies": {
-		"@types/bun": "^1.1.11"
-	}
+	"version": "0.0.1"
 }

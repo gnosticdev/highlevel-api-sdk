@@ -2,7 +2,7 @@
 /** @jsxImportSource hono/jsx */
 
 import { Database } from 'bun:sqlite'
-import { type HighLevelConfig, OauthClient, createHighLevelClient } from '@gnosticdev/highlevel-sdk'
+import { type HighLevelConfig, createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
 import type { Serve } from 'bun'
 import { Hono, type MiddlewareHandler } from 'hono'
@@ -60,7 +60,6 @@ scopes.add([
   'workflows.readonly',
 ])
 
-// const client = new HighLevelClient(auth)
 const client = createHighLevelClient({
   accessType: 'Sub-Account',
   clientId: process.env.CLIENT_ID!,
@@ -87,6 +86,7 @@ const checkForAccessToken: MiddlewareHandler = async (c, next) => {
   } else {
     console.log(kleur.red('------ checking token -----'))
     console.log(kleur.blue(`${c.req.url}`))
+
     let accessToken = await client.oauth().getAccessToken()
     const _storedToken = db.getAccessToken()
     if (_storedToken) {
@@ -122,12 +122,22 @@ app.get('/locations', async (c) => {
   }
   const locationId = client.oauth().tokenData.locationId
   if (!locationId) throw new Error('Need a location ID to get locations installed!')
-  console.log(kleur.blue(`${locationId} ${!!accessToken}`))
-  const { location } = await client.locations().getLocationById({
-    locationId,
-    accessToken,
+  const { data, error } = await client.locations.GET('/locations/{locationId}', {
+    params: {
+      header: {
+        Authorization: `Bearer ${accessToken}`,
+        Version: '2021-07-28',
+      },
+      path: {
+        locationId,
+      },
+    },
   })
-  return c.json(location)
+  if (error) {
+    console.error(error)
+    return c.html(<Result message={error.message ?? 'Unknown error'} />)
+  }
+  return c.json(data)
 })
 /**
  * OAuth callback Middleware
@@ -136,15 +146,21 @@ app.get('/locations', async (c) => {
  */
 app.get('/auth/callback', async (c, next) => {
   const authCode = c.req.query('code')
-  console.log(kleur.blue(`${authCode}`))
+  console.log(kleur.blue(`authCode: ${authCode}`))
   if (!authCode) {
     console.log(kleur.red('No auth code found!'))
     return await c.html(<Result message='Invalid auth code' />)
   }
-  const tokenData = await client.oauth().exchangeToken(authCode)
-  const tokenResponse = await client.oauth().storeTokenData(tokenData)
-  c.set('accessToken', tokenResponse.access_token)
-  await next()
+  try {
+    const tokenData = await client.oauth().exchangeToken(authCode)
+
+    const tokenResponse = await client.oauth().storeTokenData(tokenData)
+    c.set('accessToken', tokenResponse.access_token)
+    await next()
+  } catch (e) {
+    console.error(e)
+    return c.html(<Result message={(e as Error).message ?? 'Unknown error'} />)
+  }
 })
 app.get('/auth/callback', async (c) => {
   const accessToken = c.get('accessToken')

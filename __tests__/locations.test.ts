@@ -1,4 +1,4 @@
-import { OauthClient } from '../src/oauth'
+import { OauthClient } from '../src/oauth/client'
 
 const oauthClient = new OauthClient({
 	accessType: 'Sub-Account',

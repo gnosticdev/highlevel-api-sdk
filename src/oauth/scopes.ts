@@ -1,5 +1,5 @@
 import { objectEntries } from 'src/lib/utils'
-import type { HighLevelConfig } from 'src/types/highlevel-client'
+import type { HighLevelConfig } from 'src/types/config'
 import { ScopesSchema } from '../generated/v2/other/scopes'
 import type { AccessType, ScopeLiterals } from '../types/scopes-builder'
 

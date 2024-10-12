@@ -1,5 +1,5 @@
 import type { Oauth } from '../generated/v2/openapi'
-import type { HighLevelConfig } from '../types'
+import type { HighLevelConfig } from './config'
 import type { AccessType, ScopeLiterals } from './scopes-builder'
 
 type AccessTokenRequest =

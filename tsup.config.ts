@@ -27,9 +27,10 @@ const clientEntries: Record<string, string> = readdirSync('src/client')
 const mainBundle = defineConfig({
 	entry: {
 		index: 'src/index.ts',
-		oauth: 'src/oauth/index.ts',
+		oauth: 'src/oauth/client.ts',
 		scopes: 'src/oauth/scopes.ts',
 		webhooks: 'src/generated/v2/other/webhooks.ts',
+		endpoints: 'src/client/endpoints.ts',
 		...clientEntries,
 		...typeEntries,
 		...openApiEntries,

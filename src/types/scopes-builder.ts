@@ -60,11 +60,11 @@ export type BaseScopeNames<T extends AccessType> = T extends 'Sub-Account'
  * The access type available for a given scope name and permission level.
  */
 export type ScopeAccess<
-	N extends keyof Scopes,
-	R extends Permission<N>,
-> = R extends keyof Scopes[N]
-	? Scopes[N][R] extends Endpoint<infer A>[]
-		? A
+	TScopes extends keyof Scopes,
+	TPermission extends Permission<TScopes>,
+> = TPermission extends keyof Scopes[TScopes]
+	? Scopes[TScopes][TPermission] extends Endpoint<infer TAccess>[]
+		? TAccess
 		: never
 	: never
 
