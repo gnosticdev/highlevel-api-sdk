@@ -1,19 +1,48 @@
-import fs from 'node:fs/promises'
 import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, { astToString } from 'openapi-typescript'
-import { OPENAPI_SCHEMAS_DIR, OPENAPI_TYPES_DIR } from '../src/lib/constants'
+import { OPENAPI_TYPES_V2_DIR } from '../src/lib/constants'
 
-const TEMP_DIR = path.join(process.cwd(), 'temp-schemas-types')
+const TEMP_DIR = 'temp-schema-types'
+
+if (import.meta.main) {
+	await createV1Types()
+	await generateOpenApiTypes()
+}
+
+async function createV1Types() {
+	const postmanJson = Bun.resolveSync('schemas/v1/postman.json', process.cwd())
+	// convert postman json to openapi json using postman-to-openapi
+	const openapiYaml = Bun.pathToFileURL('schemas/v1/openapi.yaml')
+	console.log('openapiYaml', openapiYaml.pathname)
+	// change the openapi version to 3.1.0 then write to file
+	const yaml =
+		await Bun.$`bunx --bun postman-to-openapi ${postmanJson} | sed 's/3.0.0/3.1.0/'`.blob()
+	await Bun.write(openapiYaml.pathname, yaml)
+	console.log(
+		kleur.green('Successfully converted postman json to openapi json'),
+	)
+	// convert openapi json to typescript types using openapi-typescript
+	const openapiTypes = await openapiTS(openapiYaml, {
+		version: 3.0,
+		defaultNonNullable: true,
+		exportType: true,
+	})
+	const data = astToString(openapiTypes)
+	await Bun.write('src/generated/v1/openapi.ts', data)
+	console.log(kleur.green('Successfully created openapi types for v1'))
+}
 
 /**
- * Get all the schema files. These are absolute paths.
+ * Get all the schema files as URLs.
  */
-export async function getSchemaFileUrls() {
-	const glob = new Bun.Glob(`${OPENAPI_SCHEMAS_DIR}/*.json`)
+async function getV2OpenApiFiles() {
+	// get all json files with openapi in the path somewhere
+	const glob = new Bun.Glob('schemas/v2/openapi/*.json')
 	const files = await Array.fromAsync(glob.scan())
+	console.log(files)
 	if (files.length === 0) {
-		throw new Error('No files found in schemas/apis')
+		throw new Error('No files found in schemas')
 	}
 	return files.map((file) => Bun.pathToFileURL(file))
 }
@@ -22,7 +51,8 @@ export async function getSchemaFileUrls() {
  * Generate an index file for the schemas.
  */
 async function generateIndexFile(directory: string) {
-	const schemaFiles = await fs.readdir(directory)
+	const glob = new Bun.Glob(`${directory}/*.ts`)
+	const schemaFiles = await Array.fromAsync(glob.scan())
 
 	let importData = ''
 	const exportData: {
@@ -65,9 +95,9 @@ async function createOpenApiTypesFile(file: URL) {
  * Generate types from openapi schemas. Outputs a file for each openapi schema.
  */
 export async function generateOpenApiTypes() {
-	await fs.mkdir(TEMP_DIR)
+	await Bun.$`mkdir -p ${TEMP_DIR}`
 
-	const schemaFiles = await getSchemaFileUrls()
+	const schemaFiles = await getV2OpenApiFiles()
 	const generatedFiles: string[] = []
 
 	try {
@@ -88,8 +118,8 @@ export async function generateOpenApiTypes() {
 		console.log(kleur.green('Created index file'))
 
 		// sync files to final directory
-		await fs.mkdir(OPENAPI_TYPES_DIR).catch(() => {})
-		await Bun.$`rsync ${TEMP_DIR}/ ${OPENAPI_TYPES_DIR}/`
+		await Bun.$`mkdir -p ${OPENAPI_TYPES_V2_DIR}`
+		await Bun.$`rsync -r ${TEMP_DIR}/ ${OPENAPI_TYPES_V2_DIR}/`
 
 		console.log(kleur.green('Successfully moved all files to final directory'))
 	} catch (error) {
@@ -97,10 +127,6 @@ export async function generateOpenApiTypes() {
 		process.exit(1)
 	} finally {
 		// Clean up temp directory
-		await fs.rm(TEMP_DIR, { recursive: true, force: true })
+		await Bun.$`rm -rf ${TEMP_DIR}`
 	}
-}
-
-if (import.meta.main) {
-	await generateOpenApiTypes()
 }

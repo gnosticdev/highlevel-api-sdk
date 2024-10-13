@@ -1,15 +1,18 @@
 import path from 'node:path'
-import { OTHER_SCHEMAS_DIR } from '../src/lib/constants'
-import { OTHER_TYPES_DIR } from '../src/lib/constants'
+import { CUSTOM_SCHEMAS_DIR, CUSTOM_TYPES_DIR } from '../src/lib/constants'
 
-const SCOPES_OUTPUT_FILE = path.join(OTHER_TYPES_DIR, 'scopes.ts')
+const SCOPES_OUTPUT_FILE = path.join(CUSTOM_TYPES_DIR, 'scopes.ts')
+
+if (import.meta.main) {
+	await generateScopesSchema()
+}
 
 async function generateScopesSchema() {
 	const scopesJSON = await Bun.file(
-		path.join(OTHER_SCHEMAS_DIR, 'scopes.json'),
+		path.join(CUSTOM_SCHEMAS_DIR, 'scopes.json'),
 	).json()
 	// replacer to add 'as const' to the end of accessType arrays
-	const generatedScopes = `export const scopesSchema = ${JSON.stringify(
+	const generatedScopes = `export const ScopesSchema = ${JSON.stringify(
 		scopesJSON,
 		null,
 		4,

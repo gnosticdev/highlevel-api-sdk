@@ -1,13 +1,16 @@
 import path from 'node:path'
 import openapiTS, { astToString } from 'openapi-typescript'
-import { OTHER_SCHEMAS_DIR, OTHER_TYPES_DIR } from '../src/lib/constants'
+import { CUSTOM_SCHEMAS_DIR, CUSTOM_TYPES_DIR } from '../src/lib/constants'
 import {
 	convertWebhooksToOpenAPI,
 	generateWebhooksModules,
 } from './webhooks-to-openapi'
 
-const WEBHOOKS_OPENAPI_TYPES = path.join(OTHER_TYPES_DIR, 'webhooks-openapi.ts')
-const WEBHOOKS_OUTPUT_TYPES = path.join(OTHER_TYPES_DIR, 'webhooks.ts')
+const WEBHOOKS_OPENAPI_TYPES = path.join(
+	CUSTOM_TYPES_DIR,
+	'webhooks-openapi.ts',
+)
+const WEBHOOKS_OUTPUT_TYPES = path.join(CUSTOM_TYPES_DIR, 'webhooks.ts')
 
 if (import.meta.main) {
 	await generateWebhooksTypes()
@@ -17,7 +20,7 @@ if (import.meta.main) {
  */
 async function generateWebhooksTypes() {
 	const webhooksJSON = await Bun.file(
-		path.join(OTHER_SCHEMAS_DIR, 'webhooks.json'),
+		path.join(CUSTOM_SCHEMAS_DIR, 'webhooks.json'),
 	).json()
 	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)
 

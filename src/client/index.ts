@@ -93,6 +93,7 @@ export class HighLevelClient<T extends AccessType> {
 
 type SubAccountScopeNames = FilteredScopeNames<'Sub-Account'>
 
+// TODO: limit the methods to the scopes provides in config
 // Create a type alias for the mapped type
 type SubAccountClientMap = {
 	[K in SubAccountScopeNames]: Client<

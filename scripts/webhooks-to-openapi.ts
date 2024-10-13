@@ -1,7 +1,7 @@
 import path from 'node:path'
 import type { OpenAPI3, SchemaObject } from 'openapi-typescript'
 import { objectEntries } from 'src/lib/utils'
-import { OTHER_SCHEMAS_DIR, OTHER_TYPES_DIR } from '../src/lib/constants'
+import { CUSTOM_SCHEMAS_DIR } from '../src/lib/constants'
 
 interface WebhookSchema {
 	title: string
@@ -59,7 +59,7 @@ export function convertWebhooksToOpenAPI(webhooks: WebhookSchema[]): OpenAPI3 {
 
 if (import.meta.main) {
 	const webhooksJSON = await Bun.file(
-		path.join(OTHER_SCHEMAS_DIR, 'webhooks.json'),
+		path.join(CUSTOM_SCHEMAS_DIR, 'webhooks.json'),
 	).json()
 	if (!Array.isArray(webhooksJSON)) {
 		throw new Error('Webhooks JSON is not an array')
@@ -75,7 +75,7 @@ if (import.meta.main) {
 	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)
 
 	await Bun.write(
-		path.join(OTHER_SCHEMAS_DIR, 'webhooks-openapi.json'),
+		path.join(CUSTOM_SCHEMAS_DIR, 'webhooks-openapi.json'),
 		JSON.stringify(openAPISchema, null, 2),
 	)
 
