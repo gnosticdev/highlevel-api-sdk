@@ -2,14 +2,6 @@ import { readdirSync } from 'node:fs'
 import path from 'node:path'
 import { defineConfig } from 'tsup'
 
-const typeEntries = readdirSync('src/types')
-	.filter((file) => file.endsWith('.ts') && !file.endsWith('.d.ts'))
-	.reduce((acc, file) => {
-		const name = path.parse(file).name
-		acc[`types/${name}`] = `src/types/${file}`
-		return acc
-	}, {})
-
 const openApiEntries = readdirSync('src/generated/v2/openapi')
 	.filter((file) => file.endsWith('.ts'))
 	.reduce((acc, file) => {
@@ -17,22 +9,20 @@ const openApiEntries = readdirSync('src/generated/v2/openapi')
 		return acc
 	}, {})
 
-const clientEntries: Record<string, string> = readdirSync('src/client')
+const clientEntries: Record<string, string> = readdirSync('src/clients')
 	.filter((file) => file.endsWith('.ts') && !file.endsWith('.d.ts'))
 	.reduce((acc, file) => {
-		acc[`client/${path.parse(file).name}`] = `src/client/${file}`
+		acc[`clients/${path.parse(file).name}`] = `src/clients/${file}`
 		return acc
 	}, {})
 
 const mainBundle = defineConfig({
 	entry: {
-		index: 'src/index.ts',
-		oauth: 'src/oauth/client.ts',
-		scopes: 'src/oauth/scopes.ts',
+		index: 'src/clients/highlevel/index.ts',
+		oauth: 'src/clients/oauth/index.ts',
+		scopes: 'src/lib/scopes.ts',
 		webhooks: 'src/generated/v2/other/webhooks.ts',
-		endpoints: 'src/client/endpoints.ts',
 		...clientEntries,
-		...typeEntries,
 		...openApiEntries,
 	},
 	format: ['esm'],

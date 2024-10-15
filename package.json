@@ -43,23 +43,10 @@
 			"default": "./dist/scopes.js",
 			"import": "./dist/scopes.js",
 			"types": "./dist/scopes.d.ts"
-		},
-		"./client": {
-			"default": "./dist/client/index.js",
-			"import": "./dist/client/index.js",
-			"types": "./dist/client/index.d.ts"
-		},
-		"./client/*": {
-			"import": "./dist/client/*.js",
-			"types": "./dist/client/*.d.ts"
 		}
 	},
 	"description": "SDK for the HighLevel API",
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE"
-	],
+	"files": ["dist", "README.md", "LICENSE"],
 	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
 	"keywords": [
 		"highlevel",

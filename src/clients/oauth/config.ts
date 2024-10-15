@@ -1,6 +1,6 @@
-import type { Oauth } from '../generated/v2/openapi'
-import type { HighLevelConfig } from './config'
-import type { AccessType, ScopeLiterals } from './scopes-builder'
+import type { Oauth } from '../../generated/v2/openapi'
+import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
+import type { HighLevelConfig } from '../highlevel/config'
 
 type AccessTokenRequest =
 	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded'] & {
@@ -10,6 +10,10 @@ type AccessTokenRequest =
 type RefreshTokenRequest =
 	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded']
 
+/**
+ * Search Params appended to the auth url
+ * @see https://highlevel.stoplight.io/docs/integrations/a04191c0fabf9-authorization
+ */
 export type AuthUrlParams = {
 	response_type: 'code'
 	redirect_uri: string
@@ -17,8 +21,14 @@ export type AuthUrlParams = {
 	scope: string
 }
 
+/**
+ * The params used to generate a new access token, or refresh an existing one
+ */
 export type TokenParams = AuthCodeParams | RefreshTokenRequest
 
+/**
+ * The params used to generate a new access token
+ */
 export type AuthCodeParams<
 	TGrantType extends AccessTokenRequest['grant_type'] = 'authorization_code',
 > = {
@@ -31,32 +41,48 @@ export type AuthCodeParams<
 	user_type: 'Company' | 'Location'
 }
 
+/**
+ * The params used to generate a new location access token
+ */
 export type LocationTokenParams =
 	Oauth.components['schemas']['GetLocationAccessCodeBodyDto']
 
+/**
+ * The response from the server when generating a new location access token
+ */
 export type LocationTokenResponse =
 	Oauth.components['schemas']['GetLocationAccessTokenSuccessfulResponseDto']
 
+/**
+ * The params used to search for installed locations
+ */
 export type SearchInstalledLocationParams = {
 	query: Oauth.operations['get-installed-location']['parameters']['query']
 }
 
+/**
+ * The response from the server when generating a new access token
+ */
 export type AccessTokenResponse = Required<
 	Oauth.components['schemas']['GetAccessCodeSuccessfulResponseDto']
 >
 
+/**
+ * The data stored in the token response.
+ * **NOTE** `expiresAt` is a calculated value based on the `expires_in` value from the token response.
+ */
 export type TokenData = AccessTokenResponse & {
 	expiresAt: number
 }
 
 /**
- * If providing your own auth provider, you can implement this interface and pass it into the `create` function for a given endpoint client.
+ * If providing your own auth provider, you can implement this interface and pass it into the `createHighLevelClient` function.
  */
 export interface OAuthClientInterface<T extends AccessType> {
 	/**
 	 * The time (in seconds) when the access token expires. Default expiry is 24 hours from the time it was generated.
 	 */
-	expiresAt: number
+	expiresAt: number | undefined
 	/**
      * Auto generates the authorization url for your app.
      * @see https://highlevel.stoplight.io/docs/integrations/a04191c0fabf9-authorization
@@ -69,7 +95,7 @@ export interface OAuthClientInterface<T extends AccessType> {
 	/**
 	 * The token response from the server.
 	 */
-	tokenData: TokenData
+	tokenData: TokenData | undefined
 	/**
 	 * The scopes needed for your app. These must be added to your app in the marketplace.
 	 */

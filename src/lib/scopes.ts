@@ -1,7 +1,7 @@
-import { objectEntries } from 'src/lib/utils'
-import type { HighLevelConfig } from 'src/types/config'
+import type { HighLevelConfig } from '../clients/highlevel/config'
 import { ScopesSchema } from '../generated/v2/other/scopes'
-import type { AccessType, ScopeLiterals } from '../types/scopes-builder'
+import { objectEntries } from '../lib/utils'
+import type { AccessType, ScopeLiterals } from './scopes-types'
 
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Agency same as Company. */

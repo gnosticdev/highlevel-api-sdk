@@ -1,6 +1,9 @@
-import type { TokenData } from './oauth-client'
-import type { AccessType, ScopeLiterals } from './scopes-builder'
+import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
+import type { TokenData } from '../oauth/config'
 
+/**
+ * The configuration for the HighLevel API client.
+ */
 export type HighLevelConfig<T extends AccessType> = {
 	/**
 	 * client_id from app settings in marketplace.

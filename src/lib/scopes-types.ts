@@ -17,6 +17,9 @@ type Endpoint<TAccessType extends AccessType> = {
 	accessType: readonly TAccessType[]
 }
 
+/**
+ * A helper type to get the keys of a union.
+ */
 type KeysOfUnion<ObjectType> = ObjectType extends unknown
 	? keyof ObjectType
 	: never
@@ -53,6 +56,10 @@ type AgencyScopeNames = ScopeLiterals<'Agency'> extends infer T
 			: never
 	: never
 
+/**
+ * The first part of a scope name.
+ * @example `BaseScopeNames<'Sub-Account'>` produces `businesses`, `locations`, etc...
+ */
 export type BaseScopeNames<T extends AccessType> = T extends 'Sub-Account'
 	? SubAccountScopeNames
 	: AgencyScopeNames
@@ -82,6 +89,10 @@ export type FilteredScopeNames<T extends AccessType> = {
 		: never
 }[keyof Scopes]
 
+/**
+ * A scope with permission level for a given access type.
+ * @example `FilteredScopes<'Sub-Account'>` produces `businesses.readonly`, `locations.write`, etc...
+ */
 export type FilteredScopes<T extends AccessType> = {
 	[K in FilteredScopeNames<T>]: {
 		[R in Permission<K>]: Scopes[K][R] extends Endpoint<infer A>[]

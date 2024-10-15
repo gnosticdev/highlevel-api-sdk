@@ -18,10 +18,26 @@ bun add @gnosticdev/highlevel-sdk
 
 ## Usage
 
-Use the types for each endpoint by importing them directly:
+### Endpoint Types
+
+If you just want to get types for the api endpoints, you can use them like this:
 
 ```ts
 import type { Locations } from "@gnosticdev/highlevel-sdk/types/locations"
+
+// example: the response type for the `GET /locations/{locationId}` endpoint
+
+// Note: the `NonNullable` is necessary because the API would return undefined if there are no custom values for a location
+type LocationCustomValues =
+    NonNullable<Locations.operations['get-custom-values']['responses']['200']['content']['application/json']['customValues']>
+
+  const customValues: LocationCustomValues = [{
+    fieldKey: 'contact.lead_source',
+    id: 'lead_source_id',
+    locationId: 'my_location_id',
+    name: 'Lead Source',
+    value: 'Google',
+  }]
 ```
 
 ## Scopes Builder

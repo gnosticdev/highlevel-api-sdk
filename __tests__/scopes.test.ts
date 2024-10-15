@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test'
-import { ScopesBuilder } from '../src/oauth/scopes'
+import { ScopesBuilder } from '../src/lib/scopes'
 
 const MockAgencyScopesBuilder = ScopesBuilder<'Agency'>
 const MockSubAccountScopesBuilder = ScopesBuilder<'Sub-Account'>

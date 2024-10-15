@@ -1,7 +1,8 @@
 import createClient from 'openapi-fetch'
-import type { HighLevelConfig } from 'src/types/config'
-import type * as Oauth from '../generated/v2/openapi/oauth'
-import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../lib/constants'
+import type * as Oauth from '../../generated/v2/openapi/oauth'
+import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../../lib/constants'
+import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
+import type { HighLevelConfig } from '../highlevel/config'
 import type {
 	AccessTokenResponse,
 	AuthUrlParams,
@@ -10,8 +11,7 @@ import type {
 	SearchInstalledLocationParams,
 	TokenData,
 	TokenParams,
-} from '../types/oauth-client'
-import type { AccessType, ScopeLiterals } from '../types/scopes-builder'
+} from './config'
 
 /**
  * This client has built in methods for generating tokens, refreshing tokens, and storing tokens.
@@ -21,8 +21,8 @@ import type { AccessType, ScopeLiterals } from '../types/scopes-builder'
 export class OauthClient<T extends AccessType>
 	implements OAuthClientInterface<T>
 {
-	private accessToken: string | undefined
-	private refreshToken: string | undefined
+	private _accessToken: string | undefined
+	private _refreshToken: string | undefined
 	private readonly userType
 	private client
 
@@ -66,16 +66,14 @@ export class OauthClient<T extends AccessType>
 	/**
 	 * The token data from the server.
 	 */
-	get tokenData(): TokenData {
-		if (!this._tokenData) throw new Error('tokenData not set')
+	get tokenData(): TokenData | undefined {
 		return this._tokenData
 	}
 
 	/**
 	 * The time (in seconds) when the access token expires.
 	 */
-	get expiresAt(): number {
-		if (!this._expiresAt) throw new Error('expiresAt not set')
+	get expiresAt(): number | undefined {
 		return this._expiresAt
 	}
 
@@ -126,7 +124,7 @@ export class OauthClient<T extends AccessType>
 	}
 
 	/**
-	 * Stores everything form the Token response including the accessToken, refreshToken, locationID, and adds the expiresAt time (in ms).
+	 * Stores everything from the Token response including the accessToken, refreshToken, locationID, and adds the expiresAt time (in ms).
 	 * **NOTE**: You can add a `storageFunction` to the config to store the token data in your database or cache.
 	 * @param tokenData - the token response from the server
 	 * @returns the token data with the `expiresAt` time added
@@ -134,18 +132,19 @@ export class OauthClient<T extends AccessType>
 	async storeTokenData<T>(
 		tokenData: T extends Required<AccessTokenResponse> ? T : never,
 	) {
-		const { access_token, expires_in, refresh_token } = tokenData
+		this._accessToken = tokenData.access_token
+		this._refreshToken = tokenData.refresh_token
+		this.setExpiresAt(tokenData.expires_in)
+		this.setTokenData({ ...tokenData, expiresAt: this.expiresAt! })
 
-		this.accessToken = access_token
-		this.refreshToken = refresh_token
-		this.setExpiresAt(expires_in)
-		this.setTokenData({ ...tokenData, expiresAt: this.expiresAt })
-
-		if (typeof this.storeTokenFn !== 'function') {
-			return this.tokenData
+		if (typeof this.storeTokenFn === 'function') {
+			return await this.storeTokenFn({
+				...tokenData,
+				expiresAt: this.expiresAt!,
+			})
 		}
 
-		return this.storeTokenFn({ ...tokenData, expiresAt: this.expiresAt })
+		return this.tokenData
 	}
 
 	/**
@@ -154,11 +153,13 @@ export class OauthClient<T extends AccessType>
 	 */
 	private isTokenExpired() {
 		// if the token expires in the next 5 minutes, we should refresh it
-		const isExpired = this.expiresAt <= Date.now() + 5 * 60 * 1000
+		const isExpired = this.expiresAt
+			? this.expiresAt <= Date.now() + 5 * 60 * 1000
+			: true
 
 		// if we dont have a refreshToken, we can't refresh the token
 		// if we dont have an expires_at, we can't check if the token is expired
-		if (!this.refreshToken || !this.expiresAt) return true
+		if (!this._refreshToken || !this.expiresAt) return true
 
 		// otherwise return if the token is expired
 		return isExpired
@@ -171,8 +172,8 @@ export class OauthClient<T extends AccessType>
 	 */
 	async getAccessToken(authCode?: string) {
 		// Directly return the valid accessToken if available
-		if (this.accessToken && this.isTokenExpired() === false) {
-			return this.accessToken
+		if (this._accessToken && this.isTokenExpired() === false) {
+			return this._accessToken
 		}
 
 		if (authCode) {
@@ -183,13 +184,13 @@ export class OauthClient<T extends AccessType>
 			process.env.NODE_ENV === 'development' &&
 				console.log('storing token data')
 			const storedToken = await this.storeTokenData(tokenResponse)
-			return storedToken.access_token
+			return storedToken?.access_token ?? null
 		}
 
-		if (this.refreshToken) {
+		if (this._refreshToken) {
 			const tokenResponse = await this.refreshAccessToken()
 			const storedToken = await this.storeTokenData(tokenResponse)
-			return storedToken.access_token
+			return storedToken?.access_token ?? null
 		}
 
 		return null
@@ -226,13 +227,13 @@ export class OauthClient<T extends AccessType>
 	 * @returns The token response from the server.
 	 */
 	async refreshAccessToken() {
-		if (!this.refreshToken) {
+		if (!this._refreshToken) {
 			throw new Error('No refresh token available.')
 		}
 		const tokenParams: TokenParams = {
 			client_id: this.config.clientId,
 			client_secret: this.config.clientSecret,
-			refresh_token: this.refreshToken,
+			refresh_token: this._refreshToken,
 			grant_type: 'refresh_token',
 			user_type: this.userType,
 		}

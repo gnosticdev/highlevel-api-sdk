@@ -13,6 +13,7 @@ import type {
 	Links,
 	Locations,
 	Medias,
+	Oauth,
 	Opportunities,
 	Payments,
 	Products,
@@ -22,21 +23,20 @@ import type {
 	Surveys,
 	Users,
 	Workflows,
-} from '../generated/v2/openapi'
-import { OauthClient } from '../oauth/client'
-import type { HighLevelConfig } from '../types/config'
+} from '../../generated/v2/openapi'
 import type {
 	AccessType,
 	BaseScopeNames,
 	FilteredScopeNames,
-} from '../types/scopes-builder'
+} from '../../lib/scopes-types'
+import { OauthClient } from '../oauth'
+import type { HighLevelConfig } from './config'
 
 /**
  * You can use this class to build your own HighLevel API client. You can use the pre-configured client with `createHighLevelClient`.
  */
 export class HighLevelClient<T extends AccessType> {
-	/** the locations client for accessing location endpoints */
-	oauth: () => OauthClient<T>
+	oauth: Client<Oauth.paths, `${string}/${string}`> | OauthClient<T>
 	businesses: Client<Businesses.paths, `${string}/${string}`>
 	calendars: Client<Calendars.paths, `${string}/${string}`>
 	campaigns: Client<Campaigns.paths, `${string}/${string}`>
@@ -66,7 +66,7 @@ export class HighLevelClient<T extends AccessType> {
 	 */
 	constructor(config: HighLevelConfig<T>) {
 		this.config = config
-		this.oauth = () => new OauthClient(config)
+		this.oauth = createClient<Oauth.paths>(config)
 		this.businesses = createClient<Businesses.paths>(config)
 		this.calendars = createClient<Calendars.paths>(config)
 		this.campaigns = createClient<Campaigns.paths>(config)
@@ -111,16 +111,32 @@ type AgencyClientMap = {
 	>
 }
 
+/**
+ * Creates a new HighLevel API client with built in oauth support.
+ * @returns A new HighLevel API client.
+ */
 export function createHighLevelClient<T extends AccessType>(
 	config: HighLevelConfig<T> & {
+		/**
+		 * Can pass in a custom oauth client - must implement `OauthClientInterface`.
+		 *
+		 * @example
+		 * ```ts
+		 * const customOauthClient = new OauthClient({...})
+		 * const client = createHighLevelClient({
+		 * 	authCode: '1234567890',
+		 * 	oauthClient: new CustomOauthClient(config)
+		 * })
+		 * ```
+		 */
 		oauthClient?: OauthClient<T>
 	},
-): HighLevelClient<T> {
-	const client = new HighLevelClient(config)
-	if (config.oauthClient) {
-		return Object.assign(client, {
-			oauth: () => config.oauthClient,
-		})
+): HighLevelClient<T> & {
+	oauth: OauthClient<T>
+} {
+	const customOauthClient = config.oauthClient || new OauthClient(config)
+	return {
+		...new HighLevelClient(config),
+		oauth: customOauthClient,
 	}
-	return client
 }

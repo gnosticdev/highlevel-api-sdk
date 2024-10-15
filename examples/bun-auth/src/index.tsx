@@ -13,53 +13,32 @@ import kleur from 'kleur'
 import { Home, Links, Result } from './components'
 import { createTokensDB } from './db'
 
-export const db = createTokensDB(new Database('./db.sqlite', { create: true }))
+/**
+ * Our database with custom methods for storing and retrieving tokens
+ */
+const db = createTokensDB(new Database('db.sqlite'))
 
+/**
+ * Hono variables that can be accessed from anywhere in the app
+ */
 type HLVariables = HighLevelConfig<'Sub-Account'> & {
   accessToken: string
 }
 
+/**
+ * Initialize Hono
+ */
 const app = new Hono<{ Variables: HLVariables }>()
 
+/**
+ * Scopes for the app - can't have anything not set in the app settings
+ */
 const scopes = new ScopesBuilder({ accessType: 'Sub-Account' })
-scopes.add([
-  'businesses.readonly',
-  'businesses.write',
-  'calendars.readonly',
-  'calendars.write',
-  'calendars/events.readonly',
-  'calendars/events.write',
-  'calendars/groups.readonly',
-  'calendars/groups.write',
-  'campaigns.readonly',
-  'contacts.readonly',
-  'contacts.write',
-  'conversations.readonly',
-  'conversations.write',
-  'conversations/message.readonly',
-  'conversations/message.write',
-  'forms.readonly',
-  'links.readonly',
-  'links.write',
-  'locations.readonly',
-  'locations/customFields.readonly',
-  'locations/customFields.write',
-  'locations/customValues.readonly',
-  'locations/customValues.write',
-  'locations/tags.readonly',
-  'locations/tags.write',
-  'locations/tasks.readonly',
-  'locations/templates.readonly',
-  'medias.readonly',
-  'medias.write',
-  'opportunities.readonly',
-  'opportunities.write',
-  'surveys.readonly',
-  'users.readonly',
-  'users.write',
-  'workflows.readonly',
-])
+scopes.add(['locations.readonly', 'users.readonly'])
 
+/**
+ * Create a single instance of the OauthClient to be used throughout the application
+ */
 const client = createHighLevelClient({
   accessType: 'Sub-Account',
   clientId: process.env.CLIENT_ID!,
@@ -78,22 +57,18 @@ const client = createHighLevelClient({
   },
 })
 
-// Middleware to check accessToken, excluding /auth and /auth/callback
-const checkForAccessToken: MiddlewareHandler = async (c, next) => {
-  // dont check for /auth or /auth/callback
+/**
+ * Middleware to check, refresh, and set the access token
+ * - Excludes /auth and /auth/callback from the check
+ */
+const accessTokenMiddleware: MiddlewareHandler = async (c, next) => {
   if (c.req.path.startsWith('/auth')) {
     await next()
   } else {
     console.log(kleur.red('------ checking token -----'))
     console.log(kleur.blue(`${c.req.url}`))
 
-    let accessToken = await client.oauth().getAccessToken()
-    const _storedToken = db.getAccessToken()
-    if (_storedToken) {
-      console.log(kleur.blue(`${Bun.inspect(_storedToken)}`))
-      client.oauth().updateTokenData(_storedToken)
-      accessToken = _storedToken.access_token
-    }
+    const accessToken = await client.oauth().getAccessToken()
     if (!accessToken) {
       console.log(kleur.red('No access token found! -> redirecting to /auth'))
       return c.redirect('/auth')
@@ -104,7 +79,7 @@ const checkForAccessToken: MiddlewareHandler = async (c, next) => {
 }
 
 // Global Middleware
-app.use('*', cors(), prettyJSON(), logger(), checkForAccessToken)
+app.use('*', cors(), prettyJSON(), logger(), accessTokenMiddleware)
 app.onError((err, c) => {
   console.error(err)
   return c.html(<Result message='An error occurred' />)
@@ -115,13 +90,51 @@ app.get('/auth', async (c) => {
   return c.html(<Home buttonLink={client.oauth().getAuthorizationURL} />)
 })
 
+/**
+ * OAuth callback Middleware
+ * - intercept the auth code from the query string
+ * - exchange
+ */
+app.get('/auth/callback', async (c, next) => {
+  const authCode = c.req.query('code')
+  if (!authCode) {
+    console.error('No auth code found!')
+    return await c.html(<Result message='Invalid auth code' />)
+  }
+  try {
+    const tokenData = await client.oauth().exchangeToken(authCode)
+    const tokenResponse = await client.oauth().storeTokenData(tokenData)
+    if (!tokenResponse) throw new Error('No token response found!')
+    c.set('accessToken', tokenResponse.access_token)
+    await next()
+  } catch (e) {
+    console.error(e)
+    return c.html(<Result message={(e as Error).message ?? 'Unknown error'} />)
+  }
+})
+app.get('/auth/callback', async (c) => {
+  const accessToken = c.get('accessToken')
+  if (!accessToken) {
+    return c.redirect('/auth')
+  }
+
+  return c.redirect('/authorized')
+})
+
+/**
+ * Get the locations for the account
+ */
 app.get('/locations', async (c) => {
   const accessToken = c.get('accessToken')
   if (!accessToken) {
     return c.redirect('/auth')
   }
-  const locationId = client.oauth().tokenData.locationId
+
+  const tokenData = client.oauth().tokenData
+  if (!tokenData) throw new Error('No token data found!')
+  const locationId = tokenData.locationId
   if (!locationId) throw new Error('Need a location ID to get locations installed!')
+
   const { data, error } = await client.locations.GET('/locations/{locationId}', {
     params: {
       header: {
@@ -139,36 +152,36 @@ app.get('/locations', async (c) => {
   }
   return c.json(data)
 })
-/**
- * OAuth callback Middleware
- * - intercept the auth code from the query string
- * - exchange
- */
-app.get('/auth/callback', async (c, next) => {
-  const authCode = c.req.query('code')
-  console.log(kleur.blue(`authCode: ${authCode}`))
-  if (!authCode) {
-    console.log(kleur.red('No auth code found!'))
-    return await c.html(<Result message='Invalid auth code' />)
-  }
-  try {
-    const tokenData = await client.oauth().exchangeToken(authCode)
 
-    const tokenResponse = await client.oauth().storeTokenData(tokenData)
-    c.set('accessToken', tokenResponse.access_token)
-    await next()
-  } catch (e) {
-    console.error(e)
-    return c.html(<Result message={(e as Error).message ?? 'Unknown error'} />)
-  }
-})
-app.get('/auth/callback', async (c) => {
+/**
+ * Get the users for the account
+ */
+app.get('/users', async (c) => {
   const accessToken = c.get('accessToken')
   if (!accessToken) {
     return c.redirect('/auth')
   }
+  const tokenData = client.oauth().tokenData
+  if (!tokenData) throw new Error('No token data found!')
+  const locationId = tokenData.locationId
+  if (!locationId) throw new Error('Need a location ID to get users installed!')
 
-  return c.redirect('/authorized')
+  const { data, error } = await client.users.GET('/users/', {
+    params: {
+      header: {
+        Authorization: `Bearer ${accessToken}`,
+        Version: '2021-07-28',
+      },
+      query: {
+        locationId: locationId,
+      },
+    },
+  })
+  if (error) {
+    console.error(error)
+    return c.html(<Result message={error.message ?? 'Unknown error'} />)
+  }
+  return c.json(data)
 })
 
 app.get('/authorized', async (c) => {
@@ -194,7 +207,12 @@ app.onError((err, c) => {
 
 const allRoutes = app.routes.filter((r) => !r.path.includes('*') && !r.path.match(/^\/auth(\/)?/)).map((r) => r.path)
 
+/**
+ * Port must match what we used in the callback url in the app settings
+ */
+const PORT = process.env.PORT ? Number.parseInt(process.env.PORT) : 3000
+
 export default {
   fetch: app.fetch,
-  port: 3000,
+  port: PORT,
 } satisfies Serve
