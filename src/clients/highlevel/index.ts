@@ -1,42 +1,25 @@
-import createClient, { type Client } from 'openapi-fetch'
-// @biome-ignore format: <explanation>
+import createClient, { type Client, type ClientOptions } from 'openapi-fetch'
+// biome-ignore format: long import
 import type {
-	Businesses,
-	Calendars,
-	Campaigns,
-	Companies,
-	Contacts,
-	Conversations,
-	Forms,
-	Funnels,
-	Invoices,
-	Links,
-	Locations,
-	Medias,
-	Oauth,
-	Opportunities,
-	Payments,
-	Products,
-	SaasApi,
-	Snapshots,
-	SocialMediaPosting,
-	Surveys,
-	Users,
-	Workflows,
+	Businesses, Calendars, Campaigns, Companies, Contacts, Conversations, Forms, Funnels, Invoices, Links, Locations, Medias, Oauth, Opportunities, Payments, Products, SaasApi, Snapshots, SocialMediaPosting, Surveys, Users, Workflows,
 } from '../../generated/v2/openapi'
 import type {
 	AccessType,
 	BaseScopeNames,
 	FilteredScopeNames,
 } from '../../lib/scopes-types'
-import { OauthClient } from '../oauth'
-import type { HighLevelConfig } from './config'
+import { type BaseOauthClient, OauthClient } from '../oauth'
+import { DEFAULT_BASE_URL } from '../oauth/config'
+import type { BaseHighLevelConfig, HighLevelOauthConfig } from './config'
 
 /**
  * You can use this class to build your own HighLevel API client. You can use the pre-configured client with `createHighLevelClient`.
  */
-export class HighLevelClient<T extends AccessType> {
-	oauth: Client<Oauth.paths, `${string}/${string}`> | OauthClient<T>
+export class HighLevelClient<
+	T extends AccessType,
+	TOauth extends OauthClient<T> | BaseOauthClient = BaseOauthClient,
+> {
+	oauth: TOauth
 	businesses: Client<Businesses.paths, `${string}/${string}`>
 	calendars: Client<Calendars.paths, `${string}/${string}`>
 	campaigns: Client<Campaigns.paths, `${string}/${string}`>
@@ -59,14 +42,14 @@ export class HighLevelClient<T extends AccessType> {
 	users: Client<Users.paths, `${string}/${string}`>
 	workflows: Client<Workflows.paths, `${string}/${string}`>
 
-	readonly config: HighLevelConfig<T>
+	readonly config: BaseHighLevelConfig | HighLevelOauthConfig<T>
 	/**
 	 * creates a new HighLevel API client
 	 * @constructor
 	 */
-	constructor(config: HighLevelConfig<T>) {
-		this.config = config
-		this.oauth = createClient<Oauth.paths>(config)
+	constructor(config?: BaseHighLevelConfig & ClientOptions) {
+		this.config = config ?? { baseUrl: DEFAULT_BASE_URL }
+		this.oauth = createClient<Oauth.paths>() as TOauth
 		this.businesses = createClient<Businesses.paths>(config)
 		this.calendars = createClient<Calendars.paths>(config)
 		this.campaigns = createClient<Campaigns.paths>(config)
@@ -111,32 +94,34 @@ type AgencyClientMap = {
 	>
 }
 
+interface CreateHighLevelClient<
+	T extends AccessType,
+	O extends OauthClient<T> | BaseOauthClient = OauthClient<T>,
+> extends HighLevelClient<T, O> {
+	oauth: O
+}
 /**
  * Creates a new HighLevel API client with built in oauth support.
+ *
+ * Uses the built in `OAuthClient` by default, but allows for passing in a custom oauth client that extends `OAuthClientInterface`.
  * @returns A new HighLevel API client.
  */
-export function createHighLevelClient<T extends AccessType>(
-	config: HighLevelConfig<T> & {
-		/**
-		 * Can pass in a custom oauth client - must implement `OauthClientInterface`.
-		 *
-		 * @example
-		 * ```ts
-		 * const customOauthClient = new OauthClient({...})
-		 * const client = createHighLevelClient({
-		 * 	authCode: '1234567890',
-		 * 	oauthClient: new CustomOauthClient(config)
-		 * })
-		 * ```
-		 */
-		oauthClient?: OauthClient<T>
-	},
-): HighLevelClient<T> & {
-	oauth: OauthClient<T>
-} {
-	const customOauthClient = config.oauthClient || new OauthClient(config)
-	return {
-		...new HighLevelClient(config),
-		oauth: customOauthClient,
+export function createHighLevelClient<
+	T extends AccessType,
+	O extends OauthClient<T> | BaseOauthClient = OauthClient<T>,
+>(config: HighLevelOauthConfig<T>): HighLevelClient<T, O> {
+	let oauthClient: OauthClient<T>
+
+	if (config.oauthClient instanceof OauthClient) {
+		oauthClient = config.oauthClient as OauthClient<T>
+	} else {
+		oauthClient = new OauthClient(config) as OauthClient<T>
 	}
+
+	const highLevelConfig: HighLevelOauthConfig<T> = {
+		...config,
+		oauthClient: oauthClient,
+	}
+
+	return new HighLevelClient(highLevelConfig)
 }

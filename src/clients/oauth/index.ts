@@ -1,8 +1,8 @@
-import createClient from 'openapi-fetch'
+import createClient, { type Client } from 'openapi-fetch'
 import type * as Oauth from '../../generated/v2/openapi/oauth'
-import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../../lib/constants'
 import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
-import type { HighLevelConfig } from '../highlevel/config'
+import type { HighLevelOauthConfig } from '../highlevel/config'
+import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../oauth/config'
 import type {
 	AccessTokenResponse,
 	AuthUrlParams,
@@ -12,6 +12,8 @@ import type {
 	TokenData,
 	TokenParams,
 } from './config'
+
+export type BaseOauthClient = Client<Oauth.paths, `${string}/${string}`>
 
 /**
  * This client has built in methods for generating tokens, refreshing tokens, and storing tokens.
@@ -29,19 +31,19 @@ export class OauthClient<T extends AccessType>
 	// avoid conflict with the `expiresAt` getter
 	private _expiresAt: number | undefined
 	readonly scopes: ScopeLiterals<T> | ScopeLiterals<T>[] | (string & {}) = []
-	readonly config: HighLevelConfig<T>
+	readonly config: HighLevelOauthConfig<T>
 	private readonly baseUrl: string
 	private readonly baseOauthUrl: string
 	// avoid conflict with the `tokenData` property
-	private _tokenData: TokenData | undefined
-	storeTokenFn?: (tokenData: TokenData) => Promise<TokenData> = undefined
+	tokenData: TokenData | undefined
+	storeTokenFn: (tokenData: TokenData) => Promise<TokenData>
 
 	/**
 	 * creates a new oauth client for use with the HighLevel API
 	 * @constructor
 	 * @param config - configuration for your app
 	 */
-	constructor(config: HighLevelConfig<T>) {
+	constructor(config: HighLevelOauthConfig<T>) {
 		this.config = config
 		this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL
 		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL
@@ -53,21 +55,19 @@ export class OauthClient<T extends AccessType>
 		if (config.scopes && config.scopes.length > 0) {
 			this.scopes = config.scopes as ScopeLiterals<T>[]
 		}
-		if (config.storageFunction) {
-			this.storeTokenFn = config.storageFunction
-		}
+		this.storeTokenFn =
+			config.storageFunction ??
+			(() => {
+				if (!this.tokenData) {
+					throw new Error('No token data to store')
+				}
+				return Promise.resolve(this.tokenData)
+			})
 		const oauthClient = createClient<Oauth.paths>({
 			baseUrl: this.baseUrl,
 		})
 
 		this.client = oauthClient
-	}
-
-	/**
-	 * The token data from the server.
-	 */
-	get tokenData(): TokenData | undefined {
-		return this._tokenData
 	}
 
 	/**
@@ -77,28 +77,15 @@ export class OauthClient<T extends AccessType>
 		return this._expiresAt
 	}
 
-	setExpiresAt(expires_in: number) {
-		this._expiresAt = Date.now() + expires_in * 1000
-	}
-
-	setTokenData(tokenData: TokenData) {
-		this._tokenData = tokenData
-	}
-
+	/**
+	 * Update the stored token data with the provided token data.
+	 * @param updatedTokenData - The token data to update.
+	 */
 	updateTokenData(updatedTokenData: Partial<TokenData>) {
-		const newTokenData = Object.assign({}, this._tokenData)
-		for (const key in updatedTokenData) {
-			const _key = key as keyof typeof updatedTokenData
-			if (
-				updatedTokenData[key as keyof typeof updatedTokenData] === undefined
-			) {
-				continue
-			}
-			// @ts-expect-error - we know the key is valid
-			newTokenData[_key] =
-				updatedTokenData[key as keyof typeof updatedTokenData]!
+		if (this.tokenData) {
+			this.tokenData = { ...this.tokenData, ...updatedTokenData }
+			this.storeTokenData(this.tokenData)
 		}
-		this.setTokenData(newTokenData)
 	}
 
 	/**
@@ -109,7 +96,7 @@ export class OauthClient<T extends AccessType>
         https://marketplace.gohighlevel.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
      * ```
      */
-	get getAuthorizationURL() {
+	getAuthorizationURL() {
 		const url = new URL(this.baseOauthUrl)
 		const requiredParams: AuthUrlParams = {
 			client_id: this.config.clientId,
@@ -134,17 +121,10 @@ export class OauthClient<T extends AccessType>
 	) {
 		this._accessToken = tokenData.access_token
 		this._refreshToken = tokenData.refresh_token
-		this.setExpiresAt(tokenData.expires_in)
-		this.setTokenData({ ...tokenData, expiresAt: this.expiresAt! })
+		const expiresAt = Date.now() + tokenData.expires_in * 1000
+		this.tokenData = { ...tokenData, expiresAt }
 
-		if (typeof this.storeTokenFn === 'function') {
-			return await this.storeTokenFn({
-				...tokenData,
-				expiresAt: this.expiresAt!,
-			})
-		}
-
-		return this.tokenData
+		return this.storeTokenFn(this.tokenData)
 	}
 
 	/**
@@ -152,48 +132,35 @@ export class OauthClient<T extends AccessType>
 	 * @returns true if the token is expired or if we need to refresh it
 	 */
 	private isTokenExpired() {
-		// if the token expires in the next 5 minutes, we should refresh it
-		const isExpired = this.expiresAt
-			? this.expiresAt <= Date.now() + 5 * 60 * 1000
-			: true
-
-		// if we dont have a refreshToken, we can't refresh the token
-		// if we dont have an expires_at, we can't check if the token is expired
-		if (!this._refreshToken || !this.expiresAt) return true
-
-		// otherwise return if the token is expired
-		return isExpired
+		if (!this.tokenData?.expiresAt || !this._refreshToken) return true
+		return this.tokenData.expiresAt <= Date.now() + 5 * 60 * 1000
 	}
 
 	/**
 	 * Returns a valid access token by either refreshing the token or exchanging the auth code for a new token.
 	 * @param authCode - The authorization code received from the OAuth provider.
+	 * @throws {Error} - If no token response is received or if no auth code or refresh token is provided.
 	 * @returns The access token.
 	 */
 	async getAccessToken(authCode?: string) {
-		// Directly return the valid accessToken if available
-		if (this._accessToken && this.isTokenExpired() === false) {
+		if (this._accessToken && !this.isTokenExpired()) {
 			return this._accessToken
 		}
 
 		if (authCode) {
-			process.env.NODE_ENV === 'development' &&
-				console.log('exchanging auth code for token', this)
 			const tokenResponse = await this.exchangeToken(authCode)
 			if (!tokenResponse) throw new Error('No token response received')
-			process.env.NODE_ENV === 'development' &&
-				console.log('storing token data')
 			const storedToken = await this.storeTokenData(tokenResponse)
-			return storedToken?.access_token ?? null
+			return storedToken.access_token
 		}
 
-		if (this._refreshToken) {
-			const tokenResponse = await this.refreshAccessToken()
-			const storedToken = await this.storeTokenData(tokenResponse)
-			return storedToken?.access_token ?? null
+		if (!this._refreshToken) {
+			throw new Error('Must provide an auth code or refresh token')
 		}
 
-		return null
+		const tokenResponse = await this.refreshAccessToken()
+		const storedToken = await this.storeTokenData(tokenResponse)
+		return storedToken.access_token
 	}
 
 	/**
@@ -213,9 +180,16 @@ export class OauthClient<T extends AccessType>
 			user_type: this.userType,
 			code: authCode,
 		}
-		const token = await this.fetchAccessToken(tokenParams)
+		const { data, error } = await this.fetchAccessToken(tokenParams)
 
-		return token
+		if (error) {
+			console.error('Error: exchanging token', error)
+			throw new Error(error.message?.toString() ?? String(error))
+		}
+
+		const validatedData = this.validate(data)
+
+		return validatedData
 	}
 
 	/**
@@ -237,9 +211,16 @@ export class OauthClient<T extends AccessType>
 			grant_type: 'refresh_token',
 			user_type: this.userType,
 		}
-		const token = await this.fetchAccessToken(tokenParams)
+		const { data, error } = await this.fetchAccessToken(tokenParams)
 
-		return token
+		if (error) {
+			console.error('Error: refreshing token', error)
+			throw new Error(error.message?.toString() ?? String(error))
+		}
+
+		const validatedData = this.validate(data)
+
+		return validatedData
 	}
 
 	/**
@@ -260,13 +241,10 @@ export class OauthClient<T extends AccessType>
 		})
 
 		if (error) {
-			console.error('error getting token', error)
-			throw new Error(error.message?.toString())
+			return { data: null, error }
 		}
 
-		const validatedData = this.validate(data)
-
-		return validatedData
+		return { data }
 	}
 
 	/**
@@ -340,7 +318,7 @@ export class OauthClient<T extends AccessType>
 	private validate<T>(data: T): Required<T> {
 		for (const key in data) {
 			if (data[key as keyof typeof data] === undefined) {
-				throw new Error('Invalid data received from server')
+				throw new Error(`Invalid data received from server: ${key}`)
 			}
 		}
 		return data as Required<T>

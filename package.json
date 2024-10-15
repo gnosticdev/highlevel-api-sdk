@@ -26,6 +26,11 @@
 			"import": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		},
+		"./config": {
+			"default": "./dist/client-config.js",
+			"import": "./dist/client-config.js",
+			"types": "./dist/client-config.d.ts"
+		},
 		"./webhooks": {
 			"default": "./dist/webhooks.js",
 			"import": "./dist/webhooks.js",
@@ -38,6 +43,11 @@
 			"default": "./dist/oauth.js",
 			"import": "./dist/oauth.js",
 			"types": "./dist/oauth.d.ts"
+		},
+		"./oauth-config": {
+			"default": "./dist/oauth-config.js",
+			"import": "./dist/oauth-config.js",
+			"types": "./dist/oauth-config.d.ts"
 		},
 		"./scopes": {
 			"default": "./dist/scopes.js",

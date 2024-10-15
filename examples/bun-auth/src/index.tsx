@@ -2,7 +2,8 @@
 /** @jsxImportSource hono/jsx */
 
 import { Database } from 'bun:sqlite'
-import { type HighLevelConfig, createHighLevelClient } from '@gnosticdev/highlevel-sdk'
+import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
+import type { HighLevelOauthConfig } from '@gnosticdev/highlevel-sdk/config'
 import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
 import type { Serve } from 'bun'
 import { Hono, type MiddlewareHandler } from 'hono'
@@ -21,7 +22,7 @@ const db = createTokensDB(new Database('db.sqlite'))
 /**
  * Hono variables that can be accessed from anywhere in the app
  */
-type HLVariables = HighLevelConfig<'Sub-Account'> & {
+type HLVariables = HighLevelOauthConfig<'Sub-Account'> & {
   accessToken: string
 }
 
@@ -68,7 +69,7 @@ const accessTokenMiddleware: MiddlewareHandler = async (c, next) => {
     console.log(kleur.red('------ checking token -----'))
     console.log(kleur.blue(`${c.req.url}`))
 
-    const accessToken = await client.oauth().getAccessToken()
+    const accessToken = await client.oauth.getAccessToken()
     if (!accessToken) {
       console.log(kleur.red('No access token found! -> redirecting to /auth'))
       return c.redirect('/auth')
@@ -87,7 +88,7 @@ app.onError((err, c) => {
 
 // start the login flow
 app.get('/auth', async (c) => {
-  return c.html(<Home buttonLink={client.oauth().getAuthorizationURL} />)
+  return c.html(<Home buttonLink={client.oauth.getAuthorizationURL()} />)
 })
 
 /**
@@ -102,8 +103,8 @@ app.get('/auth/callback', async (c, next) => {
     return await c.html(<Result message='Invalid auth code' />)
   }
   try {
-    const tokenData = await client.oauth().exchangeToken(authCode)
-    const tokenResponse = await client.oauth().storeTokenData(tokenData)
+    const tokenData = await client.oauth.exchangeToken(authCode)
+    const tokenResponse = await client.oauth.storeTokenData(tokenData)
     if (!tokenResponse) throw new Error('No token response found!')
     c.set('accessToken', tokenResponse.access_token)
     await next()
@@ -130,7 +131,7 @@ app.get('/locations', async (c) => {
     return c.redirect('/auth')
   }
 
-  const tokenData = client.oauth().tokenData
+  const tokenData = client.oauth.tokenData
   if (!tokenData) throw new Error('No token data found!')
   const locationId = tokenData.locationId
   if (!locationId) throw new Error('Need a location ID to get locations installed!')
@@ -161,7 +162,7 @@ app.get('/users', async (c) => {
   if (!accessToken) {
     return c.redirect('/auth')
   }
-  const tokenData = client.oauth().tokenData
+  const tokenData = client.oauth.tokenData
   if (!tokenData) throw new Error('No token data found!')
   const locationId = tokenData.locationId
   if (!locationId) throw new Error('Need a location ID to get users installed!')

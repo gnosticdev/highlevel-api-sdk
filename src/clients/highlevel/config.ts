@@ -1,10 +1,16 @@
+import type { Client } from 'openapi-fetch'
+import type { Oauth } from '../../generated/v2/openapi'
 import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
+import type { OauthClient } from '../oauth'
+import type { BaseOauthClient } from '../oauth'
 import type { TokenData } from '../oauth/config'
-
 /**
- * The configuration for the HighLevel API client.
+ * The configuration for the HighLevel API client with OAuth.
+ *
+ * - Typed endpoints for the HighLevel API
+ * - OAuth2 fields and methods to make getting started easier.
  */
-export type HighLevelConfig<T extends AccessType> = {
+export type HighLevelOauthConfig<T extends AccessType> = {
 	/**
 	 * client_id from app settings in marketplace.
 	 *
@@ -34,7 +40,7 @@ export type HighLevelConfig<T extends AccessType> = {
 	readonly redirectUri: string
 	/**
 	 * base url for the api. no need to change unless you are proxying requests.
-	 * @see {@link OAUTH_DEFAULTS.baseUrl}
+	 * @see {@link DEFAULT_BASE_URL}
 	 * @default 'https://services.leadconnectorhq.com'
 	 */
 	readonly baseUrl?: string
@@ -62,6 +68,27 @@ export type HighLevelConfig<T extends AccessType> = {
 	 * Store the token data in your database or cache
 	 * @param fn - The function to use for storing the token data
 	 * @default stores the token data in memory on the oauth client
+	 *
 	 */
 	storageFunction?: (tokenData: TokenData) => Promise<TokenData>
+	/**
+	 * Can pass in a custom oauth client - must implement `OauthClientInterface`.
+	 *
+	 * @example
+	 * ```ts
+	 * const customOauthClient = new OauthClient({...})
+	 * const client = createHighLevelClient({
+	 * 	authCode: '1234567890',
+	 * 	oauthClient: new CustomOauthClient(config)
+	 * })
+	 */
+	oauthClient?: OauthClient<T>
+}
+
+export type BaseHighLevelConfig = {
+	/**
+	 * base url for each API endpoint. no need to change unless you are proxying requests.
+	 * @default 'https://services.leadconnectorhq.com'
+	 */
+	baseUrl?: string
 }

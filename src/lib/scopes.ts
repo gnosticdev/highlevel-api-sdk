@@ -1,4 +1,4 @@
-import type { HighLevelConfig } from '../clients/highlevel/config'
+import type { HighLevelOauthConfig } from '../clients/highlevel/config'
 import { ScopesSchema } from '../generated/v2/other/scopes'
 import { objectEntries } from '../lib/utils'
 import type { AccessType, ScopeLiterals } from './scopes-types'
@@ -13,7 +13,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * @constructor
 	 * @param accessType - the type of app access needed. 'Sub-Account' is same as 'Location' and 'Agency' is same as Agency
 	 */
-	constructor(config: Pick<HighLevelConfig<T>, 'accessType'>) {
+	constructor(config: Pick<HighLevelOauthConfig<T>, 'accessType'>) {
 		this.accessType = config.accessType
 	}
 

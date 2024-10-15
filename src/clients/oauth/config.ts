@@ -1,6 +1,5 @@
 import type { Oauth } from '../../generated/v2/openapi'
 import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
-import type { HighLevelConfig } from '../highlevel/config'
 
 type AccessTokenRequest =
 	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded'] & {
@@ -90,8 +89,8 @@ export interface OAuthClientInterface<T extends AccessType> {
      * ```ts
         https://marketplace.gohighlevel.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
      * ```
-     */
-	getAuthorizationURL: string
+	 */
+	getAuthorizationURL(): string
 	/**
 	 * The token response from the server.
 	 */
@@ -100,7 +99,7 @@ export interface OAuthClientInterface<T extends AccessType> {
 	 * The scopes needed for your app. These must be added to your app in the marketplace.
 	 */
 	readonly scopes: ScopeLiterals<T> | ScopeLiterals<T>[] | (string & {})
-	readonly config: HighLevelConfig<T>
+
 	/**
 	 * Gets the current access token, or generates a new one if needed.
 	 * @param authCode - The authorization code received from the OAuth provider.
@@ -137,3 +136,8 @@ export interface OAuthClientInterface<T extends AccessType> {
 	 */
 	refreshAccessToken(): Promise<AccessTokenResponse>
 }
+
+export const DEFAULT_BASE_AUTH_URL =
+	'https://marketplace.gohighlevel.com/oauth/chooselocation'
+
+export const DEFAULT_BASE_URL = 'https://services.leadconnectorhq.com'
