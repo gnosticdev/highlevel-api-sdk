@@ -1,8 +1,27 @@
 import createClient, { type Client, type ClientOptions } from 'openapi-fetch'
-// biome-ignore format: long import
-import type {
-	Businesses, Calendars, Campaigns, Companies, Contacts, Conversations, Forms, Funnels, Invoices, Links, Locations, Medias, Oauth, Opportunities, Payments, Products, SaasApi, Snapshots, SocialMediaPosting, Surveys, Users, Workflows,
-} from '../../generated/v2/openapi'
+import type * as Businesses from '../../generated/v2/openapi/businesses'
+import type * as Calendars from '../../generated/v2/openapi/calendars'
+import type * as Campaigns from '../../generated/v2/openapi/campaigns'
+import type * as Companies from '../../generated/v2/openapi/companies'
+import type * as Contacts from '../../generated/v2/openapi/contacts'
+import type * as Conversations from '../../generated/v2/openapi/conversations'
+import type * as Forms from '../../generated/v2/openapi/forms'
+import type * as Funnels from '../../generated/v2/openapi/funnels'
+import type * as Invoices from '../../generated/v2/openapi/invoices'
+import type * as Links from '../../generated/v2/openapi/links'
+import type * as Locations from '../../generated/v2/openapi/locations'
+import type * as Medias from '../../generated/v2/openapi/medias'
+import type * as Oauth from '../../generated/v2/openapi/oauth'
+import type * as Opportunities from '../../generated/v2/openapi/opportunities'
+import type * as Payments from '../../generated/v2/openapi/payments'
+import type * as Products from '../../generated/v2/openapi/products'
+import type * as SaasApi from '../../generated/v2/openapi/saas-api'
+import type * as Snapshots from '../../generated/v2/openapi/snapshots'
+import type * as SocialMediaPosting from '../../generated/v2/openapi/social-media-posting'
+import type * as Surveys from '../../generated/v2/openapi/surveys'
+import type * as Users from '../../generated/v2/openapi/users'
+import type * as Workflows from '../../generated/v2/openapi/workflows'
+
 import type {
 	AccessType,
 	BaseScopeNames,
@@ -94,34 +113,25 @@ type AgencyClientMap = {
 	>
 }
 
-interface CreateHighLevelClient<
+class HighLevelOauthClient<
 	T extends AccessType,
 	O extends OauthClient<T> | BaseOauthClient = OauthClient<T>,
 > extends HighLevelClient<T, O> {
 	oauth: O
+	constructor(config: HighLevelOauthConfig<T>) {
+		super(config)
+		this.oauth = (config.oauthClient ?? new OauthClient(config)) as O
+	}
 }
+
 /**
  * Creates a new HighLevel API client with built in oauth support.
  *
  * Uses the built in `OAuthClient` by default, but allows for passing in a custom oauth client that extends `OAuthClientInterface`.
  * @returns A new HighLevel API client.
  */
-export function createHighLevelClient<
-	T extends AccessType,
-	O extends OauthClient<T> | BaseOauthClient = OauthClient<T>,
->(config: HighLevelOauthConfig<T>): HighLevelClient<T, O> {
-	let oauthClient: OauthClient<T>
-
-	if (config.oauthClient instanceof OauthClient) {
-		oauthClient = config.oauthClient as OauthClient<T>
-	} else {
-		oauthClient = new OauthClient(config) as OauthClient<T>
-	}
-
-	const highLevelConfig: HighLevelOauthConfig<T> = {
-		...config,
-		oauthClient: oauthClient,
-	}
-
-	return new HighLevelClient(highLevelConfig)
+export function createHighLevelClient<T extends AccessType>(
+	config: HighLevelOauthConfig<T>,
+): HighLevelClient<T, OauthClient<T>> {
+	return new HighLevelOauthClient(config)
 }

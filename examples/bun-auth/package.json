@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"@gnosticdev/highlevel-sdk": "file:../..",
+		"@gnosticdev/highlevel-sdk": "file:../../",
 		"hono": "^4.6.3"
 	},
 	"devDependencies": {

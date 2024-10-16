@@ -1,4 +1,4 @@
-import type { Oauth } from '../../generated/v2/openapi'
+import type * as Oauth from '../../generated/v2/openapi/oauth'
 import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
 
 type AccessTokenRequest =

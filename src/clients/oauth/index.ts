@@ -4,7 +4,6 @@ import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
 import type { HighLevelOauthConfig } from '../highlevel/config'
 import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../oauth/config'
 import type {
-	AccessTokenResponse,
 	AuthUrlParams,
 	LocationTokenParams,
 	OAuthClientInterface,
@@ -30,7 +29,7 @@ export class OauthClient<T extends AccessType>
 
 	// avoid conflict with the `expiresAt` getter
 	private _expiresAt: number | undefined
-	readonly scopes: ScopeLiterals<T> | ScopeLiterals<T>[] | (string & {}) = []
+	readonly scopes: ScopeLiterals<T>[] = []
 	readonly config: HighLevelOauthConfig<T>
 	private readonly baseUrl: string
 	private readonly baseOauthUrl: string
@@ -82,10 +81,9 @@ export class OauthClient<T extends AccessType>
 	 * @param updatedTokenData - The token data to update.
 	 */
 	updateTokenData(updatedTokenData: Partial<TokenData>) {
-		if (this.tokenData) {
-			this.tokenData = { ...this.tokenData, ...updatedTokenData }
-			this.storeTokenData(this.tokenData)
-		}
+		// store
+		this.tokenData = { ...this.tokenData, ...updatedTokenData } as TokenData
+		this.storeTokenData(this.tokenData as TokenData)
 	}
 
 	/**
@@ -101,7 +99,7 @@ export class OauthClient<T extends AccessType>
 		const requiredParams: AuthUrlParams = {
 			client_id: this.config.clientId,
 			redirect_uri: this.config.redirectUri,
-			scope: Array.isArray(this.scopes) ? this.scopes.join(' ') : this.scopes,
+			scope: this.scopes.join(' '),
 			response_type: 'code',
 		}
 		const searchParams = new URLSearchParams(requiredParams)
@@ -116,9 +114,7 @@ export class OauthClient<T extends AccessType>
 	 * @param tokenData - the token response from the server
 	 * @returns the token data with the `expiresAt` time added
 	 */
-	async storeTokenData<T>(
-		tokenData: T extends Required<AccessTokenResponse> ? T : never,
-	) {
+	async storeTokenData(tokenData: TokenData) {
 		this._accessToken = tokenData.access_token
 		this._refreshToken = tokenData.refresh_token
 		const expiresAt = Date.now() + tokenData.expires_in * 1000
@@ -142,24 +138,24 @@ export class OauthClient<T extends AccessType>
 	 * @throws {Error} - If no token response is received or if no auth code or refresh token is provided.
 	 * @returns The access token.
 	 */
-	async getAccessToken(authCode?: string) {
+	async getAccessToken(authCode?: string): Promise<string | null> {
 		if (this._accessToken && !this.isTokenExpired()) {
 			return this._accessToken
 		}
 
 		if (authCode) {
 			const tokenResponse = await this.exchangeToken(authCode)
-			if (!tokenResponse) throw new Error('No token response received')
+			if (!tokenResponse) throw new Error('Error in token exchange')
 			const storedToken = await this.storeTokenData(tokenResponse)
 			return storedToken.access_token
 		}
 
 		if (!this._refreshToken) {
-			throw new Error('Must provide an auth code or refresh token')
+			return null
 		}
 
 		const tokenResponse = await this.refreshAccessToken()
-		const storedToken = await this.storeTokenData(tokenResponse)
+		const storedToken = await this.storeTokenData(tokenResponse as TokenData)
 		return storedToken.access_token
 	}
 
@@ -187,9 +183,7 @@ export class OauthClient<T extends AccessType>
 			throw new Error(error.message?.toString() ?? String(error))
 		}
 
-		const validatedData = this.validate(data)
-
-		return validatedData
+		return data as TokenData
 	}
 
 	/**
@@ -218,15 +212,12 @@ export class OauthClient<T extends AccessType>
 			throw new Error(error.message?.toString() ?? String(error))
 		}
 
-		const validatedData = this.validate(data)
-
-		return validatedData
+		return data as TokenData
 	}
 
 	/**
 	 * Sends a request to the server to obtain a new token.
 	 * @param tokenParams - Auth code params or refresh token params
-	 * @returns The token response from the server.
 	 */
 	private async fetchAccessToken(tokenParams: TokenParams) {
 		const { data, error } = await this.client.POST('/oauth/token', {
@@ -235,8 +226,8 @@ export class OauthClient<T extends AccessType>
 				'Content-Type': 'application/x-www-form-urlencoded',
 				Accept: 'application/json',
 			},
-			bodySerializer(body) {
-				return new URLSearchParams(body).toString()
+			bodySerializer(_body) {
+				return new URLSearchParams(_body).toString()
 			},
 		})
 
@@ -265,8 +256,8 @@ export class OauthClient<T extends AccessType>
 						Version: '2021-07-28',
 					},
 				},
-				bodySerializer(body) {
-					return new URLSearchParams(body).toString()
+				bodySerializer(_body) {
+					return new URLSearchParams(_body).toString()
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
@@ -280,9 +271,7 @@ export class OauthClient<T extends AccessType>
 			throw new Error(error.message?.toString() ?? String(error))
 		}
 
-		const validatedData = this.validate(data)
-
-		return validatedData
+		return data
 	}
 
 	/**
@@ -310,17 +299,6 @@ export class OauthClient<T extends AccessType>
 			throw new Error(error.message?.toString())
 		}
 
-		const validatedData = this.validate(data)
-
-		return validatedData
-	}
-
-	private validate<T>(data: T): Required<T> {
-		for (const key in data) {
-			if (data[key as keyof typeof data] === undefined) {
-				throw new Error(`Invalid data received from server: ${key}`)
-			}
-		}
-		return data as Required<T>
+		return data
 	}
 }

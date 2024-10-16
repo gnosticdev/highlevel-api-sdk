@@ -1,9 +1,9 @@
 import { Database } from 'bun:sqlite'
 import { describe, expect, it } from 'bun:test'
 import { createTokensDB } from '../examples/bun-auth/src/db'
+import type { AccessTokenResponse } from '../src/clients/oauth/config'
 
-const testDB = new Database(':memory:', { create: true })
-const db = createTokensDB(testDB)
+const db = createTokensDB(new Database(':memory:'))
 
 const USER_ID = '1'
 const LOCATION_ID = 'p5'

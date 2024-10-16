@@ -4,7 +4,6 @@
 import { Database } from 'bun:sqlite'
 import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 import type { HighLevelOauthConfig } from '@gnosticdev/highlevel-sdk/config'
-import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
 import type { Serve } from 'bun'
 import { Hono, type MiddlewareHandler } from 'hono'
 import { cors } from 'hono/cors'
@@ -32,19 +31,13 @@ type HLVariables = HighLevelOauthConfig<'Sub-Account'> & {
 const app = new Hono<{ Variables: HLVariables }>()
 
 /**
- * Scopes for the app - can't have anything not set in the app settings
- */
-const scopes = new ScopesBuilder({ accessType: 'Sub-Account' })
-scopes.add(['locations.readonly', 'users.readonly'])
-
-/**
  * Create a single instance of the OauthClient to be used throughout the application
  */
 const client = createHighLevelClient({
   accessType: 'Sub-Account',
   clientId: process.env.CLIENT_ID!,
   clientSecret: process.env.CLIENT_SECRET!,
-  scopes: scopes.get(),
+  scopes: ['locations.readonly', 'users.readonly'],
   redirectUri: 'http://localhost:3000/auth/callback',
   storageFunction: async (tokenData) => {
     db.saveTokenResponse({

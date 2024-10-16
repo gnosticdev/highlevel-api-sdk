@@ -1,8 +1,5 @@
-import type { Client } from 'openapi-fetch'
-import type { Oauth } from '../../generated/v2/openapi'
 import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
 import type { OauthClient } from '../oauth'
-import type { BaseOauthClient } from '../oauth'
 import type { TokenData } from '../oauth/config'
 /**
  * The configuration for the HighLevel API client with OAuth.
@@ -52,7 +49,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 * @see https://marketplace.gohighlevel.com/apps
 	 * @default []
 	 */
-	readonly scopes?: ScopeLiterals<T> | ScopeLiterals<T>[] | (string & {})
+	readonly scopes?: ScopeLiterals<T>[]
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
 	 * @default 'https://marketplace.gohighlevel.com/oauth/chooselocation

@@ -1,4 +1,10 @@
+import { describe, expect, mock, test } from 'bun:test'
+import { HighLevelClient } from '../src/clients/highlevel'
 import { OauthClient } from '../src/clients/oauth'
+import type { Locations } from '../src/generated/v2/openapi'
+
+type MockLocationsResponse =
+	Locations.paths['/locations/{locationId}']['get']['responses']['200']['content']['application/json']
 
 const oauthClient = new OauthClient({
 	accessType: 'Sub-Account',
@@ -6,4 +12,35 @@ const oauthClient = new OauthClient({
 	clientSecret: process.env.CLIENT_SECRET!,
 	redirectUri: 'http://localhost:3000/auth/callback',
 	scopes: ['locations.readonly'],
+})
+
+const client = new HighLevelClient()
+
+const mockGet = mock(client.locations.GET)
+
+const mockResponse: MockLocationsResponse = {
+	location: {
+		name: 'Test Location',
+		address: '123 Main St, Anytown, USA',
+		timezone: 'America/New_York',
+		id: 'abc123',
+		firstName: 'John',
+		lastName: 'Doe',
+		email: 'john.doe@example.com',
+		phone: '1234567890',
+		website: 'https://www.example.com',
+		logoUrl: 'https://www.example.com/logo.png',
+		state: 'CA',
+		city: 'Anytown',
+		country: 'USA',
+		postalCode: '12345',
+	},
+}
+
+const res = new Response(JSON.stringify(mockResponse))
+
+mockGet.mockResolvedValue({
+	response: new Response(JSON.stringify(mockResponse)),
+	data: mockResponse,
+	error: undefined,
 })

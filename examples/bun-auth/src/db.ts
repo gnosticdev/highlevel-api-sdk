@@ -1,7 +1,7 @@
 import type { Database } from 'bun:sqlite'
 import type { AccessTokenResponse } from '@gnosticdev/highlevel-sdk/oauth-config'
 
-type DBTokenData = {
+export type DBTokenData = {
 	id?: number
 	expiresAt: number
 } & Required<
@@ -25,7 +25,7 @@ type InsertDBRow = Omit<
  * @param db - The database instance
  * @returns - The access token
  */
-const getAccessToken = (db: Database): DBTokenData | null => {
+export const getAccessToken = (db: Database): DBTokenData | null => {
 	const token = db.query<DBTokenData, []>('SELECT * FROM tokens_table').get()
 	return token
 }
@@ -35,7 +35,7 @@ const getAccessToken = (db: Database): DBTokenData | null => {
  * @param db - The database instance
  * @param dbRow - The token response to save
  */
-const saveTokenResponse = (db: Database, dbRow: DBTokenData) => {
+export const saveTokenResponse = (db: Database, dbRow: DBTokenData) => {
 	db.prepare<DBTokenData, InsertDBRow>(
 		`INSERT INTO tokens_table (userId, locationId, access_token, refresh_token, expiresAt)
             VALUES ($userId, $locationId, $access_token, $refresh_token, $expiresAt)
@@ -54,7 +54,7 @@ const saveTokenResponse = (db: Database, dbRow: DBTokenData) => {
 	})
 }
 
-const getTokenByUserId = (sqlite: Database, userId: string) =>
+export const getTokenByUserId = (sqlite: Database, userId: string) =>
 	sqlite
 		.query<DBTokenData, Pick<InsertDBRow, '$userId'>>(
 			'SELECT * FROM tokens_table WHERE userId = $userId',
