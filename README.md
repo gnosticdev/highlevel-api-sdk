@@ -1,4 +1,4 @@
-# HighLevel API SDK (WIP)
+# HighLevel API SDK
 
 Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build your own apps or use the included clients to interact with the HighLevel API.
 
@@ -9,6 +9,7 @@ Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build y
 - OAuth2 helpers for working with HighLevel's OAuth2 implementation
 - Scopes builder for easily working with the scopes specified in the HighLevel Marketplace
 - Typed webhooks endpoints
+- Support for both v1 and v2 of the HighLevel API
 
 ## Installation
 
@@ -22,78 +23,114 @@ npm add @gnosticdev/highlevel-sdk
 
 ## Usage
 
-### Endpoint Types
-
-If you just want to get types for the api endpoints, you can use them like this:
+### Using the HighLevel Client
 
 ```ts
-import type { Locations } from "@gnosticdev/highlevel-sdk/types/locations"
+import { createHighLevelClient } from "@gnosticdev/highlevel-sdk"
 
-// example: the response type for the `GET /locations/{locationId}` endpoint
+const client = createHighLevelClient({
+    oauthConfig: {
+        accessType: 'Sub-Account',
+        clientId: 'your-client-id',
+        clientSecret: 'your-client-secret',
+        redirectUri: 'http://localhost:3000/oauth/callback',
+        scopes: [
+            'locations.write',
+            'contacts.readonly',
+            // ... other scopes
+        ]
+    }
+})
 
-// Note: the `NonNullable` is necessary because the API would return undefined if there are no custom values for a location
+// Example: Get contacts
+const { data, error } = await client.contacts.GET('/contacts/', {
+    params: {
+        query: {
+            locationId: '1234567890',
+            query: 'John Doe',
+            limit: 10,
+        },
+        header: {
+            Authorization: `Bearer ${process.env.HIGHLEVEL_ACCESS_TOKEN}`,
+            Version: '2021-07-28',
+        },
+    },
+})
+```
+
+### Using the v1 Client
+
+```ts
+import { createV1Client } from "@gnosticdev/highlevel-sdk"
+
+const v1Client = createV1Client({
+    apiKey: 'your-api-key'
+})
+
+const { data, error } = await v1Client.GET('/v1/contacts', {
+    params: {
+        query: {
+            locationId: '1234567890',
+        },
+        header: {
+            Authorization: `Bearer ${process.env.HIGHLEVEL_ACCESS_TOKEN}`,
+        },
+    }
+})
+```
+
+### OAuth2 Support
+
+The SDK includes built-in OAuth2 support with methods to:
+
+- Create the authorization URL
+- Get auth code from redirect
+- Get a new access token
+- Refresh the access token when it expires
+
+```ts
+// Generate authorization URL
+const authUrl = client.oauth.getAuthorizationURL()
+
+// Exchange auth code for token
+const token = await client.oauth.exchangeToken(authCode)
+
+// Get access token (automatically refreshes if expired)
+const accessToken = await client.oauth.getAccessToken()
+```
+
+### Endpoint Types
+
+If you just want to get types for the API endpoints, you can use them like this:
+
+```ts
+import type * as Locations from "@gnosticdev/highlevel-sdk/types/locations"
+
+// Example: the response type for the `GET /locations/{locationId}` endpoint
 type LocationCustomValues =
     NonNullable<Locations.operations['get-custom-values']['responses']['200']['content']['application/json']['customValues']>
 
-  const customValues: LocationCustomValues = [{
+const customValues: LocationCustomValues = [{
     fieldKey: 'contact.lead_source',
     id: 'lead_source_id',
     locationId: 'my_location_id',
     name: 'Lead Source',
     value: 'Google',
-  }]
+}]
 ```
 
-## Scopes Builder
+## Examples
 
-You can use the scopes builder to add scopes in a typesafe way, making sure your marketplace app and code match.
+For more detailed usage examples, please check out the [examples directory](./examples).
 
-With the scopes builder you just provide the access type, and it will show you all of the available options for that access type.
+## Documentation
 
-```ts
-const scopes = new ScopesBuilder()
-scopes.add("businesses.readonly")
-scopes.add("businesses.write")
-// or you can add multiple at once
-scopes.add([
-    "businesses.readonly",
-    "businesses.write",
-    "calendars.readonly",
-    ...
-])
-```
+For full documentation and API reference, please visit our [documentation site](https://link-to-your-documentation).
 
-### Collecting Scopes Helper
+## Contributing
 
-1. Once you have added your scopes to your app, you can collect them from the dev console on your app's settings page in the Highlevel Marketplace:
+Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for more details.
 
-    ```ts
-    // https://marketplace.gohighlevel.com/apps/<your app_id>/settings
-    $$('.n-tag__content')
-        .map((scope) => scope.textContent.trim())
-        .toSorted()
-    ```
+## License
 
-2. Copy the resulting array
-3. Create a new ScopesBuilder instance and paste the scopes to it.
-
-    ```ts
-    const scopes = new ScopesBuilder()
-    scopes.add([
-        "businesses.readonly",
-        "businesses.write",
-        "calendars.readonly",
-        ...
-    ])
-    ```
-
-4. Call the `get` method to get the scopes string.
-
-    ```ts
-    scopes.get()
-    ```
-
-## TODO
-
-- [ ] Allow custom fetch handler in clients
-- [ ] Add client for each schema type
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

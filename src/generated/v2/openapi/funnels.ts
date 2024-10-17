@@ -144,6 +144,11 @@ export type components = {
 			 *       "dateUpdated": "2024-04-29T15:00:28.465Z",
 			 *       "deleted": false,
 			 *       "domainId": "",
+			 *       "faviconUrl": "",
+			 *       "globalSectionVersion": 1,
+			 *       "globalSectionsPath": "funnel/SkIDfu0S4m3NYQyvWHC6/global-sections-1",
+			 *       "globalSectionsUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/funnel%2FSkIDfu0S4m3NYQyvWHC6%2Fglobal-sections-1?alt=media&token=9cc5c211-093b-4751-aeba-19282ac92955",
+			 *       "isStoreActive": false,
 			 *       "locationId": "ojQjykmwNIU88vfsfzvH",
 			 *       "name": "Chaitanya Copy",
 			 *       "orderFormVersion": 2,
@@ -162,15 +167,10 @@ export type components = {
 			 *           "url": "/newtestifypath"
 			 *         }
 			 *       ],
-			 *       "type": "funnel",
-			 *       "updatedAt": "2024-04-29T15:00:34.233Z",
-			 *       "faviconUrl": "",
-			 *       "globalSectionVersion": 1,
-			 *       "globalSectionsPath": "funnel/SkIDfu0S4m3NYQyvWHC6/global-sections-1",
-			 *       "globalSectionsUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/funnel%2FSkIDfu0S4m3NYQyvWHC6%2Fglobal-sections-1?alt=media&token=9cc5c211-093b-4751-aeba-19282ac92955",
-			 *       "isStoreActive": false,
 			 *       "trackingCodeBody": "",
 			 *       "trackingCodeHead": "",
+			 *       "type": "funnel",
+			 *       "updatedAt": "2024-04-29T15:00:34.233Z",
 			 *       "url": "/chaitanya"
 			 *     } */
 			funnels: Record<string, never>

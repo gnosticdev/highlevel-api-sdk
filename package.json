@@ -20,30 +20,44 @@
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
+			"node": "./dist/index.js",
+			"require": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		},
 		"./configs": {
 			"import": "./dist/configs/highlevel.js",
+			"node": "./dist/configs/highlevel.js",
+			"require": "./dist/configs/highlevel.js",
 			"types": "./dist/configs/highlevel.d.ts"
 		},
 		"./configs/*": {
 			"import": "./dist/configs/*.js",
+			"node": "./dist/configs/*.js",
+			"require": "./dist/configs/*.js",
 			"types": "./dist/configs/*.d.ts"
 		},
 		"./oauth": {
 			"import": "./dist/oauth.js",
+			"node": "./dist/oauth.js",
+			"require": "./dist/oauth.js",
 			"types": "./dist/oauth.d.ts"
 		},
 		"./scopes": {
 			"import": "./dist/scopes.js",
+			"node": "./dist/scopes.js",
+			"require": "./dist/scopes.js",
 			"types": "./dist/scopes.d.ts"
 		},
 		"./types/*": {
 			"import": "./dist/types/*.js",
+			"node": "./dist/types/*.js",
+			"require": "./dist/types/*.js",
 			"types": "./dist/types/*.d.ts"
 		},
 		"./webhooks": {
 			"import": "./dist/webhooks.js",
+			"node": "./dist/webhooks.js",
+			"require": "./dist/webhooks.js",
 			"types": "./dist/webhooks.d.ts"
 		}
 	},
