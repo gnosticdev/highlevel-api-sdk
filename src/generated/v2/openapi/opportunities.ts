@@ -1,38 +1,18 @@
 export type paths = {
-	'/opportunities/search': {
+	'/opportunities/': {
 		parameters: {
 			query?: never
 			header?: never
 			path?: never
 			cookie?: never
 		}
-		/**
-		 * Search Opportunity
-		 * @description Search Opportunity
-		 */
-		get: operations['search-opportunity']
+		get?: never
 		put?: never
-		post?: never
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	'/opportunities/pipelines': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
 		/**
-		 * Get Pipelines
-		 * @description Get Pipelines
+		 * Create Opportunity
+		 * @description Create Opportunity
 		 */
-		get: operations['get-pipelines']
-		put?: never
-		post?: never
+		post: operations['create-opportunity']
 		delete?: never
 		options?: never
 		head?: never
@@ -67,6 +47,30 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/opportunities/{id}/followers': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Add Followers
+		 * @description Add Followers
+		 */
+		post: operations['add-followers-opportunity']
+		/**
+		 * Remove Followers
+		 * @description Remove Followers
+		 */
+		delete: operations['remove-followers-opportunity']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/opportunities/{id}/status': {
 		parameters: {
 			query?: never
@@ -80,6 +84,46 @@ export type paths = {
 		 * @description Update Opportunity Status
 		 */
 		put: operations['update-opportunity-status']
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/opportunities/pipelines': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Pipelines
+		 * @description Get Pipelines
+		 */
+		get: operations['get-pipelines']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/opportunities/search': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Search Opportunity
+		 * @description Search Opportunity
+		 */
+		get: operations['search-opportunity']
+		put?: never
 		post?: never
 		delete?: never
 		options?: never
@@ -107,314 +151,15 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
-	'/opportunities/{id}/followers': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		/**
-		 * Add Followers
-		 * @description Add Followers
-		 */
-		post: operations['add-followers-opportunity']
-		/**
-		 * Remove Followers
-		 * @description Remove Followers
-		 */
-		delete: operations['remove-followers-opportunity']
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	'/opportunities/': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		/**
-		 * Create Opportunity
-		 * @description Create Opportunity
-		 */
-		post: operations['create-opportunity']
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 }
 export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
 		BadRequestDTO: {
-			/** @example 400 */
-			statusCode?: number
 			/** @example Bad Request */
 			message?: string
-		}
-		UnauthorizedDTO: {
-			/** @example 401 */
+			/** @example 400 */
 			statusCode?: number
-			/** @example Invalid token: access token is invalid */
-			message?: string
-			/** @example Unauthorized */
-			error?: string
-		}
-		UnprocessableDTO: {
-			/** @example 422 */
-			statusCode?: number
-			/** @example [
-			 *       "Unprocessable Entity"
-			 *     ] */
-			message?: string[]
-			/** @example Unprocessable Entity */
-			error?: string
-		}
-		SearchOpportunitiesContactResponseSchema: {
-			/** @example byMEV0NQinDhq8ZfiOi2 */
-			id?: string
-			/** @example John Deo */
-			name?: string
-			/** @example Tesla Inc */
-			companyName?: string
-			/** @example john@deo.com */
-			email?: string
-			/** @example +1202-555-0107 */
-			phone?: string
-			tags?: string[]
-		}
-		CustomFieldResponseSchema: {
-			/** @example MgobCB14YMVKuE4Ka8p1 */
-			id: string
-			/** @description The value of the custom field */
-			fieldValue:
-				| string
-				| Record<string, never>
-				| string[]
-				| Record<string, never>[]
-		}
-		SearchOpportunitiesResponseSchema: {
-			/** @example yWQobCRIhRguQtD2llvk */
-			id?: string
-			/** @example testing */
-			name?: string
-			/** @example 500 */
-			monetaryValue?: number
-			/** @example VDm7RPYC2GLUvdpKmBfC */
-			pipelineId?: string
-			/** @example e93ba61a-53b3-45e7-985a-c7732dbcdb69 */
-			pipelineStageId?: string
-			/** @example zT46WSCPbudrq4zhWMk6 */
-			assignedTo?: string
-			/** @example open */
-			status?: string
-			/** @example  */
-			source?: string
-			/** @example 2021-08-03T04:55:17.355Z */
-			lastStatusChangeAt?: string
-			/** @example 2021-08-03T04:55:17.355Z */
-			lastStageChangeAt?: string
-			/** @example 2021-08-03T04:55:17.355Z */
-			lastActionDate?: string
-			/** @example 1 */
-			indexVersion?: string
-			/** @example 2021-08-03T04:55:17.355Z */
-			createdAt?: string
-			/** @example 2021-08-03T04:55:17.355Z */
-			updatedAt?: string
-			/** @example zT46WSCPbudrq4zhWMk6 */
-			contactId?: string
-			/** @example zT46WSCPbudrq4zhW */
-			locationId?: string
-			contact?: components['schemas']['SearchOpportunitiesContactResponseSchema']
-			notes?: string[]
-			tasks?: string[]
-			calendarEvents?: string[]
-			customFields?: components['schemas']['CustomFieldResponseSchema'][]
-			followers?: unknown[][]
-		}
-		SearchMetaResponseSchema: {
-			/** @example 1 */
-			total?: number
-			/** @example http://localhost:5066/opportunities/search?q=&location_id=ve9EPM428h8vShlRW1KT&pipeline_id=&pipeline_stage_id=&status=&assigned_to+=&campaignId=&id=&order=&endDate=&startAfter=1625203104328&startAfterId=yWQobCRIhRguQtD2llvk&date=&limit=1&country=&page=1 */
-			nextPageUrl?: string
-			/** @example yWQobCRIhRguQtD2llvk */
-			startAfterId?: string
-			/** @example 1625203104328 */
-			startAfter?: number
-			/** @example 2 */
-			currentPage?: number
-			/** @example 3 */
-			nextPage?: number
-			/** @example 1 */
-			prevPage?: number
-		}
-		SearchSuccessfulResponseDto: {
-			opportunities?: components['schemas']['SearchOpportunitiesResponseSchema'][]
-			meta?: components['schemas']['SearchMetaResponseSchema']
-			aggregations?: Record<string, never>
-		}
-		PipelinesResponseSchema: {
-			/** @example aWdODOBVOlH1RUFKWQke */
-			id?: string
-			/** @example new pipeline */
-			name?: string
-			stages?: unknown[][]
-			/** @example false */
-			showInFunnel?: boolean
-			/** @example true */
-			showInPieChart?: boolean
-			/** @example dsjddjkndadqaja */
-			locationId?: string
-		}
-		GetPipelinesSuccessfulResponseDto: {
-			pipelines?: components['schemas']['PipelinesResponseSchema'][]
-		}
-		GetPostOpportunitySuccessfulResponseDto: {
-			opportunity?: components['schemas']['SearchOpportunitiesResponseSchema']
-		}
-		DeleteUpdateOpportunitySuccessfulResponseDto: {
-			/** @example true */
-			succeded?: boolean
-		}
-		UpdateStatusDto: {
-			/** @enum {string} */
-			status: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
-		}
-		customFieldsInputArraySchema: {
-			/** @example 6dvNaf7VhkQ9snc5vnjJ */
-			id: string
-			/** @example my_custom_field */
-			key?: string
-			/** @example [
-			 *       "test",
-			 *       "test2"
-			 *     ] */
-			field_value?: string[]
-		}
-		customFieldsInputObjectSchema: {
-			/** @example 6dvNaf7VhkQ9snc5vnjJ */
-			id: string
-			/** @example my_custom_field */
-			key?: string
-			/** @example {} */
-			field_value?: Record<string, never>
-		}
-		customFieldsInputStringSchema: {
-			/**
-			 * @description Pass either `id` or `key` of custom field
-			 * @example 6dvNaf7VhkQ9snc5vnjJ
-			 */
-			id?: string
-			/**
-			 * @description Pass either `id` or `key` of custom field
-			 * @example my_custom_field
-			 */
-			key?: string
-			/** @example 9039160788 */
-			field_value?: string
-		}
-		CreateDto: {
-			/**
-			 * @description pipeline Id
-			 * @example VDm7RPYC2GLUvdpKmBfC
-			 */
-			pipelineId: string
-			/** @example ve9EPM428h8vShlRW1KT */
-			locationId: string
-			/** @example First Opps */
-			name: string
-			/** @example 7915dedc-8f18-44d5-8bc3-77c04e994a10 */
-			pipelineStageId?: string
-			/** @enum {string} */
-			status: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
-			/** @example mTkSCb1UBjb5tk4OvB69 */
-			contactId: string
-			/** @example 220 */
-			monetaryValue?: number
-			/** @example 082goXVW3lIExEQPOnd3 */
-			assignedTo?: string
-			/** @description Add custom fields to opportunities. */
-			customFields?: (
-				| components['schemas']['customFieldsInputStringSchema']
-				| components['schemas']['customFieldsInputArraySchema']
-				| components['schemas']['customFieldsInputObjectSchema']
-			)[]
-		}
-		UpdateOpportunityDto: {
-			/**
-			 * @description pipeline Id
-			 * @example bCkKGpDsyPP4peuKowkG
-			 */
-			pipelineId?: string
-			/** @example First Opps */
-			name?: string
-			/** @example 7915dedc-8f18-44d5-8bc3-77c04e994a10 */
-			pipelineStageId?: string
-			/** @enum {string} */
-			status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
-			/** @example 220 */
-			monetaryValue?: number
-			/** @example 082goXVW3lIExEQPOnd3 */
-			assignedTo?: string
-			/** @description Update custom fields to opportunities. */
-			customFields?: (
-				| components['schemas']['customFieldsInputStringSchema']
-				| components['schemas']['customFieldsInputArraySchema']
-				| components['schemas']['customFieldsInputObjectSchema']
-			)[]
-		}
-		UpsertOpportunityDto: {
-			/**
-			 * @description pipeline Id
-			 * @example bCkKGpDsyPP4peuKowkG
-			 */
-			pipelineId: string
-			/**
-			 * @description locationId
-			 * @example CLu7BaljjqrEjBGKTNNe
-			 */
-			locationId: string
-			/**
-			 * @description contactId
-			 * @example LiKJ2vnRg5ETM8Z19K7
-			 */
-			contactId: string
-			/**
-			 * @description name
-			 * @example opportunity name
-			 */
-			name?: string
-			/** @enum {string} */
-			status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
-			/** @example 7915dedc-8f18-44d5-8bc3-77c04e994a10 */
-			pipelineStageId?: string
-			/** @example 220 */
-			monetaryValue?: number
-			/** @example 082goXVW3lIExEQPOnd3 */
-			assignedTo?: string
-		}
-		UpsertOpportunitySuccessfulResponseDto: {
-			/** @description Updated / New Opportunity */
-			opportunity: Record<string, never>
-			/** @example true */
-			new: boolean
-		}
-		FollowersDTO: {
-			/** @example [
-			 *       "sx6wyHhbFdRXh302Lunr",
-			 *       "sx6wyHhbFdRXh302Lunr"
-			 *     ] */
-			followers: string[]
 		}
 		CreateAddFollowersSuccessfulResponseDto: {
 			/** @example [
@@ -428,6 +173,76 @@ export type components = {
 			 *     ] */
 			followersAdded?: string[]
 		}
+		CreateDto: {
+			/** @example 082goXVW3lIExEQPOnd3 */
+			assignedTo?: string
+			/** @example mTkSCb1UBjb5tk4OvB69 */
+			contactId: string
+			/** @description Add custom fields to opportunities. */
+			customFields?: (
+				| components['schemas']['customFieldsInputStringSchema']
+				| components['schemas']['customFieldsInputArraySchema']
+				| components['schemas']['customFieldsInputObjectSchema']
+			)[]
+			/** @example ve9EPM428h8vShlRW1KT */
+			locationId: string
+			/** @example 220 */
+			monetaryValue?: number
+			/** @example First Opps */
+			name: string
+			/**
+			 * @description pipeline Id
+			 * @example VDm7RPYC2GLUvdpKmBfC
+			 */
+			pipelineId: string
+			/** @example 7915dedc-8f18-44d5-8bc3-77c04e994a10 */
+			pipelineStageId?: string
+			/** @enum {string} */
+			status: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
+		}
+		CustomFieldResponseSchema: {
+			/** @description The value of the custom field */
+			fieldValue:
+				| string
+				| Record<string, never>
+				| string[]
+				| Record<string, never>[]
+			/** @example MgobCB14YMVKuE4Ka8p1 */
+			id: string
+		}
+		customFieldsInputArraySchema: {
+			/** @example [
+			 *       "test",
+			 *       "test2"
+			 *     ] */
+			field_value?: string[]
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
+		customFieldsInputObjectSchema: {
+			/** @example {} */
+			field_value?: Record<string, never>
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
+		customFieldsInputStringSchema: {
+			/** @example 9039160788 */
+			field_value?: string
+			/**
+			 * @description Pass either `id` or `key` of custom field
+			 * @example 6dvNaf7VhkQ9snc5vnjJ
+			 */
+			id?: string
+			/**
+			 * @description Pass either `id` or `key` of custom field
+			 * @example my_custom_field
+			 */
+			key?: string
+		}
 		DeleteFollowersSuccessfulResponseDto: {
 			/** @example [
 			 *       "sx6wyHhbFdRXh302Lunr",
@@ -440,6 +255,191 @@ export type components = {
 			 *     ] */
 			followersRemoved?: string[]
 		}
+		DeleteUpdateOpportunitySuccessfulResponseDto: {
+			/** @example true */
+			succeded?: boolean
+		}
+		FollowersDTO: {
+			/** @example [
+			 *       "sx6wyHhbFdRXh302Lunr",
+			 *       "sx6wyHhbFdRXh302Lunr"
+			 *     ] */
+			followers: string[]
+		}
+		GetPipelinesSuccessfulResponseDto: {
+			pipelines?: components['schemas']['PipelinesResponseSchema'][]
+		}
+		GetPostOpportunitySuccessfulResponseDto: {
+			opportunity?: components['schemas']['SearchOpportunitiesResponseSchema']
+		}
+		PipelinesResponseSchema: {
+			/** @example aWdODOBVOlH1RUFKWQke */
+			id?: string
+			/** @example dsjddjkndadqaja */
+			locationId?: string
+			/** @example new pipeline */
+			name?: string
+			/** @example false */
+			showInFunnel?: boolean
+			/** @example true */
+			showInPieChart?: boolean
+			stages?: unknown[][]
+		}
+		SearchMetaResponseSchema: {
+			/** @example 2 */
+			currentPage?: number
+			/** @example 3 */
+			nextPage?: number
+			/** @example http://localhost:5066/opportunities/search?q=&location_id=ve9EPM428h8vShlRW1KT&pipeline_id=&pipeline_stage_id=&status=&assigned_to+=&campaignId=&id=&order=&endDate=&startAfter=1625203104328&startAfterId=yWQobCRIhRguQtD2llvk&date=&limit=1&country=&page=1 */
+			nextPageUrl?: string
+			/** @example 1 */
+			prevPage?: number
+			/** @example 1625203104328 */
+			startAfter?: number
+			/** @example yWQobCRIhRguQtD2llvk */
+			startAfterId?: string
+			/** @example 1 */
+			total?: number
+		}
+		SearchOpportunitiesContactResponseSchema: {
+			/** @example Tesla Inc */
+			companyName?: string
+			/** @example john@deo.com */
+			email?: string
+			/** @example byMEV0NQinDhq8ZfiOi2 */
+			id?: string
+			/** @example John Deo */
+			name?: string
+			/** @example +1202-555-0107 */
+			phone?: string
+			tags?: string[]
+		}
+		SearchOpportunitiesResponseSchema: {
+			/** @example zT46WSCPbudrq4zhWMk6 */
+			assignedTo?: string
+			calendarEvents?: string[]
+			contact?: components['schemas']['SearchOpportunitiesContactResponseSchema']
+			/** @example zT46WSCPbudrq4zhWMk6 */
+			contactId?: string
+			/** @example 2021-08-03T04:55:17.355Z */
+			createdAt?: string
+			customFields?: components['schemas']['CustomFieldResponseSchema'][]
+			followers?: unknown[][]
+			/** @example yWQobCRIhRguQtD2llvk */
+			id?: string
+			/** @example 1 */
+			indexVersion?: string
+			/** @example 2021-08-03T04:55:17.355Z */
+			lastActionDate?: string
+			/** @example 2021-08-03T04:55:17.355Z */
+			lastStageChangeAt?: string
+			/** @example 2021-08-03T04:55:17.355Z */
+			lastStatusChangeAt?: string
+			/** @example zT46WSCPbudrq4zhW */
+			locationId?: string
+			/** @example 500 */
+			monetaryValue?: number
+			/** @example testing */
+			name?: string
+			notes?: string[]
+			/** @example VDm7RPYC2GLUvdpKmBfC */
+			pipelineId?: string
+			/** @example e93ba61a-53b3-45e7-985a-c7732dbcdb69 */
+			pipelineStageId?: string
+			/** @example  */
+			source?: string
+			/** @example open */
+			status?: string
+			tasks?: string[]
+			/** @example 2021-08-03T04:55:17.355Z */
+			updatedAt?: string
+		}
+		SearchSuccessfulResponseDto: {
+			aggregations?: Record<string, never>
+			meta?: components['schemas']['SearchMetaResponseSchema']
+			opportunities?: components['schemas']['SearchOpportunitiesResponseSchema'][]
+		}
+		UnauthorizedDTO: {
+			/** @example Unauthorized */
+			error?: string
+			/** @example Invalid token: access token is invalid */
+			message?: string
+			/** @example 401 */
+			statusCode?: number
+		}
+		UnprocessableDTO: {
+			/** @example Unprocessable Entity */
+			error?: string
+			/** @example [
+			 *       "Unprocessable Entity"
+			 *     ] */
+			message?: string[]
+			/** @example 422 */
+			statusCode?: number
+		}
+		UpdateOpportunityDto: {
+			/** @example 082goXVW3lIExEQPOnd3 */
+			assignedTo?: string
+			/** @description Update custom fields to opportunities. */
+			customFields?: (
+				| components['schemas']['customFieldsInputStringSchema']
+				| components['schemas']['customFieldsInputArraySchema']
+				| components['schemas']['customFieldsInputObjectSchema']
+			)[]
+			/** @example 220 */
+			monetaryValue?: number
+			/** @example First Opps */
+			name?: string
+			/**
+			 * @description pipeline Id
+			 * @example bCkKGpDsyPP4peuKowkG
+			 */
+			pipelineId?: string
+			/** @example 7915dedc-8f18-44d5-8bc3-77c04e994a10 */
+			pipelineStageId?: string
+			/** @enum {string} */
+			status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
+		}
+		UpdateStatusDto: {
+			/** @enum {string} */
+			status: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
+		}
+		UpsertOpportunityDto: {
+			/** @example 082goXVW3lIExEQPOnd3 */
+			assignedTo?: string
+			/**
+			 * @description contactId
+			 * @example LiKJ2vnRg5ETM8Z19K7
+			 */
+			contactId: string
+			/**
+			 * @description locationId
+			 * @example CLu7BaljjqrEjBGKTNNe
+			 */
+			locationId: string
+			/** @example 220 */
+			monetaryValue?: number
+			/**
+			 * @description name
+			 * @example opportunity name
+			 */
+			name?: string
+			/**
+			 * @description pipeline Id
+			 * @example bCkKGpDsyPP4peuKowkG
+			 */
+			pipelineId: string
+			/** @example 7915dedc-8f18-44d5-8bc3-77c04e994a10 */
+			pipelineStageId?: string
+			/** @enum {string} */
+			status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
+		}
+		UpsertOpportunitySuccessfulResponseDto: {
+			/** @example true */
+			new: boolean
+			/** @description Updated / New Opportunity */
+			opportunity: Record<string, never>
+		}
 	}
 	responses: never
 	parameters: never
@@ -449,87 +449,9 @@ export type components = {
 }
 export type $defs = Record<string, never>
 export interface operations {
-	'search-opportunity': {
+	'create-opportunity': {
 		parameters: {
-			query: {
-				/** @example john@deo.com */
-				q?: string
-				/**
-				 * @description Location Id
-				 * @example i2SpAtBVHSVea1sL6oah
-				 */
-				location_id: string
-				/**
-				 * @description Pipeline Id
-				 * @example bCkKGpDsyPP4peuKowkG
-				 */
-				pipeline_id?: string
-				/**
-				 * @description stage Id
-				 * @example 7915dedc-8f18-44d5-8bc3-77c04e994a10
-				 */
-				pipeline_stage_id?: string
-				/**
-				 * @description Contact Id
-				 * @example WFwVrSSjZ2CNHbZThQX2
-				 */
-				contact_id?: string
-				status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
-				/** @example 082goXVW3lIExEQPOnd3 */
-				assigned_to?: string
-				/**
-				 * @description Campaign Id
-				 * @example Y2I9XM7aO1hncuSOlc9L
-				 */
-				campaignId?: string
-				/**
-				 * @description Opportunity Id
-				 * @example 123akv4LFn6C9frZoy3e
-				 */
-				id?: string
-				/** @example added_asc */
-				order?: string
-				/**
-				 * @description End date
-				 * @example mm-dd-yyyy
-				 */
-				endDate?: string
-				/**
-				 * @description Start After
-				 * @example 1628008053263
-				 */
-				startAfter?: string
-				/**
-				 * @description Start After Id
-				 * @example UIaE1WjAwWKdlyD7osQI
-				 */
-				startAfterId?: string
-				/**
-				 * @description Start date
-				 * @example mm-dd-yyyy
-				 */
-				date?: string
-				/** @example US */
-				country?: string
-				page?: number
-				/** @description Limit Per Page records count. will allow maximum up to 100 and default will be 20 */
-				limit?: number
-				/**
-				 * @description get Tasks in contact
-				 * @example false
-				 */
-				getTasks?: boolean
-				/**
-				 * @description get Notes in contact
-				 * @example false
-				 */
-				getNotes?: boolean
-				/**
-				 * @description get Calender event in contact
-				 * @example false
-				 */
-				getCalendarEvents?: boolean
-			}
+			query?: never
 			header: {
 				/** @description Access Token */
 				Authorization: string
@@ -539,15 +461,19 @@ export interface operations {
 			path?: never
 			cookie?: never
 		}
-		requestBody?: never
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CreateDto']
+			}
+		}
 		responses: {
 			/** @description Successful response */
-			200: {
+			201: {
 				headers: {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['SearchSuccessfulResponseDto']
+					'application/json': components['schemas']['GetPostOpportunitySuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -575,52 +501,6 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'get-pipelines': {
-		parameters: {
-			query: {
-				/** @example ve9EPM428h8vShlRW1KT */
-				locationId: string
-			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['GetPipelinesSuccessfulResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
 				}
 			}
 		}
@@ -803,124 +683,6 @@ export interface operations {
 			}
 		}
 	}
-	'update-opportunity-status': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Opportunity Id
-				 * @example yWQobCRIhRguQtD2llvk
-				 */
-				id: string
-			}
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['UpdateStatusDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['DeleteUpdateOpportunitySuccessfulResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'Upsert-opportunity': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['UpsertOpportunityDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UpsertOpportunitySuccessfulResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
 	'add-followers-opportunity': {
 		parameters: {
 			query?: never
@@ -1045,7 +807,245 @@ export interface operations {
 			}
 		}
 	}
-	'create-opportunity': {
+	'update-opportunity-status': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Opportunity Id
+				 * @example yWQobCRIhRguQtD2llvk
+				 */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateStatusDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['DeleteUpdateOpportunitySuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'get-pipelines': {
+		parameters: {
+			query: {
+				/** @example ve9EPM428h8vShlRW1KT */
+				locationId: string
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetPipelinesSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'search-opportunity': {
+		parameters: {
+			query: {
+				/** @example 082goXVW3lIExEQPOnd3 */
+				assigned_to?: string
+				/**
+				 * @description Campaign Id
+				 * @example Y2I9XM7aO1hncuSOlc9L
+				 */
+				campaignId?: string
+				/**
+				 * @description Contact Id
+				 * @example WFwVrSSjZ2CNHbZThQX2
+				 */
+				contact_id?: string
+				/** @example US */
+				country?: string
+				/**
+				 * @description Start date
+				 * @example mm-dd-yyyy
+				 */
+				date?: string
+				/**
+				 * @description End date
+				 * @example mm-dd-yyyy
+				 */
+				endDate?: string
+				/**
+				 * @description get Calender event in contact
+				 * @example false
+				 */
+				getCalendarEvents?: boolean
+				/**
+				 * @description get Notes in contact
+				 * @example false
+				 */
+				getNotes?: boolean
+				/**
+				 * @description get Tasks in contact
+				 * @example false
+				 */
+				getTasks?: boolean
+				/**
+				 * @description Opportunity Id
+				 * @example 123akv4LFn6C9frZoy3e
+				 */
+				id?: string
+				/** @description Limit Per Page records count. will allow maximum up to 100 and default will be 20 */
+				limit?: number
+				/**
+				 * @description Location Id
+				 * @example i2SpAtBVHSVea1sL6oah
+				 */
+				location_id: string
+				/** @example added_asc */
+				order?: string
+				page?: number
+				/**
+				 * @description Pipeline Id
+				 * @example bCkKGpDsyPP4peuKowkG
+				 */
+				pipeline_id?: string
+				/**
+				 * @description stage Id
+				 * @example 7915dedc-8f18-44d5-8bc3-77c04e994a10
+				 */
+				pipeline_stage_id?: string
+				/** @example john@deo.com */
+				q?: string
+				/**
+				 * @description Start After
+				 * @example 1628008053263
+				 */
+				startAfter?: string
+				/**
+				 * @description Start After Id
+				 * @example UIaE1WjAwWKdlyD7osQI
+				 */
+				startAfterId?: string
+				status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['SearchSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'Upsert-opportunity': {
 		parameters: {
 			query?: never
 			header: {
@@ -1059,17 +1059,17 @@ export interface operations {
 		}
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['CreateDto']
+				'application/json': components['schemas']['UpsertOpportunityDto']
 			}
 		}
 		responses: {
 			/** @description Successful response */
-			201: {
+			200: {
 				headers: {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['GetPostOpportunitySuccessfulResponseDto']
+					'application/json': components['schemas']['UpsertOpportunitySuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */

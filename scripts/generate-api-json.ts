@@ -7,14 +7,17 @@ import type {
 	ReferenceObject,
 } from 'openapi-typescript'
 
-const API_URL = 'https://highlevel-v2-api.gnosticai.workers.dev'
+const API_URL = process.env.DOCS_API_URL
 const USERNAME = process.env.DOCS_USERNAME
 const PASSWORD = process.env.DOCS_PASSWORD
-const OTHER_FILES = ['scopes.json', 'webhooks.json']
 
-const TEMP_DIR = path.join(process.cwd(), 'temp-schemas-json')
-const FINAL_OPENAPI_DIR = path.join(process.cwd(), 'schemas', 'openapi')
-const FINAL_OTHER_DIR = path.join(process.cwd(), 'schemas', 'other')
+if (!API_URL || !USERNAME || !PASSWORD) {
+	throw new Error('DOCS_API_URL, DOCS_USERNAME, and DOCS_PASSWORD must be set')
+}
+
+const CUSTOM_FILES = ['scopes.json', 'webhooks.json']
+
+const TEMP_DIR = 'temp-schemas-json'
 
 if (import.meta.main) {
 	main().catch((error) => {
@@ -39,7 +42,7 @@ async function fetchSchemaList() {
 	const data = (await response.json()) as ListSchemas
 	const schemas = data.schemas.reduce(
 		(acc: { openapi: string[]; other: string[] }, schema) => {
-			if (OTHER_FILES.includes(schema.name)) {
+			if (CUSTOM_FILES.includes(schema.name)) {
 				acc.other.push(schema.name)
 			} else {
 				acc.openapi.push(schema.name)
@@ -54,7 +57,11 @@ async function fetchSchemaList() {
 /**
  * Download a schema from the API.
  */
-async function downloadSchema(schemaName: string, dir: string) {
+async function downloadSchema(
+	schemaName: string,
+	dir: string,
+	isOpenApi: boolean,
+) {
 	const response = await fetch(`${API_URL}/${schemaName}`)
 	if (!response.ok) {
 		throw new Error(
@@ -62,10 +69,18 @@ async function downloadSchema(schemaName: string, dir: string) {
 		)
 	}
 	const content = await response.json()
-	const processedContent = ensureUniqueOperationIds(content)
-	const filePath = path.join(dir, schemaName)
+	const processedContent = isOpenApi
+		? ensureUniqueOperationIds(content)
+		: content
+
+	// Update the filename for OpenAPI schemas
+	const fileName = isOpenApi
+		? `${path.basename(schemaName, '.json')}.openapi.json`
+		: schemaName
+
+	const filePath = path.join(dir, fileName)
 	await Bun.write(filePath, JSON.stringify(processedContent, null, 2))
-	console.log(`Downloaded and processed: ${schemaName}`)
+	console.log(`Downloaded and processed: ${fileName}`)
 }
 
 function isOperationObject(
@@ -128,29 +143,18 @@ async function main() {
 
 		// Download OpenAPI schemas to temp directory
 		for (const schema of schemas.openapi) {
-			await downloadSchema(schema, path.join(TEMP_DIR, 'openapi'))
+			await downloadSchema(schema, path.join(TEMP_DIR, 'openapi'), true)
 		}
 
-		// Download other files to temp directory
+		// Download custom schemas to temp directory
 		for (const file of schemas.other) {
-			await downloadSchema(file, path.join(TEMP_DIR, 'other'))
+			await downloadSchema(file, path.join(TEMP_DIR, 'custom'), false)
 		}
 
 		// If we've reached this point, all downloads were successful
-		// Clear the existing directories
-		fs.rmSync(FINAL_OPENAPI_DIR, { recursive: true, force: true })
-		fs.rmSync(FINAL_OTHER_DIR, { recursive: true, force: true })
-
-		// Move files from temp to final directories
-		fs.cpSync(path.join(TEMP_DIR, 'openapi'), FINAL_OPENAPI_DIR, {
-			recursive: true,
-		})
-		fs.cpSync(path.join(TEMP_DIR, 'other'), FINAL_OTHER_DIR, {
-			recursive: true,
-		})
-
-		// Remove temp directory
-		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
+		// move the files from the temp dir to the final dir
+		await Bun.$`rsync -av --delete ${TEMP_DIR}/ schemas/v2`
+		await Bun.$`rm -rf ${TEMP_DIR}`
 
 		console.log('All schemas downloaded and moved successfully')
 	} catch (error) {

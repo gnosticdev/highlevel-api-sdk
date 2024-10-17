@@ -1,5 +1,5 @@
 export type paths = {
-	'/invoices/template': {
+	'/invoices/': {
 		parameters: {
 			query?: never
 			header?: never
@@ -7,23 +7,23 @@ export type paths = {
 			cookie?: never
 		}
 		/**
-		 * List templates
-		 * @description API to get list of templates
+		 * List invoices
+		 * @description API to get list of invoices
 		 */
-		get: operations['list-invoice-templates']
+		get: operations['list-invoices']
 		put?: never
 		/**
-		 * Create template
-		 * @description API to create a template
+		 * Create Invoice
+		 * @description API to create an invoice
 		 */
-		post: operations['create-invoice-template']
+		post: operations['create-invoice']
 		delete?: never
 		options?: never
 		head?: never
 		patch?: never
 		trace?: never
 	}
-	'/invoices/template/{templateId}': {
+	'/invoices/{invoiceId}': {
 		parameters: {
 			query?: never
 			header?: never
@@ -31,21 +31,101 @@ export type paths = {
 			cookie?: never
 		}
 		/**
-		 * Get an template
-		 * @description API to get an template by template id
+		 * Get invoice
+		 * @description API to get invoice by invoice id
 		 */
-		get: operations['get-invoice-template']
+		get: operations['get-invoice']
 		/**
-		 * Update template
-		 * @description API to update an template by template id
+		 * Update invoice
+		 * @description API to update invoice by invoice id
 		 */
-		put: operations['update-invoice-template']
+		put: operations['update-invoice']
 		post?: never
 		/**
-		 * Delete template
-		 * @description API to update an template by template id
+		 * Delete invoice
+		 * @description API to delete invoice by invoice id
 		 */
-		delete: operations['delete-invoice-template']
+		delete: operations['delete-invoice']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/invoices/{invoiceId}/record-payment': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Record a manual payment for an invoice
+		 * @description API to record manual payment for an invoice by invoice id
+		 */
+		post: operations['record-invoice']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/invoices/{invoiceId}/send': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Send invoice
+		 * @description API to send invoice by invoice id
+		 */
+		post: operations['send-invoice']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/invoices/{invoiceId}/void': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Void invoice
+		 * @description API to delete invoice by invoice id
+		 */
+		post: operations['void-invoice']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/invoices/generate-invoice-number': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Generate Invoice Number
+		 * @description Get the next invoice number for the given location
+		 */
+		get: operations['generate-invoice-number']
+		put?: never
+		post?: never
+		delete?: never
 		options?: never
 		head?: never
 		patch?: never
@@ -103,26 +183,6 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
-	'/invoices/schedule/{scheduleId}/schedule': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		/**
-		 * Schedule an schedule invoice
-		 * @description API to schedule an schedule invoice to start sending to the customer
-		 */
-		post: operations['schedule-invoice-schedule']
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	'/invoices/schedule/{scheduleId}/auto-payment': {
 		parameters: {
 			query?: never
@@ -163,6 +223,78 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/invoices/schedule/{scheduleId}/schedule': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Schedule an schedule invoice
+		 * @description API to schedule an schedule invoice to start sending to the customer
+		 */
+		post: operations['schedule-invoice-schedule']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/invoices/template': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * List templates
+		 * @description API to get list of templates
+		 */
+		get: operations['list-invoice-templates']
+		put?: never
+		/**
+		 * Create template
+		 * @description API to create a template
+		 */
+		post: operations['create-invoice-template']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/invoices/template/{templateId}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get an template
+		 * @description API to get an template by template id
+		 */
+		get: operations['get-invoice-template']
+		/**
+		 * Update template
+		 * @description API to update an template by template id
+		 */
+		put: operations['update-invoice-template']
+		post?: never
+		/**
+		 * Delete template
+		 * @description API to update an template by template id
+		 */
+		delete: operations['delete-invoice-template']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/invoices/text2pay': {
 		parameters: {
 			query?: never
@@ -183,155 +315,13 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
-	'/invoices/generate-invoice-number': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		/**
-		 * Generate Invoice Number
-		 * @description Get the next invoice number for the given location
-		 */
-		get: operations['generate-invoice-number']
-		put?: never
-		post?: never
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	'/invoices/{invoiceId}': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		/**
-		 * Get invoice
-		 * @description API to get invoice by invoice id
-		 */
-		get: operations['get-invoice']
-		/**
-		 * Update invoice
-		 * @description API to update invoice by invoice id
-		 */
-		put: operations['update-invoice']
-		post?: never
-		/**
-		 * Delete invoice
-		 * @description API to delete invoice by invoice id
-		 */
-		delete: operations['delete-invoice']
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	'/invoices/{invoiceId}/void': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		/**
-		 * Void invoice
-		 * @description API to delete invoice by invoice id
-		 */
-		post: operations['void-invoice']
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	'/invoices/{invoiceId}/send': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		/**
-		 * Send invoice
-		 * @description API to send invoice by invoice id
-		 */
-		post: operations['send-invoice']
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	'/invoices/{invoiceId}/record-payment': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		/**
-		 * Record a manual payment for an invoice
-		 * @description API to record manual payment for an invoice by invoice id
-		 */
-		post: operations['record-invoice']
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	'/invoices/': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		/**
-		 * List invoices
-		 * @description API to get list of invoices
-		 */
-		get: operations['list-invoices']
-		put?: never
-		/**
-		 * Create Invoice
-		 * @description API to create an invoice
-		 */
-		post: operations['create-invoice']
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 }
 export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
-		BadRequestDTO: {
-			/** @example 400 */
-			statusCode?: number
-			/** @example Bad Request */
-			message?: string
-		}
-		UnauthorizedDTO: {
-			/** @example 401 */
-			statusCode?: number
-			/** @example Invalid token: access token is invalid */
-			message?: string
-			/** @example Unauthorized */
-			error?: string
+		AdditionalEmailsDto: {
+			/** @example alex@example.com */
+			email: string
 		}
 		AddressDto: {
 			/**
@@ -350,11 +340,6 @@ export type components = {
 			 */
 			city?: string
 			/**
-			 * @description State
-			 * @example TX
-			 */
-			state?: string
-			/**
 			 * @description Country Code
 			 * @example US
 			 */
@@ -364,1149 +349,26 @@ export type components = {
 			 * @example 559-6993
 			 */
 			postalCode?: string
-		}
-		BusinessDetailsDto: {
 			/**
-			 * @description Business Logo URL
-			 * @example https://example.com/logo.png
+			 * @description State
+			 * @example TX
 			 */
-			logoUrl?: string
-			/**
-			 * @description Business Name
-			 * @example ABC Corp.
-			 */
-			name?: string
-			/**
-			 * @description Business Phone Number
-			 * @example +1-214-559-6993
-			 */
-			phoneNo?: string
-			/**
-			 * @description Business Address
-			 * @example 9931 Beechwood, TX
-			 */
-			address?: components['schemas']['AddressDto']
-			/**
-			 * @description Business Website Link
-			 * @example wwww.example.com
-			 */
-			website?: string
-			/** @description Custom Values */
-			customValues?: string[]
-		}
-		ItemTaxDto: {
-			_id: string
-			name: string
-			rate: number
-			/** @enum {string} */
-			calculation: 'exclusive'
-			description?: string
-			taxId?: string
-		}
-		InvoiceItemDto: {
-			/**
-			 * @description Invoice Item Name
-			 * @example ABC Product
-			 */
-			name: string
-			/**
-			 * @description Invoice descriptions
-			 * @example ABC Corp.
-			 */
-			description?: string
-			/**
-			 * @description Product Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			productId?: string
-			/**
-			 * @description Price Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			priceId?: string
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Product amount
-			 * @example 999
-			 */
-			amount: number
-			/**
-			 * @description Product Quantity
-			 * @example 1
-			 */
-			qty: number
-			/** @description Tax */
-			taxes?: components['schemas']['ItemTaxDto'][]
-		}
-		DiscountDto: {
-			/**
-			 * @description Discount Value
-			 * @default 0
-			 * @example 10
-			 */
-			value: number
-			/**
-			 * @description Discount type
-			 * @default percentage
-			 * @example percentage
-			 * @enum {string}
-			 */
-			type: 'percentage' | 'fixed'
-		}
-		CreateInvoiceTemplateDto: {
-			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
-			internal?: boolean
-			/**
-			 * @description Name of the template
-			 * @example New Template
-			 */
-			name: string
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			currency: string
-			items: components['schemas']['InvoiceItemDto'][]
-			discount?: components['schemas']['DiscountDto']
-			termsNotes?: string
-			/**
-			 * @description Template title
-			 * @example New Template
-			 */
-			title?: string
-		}
-		CreateInvoiceTemplateResponseDto: {
-			/**
-			 * @description Template Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the Template
-			 * @example New Template
-			 */
-			name: string
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			items: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-		}
-		UnprocessableDTO: {
-			/** @example 422 */
-			statusCode?: number
-			/** @example [
-			 *       "Unprocessable Entity"
-			 *     ] */
-			message?: string[]
-			/** @example Unprocessable Entity */
-			error?: string
-		}
-		GetTemplateResponseDto: {
-			/**
-			 * @description Template Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the Template
-			 * @example New Template
-			 */
-			name: string
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			items: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-		}
-		ListTemplatesResponseDto: {
-			data: components['schemas']['GetTemplateResponseDto'][]
-			/**
-			 * @description Total number of Templates
-			 * @example 100
-			 */
-			totalCount: number
-		}
-		UpdateInvoiceTemplateDto: {
-			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
-			internal?: boolean
-			/**
-			 * @description Name of the template
-			 * @example New Template
-			 */
-			name: string
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			currency: string
-			items: components['schemas']['InvoiceItemDto'][]
-			discount?: components['schemas']['DiscountDto']
-			termsNotes?: string
-			/**
-			 * @description Template title
-			 * @example New Template
-			 */
-			title?: string
-		}
-		UpdateInvoiceTemplateResponseDto: {
-			/**
-			 * @description Template Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the Template
-			 * @example New Template
-			 */
-			name: string
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			items: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-		}
-		DeleteInvoiceTemplateResponseDto: {
-			/**
-			 * @description success
-			 * @example true
-			 */
-			success: boolean
-		}
-		AdditionalEmailsDto: {
-			/** @example alex@example.com */
-			email: string
-		}
-		ContactDetailsDto: {
-			/**
-			 * @description Contact ID
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			id: string
-			/**
-			 * @description Contact Name
-			 * @example Alex
-			 */
-			name: string
-			/**
-			 * @description Contact Phone Number
-			 * @example +1-214-559-6993
-			 */
-			phoneNo?: string
-			/**
-			 * @description Contact Email
-			 * @example alex@example.com
-			 */
-			email?: string
-			/** @description Secondary email addresses for the contact to be saved */
-			additionalEmails?: components['schemas']['AdditionalEmailsDto'][]
-			/**
-			 * @description Contact Company Name
-			 * @example ABC Corp.
-			 */
-			companyName?: string
-			address?: components['schemas']['AddressDto']
-			/** @description Custom Values */
-			customFields?: string[]
-		}
-		CustomRRuleOptionsDto: {
-			/**
-			 * @example monthly
-			 * @enum {string}
-			 */
-			intervalType:
-				| 'yearly'
-				| 'monthly'
-				| 'weekly'
-				| 'daily'
-				| 'hourly'
-				| 'minutely'
-				| 'secondly'
-			/** @example 2 */
-			interval: number
-			/**
-			 * @description Start date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			startDate: string
-			/**
-			 * @description Start time in HH:mm:ss format
-			 * @example 20:45:00
-			 */
-			startTime?: string
-			/**
-			 * @description End date in YYYY-MM-DD format
-			 * @example 2029-11-01
-			 */
-			endDate?: string
-			/**
-			 * @description End time in HH:mm:ss format
-			 * @example 18:45:00
-			 */
-			endTime?: string
-			/**
-			 * @description -1, 1, 2, 3, ..., 27, 28
-			 * @example 15
-			 */
-			dayOfMonth?: number
-			/**
-			 * @example mo
-			 * @enum {string}
-			 */
-			dayOfWeek?: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
-			/**
-			 * @description -1, 1, 2, 3, 4
-			 * @example -1
-			 */
-			numOfWeek?: number
-			/**
-			 * @example jan
-			 * @enum {string}
-			 */
-			monthOfYear?:
-				| 'jan'
-				| 'feb'
-				| 'mar'
-				| 'apr'
-				| 'may'
-				| 'jun'
-				| 'jul'
-				| 'aug'
-				| 'sep'
-				| 'oct'
-				| 'nov'
-				| 'dec'
-			/**
-			 * @description Max number of task executions
-			 * @example 10
-			 */
-			count?: number
-			/**
-			 * @description Execute task number of days before
-			 * @example 5
-			 */
-			daysBefore?: number
-		}
-		ScheduleOptionsDto: {
-			executeAt?: string
-			rrule?: components['schemas']['CustomRRuleOptionsDto']
-		}
-		CreateInvoiceScheduleDto: {
-			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
-			name: string
-			contactDetails: components['schemas']['ContactDetailsDto']
-			schedule: components['schemas']['ScheduleOptionsDto']
-			liveMode: boolean
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			currency: string
-			items: components['schemas']['InvoiceItemDto'][]
-			discount: components['schemas']['DiscountDto']
-			termsNotes?: string
-			title?: string
-		}
-		DefaultInvoiceResponseDto: {
-			/**
-			 * @description Invoice Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Invoice Status
-			 * @example draft
-			 * @enum {string}
-			 */
-			status:
-				| 'draft'
-				| 'sent'
-				| 'payment_processing'
-				| 'paid'
-				| 'void'
-				| 'partially_paid'
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Amount Paid
-			 * @example 0
-			 */
-			amountPaid: number
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Invoice Number
-			 * @example 19
-			 */
-			invoiceNumber: number
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Contact Details
-			 * @example {
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "email": "alex@example.com",
-			 *       "customFields": [],
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       }
-			 *     }
-			 */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			issueDate: string
-			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			dueDate: string
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			invoiceItems: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Total Amount Due
-			 * @example 999
-			 */
-			amountDue: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-		}
-		CreateInvoiceScheduleResponseDto: {
-			/**
-			 * @description Schedule Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Schedule Status
-			 * @example draft
-			 */
-			status: Record<string, never>
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			schedule?: components['schemas']['ScheduleOptionsDto']
-			/** @description List of invoices */
-			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Contact Details
-			 * @example {
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "email": "alex@example.com",
-			 *       "customFields": [],
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       }
-			 *     }
-			 */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			items: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Terms notes
-			 * @example Confidential
-			 */
-			termsNotes: string
-			/**
-			 * @description Compiled terms notes
-			 * @example Confidential
-			 */
-			compiledTermsNotes: string
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-		}
-		GetScheduleResponseDto: {
-			/**
-			 * @description Schedule Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Schedule Status
-			 * @example draft
-			 */
-			status: Record<string, never>
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			schedule?: components['schemas']['ScheduleOptionsDto']
-			/** @description List of invoices */
-			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Contact Details
-			 * @example {
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "email": "alex@example.com",
-			 *       "customFields": [],
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       }
-			 *     }
-			 */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			items: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Terms notes
-			 * @example Confidential
-			 */
-			termsNotes: string
-			/**
-			 * @description Compiled terms notes
-			 * @example Confidential
-			 */
-			compiledTermsNotes: string
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-		}
-		ListSchedulesResponseDto: {
-			schedules: components['schemas']['GetScheduleResponseDto'][]
-			/**
-			 * @description Total number of Schedules
-			 * @example 100
-			 */
-			total: number
-		}
-		UpdateInvoiceScheduleDto: {
-			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
-			name: string
-			contactDetails: components['schemas']['ContactDetailsDto']
-			schedule: components['schemas']['ScheduleOptionsDto']
-			liveMode: boolean
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			currency: string
-			items: components['schemas']['InvoiceItemDto'][]
-			discount: components['schemas']['DiscountDto']
-			termsNotes?: string
-			title?: string
-		}
-		UpdateInvoiceScheduleResponseDto: {
-			/**
-			 * @description Schedule Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Schedule Status
-			 * @example draft
-			 */
-			status: Record<string, never>
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			schedule?: components['schemas']['ScheduleOptionsDto']
-			/** @description List of invoices */
-			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Contact Details
-			 * @example {
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "email": "alex@example.com",
-			 *       "customFields": [],
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       }
-			 *     }
-			 */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			items: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Terms notes
-			 * @example Confidential
-			 */
-			termsNotes: string
-			/**
-			 * @description Compiled terms notes
-			 * @example Confidential
-			 */
-			compiledTermsNotes: string
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-		}
-		DeleteInvoiceScheduleResponseDto: {
-			/**
-			 * @description success
-			 * @example true
-			 */
-			success: boolean
-		}
-		CardDto: {
-			brand: string
-			last4: string
-		}
-		USBankAccountDto: {
-			bank_name: string
-			last4: string
+			state?: string
 		}
 		AutoPaymentDetailsDto: {
-			enable: boolean
-			type?: string
-			paymentMethodId?: string
-			customerId?: string
 			card?: components['schemas']['CardDto']
+			customerId?: string
+			enable: boolean
+			paymentMethodId?: string
+			type?: string
 			usBankAccount?: components['schemas']['USBankAccountDto']
 		}
-		ScheduleInvoiceScheduleDto: {
-			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
-			liveMode: boolean
-			/** @description auto-payment configuration */
-			autoPayment?: components['schemas']['AutoPaymentDetailsDto']
-		}
-		ScheduleInvoiceScheduleResponseDto: {
+		AutoPaymentInvoiceScheduleResponseDto: {
 			/**
 			 * @description Schedule Id
 			 * @example 6578278e879ad2646715ba9c
 			 */
 			_id: string
-			/**
-			 * @description Schedule Status
-			 * @example draft
-			 */
-			status: Record<string, never>
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
 			/**
 			 * @description Location Id or Agency Id
 			 * @example 6578278e879ad2646715ba9c
@@ -1514,14 +376,6 @@ export type components = {
 			altId: string
 			/** @enum {string} */
 			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			schedule?: components['schemas']['ScheduleOptionsDto']
-			/** @description List of invoices */
-			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
 			/**
 			 * @description Business Details
 			 * @example {
@@ -1539,10 +393,10 @@ export type components = {
 			 */
 			businessDetails: components['schemas']['BusinessDetailsDto']
 			/**
-			 * @description Currency
-			 * @example USD
+			 * @description Compiled terms notes
+			 * @example Confidential
 			 */
-			currency: string
+			compiledTermsNotes: string
 			/**
 			 * @description Contact Details
 			 * @example {
@@ -1558,6 +412,16 @@ export type components = {
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
 			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
 			 * @description Discount
 			 * @example {
 			 *       "type": "percentage",
@@ -1565,6 +429,8 @@ export type components = {
 			 *     }
 			 */
 			discount?: components['schemas']['DiscountDto']
+			/** @description List of invoices */
+			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
 			/**
 			 * @description Invoice Items
 			 * @example [
@@ -1582,30 +448,36 @@ export type components = {
 			 */
 			items: string[]
 			/**
-			 * @description Total Amount
-			 * @example 999
+			 * @description Live Mode
+			 * @example false
 			 */
-			total: number
+			liveMode: boolean
 			/**
-			 * @description Title
-			 * @example INVOICE
+			 * @description Name of the invoice
+			 * @example New Invoice
 			 */
-			title: string
+			name: string
+			schedule?: components['schemas']['ScheduleOptionsDto']
+			/**
+			 * @description Schedule Status
+			 * @example draft
+			 */
+			status: Record<string, never>
 			/**
 			 * @description Terms notes
 			 * @example Confidential
 			 */
 			termsNotes: string
 			/**
-			 * @description Compiled terms notes
-			 * @example Confidential
+			 * @description Title
+			 * @example INVOICE
 			 */
-			compiledTermsNotes: string
+			title: string
 			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
+			 * @description Total Amount
+			 * @example 999
 			 */
-			createdAt: string
+			total: number
 			/**
 			 * @description updated at
 			 * @example 2023-12-12T09:27:42.355Z
@@ -1624,130 +496,44 @@ export type components = {
 			 * @enum {string}
 			 */
 			altType: 'location'
-			id: string
 			/** @description auto-payment configuration */
 			autoPayment: components['schemas']['AutoPaymentDetailsDto']
+			id: string
 		}
-		AutoPaymentInvoiceScheduleResponseDto: {
+		BadRequestDTO: {
+			/** @example Bad Request */
+			message?: string
+			/** @example 400 */
+			statusCode?: number
+		}
+		BusinessDetailsDto: {
 			/**
-			 * @description Schedule Id
-			 * @example 6578278e879ad2646715ba9c
+			 * @description Business Address
+			 * @example 9931 Beechwood, TX
 			 */
-			_id: string
+			address?: components['schemas']['AddressDto']
+			/** @description Custom Values */
+			customValues?: string[]
 			/**
-			 * @description Schedule Status
-			 * @example draft
+			 * @description Business Logo URL
+			 * @example https://example.com/logo.png
 			 */
-			status: Record<string, never>
+			logoUrl?: string
 			/**
-			 * @description Live Mode
-			 * @example false
+			 * @description Business Name
+			 * @example ABC Corp.
 			 */
-			liveMode: boolean
+			name?: string
 			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
+			 * @description Business Phone Number
+			 * @example +1-214-559-6993
 			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
+			phoneNo?: string
 			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
+			 * @description Business Website Link
+			 * @example wwww.example.com
 			 */
-			name: string
-			schedule?: components['schemas']['ScheduleOptionsDto']
-			/** @description List of invoices */
-			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Contact Details
-			 * @example {
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "email": "alex@example.com",
-			 *       "customFields": [],
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       }
-			 *     }
-			 */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			items: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Terms notes
-			 * @example Confidential
-			 */
-			termsNotes: string
-			/**
-			 * @description Compiled terms notes
-			 * @example Confidential
-			 */
-			compiledTermsNotes: string
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
+			website?: string
 		}
 		CancelInvoiceScheduleDto: {
 			/**
@@ -1769,30 +555,12 @@ export type components = {
 			 */
 			_id: string
 			/**
-			 * @description Schedule Status
-			 * @example draft
-			 */
-			status: Record<string, never>
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
 			 * @description Location Id or Agency Id
 			 * @example 6578278e879ad2646715ba9c
 			 */
 			altId: string
 			/** @enum {string} */
 			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			schedule?: components['schemas']['ScheduleOptionsDto']
-			/** @description List of invoices */
-			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
 			/**
 			 * @description Business Details
 			 * @example {
@@ -1810,10 +578,10 @@ export type components = {
 			 */
 			businessDetails: components['schemas']['BusinessDetailsDto']
 			/**
-			 * @description Currency
-			 * @example USD
+			 * @description Compiled terms notes
+			 * @example Confidential
 			 */
-			currency: string
+			compiledTermsNotes: string
 			/**
 			 * @description Contact Details
 			 * @example {
@@ -1828,6 +596,530 @@ export type components = {
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/** @description List of invoices */
+			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			items: string[]
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			schedule?: components['schemas']['ScheduleOptionsDto']
+			/**
+			 * @description Schedule Status
+			 * @example draft
+			 */
+			status: Record<string, never>
+			/**
+			 * @description Terms notes
+			 * @example Confidential
+			 */
+			termsNotes: string
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		CardDto: {
+			brand: string
+			last4: string
+		}
+		ChequeDto: {
+			/**
+			 * @description check number
+			 * @example 129-129-129-912
+			 */
+			number: string
+		}
+		ContactDetailsDto: {
+			/** @description Secondary email addresses for the contact to be saved */
+			additionalEmails?: components['schemas']['AdditionalEmailsDto'][]
+			address?: components['schemas']['AddressDto']
+			/**
+			 * @description Contact Company Name
+			 * @example ABC Corp.
+			 */
+			companyName?: string
+			/** @description Custom Values */
+			customFields?: string[]
+			/**
+			 * @description Contact Email
+			 * @example alex@example.com
+			 */
+			email?: string
+			/**
+			 * @description Contact ID
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			id: string
+			/**
+			 * @description Contact Name
+			 * @example Alex
+			 */
+			name: string
+			/**
+			 * @description Contact Phone Number
+			 * @example +1-214-559-6993
+			 */
+			phoneNo?: string
+		}
+		CreateInvoiceDto: {
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/** @description Contact information to send the invoice to */
+			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description Currency code
+			 * @example USD
+			 */
+			currency: string
+			discount: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-14
+			 */
+			dueDate?: string
+			/**
+			 * @description Invoice Number
+			 * @example 1001
+			 */
+			invoiceNumber?: string
+			/**
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			issueDate: string
+			/** @description An array of items for the invoice. */
+			items: components['schemas']['InvoiceItemDto'][]
+			liveMode: boolean
+			/**
+			 * @description Invoice Name
+			 * @example New Invoice
+			 */
+			name: string
+			sentTo: components['schemas']['SentToDto']
+			/**
+			 * @description Terms notes, Also supports HTML markups
+			 * @example <p>This is a default terms.</p>
+			 */
+			termsNotes?: string
+			/**
+			 * @description Title for the invoice
+			 * @example INVOICE
+			 */
+			title?: string
+		}
+		CreateInvoiceResponseDto: {
+			/**
+			 * @description Invoice Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Total Amount Due
+			 * @example 999
+			 */
+			amountDue: number
+			/**
+			 * @description Amount Paid
+			 * @example 0
+			 */
+			amountPaid: number
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description Contact Details
+			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
+			 *     }
+			 */
+			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			dueDate: string
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			invoiceItems: string[]
+			/**
+			 * @description Invoice Number
+			 * @example 19
+			 */
+			invoiceNumber: number
+			/**
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			issueDate: string
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			/**
+			 * @description Invoice Status
+			 * @example draft
+			 * @enum {string}
+			 */
+			status:
+				| 'draft'
+				| 'sent'
+				| 'payment_processing'
+				| 'paid'
+				| 'void'
+				| 'partially_paid'
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		CreateInvoiceScheduleDto: {
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			contactDetails: components['schemas']['ContactDetailsDto']
+			currency: string
+			discount: components['schemas']['DiscountDto']
+			items: components['schemas']['InvoiceItemDto'][]
+			liveMode: boolean
+			name: string
+			schedule: components['schemas']['ScheduleOptionsDto']
+			termsNotes?: string
+			title?: string
+		}
+		CreateInvoiceScheduleResponseDto: {
+			/**
+			 * @description Schedule Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description Compiled terms notes
+			 * @example Confidential
+			 */
+			compiledTermsNotes: string
+			/**
+			 * @description Contact Details
+			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
+			 *     }
+			 */
+			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/** @description List of invoices */
+			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			items: string[]
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			schedule?: components['schemas']['ScheduleOptionsDto']
+			/**
+			 * @description Schedule Status
+			 * @example draft
+			 */
+			status: Record<string, never>
+			/**
+			 * @description Terms notes
+			 * @example Confidential
+			 */
+			termsNotes: string
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		CreateInvoiceTemplateDto: {
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			currency: string
+			discount?: components['schemas']['DiscountDto']
+			internal?: boolean
+			items: components['schemas']['InvoiceItemDto'][]
+			/**
+			 * @description Name of the template
+			 * @example New Template
+			 */
+			name: string
+			termsNotes?: string
+			/**
+			 * @description Template title
+			 * @example New Template
+			 */
+			title?: string
+		}
+		CreateInvoiceTemplateResponseDto: {
+			/**
+			 * @description Template Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
 			/**
 			 * @description Discount
 			 * @example {
@@ -1853,35 +1145,1048 @@ export type components = {
 			 */
 			items: string[]
 			/**
+			 * @description Name of the Template
+			 * @example New Template
+			 */
+			name: string
+			/**
 			 * @description Total Amount
 			 * @example 999
 			 */
 			total: number
 			/**
-			 * @description Title
-			 * @example INVOICE
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
 			 */
-			title: string
+			updatedAt: string
+		}
+		CustomRRuleOptionsDto: {
 			/**
-			 * @description Terms notes
-			 * @example Confidential
+			 * @description Max number of task executions
+			 * @example 10
 			 */
-			termsNotes: string
+			count?: number
 			/**
-			 * @description Compiled terms notes
-			 * @example Confidential
+			 * @description -1, 1, 2, 3, ..., 27, 28
+			 * @example 15
 			 */
-			compiledTermsNotes: string
+			dayOfMonth?: number
+			/**
+			 * @example mo
+			 * @enum {string}
+			 */
+			dayOfWeek?: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
+			/**
+			 * @description Execute task number of days before
+			 * @example 5
+			 */
+			daysBefore?: number
+			/**
+			 * @description End date in YYYY-MM-DD format
+			 * @example 2029-11-01
+			 */
+			endDate?: string
+			/**
+			 * @description End time in HH:mm:ss format
+			 * @example 18:45:00
+			 */
+			endTime?: string
+			/** @example 2 */
+			interval: number
+			/**
+			 * @example monthly
+			 * @enum {string}
+			 */
+			intervalType:
+				| 'yearly'
+				| 'monthly'
+				| 'weekly'
+				| 'daily'
+				| 'hourly'
+				| 'minutely'
+				| 'secondly'
+			/**
+			 * @example jan
+			 * @enum {string}
+			 */
+			monthOfYear?:
+				| 'jan'
+				| 'feb'
+				| 'mar'
+				| 'apr'
+				| 'may'
+				| 'jun'
+				| 'jul'
+				| 'aug'
+				| 'sep'
+				| 'oct'
+				| 'nov'
+				| 'dec'
+			/**
+			 * @description -1, 1, 2, 3, 4
+			 * @example -1
+			 */
+			numOfWeek?: number
+			/**
+			 * @description Start date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			startDate: string
+			/**
+			 * @description Start time in HH:mm:ss format
+			 * @example 20:45:00
+			 */
+			startTime?: string
+		}
+		DefaultInvoiceResponseDto: {
+			/**
+			 * @description Invoice Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Total Amount Due
+			 * @example 999
+			 */
+			amountDue: number
+			/**
+			 * @description Amount Paid
+			 * @example 0
+			 */
+			amountPaid: number
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description Contact Details
+			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
+			 *     }
+			 */
+			contactDetails: components['schemas']['ContactDetailsDto']
 			/**
 			 * @description created at
 			 * @example 2023-12-12T09:27:42.355Z
 			 */
 			createdAt: string
 			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			dueDate: string
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			invoiceItems: string[]
+			/**
+			 * @description Invoice Number
+			 * @example 19
+			 */
+			invoiceNumber: number
+			/**
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			issueDate: string
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			/**
+			 * @description Invoice Status
+			 * @example draft
+			 * @enum {string}
+			 */
+			status:
+				| 'draft'
+				| 'sent'
+				| 'payment_processing'
+				| 'paid'
+				| 'void'
+				| 'partially_paid'
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
 			 * @description updated at
 			 * @example 2023-12-12T09:27:42.355Z
 			 */
 			updatedAt: string
+		}
+		DeleteInvoiceResponseDto: {
+			/**
+			 * @description Invoice Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Total Amount Due
+			 * @example 999
+			 */
+			amountDue: number
+			/**
+			 * @description Amount Paid
+			 * @example 0
+			 */
+			amountPaid: number
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description Contact Details
+			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
+			 *     }
+			 */
+			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			dueDate: string
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			invoiceItems: string[]
+			/**
+			 * @description Invoice Number
+			 * @example 19
+			 */
+			invoiceNumber: number
+			/**
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			issueDate: string
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			/**
+			 * @description Invoice Status
+			 * @example draft
+			 * @enum {string}
+			 */
+			status:
+				| 'draft'
+				| 'sent'
+				| 'payment_processing'
+				| 'paid'
+				| 'void'
+				| 'partially_paid'
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		DeleteInvoiceScheduleResponseDto: {
+			/**
+			 * @description success
+			 * @example true
+			 */
+			success: boolean
+		}
+		DeleteInvoiceTemplateResponseDto: {
+			/**
+			 * @description success
+			 * @example true
+			 */
+			success: boolean
+		}
+		DiscountDto: {
+			/**
+			 * @description Discount type
+			 * @default percentage
+			 * @example percentage
+			 * @enum {string}
+			 */
+			type: 'percentage' | 'fixed'
+			/**
+			 * @description Discount Value
+			 * @default 0
+			 * @example 10
+			 */
+			value: number
+		}
+		GenerateInvoiceNumberResponseDto: {
+			/**
+			 * @description Invoice Number
+			 * @example 19
+			 */
+			invoiceNumber?: number
+		}
+		GetInvoiceResponseDto: {
+			/**
+			 * @description Invoice Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Total Amount Due
+			 * @example 999
+			 */
+			amountDue: number
+			/**
+			 * @description Amount Paid
+			 * @example 0
+			 */
+			amountPaid: number
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description Contact Details
+			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
+			 *     }
+			 */
+			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			dueDate: string
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			invoiceItems: string[]
+			/**
+			 * @description Invoice Number
+			 * @example 19
+			 */
+			invoiceNumber: number
+			/**
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			issueDate: string
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			/**
+			 * @description Invoice Status
+			 * @example draft
+			 * @enum {string}
+			 */
+			status:
+				| 'draft'
+				| 'sent'
+				| 'payment_processing'
+				| 'paid'
+				| 'void'
+				| 'partially_paid'
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			totalSummary: components['schemas']['TotalSummaryDto']
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		GetScheduleResponseDto: {
+			/**
+			 * @description Schedule Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description Compiled terms notes
+			 * @example Confidential
+			 */
+			compiledTermsNotes: string
+			/**
+			 * @description Contact Details
+			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
+			 *     }
+			 */
+			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/** @description List of invoices */
+			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			items: string[]
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			schedule?: components['schemas']['ScheduleOptionsDto']
+			/**
+			 * @description Schedule Status
+			 * @example draft
+			 */
+			status: Record<string, never>
+			/**
+			 * @description Terms notes
+			 * @example Confidential
+			 */
+			termsNotes: string
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		GetTemplateResponseDto: {
+			/**
+			 * @description Template Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			items: string[]
+			/**
+			 * @description Name of the Template
+			 * @example New Template
+			 */
+			name: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		InvoiceItemDto: {
+			/**
+			 * @description Product amount
+			 * @example 999
+			 */
+			amount: number
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Invoice descriptions
+			 * @example ABC Corp.
+			 */
+			description?: string
+			/**
+			 * @description Invoice Item Name
+			 * @example ABC Product
+			 */
+			name: string
+			/**
+			 * @description Price Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			priceId?: string
+			/**
+			 * @description Product Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			productId?: string
+			/**
+			 * @description Product Quantity
+			 * @example 1
+			 */
+			qty: number
+			/** @description Tax */
+			taxes?: components['schemas']['ItemTaxDto'][]
+		}
+		InvoiceSettingsSenderConfigurationDto: {
+			/**
+			 * @description Email id to be used while sending out invoices
+			 * @example alex@example.com
+			 */
+			fromEmail?: string
+			/**
+			 * @description Sender name to be used while sending invoice
+			 * @example Alex
+			 */
+			fromName?: string
+		}
+		ItemTaxDto: {
+			_id: string
+			/** @enum {string} */
+			calculation: 'exclusive'
+			description?: string
+			name: string
+			rate: number
+			taxId?: string
+		}
+		ListInvoicesResponseDto: {
+			invoices: components['schemas']['GetInvoiceResponseDto'][]
+			/**
+			 * @description Total number of invoices
+			 * @example 100
+			 */
+			total: number
+		}
+		ListSchedulesResponseDto: {
+			schedules: components['schemas']['GetScheduleResponseDto'][]
+			/**
+			 * @description Total number of Schedules
+			 * @example 100
+			 */
+			total: number
+		}
+		ListTemplatesResponseDto: {
+			data: components['schemas']['GetTemplateResponseDto'][]
+			/**
+			 * @description Total number of Templates
+			 * @example 100
+			 */
+			totalCount: number
+		}
+		OldCreateInvoiceDTO: Record<string, never>
+		RecordPaymentDto: {
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			/**
+			 * @description Amount to be paid against the invoice.
+			 * @example 999
+			 */
+			amount?: number
+			card: components['schemas']['CardDto']
+			cheque: components['schemas']['ChequeDto']
+			/**
+			 * @description manual payment method
+			 * @example card
+			 * @enum {string}
+			 */
+			mode: 'cash' | 'card' | 'cheque' | 'bank_transfer' | 'other'
+			/**
+			 * @description Any note to be recorded with the transaction
+			 * @example This was a direct payment
+			 */
+			notes: string
+		}
+		RecordPaymentResponseDto: {
+			invoice: components['schemas']['DefaultInvoiceResponseDto']
+			/**
+			 * @description status
+			 * @example true
+			 */
+			success: boolean
+		}
+		ScheduleInvoiceScheduleDto: {
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			/** @description auto-payment configuration */
+			autoPayment?: components['schemas']['AutoPaymentDetailsDto']
+			liveMode: boolean
+		}
+		ScheduleInvoiceScheduleResponseDto: {
+			/**
+			 * @description Schedule Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description Compiled terms notes
+			 * @example Confidential
+			 */
+			compiledTermsNotes: string
+			/**
+			 * @description Contact Details
+			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
+			 *     }
+			 */
+			contactDetails: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/** @description List of invoices */
+			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			items: string[]
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			schedule?: components['schemas']['ScheduleOptionsDto']
+			/**
+			 * @description Schedule Status
+			 * @example draft
+			 */
+			status: Record<string, never>
+			/**
+			 * @description Terms notes
+			 * @example Confidential
+			 */
+			termsNotes: string
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		ScheduleOptionsDto: {
+			executeAt?: string
+			rrule?: components['schemas']['CustomRRuleOptionsDto']
+		}
+		SendInvoiceDto: {
+			/** @enum {string} */
+			action: 'sms_and_email' | 'send_manually' | 'email' | 'sms'
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			liveMode: boolean
+			/** @description sender details for invoice, valid only if invoice is not sent manually */
+			sentFrom?: components['schemas']['InvoiceSettingsSenderConfigurationDto']
+			/**
+			 * @description Please ensure that the UserId corresponds to an authorized personnel, either by an employee ID or agency ID, to access this location. This account will serve as the primary channel for all future communications and updates.
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			userId: string
+		}
+		SendInvoicesResponseDto: {
+			emailData: Record<string, never>
+			invoice: components['schemas']['DefaultInvoiceResponseDto']
+			smsData: Record<string, never>
 		}
 		SentToDto: {
 			/**
@@ -1892,19 +2197,19 @@ export type components = {
 			 */
 			email: string[]
 			/**
-			 * @description cc to be kept in any sent out emails
-			 * @example [
-			 *       "alex@example.com"
-			 *     ]
-			 */
-			emailCc?: string[]
-			/**
 			 * @description bcc to be kept in any sent out emails
 			 * @example [
 			 *       "alex@example.com"
 			 *     ]
 			 */
 			emailBcc?: string[]
+			/**
+			 * @description cc to be kept in any sent out emails
+			 * @example [
+			 *       "alex@example.com"
+			 *     ]
+			 */
+			emailCc?: string[]
 			/**
 			 * @description Contact Phone Number
 			 * @example [
@@ -1915,6 +2220,12 @@ export type components = {
 		}
 		Text2PayDto: {
 			/**
+			 * @description create invoice in draft mode or send mode
+			 * @example draft
+			 * @enum {string}
+			 */
+			action: 'draft' | 'send'
+			/**
 			 * @description location Id / company Id based on altType
 			 * @example 6578278e879ad2646715ba9c
 			 */
@@ -1925,48 +2236,20 @@ export type components = {
 			 * @enum {string}
 			 */
 			altType: 'location'
-			/**
-			 * @description Invoice Name
-			 * @example New Invoice
-			 */
-			name: string
 			businessDetails: components['schemas']['BusinessDetailsDto']
+			/** @description Contact information to send the invoice to */
+			contactDetails: components['schemas']['ContactDetailsDto']
 			/**
 			 * @description Currency code
 			 * @example USD
 			 */
 			currency: string
-			/** @description An array of items for the invoice. */
-			items: components['schemas']['InvoiceItemDto'][]
-			/**
-			 * @description Terms notes, Also supports HTML markups
-			 * @example <p>This is a default terms.</p>
-			 */
-			termsNotes?: string
-			/**
-			 * @description Title for the invoice
-			 * @example INVOICE
-			 */
-			title?: string
-			/** @description Contact information to send the invoice to */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Invoice Number
-			 * @example 1001
-			 */
-			invoiceNumber?: string
-			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			issueDate: string
+			discount?: components['schemas']['DiscountDto']
 			/**
 			 * @description Due date in YYYY-MM-DD format
 			 * @example 2023-01-14
 			 */
 			dueDate?: string
-			sentTo: components['schemas']['SentToDto']
-			liveMode: boolean
 			/** @description id of invoice to update. If skipped, a new invoice will be created */
 			id?: string
 			/**
@@ -1975,53 +2258,24 @@ export type components = {
 			 */
 			includeTermsNote?: boolean
 			/**
-			 * @description create invoice in draft mode or send mode
-			 * @example draft
-			 * @enum {string}
-			 */
-			action: 'draft' | 'send'
-			/** @description id of user generating invoice */
-			userId: string
-			discount?: components['schemas']['DiscountDto']
-		}
-		Text2PayInvoiceResponseDto: {
-			invoice: components['schemas']['DefaultInvoiceResponseDto']
-			/** @description preview url of generated invoice */
-			invoiceUrl: string
-		}
-		GenerateInvoiceNumberResponseDto: {
-			/**
 			 * @description Invoice Number
-			 * @example 19
+			 * @example 1001
 			 */
-			invoiceNumber?: number
-		}
-		CreateInvoiceDto: {
+			invoiceNumber?: string
 			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
 			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
+			issueDate: string
+			/** @description An array of items for the invoice. */
+			items: components['schemas']['InvoiceItemDto'][]
+			liveMode: boolean
 			/**
 			 * @description Invoice Name
 			 * @example New Invoice
 			 */
 			name: string
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Currency code
-			 * @example USD
-			 */
-			currency: string
-			/** @description An array of items for the invoice. */
-			items: components['schemas']['InvoiceItemDto'][]
-			discount: components['schemas']['DiscountDto']
+			sentTo: components['schemas']['SentToDto']
 			/**
 			 * @description Terms notes, Also supports HTML markups
 			 * @example <p>This is a default terms.</p>
@@ -2032,327 +2286,43 @@ export type components = {
 			 * @example INVOICE
 			 */
 			title?: string
-			/** @description Contact information to send the invoice to */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Invoice Number
-			 * @example 1001
-			 */
-			invoiceNumber?: string
-			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			issueDate: string
-			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-14
-			 */
-			dueDate?: string
-			sentTo: components['schemas']['SentToDto']
-			liveMode: boolean
+			/** @description id of user generating invoice */
+			userId: string
 		}
-		OldCreateInvoiceDTO: Record<string, never>
-		CreateInvoiceResponseDto: {
-			/**
-			 * @description Invoice Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Invoice Status
-			 * @example draft
-			 * @enum {string}
-			 */
-			status:
-				| 'draft'
-				| 'sent'
-				| 'payment_processing'
-				| 'paid'
-				| 'void'
-				| 'partially_paid'
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Amount Paid
-			 * @example 0
-			 */
-			amountPaid: number
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Invoice Number
-			 * @example 19
-			 */
-			invoiceNumber: number
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Contact Details
-			 * @example {
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "email": "alex@example.com",
-			 *       "customFields": [],
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       }
-			 *     }
-			 */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			issueDate: string
-			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			dueDate: string
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			invoiceItems: string[]
-			/**
-			 * @description Total Amount
-			 * @example 999
-			 */
-			total: number
-			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Total Amount Due
-			 * @example 999
-			 */
-			amountDue: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
+		Text2PayInvoiceResponseDto: {
+			invoice: components['schemas']['DefaultInvoiceResponseDto']
+			/** @description preview url of generated invoice */
+			invoiceUrl: string
 		}
 		TotalSummaryDto: {
-			/**
-			 * @description subTotal
-			 * @example 999
-			 */
-			subTotal: number
 			/**
 			 * @description discount
 			 * @example 0
 			 */
 			discount: number
-		}
-		GetInvoiceResponseDto: {
 			/**
-			 * @description Invoice Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			_id: string
-			/**
-			 * @description Invoice Status
-			 * @example draft
-			 * @enum {string}
-			 */
-			status:
-				| 'draft'
-				| 'sent'
-				| 'payment_processing'
-				| 'paid'
-				| 'void'
-				| 'partially_paid'
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Amount Paid
-			 * @example 0
-			 */
-			amountPaid: number
-			/**
-			 * @description Location Id or Agency Id
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/** @enum {string} */
-			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
-			/**
-			 * @description Business Details
-			 * @example {
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "addressLine1": "9931 Beechwood",
-			 *         "city": "St. Houston",
-			 *         "state": "TX",
-			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993"
-			 *       },
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "website": "www.example.com"
-			 *     }
-			 */
-			businessDetails: components['schemas']['BusinessDetailsDto']
-			/**
-			 * @description Invoice Number
-			 * @example 19
-			 */
-			invoiceNumber: number
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Contact Details
-			 * @example {
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "phoneNo": "+1-214-559-6993",
-			 *       "email": "alex@example.com",
-			 *       "customFields": [],
-			 *       "name": "Alex",
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       }
-			 *     }
-			 */
-			contactDetails: components['schemas']['ContactDetailsDto']
-			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			issueDate: string
-			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-01
-			 */
-			dueDate: string
-			/**
-			 * @description Discount
-			 * @example {
-			 *       "type": "percentage",
-			 *       "value": 0
-			 *     }
-			 */
-			discount?: components['schemas']['DiscountDto']
-			/**
-			 * @description Invoice Items
-			 * @example [
-			 *       {
-			 *         "taxes": [],
-			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "currency": "USD",
-			 *         "name": "Macbook Pro",
-			 *         "qty": 1,
-			 *         "amount": 999
-			 *       }
-			 *     ]
-			 */
-			invoiceItems: string[]
-			/**
-			 * @description Total Amount
+			 * @description subTotal
 			 * @example 999
 			 */
-			total: number
-			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Total Amount Due
-			 * @example 999
-			 */
-			amountDue: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
-			 * @description updated at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			updatedAt: string
-			totalSummary: components['schemas']['TotalSummaryDto']
+			subTotal: number
 		}
-		ListInvoicesResponseDto: {
-			invoices: components['schemas']['GetInvoiceResponseDto'][]
-			/**
-			 * @description Total number of invoices
-			 * @example 100
-			 */
-			total: number
+		UnauthorizedDTO: {
+			/** @example Unauthorized */
+			error?: string
+			/** @example Invalid token: access token is invalid */
+			message?: string
+			/** @example 401 */
+			statusCode?: number
+		}
+		UnprocessableDTO: {
+			/** @example Unprocessable Entity */
+			error?: string
+			/** @example [
+			 *       "Unprocessable Entity"
+			 *     ] */
+			message?: string[]
+			/** @example 422 */
+			statusCode?: number
 		}
 		UpdateInvoiceDto: {
 			/**
@@ -2366,26 +2336,6 @@ export type components = {
 			 * @enum {string}
 			 */
 			altType: 'location'
-			/**
-			 * @description Name to be updated
-			 * @example New Invoice
-			 */
-			name: string
-			/**
-			 * @description Title for the invoice
-			 * @example INVOICE
-			 */
-			title?: string
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
-			 * @description Description
-			 * @example ABC Corp payments
-			 */
-			description?: string
 			/**
 			 * @description Business details which need to be updated
 			 * @example {
@@ -2402,36 +2352,56 @@ export type components = {
 			 *     }
 			 */
 			businessDetails?: components['schemas']['BusinessDetailsDto']
+			contactDetails?: components['schemas']['ContactDetailsDto']
+			/**
+			 * @description Id of the contact which you need to send the invoice
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			contactId?: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Description
+			 * @example ABC Corp payments
+			 */
+			description?: string
+			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-14
+			 */
+			dueDate: string
+			invoiceItems: components['schemas']['InvoiceItemDto'][]
 			/**
 			 * @description Invoice Number
 			 * @example 1001
 			 */
 			invoiceNumber?: string
 			/**
-			 * @description Id of the contact which you need to send the invoice
-			 * @example 6578278e879ad2646715ba9c
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
 			 */
-			contactId?: string
-			contactDetails?: components['schemas']['ContactDetailsDto']
+			issueDate: string
+			/** @description Payment mode */
+			liveMode?: boolean
+			/**
+			 * @description Name to be updated
+			 * @example New Invoice
+			 */
+			name: string
 			/**
 			 * @description Terms notes, Also supports HTML markups
 			 * @example <p>This is a default terms.</p>
 			 */
 			termsNotes?: string
-			discount?: components['schemas']['DiscountDto']
-			invoiceItems: components['schemas']['InvoiceItemDto'][]
-			/** @description Payment mode */
-			liveMode?: boolean
 			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
+			 * @description Title for the invoice
+			 * @example INVOICE
 			 */
-			issueDate: string
-			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-14
-			 */
-			dueDate: string
+			title?: string
 		}
 		UpdateInvoiceResponseDto: {
 			/**
@@ -2440,28 +2410,6 @@ export type components = {
 			 */
 			_id: string
 			/**
-			 * @description Invoice Status
-			 * @example draft
-			 * @enum {string}
-			 */
-			status:
-				| 'draft'
-				| 'sent'
-				| 'payment_processing'
-				| 'paid'
-				| 'void'
-				| 'partially_paid'
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Amount Paid
-			 * @example 0
-			 */
-			amountPaid: number
-			/**
 			 * @description Location Id or Agency Id
 			 * @example 6578278e879ad2646715ba9c
 			 */
@@ -2469,10 +2417,15 @@ export type components = {
 			/** @enum {string} */
 			altType: 'location'
 			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
+			 * @description Total Amount Due
+			 * @example 999
 			 */
-			name: string
+			amountDue: number
+			/**
+			 * @description Amount Paid
+			 * @example 0
+			 */
+			amountPaid: number
 			/**
 			 * @description Business Details
 			 * @example {
@@ -2490,16 +2443,6 @@ export type components = {
 			 */
 			businessDetails: components['schemas']['BusinessDetailsDto']
 			/**
-			 * @description Invoice Number
-			 * @example 19
-			 */
-			invoiceNumber: number
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
 			 * @description Contact Details
 			 * @example {
 			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
@@ -2514,15 +2457,15 @@ export type components = {
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
 			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
 			 */
-			issueDate: string
+			createdAt: string
 			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-01
+			 * @description Currency
+			 * @example USD
 			 */
-			dueDate: string
+			currency: string
 			/**
 			 * @description Discount
 			 * @example {
@@ -2531,6 +2474,11 @@ export type components = {
 			 *     }
 			 */
 			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			dueDate: string
 			/**
 			 * @description Invoice Items
 			 * @example [
@@ -2548,59 +2496,82 @@ export type components = {
 			 */
 			invoiceItems: string[]
 			/**
-			 * @description Total Amount
-			 * @example 999
+			 * @description Invoice Number
+			 * @example 19
 			 */
-			total: number
+			invoiceNumber: number
+			/**
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			issueDate: string
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			/**
+			 * @description Invoice Status
+			 * @example draft
+			 * @enum {string}
+			 */
+			status:
+				| 'draft'
+				| 'sent'
+				| 'payment_processing'
+				| 'paid'
+				| 'void'
+				| 'partially_paid'
 			/**
 			 * @description Title
 			 * @example INVOICE
 			 */
 			title: string
 			/**
-			 * @description Total Amount Due
+			 * @description Total Amount
 			 * @example 999
 			 */
-			amountDue: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
+			total: number
 			/**
 			 * @description updated at
 			 * @example 2023-12-12T09:27:42.355Z
 			 */
 			updatedAt: string
 		}
-		DeleteInvoiceResponseDto: {
+		UpdateInvoiceScheduleDto: {
 			/**
-			 * @description Invoice Id
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			contactDetails: components['schemas']['ContactDetailsDto']
+			currency: string
+			discount: components['schemas']['DiscountDto']
+			items: components['schemas']['InvoiceItemDto'][]
+			liveMode: boolean
+			name: string
+			schedule: components['schemas']['ScheduleOptionsDto']
+			termsNotes?: string
+			title?: string
+		}
+		UpdateInvoiceScheduleResponseDto: {
+			/**
+			 * @description Schedule Id
 			 * @example 6578278e879ad2646715ba9c
 			 */
 			_id: string
-			/**
-			 * @description Invoice Status
-			 * @example draft
-			 * @enum {string}
-			 */
-			status:
-				| 'draft'
-				| 'sent'
-				| 'payment_processing'
-				| 'paid'
-				| 'void'
-				| 'partially_paid'
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Amount Paid
-			 * @example 0
-			 */
-			amountPaid: number
 			/**
 			 * @description Location Id or Agency Id
 			 * @example 6578278e879ad2646715ba9c
@@ -2608,11 +2579,6 @@ export type components = {
 			altId: string
 			/** @enum {string} */
 			altType: 'location'
-			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
-			 */
-			name: string
 			/**
 			 * @description Business Details
 			 * @example {
@@ -2630,15 +2596,10 @@ export type components = {
 			 */
 			businessDetails: components['schemas']['BusinessDetailsDto']
 			/**
-			 * @description Invoice Number
-			 * @example 19
+			 * @description Compiled terms notes
+			 * @example Confidential
 			 */
-			invoiceNumber: number
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
+			compiledTermsNotes: string
 			/**
 			 * @description Contact Details
 			 * @example {
@@ -2654,15 +2615,146 @@ export type components = {
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
 			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
 			 */
-			issueDate: string
+			createdAt: string
 			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-01
+			 * @description Currency
+			 * @example USD
 			 */
-			dueDate: string
+			currency: string
+			/**
+			 * @description Discount
+			 * @example {
+			 *       "type": "percentage",
+			 *       "value": 0
+			 *     }
+			 */
+			discount?: components['schemas']['DiscountDto']
+			/** @description List of invoices */
+			invoices: components['schemas']['DefaultInvoiceResponseDto'][]
+			/**
+			 * @description Invoice Items
+			 * @example [
+			 *       {
+			 *         "taxes": [],
+			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "currency": "USD",
+			 *         "name": "Macbook Pro",
+			 *         "qty": 1,
+			 *         "amount": 999
+			 *       }
+			 *     ]
+			 */
+			items: string[]
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			schedule?: components['schemas']['ScheduleOptionsDto']
+			/**
+			 * @description Schedule Status
+			 * @example draft
+			 */
+			status: Record<string, never>
+			/**
+			 * @description Terms notes
+			 * @example Confidential
+			 */
+			termsNotes: string
+			/**
+			 * @description Title
+			 * @example INVOICE
+			 */
+			title: string
+			/**
+			 * @description Total Amount
+			 * @example 999
+			 */
+			total: number
+			/**
+			 * @description updated at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			updatedAt: string
+		}
+		UpdateInvoiceTemplateDto: {
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			currency: string
+			discount?: components['schemas']['DiscountDto']
+			internal?: boolean
+			items: components['schemas']['InvoiceItemDto'][]
+			/**
+			 * @description Name of the template
+			 * @example New Template
+			 */
+			name: string
+			termsNotes?: string
+			/**
+			 * @description Template title
+			 * @example New Template
+			 */
+			title?: string
+		}
+		UpdateInvoiceTemplateResponseDto: {
+			/**
+			 * @description Template Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			_id: string
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/**
+			 * @description Business Details
+			 * @example {
+			 *       "name": "Alex",
+			 *       "address": {
+			 *         "addressLine1": "9931 Beechwood",
+			 *         "city": "St. Houston",
+			 *         "state": "TX",
+			 *         "countryCode": "USA",
+			 *         "postalCode": "559-6993"
+			 *       },
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "website": "www.example.com"
+			 *     }
+			 */
+			businessDetails: components['schemas']['BusinessDetailsDto']
+			/**
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
+			 */
+			createdAt: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
 			/**
 			 * @description Discount
 			 * @example {
@@ -2686,32 +2778,26 @@ export type components = {
 			 *       }
 			 *     ]
 			 */
-			invoiceItems: string[]
+			items: string[]
+			/**
+			 * @description Name of the Template
+			 * @example New Template
+			 */
+			name: string
 			/**
 			 * @description Total Amount
 			 * @example 999
 			 */
 			total: number
 			/**
-			 * @description Title
-			 * @example INVOICE
-			 */
-			title: string
-			/**
-			 * @description Total Amount Due
-			 * @example 999
-			 */
-			amountDue: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
-			/**
 			 * @description updated at
 			 * @example 2023-12-12T09:27:42.355Z
 			 */
 			updatedAt: string
+		}
+		USBankAccountDto: {
+			bank_name: string
+			last4: string
 		}
 		VoidInvoiceDto: {
 			/**
@@ -2733,28 +2819,6 @@ export type components = {
 			 */
 			_id: string
 			/**
-			 * @description Invoice Status
-			 * @example draft
-			 * @enum {string}
-			 */
-			status:
-				| 'draft'
-				| 'sent'
-				| 'payment_processing'
-				| 'paid'
-				| 'void'
-				| 'partially_paid'
-			/**
-			 * @description Live Mode
-			 * @example false
-			 */
-			liveMode: boolean
-			/**
-			 * @description Amount Paid
-			 * @example 0
-			 */
-			amountPaid: number
-			/**
 			 * @description Location Id or Agency Id
 			 * @example 6578278e879ad2646715ba9c
 			 */
@@ -2762,10 +2826,15 @@ export type components = {
 			/** @enum {string} */
 			altType: 'location'
 			/**
-			 * @description Name of the invoice
-			 * @example New Invoice
+			 * @description Total Amount Due
+			 * @example 999
 			 */
-			name: string
+			amountDue: number
+			/**
+			 * @description Amount Paid
+			 * @example 0
+			 */
+			amountPaid: number
 			/**
 			 * @description Business Details
 			 * @example {
@@ -2783,16 +2852,6 @@ export type components = {
 			 */
 			businessDetails: components['schemas']['BusinessDetailsDto']
 			/**
-			 * @description Invoice Number
-			 * @example 19
-			 */
-			invoiceNumber: number
-			/**
-			 * @description Currency
-			 * @example USD
-			 */
-			currency: string
-			/**
 			 * @description Contact Details
 			 * @example {
 			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
@@ -2807,15 +2866,15 @@ export type components = {
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
 			/**
-			 * @description Issue date in YYYY-MM-DD format
-			 * @example 2023-01-01
+			 * @description created at
+			 * @example 2023-12-12T09:27:42.355Z
 			 */
-			issueDate: string
+			createdAt: string
 			/**
-			 * @description Due date in YYYY-MM-DD format
-			 * @example 2023-01-01
+			 * @description Currency
+			 * @example USD
 			 */
-			dueDate: string
+			currency: string
 			/**
 			 * @description Discount
 			 * @example {
@@ -2824,6 +2883,11 @@ export type components = {
 			 *     }
 			 */
 			discount?: components['schemas']['DiscountDto']
+			/**
+			 * @description Due date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			dueDate: string
 			/**
 			 * @description Invoice Items
 			 * @example [
@@ -2841,116 +2905,52 @@ export type components = {
 			 */
 			invoiceItems: string[]
 			/**
-			 * @description Total Amount
-			 * @example 999
+			 * @description Invoice Number
+			 * @example 19
 			 */
-			total: number
+			invoiceNumber: number
+			/**
+			 * @description Issue date in YYYY-MM-DD format
+			 * @example 2023-01-01
+			 */
+			issueDate: string
+			/**
+			 * @description Live Mode
+			 * @example false
+			 */
+			liveMode: boolean
+			/**
+			 * @description Name of the invoice
+			 * @example New Invoice
+			 */
+			name: string
+			/**
+			 * @description Invoice Status
+			 * @example draft
+			 * @enum {string}
+			 */
+			status:
+				| 'draft'
+				| 'sent'
+				| 'payment_processing'
+				| 'paid'
+				| 'void'
+				| 'partially_paid'
 			/**
 			 * @description Title
 			 * @example INVOICE
 			 */
 			title: string
 			/**
-			 * @description Total Amount Due
+			 * @description Total Amount
 			 * @example 999
 			 */
-			amountDue: number
-			/**
-			 * @description created at
-			 * @example 2023-12-12T09:27:42.355Z
-			 */
-			createdAt: string
+			total: number
 			/**
 			 * @description updated at
 			 * @example 2023-12-12T09:27:42.355Z
 			 */
 			updatedAt: string
-		}
-		InvoiceSettingsSenderConfigurationDto: {
-			/**
-			 * @description Sender name to be used while sending invoice
-			 * @example Alex
-			 */
-			fromName?: string
-			/**
-			 * @description Email id to be used while sending out invoices
-			 * @example alex@example.com
-			 */
-			fromEmail?: string
-		}
-		SendInvoiceDto: {
-			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
-			/**
-			 * @description Please ensure that the UserId corresponds to an authorized personnel, either by an employee ID or agency ID, to access this location. This account will serve as the primary channel for all future communications and updates.
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			userId: string
-			/** @enum {string} */
-			action: 'sms_and_email' | 'send_manually' | 'email' | 'sms'
-			liveMode: boolean
-			/** @description sender details for invoice, valid only if invoice is not sent manually */
-			sentFrom?: components['schemas']['InvoiceSettingsSenderConfigurationDto']
-		}
-		SendInvoicesResponseDto: {
-			invoice: components['schemas']['DefaultInvoiceResponseDto']
-			smsData: Record<string, never>
-			emailData: Record<string, never>
-		}
-		ChequeDto: {
-			/**
-			 * @description check number
-			 * @example 129-129-129-912
-			 */
-			number: string
-		}
-		RecordPaymentDto: {
-			/**
-			 * @description location Id / company Id based on altType
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			altId: string
-			/**
-			 * @description Alt Type
-			 * @example location
-			 * @enum {string}
-			 */
-			altType: 'location'
-			/**
-			 * @description manual payment method
-			 * @example card
-			 * @enum {string}
-			 */
-			mode: 'cash' | 'card' | 'cheque' | 'bank_transfer' | 'other'
-			card: components['schemas']['CardDto']
-			cheque: components['schemas']['ChequeDto']
-			/**
-			 * @description Any note to be recorded with the transaction
-			 * @example This was a direct payment
-			 */
-			notes: string
-			/**
-			 * @description Amount to be paid against the invoice.
-			 * @example 999
-			 */
-			amount?: number
-		}
-		RecordPaymentResponseDto: {
-			/**
-			 * @description status
-			 * @example true
-			 */
-			success: boolean
-			invoice: components['schemas']['DefaultInvoiceResponseDto']
 		}
 	}
 	responses: never
@@ -2961,7 +2961,7 @@ export type components = {
 }
 export type $defs = Record<string, never>
 export interface operations {
-	'list-invoice-templates': {
+	'list-invoices': {
 		parameters: {
 			query: {
 				/**
@@ -2974,28 +2974,16 @@ export interface operations {
 				 * @example location
 				 */
 				altType: 'location'
-				/** @description status to be filtered */
-				status?: string
 				/**
-				 * @description startAt in YYYY-MM-DD format
-				 * @example 2023-01-01
+				 * @description Contact ID for the invoice
+				 * @example AmuzcoPBpgKeccNsFlib
 				 */
-				startAt?: string
+				contactId?: string
 				/**
 				 * @description endAt in YYYY-MM-DD format
 				 * @example 2023-01-01
 				 */
 				endAt?: string
-				/**
-				 * @description To search for an invoice by id / name / email / phoneNo
-				 * @example Alex
-				 */
-				search?: string
-				/**
-				 * @description payment mode
-				 * @example live
-				 */
-				paymentMode?: 'default' | 'live'
 				/**
 				 * @description Limit the number of items to return
 				 * @example 10
@@ -3006,6 +2994,23 @@ export interface operations {
 				 * @example 10
 				 */
 				offset: string
+				/**
+				 * @description payment mode
+				 * @example live
+				 */
+				paymentMode?: 'default' | 'live'
+				/**
+				 * @description To search for an invoice by id / name / email / phoneNo
+				 * @example Alex
+				 */
+				search?: string
+				/**
+				 * @description startAt in YYYY-MM-DD format
+				 * @example 2023-01-01
+				 */
+				startAt?: string
+				/** @description status to be filtered */
+				status?: string
 			}
 			header: {
 				/** @description Access Token */
@@ -3024,7 +3029,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['ListTemplatesResponseDto']
+					'application/json': components['schemas']['ListInvoicesResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -3056,7 +3061,7 @@ export interface operations {
 			}
 		}
 	}
-	'create-invoice-template': {
+	'create-invoice': {
 		parameters: {
 			query?: never
 			header: {
@@ -3070,7 +3075,7 @@ export interface operations {
 		}
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['CreateInvoiceTemplateDto']
+				'application/json': components['schemas']['CreateInvoiceDto']
 			}
 		}
 		responses: {
@@ -3080,7 +3085,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['CreateInvoiceTemplateResponseDto']
+					'application/json': components['schemas']['CreateInvoiceResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -3112,7 +3117,7 @@ export interface operations {
 			}
 		}
 	}
-	'get-invoice-template': {
+	'get-invoice': {
 		parameters: {
 			query: {
 				/**
@@ -3134,10 +3139,10 @@ export interface operations {
 			}
 			path: {
 				/**
-				 * @description Template Id
+				 * @description Invoice Id
 				 * @example 6578278e879ad2646715ba9c
 				 */
-				templateId: string
+				invoiceId: string
 			}
 			cookie?: never
 		}
@@ -3149,7 +3154,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['GetTemplateResponseDto']
+					'application/json': components['schemas']['GetInvoiceResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -3181,7 +3186,7 @@ export interface operations {
 			}
 		}
 	}
-	'update-invoice-template': {
+	'update-invoice': {
 		parameters: {
 			query?: never
 			header: {
@@ -3192,16 +3197,16 @@ export interface operations {
 			}
 			path: {
 				/**
-				 * @description Template Id
+				 * @description Invoice Id
 				 * @example 6578278e879ad2646715ba9c
 				 */
-				templateId: string
+				invoiceId: string
 			}
 			cookie?: never
 		}
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['UpdateInvoiceTemplateDto']
+				'application/json': components['schemas']['UpdateInvoiceDto']
 			}
 		}
 		responses: {
@@ -3211,7 +3216,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['UpdateInvoiceTemplateResponseDto']
+					'application/json': components['schemas']['UpdateInvoiceResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -3243,7 +3248,7 @@ export interface operations {
 			}
 		}
 	}
-	'delete-invoice-template': {
+	'delete-invoice': {
 		parameters: {
 			query: {
 				/**
@@ -3265,10 +3270,10 @@ export interface operations {
 			}
 			path: {
 				/**
-				 * @description Template Id
+				 * @description Invoice Id
 				 * @example 6578278e879ad2646715ba9c
 				 */
-				templateId: string
+				invoiceId: string
 			}
 			cookie?: never
 		}
@@ -3280,7 +3285,249 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['DeleteInvoiceTemplateResponseDto']
+					'application/json': components['schemas']['DeleteInvoiceResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': unknown
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'record-invoice': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Invoice Id
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				invoiceId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['RecordPaymentDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['RecordPaymentResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'send-invoice': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Invoice Id
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				invoiceId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['SendInvoiceDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['SendInvoicesResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'void-invoice': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Invoice Id
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				invoiceId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['VoidInvoiceDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['VoidInvoiceResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': unknown
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'generate-invoice-number': {
+		parameters: {
+			query: {
+				/** @description Location Id */
+				altId: string
+				altType: 'location'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GenerateInvoiceNumberResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -3325,28 +3572,11 @@ export interface operations {
 				 * @example location
 				 */
 				altType: 'location'
-				/** @description status to be filtered */
-				status?: string
-				/**
-				 * @description startAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
-				startAt?: string
 				/**
 				 * @description endAt in YYYY-MM-DD format
 				 * @example 2023-01-01
 				 */
 				endAt?: string
-				/**
-				 * @description To search for an invoice by id / name / email / phoneNo
-				 * @example Alex
-				 */
-				search?: string
-				/**
-				 * @description payment mode
-				 * @example live
-				 */
-				paymentMode?: 'default' | 'live'
 				/**
 				 * @description Limit the number of items to return
 				 * @example 10
@@ -3357,6 +3587,23 @@ export interface operations {
 				 * @example 10
 				 */
 				offset: string
+				/**
+				 * @description payment mode
+				 * @example live
+				 */
+				paymentMode?: 'default' | 'live'
+				/**
+				 * @description To search for an invoice by id / name / email / phoneNo
+				 * @example Alex
+				 */
+				search?: string
+				/**
+				 * @description startAt in YYYY-MM-DD format
+				 * @example 2023-01-01
+				 */
+				startAt?: string
+				/** @description status to be filtered */
+				status?: string
 			}
 			header: {
 				/** @description Access Token */
@@ -3663,68 +3910,6 @@ export interface operations {
 			}
 		}
 	}
-	'schedule-invoice-schedule': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				scheduleId: string
-			}
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['ScheduleInvoiceScheduleDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['ScheduleInvoiceScheduleResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
 	'auto-payment-invoice-schedule': {
 		parameters: {
 			query?: never
@@ -3849,6 +4034,419 @@ export interface operations {
 			}
 		}
 	}
+	'schedule-invoice-schedule': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Schedule Id
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				scheduleId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['ScheduleInvoiceScheduleDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ScheduleInvoiceScheduleResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'list-invoice-templates': {
+		parameters: {
+			query: {
+				/**
+				 * @description location Id / company Id based on altType
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				altId: string
+				/**
+				 * @description Alt Type
+				 * @example location
+				 */
+				altType: 'location'
+				/**
+				 * @description endAt in YYYY-MM-DD format
+				 * @example 2023-01-01
+				 */
+				endAt?: string
+				/**
+				 * @description Limit the number of items to return
+				 * @example 10
+				 */
+				limit: string
+				/**
+				 * @description Number of items to skip
+				 * @example 10
+				 */
+				offset: string
+				/**
+				 * @description payment mode
+				 * @example live
+				 */
+				paymentMode?: 'default' | 'live'
+				/**
+				 * @description To search for an invoice by id / name / email / phoneNo
+				 * @example Alex
+				 */
+				search?: string
+				/**
+				 * @description startAt in YYYY-MM-DD format
+				 * @example 2023-01-01
+				 */
+				startAt?: string
+				/** @description status to be filtered */
+				status?: string
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ListTemplatesResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'create-invoice-template': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CreateInvoiceTemplateDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CreateInvoiceTemplateResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'get-invoice-template': {
+		parameters: {
+			query: {
+				/**
+				 * @description location Id / company Id based on altType
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				altId: string
+				/**
+				 * @description Alt Type
+				 * @example location
+				 */
+				altType: 'location'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Template Id
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				templateId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetTemplateResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'update-invoice-template': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Template Id
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				templateId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateInvoiceTemplateDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UpdateInvoiceTemplateResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'delete-invoice-template': {
+		parameters: {
+			query: {
+				/**
+				 * @description location Id / company Id based on altType
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				altId: string
+				/**
+				 * @description Alt Type
+				 * @example location
+				 */
+				altType: 'location'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Template Id
+				 * @example 6578278e879ad2646715ba9c
+				 */
+				templateId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['DeleteInvoiceTemplateResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'text2pay-invoice': {
 		parameters: {
 			query?: never
@@ -3874,604 +4472,6 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['Text2PayInvoiceResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'generate-invoice-number': {
-		parameters: {
-			query: {
-				/** @description Location Id */
-				altId: string
-				altType: 'location'
-			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['GenerateInvoiceNumberResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'get-invoice': {
-		parameters: {
-			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
-				altType: 'location'
-			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				invoiceId: string
-			}
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['GetInvoiceResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'update-invoice': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				invoiceId: string
-			}
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['UpdateInvoiceDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UpdateInvoiceResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'delete-invoice': {
-		parameters: {
-			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
-				altType: 'location'
-			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				invoiceId: string
-			}
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['DeleteInvoiceResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': unknown
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'void-invoice': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				invoiceId: string
-			}
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['VoidInvoiceDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['VoidInvoiceResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': unknown
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'send-invoice': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				invoiceId: string
-			}
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['SendInvoiceDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['SendInvoicesResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'record-invoice': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				invoiceId: string
-			}
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['RecordPaymentDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['RecordPaymentResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'list-invoices': {
-		parameters: {
-			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
-				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
-				altType: 'location'
-				/** @description status to be filtered */
-				status?: string
-				/**
-				 * @description startAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
-				startAt?: string
-				/**
-				 * @description endAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
-				endAt?: string
-				/**
-				 * @description To search for an invoice by id / name / email / phoneNo
-				 * @example Alex
-				 */
-				search?: string
-				/**
-				 * @description payment mode
-				 * @example live
-				 */
-				paymentMode?: 'default' | 'live'
-				/**
-				 * @description Contact ID for the invoice
-				 * @example AmuzcoPBpgKeccNsFlib
-				 */
-				contactId?: string
-				/**
-				 * @description Limit the number of items to return
-				 * @example 10
-				 */
-				limit: string
-				/**
-				 * @description Number of items to skip
-				 * @example 10
-				 */
-				offset: string
-			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['ListInvoicesResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-			/** @description Unprocessable Entity */
-			422: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnprocessableDTO']
-				}
-			}
-		}
-	}
-	'create-invoice': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['CreateInvoiceDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['CreateInvoiceResponseDto']
 				}
 			}
 			/** @description Bad Request */

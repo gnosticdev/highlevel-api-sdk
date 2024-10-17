@@ -1,4 +1,24 @@
 export type paths = {
+	'/medias/{id}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post?: never
+		/**
+		 * Delete File or Folder
+		 * @description Deletes specific file or folder from the media library
+		 */
+		delete: operations['delete-media-content']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/medias/files': {
 		parameters: {
 			query?: never
@@ -39,26 +59,6 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
-	'/medias/{id}': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post?: never
-		/**
-		 * Delete File or Folder
-		 * @description Deletes specific file or folder from the media library
-		 */
-		delete: operations['delete-media-content']
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 }
 export type webhooks = Record<string, never>
 export type components = {
@@ -93,19 +93,62 @@ export type components = {
 }
 export type $defs = Record<string, never>
 export interface operations {
+	'delete-media-content': {
+		parameters: {
+			query: {
+				/** @description location or agency Id */
+				altId: string
+				/**
+				 * @description AltType
+				 * @example location
+				 */
+				altType: 'agency' | 'location'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+			}
+			path: {
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
 	'fetch-media-content': {
 		parameters: {
 			query: {
+				/** @description location or agency Id */
+				altId: string
+				/**
+				 * @description AltType
+				 * @example location
+				 */
+				altType: 'agency' | 'location'
+				/**
+				 * @description Number of files to show in the listing
+				 * @example 10
+				 */
+				limit?: string
 				/**
 				 * @description Number of files to skip in listing
 				 * @example 5
 				 */
 				offset?: string
 				/**
-				 * @description Number of files to show in the listing
-				 * @example 10
+				 * @description Query text
+				 * @example Test file
 				 */
-				limit?: string
+				query?: string
 				/**
 				 * @description Field to sorting the file listing by
 				 * @example createdAt
@@ -121,18 +164,6 @@ export interface operations {
 				 * @example file
 				 */
 				type?: string
-				/**
-				 * @description Query text
-				 * @example Test file
-				 */
-				query?: string
-				/**
-				 * @description AltType
-				 * @example location
-				 */
-				altType: 'agency' | 'location'
-				/** @description location or agency Id */
-				altId: string
 			}
 			header: {
 				/** @description Access Token */
@@ -169,8 +200,8 @@ export interface operations {
 				'multipart/form-data': {
 					/** Format: binary */
 					file?: string
-					hosted?: boolean
 					fileUrl?: string
+					hosted?: boolean
 					name?: string
 				}
 			}
@@ -184,37 +215,6 @@ export interface operations {
 				content: {
 					'application/json': components['schemas']['UploadFileResponseDTO']
 				}
-			}
-		}
-	}
-	'delete-media-content': {
-		parameters: {
-			query: {
-				/**
-				 * @description AltType
-				 * @example location
-				 */
-				altType: 'agency' | 'location'
-				/** @description location or agency Id */
-				altId: string
-			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-			}
-			path: {
-				id: string
-			}
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			/** @description Successful response */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content?: never
 			}
 		}
 	}

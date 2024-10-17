@@ -16,8 +16,10 @@ class TempJson implements AsyncDisposable {
 			this.write(data)
 		}
 	}
+
 	async [Symbol.asyncDispose]() {
 		await Bun.$`rm -f ${this.path}`
+		console.log(kleur.red(`Deleted ${this.path}`))
 	}
 	async write(data: string) {
 		await Bun.write(this.path, data)
@@ -65,10 +67,13 @@ async function createV1Types() {
 		},
 	}
 
-	const optionsJson = new TempJson('temp-v1-json.json', JSON.stringify(opts))
+	await using optionsJson = new TempJson(
+		'temp-v1-json.json',
+		JSON.stringify(opts),
+	)
 	const openapiJsonFile = 'schemas/v1/openapi.json'
 
-	await Bun.$`bunx --bun postman-to-openapi ${postmanJson} -f ${openapiJsonFile} -o ${optionsJson.path}`
+	await Bun.$`bunx --bun postman-to-openapi ${postmanJson} -f ${openapiJsonFile} -o ${optionsJson.path}`.quiet()
 	const openapiJson: OpenAPI3 = await Bun.file(openapiJsonFile).json()
 	// add the required headers to each path's parameters object
 	const paths = openapiJson.paths
@@ -83,13 +88,14 @@ async function createV1Types() {
 		}
 	}
 
+	// create the openapi json file for reference
 	await Bun.write(openapiJsonFile, JSON.stringify(openapiJson))
+
 	console.log(
 		kleur.green('Successfully converted postman json to openapi json'),
 	)
 	// convert openapi json to typescript types using openapi-typescript
 	const openapiTypes = await openapiTS(openapiJson, {
-		version: 3.0,
 		defaultNonNullable: true,
 		alphabetize: true,
 		exportType: true,
@@ -106,7 +112,6 @@ async function getV2OpenApiFiles() {
 	// get all json files with openapi in the path somewhere
 	const glob = new Bun.Glob('schemas/v2/openapi/*.json')
 	const files = await Array.fromAsync(glob.scan())
-	console.log(files)
 	if (files.length === 0) {
 		throw new Error('No files found in schemas')
 	}
@@ -116,14 +121,17 @@ async function getV2OpenApiFiles() {
 async function createOpenApiTypesFile(file: URL) {
 	const fileName = path.basename(file.pathname, '.json')
 	const output = await openapiTS(file, {
-		version: 3.0,
 		defaultNonNullable: true,
+		alphabetize: true,
 		exportType: true,
 	})
 
 	const data = astToString(output, { fileName })
 
-	const outFile = path.join(TEMP_DIR, `${fileName}.ts`)
+	const outFile = path.join(
+		TEMP_DIR,
+		`${fileName.replaceAll('.openapi', '')}.ts`,
+	)
 	await Bun.write(outFile, data)
 	return outFile
 }
@@ -134,25 +142,30 @@ async function createOpenApiTypesFile(file: URL) {
 export async function generateOpenApiTypes() {
 	await Bun.$`mkdir -p ${TEMP_DIR}`
 
-	const schemaFiles = await getV2OpenApiFiles()
-	const generatedFiles: string[] = []
+	const jsonV2Schemas = await getV2OpenApiFiles()
+	/**
+	 * The generated types files
+	 */
+	const generatedTsFiles: string[] = []
 
 	try {
-		for (const schemaFile of schemaFiles) {
-			const fileName = path.basename(schemaFile.pathname, '.json')
-			console.log(kleur.bgBlue(`Creating types for ${fileName}`))
+		for (const schemaFile of jsonV2Schemas) {
+			const newFileName = path
+				.basename(schemaFile.pathname, '.json')
+				.replace('.openapi', '')
+			console.log(kleur.bgBlue(`Creating types for ${newFileName}`))
 
 			const outFile = await createOpenApiTypesFile(schemaFile)
-			generatedFiles.push(outFile)
+			generatedTsFiles.push(outFile)
 
-			console.log(kleur.green(`Added types for ${fileName}`))
+			console.log(kleur.green(`Added types for ${newFileName}`))
 		}
 
 		console.log(kleur.green('Successfully created all types'))
 
-		// sync files to final directory
-		await Bun.$`mkdir -p ${OPENAPI_TYPES_V2_DIR}`
-		await Bun.$`rsync -r ${TEMP_DIR}/ ${OPENAPI_TYPES_V2_DIR}/`
+		// sync files to final directory and remove the .openapi in the name
+		await Bun.$`rsync -avr --delete ${TEMP_DIR}/ ${OPENAPI_TYPES_V2_DIR}/`
+		await Bun.$`rm -rf ${TEMP_DIR}`
 
 		console.log(kleur.green('Successfully moved all files to final directory'))
 	} catch (error) {

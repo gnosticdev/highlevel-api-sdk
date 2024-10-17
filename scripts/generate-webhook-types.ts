@@ -22,7 +22,15 @@ async function generateWebhooksTypes() {
 	const webhooksJSON = await Bun.file(
 		path.join(CUSTOM_SCHEMAS_DIR, 'webhooks.json'),
 	).json()
+	/**
+	 * The webhooks.openapi.json file will still stay in the custom schemas directory bc we dont want to mix in with the endpoint schemas.
+	 */
+	const webhooksOpenapiJson = path.join(
+		CUSTOM_SCHEMAS_DIR,
+		'webhooks.openapi.json',
+	)
 	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)
+	await Bun.write(webhooksOpenapiJson, JSON.stringify(openAPISchema, null, 2))
 
 	const openapiTypes = await openapiTS(openAPISchema, {
 		exportType: true,

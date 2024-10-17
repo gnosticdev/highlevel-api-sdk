@@ -1,0 +1,4673 @@
+{
+	"components": {
+		"schemas": {
+			"AddContactToCampaignDto": {
+				"properties": {},
+				"type": "object"
+			},
+			"AttributionSource": {
+				"properties": {
+					"campaign": {
+						"nullable": true,
+						"type": "string"
+					},
+					"campaignId": {
+						"nullable": true,
+						"type": "string"
+					},
+					"dclid": {
+						"nullable": true,
+						"type": "string"
+					},
+					"fbEventId": {
+						"example": "Mozilla/5.0",
+						"nullable": true,
+						"type": "string"
+					},
+					"fbc": {
+						"nullable": true,
+						"type": "string"
+					},
+					"fbclid": {
+						"nullable": true,
+						"type": "string"
+					},
+					"fbp": {
+						"example": "fb. 1.1674748390986.1171287961",
+						"nullable": true,
+						"type": "string"
+					},
+					"gclid": {
+						"example": "CjOKCQjwnNyUBhCZARISAI9AYIFtNnIcWcYGIOQINz_ZoFI5SSLRRugSoPZoiEu27IZBY£1-MAIWmEaAo2VEALW_WCB",
+						"nullable": true,
+						"type": "string"
+					},
+					"ip": {
+						"example": "58.111.106.198",
+						"nullable": true,
+						"type": "string"
+					},
+					"medium": {
+						"example": "survey",
+						"nullable": true,
+						"type": "string"
+					},
+					"mediumId": {
+						"example": "FglfHAn30PRwsZVyQlKp",
+						"nullable": true,
+						"type": "string"
+					},
+					"msclikid": {
+						"nullable": true,
+						"type": "string"
+					},
+					"referrer": {
+						"example": "https: //www.google.com",
+						"nullable": true,
+						"type": "string"
+					},
+					"url": {
+						"example": "Trigger Link",
+						"type": "string"
+					},
+					"userAgent": {
+						"example": "Mozilla/5.0",
+						"nullable": true,
+						"type": "string"
+					},
+					"utmContent": {
+						"nullable": true,
+						"type": "string"
+					},
+					"utmMedium": {
+						"nullable": true,
+						"type": "string"
+					},
+					"utmSource": {
+						"nullable": true,
+						"type": "string"
+					}
+				},
+				"required": ["url"],
+				"type": "object"
+			},
+			"BadRequestDTO": {
+				"properties": {
+					"message": {
+						"example": "Bad Request",
+						"type": "string"
+					},
+					"statusCode": {
+						"example": 400,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"Contact": {
+				"properties": {
+					"additionalEmails": {
+						"example": ["john@example.com", "jane@example.com"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"additionalPhones": {
+						"example": ["123456789", "987654321"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"address": {
+						"example": "123 Main Street",
+						"type": "string"
+					},
+					"assignedTo": {
+						"example": "182goXVW3lIExEQPOnd3",
+						"type": "string"
+					},
+					"businessId": {
+						"example": "282goXVW3lIExEQPOnd3",
+						"type": "string"
+					},
+					"businessName": {
+						"example": "Acme Corporation",
+						"type": "string"
+					},
+					"city": {
+						"example": "New York",
+						"type": "string"
+					},
+					"companyName": {
+						"example": "XYZ Corp",
+						"type": "string"
+					},
+					"country": {
+						"example": "United States",
+						"type": "string"
+					},
+					"customFields": {
+						"items": {
+							"$ref": "#/components/schemas/CustomFieldSchema"
+						},
+						"type": "array"
+					},
+					"dateAdded": {
+						"example": "2024-06-06T18:54:57.221Z",
+						"type": "string"
+					},
+					"dateOfBirth": {
+						"example": "1990-01-01",
+						"type": "string"
+					},
+					"dateUpdated": {
+						"example": "2024-06-06T18:54:57.221Z",
+						"type": "string"
+					},
+					"dnd": {
+						"example": false,
+						"type": "boolean"
+					},
+					"dndSettings": {
+						"$ref": "#/components/schemas/DndSettingsSchema"
+					},
+					"email": {
+						"example": "john@example.com",
+						"type": "string"
+					},
+					"firstNameLowerCase": {
+						"example": "john",
+						"type": "string"
+					},
+					"followers": {
+						"example": ["682goXVW3lIExEQPOnd3", "582goXVW3lIExEQPOnd3"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"id": {
+						"example": "102goXVW3lIExEQPOnd3",
+						"type": "string"
+					},
+					"lastNameLowerCase": {
+						"example": "doe",
+						"type": "string"
+					},
+					"locationId": {
+						"example": "502goXVW3lIExEQPOnd3",
+						"type": "string"
+					},
+					"opportunities": {
+						"items": {
+							"$ref": "#/components/schemas/ContactOpportunity"
+						},
+						"type": "array"
+					},
+					"phone": {
+						"example": "+123456789",
+						"type": "string"
+					},
+					"phoneLabel": {
+						"example": "Mobile",
+						"type": "string"
+					},
+					"postalCode": {
+						"example": "12345",
+						"type": "string"
+					},
+					"searchAfter": {
+						"example": [1234, "102goXVW3lIExEQPOnd3"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"source": {
+						"example": "Website",
+						"type": "string"
+					},
+					"state": {
+						"example": "California",
+						"type": "string"
+					},
+					"tags": {
+						"example": ["tag-1", "tag-2"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": {
+						"example": "lead",
+						"type": "string"
+					},
+					"validEmail": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"ContactOpportunity": {
+				"properties": {
+					"id": {
+						"example": "1a2b3c4d5e6f7g8h9i0j",
+						"type": "string"
+					},
+					"monetary_value": {
+						"example": 10000,
+						"type": "number"
+					},
+					"pipeline_id": {
+						"example": "pipeline123",
+						"type": "string"
+					},
+					"pipeline_stage_id": {
+						"example": "stage456",
+						"type": "string"
+					},
+					"status": {
+						"example": "open",
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"pipeline_id",
+					"pipeline_stage_id",
+					"monetary_value",
+					"status"
+				],
+				"type": "object"
+			},
+			"ContactsBulkUpateResponse": {
+				"properties": {
+					"ids": {
+						"example": ["pOC0uJ97VYOKH2m3fkMD"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"success": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"required": ["success", "ids"],
+				"type": "object"
+			},
+			"ContactsBusinessUpdate": {
+				"properties": {
+					"businessId": {
+						"example": "63b7ec34ea409a9a8bd2a4ff",
+						"nullable": true,
+						"type": "string"
+					},
+					"ids": {
+						"example": ["IDqvFHGColiyK6jiatuz", "pOC0uJ97VYOKH2m3fkMD"],
+						"items": {
+							"maxLength": 50,
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"locationId": {
+						"example": "PX8m5VwxEbcpFlzYEPVG",
+						"type": "string"
+					}
+				},
+				"required": ["locationId", "ids", "businessId"],
+				"type": "object"
+			},
+			"ContactsByIdSuccessfulResponseDto": {
+				"properties": {
+					"contact": {
+						"$ref": "#/components/schemas/GetContectByIdSchema"
+					}
+				},
+				"type": "object"
+			},
+			"ContactsMetaSchema": {
+				"properties": {
+					"currentPage": {
+						"example": 2,
+						"type": "number"
+					},
+					"nextPage": {
+						"example": 3,
+						"type": "number"
+					},
+					"nextPageUrl": {
+						"example": "http://localhost:5058/contacts/?locationId=ve9EPM428h8vShlRW1KT&startAfter=1631087949919&startAfterId=yd0jdjOavGk2o6Nh5Ndb",
+						"type": "string"
+					},
+					"prevPage": {
+						"example": 1,
+						"nullable": true,
+						"type": "number"
+					},
+					"startAfter": {
+						"example": 1631087949919,
+						"type": "number"
+					},
+					"startAfterId": {
+						"example": "yd0jdjOavGk2o6Nh5Ndb",
+						"type": "string"
+					},
+					"total": {
+						"example": 50,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"ContactsSearchSchema": {
+				"properties": {
+					"attributions": {
+						"items": {
+							"$ref": "#/components/schemas/AttributionSource"
+						},
+						"type": "array"
+					},
+					"businessId": {
+						"example": "641c094001436dbc2081e642",
+						"type": "string"
+					},
+					"country": {
+						"example": "DE",
+						"type": "string"
+					},
+					"customFields": {
+						"items": {
+							"$ref": "#/components/schemas/CustomFieldSchema"
+						},
+						"type": "array"
+					},
+					"dateAdded": {
+						"example": "2020-10-29T09:31:30.255Z",
+						"type": "string"
+					},
+					"email": {
+						"example": "JohnDeo@gmail.com",
+						"type": "string"
+					},
+					"followers": {
+						"example": "641c094001436dbc2081e642",
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"id": {
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"type": "string"
+					},
+					"locationId": {
+						"example": "C2QujeCh8ZnC7al2InWR",
+						"type": "string"
+					},
+					"source": {
+						"example": "xyz form",
+						"type": "string"
+					},
+					"tags": {
+						"example": ["nisi sint commodo amet", "consequat"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"timezone": {
+						"example": "Asia/Calcutta",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"ContactsSearchSuccessfulResponseDto": {
+				"properties": {
+					"contacts": {
+						"items": {
+							"$ref": "#/components/schemas/ContactsSearchSchema"
+						},
+						"type": "array"
+					},
+					"count": {
+						"example": 10,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"ContactsWorkflowSuccessfulResponseDto": {
+				"properties": {
+					"succeded": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"CreateAddFollowersSuccessfulResponseDto": {
+				"properties": {
+					"followers": {
+						"example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302LLss"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"followersAdded": {
+						"example": ["Mx6wyHhbFdRXh302Luer", "Ka6wyHhbFdRXh302LLsAm"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			},
+			"CreateAddTagSuccessfulResponseDto": {
+				"properties": {
+					"tags": {
+						"example": ["minim", "velit magna"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			},
+			"CreateContactDto": {
+				"properties": {
+					"address1": {
+						"example": "3535 1st St N",
+						"nullable": true,
+						"type": "string"
+					},
+					"city": {
+						"example": "Dolomite",
+						"nullable": true,
+						"type": "string"
+					},
+					"companyName": {
+						"example": "DGS VolMAX",
+						"nullable": true,
+						"type": "string"
+					},
+					"country": {
+						"example": "US",
+						"type": "string"
+					},
+					"customFields": {
+						"items": {
+							"anyOf": [
+								{
+									"$ref": "#/components/schemas/customFieldsInputStringSchema"
+								},
+								{
+									"$ref": "#/components/schemas/customFieldsInputArraySchema"
+								},
+								{
+									"$ref": "#/components/schemas/customFieldsInputObjectSchema"
+								}
+							]
+						},
+						"type": "array"
+					},
+					"dnd": {
+						"example": true,
+						"type": "boolean"
+					},
+					"dndSettings": {
+						"$ref": "#/components/schemas/DndSettingsSchema"
+					},
+					"email": {
+						"example": "rosan@deos.com",
+						"nullable": true,
+						"type": "string"
+					},
+					"firstName": {
+						"example": "Rosan",
+						"nullable": true,
+						"type": "string"
+					},
+					"gender": {
+						"example": "male",
+						"type": "string"
+					},
+					"inboundDndSettings": {
+						"$ref": "#/components/schemas/InboundDndSettingsSchema"
+					},
+					"lastName": {
+						"example": "Deo",
+						"nullable": true,
+						"type": "string"
+					},
+					"locationId": {
+						"example": "ve9EPM428h8vShlRW1KT",
+						"type": "string"
+					},
+					"name": {
+						"example": "Rosan Deo",
+						"nullable": true,
+						"type": "string"
+					},
+					"phone": {
+						"example": "+1 888-888-8888",
+						"nullable": true,
+						"type": "string"
+					},
+					"postalCode": {
+						"example": "35061",
+						"type": "string"
+					},
+					"source": {
+						"example": "public api",
+						"type": "string"
+					},
+					"state": {
+						"example": "AL",
+						"nullable": true,
+						"type": "string"
+					},
+					"tags": {
+						"example": ["nisi sint commodo amet", "consequat"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"timezone": {
+						"example": "America/Chihuahua",
+						"nullable": true,
+						"type": "string"
+					},
+					"website": {
+						"example": "https://www.tesla.com",
+						"nullable": true,
+						"type": "string"
+					}
+				},
+				"required": ["locationId"],
+				"type": "object"
+			},
+			"CreateContactSchema": {
+				"properties": {
+					"address1": {
+						"example": "3535 1st St N",
+						"type": "string"
+					},
+					"birthDay": {
+						"example": 25,
+						"type": "number"
+					},
+					"birthMonth": {
+						"example": 8,
+						"type": "number"
+					},
+					"bounceEmail": {
+						"example": false,
+						"type": "boolean"
+					},
+					"businessId": {
+						"example": "641c094001436dbc2081e642",
+						"type": "string"
+					},
+					"city": {
+						"example": "ruDolomitebika",
+						"type": "string"
+					},
+					"companyName": {
+						"example": "DGS VolMAX",
+						"type": "string"
+					},
+					"country": {
+						"example": "US",
+						"type": "string"
+					},
+					"customFields": {
+						"items": {
+							"$ref": "#/components/schemas/CustomFieldSchema"
+						},
+						"type": "array"
+					},
+					"dateAdded": {
+						"example": "2021-08-31T09:59:41.937Z",
+						"type": "string"
+					},
+					"dateOfBirth": {
+						"example": "1990-09-25T00:00:00.000Z",
+						"type": "string"
+					},
+					"dateUpdated": {
+						"example": "2021-08-31T09:59:41.937Z",
+						"type": "string"
+					},
+					"deleted": {
+						"example": false,
+						"type": "boolean"
+					},
+					"dnd": {
+						"example": true,
+						"type": "boolean"
+					},
+					"dndSettings": {
+						"$ref": "#/components/schemas/DndSettingsSchema"
+					},
+					"email": {
+						"example": "rubika@deos.com",
+						"type": "string"
+					},
+					"emailLowerCase": {
+						"example": "rubika@deos.com",
+						"type": "string"
+					},
+					"firstName": {
+						"example": "rubika",
+						"type": "string"
+					},
+					"firstNameLowerCase": {
+						"example": "rubika",
+						"type": "string"
+					},
+					"fullNameLowerCase": {
+						"example": "rubika deo",
+						"type": "string"
+					},
+					"id": {
+						"example": "seD4PfOuKoVMLkEZqohJ",
+						"type": "string"
+					},
+					"lastName": {
+						"example": "Deo",
+						"type": "string"
+					},
+					"lastNameLowerCase": {
+						"example": "deo",
+						"type": "string"
+					},
+					"lastSessionActivityAt": {
+						"example": "2021-07-16T11:39:30.564Z",
+						"type": "string"
+					},
+					"locationId": {
+						"example": "ve9EPM428h8vShlRW1KT",
+						"type": "string"
+					},
+					"offers": {
+						"example": [],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"phone": {
+						"example": "+18832327657",
+						"type": "string"
+					},
+					"postalCode": {
+						"example": "35061",
+						"type": "string"
+					},
+					"products": {
+						"example": [],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"source": {
+						"example": "public api",
+						"type": "string"
+					},
+					"state": {
+						"example": "AL",
+						"type": "string"
+					},
+					"tags": {
+						"example": ["nisi sint commodo amet", "consequat"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": {
+						"example": "read",
+						"type": "string"
+					},
+					"unsubscribeEmail": {
+						"example": false,
+						"type": "boolean"
+					},
+					"website": {
+						"example": "https://www.tesla.com",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"CreateContactsSuccessfulResponseDto": {
+				"properties": {
+					"contact": {
+						"$ref": "#/components/schemas/CreateContactSchema"
+					}
+				},
+				"type": "object"
+			},
+			"CreateDeleteCantactsCampaignsSuccessfulResponseDto": {
+				"properties": {
+					"succeded": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"CreateDeleteTagSuccessfulResponseDto": {
+				"properties": {
+					"tags": {
+						"example": ["minim", "velit magna"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			},
+			"CreateTaskParams": {
+				"properties": {
+					"assignedTo": {
+						"example": "hxHGVRb1YJUscrCB8eXK",
+						"type": "string"
+					},
+					"body": {
+						"example": "loram ipsum",
+						"type": "string"
+					},
+					"completed": {
+						"example": true,
+						"type": "boolean"
+					},
+					"dueDate": {
+						"example": "2020-10-25T11:00:00Z",
+						"type": "string"
+					},
+					"title": {
+						"example": "First Task",
+						"type": "string"
+					}
+				},
+				"required": ["title", "dueDate", "completed"],
+				"type": "object"
+			},
+			"CreateWorkflowDto": {
+				"properties": {
+					"eventStartTime": {
+						"example": "2021-06-23T03:30:00+01:00",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"CustomFieldSchema": {
+				"properties": {
+					"id": {
+						"example": "MgobCB14YMVKuE4Ka8p1",
+						"type": "string"
+					},
+					"value": {
+						"example": "name",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"DeleteContactsSuccessfulResponseDto": {
+				"properties": {
+					"succeded": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"DeleteFollowersSuccessfulResponseDto": {
+				"properties": {
+					"followers": {
+						"example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302LLss"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"followersRemoved": {
+						"example": ["Mx6wyHhbFdRXh302Luer", "Ka6wyHhbFdRXh302LLsAm"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			},
+			"DeleteNoteSuccessfulResponseDto": {
+				"properties": {
+					"succeded": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"DeleteTaskSuccessfulResponseDto": {
+				"properties": {
+					"succeded": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"DndSettingSchema": {
+				"properties": {
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"enum": ["active", "inactive", "permanent"],
+						"type": "string"
+					}
+				},
+				"required": ["status"],
+				"type": "object"
+			},
+			"DndSettingsSchema": {
+				"properties": {
+					"Call": {
+						"$ref": "#/components/schemas/DndSettingSchema"
+					},
+					"Email": {
+						"$ref": "#/components/schemas/DndSettingSchema"
+					},
+					"FB": {
+						"$ref": "#/components/schemas/DndSettingSchema"
+					},
+					"GMB": {
+						"$ref": "#/components/schemas/DndSettingSchema"
+					},
+					"SMS": {
+						"$ref": "#/components/schemas/DndSettingSchema"
+					},
+					"WhatsApp": {
+						"$ref": "#/components/schemas/DndSettingSchema"
+					}
+				},
+				"type": "object"
+			},
+			"FollowersDTO": {
+				"properties": {
+					"followers": {
+						"example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302Lunr"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": ["followers"],
+				"type": "object"
+			},
+			"GetContectByIdSchema": {
+				"properties": {
+					"address1": {
+						"example": "3535 1st St N",
+						"type": "string"
+					},
+					"assignedTo": {
+						"example": "ve9EPM428h8vShlRW1KT",
+						"type": "string"
+					},
+					"attachments": {
+						"type": "string"
+					},
+					"attributionSource": {
+						"$ref": "#/components/schemas/AttributionSource"
+					},
+					"businessId": {
+						"example": "641c094001436dbc2081e642",
+						"type": "string"
+					},
+					"city": {
+						"example": "ruDolomitebika",
+						"type": "string"
+					},
+					"companyName": {
+						"example": "DGS VolMAX",
+						"type": "string"
+					},
+					"country": {
+						"example": "US",
+						"type": "string"
+					},
+					"customFields": {
+						"items": {
+							"$ref": "#/components/schemas/CustomFieldSchema"
+						},
+						"type": "array"
+					},
+					"dateAdded": {
+						"example": "2021-07-02T05:18:26.704Z",
+						"type": "string"
+					},
+					"dateOfBirth": {
+						"example": "1990-09-25T00:00:00.000Z",
+						"type": "string"
+					},
+					"dateUpdated": {
+						"example": "2021-07-02T05:18:26.704Z",
+						"type": "string"
+					},
+					"dnd": {
+						"example": true,
+						"type": "boolean"
+					},
+					"dndSettings": {
+						"$ref": "#/components/schemas/DndSettingsSchema"
+					},
+					"email": {
+						"example": "rubika@deos.com",
+						"type": "string"
+					},
+					"emailLowerCase": {
+						"example": "rubika@deos.com",
+						"type": "string"
+					},
+					"firstName": {
+						"example": "rubika",
+						"type": "string"
+					},
+					"firstNameLowerCase": {
+						"example": "rubika",
+						"type": "string"
+					},
+					"fullNameLowerCase": {
+						"example": "rubika deo",
+						"type": "string"
+					},
+					"gender": {
+						"example": "male",
+						"type": "string"
+					},
+					"id": {
+						"example": "seD4PfOuKoVMLkEZqohJ",
+						"type": "string"
+					},
+					"keyword": {
+						"example": "test",
+						"type": "string"
+					},
+					"lastActivity": {
+						"example": "2021-07-16T11:39:30.564Z",
+						"type": "string"
+					},
+					"lastAttributionSource": {
+						"$ref": "#/components/schemas/AttributionSource"
+					},
+					"lastName": {
+						"example": "Deo",
+						"type": "string"
+					},
+					"lastNameLowerCase": {
+						"example": "deo",
+						"type": "string"
+					},
+					"locationId": {
+						"example": "ve9EPM428h8vShlRW1KT",
+						"type": "string"
+					},
+					"name": {
+						"example": "rubika deo",
+						"type": "string"
+					},
+					"phone": {
+						"example": "+18832327657",
+						"type": "string"
+					},
+					"postalCode": {
+						"example": "35061",
+						"type": "string"
+					},
+					"source": {
+						"example": "public api",
+						"type": "string"
+					},
+					"ssn": {
+						"type": "string"
+					},
+					"state": {
+						"example": "AL",
+						"type": "string"
+					},
+					"tags": {
+						"example": ["nisi sint commodo amet", "consequat"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"timezone": {
+						"example": "",
+						"type": "string"
+					},
+					"type": {
+						"example": "read",
+						"type": "string"
+					},
+					"website": {
+						"example": "https://www.tesla.com",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"GetCreateUpdateNoteSuccessfulResponseDto": {
+				"properties": {
+					"note": {
+						"$ref": "#/components/schemas/GetNoteSchema"
+					}
+				},
+				"type": "object"
+			},
+			"GetEventSchema": {
+				"properties": {
+					"appoinmentStatus": {
+						"example": "confirmed",
+						"type": "string"
+					},
+					"assignedUserId": {
+						"example": "YlWd2wuCAZQzh2cH1fVZ",
+						"type": "string"
+					},
+					"calendarId": {
+						"example": "YlWd2wuCAZQzh2cH1fVZ",
+						"type": "string"
+					},
+					"endTime": {
+						"example": "2021-07-16 11:30:00",
+						"type": "string"
+					},
+					"id": {
+						"example": "YS3jaqqeehkR2Is80miy",
+						"type": "string"
+					},
+					"notes": {
+						"example": "test",
+						"type": "string"
+					},
+					"startTime": {
+						"example": "2021-07-16 11:00:00",
+						"type": "string"
+					},
+					"status": {
+						"example": "booked",
+						"type": "string"
+					},
+					"title": {
+						"example": "Test",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"GetEventsSuccessfulResponseDto": {
+				"properties": {
+					"events": {
+						"items": {
+							"$ref": "#/components/schemas/GetEventSchema"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			},
+			"GetNoteSchema": {
+				"properties": {
+					"body": {
+						"example": "lorem ipsum",
+						"type": "string"
+					},
+					"contactId": {
+						"example": "TUcmRxWrjqzJS8EjkxNK",
+						"type": "string"
+					},
+					"dateAdded": {
+						"example": "2021-07-08T12:02:11.285Z",
+						"type": "string"
+					},
+					"id": {
+						"example": "HGPcayliwcdoUFzvbTok",
+						"type": "string"
+					},
+					"userId": {
+						"example": "TUcmRxWrjqzJS8EjkxNK",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"GetNotesListSuccessfulResponseDto": {
+				"properties": {
+					"notes": {
+						"items": {
+							"$ref": "#/components/schemas/GetNoteSchema"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			},
+			"InboundDndSettingSchema": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"enum": ["active", "inactive"],
+						"type": "string"
+					}
+				},
+				"required": ["status"],
+				"type": "object"
+			},
+			"InboundDndSettingsSchema": {
+				"properties": {
+					"all": {
+						"$ref": "#/components/schemas/InboundDndSettingSchema"
+					}
+				},
+				"type": "object"
+			},
+			"NotesDTO": {
+				"properties": {
+					"body": {
+						"example": "lorem ipsum",
+						"type": "string"
+					},
+					"userId": {
+						"example": "GCs5KuzPqTls7vWclkEV",
+						"type": "string"
+					}
+				},
+				"required": ["body"],
+				"type": "object"
+			},
+			"SearchBodyV2DTO": {
+				"properties": {},
+				"type": "object"
+			},
+			"SearchContactSuccessResponseDto": {
+				"properties": {
+					"contacts": {
+						"items": {
+							"$ref": "#/components/schemas/Contact"
+						},
+						"type": "array"
+					},
+					"total": {
+						"example": 120,
+						"type": "number"
+					}
+				},
+				"required": ["contacts", "total"],
+				"type": "object"
+			},
+			"TagsDTO": {
+				"properties": {
+					"tags": {
+						"example": ["minim", "velit magna"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": ["tags"],
+				"type": "object"
+			},
+			"TaskByIsSuccessfulResponseDto": {
+				"properties": {
+					"task": {
+						"$ref": "#/components/schemas/TaskSchema"
+					}
+				},
+				"type": "object"
+			},
+			"TaskSchema": {
+				"properties": {
+					"assignedTo": {
+						"example": "tesTUcmRxWrjqzJS8EjkxNKting",
+						"type": "string"
+					},
+					"body": {
+						"example": "testing",
+						"type": "string"
+					},
+					"completed": {
+						"example": true,
+						"type": "boolean"
+					},
+					"contactId": {
+						"example": "lJpzYrWdpkC2hX6t2yue",
+						"type": "string"
+					},
+					"dueDate": {
+						"example": "2021-07-08T02:30:00.000Z",
+						"type": "string"
+					},
+					"id": {
+						"example": "lJpzYrWdpkC2hX6t2yue",
+						"type": "string"
+					},
+					"title": {
+						"example": "test",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"TasksListSuccessfulResponseDto": {
+				"properties": {
+					"tasks": {
+						"items": {
+							"$ref": "#/components/schemas/TaskSchema"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			},
+			"UnauthorizedDTO": {
+				"properties": {
+					"error": {
+						"example": "Unauthorized",
+						"type": "string"
+					},
+					"message": {
+						"example": "Invalid token: access token is invalid",
+						"type": "string"
+					},
+					"statusCode": {
+						"example": 401,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"UnprocessableDTO": {
+				"properties": {
+					"error": {
+						"example": "Unprocessable Entity",
+						"type": "string"
+					},
+					"message": {
+						"example": ["Unprocessable Entity"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"statusCode": {
+						"example": 422,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"UpdateContactDto": {
+				"properties": {
+					"address1": {
+						"example": "3535 1st St N",
+						"nullable": true,
+						"type": "string"
+					},
+					"city": {
+						"example": "Dolomite",
+						"nullable": true,
+						"type": "string"
+					},
+					"country": {
+						"example": "US",
+						"type": "string"
+					},
+					"customFields": {
+						"items": {
+							"anyOf": [
+								{
+									"$ref": "#/components/schemas/customFieldsInputStringSchema"
+								},
+								{
+									"$ref": "#/components/schemas/customFieldsInputArraySchema"
+								},
+								{
+									"$ref": "#/components/schemas/customFieldsInputObjectSchema"
+								}
+							]
+						},
+						"type": "array"
+					},
+					"dnd": {
+						"example": true,
+						"type": "boolean"
+					},
+					"dndSettings": {
+						"$ref": "#/components/schemas/DndSettingsSchema"
+					},
+					"email": {
+						"example": "rosan@deos.com",
+						"nullable": true,
+						"type": "string"
+					},
+					"firstName": {
+						"example": "rosan",
+						"nullable": true,
+						"type": "string"
+					},
+					"inboundDndSettings": {
+						"$ref": "#/components/schemas/InboundDndSettingsSchema"
+					},
+					"lastName": {
+						"example": "Deo",
+						"nullable": true,
+						"type": "string"
+					},
+					"name": {
+						"example": "rosan Deo",
+						"nullable": true,
+						"type": "string"
+					},
+					"phone": {
+						"example": "+1 888-888-8888",
+						"nullable": true,
+						"type": "string"
+					},
+					"postalCode": {
+						"example": "35061",
+						"type": "string"
+					},
+					"source": {
+						"example": "public api",
+						"nullable": true,
+						"type": "string"
+					},
+					"state": {
+						"example": "AL",
+						"nullable": true,
+						"type": "string"
+					},
+					"tags": {
+						"description": "This field will overwrite all current tags associated with the contact. To update a tags, it is recommended to use the Add Tag or Remove Tag API instead.",
+						"example": ["nisi sint commodo amet", "consequat"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"timezone": {
+						"example": "America/Chihuahua",
+						"nullable": true,
+						"type": "string"
+					},
+					"website": {
+						"example": "https://www.tesla.com",
+						"nullable": true,
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"UpdateContactsSuccessfulResponseDto": {
+				"properties": {
+					"contact": {
+						"$ref": "#/components/schemas/GetContectByIdSchema"
+					},
+					"succeded": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"UpdateTaskBody": {
+				"properties": {
+					"assignedTo": {
+						"example": "hxHGVRb1YJUscrCB8eXK",
+						"type": "string"
+					},
+					"body": {
+						"example": "loram ipsum",
+						"type": "string"
+					},
+					"completed": {
+						"example": true,
+						"type": "boolean"
+					},
+					"dueDate": {
+						"example": "2020-10-25T11:00:00Z",
+						"type": "string"
+					},
+					"title": {
+						"example": "First Task",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"UpdateTaskStatusParams": {
+				"properties": {
+					"completed": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"required": ["completed"],
+				"type": "object"
+			},
+			"UpsertContactDto": {
+				"properties": {
+					"address1": {
+						"example": "3535 1st St N",
+						"nullable": true,
+						"type": "string"
+					},
+					"city": {
+						"example": "Dolomite",
+						"nullable": true,
+						"type": "string"
+					},
+					"companyName": {
+						"example": "DGS VolMAX",
+						"nullable": true,
+						"type": "string"
+					},
+					"country": {
+						"example": "US",
+						"type": "string"
+					},
+					"customFields": {
+						"items": {
+							"anyOf": [
+								{
+									"$ref": "#/components/schemas/customFieldsInputStringSchema"
+								},
+								{
+									"$ref": "#/components/schemas/customFieldsInputArraySchema"
+								},
+								{
+									"$ref": "#/components/schemas/customFieldsInputObjectSchema"
+								}
+							]
+						},
+						"type": "array"
+					},
+					"dnd": {
+						"example": true,
+						"type": "boolean"
+					},
+					"dndSettings": {
+						"$ref": "#/components/schemas/DndSettingsSchema"
+					},
+					"email": {
+						"example": "rosan@deos.com",
+						"nullable": true,
+						"type": "string"
+					},
+					"firstName": {
+						"example": "Rosan",
+						"nullable": true,
+						"type": "string"
+					},
+					"gender": {
+						"example": "male",
+						"type": "string"
+					},
+					"inboundDndSettings": {
+						"$ref": "#/components/schemas/InboundDndSettingsSchema"
+					},
+					"lastName": {
+						"example": "Deo",
+						"nullable": true,
+						"type": "string"
+					},
+					"locationId": {
+						"example": "ve9EPM428h8vShlRW1KT",
+						"type": "string"
+					},
+					"name": {
+						"example": "Rosan Deo",
+						"nullable": true,
+						"type": "string"
+					},
+					"phone": {
+						"example": "+1 888-888-8888",
+						"nullable": true,
+						"type": "string"
+					},
+					"postalCode": {
+						"example": "35061",
+						"type": "string"
+					},
+					"source": {
+						"example": "public api",
+						"type": "string"
+					},
+					"state": {
+						"example": "AL",
+						"nullable": true,
+						"type": "string"
+					},
+					"tags": {
+						"description": "This field will overwrite all current tags associated with the contact. To update a tags, it is recommended to use the Add Tag or Remove Tag API instead.",
+						"example": ["nisi sint commodo amet", "consequat"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"timezone": {
+						"example": "America/Chihuahua",
+						"nullable": true,
+						"type": "string"
+					},
+					"website": {
+						"example": "https://www.tesla.com",
+						"nullable": true,
+						"type": "string"
+					}
+				},
+				"required": ["locationId"],
+				"type": "object"
+			},
+			"UpsertContactsSuccessfulResponseDto": {
+				"properties": {
+					"contact": {
+						"$ref": "#/components/schemas/GetContectByIdSchema"
+					},
+					"new": {
+						"example": true,
+						"type": "boolean"
+					},
+					"traceId": {
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"customFieldsInputArraySchema": {
+				"properties": {
+					"field_value": {
+						"example": ["test", "test2"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"id": {
+						"example": "6dvNaf7VhkQ9snc5vnjJ",
+						"type": "string"
+					},
+					"key": {
+						"example": "my_custom_field",
+						"type": "string"
+					}
+				},
+				"required": ["id"],
+				"type": "object"
+			},
+			"customFieldsInputObjectSchema": {
+				"properties": {
+					"field_value": {
+						"example": {},
+						"type": "object"
+					},
+					"id": {
+						"example": "6dvNaf7VhkQ9snc5vnjJ",
+						"type": "string"
+					},
+					"key": {
+						"example": "my_custom_field",
+						"type": "string"
+					}
+				},
+				"required": ["id"],
+				"type": "object"
+			},
+			"customFieldsInputStringSchema": {
+				"properties": {
+					"field_value": {
+						"example": "9039160788",
+						"type": "string"
+					},
+					"id": {
+						"description": "Pass either `id` or `key` of custom field",
+						"example": "6dvNaf7VhkQ9snc5vnjJ",
+						"type": "string"
+					},
+					"key": {
+						"description": "Pass either `id` or `key` of custom field",
+						"example": "my_custom_field",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			}
+		},
+		"securitySchemes": {
+			"Agency-Access": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Agency.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			},
+			"Location-Access": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			},
+			"bearer": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			}
+		}
+	},
+	"info": {
+		"contact": {},
+		"description": "Documentation for Contacts API",
+		"title": "Contacts API",
+		"version": "1.0"
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/contacts/": {
+			"get": {
+				"description": "Get Contacts",
+				"operationId": "get-contacts",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Location Id",
+						"example": "ve9EPM428h8vShlRW1KT",
+						"in": "query",
+						"name": "locationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Start After Id",
+						"example": "UIaE1WjAwWKdlyD7osQI",
+						"in": "query",
+						"name": "startAfterId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Start Afte",
+						"example": 1603870249758,
+						"in": "query",
+						"name": "startAfter",
+						"required": false,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"description": "Contact Query",
+						"example": "John",
+						"in": "query",
+						"name": "query",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Limit Per Page records count. will allow maximum up to 100 and default will be 20",
+						"example": 20,
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 20,
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ContactsSearchSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get Contacts",
+				"tags": ["Contacts"]
+			},
+			"post": {
+				"description": "Please find the list of acceptable values for the `country` field  <a href=\"https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list\" target=\"_blank\">here</a>",
+				"operationId": "create-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateContactDto"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateContactsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Create Contact",
+				"tags": ["Contacts"]
+			}
+		},
+		"/contacts/bulk/business": {
+			"post": {
+				"description": "Add/Remove Contacts From Business",
+				"operationId": "add-remove-contact-from-business",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ContactsBusinessUpdate"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ContactsBulkUpateResponse"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"summary": "Add/Remove Contacts From Business",
+				"tags": ["Bulk"]
+			}
+		},
+		"/contacts/business/{businessId}": {
+			"get": {
+				"description": "Get Contacts By BusinessId",
+				"operationId": "get-contacts-by-businessId",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "businessId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"example": "10",
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": "25",
+							"type": "string"
+						}
+					},
+					{
+						"example": "5DP4iH6HLkQsiKESj6rh",
+						"in": "query",
+						"name": "locationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"example": "10",
+						"in": "query",
+						"name": "skip",
+						"required": false,
+						"schema": {
+							"default": "0",
+							"type": "string"
+						}
+					},
+					{
+						"example": "contact name",
+						"in": "query",
+						"name": "query",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ContactsSearchSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get Contacts By BusinessId",
+				"tags": ["Contacts"]
+			}
+		},
+		"/contacts/search": {
+			"post": {
+				"description": "Search contacts based on combinations of advanced filters. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-158396/6e629989abe7fad",
+				"externalDocs": {
+					"description": "Click here for more information",
+					"url": "https://doc.clickup.com/8631005/d/h/87cpx-158396/6e629989abe7fad"
+				},
+				"operationId": "search-contacts-advanced",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SearchBodyV2DTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SearchContactSuccessResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Search Contacts",
+				"tags": ["Search"]
+			}
+		},
+		"/contacts/search/duplicate": {
+			"get": {
+				"description": "Get Duplicate Contact.<br><br>If `Allow Duplicate Contact` is disabled under Settings, the global unique identifier will be used for searching the contact. If the setting is enabled, first priority for search is `email` and the second priority will be `phone`.",
+				"operationId": "get-duplicate-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Location Id",
+						"example": "sadadya1u12basyhasd",
+						"in": "query",
+						"name": "locationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Phone Number - Pass in URL Encoded form. i.e +1423164516 will become `%2B1423164516`",
+						"example": "+1423164516",
+						"in": "query",
+						"name": "number",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Email - Pass in URL Encoded form. i.e test+abc@gmail.com will become `test%2Babc%40gmail.com`",
+						"example": "abc@abc.com",
+						"in": "query",
+						"name": "email",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": ""
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get Duplicate Contact",
+				"tags": ["Search"]
+			}
+		},
+		"/contacts/upsert": {
+			"post": {
+				"description": "Please find the list of acceptable values for the `country` field  <a href=\"https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list\" target=\"_blank\">here</a><br><br>If `Allow Duplicate Contact` is disabled under Settings, the global unique identifier will be used for de-duplication. If the setting is enabled, a new contact will get created with the shared details.",
+				"operationId": "upsert-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpsertContactDto"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpsertContactsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Upsert Contact",
+				"tags": ["Contacts"]
+			}
+		},
+		"/contacts/{contactId}": {
+			"delete": {
+				"description": "Delete Contact",
+				"operationId": "delete-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteContactsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Delete Contact",
+				"tags": ["Contacts"]
+			},
+			"get": {
+				"description": "Get Contact",
+				"operationId": "get-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ContactsByIdSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get Contact",
+				"tags": ["Contacts"]
+			},
+			"put": {
+				"description": "Please find the list of acceptable values for the `country` field  <a href=\"https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list\" target=\"_blank\">here</a>",
+				"operationId": "update-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateContactDto"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateContactsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Update Contact",
+				"tags": ["Contacts"]
+			}
+		},
+		"/contacts/{contactId}/appointments": {
+			"get": {
+				"description": "Get Appointments for Contact",
+				"operationId": "get-appointments-for-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetEventsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get Appointments for Contact",
+				"tags": ["Appointments"]
+			}
+		},
+		"/contacts/{contactId}/campaigns/removeAll": {
+			"delete": {
+				"description": "Remove Contact From Every Campaign",
+				"operationId": "remove-contact-from-every-campaign",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "3bZD1nQzbul0MCancbQD",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateDeleteCantactsCampaignsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Remove Contact From Every Campaign",
+				"tags": ["Campaigns"]
+			}
+		},
+		"/contacts/{contactId}/campaigns/{campaignId}": {
+			"delete": {
+				"description": "Remove Contact From Campaign",
+				"operationId": "remove-contact-from-campaign",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "3bZD1nQzbul0MCancbQD",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Campaigns Id",
+						"example": "Y2I9XM7aO1hncuSOlc9L",
+						"in": "path",
+						"name": "campaignId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateDeleteCantactsCampaignsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Remove Contact From Campaign",
+				"tags": ["Campaigns"]
+			},
+			"post": {
+				"description": "Add contact to Campaign",
+				"operationId": "add-contact-to-campaign",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "3bZD1nQzbul0MCancbQD",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Campaigns Id",
+						"example": "Y2I9XM7aO1hncuSOlc9L",
+						"in": "path",
+						"name": "campaignId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddContactToCampaignDto"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateDeleteCantactsCampaignsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Add Contact to Campaign",
+				"tags": ["Campaigns"]
+			}
+		},
+		"/contacts/{contactId}/followers": {
+			"delete": {
+				"description": "Remove Followers",
+				"operationId": "remove-followers-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302Lunr",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/FollowersDTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteFollowersSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Remove Followers",
+				"tags": ["Followers"]
+			},
+			"post": {
+				"description": "Add Followers",
+				"operationId": "add-followers-contact",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302Lunr",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/FollowersDTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateAddFollowersSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Add Followers",
+				"tags": ["Followers"]
+			}
+		},
+		"/contacts/{contactId}/notes": {
+			"get": {
+				"description": "Get All Notes",
+				"operationId": "get-all-notes",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetNotesListSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get All Notes",
+				"tags": ["Notes"]
+			},
+			"post": {
+				"description": "Create Note",
+				"operationId": "create-note",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/NotesDTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetCreateUpdateNoteSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Create Note",
+				"tags": ["Notes"]
+			}
+		},
+		"/contacts/{contactId}/notes/{id}": {
+			"delete": {
+				"description": "Delete Note",
+				"operationId": "delete-note",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Note Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteNoteSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Delete Note",
+				"tags": ["Notes"]
+			},
+			"get": {
+				"description": "Get Note",
+				"operationId": "get-note",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Note Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetCreateUpdateNoteSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get Note",
+				"tags": ["Notes"]
+			},
+			"put": {
+				"description": "Update Note",
+				"operationId": "update-note",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Note Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/NotesDTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetCreateUpdateNoteSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Update Note",
+				"tags": ["Notes"]
+			}
+		},
+		"/contacts/{contactId}/tags": {
+			"delete": {
+				"description": "Remove Tags",
+				"operationId": "remove-tags",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TagsDTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateDeleteTagSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Remove Tags",
+				"tags": ["Tags"]
+			},
+			"post": {
+				"description": "Add Tags",
+				"operationId": "add-tags",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TagsDTO"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateAddTagSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Add Tags",
+				"tags": ["Tags"]
+			}
+		},
+		"/contacts/{contactId}/tasks": {
+			"get": {
+				"description": "Get all Tasks",
+				"operationId": "get-all-tasks",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TasksListSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get all Tasks",
+				"tags": ["Tasks"]
+			},
+			"post": {
+				"description": "Create Task",
+				"operationId": "create-task",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTaskParams"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TaskByIsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Create Task",
+				"tags": ["Tasks"]
+			}
+		},
+		"/contacts/{contactId}/tasks/{taskId}": {
+			"delete": {
+				"description": "Delete Task",
+				"operationId": "delete-task",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Task Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "taskId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteTaskSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Delete Task",
+				"tags": ["Tasks"]
+			},
+			"get": {
+				"description": "Get Task",
+				"operationId": "get-task",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Task Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "taskId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TaskByIsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Get Task",
+				"tags": ["Tasks"]
+			},
+			"put": {
+				"description": "Update Task",
+				"operationId": "update-task",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Task Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "taskId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateTaskBody"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TaskByIsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Update Task",
+				"tags": ["Tasks"]
+			}
+		},
+		"/contacts/{contactId}/tasks/{taskId}/completed": {
+			"put": {
+				"description": "Update Task Completed",
+				"operationId": "update-task-completed",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Task Id",
+						"example": "ocQHyuzHvysMo5N5VsXc",
+						"in": "path",
+						"name": "taskId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateTaskStatusParams"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TaskByIsSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Update Task Completed",
+				"tags": ["Tasks"]
+			}
+		},
+		"/contacts/{contactId}/workflow/{workflowId}": {
+			"delete": {
+				"description": "Delete Contact to Workflow",
+				"operationId": "delete-contact-to-workflow",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Workflow Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "workflowId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateWorkflowDto"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ContactsWorkflowSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Delete Contact to Workflow",
+				"tags": ["Workflow"]
+			},
+			"post": {
+				"description": "Add Contact to Workflow",
+				"operationId": "add-contact-to-workflow",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"description": "Contact Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "contactId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Workflow Id",
+						"example": "sx6wyHhbFdRXh302LLNR",
+						"in": "path",
+						"name": "workflowId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateWorkflowDto"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ContactsWorkflowSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"summary": "Add Contact to Workflow",
+				"tags": ["Workflow"]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://services.leadconnectorhq.com"
+		}
+	],
+	"tags": [
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Contacts"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Tasks"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Appointments"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Tags"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Notes"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Campaigns"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Workflow"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Bulk"
+		},
+		{
+			"description": "Documentation for Contacts API",
+			"name": "Search"
+		}
+	]
+}

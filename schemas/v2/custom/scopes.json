@@ -2,1344 +2,1344 @@
 	"businesses": {
 		"readonly": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /businesses",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /businesses/:businessId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		],
 		"write": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /businesses",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /businesses/:businessId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /businesses/:businessId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		]
 	},
 	"calendars": {
-		"write": [
-			{
-				"methodAndEndpoint": "POST /calendars/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /calendars/:calendarId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /calendars/:calendarId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
 		"readonly": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /calendars/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /calendars/:calendarId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /calendars/:calendarId/free-slots",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"calendars/groups": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /calendars/groups",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		],
 		"write": [
 			{
-				"methodAndEndpoint": "POST /calendars/groups",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /calendars/",
+				"webhookEvents": ""
 			},
 			{
-				"methodAndEndpoint": "POST /calendars/groups/validate-slug",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /calendars/:calendarId",
+				"webhookEvents": ""
 			},
 			{
-				"methodAndEndpoint": "DELETE /calendars/groups/:groupId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /calendars/groups/:groupId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /calendars/groups/:groupId/status",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"calendars/resources": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /calendars/resources/:resourceType",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /calendars/resources/:resourceType/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /calendars/resources",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /calendars/resources/:resourceType/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /calendars/resources/:resourceType/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /calendars/:calendarId",
+				"webhookEvents": ""
 			}
 		]
 	},
 	"calendars/events": {
 		"readonly": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /calendars/events/appointments/:eventId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /calendars/events",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /calendars/blocked-slots",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		],
 		"write": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /calendars/events/:eventId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /calendars/events/block-slots",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /calendars/events/block-slots/:eventId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /calendars/events/appointments",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /calendars/events/appointments /:eventId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
+			}
+		]
+	},
+	"calendars/groups": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /calendars/groups",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /calendars/groups",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /calendars/groups/validate-slug",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /calendars/groups/:groupId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /calendars/groups/:groupId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /calendars/groups/:groupId/status",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"calendars/resources": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /calendars/resources/:resourceType",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /calendars/resources/:resourceType/:id",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /calendars/resources",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /calendars/resources/:resourceType/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /calendars/resources/:resourceType/:id",
+				"webhookEvents": ""
 			}
 		]
 	},
 	"campaigns": {
 		"readonly": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /campaigns/",
-				"webhookEvents": "CampaignStatusUpdate",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "CampaignStatusUpdate"
 			}
 		]
 	},
 	"contacts": {
 		"readonly": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/:contactId",
-				"webhookEvents": "ContactCreate",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "ContactCreate"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/:contactId/tasks",
-				"webhookEvents": "ContactDelete",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "ContactDelete"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/:contactId/tasks/:taskId",
-				"webhookEvents": "ContactDndUpdate",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "ContactDndUpdate"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/:contactId/notes",
-				"webhookEvents": "ContactTagUpdate",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "ContactTagUpdate"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/:contactId/notes/:id",
-				"webhookEvents": "NoteCreate",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "NoteCreate"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/:contactId/appointments",
-				"webhookEvents": "NoteDelete",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "NoteDelete"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/",
-				"webhookEvents": "TaskCreate",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "TaskCreate"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /contacts/business/:businessId",
-				"webhookEvents": "TaskDelete",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "TaskDelete"
 			}
 		],
 		"write": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /contacts/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /contacts/:contactId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /contacts/:contactId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /contacts/:contactId/tasks",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /contacts/:contactId/tasks/:taskId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /contacts/:contactId/tasks/:taskId/completed",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /contacts/:contactId/tasks/:taskId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /contacts/:contactId/tags",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /contacts/:contactId/tags",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /contacts/:contactId/notes",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /contacts/:contactId/notes/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /contacts/:contactId/notes/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /contacts/:contactId/campaigns/:campaignId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /contacts/:contactId/campaigns/removeAll",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /contacts/:contactId/campaigns/:campaignId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /contacts/:contactId/workflow/:workflowId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /contacts/:contactId/workflow/:workflowId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		]
 	},
 	"conversations": {
 		"readonly": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /conversations/:conversationsId",
-				"webhookEvents": "ConversationUnreadWebhook",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "ConversationUnreadWebhook"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET /conversations/search",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		],
 		"write": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /conversations/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /conversations/:conversationsId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /conversations/:conversationsId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		]
 	},
 	"conversations/message": {
 		"readonly": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET conversations/messages/:messageId/locations/:locationId/recording",
-				"webhookEvents": "InboundMessage",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "InboundMessage"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "",
-				"webhookEvents": "OutboundMessage",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "OutboundMessage"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET conversations/locations/:locationId/messages/:messageId/transcription",
-				"webhookEvents": "InboundMessage",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "InboundMessage"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "",
-				"webhookEvents": "OutboundMessage",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "OutboundMessage"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "GET conversations/locations/:locationId/messages/:messageId/transcription/download",
-				"webhookEvents": "InboundMessage",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "InboundMessage"
 			},
 			{
+				"accessType": [""],
 				"methodAndEndpoint": "",
-				"webhookEvents": "OutboundMessage",
-				"accessType": [""]
+				"webhookEvents": "OutboundMessage"
 			}
 		],
 		"write": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /conversations/messages",
-				"webhookEvents": "ConversationProviderOutboundMessage",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": "ConversationProviderOutboundMessage"
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /conversations/messages/inbound",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST /conversations/messages/upload",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "PUT /conversations/messages/:messageId/status",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /conversations/messages/:messageId/schedule",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			},
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "DELETE /conversations/messages/email/:emailMessageId/schedule",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"forms": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /forms/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /forms/submissions",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"invoices": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /invoices/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /invoices/:invoiceId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /invoices/generate-invoice-number",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /invoices",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /invoices/:invoiceId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /invoices/:invoiceId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /invoices/:invoiceId/send",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /invoices/:invoiceId/void",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /invoices/:invoiceId/record-payment",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /invoices/text2pay",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"invoices/schedule": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /invoices/schedule/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /invoices/schedule/:scheduleId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /invoices/schedule",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /invoices/schedule/:scheduleId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /invoices/schedule/:scheduleId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /invoices/schedule/:scheduleId/schedule",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /invoices/schedule/:scheduleId/auto-payment",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /invoices/schedule/:scheduleId/cancel",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"invoices/template": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /invoices/template/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /invoices/template/:templateId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /invoices/template/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /invoices/template/:templateId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /invoices/template/:templateId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"links": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /links/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /links/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /links/:linkId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /links/:linkId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"locations": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /locations/:locationId",
-				"webhookEvents": "LocationCreate",
-				"accessType": ["Sub-Account", "Agency"]
-			},
-			{
-				"methodAndEndpoint": "",
-				"webhookEvents": "LocationUpdate",
-				"accessType": ["Sub-Account", "Agency"]
-			},
-			{
-				"methodAndEndpoint": "GET /locations/search",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			},
-			{
-				"methodAndEndpoint": "GET /locations/timeZones",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /locations/",
-				"webhookEvents": "",
-				"accessType": ["Agency"]
-			},
-			{
-				"methodAndEndpoint": "PUT /locations/:locationId",
-				"webhookEvents": "",
-				"accessType": ["Agency"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /locations/:locationId",
-				"webhookEvents": "",
-				"accessType": ["Agency"]
-			}
-		]
-	},
-	"locations/customValues": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /locations/:locationId/customValues",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /locations/:locationId/customValues/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /locations/:locationId/customValues",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /locations/:locationId/customValues/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /locations/:locationId/customValues/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"locations/customFields": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /locations/:locationId/customFields",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /locations/:locationId/customFields/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /locations/:locationId/customFields",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /locations/:locationId/customFields/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /locations/:locationId/customFields/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"locations/tags": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /locations/:locationId/tags",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /locations/:locationId/tags/:tagId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /locations/:locationId/tags/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /locations/:locationId/tags/:tagId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /locations/:locationId/tags/:tagId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"locations/templates": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /locations/:locationId/templates",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"locations/tasks": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "POST /locations/:locationId/tasks/search",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"medias": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /medias/files",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /medias/upload-file",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"funnels/redirect": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /funnels/lookup/redirect/list",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /funnels/lookup/redirect",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"funnels/page": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /funnels/page",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"funnels/funnel": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /funnels/funnel/list",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"funnels/pagecount": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /funnels/page/count",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /funnels/lookup/redirect/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PATCH /funnels/lookup/redirect/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /medias/:fileId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"opportunities": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /opportunities/search",
-				"webhookEvents": "OpportunityCreate",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /opportunities/:id",
-				"webhookEvents": "OpportunityDelete",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /opportunities/pipelines",
-				"webhookEvents": "OpportunityStageUpdate",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "",
-				"webhookEvents": "OpportunityStatusUpdate",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "",
-				"webhookEvents": "OpportunityMonetaryValueUpdate",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "DELETE /opportunities/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /opportunities/:id/status",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /opportunities",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /opportunities/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"payments/integration": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /payments/integrations/provider/whitelabel",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /payments/integrations/provider/whitelabel",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"payments/orders": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /payments/orders/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /payments/orders/:orderId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /payments/orders/:orderId/fulfillments",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /payments/orders/:orderId/fulfillments",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"payments/transactions": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /payments/transactions/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /payments/transactions/:transactionId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"payments/subscriptions": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /payments/subscriptions/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /payments/subscriptions/:subscriptionId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"products": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /products/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /products/:productId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /products/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /products/:productId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /products/:productId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"products/prices": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /products/:productId/price/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /products/:productId/price/:priceId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /products/:productId/price/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /products/:productId/price/:priceId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /products/:productId/price/:priceId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"oauth": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /oauth/installedLocations",
-				"webhookEvents": "",
-				"accessType": ["Agency"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /oauth/locationToken",
-				"webhookEvents": "",
-				"accessType": ["Agency"]
-			}
-		]
-	},
-	"saas/location": {
-		"write": [
-			{
-				"methodAndEndpoint": "PUT /update-saas-subscription/:locationId",
-				"webhookEvents": "",
-				"accessType": ["Agency"]
-			},
-			{
-				"methodAndEndpoint": "POST /enable-saas/:locationId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			}
-		],
-		"read": [
-			{
-				"methodAndEndpoint": "GET /locations",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			}
-		]
-	},
-	"saas/company": {
-		"write": [
-			{
-				"methodAndEndpoint": "POST /bulk-disable-saas/:companyId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			}
-		]
-	},
-	"snapshots": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /snapshots",
-				"webhookEvents": "",
-				"accessType": ["Agency"]
-			}
-		]
-	},
-	"socialplanner/account": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /social-media-posting/:locationId/accounts",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/accounts/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"socialplanner/csv": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /social-media-posting/:locationId/csv",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/:locationId/csv/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /social-media-posting/:locationId/csv",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/:locationId/set-accounts",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/csv/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PATCH /social-media-posting/:locationId/csv/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/csv/:csvId/post/:postId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"socialplanner/category": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /social-media-posting/:locationId/categories",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/:locationId/categories/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"socialplanner/oauth": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/facebook/start",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/facebook/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/google/start",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/google/locations/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/instagram/start",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/instagram/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/linkedin/start",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/linkedin/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/tiktok/start",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/tiktok/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/tiktok-business/start",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/tiktok-business/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/twitter/start",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/twitter/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/facebook/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/google/locations/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/instagram/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/linkedin/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/tiktok/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/twitter/accounts/:accountId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"socialplanner/post": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /social-media-posting/:locationId/posts/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/:locationId/posts/list",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /social-media-posting/:locationId/posts",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PUT /social-media-posting/:locationId/posts/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/posts/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "PATCH /social-media-posting/:locationId/posts/:id",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"socialplanner/tag": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /social-media-posting/:locationId/tags",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "POST /social-media-posting/:locationId/tags/details",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"surveys": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /surveys/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			},
-			{
-				"methodAndEndpoint": "GET /surveys/submissions",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
-			}
-		]
-	},
-	"users": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /users/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			},
-			{
-				"methodAndEndpoint": "GET /users/:userId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			}
-		],
-		"write": [
-			{
-				"methodAndEndpoint": "POST /users/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			},
-			{
-				"methodAndEndpoint": "DELETE /users/:userId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			},
-			{
-				"methodAndEndpoint": "PUT /users/:userId",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account", "Agency"]
-			}
-		]
-	},
-	"workflows": {
-		"readonly": [
-			{
-				"methodAndEndpoint": "GET /workflows/",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
 			}
 		]
 	},
 	"courses": {
 		"write": [
 			{
+				"accessType": ["Sub-Account"],
 				"methodAndEndpoint": "POST courses/courses-exporter/public/import",
-				"webhookEvents": "",
-				"accessType": ["Sub-Account"]
+				"webhookEvents": ""
+			}
+		]
+	},
+	"forms": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /forms/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /forms/submissions",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"funnels/funnel": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /funnels/funnel/list",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"funnels/page": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /funnels/page",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"funnels/pagecount": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /funnels/page/count",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /funnels/lookup/redirect/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PATCH /funnels/lookup/redirect/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /medias/:fileId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"funnels/redirect": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /funnels/lookup/redirect/list",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /funnels/lookup/redirect",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"invoices": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /invoices/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /invoices/:invoiceId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /invoices/generate-invoice-number",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /invoices/:invoiceId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /invoices/:invoiceId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/:invoiceId/send",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/:invoiceId/void",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/:invoiceId/record-payment",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/text2pay",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"invoices/schedule": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /invoices/schedule/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /invoices/schedule/:scheduleId",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/schedule",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /invoices/schedule/:scheduleId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /invoices/schedule/:scheduleId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/schedule/:scheduleId/schedule",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/schedule/:scheduleId/auto-payment",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/schedule/:scheduleId/cancel",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"invoices/template": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /invoices/template/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /invoices/template/:templateId",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /invoices/template/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /invoices/template/:templateId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /invoices/template/:templateId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"links": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /links/",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /links/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /links/:linkId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /links/:linkId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"locations": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "GET /locations/:locationId",
+				"webhookEvents": "LocationCreate"
+			},
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "",
+				"webhookEvents": "LocationUpdate"
+			},
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "GET /locations/search",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/timeZones",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Agency"],
+				"methodAndEndpoint": "POST /locations/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Agency"],
+				"methodAndEndpoint": "PUT /locations/:locationId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Agency"],
+				"methodAndEndpoint": "DELETE /locations/:locationId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"locations/customFields": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/:locationId/customFields",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/:locationId/customFields/:id",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /locations/:locationId/customFields",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /locations/:locationId/customFields/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /locations/:locationId/customFields/:id",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"locations/customValues": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/:locationId/customValues",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/:locationId/customValues/:id",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /locations/:locationId/customValues",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /locations/:locationId/customValues/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /locations/:locationId/customValues/:id",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"locations/tags": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/:locationId/tags",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/:locationId/tags/:tagId",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /locations/:locationId/tags/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /locations/:locationId/tags/:tagId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /locations/:locationId/tags/:tagId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"locations/tasks": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /locations/:locationId/tasks/search",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"locations/templates": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /locations/:locationId/templates",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"medias": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /medias/files",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /medias/upload-file",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"oauth": {
+		"readonly": [
+			{
+				"accessType": ["Agency"],
+				"methodAndEndpoint": "GET /oauth/installedLocations",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Agency"],
+				"methodAndEndpoint": "POST /oauth/locationToken",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"opportunities": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /opportunities/search",
+				"webhookEvents": "OpportunityCreate"
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /opportunities/:id",
+				"webhookEvents": "OpportunityDelete"
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /opportunities/pipelines",
+				"webhookEvents": "OpportunityStageUpdate"
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "",
+				"webhookEvents": "OpportunityStatusUpdate"
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "",
+				"webhookEvents": "OpportunityMonetaryValueUpdate"
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /opportunities/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /opportunities/:id/status",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /opportunities",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /opportunities/:id",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"payments/integration": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/integrations/provider/whitelabel",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /payments/integrations/provider/whitelabel",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"payments/orders": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/orders/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/orders/:orderId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/orders/:orderId/fulfillments",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /payments/orders/:orderId/fulfillments",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"payments/subscriptions": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/subscriptions/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/subscriptions/:subscriptionId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"payments/transactions": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/transactions/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /payments/transactions/:transactionId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"products": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /products/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /products/:productId",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /products/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /products/:productId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /products/:productId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"products/prices": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /products/:productId/price/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /products/:productId/price/:priceId",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /products/:productId/price/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /products/:productId/price/:priceId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /products/:productId/price/:priceId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"saas/company": {
+		"write": [
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "POST /bulk-disable-saas/:companyId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"saas/location": {
+		"read": [
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "GET /locations",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Agency"],
+				"methodAndEndpoint": "PUT /update-saas-subscription/:locationId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "POST /enable-saas/:locationId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"snapshots": {
+		"readonly": [
+			{
+				"accessType": ["Agency"],
+				"methodAndEndpoint": "GET /snapshots",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"socialplanner/account": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/:locationId/accounts",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/accounts/:id",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"socialplanner/category": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/:locationId/categories",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/:locationId/categories/:id",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"socialplanner/csv": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/:locationId/csv",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/:locationId/csv/:id",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/:locationId/csv",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/:locationId/set-accounts",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/csv/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PATCH /social-media-posting/:locationId/csv/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/csv/:csvId/post/:postId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"socialplanner/oauth": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/facebook/start",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/facebook/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/google/start",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/google/locations/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/instagram/start",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/instagram/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/linkedin/start",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/linkedin/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/tiktok/start",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/tiktok/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/tiktok-business/start",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/tiktok-business/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/twitter/start",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/oauth/:locationId/twitter/accounts/:accountId",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/facebook/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/google/locations/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/instagram/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/linkedin/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/tiktok/accounts/:accountId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/oauth/:locationId/twitter/accounts/:accountId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"socialplanner/post": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/:locationId/posts/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/:locationId/posts/list",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/:locationId/posts",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PUT /social-media-posting/:locationId/posts/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "DELETE /social-media-posting/:locationId/posts/:id",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "PATCH /social-media-posting/:locationId/posts/:id",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"socialplanner/tag": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /social-media-posting/:locationId/tags",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "POST /social-media-posting/:locationId/tags/details",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"surveys": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /surveys/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /surveys/submissions",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"users": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "GET /users/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "GET /users/:userId",
+				"webhookEvents": ""
+			}
+		],
+		"write": [
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "POST /users/",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "DELETE /users/:userId",
+				"webhookEvents": ""
+			},
+			{
+				"accessType": ["Sub-Account", "Agency"],
+				"methodAndEndpoint": "PUT /users/:userId",
+				"webhookEvents": ""
+			}
+		]
+	},
+	"workflows": {
+		"readonly": [
+			{
+				"accessType": ["Sub-Account"],
+				"methodAndEndpoint": "GET /workflows/",
+				"webhookEvents": ""
 			}
 		]
 	}

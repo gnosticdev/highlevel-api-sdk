@@ -84,18 +84,54 @@ export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
 		BadRequestDTO: {
-			/** @example 400 */
-			statusCode?: number
 			/** @example Bad Request */
 			message?: string
-		}
-		UnauthorizedDTO: {
-			/** @example 401 */
+			/** @example 400 */
 			statusCode?: number
-			/** @example Invalid token: access token is invalid */
-			message?: string
-			/** @example Unauthorized */
-			error?: string
+		}
+		CreateSnapshotShareLinkRequestDTO: {
+			/**
+			 * @description Comma separated Relationship number of Agencies to create agency restricted share link
+			 * @example 0-128-926,1-208-926,2-008-926
+			 */
+			relationship_number?: string
+			/**
+			 * @description Comma separated Sub-Account ids to create sub-account restricted share link
+			 * @example l1C08ntBrFjLS0elLIYU, U1C08ntBrFjLS0elKIYP
+			 */
+			share_location_id?: string
+			/**
+			 * @description Type of share link to generate
+			 * @example permanent_link
+			 * @enum {string}
+			 */
+			share_type: 'link' | 'permanent_link' | 'agency_link' | 'location_link'
+			/**
+			 * @description id for snapshot to be shared
+			 * @example 1eM2UgkfaECOYyUdCo9Pa
+			 */
+			snapshot_id: string
+		}
+		CreateSnapshotShareLinkSuccessfulResponseDTO: {
+			/**
+			 * @description id for shared snapshot
+			 * @example 1eM2UgkfaECOYyUdCo9Pa
+			 */
+			id?: string
+			/**
+			 * @description Share Link for snapshot
+			 * @example https://affiliates.gohighlevel.com/?share=1eM2UgkfaECOYyUdCo9Pa
+			 */
+			shareLink?: string
+		}
+		GetLatestSnapshotPushStatusSuccessfulResponseDTO: {
+			data?: components['schemas']['SnapshotStatusSchemaWithAssets']
+		}
+		GetSnapshotPushStatusSuccessfulResponseDTO: {
+			data?: components['schemas']['SnapshotStatusSchema'][]
+		}
+		GetSnapshotsSuccessfulResponseDto: {
+			snapshots?: components['schemas']['SnapshotsSchema'][]
 		}
 		SnapshotsSchema: {
 			/**
@@ -114,71 +150,13 @@ export type components = {
 			 */
 			type?: string
 		}
-		GetSnapshotsSuccessfulResponseDto: {
-			snapshots?: components['schemas']['SnapshotsSchema'][]
-		}
-		CreateSnapshotShareLinkRequestDTO: {
-			/**
-			 * @description id for snapshot to be shared
-			 * @example 1eM2UgkfaECOYyUdCo9Pa
-			 */
-			snapshot_id: string
-			/**
-			 * @description Type of share link to generate
-			 * @example permanent_link
-			 * @enum {string}
-			 */
-			share_type: 'link' | 'permanent_link' | 'agency_link' | 'location_link'
-			/**
-			 * @description Comma separated Relationship number of Agencies to create agency restricted share link
-			 * @example 0-128-926,1-208-926,2-008-926
-			 */
-			relationship_number?: string
-			/**
-			 * @description Comma separated Sub-Account ids to create sub-account restricted share link
-			 * @example l1C08ntBrFjLS0elLIYU, U1C08ntBrFjLS0elKIYP
-			 */
-			share_location_id?: string
-		}
-		CreateSnapshotShareLinkSuccessfulResponseDTO: {
-			/**
-			 * @description id for shared snapshot
-			 * @example 1eM2UgkfaECOYyUdCo9Pa
-			 */
-			id?: string
-			/**
-			 * @description Share Link for snapshot
-			 * @example https://affiliates.gohighlevel.com/?share=1eM2UgkfaECOYyUdCo9Pa
-			 */
-			shareLink?: string
-		}
 		SnapshotStatusSchema: {
-			/**
-			 * @description Document id
-			 * @example 1eM2UgkfaECOYyUdCo9Pa
-			 */
-			id?: string
-			/**
-			 * @description Sub-account id
-			 * @example BrKClvyvdxhJ9Mxz2pzQ
-			 */
-			locationId?: string
-			/**
-			 * @description Status of snapshot push
-			 * @example processing
-			 */
-			status?: string
 			/**
 			 * Format: date-time
 			 * @description Timestamp of when snapshot processing starts for sub-account
 			 * @example 10/28/2022, 6:24:54 PM
 			 */
 			dateAdded?: string
-		}
-		GetSnapshotPushStatusSuccessfulResponseDTO: {
-			data?: components['schemas']['SnapshotStatusSchema'][]
-		}
-		SnapshotStatusSchemaWithAssets: {
 			/**
 			 * @description Document id
 			 * @example 1eM2UgkfaECOYyUdCo9Pa
@@ -194,19 +172,41 @@ export type components = {
 			 * @example processing
 			 */
 			status?: string
+		}
+		SnapshotStatusSchemaWithAssets: {
 			/**
 			 * @description List of completed assets
 			 * @example ['forms', 'surveys', 'funnels', 'workflows']
 			 */
 			completed?: string[]
 			/**
+			 * @description Document id
+			 * @example 1eM2UgkfaECOYyUdCo9Pa
+			 */
+			id?: string
+			/**
+			 * @description Sub-account id
+			 * @example BrKClvyvdxhJ9Mxz2pzQ
+			 */
+			locationId?: string
+			/**
 			 * @description List of pending assets
 			 * @example ['custom_fields','custom_values','tags']
 			 */
 			pending?: string[]
+			/**
+			 * @description Status of snapshot push
+			 * @example processing
+			 */
+			status?: string
 		}
-		GetLatestSnapshotPushStatusSuccessfulResponseDTO: {
-			data?: components['schemas']['SnapshotStatusSchemaWithAssets']
+		UnauthorizedDTO: {
+			/** @example Unauthorized */
+			error?: string
+			/** @example Invalid token: access token is invalid */
+			message?: string
+			/** @example 401 */
+			statusCode?: number
 		}
 	}
 	responses: never
@@ -320,10 +320,10 @@ export interface operations {
 			query: {
 				companyId: string
 				from: string
-				to: string
 				/** @description Id for last document till what you want to skip */
 				lastDoc: string
 				limit: string
+				to: string
 			}
 			header: {
 				/** @description Access Token */
@@ -379,8 +379,8 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				snapshotId: string
 				locationId: string
+				snapshotId: string
 			}
 			cookie?: never
 		}

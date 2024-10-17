@@ -1,5 +1,5 @@
 export type paths = {
-	'/users/search': {
+	'/users/': {
 		parameters: {
 			query?: never
 			header?: never
@@ -7,12 +7,16 @@ export type paths = {
 			cookie?: never
 		}
 		/**
-		 * Search Users
-		 * @description Search Users
+		 * Get User by Location
+		 * @description Get User by Location
 		 */
-		get: operations['search-users']
+		get: operations['get-user-by-location']
 		put?: never
-		post?: never
+		/**
+		 * Create User
+		 * @description Create User
+		 */
+		post: operations['create-user']
 		delete?: never
 		options?: never
 		head?: never
@@ -47,7 +51,7 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
-	'/users/': {
+	'/users/search': {
 		parameters: {
 			query?: never
 			header?: never
@@ -55,16 +59,12 @@ export type paths = {
 			cookie?: never
 		}
 		/**
-		 * Get User by Location
-		 * @description Get User by Location
+		 * Search Users
+		 * @description Search Users
 		 */
-		get: operations['get-user-by-location']
+		get: operations['search-users']
 		put?: never
-		/**
-		 * Create User
-		 * @description Create User
-		 */
-		post: operations['create-user']
+		post?: never
 		delete?: never
 		options?: never
 		head?: never
@@ -76,20 +76,215 @@ export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
 		BadRequestDTO: {
-			/** @example 400 */
-			statusCode?: number
 			/** @example Bad Request */
 			message?: string
-		}
-		UnauthorizedDTO: {
-			/** @example 401 */
+			/** @example 400 */
 			statusCode?: number
-			/** @example Invalid token: access token is invalid */
+		}
+		CreateUserDto: {
+			/** @example ve9EPM428h8vShlRW1KT */
+			companyId: string
+			/** @example john@deo.com */
+			email: string
+			/** @example John */
+			firstName: string
+			/** @example Deo */
+			lastName: string
+			/** @example [
+			 *       "C2QujeCh8ZnC7al2InWR"
+			 *     ] */
+			locationIds: string[]
+			/** @example ******* */
+			password: string
+			permissions: components['schemas']['PermissionsDto']
+			/** @example +18832327657 */
+			phone?: string
+			/** @example https://img.png */
+			profilePhoto?: string
+			/** @example admin */
+			role: string
+			/**
+			 * @description Scopes allowed for users. If passed empty all the scopes will be get disabled
+			 * @example [
+			 *       "contacts.write",
+			 *       "campaigns.readonly"
+			 *     ]
+			 */
+			scopes?: (
+				| 'campaigns.readonly'
+				| 'campaigns.write'
+				| 'calendars/events.write'
+				| 'calendars/events.readonly'
+				| 'contacts.write'
+				| 'contacts/bulkActions.write'
+				| 'workflows.readonly'
+				| 'workflows.write'
+				| 'triggers.write'
+				| 'funnels.write'
+				| 'websites.write'
+				| 'opportunities.write'
+				| 'opportunities/leadValue.readonly'
+				| 'reporting/phone.readonly'
+				| 'reporting/adwords.readonly'
+				| 'reporting/facebookAds.readonly'
+				| 'reporting/attributions.readonly'
+				| 'reporting/agent.readonly'
+				| 'payments.write'
+				| 'payments/refunds.write'
+				| 'payments/records.write'
+				| 'payments/exports.write'
+				| 'payments/subscriptionsCancel.write'
+				| 'invoices.write'
+				| 'invoices.readonly'
+				| 'invoices/schedule.readonly'
+				| 'invoices/schedule.write'
+				| 'invoices/template.readonly'
+				| 'invoices/template.write'
+				| 'reputation/review.write'
+				| 'reputation/listing.write'
+				| 'conversations.write'
+				| 'conversations.readonly'
+				| 'conversations/message.readonly'
+				| 'conversations/message.write'
+				| 'contentAI.write'
+				| 'dashboard/stats.readonly'
+				| 'locations/tags.write'
+				| 'locations/tags.readonly'
+				| 'marketing.write'
+				| 'eliza.write'
+				| 'settings.write'
+				| 'socialplanner/post.write'
+				| 'marketing/affiliate.write'
+				| 'blogs.write'
+				| 'membership.write'
+				| 'communities.write'
+				| 'certificates.write'
+				| 'certificates.readonly'
+				| 'adPublishing.write'
+				| 'adPublishing.write'
+				| 'adPublishing.readonly'
+				| 'adPublishing.readonly'
+			)[]
+			/**
+			 * @description Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled
+			 * @example [
+			 *       "contacts.write",
+			 *       "campaigns.readonly"
+			 *     ]
+			 */
+			scopesAssignedToOnly?: (
+				| 'campaigns.readonly'
+				| 'campaigns.write'
+				| 'calendars/events.write'
+				| 'calendars/events.readonly'
+				| 'contacts.write'
+				| 'contacts/bulkActions.write'
+				| 'workflows.readonly'
+				| 'workflows.write'
+				| 'triggers.write'
+				| 'funnels.write'
+				| 'websites.write'
+				| 'opportunities.write'
+				| 'opportunities/leadValue.readonly'
+				| 'reporting/phone.readonly'
+				| 'reporting/adwords.readonly'
+				| 'reporting/facebookAds.readonly'
+				| 'reporting/attributions.readonly'
+				| 'reporting/agent.readonly'
+				| 'payments.write'
+				| 'payments/refunds.write'
+				| 'payments/records.write'
+				| 'payments/exports.write'
+				| 'payments/subscriptionsCancel.write'
+				| 'invoices.write'
+				| 'invoices.readonly'
+				| 'invoices/schedule.readonly'
+				| 'invoices/schedule.write'
+				| 'invoices/template.readonly'
+				| 'invoices/template.write'
+				| 'reputation/review.write'
+				| 'reputation/listing.write'
+				| 'conversations.write'
+				| 'conversations.readonly'
+				| 'conversations/message.readonly'
+				| 'conversations/message.write'
+				| 'contentAI.write'
+				| 'dashboard/stats.readonly'
+				| 'locations/tags.write'
+				| 'locations/tags.readonly'
+				| 'marketing.write'
+				| 'eliza.write'
+				| 'settings.write'
+				| 'socialplanner/post.write'
+				| 'marketing/affiliate.write'
+				| 'blogs.write'
+				| 'membership.write'
+				| 'communities.write'
+				| 'certificates.write'
+				| 'certificates.readonly'
+				| 'adPublishing.write'
+				| 'adPublishing.write'
+				| 'adPublishing.readonly'
+				| 'adPublishing.readonly'
+			)[]
+			/** @example account */
+			type: string
+		}
+		DeleteUserSuccessfulResponseDto: {
+			/** @example Queued deleting user with e-mail john@deo.com and name John Deo. Will take effect in a few minutes. */
 			message?: string
-			/** @example Unauthorized */
-			error?: string
+			/** @example true */
+			succeded?: boolean
+		}
+		LocationSuccessfulResponseDto: {
+			users?: components['schemas']['UserSchema'][]
 		}
 		PermissionsDto: {
+			/**
+			 * @default false
+			 * @example false
+			 */
+			adwordsReportingEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			affiliateManagerEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			agentReportingEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			appointmentsEnabled: boolean
+			/**
+			 * @default false
+			 * @example false
+			 */
+			assignedDataOnly: boolean
+			/**
+			 * @default false
+			 * @example false
+			 */
+			attributionsReportingEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			bloggingEnabled: boolean
+			/**
+			 * @default false
+			 * @example false
+			 */
+			botService: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			bulkRequestsEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
@@ -104,37 +299,27 @@ export type components = {
 			 * @default true
 			 * @example true
 			 */
+			cancelSubscriptionEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			communitiesEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
 			contactsEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
 			 */
-			workflowsEnabled: boolean
-			/**
-			 * @default false
-			 * @example true
-			 */
-			workflowsReadOnly: boolean
+			contentAiEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
 			 */
-			triggersEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			funnelsEnabled: boolean
-			/**
-			 * @default false
-			 * @example false
-			 */
-			websitesEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			opportunitiesEnabled: boolean
+			conversationsEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
@@ -144,67 +329,22 @@ export type components = {
 			 * @default true
 			 * @example true
 			 */
-			bulkRequestsEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			appointmentsEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			reviewsEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			onlineListingsEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			phoneCallEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			conversationsEnabled: boolean
-			/**
-			 * @default false
-			 * @example false
-			 */
-			assignedDataOnly: boolean
-			/**
-			 * @default false
-			 * @example false
-			 */
-			adwordsReportingEnabled: boolean
-			/**
-			 * @default false
-			 * @example false
-			 */
-			membershipEnabled: boolean
+			exportPaymentsEnabled: boolean
 			/**
 			 * @default false
 			 * @example false
 			 */
 			facebookAdsReportingEnabled: boolean
 			/**
-			 * @default false
-			 * @example false
+			 * @default true
+			 * @example true
 			 */
-			attributionsReportingEnabled: boolean
+			funnelsEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
 			 */
-			settingsEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			tagsEnabled: boolean
+			invoiceEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
@@ -216,55 +356,20 @@ export type components = {
 			 */
 			marketingEnabled: boolean
 			/**
-			 * @default true
-			 * @example true
-			 */
-			agentReportingEnabled: boolean
-			/**
 			 * @default false
 			 * @example false
 			 */
-			botService: boolean
+			membershipEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
 			 */
-			socialPlanner: boolean
+			onlineListingsEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
 			 */
-			bloggingEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			invoiceEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			affiliateManagerEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			contentAiEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			refundsEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			recordPaymentEnabled: boolean
-			/**
-			 * @default true
-			 * @example true
-			 */
-			cancelSubscriptionEnabled: boolean
+			opportunitiesEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
@@ -274,233 +379,97 @@ export type components = {
 			 * @default true
 			 * @example true
 			 */
-			communitiesEnabled: boolean
+			phoneCallEnabled: boolean
 			/**
 			 * @default true
 			 * @example true
 			 */
-			exportPaymentsEnabled: boolean
+			recordPaymentEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			refundsEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			reviewsEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			settingsEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			socialPlanner: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			tagsEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			triggersEnabled: boolean
+			/**
+			 * @default false
+			 * @example false
+			 */
+			websitesEnabled: boolean
+			/**
+			 * @default true
+			 * @example true
+			 */
+			workflowsEnabled: boolean
+			/**
+			 * @default false
+			 * @example true
+			 */
+			workflowsReadOnly: boolean
 		}
 		RoleSchema: {
-			/** @example account */
-			type?: string
-			/** @example admin */
-			role?: string
 			/** @example [
 			 *       "ve9EPM428h8vShlRW1KT"
 			 *     ] */
 			locationIds?: string[]
-		}
-		UserSchema: {
-			/** @example 0IHuJvc2ofPAAA8GzTRi */
-			id?: string
-			/** @example John Deo */
-			name?: string
-			/** @example John */
-			firstName?: string
-			/** @example Deo */
-			lastName?: string
-			/** @example john@deo.com */
-			email?: string
-			/** @example +1 808-868-8888 */
-			phone?: string
-			/** @example  */
-			extension?: string
-			permissions?: components['schemas']['PermissionsDto']
-			roles?: components['schemas']['RoleSchema']
-			/** @example false */
-			deleted?: boolean
+			/** @example admin */
+			role?: string
+			/** @example account */
+			type?: string
 		}
 		SearchUserSuccessfulResponseDto: {
-			users?: components['schemas']['UserSchema'][]
 			/** @example 1231 */
 			count?: number
+			users?: components['schemas']['UserSchema'][]
+		}
+		UnauthorizedDTO: {
+			/** @example Unauthorized */
+			error?: string
+			/** @example Invalid token: access token is invalid */
+			message?: string
+			/** @example 401 */
+			statusCode?: number
 		}
 		UnprocessableDTO: {
-			/** @example 422 */
-			statusCode?: number
+			/** @example Unprocessable Entity */
+			error?: string
 			/** @example [
 			 *       "Unprocessable Entity"
 			 *     ] */
 			message?: string[]
-			/** @example Unprocessable Entity */
-			error?: string
-		}
-		LocationSuccessfulResponseDto: {
-			users?: components['schemas']['UserSchema'][]
-		}
-		UserSuccessfulResponseDto: {
-			/** @example 0IHuJvc2ofPAAA8GzTRi */
-			id?: string
-			/** @example John Deo */
-			name?: string
-			/** @example John */
-			firstName?: string
-			/** @example Deo */
-			lastName?: string
-			/** @example john@deo.com */
-			email?: string
-			/** @example +1 808-868-8888 */
-			phone?: string
-			/** @example  */
-			extension?: string
-			permissions?: components['schemas']['PermissionsDto']
-			roles?: components['schemas']['RoleSchema']
-		}
-		CreateUserDto: {
-			/** @example ve9EPM428h8vShlRW1KT */
-			companyId: string
-			/** @example John */
-			firstName: string
-			/** @example Deo */
-			lastName: string
-			/** @example john@deo.com */
-			email: string
-			/** @example ******* */
-			password: string
-			/** @example +18832327657 */
-			phone?: string
-			/** @example account */
-			type: string
-			/** @example admin */
-			role: string
-			/** @example [
-			 *       "C2QujeCh8ZnC7al2InWR"
-			 *     ] */
-			locationIds: string[]
-			permissions: components['schemas']['PermissionsDto']
-			/**
-			 * @description Scopes allowed for users. If passed empty all the scopes will be get disabled
-			 * @example [
-			 *       "contacts.write",
-			 *       "campaigns.readonly"
-			 *     ]
-			 */
-			scopes?: (
-				| 'campaigns.readonly'
-				| 'campaigns.write'
-				| 'calendars/events.write'
-				| 'calendars/events.readonly'
-				| 'contacts.write'
-				| 'contacts/bulkActions.write'
-				| 'workflows.readonly'
-				| 'workflows.write'
-				| 'triggers.write'
-				| 'funnels.write'
-				| 'websites.write'
-				| 'opportunities.write'
-				| 'opportunities/leadValue.readonly'
-				| 'reporting/phone.readonly'
-				| 'reporting/adwords.readonly'
-				| 'reporting/facebookAds.readonly'
-				| 'reporting/attributions.readonly'
-				| 'reporting/agent.readonly'
-				| 'payments.write'
-				| 'payments/refunds.write'
-				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
-				| 'invoices.write'
-				| 'invoices.readonly'
-				| 'invoices/schedule.readonly'
-				| 'invoices/schedule.write'
-				| 'invoices/template.readonly'
-				| 'invoices/template.write'
-				| 'reputation/review.write'
-				| 'reputation/listing.write'
-				| 'conversations.write'
-				| 'conversations.readonly'
-				| 'conversations/message.readonly'
-				| 'conversations/message.write'
-				| 'contentAI.write'
-				| 'dashboard/stats.readonly'
-				| 'locations/tags.write'
-				| 'locations/tags.readonly'
-				| 'marketing.write'
-				| 'eliza.write'
-				| 'settings.write'
-				| 'socialplanner/post.write'
-				| 'marketing/affiliate.write'
-				| 'blogs.write'
-				| 'membership.write'
-				| 'communities.write'
-				| 'certificates.write'
-				| 'certificates.readonly'
-				| 'adPublishing.write'
-				| 'adPublishing.write'
-				| 'adPublishing.readonly'
-				| 'adPublishing.readonly'
-			)[]
-			/**
-			 * @description Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled
-			 * @example [
-			 *       "contacts.write",
-			 *       "campaigns.readonly"
-			 *     ]
-			 */
-			scopesAssignedToOnly?: (
-				| 'campaigns.readonly'
-				| 'campaigns.write'
-				| 'calendars/events.write'
-				| 'calendars/events.readonly'
-				| 'contacts.write'
-				| 'contacts/bulkActions.write'
-				| 'workflows.readonly'
-				| 'workflows.write'
-				| 'triggers.write'
-				| 'funnels.write'
-				| 'websites.write'
-				| 'opportunities.write'
-				| 'opportunities/leadValue.readonly'
-				| 'reporting/phone.readonly'
-				| 'reporting/adwords.readonly'
-				| 'reporting/facebookAds.readonly'
-				| 'reporting/attributions.readonly'
-				| 'reporting/agent.readonly'
-				| 'payments.write'
-				| 'payments/refunds.write'
-				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
-				| 'invoices.write'
-				| 'invoices.readonly'
-				| 'invoices/schedule.readonly'
-				| 'invoices/schedule.write'
-				| 'invoices/template.readonly'
-				| 'invoices/template.write'
-				| 'reputation/review.write'
-				| 'reputation/listing.write'
-				| 'conversations.write'
-				| 'conversations.readonly'
-				| 'conversations/message.readonly'
-				| 'conversations/message.write'
-				| 'contentAI.write'
-				| 'dashboard/stats.readonly'
-				| 'locations/tags.write'
-				| 'locations/tags.readonly'
-				| 'marketing.write'
-				| 'eliza.write'
-				| 'settings.write'
-				| 'socialplanner/post.write'
-				| 'marketing/affiliate.write'
-				| 'blogs.write'
-				| 'membership.write'
-				| 'communities.write'
-				| 'certificates.write'
-				| 'certificates.readonly'
-				| 'adPublishing.write'
-				| 'adPublishing.write'
-				| 'adPublishing.readonly'
-				| 'adPublishing.readonly'
-			)[]
-			/** @example https://img.png */
-			profilePhoto?: string
+			/** @example 422 */
+			statusCode?: number
 		}
 		UpdateUserDto: {
-			/** @example John */
-			firstName?: string
-			/** @example Deo */
-			lastName?: string
+			/**
+			 * @description Company/Agency Id. Required for Agency Level access
+			 * @example UAXssdawIWAWD
+			 */
+			companyId?: string
 			/** @example john@deo.com */
 			email?: string
 			/**
@@ -508,24 +477,23 @@ export type components = {
 			 * @example 191344
 			 */
 			emailChangeOTP?: string
-			/** @example ******* */
-			password?: string
-			/** @example +18832327657 */
-			phone?: string
-			/** @example account */
-			type?: string
-			/** @example admin */
-			role?: string
-			/**
-			 * @description Company/Agency Id. Required for Agency Level access
-			 * @example UAXssdawIWAWD
-			 */
-			companyId?: string
+			/** @example John */
+			firstName?: string
+			/** @example Deo */
+			lastName?: string
 			/** @example [
 			 *       "C2QujeCh8ZnC7al2InWR"
 			 *     ] */
 			locationIds?: string[]
+			/** @example ******* */
+			password?: string
 			permissions?: components['schemas']['PermissionsDto']
+			/** @example +18832327657 */
+			phone?: string
+			/** @example https://img.png */
+			profilePhoto?: string
+			/** @example admin */
+			role?: string
 			/**
 			 * @description Scopes allowed for users. If passed empty all the scopes will be get disabled
 			 * @example [
@@ -650,14 +618,46 @@ export type components = {
 				| 'adPublishing.readonly'
 				| 'adPublishing.readonly'
 			)[]
-			/** @example https://img.png */
-			profilePhoto?: string
+			/** @example account */
+			type?: string
 		}
-		DeleteUserSuccessfulResponseDto: {
-			/** @example true */
-			succeded?: boolean
-			/** @example Queued deleting user with e-mail john@deo.com and name John Deo. Will take effect in a few minutes. */
-			message?: string
+		UserSchema: {
+			/** @example false */
+			deleted?: boolean
+			/** @example john@deo.com */
+			email?: string
+			/** @example  */
+			extension?: string
+			/** @example John */
+			firstName?: string
+			/** @example 0IHuJvc2ofPAAA8GzTRi */
+			id?: string
+			/** @example Deo */
+			lastName?: string
+			/** @example John Deo */
+			name?: string
+			permissions?: components['schemas']['PermissionsDto']
+			/** @example +1 808-868-8888 */
+			phone?: string
+			roles?: components['schemas']['RoleSchema']
+		}
+		UserSuccessfulResponseDto: {
+			/** @example john@deo.com */
+			email?: string
+			/** @example  */
+			extension?: string
+			/** @example John */
+			firstName?: string
+			/** @example 0IHuJvc2ofPAAA8GzTRi */
+			id?: string
+			/** @example Deo */
+			lastName?: string
+			/** @example John Deo */
+			name?: string
+			permissions?: components['schemas']['PermissionsDto']
+			/** @example +1 808-868-8888 */
+			phone?: string
+			roles?: components['schemas']['RoleSchema']
 		}
 	}
 	responses: never
@@ -668,60 +668,11 @@ export type components = {
 }
 export type $defs = Record<string, never>
 export interface operations {
-	'search-users': {
+	'get-user-by-location': {
 		parameters: {
 			query: {
-				/**
-				 * @description Company ID in which the search needs to be performed
-				 * @example 5DP41231LkQsiKESj6rh
-				 */
-				companyId: string
-				/**
-				 * @description The search term for the user is matched based on the user full name, email or phone
-				 * @example John
-				 */
-				query?: string
-				/**
-				 * @description No of results to be skipped before returning the result
-				 * @example 1
-				 */
-				skip?: string
-				/**
-				 * @description No of results to be limited before returning the result
-				 * @example 10
-				 */
-				limit?: string
-				/**
-				 * @description Location ID in which the search needs to be performed
-				 * @example 5DP41231LkQsiKESj6rh
-				 */
-				locationId?: string
-				/**
-				 * @description Type of the users to be filtered in the search
-				 * @example agency
-				 */
-				type?: string
-				/**
-				 * @description Role of the users to be filtered in the search
-				 * @example admin
-				 */
-				role?: string
-				/**
-				 * @description List of User IDs to be filtered in the search
-				 * @example 5DP4iH6HLkQsiKESj6rh,5DP4iH6HLkQsiKESj34h
-				 */
-				ids?: string
-				/**
-				 * @description The field on which sort is applied in which the results need to be sorted. Default is based on the first and last name
-				 * @example dateAdded
-				 */
-				sort?: string
-				/**
-				 * @description The direction in which the results need to be sorted
-				 * @example asc
-				 */
-				sortDirection?: string
-				enabled2waySync?: boolean
+				/** @example ve9EPM428h8vShlRW1KT */
+				locationId: string
 			}
 			header: {
 				/** @description Access Token */
@@ -740,7 +691,54 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['SearchUserSuccessfulResponseDto']
+					'application/json': components['schemas']['LocationSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'create-user': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CreateUserDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UserSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -944,11 +942,60 @@ export interface operations {
 			}
 		}
 	}
-	'get-user-by-location': {
+	'search-users': {
 		parameters: {
 			query: {
-				/** @example ve9EPM428h8vShlRW1KT */
-				locationId: string
+				/**
+				 * @description Company ID in which the search needs to be performed
+				 * @example 5DP41231LkQsiKESj6rh
+				 */
+				companyId: string
+				enabled2waySync?: boolean
+				/**
+				 * @description List of User IDs to be filtered in the search
+				 * @example 5DP4iH6HLkQsiKESj6rh,5DP4iH6HLkQsiKESj34h
+				 */
+				ids?: string
+				/**
+				 * @description No of results to be limited before returning the result
+				 * @example 10
+				 */
+				limit?: string
+				/**
+				 * @description Location ID in which the search needs to be performed
+				 * @example 5DP41231LkQsiKESj6rh
+				 */
+				locationId?: string
+				/**
+				 * @description The search term for the user is matched based on the user full name, email or phone
+				 * @example John
+				 */
+				query?: string
+				/**
+				 * @description Role of the users to be filtered in the search
+				 * @example admin
+				 */
+				role?: string
+				/**
+				 * @description No of results to be skipped before returning the result
+				 * @example 1
+				 */
+				skip?: string
+				/**
+				 * @description The field on which sort is applied in which the results need to be sorted. Default is based on the first and last name
+				 * @example dateAdded
+				 */
+				sort?: string
+				/**
+				 * @description The direction in which the results need to be sorted
+				 * @example asc
+				 */
+				sortDirection?: string
+				/**
+				 * @description Type of the users to be filtered in the search
+				 * @example agency
+				 */
+				type?: string
 			}
 			header: {
 				/** @description Access Token */
@@ -967,54 +1014,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['LocationSuccessfulResponseDto']
-				}
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-		}
-	}
-	'create-user': {
-		parameters: {
-			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody: {
-			content: {
-				'application/json': components['schemas']['CreateUserDto']
-			}
-		}
-		responses: {
-			/** @description Successful response */
-			201: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UserSuccessfulResponseDto']
+					'application/json': components['schemas']['SearchUserSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */

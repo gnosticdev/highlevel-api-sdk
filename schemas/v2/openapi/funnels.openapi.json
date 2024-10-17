@@ -1,0 +1,791 @@
+{
+	"components": {
+		"schemas": {
+			"CreateRedirectParams": {
+				"properties": {
+					"action": {
+						"enum": ["funnel", "website", "url", "all"],
+						"example": "URL",
+						"type": "string"
+					},
+					"domain": {
+						"example": "example.com",
+						"type": "string"
+					},
+					"locationId": {
+						"example": "6p2RxpgtMKQwO3E6IUaT",
+						"type": "string"
+					},
+					"path": {
+						"example": "/Hello",
+						"type": "string"
+					},
+					"target": {
+						"example": "https://www.google.com",
+						"type": "string"
+					}
+				},
+				"required": ["locationId", "domain", "path", "target", "action"],
+				"type": "object"
+			},
+			"CreateRedirectResponseDTO": {
+				"properties": {
+					"data": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/RedirectResponseDTO"
+							}
+						],
+						"description": "Data containing details of the created redirect"
+					}
+				},
+				"required": ["data"],
+				"type": "object"
+			},
+			"DeleteRedirectResponseDTO": {
+				"properties": {
+					"data": {
+						"description": "Status of the delete operation",
+						"example": {
+							"status": "ok"
+						},
+						"type": "object"
+					}
+				},
+				"required": ["data"],
+				"type": "object"
+			},
+			"FunnelListResponseDTO": {
+				"properties": {
+					"count": {
+						"example": 24,
+						"type": "number"
+					},
+					"funnels": {
+						"example": {
+							"_id": "SkIDfu0S4m3NYQyvWHC6",
+							"dateAdded": "2024-04-29T15:00:05.681Z",
+							"dateUpdated": "2024-04-29T15:00:28.465Z",
+							"deleted": false,
+							"domainId": "",
+							"faviconUrl": "",
+							"globalSectionVersion": 1,
+							"globalSectionsPath": "funnel/SkIDfu0S4m3NYQyvWHC6/global-sections-1",
+							"globalSectionsUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/funnel%2FSkIDfu0S4m3NYQyvWHC6%2Fglobal-sections-1?alt=media&token=9cc5c211-093b-4751-aeba-19282ac92955",
+							"isStoreActive": false,
+							"locationId": "ojQjykmwNIU88vfsfzvH",
+							"name": "Chaitanya Copy",
+							"orderFormVersion": 2,
+							"originId": "hAmyh7jrJH5FfEEKAJ9z",
+							"steps": [
+								{
+									"id": "f5d178c0-8bbb-4cd4-927c-691c68a62c59",
+									"name": "Step 1",
+									"originId": "80b2f227-5bc8-4ca5-980d-817745ea4e8b",
+									"pages": ["2IhBmBcQRx9JXV1JZsRt"],
+									"products": [],
+									"sequence": 1,
+									"type": "optin_funnel_page",
+									"url": "/newtestifypath"
+								}
+							],
+							"trackingCodeBody": "",
+							"trackingCodeHead": "",
+							"type": "funnel",
+							"updatedAt": "2024-04-29T15:00:34.233Z",
+							"url": "/chaitanya"
+						},
+						"type": "object"
+					},
+					"traceId": {
+						"example": "03774d31-a57e-4b4f-95c7-315ce61969f1",
+						"type": "string"
+					}
+				},
+				"required": ["funnels", "count", "traceId"],
+				"type": "object"
+			},
+			"FunnelPageResponseDTO": {
+				"properties": {
+					"_id": {
+						"example": "0yJbP3q7t7pLmeTWRAE2",
+						"type": "string"
+					},
+					"deleted": {
+						"example": false,
+						"type": "string"
+					},
+					"funnelId": {
+						"example": "iucJ6TdFZiddhq9f6znh",
+						"type": "string"
+					},
+					"locationId": {
+						"example": "ojQjykmwNIU88vfsfzvH",
+						"type": "string"
+					},
+					"name": {
+						"example": "Home",
+						"type": "string"
+					},
+					"stepId": {
+						"example": "343bf634-3aa6-4ade-b963-2d3cd0bf2ede",
+						"type": "string"
+					},
+					"updatedAt": {
+						"example": "2024-04-18T12:25:23.029Z",
+						"type": "string"
+					}
+				},
+				"required": [
+					"locationId",
+					"name",
+					"funnelId",
+					"stepId",
+					"deleted",
+					"updatedAt",
+					"_id"
+				],
+				"type": "object"
+			},
+			"RedirectListResponseDTO": {
+				"properties": {
+					"data": {
+						"description": "Object containing the count of redirects and an array of redirect data",
+						"example": {
+							"count": 42,
+							"data": []
+						},
+						"type": "object"
+					}
+				},
+				"required": ["data"],
+				"type": "object"
+			},
+			"RedirectResponseDTO": {
+				"properties": {
+					"action": {
+						"description": "Action performed by the redirect",
+						"example": "url",
+						"type": "string"
+					},
+					"domain": {
+						"description": "Domain where the redirect occurs",
+						"example": "www.example.com",
+						"type": "string"
+					},
+					"id": {
+						"description": "Unique identifier of the redirect",
+						"example": "6p2RxpgtMKQwO3E6IUaT",
+						"type": "string"
+					},
+					"locationId": {
+						"description": "Identifier of the location associated with the redirect",
+						"example": "6p2RxpgtMKQwO3E6IUaT",
+						"type": "string"
+					},
+					"path": {
+						"description": "Original path that will be redirected",
+						"example": "/old-path",
+						"type": "string"
+					},
+					"pathLowercase": {
+						"description": "Lowercase version of the original path",
+						"example": "/old-path",
+						"type": "string"
+					},
+					"target": {
+						"description": "Target URL to which the original path will be redirected",
+						"example": "https://www.example.com/new-path",
+						"type": "string"
+					},
+					"type": {
+						"description": "Type of redirect (e.g., Permanent, Temporary)",
+						"example": "Permanent",
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"locationId",
+					"domain",
+					"path",
+					"pathLowercase",
+					"type",
+					"target",
+					"action"
+				],
+				"type": "object"
+			},
+			"UnprocessableDTO": {
+				"properties": {
+					"error": {
+						"example": "Unprocessable Entity",
+						"type": "string"
+					},
+					"message": {
+						"example": ["Unprocessable Entity"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"statusCode": {
+						"example": 422,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"UpdateRedirectParams": {
+				"properties": {
+					"action": {
+						"enum": ["funnel", "website", "url", "all"],
+						"example": "URL",
+						"type": "string"
+					},
+					"locationId": {
+						"example": "6p2RxpgtMKQwO3E6IUaT",
+						"type": "string"
+					},
+					"target": {
+						"example": "https://www.google.com",
+						"type": "string"
+					}
+				},
+				"required": ["target", "action", "locationId"],
+				"type": "object"
+			},
+			"UpdateRedirectResponseDTO": {
+				"properties": {
+					"data": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/RedirectResponseDTO"
+							}
+						],
+						"description": "Data containing details of the updated redirect"
+					}
+				},
+				"required": ["data"],
+				"type": "object"
+			}
+		},
+		"securitySchemes": {
+			"Agency-Access": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Agency.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			},
+			"Location-Access": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			},
+			"bearer": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			}
+		}
+	},
+	"info": {
+		"contact": {},
+		"description": "Documentation for funnels API",
+		"title": "Funnels API",
+		"version": "1.0"
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/funnels/funnel/list": {
+			"get": {
+				"description": "Retrieves a list of all funnels based on the given query parameters.",
+				"operationId": "getFunnels",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "locationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "type",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "category",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "offset",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "parentId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "search",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FunnelListResponseDTO"
+								}
+							}
+						},
+						"description": "Successful response - List of funnels returned"
+					}
+				},
+				"security": [
+					{
+						"Location-Access": []
+					}
+				],
+				"summary": "Fetch List of Funnels",
+				"tags": ["Funnel"]
+			}
+		},
+		"/funnels/lookup/redirect": {
+			"post": {
+				"description": "The \"Create Redirect\" API Allows adding a new url redirect to the system. Use this endpoint to create a url redirect with the specified details. Ensure that the required information is provided in the request payload.",
+				"operationId": "create-redirect",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateRedirectParams"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateRedirectResponseDTO"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"Location-Access": []
+					}
+				],
+				"summary": "Create Redirect",
+				"tags": ["Redirect"]
+			}
+		},
+		"/funnels/lookup/redirect/list": {
+			"get": {
+				"description": "Retrieves a list of all URL redirects based on the given query parameters.",
+				"operationId": "fetch-redirects-list",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"example": "6p2RxpgtMKQwO3E6IUaT",
+						"in": "query",
+						"name": "locationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"example": 20,
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"example": 10,
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"example": "example.com/test",
+						"in": "query",
+						"name": "search",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RedirectListResponseDTO"
+								}
+							}
+						},
+						"description": "Successful response - List of URL redirects returned"
+					},
+					"422": {
+						"description": "Unprocessable Entity - The provided data is invalid or incomplete"
+					}
+				},
+				"security": [
+					{
+						"Location-Access": []
+					}
+				],
+				"summary": "Fetch List of Redirects",
+				"tags": ["Redirect"]
+			}
+		},
+		"/funnels/lookup/redirect/{id}": {
+			"delete": {
+				"description": "The \"Delete Redirect By Id\" API Allows deletion of a URL redirect from the system using its unique identifier. Use this endpoint to delete a URL redirect with the specified ID using details provided in the request payload.",
+				"operationId": "delete-redirect-by-id",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"example": "6p2RxpgtMKQwO3E6IUaT",
+						"in": "query",
+						"name": "locationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteRedirectResponseDTO"
+								}
+							}
+						},
+						"description": "Successful response - URL redirect deleted successfully"
+					},
+					"422": {
+						"description": "Unprocessable Entity - The provided data is invalid or incomplete"
+					}
+				},
+				"security": [
+					{
+						"Location-Access": []
+					}
+				],
+				"summary": "Delete Redirect By Id",
+				"tags": ["Redirect"]
+			},
+			"patch": {
+				"description": "The \"Update Redirect By Id\" API Allows updating an existing URL redirect in the system. Use this endpoint to modify a URL redirect with the specified ID using details provided in the request payload.",
+				"operationId": "update-redirect-by-id",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateRedirectParams"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateRedirectResponseDTO"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"Location-Access": []
+					}
+				],
+				"summary": "Update Redirect By Id",
+				"tags": ["Redirect"]
+			}
+		},
+		"/funnels/page": {
+			"get": {
+				"description": "Retrieves a list of all funnel pages based on the given query parameters.",
+				"operationId": "getPagesByFunnelId",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "locationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "funnelId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FunnelPageResponseDTO"
+								}
+							}
+						},
+						"description": "Successful response - List of funnel pages returned"
+					}
+				},
+				"security": [
+					{
+						"Location-Access": []
+					}
+				],
+				"summary": "Fetch list of funnel pages",
+				"tags": ["Funnel"]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://services.leadconnectorhq.com"
+		}
+	],
+	"tags": [
+		{
+			"description": "Documentation for funnels API",
+			"name": "Funnels"
+		}
+	]
+}

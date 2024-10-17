@@ -23,10 +23,51 @@ export type paths = {
 export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
-		/** @enum {string} */
-		visibility: 'published' | 'draft'
+		CategoryInterface: {
+			posts?: components['schemas']['PostInterface'][]
+			subCategories?: components['schemas']['SubCategoryInterface'][]
+			thumbnailUrl?: string
+			title: string
+			visibility: components['schemas']['visibility']
+		}
 		/** @enum {string} */
 		contentType: 'video' | 'assignment' | 'quiz'
+		InstructorDetails: {
+			description: string
+			name: string
+		}
+		PostInterface: {
+			bucketVideoUrl?: string
+			contentType: components['schemas']['contentType']
+			description: string
+			postMaterials?: components['schemas']['PostMaterialInterface'][]
+			thumbnailUrl?: string
+			title: string
+			visibility: components['schemas']['visibility']
+		}
+		PostMaterialInterface: {
+			title: string
+			type: components['schemas']['type']
+			url: string
+		}
+		ProductInterface: {
+			categories: components['schemas']['CategoryInterface'][]
+			description: string
+			imageUrl?: string
+			instructorDetails?: components['schemas']['InstructorDetails']
+			title: string
+		}
+		PublicExporterPayload: {
+			locationId: string
+			products: components['schemas']['ProductInterface'][]
+			userId?: string
+		}
+		SubCategoryInterface: {
+			posts?: components['schemas']['PostInterface'][]
+			thumbnailUrl?: string
+			title: string
+			visibility: components['schemas']['visibility']
+		}
 		/** @enum {string} */
 		type:
 			| 'pdf'
@@ -82,49 +123,8 @@ export type components = {
 			| 'stl'
 			| 'woff'
 			| 'ttf'
-		PostMaterialInterface: {
-			title: string
-			type: components['schemas']['type']
-			url: string
-		}
-		PostInterface: {
-			title: string
-			visibility: components['schemas']['visibility']
-			thumbnailUrl?: string
-			contentType: components['schemas']['contentType']
-			description: string
-			bucketVideoUrl?: string
-			postMaterials?: components['schemas']['PostMaterialInterface'][]
-		}
-		SubCategoryInterface: {
-			title: string
-			visibility: components['schemas']['visibility']
-			thumbnailUrl?: string
-			posts?: components['schemas']['PostInterface'][]
-		}
-		CategoryInterface: {
-			title: string
-			visibility: components['schemas']['visibility']
-			thumbnailUrl?: string
-			posts?: components['schemas']['PostInterface'][]
-			subCategories?: components['schemas']['SubCategoryInterface'][]
-		}
-		InstructorDetails: {
-			name: string
-			description: string
-		}
-		ProductInterface: {
-			title: string
-			description: string
-			imageUrl?: string
-			categories: components['schemas']['CategoryInterface'][]
-			instructorDetails?: components['schemas']['InstructorDetails']
-		}
-		PublicExporterPayload: {
-			locationId: string
-			userId?: string
-			products: components['schemas']['ProductInterface'][]
-		}
+		/** @enum {string} */
+		visibility: 'published' | 'draft'
 	}
 	responses: never
 	parameters: never

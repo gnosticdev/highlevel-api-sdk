@@ -1,18 +1,18 @@
 export type paths = {
-	'/oauth/token': {
+	'/oauth/installedLocations': {
 		parameters: {
 			query?: never
 			header?: never
 			path?: never
 			cookie?: never
 		}
-		get?: never
-		put?: never
 		/**
-		 * Get Access Token
-		 * @description Use Access Tokens to access GoHighLevel resources on behalf of an authenticated location/company.
+		 * Get Location where app is installed
+		 * @description This API allows you fetch location where app is installed upon
 		 */
-		post: operations['get-access-token']
+		get: operations['get-installed-location']
+		put?: never
+		post?: never
 		delete?: never
 		options?: never
 		head?: never
@@ -39,20 +39,20 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
-	'/oauth/installedLocations': {
+	'/oauth/token': {
 		parameters: {
 			query?: never
 			header?: never
 			path?: never
 			cookie?: never
 		}
-		/**
-		 * Get Location where app is installed
-		 * @description This API allows you fetch location where app is installed upon
-		 */
-		get: operations['get-installed-location']
+		get?: never
 		put?: never
-		post?: never
+		/**
+		 * Get Access Token
+		 * @description Use Access Tokens to access GoHighLevel resources on behalf of an authenticated location/company.
+		 */
+		post: operations['get-access-token']
 		delete?: never
 		options?: never
 		head?: never
@@ -64,26 +64,23 @@ export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
 		BadRequestDTO: {
-			/** @example 400 */
-			statusCode?: number
 			/** @example Bad Request */
 			message?: string
-		}
-		UnauthorizedDTO: {
-			/** @example 401 */
+			/** @example 400 */
 			statusCode?: number
-			/** @example Invalid token: access token is invalid */
-			message?: string
-			/** @example Unauthorized */
-			error?: string
 		}
 		GetAccessCodebodyDto: {
 			/** @description The ID provided by GHL for your integration */
 			client_id: string
 			client_secret: string
+			code?: string
 			/** @enum {string} */
 			grant_type: 'authorization_code' | 'refresh_token'
-			code?: string
+			/**
+			 * @description The redirect URI for your application
+			 * @example https://myapp.com/oauth/callback/gohighlevel
+			 */
+			redirect_uri?: string
 			refresh_token?: string
 			/**
 			 * @description The type of token to be requested
@@ -91,35 +88,10 @@ export type components = {
 			 * @enum {string}
 			 */
 			user_type?: 'Company' | 'Location'
-			/**
-			 * @description The redirect URI for your application
-			 * @example https://myapp.com/oauth/callback/gohighlevel
-			 */
-			redirect_uri?: string
 		}
 		GetAccessCodeSuccessfulResponseDto: {
 			/** @example ab12dc0ae1234a7898f9ff06d4f69gh */
 			access_token?: string
-			/** @example Bearer */
-			token_type?: string
-			/** @example 86399 */
-			expires_in?: number
-			/** @example xy34dc0ae1234a4858f9ff06d4f66ba */
-			refresh_token?: string
-			/** @example conversations/message.readonly conversations/message.write */
-			scope?: string
-			/** @example Location */
-			userType?: string
-			/**
-			 * @description Location ID - Present only for Sub-Account Access Token
-			 * @example l1C08ntBrFjLS0elLIYU
-			 */
-			locationId?: string
-			/**
-			 * @description Company ID
-			 * @example l1C08ntBrFjLS0elLIYU
-			 */
-			companyId?: string
 			/**
 			 * @description Approved locations to generate location access token
 			 * @example [
@@ -128,25 +100,48 @@ export type components = {
 			 */
 			approvedLocations?: string[]
 			/**
-			 * @description USER ID - Represent user id of person who performed installation
+			 * @description Company ID
 			 * @example l1C08ntBrFjLS0elLIYU
 			 */
-			userId: string
+			companyId?: string
+			/** @example 86399 */
+			expires_in?: number
+			/**
+			 * @description Location ID - Present only for Sub-Account Access Token
+			 * @example l1C08ntBrFjLS0elLIYU
+			 */
+			locationId?: string
 			/**
 			 * @description Plan Id of the subscribed plan in paid apps.
 			 * @example l1C08ntBrFjLS0elLIYU
 			 */
 			planId?: string
+			/** @example xy34dc0ae1234a4858f9ff06d4f66ba */
+			refresh_token?: string
+			/** @example conversations/message.readonly conversations/message.write */
+			scope?: string
+			/** @example Bearer */
+			token_type?: string
+			/**
+			 * @description USER ID - Represent user id of person who performed installation
+			 * @example l1C08ntBrFjLS0elLIYU
+			 */
+			userId: string
+			/** @example Location */
+			userType?: string
 		}
-		UnprocessableDTO: {
-			/** @example 422 */
-			statusCode?: number
-			/** @example [
-			 *       "Unprocessable Entity"
-			 *     ] */
-			message?: string[]
-			/** @example Unprocessable Entity */
-			error?: string
+		GetInstalledLocationsSuccessfulResponseDto: {
+			/**
+			 * @description Total location count under the company
+			 * @example 1231
+			 */
+			count?: number
+			/**
+			 * @description Boolean to control if user wants app to be automatically installed to future locations
+			 * @example true
+			 */
+			installToFutureLocations?: boolean
+			locations?: components['schemas']['InstalledLocationSchema'][]
 		}
 		GetLocationAccessCodeBodyDto: {
 			/** @description Company Id of location you want to request token for */
@@ -160,23 +155,23 @@ export type components = {
 			 * @example ab12dc0ae1234a7898f9ff06d4f69gh
 			 */
 			access_token?: string
-			/** @example Bearer */
-			token_type?: string
 			/**
 			 * @description Time in seconds remaining for token to expire
 			 * @example 86399
 			 */
 			expires_in?: number
 			/**
-			 * @description Scopes the following accessToken have access to
-			 * @example conversations/message.readonly conversations/message.write
-			 */
-			scope?: string
-			/**
 			 * @description Location ID - Present only for Sub-Account Access Token
 			 * @example l1C08ntBrFjLS0elLIYU
 			 */
 			locationId?: string
+			/**
+			 * @description Scopes the following accessToken have access to
+			 * @example conversations/message.readonly conversations/message.write
+			 */
+			scope?: string
+			/** @example Bearer */
+			token_type?: string
 			/**
 			 * @description USER ID - Represent user id of person who performed installation
 			 * @example l1C08ntBrFjLS0elLIYU
@@ -190,11 +185,6 @@ export type components = {
 			 */
 			_id: string
 			/**
-			 * @description Name of the location
-			 * @example John Deo
-			 */
-			name: string
-			/**
 			 * @description Address linked to location
 			 * @example 47 W 13th St, New York, NY 10011, USA
 			 */
@@ -204,19 +194,29 @@ export type components = {
 			 * @example true
 			 */
 			isInstalled?: boolean
+			/**
+			 * @description Name of the location
+			 * @example John Deo
+			 */
+			name: string
 		}
-		GetInstalledLocationsSuccessfulResponseDto: {
-			locations?: components['schemas']['InstalledLocationSchema'][]
-			/**
-			 * @description Total location count under the company
-			 * @example 1231
-			 */
-			count?: number
-			/**
-			 * @description Boolean to control if user wants app to be automatically installed to future locations
-			 * @example true
-			 */
-			installToFutureLocations?: boolean
+		UnauthorizedDTO: {
+			/** @example Unauthorized */
+			error?: string
+			/** @example Invalid token: access token is invalid */
+			message?: string
+			/** @example 401 */
+			statusCode?: number
+		}
+		UnprocessableDTO: {
+			/** @example Unprocessable Entity */
+			error?: string
+			/** @example [
+			 *       "Unprocessable Entity"
+			 *     ] */
+			message?: string[]
+			/** @example 422 */
+			statusCode?: number
 		}
 	}
 	responses: never
@@ -227,18 +227,48 @@ export type components = {
 }
 export type $defs = Record<string, never>
 export interface operations {
-	'get-access-token': {
+	'get-installed-location': {
 		parameters: {
-			query?: never
-			header?: never
+			query: {
+				/**
+				 * @description Parameter to search by the appId
+				 * @example tDtDnQdgm2LXpyiqYvZ6
+				 */
+				appId: string
+				/**
+				 * @description Parameter to search by the companyId
+				 * @example tDtDnQdgm2LXpyiqYvZ6
+				 */
+				companyId: string
+				/**
+				 * @description Filters out location which are installed for specified app under the specified company
+				 * @example true
+				 */
+				isInstalled?: boolean
+				/**
+				 * @description Parameter to limit the number installed locations
+				 * @example 10
+				 */
+				limit?: string
+				/**
+				 * @description Parameter to search for the installed location by name
+				 * @example location name
+				 */
+				query?: string
+				/**
+				 * @description Parameter to skip the number installed locations
+				 * @example 1
+				 */
+				skip?: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
 			path?: never
 			cookie?: never
 		}
-		requestBody: {
-			content: {
-				'application/x-www-form-urlencoded': components['schemas']['GetAccessCodebodyDto']
-			}
-		}
+		requestBody?: never
 		responses: {
 			/** @description Successful response */
 			200: {
@@ -246,7 +276,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['GetAccessCodeSuccessfulResponseDto']
+					'application/json': components['schemas']['GetInstalledLocationsSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -332,48 +362,18 @@ export interface operations {
 			}
 		}
 	}
-	'get-installed-location': {
+	'get-access-token': {
 		parameters: {
-			query: {
-				/**
-				 * @description Parameter to skip the number installed locations
-				 * @example 1
-				 */
-				skip?: string
-				/**
-				 * @description Parameter to limit the number installed locations
-				 * @example 10
-				 */
-				limit?: string
-				/**
-				 * @description Parameter to search for the installed location by name
-				 * @example location name
-				 */
-				query?: string
-				/**
-				 * @description Filters out location which are installed for specified app under the specified company
-				 * @example true
-				 */
-				isInstalled?: boolean
-				/**
-				 * @description Parameter to search by the companyId
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
-				companyId: string
-				/**
-				 * @description Parameter to search by the appId
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
-				appId: string
-			}
-			header: {
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
+			query?: never
+			header?: never
 			path?: never
 			cookie?: never
 		}
-		requestBody?: never
+		requestBody: {
+			content: {
+				'application/x-www-form-urlencoded': components['schemas']['GetAccessCodebodyDto']
+			}
+		}
 		responses: {
 			/** @description Successful response */
 			200: {
@@ -381,7 +381,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['GetInstalledLocationsSuccessfulResponseDto']
+					'application/json': components['schemas']['GetAccessCodeSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */

@@ -1,34 +1,10 @@
 [
 	{
-		"title": "AppointmentCreate",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"type": {
-					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
 				"appointment": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
 						"address": {
-							"type": "string"
-						},
-						"title": {
-							"type": "string"
-						},
-						"calendarId": {
-							"type": "string"
-						},
-						"contactId": {
-							"type": "string"
-						},
-						"groupId": {
 							"type": "string"
 						},
 						"appointmentStatus": {
@@ -37,8 +13,26 @@
 						"assignedUserId": {
 							"type": "string"
 						},
-						"users": {
-							"type": "array"
+						"calendarId": {
+							"type": "string"
+						},
+						"contactId": {
+							"type": "string"
+						},
+						"dateAdded": {
+							"type": "string"
+						},
+						"dateUpdated": {
+							"type": "string"
+						},
+						"endTime": {
+							"type": "string"
+						},
+						"groupId": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
 						},
 						"notes": {
 							"type": "string"
@@ -49,50 +43,32 @@
 						"startTime": {
 							"type": "string"
 						},
-						"endTime": {
+						"title": {
 							"type": "string"
 						},
-						"dateAdded": {
-							"type": "string"
-						},
-						"dateUpdated": {
-							"type": "string"
+						"users": {
+							"type": "array"
 						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "AppointmentDelete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"locationId": {
 					"type": "string"
 				},
+				"type": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "AppointmentCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"appointment": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
 						"address": {
-							"type": "string"
-						},
-						"title": {
-							"type": "string"
-						},
-						"calendarId": {
-							"type": "string"
-						},
-						"contactId": {
-							"type": "string"
-						},
-						"groupId": {
 							"type": "string"
 						},
 						"appointmentStatus": {
@@ -101,8 +77,26 @@
 						"assignedUserId": {
 							"type": "string"
 						},
-						"users": {
-							"type": "array"
+						"calendarId": {
+							"type": "string"
+						},
+						"contactId": {
+							"type": "string"
+						},
+						"dateAdded": {
+							"type": "string"
+						},
+						"dateUpdated": {
+							"type": "string"
+						},
+						"endTime": {
+							"type": "string"
+						},
+						"groupId": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
 						},
 						"notes": {
 							"type": "string"
@@ -113,50 +107,32 @@
 						"startTime": {
 							"type": "string"
 						},
-						"endTime": {
+						"title": {
 							"type": "string"
 						},
-						"dateAdded": {
-							"type": "string"
-						},
-						"dateUpdated": {
-							"type": "string"
+						"users": {
+							"type": "array"
 						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "AppointmentUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"locationId": {
 					"type": "string"
 				},
+				"type": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "AppointmentDelete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"appointment": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
 						"address": {
-							"type": "string"
-						},
-						"title": {
-							"type": "string"
-						},
-						"calendarId": {
-							"type": "string"
-						},
-						"contactId": {
-							"type": "string"
-						},
-						"groupId": {
 							"type": "string"
 						},
 						"appointmentStatus": {
@@ -165,8 +141,26 @@
 						"assignedUserId": {
 							"type": "string"
 						},
-						"users": {
-							"type": "array"
+						"calendarId": {
+							"type": "string"
+						},
+						"contactId": {
+							"type": "string"
+						},
+						"dateAdded": {
+							"type": "string"
+						},
+						"dateUpdated": {
+							"type": "string"
+						},
+						"endTime": {
+							"type": "string"
+						},
+						"groupId": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
 						},
 						"notes": {
 							"type": "string"
@@ -177,28 +171,29 @@
 						"startTime": {
 							"type": "string"
 						},
-						"endTime": {
+						"title": {
 							"type": "string"
 						},
-						"dateAdded": {
-							"type": "string"
-						},
-						"dateUpdated": {
-							"type": "string"
+						"users": {
+							"type": "array"
 						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "AppInstall",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
+					},
+					"type": "object"
+				},
+				"locationId": {
 					"type": "string"
 				},
+				"type": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "AppointmentUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"appId": {
 					"type": "string"
 				},
@@ -208,14 +203,10 @@
 				"locationId": {
 					"type": "string"
 				},
-				"userId": {
-					"type": "string"
-				},
 				"planId": {
 					"type": "string"
 				},
 				"trial": {
-					"type": "object",
 					"properties": {
 						"onTrial": {
 							"type": "boolean"
@@ -226,19 +217,23 @@
 						"trialStartDate": {
 							"type": "Date"
 						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "AppUninstall",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
+					},
+					"type": "object"
+				},
 				"type": {
 					"type": "string"
 				},
+				"userId": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "AppInstall"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"appId": {
 					"type": "string"
 				},
@@ -247,25 +242,31 @@
 				},
 				"locationId": {
 					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "CampaignStatusUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
+				},
 				"type": {
 					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "AppUninstall"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"contactId": {
+					"type": "string"
 				},
-				"locationId": {
+				"dateAdded": {
 					"type": "string"
 				},
 				"id": {
 					"type": "string"
 				},
-				"contactId": {
+				"locationId": {
+					"type": "string"
+				},
+				"replied": {
 					"type": "string"
 				},
 				"status": {
@@ -274,31 +275,25 @@
 				"templateId": {
 					"type": "string"
 				},
-				"replied": {
-					"type": "string"
-				},
-				"dateAdded": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "ContactCreate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
+				}
+			},
+			"type": "object"
+		},
+		"title": "CampaignStatusUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"address1": {
 					"type": "string"
+				},
+				"assignedTo": {
+					"type": "string"
+				},
+				"attachments": {
+					"type": "array"
 				},
 				"city": {
 					"type": "string"
@@ -309,8 +304,19 @@
 				"country": {
 					"type": "string"
 				},
-				"source": {
-					"type": "string"
+				"customFields": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"value": {
+								"type": ["string", "number", "array", "object"]
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
 				"dateAdded": {
 					"type": "string"
@@ -324,13 +330,19 @@
 				"email": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
-				},
 				"firstName": {
 					"type": "string"
 				},
+				"id": {
+					"type": "string"
+				},
 				"lastName": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"name": {
 					"type": "string"
 				},
 				"phone": {
@@ -339,54 +351,37 @@
 				"postalCode": {
 					"type": "string"
 				},
+				"source": {
+					"type": "string"
+				},
 				"state": {
 					"type": "string"
 				},
 				"tags": {
 					"type": "array"
 				},
-				"website": {
+				"type": {
 					"type": "string"
 				},
-				"attachments": {
-					"type": "array"
+				"website": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "ContactCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"address1": {
+					"type": "string"
 				},
 				"assignedTo": {
 					"type": "string"
 				},
-				"customFields": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"value": {
-								"type": ["string", "number", "array", "object"]
-							}
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "ContactDelete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
-					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
-				"address1": {
-					"type": "string"
+				"attachments": {
+					"type": "array"
 				},
 				"city": {
 					"type": "string"
@@ -397,8 +392,19 @@
 				"country": {
 					"type": "string"
 				},
-				"source": {
-					"type": "string"
+				"customFields": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"value": {
+								"type": ["string", "number", "array", "object"]
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
 				"dateAdded": {
 					"type": "string"
@@ -412,13 +418,19 @@
 				"email": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
-				},
 				"firstName": {
 					"type": "string"
 				},
+				"id": {
+					"type": "string"
+				},
 				"lastName": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"name": {
 					"type": "string"
 				},
 				"phone": {
@@ -427,54 +439,37 @@
 				"postalCode": {
 					"type": "string"
 				},
+				"source": {
+					"type": "string"
+				},
 				"state": {
 					"type": "string"
 				},
 				"tags": {
 					"type": "array"
 				},
-				"website": {
+				"type": {
 					"type": "string"
 				},
-				"attachments": {
-					"type": "array"
+				"website": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "ContactDelete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"address1": {
+					"type": "string"
 				},
 				"assignedTo": {
 					"type": "string"
 				},
-				"customFields": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"value": {
-								"type": ["string", "number", "array", "object"]
-							}
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "ContactTagUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
-					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
-				"address1": {
-					"type": "string"
+				"attachments": {
+					"type": "array"
 				},
 				"city": {
 					"type": "string"
@@ -485,8 +480,19 @@
 				"country": {
 					"type": "string"
 				},
-				"source": {
-					"type": "string"
+				"customFields": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"value": {
+								"type": ["string", "number", "array", "object"]
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
 				"dateAdded": {
 					"type": "string"
@@ -500,13 +506,19 @@
 				"email": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
-				},
 				"firstName": {
 					"type": "string"
 				},
+				"id": {
+					"type": "string"
+				},
 				"lastName": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"name": {
 					"type": "string"
 				},
 				"phone": {
@@ -515,54 +527,37 @@
 				"postalCode": {
 					"type": "string"
 				},
+				"source": {
+					"type": "string"
+				},
 				"state": {
 					"type": "string"
 				},
 				"tags": {
 					"type": "array"
 				},
-				"website": {
+				"type": {
 					"type": "string"
 				},
-				"attachments": {
-					"type": "array"
+				"website": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "ContactTagUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"address1": {
+					"type": "string"
 				},
 				"assignedTo": {
 					"type": "string"
 				},
-				"customFields": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"value": {
-								"type": ["string", "number", "array", "object"]
-							}
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "ContactDndUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
-					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
-				"address1": {
-					"type": "string"
+				"attachments": {
+					"type": "array"
 				},
 				"city": {
 					"type": "string"
@@ -573,8 +568,19 @@
 				"country": {
 					"type": "string"
 				},
-				"source": {
-					"type": "string"
+				"customFields": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"value": {
+								"type": ["string", "number", "array", "object"]
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
 				"dateAdded": {
 					"type": "string"
@@ -586,104 +592,110 @@
 					"type": "boolean"
 				},
 				"dndSettings": {
-					"type": "object",
 					"properties": {
-						"SMS": {
-							"type": "object",
+						"Call": {
 							"properties": {
-								"status": {
+								"code": {
 									"type": "string"
 								},
 								"message": {
 									"type": "string"
 								},
-								"code": {
+								"status": {
 									"type": "string"
 								}
-							}
+							},
+							"type": "object"
 						},
 						"Email": {
-							"type": "object",
 							"properties": {
-								"status": {
+								"code": {
 									"type": "string"
 								},
 								"message": {
 									"type": "string"
 								},
-								"code": {
-									"type": "string"
-								}
-							}
-						},
-						"GMB": {
-							"type": "object",
-							"properties": {
 								"status": {
 									"type": "string"
-								},
-								"message": {
-									"type": "string"
-								},
-								"code": {
-									"type": "string"
 								}
-							}
+							},
+							"type": "object"
 						},
 						"FB": {
-							"type": "object",
 							"properties": {
-								"status": {
+								"code": {
 									"type": "string"
 								},
 								"message": {
 									"type": "string"
 								},
-								"code": {
+								"status": {
 									"type": "string"
 								}
-							}
+							},
+							"type": "object"
+						},
+						"GMB": {
+							"properties": {
+								"code": {
+									"type": "string"
+								},
+								"message": {
+									"type": "string"
+								},
+								"status": {
+									"type": "string"
+								}
+							},
+							"type": "object"
+						},
+						"SMS": {
+							"properties": {
+								"code": {
+									"type": "string"
+								},
+								"message": {
+									"type": "string"
+								},
+								"status": {
+									"type": "string"
+								}
+							},
+							"type": "object"
 						},
 						"WhatsApp": {
-							"type": "object",
 							"properties": {
-								"status": {
+								"code": {
 									"type": "string"
 								},
 								"message": {
 									"type": "string"
 								},
-								"code": {
-									"type": "string"
-								}
-							}
-						},
-						"Call": {
-							"type": "object",
-							"properties": {
 								"status": {
 									"type": "string"
-								},
-								"message": {
-									"type": "string"
-								},
-								"code": {
-									"type": "string"
 								}
-							}
+							},
+							"type": "object"
 						}
-					}
+					},
+					"type": "object"
 				},
 				"email": {
-					"type": "string"
-				},
-				"name": {
 					"type": "string"
 				},
 				"firstName": {
 					"type": "string"
 				},
+				"id": {
+					"type": "string"
+				},
 				"lastName": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"name": {
 					"type": "string"
 				},
 				"phone": {
@@ -692,96 +704,76 @@
 				"postalCode": {
 					"type": "string"
 				},
+				"source": {
+					"type": "string"
+				},
 				"state": {
 					"type": "string"
 				},
 				"tags": {
 					"type": "array"
 				},
+				"type": {
+					"type": "string"
+				},
 				"website": {
 					"type": "string"
-				},
-				"attachments": {
-					"type": "array"
-				},
-				"assignedTo": {
-					"type": "string"
-				},
-				"customFields": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"value": {
-								"type": ["string", "number", "array", "object"]
-							}
-						}
-					}
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "ContactDndUpdate"
 	},
 	{
-		"title": "Conversation Provider Outbound Webhook",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"contactId": {
-					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"messageId": {
-					"type": "string"
-				},
-				"emailMessageId": {
-					"type": "string"
-				},
-				"type": {
-					"type": "Email/SMS"
-				},
 				"attachments": {
 					"type": "array"
 				},
-				"message": {
-					"type": "string"
-				},
-				"phone": {
-					"type": "string"
-				},
-				"emailTo": {
+				"contactId": {
 					"type": "string"
 				},
 				"emailFrom": {
 					"type": "string"
 				},
+				"emailMessageId": {
+					"type": "string"
+				},
+				"emailTo": {
+					"type": "string"
+				},
 				"html": {
-					"type": "string"
-				},
-				"subject": {
-					"type": "string"
-				},
-				"userId": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "InboundMessage",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
 					"type": "string"
 				},
 				"locationId": {
 					"type": "string"
 				},
+				"message": {
+					"type": "string"
+				},
+				"messageId": {
+					"type": "string"
+				},
+				"phone": {
+					"type": "string"
+				},
+				"subject": {
+					"type": "string"
+				},
+				"type": {
+					"type": "Email/SMS"
+				},
+				"userId": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "Conversation Provider Outbound Webhook"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"attachments": {
 					"type": "array"
 				},
@@ -803,69 +795,72 @@
 				"direction": {
 					"type": "string"
 				},
+				"locationId": {
+					"type": "string"
+				},
+				"messageId": {
+					"type": "string"
+				},
 				"messageType": {
 					"type": "string"
 				},
 				"status": {
 					"type": "string"
 				},
-				"messageId": {
+				"type": {
 					"type": "string"
 				},
 				"userId": {
 					"type": "string"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "InboundMessage"
 	},
 	{
-		"title": "Conversation Unread Webhook",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"type": {
-					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
 				"contactId": {
 					"type": "string"
 				},
-				"unreadCount": {
-					"type": "number"
+				"deleted": {
+					"type": "boolean"
+				},
+				"id": {
+					"type": "string"
 				},
 				"inbox": {
 					"type": "boolean"
 				},
-				"starred": {
-					"type": "boolean"
-				},
-				"deleted": {
-					"type": "boolean"
-				}
-			}
-		}
-	},
-	{
-		"title": "ContactUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
-					"type": "string"
-				},
 				"locationId": {
 					"type": "string"
 				},
-				"id": {
+				"starred": {
+					"type": "boolean"
+				},
+				"type": {
 					"type": "string"
 				},
+				"unreadCount": {
+					"type": "number"
+				}
+			},
+			"type": "object"
+		},
+		"title": "Conversation Unread Webhook"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"address1": {
 					"type": "string"
+				},
+				"assignedTo": {
+					"type": "string"
+				},
+				"attachments": {
+					"type": "array"
 				},
 				"city": {
 					"type": "string"
@@ -876,8 +871,19 @@
 				"country": {
 					"type": "string"
 				},
-				"source": {
-					"type": "string"
+				"customFields": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"value": {
+								"type": ["string", "number", "array", "object"]
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
 				"dateAdded": {
 					"type": "string"
@@ -891,13 +897,19 @@
 				"email": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
-				},
 				"firstName": {
 					"type": "string"
 				},
+				"id": {
+					"type": "string"
+				},
 				"lastName": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"name": {
 					"type": "string"
 				},
 				"phone": {
@@ -906,54 +918,227 @@
 				"postalCode": {
 					"type": "string"
 				},
+				"source": {
+					"type": "string"
+				},
 				"state": {
 					"type": "string"
 				},
 				"tags": {
 					"type": "array"
 				},
+				"type": {
+					"type": "string"
+				},
 				"website": {
 					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "ContactUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
 				},
-				"attachments": {
+				"altId": {
+					"type": "string"
+				},
+				"altType": {
+					"type": "string"
+				},
+				"amountDue": {
+					"type": "number"
+				},
+				"amountPaid": {
+					"type": "number"
+				},
+				"businessDetails": {
+					"properties": {
+						"address": {
+							"type": "string"
+						},
+						"customValues": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"logoUrl": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"phoneNo": {
+							"type": "string"
+						},
+						"website": {
+							"type": "string"
+						}
+					},
+					"type": "object"
+				},
+				"contactDetails": {
+					"properties": {
+						"additionalEmails": {
+							"items": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							"type": "array"
+						},
+						"address": {
+							"properties": {
+								"addressLine1": {
+									"type": "string"
+								},
+								"addressLine2": {
+									"type": "string"
+								},
+								"city": {
+									"type": "string"
+								},
+								"countryCode": {
+									"type": "string"
+								},
+								"postalCode": {
+									"type": "string"
+								},
+								"state": {
+									"type": "string"
+								}
+							},
+							"type": "object"
+						},
+						"companyName": {
+							"type": "string"
+						},
+						"customFields": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"email": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"phoneNo": {
+							"type": "string"
+						}
+					},
+					"type": "object"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"currency": {
+					"type": "string"
+				},
+				"discount": {
+					"properties": {
+						"type": {
+							"type": "string"
+						},
+						"value": {
+							"type": "number"
+						}
+					},
+					"type": "object"
+				},
+				"dueDate": {
+					"type": "string"
+				},
+				"invoiceItems": {
+					"items": {
+						"properties": {
+							"_id": {
+								"type": "string"
+							},
+							"amount": {
+								"type": "number"
+							},
+							"currency": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"priceId": {
+								"type": "string"
+							},
+							"productId": {
+								"type": "string"
+							},
+							"qty": {
+								"type": "number"
+							},
+							"taxes": {
+								"type": "array"
+							}
+						},
+						"type": "object"
+					},
 					"type": "array"
 				},
-				"assignedTo": {
+				"invoiceNumber": {
 					"type": "string"
 				},
-				"customFields": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"value": {
-								"type": ["string", "number", "array", "object"]
-							}
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "InvoiceCreate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
-					"type": "string"
-				},
-				"status": {
+				"issueDate": {
 					"type": "string"
 				},
 				"liveMode": {
 					"type": "boolean"
 				},
-				"amountPaid": {
+				"name": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"total": {
 					"type": "number"
+				},
+				"totalSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"subTotal": {
+							"type": "number"
+						}
+					},
+					"type": "object"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "InvoiceCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
 				},
 				"altId": {
 					"type": "string"
@@ -961,16 +1146,27 @@
 				"altType": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
+				"amountDue": {
+					"type": "number"
+				},
+				"amountPaid": {
+					"type": "number"
 				},
 				"businessDetails": {
-					"type": "object",
 					"properties": {
-						"name": {
+						"address": {
 							"type": "string"
 						},
-						"address": {
+						"customValues": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"logoUrl": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phoneNo": {
@@ -978,51 +1174,25 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"logoUrl": {
-							"type": "string"
-						},
-						"customValues": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
 						}
-					}
-				},
-				"invoiceNumber": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"contactDetails": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"phoneNo": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"customFields": {
-							"type": "array",
+						"additionalEmails": {
 							"items": {
-								"type": "string"
-							}
-						},
-						"name": {
-							"type": "string"
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							"type": "array"
 						},
 						"address": {
-							"type": "object",
 							"properties": {
-								"countryCode": {
-									"type": "string"
-								},
 								"addressLine1": {
 									"type": "string"
 								},
@@ -1032,38 +1202,49 @@
 								"city": {
 									"type": "string"
 								},
-								"state": {
+								"countryCode": {
 									"type": "string"
 								},
 								"postalCode": {
 									"type": "string"
+								},
+								"state": {
+									"type": "string"
 								}
-							}
-						},
-						"additionalEmails": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								}
-							}
+							},
+							"type": "object"
 						},
 						"companyName": {
 							"type": "string"
+						},
+						"customFields": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"email": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"phoneNo": {
+							"type": "string"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"issueDate": {
+				"createdAt": {
 					"type": "string"
 				},
-				"dueDate": {
+				"currency": {
 					"type": "string"
 				},
 				"discount": {
-					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string"
@@ -1071,24 +1252,20 @@
 						"value": {
 							"type": "number"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"dueDate": {
+					"type": "string"
 				},
 				"invoiceItems": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
-							"taxes": {
-								"type": "array"
-							},
 							"_id": {
 								"type": "string"
 							},
-							"productId": {
-								"type": "string"
-							},
-							"priceId": {
-								"type": "string"
+							"amount": {
+								"type": "number"
 							},
 							"currency": {
 								"type": "string"
@@ -1096,60 +1273,68 @@
 							"name": {
 								"type": "string"
 							},
+							"priceId": {
+								"type": "string"
+							},
+							"productId": {
+								"type": "string"
+							},
 							"qty": {
 								"type": "number"
 							},
-							"amount": {
-								"type": "number"
+							"taxes": {
+								"type": "array"
 							}
-						}
-					}
-				},
-				"total": {
-					"type": "number"
-				},
-				"title": {
-					"type": "string"
-				},
-				"amountDue": {
-					"type": "number"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"totalSummary": {
-					"type": "object",
-					"properties": {
-						"subTotal": {
-							"type": "number"
 						},
-						"discount": {
-							"type": "number"
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "InvoiceVoid",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"invoiceNumber": {
 					"type": "string"
 				},
-				"status": {
+				"issueDate": {
 					"type": "string"
 				},
 				"liveMode": {
 					"type": "boolean"
 				},
-				"amountPaid": {
+				"name": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"total": {
 					"type": "number"
+				},
+				"totalSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"subTotal": {
+							"type": "number"
+						}
+					},
+					"type": "object"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "InvoiceVoid"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
 				},
 				"altId": {
 					"type": "string"
@@ -1157,16 +1342,27 @@
 				"altType": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
+				"amountDue": {
+					"type": "number"
+				},
+				"amountPaid": {
+					"type": "number"
 				},
 				"businessDetails": {
-					"type": "object",
 					"properties": {
-						"name": {
+						"address": {
 							"type": "string"
 						},
-						"address": {
+						"customValues": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"logoUrl": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phoneNo": {
@@ -1174,51 +1370,25 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"logoUrl": {
-							"type": "string"
-						},
-						"customValues": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
 						}
-					}
-				},
-				"invoiceNumber": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"contactDetails": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"phoneNo": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"customFields": {
-							"type": "array",
+						"additionalEmails": {
 							"items": {
-								"type": "string"
-							}
-						},
-						"name": {
-							"type": "string"
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							"type": "array"
 						},
 						"address": {
-							"type": "object",
 							"properties": {
-								"countryCode": {
-									"type": "string"
-								},
 								"addressLine1": {
 									"type": "string"
 								},
@@ -1228,38 +1398,49 @@
 								"city": {
 									"type": "string"
 								},
-								"state": {
+								"countryCode": {
 									"type": "string"
 								},
 								"postalCode": {
 									"type": "string"
+								},
+								"state": {
+									"type": "string"
 								}
-							}
-						},
-						"additionalEmails": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								}
-							}
+							},
+							"type": "object"
 						},
 						"companyName": {
 							"type": "string"
+						},
+						"customFields": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"email": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"phoneNo": {
+							"type": "string"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"issueDate": {
+				"createdAt": {
 					"type": "string"
 				},
-				"dueDate": {
+				"currency": {
 					"type": "string"
 				},
 				"discount": {
-					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string"
@@ -1267,24 +1448,20 @@
 						"value": {
 							"type": "number"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"dueDate": {
+					"type": "string"
 				},
 				"invoiceItems": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
-							"taxes": {
-								"type": "array"
-							},
 							"_id": {
 								"type": "string"
 							},
-							"productId": {
-								"type": "string"
-							},
-							"priceId": {
-								"type": "string"
+							"amount": {
+								"type": "number"
 							},
 							"currency": {
 								"type": "string"
@@ -1292,60 +1469,68 @@
 							"name": {
 								"type": "string"
 							},
+							"priceId": {
+								"type": "string"
+							},
+							"productId": {
+								"type": "string"
+							},
 							"qty": {
 								"type": "number"
 							},
-							"amount": {
-								"type": "number"
+							"taxes": {
+								"type": "array"
 							}
-						}
-					}
-				},
-				"total": {
-					"type": "number"
-				},
-				"title": {
-					"type": "string"
-				},
-				"amountDue": {
-					"type": "number"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"totalSummary": {
-					"type": "object",
-					"properties": {
-						"subTotal": {
-							"type": "number"
 						},
-						"discount": {
-							"type": "number"
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "InvoiceSent",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"invoiceNumber": {
 					"type": "string"
 				},
-				"status": {
+				"issueDate": {
 					"type": "string"
 				},
 				"liveMode": {
 					"type": "boolean"
 				},
-				"amountPaid": {
+				"name": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"total": {
 					"type": "number"
+				},
+				"totalSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"subTotal": {
+							"type": "number"
+						}
+					},
+					"type": "object"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "InvoiceSent"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
 				},
 				"altId": {
 					"type": "string"
@@ -1353,16 +1538,27 @@
 				"altType": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
+				"amountDue": {
+					"type": "number"
+				},
+				"amountPaid": {
+					"type": "number"
 				},
 				"businessDetails": {
-					"type": "object",
 					"properties": {
-						"name": {
+						"address": {
 							"type": "string"
 						},
-						"address": {
+						"customValues": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"logoUrl": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phoneNo": {
@@ -1370,51 +1566,25 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"logoUrl": {
-							"type": "string"
-						},
-						"customValues": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
 						}
-					}
-				},
-				"invoiceNumber": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"contactDetails": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"phoneNo": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"customFields": {
-							"type": "array",
+						"additionalEmails": {
 							"items": {
-								"type": "string"
-							}
-						},
-						"name": {
-							"type": "string"
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							"type": "array"
 						},
 						"address": {
-							"type": "object",
 							"properties": {
-								"countryCode": {
-									"type": "string"
-								},
 								"addressLine1": {
 									"type": "string"
 								},
@@ -1424,38 +1594,49 @@
 								"city": {
 									"type": "string"
 								},
-								"state": {
+								"countryCode": {
 									"type": "string"
 								},
 								"postalCode": {
 									"type": "string"
+								},
+								"state": {
+									"type": "string"
 								}
-							}
-						},
-						"additionalEmails": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								}
-							}
+							},
+							"type": "object"
 						},
 						"companyName": {
 							"type": "string"
+						},
+						"customFields": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"email": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"phoneNo": {
+							"type": "string"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"issueDate": {
+				"createdAt": {
 					"type": "string"
 				},
-				"dueDate": {
+				"currency": {
 					"type": "string"
 				},
 				"discount": {
-					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string"
@@ -1463,24 +1644,20 @@
 						"value": {
 							"type": "number"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"dueDate": {
+					"type": "string"
 				},
 				"invoiceItems": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
-							"taxes": {
-								"type": "array"
-							},
 							"_id": {
 								"type": "string"
 							},
-							"productId": {
-								"type": "string"
-							},
-							"priceId": {
-								"type": "string"
+							"amount": {
+								"type": "number"
 							},
 							"currency": {
 								"type": "string"
@@ -1488,60 +1665,68 @@
 							"name": {
 								"type": "string"
 							},
+							"priceId": {
+								"type": "string"
+							},
+							"productId": {
+								"type": "string"
+							},
 							"qty": {
 								"type": "number"
 							},
-							"amount": {
-								"type": "number"
+							"taxes": {
+								"type": "array"
 							}
-						}
-					}
-				},
-				"total": {
-					"type": "number"
-				},
-				"title": {
-					"type": "string"
-				},
-				"amountDue": {
-					"type": "number"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"totalSummary": {
-					"type": "object",
-					"properties": {
-						"subTotal": {
-							"type": "number"
 						},
-						"discount": {
-							"type": "number"
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "InvoicePartiallyPaid",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"invoiceNumber": {
 					"type": "string"
 				},
-				"status": {
+				"issueDate": {
 					"type": "string"
 				},
 				"liveMode": {
 					"type": "boolean"
 				},
-				"amountPaid": {
+				"name": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"total": {
 					"type": "number"
+				},
+				"totalSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"subTotal": {
+							"type": "number"
+						}
+					},
+					"type": "object"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "InvoicePartiallyPaid"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
 				},
 				"altId": {
 					"type": "string"
@@ -1549,16 +1734,27 @@
 				"altType": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
+				"amountDue": {
+					"type": "number"
+				},
+				"amountPaid": {
+					"type": "number"
 				},
 				"businessDetails": {
-					"type": "object",
 					"properties": {
-						"name": {
+						"address": {
 							"type": "string"
 						},
-						"address": {
+						"customValues": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"logoUrl": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phoneNo": {
@@ -1566,51 +1762,25 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"logoUrl": {
-							"type": "string"
-						},
-						"customValues": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
 						}
-					}
-				},
-				"invoiceNumber": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"contactDetails": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"phoneNo": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"customFields": {
-							"type": "array",
+						"additionalEmails": {
 							"items": {
-								"type": "string"
-							}
-						},
-						"name": {
-							"type": "string"
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							"type": "array"
 						},
 						"address": {
-							"type": "object",
 							"properties": {
-								"countryCode": {
-									"type": "string"
-								},
 								"addressLine1": {
 									"type": "string"
 								},
@@ -1620,38 +1790,49 @@
 								"city": {
 									"type": "string"
 								},
-								"state": {
+								"countryCode": {
 									"type": "string"
 								},
 								"postalCode": {
 									"type": "string"
+								},
+								"state": {
+									"type": "string"
 								}
-							}
-						},
-						"additionalEmails": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								}
-							}
+							},
+							"type": "object"
 						},
 						"companyName": {
 							"type": "string"
+						},
+						"customFields": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"email": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"phoneNo": {
+							"type": "string"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"issueDate": {
+				"createdAt": {
 					"type": "string"
 				},
-				"dueDate": {
+				"currency": {
 					"type": "string"
 				},
 				"discount": {
-					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string"
@@ -1659,24 +1840,20 @@
 						"value": {
 							"type": "number"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"dueDate": {
+					"type": "string"
 				},
 				"invoiceItems": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
-							"taxes": {
-								"type": "array"
-							},
 							"_id": {
 								"type": "string"
 							},
-							"productId": {
-								"type": "string"
-							},
-							"priceId": {
-								"type": "string"
+							"amount": {
+								"type": "number"
 							},
 							"currency": {
 								"type": "string"
@@ -1684,60 +1861,68 @@
 							"name": {
 								"type": "string"
 							},
+							"priceId": {
+								"type": "string"
+							},
+							"productId": {
+								"type": "string"
+							},
 							"qty": {
 								"type": "number"
 							},
-							"amount": {
-								"type": "number"
+							"taxes": {
+								"type": "array"
 							}
-						}
-					}
-				},
-				"total": {
-					"type": "number"
-				},
-				"title": {
-					"type": "string"
-				},
-				"amountDue": {
-					"type": "number"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"totalSummary": {
-					"type": "object",
-					"properties": {
-						"subTotal": {
-							"type": "number"
 						},
-						"discount": {
-							"type": "number"
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "InvoicePaid",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"invoiceNumber": {
 					"type": "string"
 				},
-				"status": {
+				"issueDate": {
 					"type": "string"
 				},
 				"liveMode": {
 					"type": "boolean"
 				},
-				"amountPaid": {
+				"name": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"total": {
 					"type": "number"
+				},
+				"totalSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"subTotal": {
+							"type": "number"
+						}
+					},
+					"type": "object"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "InvoicePaid"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
 				},
 				"altId": {
 					"type": "string"
@@ -1745,16 +1930,27 @@
 				"altType": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
+				"amountDue": {
+					"type": "number"
+				},
+				"amountPaid": {
+					"type": "number"
 				},
 				"businessDetails": {
-					"type": "object",
 					"properties": {
-						"name": {
+						"address": {
 							"type": "string"
 						},
-						"address": {
+						"customValues": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"logoUrl": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phoneNo": {
@@ -1762,51 +1958,25 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"logoUrl": {
-							"type": "string"
-						},
-						"customValues": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
 						}
-					}
-				},
-				"invoiceNumber": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"contactDetails": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"phoneNo": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"customFields": {
-							"type": "array",
+						"additionalEmails": {
 							"items": {
-								"type": "string"
-							}
-						},
-						"name": {
-							"type": "string"
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							"type": "array"
 						},
 						"address": {
-							"type": "object",
 							"properties": {
-								"countryCode": {
-									"type": "string"
-								},
 								"addressLine1": {
 									"type": "string"
 								},
@@ -1816,38 +1986,49 @@
 								"city": {
 									"type": "string"
 								},
-								"state": {
+								"countryCode": {
 									"type": "string"
 								},
 								"postalCode": {
 									"type": "string"
+								},
+								"state": {
+									"type": "string"
 								}
-							}
-						},
-						"additionalEmails": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								}
-							}
+							},
+							"type": "object"
 						},
 						"companyName": {
 							"type": "string"
+						},
+						"customFields": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"email": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"phoneNo": {
+							"type": "string"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"issueDate": {
+				"createdAt": {
 					"type": "string"
 				},
-				"dueDate": {
+				"currency": {
 					"type": "string"
 				},
 				"discount": {
-					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string"
@@ -1855,24 +2036,20 @@
 						"value": {
 							"type": "number"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"dueDate": {
+					"type": "string"
 				},
 				"invoiceItems": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
-							"taxes": {
-								"type": "array"
-							},
 							"_id": {
 								"type": "string"
 							},
-							"productId": {
-								"type": "string"
-							},
-							"priceId": {
-								"type": "string"
+							"amount": {
+								"type": "number"
 							},
 							"currency": {
 								"type": "string"
@@ -1880,60 +2057,68 @@
 							"name": {
 								"type": "string"
 							},
+							"priceId": {
+								"type": "string"
+							},
+							"productId": {
+								"type": "string"
+							},
 							"qty": {
 								"type": "number"
 							},
-							"amount": {
-								"type": "number"
+							"taxes": {
+								"type": "array"
 							}
-						}
-					}
-				},
-				"total": {
-					"type": "number"
-				},
-				"title": {
-					"type": "string"
-				},
-				"amountDue": {
-					"type": "number"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"totalSummary": {
-					"type": "object",
-					"properties": {
-						"subTotal": {
-							"type": "number"
 						},
-						"discount": {
-							"type": "number"
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "InvoiceDelete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"invoiceNumber": {
 					"type": "string"
 				},
-				"status": {
+				"issueDate": {
 					"type": "string"
 				},
 				"liveMode": {
 					"type": "boolean"
 				},
-				"amountPaid": {
+				"name": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"total": {
 					"type": "number"
+				},
+				"totalSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"subTotal": {
+							"type": "number"
+						}
+					},
+					"type": "object"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "InvoiceDelete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
 				},
 				"altId": {
 					"type": "string"
@@ -1941,16 +2126,27 @@
 				"altType": {
 					"type": "string"
 				},
-				"name": {
-					"type": "string"
+				"amountDue": {
+					"type": "number"
+				},
+				"amountPaid": {
+					"type": "number"
 				},
 				"businessDetails": {
-					"type": "object",
 					"properties": {
-						"name": {
+						"address": {
 							"type": "string"
 						},
-						"address": {
+						"customValues": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"logoUrl": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phoneNo": {
@@ -1958,51 +2154,25 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"logoUrl": {
-							"type": "string"
-						},
-						"customValues": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
 						}
-					}
-				},
-				"invoiceNumber": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
+					},
+					"type": "object"
 				},
 				"contactDetails": {
-					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"phoneNo": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"customFields": {
-							"type": "array",
+						"additionalEmails": {
 							"items": {
-								"type": "string"
-							}
-						},
-						"name": {
-							"type": "string"
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							"type": "array"
 						},
 						"address": {
-							"type": "object",
 							"properties": {
-								"countryCode": {
-									"type": "string"
-								},
 								"addressLine1": {
 									"type": "string"
 								},
@@ -2012,234 +2182,49 @@
 								"city": {
 									"type": "string"
 								},
-								"state": {
+								"countryCode": {
 									"type": "string"
 								},
 								"postalCode": {
 									"type": "string"
+								},
+								"state": {
+									"type": "string"
 								}
-							}
-						},
-						"additionalEmails": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								}
-							}
+							},
+							"type": "object"
 						},
 						"companyName": {
 							"type": "string"
-						}
-					}
-				},
-				"issueDate": {
-					"type": "string"
-				},
-				"dueDate": {
-					"type": "string"
-				},
-				"discount": {
-					"type": "object",
-					"properties": {
-						"type": {
+						},
+						"customFields": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"email": {
 							"type": "string"
 						},
-						"value": {
-							"type": "number"
-						}
-					}
-				},
-				"invoiceItems": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"taxes": {
-								"type": "array"
-							},
-							"_id": {
-								"type": "string"
-							},
-							"productId": {
-								"type": "string"
-							},
-							"priceId": {
-								"type": "string"
-							},
-							"currency": {
-								"type": "string"
-							},
-							"name": {
-								"type": "string"
-							},
-							"qty": {
-								"type": "number"
-							},
-							"amount": {
-								"type": "number"
-							}
-						}
-					}
-				},
-				"total": {
-					"type": "number"
-				},
-				"title": {
-					"type": "string"
-				},
-				"amountDue": {
-					"type": "number"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"totalSummary": {
-					"type": "object",
-					"properties": {
-						"subTotal": {
-							"type": "number"
+						"id": {
+							"type": "string"
 						},
-						"discount": {
-							"type": "number"
-						}
-					}
-				}
-			}
-		}
-	},
-	{
-		"title": "InvoiceUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
-					"type": "string"
-				},
-				"status": {
-					"type": "string"
-				},
-				"liveMode": {
-					"type": "boolean"
-				},
-				"amountPaid": {
-					"type": "number"
-				},
-				"altId": {
-					"type": "string"
-				},
-				"altType": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"businessDetails": {
-					"type": "object",
-					"properties": {
 						"name": {
-							"type": "string"
-						},
-						"address": {
 							"type": "string"
 						},
 						"phoneNo": {
 							"type": "string"
-						},
-						"website": {
-							"type": "string"
-						},
-						"logoUrl": {
-							"type": "string"
-						},
-						"customValues": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
 						}
-					}
+					},
+					"type": "object"
 				},
-				"invoiceNumber": {
+				"createdAt": {
 					"type": "string"
 				},
 				"currency": {
 					"type": "string"
 				},
-				"contactDetails": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"phoneNo": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"customFields": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						},
-						"name": {
-							"type": "string"
-						},
-						"address": {
-							"type": "object",
-							"properties": {
-								"countryCode": {
-									"type": "string"
-								},
-								"addressLine1": {
-									"type": "string"
-								},
-								"addressLine2": {
-									"type": "string"
-								},
-								"city": {
-									"type": "string"
-								},
-								"state": {
-									"type": "string"
-								},
-								"postalCode": {
-									"type": "string"
-								}
-							}
-						},
-						"additionalEmails": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"companyName": {
-							"type": "string"
-						}
-					}
-				},
-				"issueDate": {
-					"type": "string"
-				},
-				"dueDate": {
-					"type": "string"
-				},
 				"discount": {
-					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string"
@@ -2247,24 +2232,20 @@
 						"value": {
 							"type": "number"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"dueDate": {
+					"type": "string"
 				},
 				"invoiceItems": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
-							"taxes": {
-								"type": "array"
-							},
 							"_id": {
 								"type": "string"
 							},
-							"productId": {
-								"type": "string"
-							},
-							"priceId": {
-								"type": "string"
+							"amount": {
+								"type": "number"
 							},
 							"currency": {
 								"type": "string"
@@ -2272,80 +2253,147 @@
 							"name": {
 								"type": "string"
 							},
+							"priceId": {
+								"type": "string"
+							},
+							"productId": {
+								"type": "string"
+							},
 							"qty": {
 								"type": "number"
 							},
-							"amount": {
-								"type": "number"
+							"taxes": {
+								"type": "array"
 							}
-						}
-					}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
-				"total": {
-					"type": "number"
+				"invoiceNumber": {
+					"type": "string"
+				},
+				"issueDate": {
+					"type": "string"
+				},
+				"liveMode": {
+					"type": "boolean"
+				},
+				"name": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
 				},
 				"title": {
 					"type": "string"
 				},
-				"amountDue": {
+				"total": {
 					"type": "number"
 				},
-				"createdAt": {
-					"type": "string"
+				"totalSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"subTotal": {
+							"type": "number"
+						}
+					},
+					"type": "object"
 				},
 				"updatedAt": {
 					"type": "string"
-				},
-				"totalSummary": {
-					"type": "object",
-					"properties": {
-						"subTotal": {
-							"type": "number"
-						},
-						"discount": {
-							"type": "number"
-						}
-					}
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "InvoiceUpdate"
 	},
 	{
-		"title": "LCEmailStats",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"type": {
+				"companyId": {
 					"type": "string"
 				},
 				"locationId": {
 					"type": "string"
 				},
-				"companyId": {
+				"type": {
 					"type": "string"
 				},
 				"webhookPayload": {
-					"type": "object",
 					"properties": {
+						"campaigns": {
+							"type": "array"
+						},
+						"delivery-status": {
+							"properties": {
+								"attempt-no": {
+									"type": "integer"
+								},
+								"code": {
+									"type": "integer"
+								},
+								"description": {
+									"type": "string"
+								},
+								"enhanced-code": {
+									"type": "string"
+								},
+								"i-first-delivery-attempt-seconds": {
+									"type": "number"
+								},
+								"message": {
+									"type": "string"
+								},
+								"mx-host": {
+									"type": "string"
+								},
+								"session-seconds": {
+									"type": "number"
+								},
+								"utf8": {
+									"type": "boolean"
+								}
+							},
+							"type": "object"
+						},
+						"envelope": {
+							"properties": {
+								"i-ip-pool-id": {
+									"type": "string"
+								},
+								"i-ip-pool-name": {
+									"type": "string"
+								},
+								"sender": {
+									"type": "string"
+								},
+								"sending-ip": {
+									"type": "string"
+								},
+								"targets": {
+									"type": "string"
+								},
+								"transport": {
+									"type": "string"
+								}
+							},
+							"type": "object"
+						},
 						"event": {
 							"type": "string"
 						},
-						"id": {
-							"type": "string"
-						},
-						"timestamp": {
-							"type": "integer"
-						},
 						"flags": {
-							"type": "object",
 							"properties": {
 								"is-authenticated": {
 									"type": "boolean"
 								},
-								"is-routed": {
+								"is-big": {
 									"type": "boolean"
 								},
-								"is-big": {
+								"is-routed": {
 									"type": "boolean"
 								},
 								"is-system-test": {
@@ -2354,35 +2402,39 @@
 								"is-test-mode": {
 									"type": "boolean"
 								}
-							}
+							},
+							"type": "object"
+						},
+						"id": {
+							"type": "string"
+						},
+						"log-level": {
+							"type": "string"
 						},
 						"message": {
-							"type": "object",
 							"properties": {
 								"attachments": {
 									"type": "array"
 								},
 								"headers": {
-									"type": "object",
 									"properties": {
-										"message-id": {
+										"from": {
 											"type": "string"
 										},
-										"from": {
+										"message-id": {
 											"type": "string"
 										},
 										"to": {
 											"type": "string"
 										}
-									}
+									},
+									"type": "object"
 								},
 								"size": {
 									"type": "integer"
 								}
-							}
-						},
-						"log-level": {
-							"type": "string"
+							},
+							"type": "object"
 						},
 						"recipient": {
 							"type": "string"
@@ -2390,141 +2442,78 @@
 						"recipient-domain": {
 							"type": "string"
 						},
-						"tags": {
-							"type": "array"
-						},
 						"recipient-provider": {
 							"type": "string"
 						},
-						"campaigns": {
+						"tags": {
 							"type": "array"
 						},
-						"delivery-status": {
-							"type": "object",
-							"properties": {
-								"attempt-no": {
-									"type": "integer"
-								},
-								"code": {
-									"type": "integer"
-								},
-								"message": {
-									"type": "string"
-								},
-								"description": {
-									"type": "string"
-								},
-								"session-seconds": {
-									"type": "number"
-								},
-								"enhanced-code": {
-									"type": "string"
-								},
-								"mx-host": {
-									"type": "string"
-								},
-								"utf8": {
-									"type": "boolean"
-								},
-								"i-first-delivery-attempt-seconds": {
-									"type": "number"
-								}
-							}
-						},
-						"envelope": {
-							"type": "object",
-							"properties": {
-								"sender": {
-									"type": "string"
-								},
-								"targets": {
-									"type": "string"
-								},
-								"transport": {
-									"type": "string"
-								},
-								"sending-ip": {
-									"type": "string"
-								},
-								"i-ip-pool-id": {
-									"type": "string"
-								},
-								"i-ip-pool-name": {
-									"type": "string"
-								}
-							}
+						"timestamp": {
+							"type": "integer"
 						}
-					}
+					},
+					"type": "object"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "LCEmailStats"
 	},
 	{
-		"title": "LocationCreate",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"type": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
-				"name": {
+				"companyId": {
 					"type": "string"
 				},
 				"email": {
 					"type": "string"
 				},
-				"stripeProductId": {
-					"type": "string"
-				},
-				"companyId": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "LocationUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
-					"type": "string"
-				},
 				"id": {
 					"type": "string"
 				},
 				"name": {
+					"type": "string"
+				},
+				"stripeProductId": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "LocationCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"companyId": {
 					"type": "string"
 				},
 				"email": {
 					"type": "string"
 				},
+				"id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
 				"stripeProductId": {
 					"type": "string"
 				},
-				"companyId": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "NoteCreate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
+				}
+			},
+			"type": "object"
+		},
+		"title": "LocationUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"body": {
 					"type": "string"
 				},
@@ -2533,24 +2522,24 @@
 				},
 				"dateAdded": {
 					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "NoteDelete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
+				},
+				"id": {
 					"type": "string"
 				},
 				"locationId": {
 					"type": "string"
 				},
-				"id": {
+				"type": {
 					"type": "string"
-				},
+				}
+			},
+			"type": "object"
+		},
+		"title": "NoteCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"body": {
 					"type": "string"
 				},
@@ -2559,28 +2548,37 @@
 				},
 				"dateAdded": {
 					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "OpportunityCreate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
+				},
+				"id": {
 					"type": "string"
 				},
 				"locationId": {
 					"type": "string"
 				},
-				"id": {
+				"type": {
 					"type": "string"
-				},
+				}
+			},
+			"type": "object"
+		},
+		"title": "NoteDelete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"assignedTo": {
 					"type": "string"
 				},
 				"contactId": {
+					"type": "string"
+				},
+				"dateAdded": {
+					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				},
+				"locationId": {
 					"type": "string"
 				},
 				"monetaryValue": {
@@ -2601,30 +2599,30 @@
 				"status": {
 					"type": "string"
 				},
-				"dateAdded": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "OpportunityAssignedToUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "OpportunityCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"assignedTo": {
+					"type": "string"
 				},
-				"locationId": {
+				"contactId": {
+					"type": "string"
+				},
+				"dateAdded": {
 					"type": "string"
 				},
 				"id": {
 					"type": "string"
 				},
-				"assignedTo": {
-					"type": "string"
-				},
-				"contactId": {
+				"locationId": {
 					"type": "string"
 				},
 				"monetaryValue": {
@@ -2645,26 +2643,17 @@
 				"status": {
 					"type": "string"
 				},
-				"dateAdded": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "NoteUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
+				}
+			},
+			"type": "object"
+		},
+		"title": "OpportunityAssignedToUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"body": {
 					"type": "string"
 				},
@@ -2673,28 +2662,37 @@
 				},
 				"dateAdded": {
 					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "OpportunityDelete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
+				},
+				"id": {
 					"type": "string"
 				},
 				"locationId": {
 					"type": "string"
 				},
-				"id": {
+				"type": {
 					"type": "string"
-				},
+				}
+			},
+			"type": "object"
+		},
+		"title": "NoteUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"assignedTo": {
 					"type": "string"
 				},
 				"contactId": {
+					"type": "string"
+				},
+				"dateAdded": {
+					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				},
+				"locationId": {
 					"type": "string"
 				},
 				"monetaryValue": {
@@ -2715,30 +2713,30 @@
 				"status": {
 					"type": "string"
 				},
-				"dateAdded": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "OpportunityMonetaryValueUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "OpportunityDelete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"assignedTo": {
+					"type": "string"
 				},
-				"locationId": {
+				"contactId": {
+					"type": "string"
+				},
+				"dateAdded": {
 					"type": "string"
 				},
 				"id": {
 					"type": "string"
 				},
-				"assignedTo": {
-					"type": "string"
-				},
-				"contactId": {
+				"locationId": {
 					"type": "string"
 				},
 				"monetaryValue": {
@@ -2759,30 +2757,30 @@
 				"status": {
 					"type": "string"
 				},
-				"dateAdded": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "OpportunityStageUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "OpportunityMonetaryValueUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"assignedTo": {
+					"type": "string"
 				},
-				"locationId": {
+				"contactId": {
+					"type": "string"
+				},
+				"dateAdded": {
 					"type": "string"
 				},
 				"id": {
 					"type": "string"
 				},
-				"assignedTo": {
-					"type": "string"
-				},
-				"contactId": {
+				"locationId": {
 					"type": "string"
 				},
 				"monetaryValue": {
@@ -2803,30 +2801,30 @@
 				"status": {
 					"type": "string"
 				},
-				"dateAdded": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "OpportunityStatusUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "OpportunityStageUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"assignedTo": {
+					"type": "string"
 				},
-				"locationId": {
+				"contactId": {
+					"type": "string"
+				},
+				"dateAdded": {
 					"type": "string"
 				},
 				"id": {
 					"type": "string"
 				},
-				"assignedTo": {
-					"type": "string"
-				},
-				"contactId": {
+				"locationId": {
 					"type": "string"
 				},
 				"monetaryValue": {
@@ -2847,30 +2845,30 @@
 				"status": {
 					"type": "string"
 				},
-				"dateAdded": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "OpportunityUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "OpportunityStatusUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"assignedTo": {
+					"type": "string"
 				},
-				"locationId": {
+				"contactId": {
+					"type": "string"
+				},
+				"dateAdded": {
 					"type": "string"
 				},
 				"id": {
 					"type": "string"
 				},
-				"assignedTo": {
-					"type": "string"
-				},
-				"contactId": {
+				"locationId": {
 					"type": "string"
 				},
 				"monetaryValue": {
@@ -2891,18 +2889,18 @@
 				"status": {
 					"type": "string"
 				},
-				"dateAdded": {
+				"type": {
 					"type": "string"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "OpportunityUpdate"
 	},
 	{
-		"title": "OrderCreate",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"type": {
+				"_id": {
 					"type": "string"
 				},
 				"altId": {
@@ -2911,23 +2909,39 @@
 				"altType": {
 					"type": "string"
 				},
-				"_id": {
-					"type": "string"
+				"amount": {
+					"type": "number"
+				},
+				"amountSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"shipping": {
+							"type": "number"
+						},
+						"subtotal": {
+							"type": "number"
+						},
+						"tax": {
+							"type": "number"
+						}
+					},
+					"type": "object"
 				},
 				"contactId": {
 					"type": "string"
 				},
 				"contactSnapshot": {
-					"type": "object",
 					"properties": {
-						"locationId": {
-							"type": "string"
-						},
-						"id": {
-							"type": "string"
-						},
 						"address1": {
 							"type": "string"
+						},
+						"assignedTo": {
+							"type": "string"
+						},
+						"attachments": {
+							"type": "array"
 						},
 						"city": {
 							"type": "string"
@@ -2936,9 +2950,6 @@
 							"type": "string"
 						},
 						"country": {
-							"type": "string"
-						},
-						"source": {
 							"type": "string"
 						},
 						"dateAdded": {
@@ -2953,19 +2964,28 @@
 						"email": {
 							"type": "string"
 						},
-						"name": {
-							"type": "string"
-						},
 						"firstName": {
 							"type": "string"
 						},
+						"id": {
+							"type": "string"
+						},
 						"lastName": {
+							"type": "string"
+						},
+						"locationId": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phone": {
 							"type": "string"
 						},
 						"postalCode": {
+							"type": "string"
+						},
+						"source": {
 							"type": "string"
 						},
 						"state": {
@@ -2976,71 +2996,67 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"attachments": {
-							"type": "array"
-						},
-						"assignedTo": {
-							"type": "string"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"status": {
-					"type": "string"
-				},
-				"fulfillmentStatus": {
+				"createdAt": {
 					"type": "string"
 				},
 				"currency": {
 					"type": "string"
 				},
-				"amount": {
-					"type": "number"
-				},
-				"liveMode": {
-					"type": "boolean"
+				"fulfillmentStatus": {
+					"type": "string"
 				},
 				"items": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
 							"name": {
 								"type": "string"
 							},
-							"qty": {
-								"type": "number"
+							"price": {
+								"type": "object"
 							},
 							"product": {
 								"type": "object"
 							},
-							"price": {
-								"type": "object"
+							"qty": {
+								"type": "number"
 							}
-						}
-					}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
-				"amountSummary": {
-					"type": "object",
+				"liveMode": {
+					"type": "boolean"
+				},
+				"source": {
 					"properties": {
-						"discount": {
-							"type": "number"
+						"id": {
+							"type": "string"
 						},
-						"shipping": {
-							"type": "number"
+						"meta": {
+							"type": "object"
 						},
-						"subtotal": {
-							"type": "number"
+						"name": {
+							"type": "string"
 						},
-						"tax": {
-							"type": "number"
+						"subType": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"status": {
+					"type": "string"
 				},
 				"taxSummary": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
 							"_id": {
 								"type": "string"
@@ -3057,44 +3073,26 @@
 							"rate": {
 								"type": "number"
 							}
-						}
-					}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
-				"source": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"name": {
-							"type": "string"
-						},
-						"type": {
-							"type": "string"
-						},
-						"subType": {
-							"type": "string"
-						},
-						"meta": {
-							"type": "object"
-						}
-					}
-				},
-				"createdAt": {
+				"type": {
 					"type": "string"
 				},
 				"updatedAt": {
 					"type": "string"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "OrderCreate"
 	},
 	{
-		"title": "OrderStatusUpdate",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"type": {
+				"_id": {
 					"type": "string"
 				},
 				"altId": {
@@ -3103,23 +3101,39 @@
 				"altType": {
 					"type": "string"
 				},
-				"_id": {
-					"type": "string"
+				"amount": {
+					"type": "number"
+				},
+				"amountSummary": {
+					"properties": {
+						"discount": {
+							"type": "number"
+						},
+						"shipping": {
+							"type": "number"
+						},
+						"subtotal": {
+							"type": "number"
+						},
+						"tax": {
+							"type": "number"
+						}
+					},
+					"type": "object"
 				},
 				"contactId": {
 					"type": "string"
 				},
 				"contactSnapshot": {
-					"type": "object",
 					"properties": {
-						"locationId": {
-							"type": "string"
-						},
-						"id": {
-							"type": "string"
-						},
 						"address1": {
 							"type": "string"
+						},
+						"assignedTo": {
+							"type": "string"
+						},
+						"attachments": {
+							"type": "array"
 						},
 						"city": {
 							"type": "string"
@@ -3128,9 +3142,6 @@
 							"type": "string"
 						},
 						"country": {
-							"type": "string"
-						},
-						"source": {
 							"type": "string"
 						},
 						"dateAdded": {
@@ -3145,19 +3156,28 @@
 						"email": {
 							"type": "string"
 						},
-						"name": {
-							"type": "string"
-						},
 						"firstName": {
 							"type": "string"
 						},
+						"id": {
+							"type": "string"
+						},
 						"lastName": {
+							"type": "string"
+						},
+						"locationId": {
+							"type": "string"
+						},
+						"name": {
 							"type": "string"
 						},
 						"phone": {
 							"type": "string"
 						},
 						"postalCode": {
+							"type": "string"
+						},
+						"source": {
 							"type": "string"
 						},
 						"state": {
@@ -3168,71 +3188,67 @@
 						},
 						"website": {
 							"type": "string"
-						},
-						"attachments": {
-							"type": "array"
-						},
-						"assignedTo": {
-							"type": "string"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"status": {
-					"type": "string"
-				},
-				"fulfillmentStatus": {
+				"createdAt": {
 					"type": "string"
 				},
 				"currency": {
 					"type": "string"
 				},
-				"amount": {
-					"type": "number"
-				},
-				"liveMode": {
-					"type": "boolean"
+				"fulfillmentStatus": {
+					"type": "string"
 				},
 				"items": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
 							"name": {
 								"type": "string"
 							},
-							"qty": {
-								"type": "number"
+							"price": {
+								"type": "object"
 							},
 							"product": {
 								"type": "object"
 							},
-							"price": {
-								"type": "object"
+							"qty": {
+								"type": "number"
 							}
-						}
-					}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
-				"amountSummary": {
-					"type": "object",
+				"liveMode": {
+					"type": "boolean"
+				},
+				"source": {
 					"properties": {
-						"discount": {
-							"type": "number"
+						"id": {
+							"type": "string"
 						},
-						"shipping": {
-							"type": "number"
+						"meta": {
+							"type": "object"
 						},
-						"subtotal": {
-							"type": "number"
+						"name": {
+							"type": "string"
 						},
-						"tax": {
-							"type": "number"
+						"subType": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
 						}
-					}
+					},
+					"type": "object"
+				},
+				"status": {
+					"type": "string"
 				},
 				"taxSummary": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
 							"_id": {
 								"type": "string"
@@ -3249,49 +3265,25 @@
 							"rate": {
 								"type": "number"
 							}
-						}
-					}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
-				"source": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"name": {
-							"type": "string"
-						},
-						"type": {
-							"type": "string"
-						},
-						"subType": {
-							"type": "string"
-						},
-						"meta": {
-							"type": "object"
-						}
-					}
-				},
-				"createdAt": {
+				"type": {
 					"type": "string"
 				},
 				"updatedAt": {
 					"type": "string"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "OrderStatusUpdate"
 	},
 	{
-		"title": "OutboundMessage",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
-				"type": {
-					"type": "string"
-				},
-				"locationId": {
-					"type": "string"
-				},
 				"attachments": {
 					"type": "array"
 				},
@@ -3313,63 +3305,75 @@
 				"direction": {
 					"type": "string"
 				},
-				"messageType": {
-					"type": "string"
-				},
-				"status": {
+				"locationId": {
 					"type": "string"
 				},
 				"messageId": {
 					"type": "string"
 				},
-				"userId": {
+				"messageType": {
 					"type": "string"
 				},
 				"source": {
 					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "OutboundMessage"
 	},
 	{
-		"title": "PriceCreate",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
 				"_id": {
 					"type": "string"
 				},
+				"allowOutOfStockPurchases": {
+					"type": "boolean"
+				},
+				"amount": {
+					"type": "number"
+				},
+				"availableQuantity": {
+					"type": "number"
+				},
+				"compareAtPrice": {
+					"type": "number"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"currency": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
 				"membershipOffers": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
+							"_id": {
+								"type": "string"
+							},
 							"label": {
 								"type": "string"
 							},
 							"value": {
 								"type": "string"
-							},
-							"_id": {
-								"type": "string"
 							}
-						}
-					}
-				},
-				"variantOptionIds": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"product": {
-					"type": "string"
-				},
-				"userId": {
-					"type": "string"
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
 				"name": {
 					"type": "string"
@@ -3377,14 +3381,10 @@
 				"priceType": {
 					"type": "string"
 				},
-				"currency": {
+				"product": {
 					"type": "string"
 				},
-				"amount": {
-					"type": "number"
-				},
 				"recurring": {
-					"type": "object",
 					"properties": {
 						"interval": {
 							"type": "string"
@@ -3392,83 +3392,80 @@
 						"intervalCount": {
 							"type": "number"
 						}
-					}
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"compareAtPrice": {
-					"type": "number"
+					},
+					"type": "object"
 				},
 				"trackInventory": {
 					"type": "null"
 				},
-				"availableQuantity": {
-					"type": "number"
+				"updatedAt": {
+					"type": "string"
 				},
-				"allowOutOfStockPurchases": {
-					"type": "boolean"
+				"userId": {
+					"type": "string"
+				},
+				"variantOptionIds": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "PriceCreate"
 	},
 	{
-		"title": "PriceUpdate",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
 				"_id": {
 					"type": "string"
 				},
+				"allowOutOfStockPurchases": {
+					"type": "boolean"
+				},
+				"amount": {
+					"type": "number"
+				},
+				"availableQuantity": {
+					"type": "number"
+				},
+				"compareAtPrice": {
+					"type": "number"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"currency": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
 				"membershipOffers": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
+							"_id": {
+								"type": "string"
+							},
 							"label": {
 								"type": "string"
 							},
 							"value": {
 								"type": "string"
-							},
-							"_id": {
-								"type": "string"
 							}
-						}
-					}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
-				"variantOptionIds": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
-				},
-				"locationId": {
+				"name": {
 					"type": "string"
 				},
 				"product": {
 					"type": "string"
 				},
-				"userId": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"type": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
-				},
-				"amount": {
-					"type": "number"
-				},
 				"recurring": {
-					"type": "object",
 					"properties": {
 						"interval": {
 							"type": "string"
@@ -3476,83 +3473,83 @@
 						"intervalCount": {
 							"type": "number"
 						}
-					}
+					},
+					"type": "object"
 				},
-				"createdAt": {
+				"trackInventory": {
+					"type": "null"
+				},
+				"type": {
 					"type": "string"
 				},
 				"updatedAt": {
 					"type": "string"
 				},
-				"compareAtPrice": {
-					"type": "number"
+				"userId": {
+					"type": "string"
 				},
-				"trackInventory": {
-					"type": "null"
-				},
-				"availableQuantity": {
-					"type": "number"
-				},
-				"allowOutOfStockPurchases": {
-					"type": "boolean"
+				"variantOptionIds": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "PriceUpdate"
 	},
 	{
-		"title": "PriceDelete",
 		"jsonSchema": {
-			"type": "object",
 			"properties": {
 				"_id": {
 					"type": "string"
 				},
+				"allowOutOfStockPurchases": {
+					"type": "boolean"
+				},
+				"amount": {
+					"type": "number"
+				},
+				"availableQuantity": {
+					"type": "number"
+				},
+				"compareAtPrice": {
+					"type": "number"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"currency": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
 				"membershipOffers": {
-					"type": "array",
 					"items": {
-						"type": "object",
 						"properties": {
+							"_id": {
+								"type": "string"
+							},
 							"label": {
 								"type": "string"
 							},
 							"value": {
 								"type": "string"
-							},
-							"_id": {
-								"type": "string"
 							}
-						}
-					}
+						},
+						"type": "object"
+					},
+					"type": "array"
 				},
-				"variantOptionIds": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
-				},
-				"locationId": {
+				"name": {
 					"type": "string"
 				},
 				"product": {
 					"type": "string"
 				},
-				"userId": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"type": {
-					"type": "string"
-				},
-				"currency": {
-					"type": "string"
-				},
-				"amount": {
-					"type": "number"
-				},
 				"recurring": {
-					"type": "object",
 					"properties": {
 						"interval": {
 							"type": "string"
@@ -3560,319 +3557,311 @@
 						"intervalCount": {
 							"type": "number"
 						}
-					}
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"compareAtPrice": {
-					"type": "number"
+					},
+					"type": "object"
 				},
 				"trackInventory": {
 					"type": "null"
 				},
-				"availableQuantity": {
-					"type": "number"
-				},
-				"allowOutOfStockPurchases": {
-					"type": "boolean"
-				}
-			}
-		}
-	},
-	{
-		"title": "ProductCreate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
-					"type": "string"
-				},
-				"description": {
-					"type": "string"
-				},
-				"variants": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"name": {
-								"type": "string"
-							},
-							"options": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"id": {
-											"type": "string"
-										},
-										"name": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				"medias": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"title": {
-								"type": "string"
-							},
-							"url": {
-								"type": "string"
-							},
-							"type": {
-								"type": "string"
-							},
-							"isFeatured": {
-								"type": "boolean"
-							}
-						}
-					}
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"productType": {
-					"type": "string"
-				},
-				"availableInStore": {
-					"type": "boolean"
-				},
-				"userId": {
-					"type": "string"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"statementDescriptor": {
-					"type": "string"
-				},
-				"image": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "ProductUpdate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
-					"type": "string"
-				},
-				"description": {
-					"type": "string"
-				},
-				"variants": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"name": {
-								"type": "string"
-							},
-							"options": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"id": {
-											"type": "string"
-										},
-										"name": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				"medias": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"title": {
-								"type": "string"
-							},
-							"url": {
-								"type": "string"
-							},
-							"type": {
-								"type": "string"
-							},
-							"isFeatured": {
-								"type": "boolean"
-							}
-						}
-					}
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"productType": {
-					"type": "string"
-				},
-				"availableInStore": {
-					"type": "boolean"
-				},
-				"userId": {
-					"type": "string"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"statementDescriptor": {
-					"type": "string"
-				},
-				"image": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "ProductDelete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"_id": {
-					"type": "string"
-				},
-				"description": {
-					"type": "string"
-				},
-				"variants": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"name": {
-								"type": "string"
-							},
-							"options": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"id": {
-											"type": "string"
-										},
-										"name": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				"medias": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"type": "string"
-							},
-							"title": {
-								"type": "string"
-							},
-							"url": {
-								"type": "string"
-							},
-							"type": {
-								"type": "string"
-							},
-							"isFeatured": {
-								"type": "boolean"
-							}
-						}
-					}
-				},
-				"locationId": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"productType": {
-					"type": "string"
-				},
-				"availableInStore": {
-					"type": "boolean"
-				},
-				"userId": {
-					"type": "string"
-				},
-				"createdAt": {
-					"type": "string"
-				},
-				"updatedAt": {
-					"type": "string"
-				},
-				"statementDescriptor": {
-					"type": "string"
-				},
-				"image": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "TaskComplete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
 				"type": {
 					"type": "string"
 				},
+				"updatedAt": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				},
+				"variantOptionIds": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"title": "PriceDelete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
+				},
+				"availableInStore": {
+					"type": "boolean"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"image": {
+					"type": "string"
+				},
 				"locationId": {
 					"type": "string"
 				},
-				"id": {
+				"medias": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"isFeatured": {
+								"type": "boolean"
+							},
+							"title": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"name": {
 					"type": "string"
 				},
+				"productType": {
+					"type": "string"
+				},
+				"statementDescriptor": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				},
+				"variants": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"options": {
+								"items": {
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"type": "object"
+								},
+								"type": "array"
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"title": "ProductCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
+				},
+				"availableInStore": {
+					"type": "boolean"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"image": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"medias": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"isFeatured": {
+								"type": "boolean"
+							},
+							"title": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"name": {
+					"type": "string"
+				},
+				"productType": {
+					"type": "string"
+				},
+				"statementDescriptor": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				},
+				"variants": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"options": {
+								"items": {
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"type": "object"
+								},
+								"type": "array"
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"title": "ProductUpdate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
+				"_id": {
+					"type": "string"
+				},
+				"availableInStore": {
+					"type": "boolean"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"image": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"medias": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"isFeatured": {
+								"type": "boolean"
+							},
+							"title": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
+				},
+				"name": {
+					"type": "string"
+				},
+				"productType": {
+					"type": "string"
+				},
+				"statementDescriptor": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				},
+				"variants": {
+					"items": {
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"options": {
+								"items": {
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									},
+									"type": "object"
+								},
+								"type": "array"
+							}
+						},
+						"type": "object"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"title": "ProductDelete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"assignedTo": {
 					"type": "string"
 				},
@@ -3882,32 +3871,32 @@
 				"contactId": {
 					"type": "string"
 				},
-				"title": {
-					"type": "string"
-				},
 				"dateAdded": {
 					"type": "string"
 				},
 				"dueDate": {
 					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "TaskCreate",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
+				},
+				"id": {
 					"type": "string"
 				},
 				"locationId": {
 					"type": "string"
 				},
-				"id": {
+				"title": {
 					"type": "string"
 				},
+				"type": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "TaskComplete"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"assignedTo": {
 					"type": "string"
 				},
@@ -3917,32 +3906,32 @@
 				"contactId": {
 					"type": "string"
 				},
-				"title": {
-					"type": "string"
-				},
 				"dateAdded": {
 					"type": "string"
 				},
 				"dueDate": {
 					"type": "string"
-				}
-			}
-		}
-	},
-	{
-		"title": "TaskDelete",
-		"jsonSchema": {
-			"type": "object",
-			"properties": {
-				"type": {
+				},
+				"id": {
 					"type": "string"
 				},
 				"locationId": {
 					"type": "string"
 				},
-				"id": {
+				"title": {
 					"type": "string"
 				},
+				"type": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"title": "TaskCreate"
+	},
+	{
+		"jsonSchema": {
+			"properties": {
 				"assignedTo": {
 					"type": "string"
 				},
@@ -3952,16 +3941,27 @@
 				"contactId": {
 					"type": "string"
 				},
-				"title": {
-					"type": "string"
-				},
 				"dateAdded": {
 					"type": "string"
 				},
 				"dueDate": {
 					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				},
+				"locationId": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
 				}
-			}
-		}
+			},
+			"type": "object"
+		},
+		"title": "TaskDelete"
 	}
 ]

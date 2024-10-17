@@ -24,41 +24,41 @@ export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
 		BadRequestDTO: {
-			/** @example 400 */
-			statusCode?: number
 			/** @example Bad Request */
 			message?: string
-		}
-		UnauthorizedDTO: {
-			/** @example 401 */
+			/** @example 400 */
 			statusCode?: number
-			/** @example Invalid token: access token is invalid */
-			message?: string
-			/** @example Unauthorized */
-			error?: string
-		}
-		UnprocessableDTO: {
-			/** @example 422 */
-			statusCode?: number
-			/** @example [
-			 *       "Unprocessable Entity"
-			 *     ] */
-			message?: string[]
-			/** @example Unprocessable Entity */
-			error?: string
 		}
 		campaignsSchema: {
 			/** @example mIVALPYuTD7YjUHnFEx4 */
 			id?: string
+			/** @example ve9EPM428h8vShlRW1KT */
+			locationId?: string
 			/** @example test */
 			name?: string
 			/** @example published */
 			status?: string
-			/** @example ve9EPM428h8vShlRW1KT */
-			locationId?: string
 		}
 		CampaignsSuccessfulResponseDto: {
 			campaigns?: components['schemas']['campaignsSchema'][]
+		}
+		UnauthorizedDTO: {
+			/** @example Unauthorized */
+			error?: string
+			/** @example Invalid token: access token is invalid */
+			message?: string
+			/** @example 401 */
+			statusCode?: number
+		}
+		UnprocessableDTO: {
+			/** @example Unprocessable Entity */
+			error?: string
+			/** @example [
+			 *       "Unprocessable Entity"
+			 *     ] */
+			message?: string[]
+			/** @example 422 */
+			statusCode?: number
 		}
 	}
 	responses: never

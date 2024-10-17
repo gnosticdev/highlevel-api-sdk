@@ -1,0 +1,672 @@
+{
+	"components": {
+		"schemas": {
+			"AgencyProAddOnDto": {
+				"properties": {
+					"agency_pro_addon_active_plan": {
+						"enum": [
+							"reviews_monthly_150",
+							"listing_monthly_50",
+							"conversations_monthly_100",
+							"priority-support_monthly_300",
+							"priority-support_annual_300",
+							"priority-support_monthly_300_legacy",
+							"priority-support_annual_300_legacy",
+							"priority-support_monthly_240_july",
+							"hipaa_monthly_297",
+							"hipaa_annual_297",
+							"hipaa_monthly_297_legacy",
+							"agency-pro-plus_monthly_399",
+							"agency-pro-plus_annual_399"
+						],
+						"example": "agency-pro-plus_monthly_399",
+						"type": "string"
+					},
+					"agency_pro_addon_subscription_id": {
+						"example": "price_a21hvDAS456asc",
+						"type": "string"
+					},
+					"is_active": {
+						"example": true,
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"is_active",
+					"agency_pro_addon_subscription_id",
+					"agency_pro_addon_active_plan"
+				],
+				"type": "object"
+			},
+			"BadRequestDTO": {
+				"properties": {
+					"message": {
+						"example": "Bad Request",
+						"type": "string"
+					},
+					"statusCode": {
+						"example": 400,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"BillingInfoDto": {
+				"properties": {
+					"agency_pro_addon": {
+						"$ref": "#/components/schemas/AgencyProAddOnDto"
+					},
+					"coupons_added": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"downgrade": {
+						"$ref": "#/components/schemas/DowngradeDto"
+					},
+					"end_trial_early": {
+						"$ref": "#/components/schemas/EndTrialDto"
+					},
+					"first_payment_date": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"first_trial_extension_processed_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"first_trial_extension_reason": {
+						"example": "Some reason for extending trial",
+						"type": "string"
+					},
+					"pause_subscription_info": {
+						"$ref": "#/components/schemas/PauseSubscriptionInfoDto"
+					},
+					"pause_subscription_reason": {
+						"example": "Some reason for pausing subscription",
+						"type": "string"
+					},
+					"pause_subscription_req_by": {
+						"example": "john.doe@example.com",
+						"type": "string"
+					},
+					"pause_subscription_req_processed_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"pause_subscription_requested_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"pause_subscription_status": {
+						"enum": ["pending", "approved", "rejected"],
+						"example": "pending",
+						"type": "string"
+					},
+					"reactivation_attempt": {
+						"$ref": "#/components/schemas/ReactivationAttemptDto"
+					},
+					"second_trial_extension_processed_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"second_trial_extension_reason": {
+						"example": "Some reason for extending trial",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"DowngradeDto": {
+				"properties": {
+					"attempted_by": {
+						"example": "john.doe@example.com",
+						"type": "string"
+					},
+					"attempted_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"current_plan": {
+						"example": "$297 / month",
+						"type": "string"
+					},
+					"previous_plan": {
+						"example": "$497 / month",
+						"type": "string"
+					},
+					"reason": {
+						"example": "Expensive",
+						"type": "string"
+					}
+				},
+				"required": [
+					"attempted_on",
+					"attempted_by",
+					"previous_plan",
+					"current_plan",
+					"reason"
+				],
+				"type": "object"
+			},
+			"EndTrialDto": {
+				"properties": {
+					"trial_end_req_by": {
+						"example": "",
+						"type": "string"
+					},
+					"trial_ended_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					}
+				},
+				"required": ["trial_end_req_by", "trial_ended_on"],
+				"type": "object"
+			},
+			"GetCompanyByIdSchema": {
+				"properties": {
+					"address": {
+						"example": "3500 Deer Creek Road",
+						"type": "string"
+					},
+					"affiliatePolicyAcceptedBy": {
+						"example": "SDfdf355Dfggdee",
+						"type": "string"
+					},
+					"affiliatePolicyAcceptedDate": {
+						"example": "",
+						"type": "string"
+					},
+					"affiliatePolicyVersion": {
+						"example": "06/01/2022",
+						"type": "string"
+					},
+					"autoSuspendEnabled": {
+						"description": "Flag to set if auto suspend is enabled",
+						"example": true,
+						"type": "boolean"
+					},
+					"billingInfo": {
+						"$ref": "#/components/schemas/BillingInfoDto"
+					},
+					"cancelEnabledForClients": {
+						"description": "Flag to set if cancel plan is enabled",
+						"example": true,
+						"type": "boolean"
+					},
+					"city": {
+						"example": "Palo Alto",
+						"type": "string"
+					},
+					"country": {
+						"example": "US",
+						"type": "string"
+					},
+					"currency": {
+						"example": "",
+						"type": "string"
+					},
+					"customerType": {
+						"example": "agency",
+						"type": "string"
+					},
+					"disableEmailService": {
+						"example": false,
+						"type": "boolean"
+					},
+					"domain": {
+						"example": "https://app.myawesomedomain.com",
+						"type": "string"
+					},
+					"email": {
+						"example": "john@deo.com",
+						"type": "string"
+					},
+					"enableDepreciatedFeatures": {
+						"example": true,
+						"type": "boolean"
+					},
+					"faviconUrl": {
+						"example": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/companyPhotos%2F5DP4iH6HLkQsiKESj6rh.gif?alt=media&token=2aec9720-59a7-46af-a187-d4a2774ee873",
+						"type": "string"
+					},
+					"id": {
+						"example": "seD4PfOuKoVMLkEZqohJ",
+						"type": "string"
+					},
+					"isReselling": {
+						"example": true,
+						"type": "boolean"
+					},
+					"locationCount": {
+						"example": 10,
+						"type": "number"
+					},
+					"logoUrl": {
+						"example": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/companyPhotos%2F5DP4iH6HLkQsiKESj6rh.gif?alt=media&token=2aec9720-59a7-46af-a187-d4a2774ee873",
+						"type": "string"
+					},
+					"name": {
+						"example": "Tesla inc",
+						"type": "string"
+					},
+					"onboardingInfo": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/IOnboardingDto"
+							}
+						],
+						"example": ""
+					},
+					"phone": {
+						"example": "+1202-555-0107",
+						"type": "string"
+					},
+					"plan": {
+						"example": 1,
+						"type": "number"
+					},
+					"postalCode": {
+						"example": "94304",
+						"type": "string"
+					},
+					"premiumUpgraded": {
+						"default": false,
+						"description": "If you want to enable / disable Priority Support for any agency. Default value is false.",
+						"example": false,
+						"type": "boolean"
+					},
+					"privacyPolicy": {
+						"example": "https://app.gohighlevel.com/privacy_policy",
+						"type": "string"
+					},
+					"privacyPolicyAcceptedBy": {
+						"example": "SDfdf355Dfggdee",
+						"type": "string"
+					},
+					"privacyPolicyAcceptedDate": {
+						"example": "",
+						"type": "string"
+					},
+					"privacyPolicyVersion": {
+						"example": "06/01/2022",
+						"type": "string"
+					},
+					"relationshipNumber": {
+						"example": "x-xxx-xxx",
+						"type": "string"
+					},
+					"saasSettings": {
+						"description": "Saas Settings",
+						"example": {
+							"agencyDashboardVisibleTo": "string",
+							"stripeConnectInitiatedBy": "string"
+						},
+						"type": "object"
+					},
+					"spareDomain": {
+						"example": "link.msgsndr.com",
+						"type": "string"
+					},
+					"state": {
+						"example": "CA",
+						"type": "string"
+					},
+					"status": {
+						"example": "active-trial",
+						"type": "string"
+					},
+					"stripeActivePlan": {
+						"example": "agency_monthly_297",
+						"type": "string"
+					},
+					"stripeConnectId": {
+						"example": "",
+						"type": "string"
+					},
+					"stripeId": {
+						"example": "",
+						"type": "string"
+					},
+					"subdomain": {
+						"example": "https://app.myawesomedomain.com/subdomain",
+						"type": "string"
+					},
+					"termsConditions": {
+						"example": "https://app.gohighlevel.com/terms-of-service",
+						"type": "string"
+					},
+					"termsOfServiceAcceptedBy": {
+						"example": "SDfdf355Dfggdee",
+						"type": "string"
+					},
+					"termsOfServiceAcceptedDate": {
+						"example": "",
+						"type": "string"
+					},
+					"termsOfServiceVersion": {
+						"example": "06/01/2022",
+						"type": "string"
+					},
+					"theme": {
+						"example": "default-dark-v1",
+						"type": "string"
+					},
+					"timezone": {
+						"example": "US/Central",
+						"type": "string"
+					},
+					"twilioFreeCredits": {
+						"example": 100,
+						"type": "number"
+					},
+					"twilioTrialMode": {
+						"example": true,
+						"type": "boolean"
+					},
+					"upgradeEnabledForClients": {
+						"description": "Flag to set if upgrade plan is enabled",
+						"example": true,
+						"type": "boolean"
+					},
+					"website": {
+						"example": "https://www.tesla.com",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"GetCompanyByIdSuccessfulResponseDto": {
+				"properties": {
+					"company": {
+						"$ref": "#/components/schemas/GetCompanyByIdSchema"
+					}
+				},
+				"type": "object"
+			},
+			"IOnboardingDto": {
+				"properties": {
+					"conversationDemo": {
+						"example": "",
+						"type": "boolean"
+					},
+					"customerCount": {
+						"example": "",
+						"type": "string"
+					},
+					"haveWebsite": {
+						"example": "",
+						"type": "boolean"
+					},
+					"industryServed": {
+						"example": "",
+						"type": "string"
+					},
+					"location": {
+						"example": "",
+						"type": "boolean"
+					},
+					"locationId": {
+						"example": "",
+						"type": "string"
+					},
+					"pending": {
+						"example": "true",
+						"type": "boolean"
+					},
+					"snapshotId": {
+						"example": "",
+						"type": "string"
+					},
+					"tools": {
+						"example": "",
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"websiteUrl": {
+						"example": "",
+						"type": "string"
+					}
+				},
+				"required": ["pending"],
+				"type": "object"
+			},
+			"PauseSubscriptionInfoDto": {
+				"properties": {
+					"processed_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"reason": {
+						"example": "Expensive",
+						"type": "string"
+					},
+					"req_by": {
+						"example": "request by",
+						"type": "string"
+					},
+					"requested_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"status": {
+						"enum": ["pending", "approved", "rejected"],
+						"example": "pending",
+						"type": "string"
+					}
+				},
+				"required": [
+					"requested_on",
+					"req_by",
+					"reason",
+					"status",
+					"processed_on"
+				],
+				"type": "object"
+			},
+			"ReactivationAttemptDto": {
+				"properties": {
+					"attempted_by": {
+						"example": "john.doe@example.com",
+						"type": "string"
+					},
+					"attempted_on": {
+						"example": "2023-08-02T00:00:00.000Z",
+						"format": "date-time",
+						"type": "string"
+					},
+					"invoice_id": {
+						"example": "in_1NZoVqFpU9DlKp7RclfCqtIF",
+						"type": "string"
+					}
+				},
+				"required": ["attempted_on", "attempted_by", "invoice_id"],
+				"type": "object"
+			},
+			"UnauthorizedDTO": {
+				"properties": {
+					"error": {
+						"example": "Unauthorized",
+						"type": "string"
+					},
+					"message": {
+						"example": "Invalid token: access token is invalid",
+						"type": "string"
+					},
+					"statusCode": {
+						"example": 401,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			},
+			"UnprocessableDTO": {
+				"properties": {
+					"error": {
+						"example": "Unprocessable Entity",
+						"type": "string"
+					},
+					"message": {
+						"example": ["Unprocessable Entity"],
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"statusCode": {
+						"example": 422,
+						"type": "number"
+					}
+				},
+				"type": "object"
+			}
+		},
+		"securitySchemes": {
+			"Agency-Access": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Agency.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			},
+			"Location-Access": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			},
+			"bearer": {
+				"bearerFormat": "JWT",
+				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+				"in": "header",
+				"name": "Authorization",
+				"scheme": "bearer",
+				"type": "http"
+			}
+		}
+	},
+	"info": {
+		"contact": {},
+		"description": "Documentation for Companies API",
+		"title": "Companies API",
+		"version": "1.0"
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/companies/{companyId}": {
+			"get": {
+				"description": "Get Comapny",
+				"operationId": "get-company",
+				"parameters": [
+					{
+						"description": "Access Token",
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+							"type": "string"
+						}
+					},
+					{
+						"description": "API Version",
+						"in": "header",
+						"name": "Version",
+						"required": true,
+						"schema": {
+							"enum": ["2021-07-28"],
+							"type": "string"
+						}
+					},
+					{
+						"example": "ve9EPM428h8vShlRW1KT",
+						"in": "path",
+						"name": "companyId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetCompanyByIdSuccessfulResponseDto"
+								}
+							}
+						},
+						"description": "Successful response"
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestDTO"
+								}
+							}
+						},
+						"description": "Bad Request"
+					},
+					"401": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedDTO"
+								}
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"422": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnprocessableDTO"
+								}
+							}
+						},
+						"description": "Unprocessable Entity"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					},
+					{
+						"Agency-Access": []
+					}
+				],
+				"summary": "Get Company",
+				"tags": ["Companies"]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://services.leadconnectorhq.com"
+		}
+	],
+	"tags": [
+		{
+			"description": "Documentation for Companies API",
+			"name": "Companies"
+		}
+	]
+}

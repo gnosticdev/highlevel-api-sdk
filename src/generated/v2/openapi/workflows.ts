@@ -24,47 +24,47 @@ export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
 		BadRequestDTO: {
-			/** @example 400 */
-			statusCode?: number
 			/** @example Bad Request */
 			message?: string
+			/** @example 400 */
+			statusCode?: number
+		}
+		GetWorkflowSuccessfulResponseDto: {
+			workflows?: components['schemas']['WorkflowSchema'][]
 		}
 		UnauthorizedDTO: {
-			/** @example 401 */
-			statusCode?: number
-			/** @example Invalid token: access token is invalid */
-			message?: string
 			/** @example Unauthorized */
 			error?: string
+			/** @example Invalid token: access token is invalid */
+			message?: string
+			/** @example 401 */
+			statusCode?: number
 		}
 		UnprocessableDTO: {
-			/** @example 422 */
-			statusCode?: number
+			/** @example Unprocessable Entity */
+			error?: string
 			/** @example [
 			 *       "Unprocessable Entity"
 			 *     ] */
 			message?: string[]
-			/** @example Unprocessable Entity */
-			error?: string
+			/** @example 422 */
+			statusCode?: number
 		}
 		WorkflowSchema: {
+			/** @example 2021-05-26T11:33:49.000Z */
+			createdAt?: string
 			/** @example 78559bb3-b920-461e-b010-7b2a2816d2a9 */
 			id?: string
+			/** @example eBG6WapS3v4ZqwA45MTxtYJ */
+			locationId?: string
 			/** @example First Workflow */
 			name?: string
 			/** @example draft */
 			status?: string
-			/** @example 2 */
-			version?: number
-			/** @example 2021-05-26T11:33:49.000Z */
-			createdAt?: string
 			/** @example 2021-05-26T11:33:49.000Z */
 			updatedAt?: string
-			/** @example eBG6WapS3v4ZqwA45MTxtYJ */
-			locationId?: string
-		}
-		GetWorkflowSuccessfulResponseDto: {
-			workflows?: components['schemas']['WorkflowSchema'][]
+			/** @example 2 */
+			version?: number
 		}
 	}
 	responses: never

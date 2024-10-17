@@ -1,4 +1,24 @@
 export type paths = {
+	'/funnels/funnel/list': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Fetch List of Funnels
+		 * @description Retrieves a list of all funnels based on the given query parameters.
+		 */
+		get: operations['getFunnels']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/funnels/lookup/redirect': {
 		parameters: {
 			query?: never
@@ -63,26 +83,6 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
-	'/funnels/funnel/list': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		/**
-		 * Fetch List of Funnels
-		 * @description Retrieves a list of all funnels based on the given query parameters.
-		 */
-		get: operations['getFunnels']
-		put?: never
-		post?: never
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	'/funnels/page': {
 		parameters: {
 			query?: never
@@ -108,86 +108,23 @@ export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
 		CreateRedirectParams: {
-			/** @example 6p2RxpgtMKQwO3E6IUaT */
-			locationId: string
+			/**
+			 * @example URL
+			 * @enum {string}
+			 */
+			action: 'funnel' | 'website' | 'url' | 'all'
 			/** @example example.com */
 			domain: string
+			/** @example 6p2RxpgtMKQwO3E6IUaT */
+			locationId: string
 			/** @example /Hello */
 			path: string
 			/** @example https://www.google.com */
 			target: string
-			/**
-			 * @example URL
-			 * @enum {string}
-			 */
-			action: 'funnel' | 'website' | 'url' | 'all'
-		}
-		RedirectResponseDTO: {
-			/**
-			 * @description Unique identifier of the redirect
-			 * @example 6p2RxpgtMKQwO3E6IUaT
-			 */
-			id: string
-			/**
-			 * @description Identifier of the location associated with the redirect
-			 * @example 6p2RxpgtMKQwO3E6IUaT
-			 */
-			locationId: string
-			/**
-			 * @description Domain where the redirect occurs
-			 * @example www.example.com
-			 */
-			domain: string
-			/**
-			 * @description Original path that will be redirected
-			 * @example /old-path
-			 */
-			path: string
-			/**
-			 * @description Lowercase version of the original path
-			 * @example /old-path
-			 */
-			pathLowercase: string
-			/**
-			 * @description Type of redirect (e.g., Permanent, Temporary)
-			 * @example Permanent
-			 */
-			type: string
-			/**
-			 * @description Target URL to which the original path will be redirected
-			 * @example https://www.example.com/new-path
-			 */
-			target: string
-			/**
-			 * @description Action performed by the redirect
-			 * @example url
-			 */
-			action: string
 		}
 		CreateRedirectResponseDTO: {
 			/** @description Data containing details of the created redirect */
 			data: components['schemas']['RedirectResponseDTO']
-		}
-		UpdateRedirectParams: {
-			/** @example https://www.google.com */
-			target: string
-			/**
-			 * @example URL
-			 * @enum {string}
-			 */
-			action: 'funnel' | 'website' | 'url' | 'all'
-			/** @example 6p2RxpgtMKQwO3E6IUaT */
-			locationId: string
-		}
-		RedirectListResponseDTO: {
-			/**
-			 * @description Object containing the count of redirects and an array of redirect data
-			 * @example {
-			 *       "count": 42,
-			 *       "data": []
-			 *     }
-			 */
-			data: Record<string, never>
 		}
 		DeleteRedirectResponseDTO: {
 			/**
@@ -198,37 +135,9 @@ export type components = {
 			 */
 			data: Record<string, never>
 		}
-		UpdateRedirectResponseDTO: {
-			/** @description Data containing details of the updated redirect */
-			data: components['schemas']['RedirectResponseDTO']
-		}
-		UnprocessableDTO: {
-			/** @example 422 */
-			statusCode?: number
-			/** @example [
-			 *       "Unprocessable Entity"
-			 *     ] */
-			message?: string[]
-			/** @example Unprocessable Entity */
-			error?: string
-		}
-		FunnelPageResponseDTO: {
-			/** @example 0yJbP3q7t7pLmeTWRAE2 */
-			_id: string
-			/** @example ojQjykmwNIU88vfsfzvH */
-			locationId: string
-			/** @example iucJ6TdFZiddhq9f6znh */
-			funnelId: string
-			/** @example Home */
-			name: string
-			/** @example 343bf634-3aa6-4ade-b963-2d3cd0bf2ede */
-			stepId: string
-			/** @example false */
-			deleted: string
-			/** @example 2024-04-18T12:25:23.029Z */
-			updatedAt: string
-		}
 		FunnelListResponseDTO: {
+			/** @example 24 */
+			count: number
 			/** @example {
 			 *       "_id": "SkIDfu0S4m3NYQyvWHC6",
 			 *       "dateAdded": "2024-04-29T15:00:05.681Z",
@@ -265,10 +174,101 @@ export type components = {
 			 *       "url": "/chaitanya"
 			 *     } */
 			funnels: Record<string, never>
-			/** @example 24 */
-			count: number
 			/** @example 03774d31-a57e-4b4f-95c7-315ce61969f1 */
 			traceId: string
+		}
+		FunnelPageResponseDTO: {
+			/** @example 0yJbP3q7t7pLmeTWRAE2 */
+			_id: string
+			/** @example false */
+			deleted: string
+			/** @example iucJ6TdFZiddhq9f6znh */
+			funnelId: string
+			/** @example ojQjykmwNIU88vfsfzvH */
+			locationId: string
+			/** @example Home */
+			name: string
+			/** @example 343bf634-3aa6-4ade-b963-2d3cd0bf2ede */
+			stepId: string
+			/** @example 2024-04-18T12:25:23.029Z */
+			updatedAt: string
+		}
+		RedirectListResponseDTO: {
+			/**
+			 * @description Object containing the count of redirects and an array of redirect data
+			 * @example {
+			 *       "count": 42,
+			 *       "data": []
+			 *     }
+			 */
+			data: Record<string, never>
+		}
+		RedirectResponseDTO: {
+			/**
+			 * @description Action performed by the redirect
+			 * @example url
+			 */
+			action: string
+			/**
+			 * @description Domain where the redirect occurs
+			 * @example www.example.com
+			 */
+			domain: string
+			/**
+			 * @description Unique identifier of the redirect
+			 * @example 6p2RxpgtMKQwO3E6IUaT
+			 */
+			id: string
+			/**
+			 * @description Identifier of the location associated with the redirect
+			 * @example 6p2RxpgtMKQwO3E6IUaT
+			 */
+			locationId: string
+			/**
+			 * @description Original path that will be redirected
+			 * @example /old-path
+			 */
+			path: string
+			/**
+			 * @description Lowercase version of the original path
+			 * @example /old-path
+			 */
+			pathLowercase: string
+			/**
+			 * @description Target URL to which the original path will be redirected
+			 * @example https://www.example.com/new-path
+			 */
+			target: string
+			/**
+			 * @description Type of redirect (e.g., Permanent, Temporary)
+			 * @example Permanent
+			 */
+			type: string
+		}
+		UnprocessableDTO: {
+			/** @example Unprocessable Entity */
+			error?: string
+			/** @example [
+			 *       "Unprocessable Entity"
+			 *     ] */
+			message?: string[]
+			/** @example 422 */
+			statusCode?: number
+		}
+		UpdateRedirectParams: {
+			/**
+			 * @example URL
+			 * @enum {string}
+			 */
+			action: 'funnel' | 'website' | 'url' | 'all'
+			/** @example 6p2RxpgtMKQwO3E6IUaT */
+			locationId: string
+			/** @example https://www.google.com */
+			target: string
+		}
+		UpdateRedirectResponseDTO: {
+			/** @description Data containing details of the updated redirect */
+			data: components['schemas']['RedirectResponseDTO']
 		}
 	}
 	responses: never
@@ -279,6 +279,38 @@ export type components = {
 }
 export type $defs = Record<string, never>
 export interface operations {
+	getFunnels: {
+		parameters: {
+			query: {
+				category?: string
+				limit?: string
+				locationId: string
+				name?: string
+				offset?: string
+				parentId?: string
+				search?: string
+				type?: string
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response - List of funnels returned */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['FunnelListResponseDTO']
+				}
+			}
+		}
+	}
 	'create-redirect': {
 		parameters: {
 			query?: never
@@ -397,10 +429,10 @@ export interface operations {
 	'fetch-redirects-list': {
 		parameters: {
 			query: {
-				/** @example 6p2RxpgtMKQwO3E6IUaT */
-				locationId: string
 				/** @example 20 */
 				limit: number
+				/** @example 6p2RxpgtMKQwO3E6IUaT */
+				locationId: string
 				/** @example 10 */
 				offset: number
 				/** @example example.com/test */
@@ -435,45 +467,13 @@ export interface operations {
 			}
 		}
 	}
-	getFunnels: {
-		parameters: {
-			query: {
-				locationId: string
-				type?: string
-				category?: string
-				offset?: string
-				limit?: string
-				parentId?: string
-				name?: string
-				search?: string
-			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			/** @description Successful response - List of funnels returned */
-			200: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['FunnelListResponseDTO']
-				}
-			}
-		}
-	}
 	getPagesByFunnelId: {
 		parameters: {
 			query: {
-				locationId: string
 				funnelId: string
-				name?: string
 				limit: number
+				locationId: string
+				name?: string
 				offset: number
 			}
 			header: {

@@ -42,6 +42,7 @@ export function convertWebhooksToOpenAPI(webhooks: WebhookSchema[]): OpenAPI3 {
 		components: {
 			schemas: {},
 		},
+		webhooks: {},
 	}
 
 	for (const webhook of webhooks) {
@@ -50,6 +51,28 @@ export function convertWebhooksToOpenAPI(webhooks: WebhookSchema[]): OpenAPI3 {
 			openAPISchema.components.schemas[schemaName] = {
 				type: 'object',
 				properties: webhook.jsonSchema.properties,
+			}
+		}
+
+		// Add webhook to the webhooks object
+		if (openAPISchema.webhooks) {
+			openAPISchema.webhooks[schemaName] = {
+				post: {
+					requestBody: {
+						content: {
+							'application/json': {
+								schema: {
+									$ref: `#/components/schemas/${schemaName}`,
+								},
+							},
+						},
+					},
+					responses: {
+						'200': {
+							description: 'Webhook processed successfully',
+						},
+					},
+				},
 			}
 		}
 	}
