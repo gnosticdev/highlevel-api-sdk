@@ -1,41 +1,28 @@
-import { readdirSync } from 'node:fs'
 import path from 'node:path'
 import { defineConfig } from 'tsup'
 
-const openApiEntries = readdirSync('src/generated/v2/openapi')
-	.filter((file) => file.endsWith('.ts'))
-	.reduce((acc, file) => {
-		acc[`types/${path.parse(file).name}`] = `src/generated/v2/openapi/${file}`
-		return acc
-	}, {})
+const openapiTypeEntries: Record<`types/${string}`, string> = Array.from(
+	new Bun.Glob('*.ts').scanSync({ cwd: 'src/generated/v2/openapi' }),
+).reduce((acc, file) => {
+	acc[`types/${path.parse(file).name}`] = path.join(
+		'src/generated/v2/openapi',
+		file,
+	)
+	return acc
+}, {})
 
-const clientGlob = new Bun.Glob('clients/**/index*.ts')
-const clientEntries: Record<string, string> = readdirSync('src/clients')
-	.filter((file) => file.endsWith('.ts') && !file.endsWith('.d.ts'))
-	.reduce((acc, file) => {
-		acc[`clients/${path.parse(file).name}`] = `src/clients/${file}`
-		return acc
-	}, {})
-
-const configGlob = new Bun.Glob('clients/**/config.ts')
-const configEntries: Record<string, string> = Array.from(
-	configGlob.scanSync({ cwd: './src' }),
-)
-	.filter((file) => file.endsWith('.ts') && !file.endsWith('.d.ts'))
-	.reduce((acc, file) => {
-		acc[`clients/${path.parse(file).name}`] = `src/clients/${file}`
-		return acc
-	}, {})
+console.log(openapiTypeEntries)
 
 const mainBundle = defineConfig({
 	entry: {
 		index: 'src/clients/highlevel/index.ts',
 		oauth: 'src/clients/oauth/index.ts',
+		v1: 'src/clients/v1/index.ts',
 		scopes: 'src/lib/scopes.ts',
-		webhooks: 'src/generated/v2/other/webhooks.ts',
-		...openApiEntries,
-		...clientEntries,
-		...configEntries,
+		webhooks: 'src/generated/v2/custom/webhooks.ts',
+		'configs/highlevel': 'src/clients/highlevel/config.ts',
+		'configs/oauth': 'src/clients/oauth/config.ts',
+		...openapiTypeEntries,
 	},
 	format: ['esm'],
 	sourcemap: true,

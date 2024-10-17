@@ -19,24 +19,20 @@
 	},
 	"exports": {
 		".": {
-			"default": "./dist/index.js",
 			"import": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		},
-		"./config": {
-			"default": "./dist/client-config.js",
-			"import": "./dist/client-config.js",
-			"types": "./dist/client-config.d.ts"
+		"./configs": {
+			"import": "./dist/configs/highlevel.js",
+			"types": "./dist/configs/highlevel.d.ts"
+		},
+		"./configs/*": {
+			"import": "./dist/configs/*.js",
+			"types": "./dist/configs/*.d.ts"
 		},
 		"./oauth": {
-			"default": "./dist/oauth.js",
 			"import": "./dist/oauth.js",
 			"types": "./dist/oauth.d.ts"
-		},
-		"./oauth-config": {
-			"default": "./dist/oauth-config.js",
-			"import": "./dist/oauth-config.js",
-			"types": "./dist/oauth-config.d.ts"
 		},
 		"./scopes": {
 			"default": "./dist/scopes.js",
@@ -44,6 +40,8 @@
 			"types": "./dist/scopes.d.ts"
 		},
 		"./types/*": {
+			"default": "./dist/types/*.js",
+			"import": "./dist/types/*.js",
 			"types": "./dist/types/*.d.ts"
 		},
 		"./webhooks": {

@@ -1,11 +1,18 @@
 import createClient, { type ClientOptions } from 'openapi-fetch'
 import type * as V1 from '../../generated/v1/openapi'
-import type { BaseHighLevelConfig } from '../highlevel/config'
 
-type V1ClientOptions = BaseHighLevelConfig &
-	ClientOptions & {
-		apiKey?: string
-	}
+type V1ClientOptions = ClientOptions & {
+	/**
+	 * The api key for the HighLevel Agency or Sub-Account.
+	 * @see https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api
+	 */
+	apiKey?: string
+	/**
+	 * base url for each API endpoint. no need to change unless you are proxying requests.
+	 * @default 'https://rest.gohighlevel.com'
+	 */
+	baseUrl?: string
+}
 
 /**
  * Typed HighLevel v1 endpoints.
