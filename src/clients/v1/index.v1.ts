@@ -1,8 +1,11 @@
 import createClient, { type ClientOptions } from 'openapi-fetch'
 import type * as V1 from '../../generated/v1/openapi'
-import type { BaseHighLevelConfig } from './config'
+import type { BaseHighLevelConfig } from '../highlevel/config'
 
-type V1ClientOptions = BaseHighLevelConfig & ClientOptions
+type V1ClientOptions = BaseHighLevelConfig &
+	ClientOptions & {
+		apiKey?: string
+	}
 
 /**
  * Typed HighLevel v1 endpoints.
@@ -15,7 +18,7 @@ type V1ClientOptions = BaseHighLevelConfig & ClientOptions
  * const {data, error} = await client.get('/v1/contacts', {
  * 	params: {
  * 	headers: {
- * 		Authorization: process.env.HIGHLEVEL_API_KEY!
+ * 		Authorization: `Bearer ${process.env.HIGHLEVEL_API_KEY}`
  * 		}
  * 	  }
  * })
@@ -37,11 +40,13 @@ type V1ClientOptions = BaseHighLevelConfig & ClientOptions
 }
  * ```
  */
-export function createV1Client(config: V1ClientOptions) {
-	return createClient<V1.paths>({
-		baseUrl: config.baseUrl ?? 'https://rest.gohighlevel.com',
+export function createV1Client(config?: V1ClientOptions) {
+	const client = createClient<V1.paths>({
+		baseUrl: config?.baseUrl ?? 'https://rest.gohighlevel.com',
 		headers: {
-			Authorization: `Bearer ${process.env.HIGHLEVEL_API_KEY}`,
+			Authorization: `Bearer ${config?.apiKey ?? process.env.HIGHLEVEL_API_KEY}`,
 		},
 	})
+
+	return client
 }

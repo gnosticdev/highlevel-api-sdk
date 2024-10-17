@@ -1,5 +1,14 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+	"assists": {
+		"actions": { "source": { "sortJsxProps": "on", "useSortedKeys": "on" } },
+		"enabled": true
+	},
+	"css": {
+		"formatter": {
+			"enabled": true
+		}
+	},
 
 	"files": {
 		"ignore": [
@@ -8,7 +17,7 @@
 			"dist",
 			".wrangler",
 			".vscode",
-			"schemas/v1/postman.json"
+			"schemas"
 		],
 		"include": ["**/*[.js,.jsx,.ts,.tsx,.astro,.css,.json,.jsonc]"]
 	},
@@ -18,9 +27,9 @@
 	},
 	"javascript": {
 		"formatter": {
+			"jsxQuoteStyle": "single",
 			"quoteStyle": "single",
-			"semicolons": "asNeeded",
-			"jsxQuoteStyle": "single"
+			"semicolons": "asNeeded"
 		}
 	},
 	"json": {
@@ -29,36 +38,25 @@
 			"allowTrailingCommas": false
 		}
 	},
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"defaultBranch": "main",
-		"useIgnoreFile": true
-	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
-			"style": {
-				"noNonNullAssertion": "off"
-			},
 			"a11y": {
 				"useMediaCaption": "off"
 			},
+			"correctness": { "useJsxKeyInIterable": "off" },
 			"nursery": {
-				"useSortedClasses": "warn",
-				"recommended": true
+				"recommended": true,
+				"useSortedClasses": "warn"
 			},
-			"correctness": { "useJsxKeyInIterable": "off" }
+			"recommended": true,
+			"style": {
+				"noNonNullAssertion": "off"
+			}
 		}
 	},
 	"organizeImports": {
 		"enabled": true
-	},
-	"css": {
-		"formatter": {
-			"enabled": true
-		}
 	},
 	"overrides": [
 		{
@@ -68,15 +66,21 @@
 			}
 		},
 		{
-			"include": ["./**/*.tsx"],
 			"formatter": {
-				"indentWidth": 2,
-				"indentStyle": "space",
-				"formatWithErrors": true,
+				"attributePosition": "multiline",
 				"enabled": true,
-				"lineWidth": 120,
-				"attributePosition": "multiline"
-			}
+				"formatWithErrors": true,
+				"indentStyle": "space",
+				"indentWidth": 2,
+				"lineWidth": 120
+			},
+			"include": ["./**/*.tsx"]
 		}
-	]
+	],
+	"vcs": {
+		"clientKind": "git",
+		"defaultBranch": "main",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
 }

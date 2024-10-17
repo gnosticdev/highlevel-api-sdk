@@ -10,8 +10,8 @@ const Layout: FC = async (props) => {
       <head>
         <title>Get Your Authorization Code</title>
         <link
-          rel='stylesheet'
           href='https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css'
+          rel='stylesheet'
         />
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: */}
         <style dangerouslySetInnerHTML={{ __html: cssText }} />
@@ -61,15 +61,15 @@ export const Result: FC<{
             <summary>Access Token</summary>
             <div class='copy container'>
               <div
-                id='copy-text'
                 class='copy-text'
+                id='copy-text'
               >
                 {props.accessToken}
               </div>
               <button
-                type='button'
-                id='copy-btn'
                 class='btn'
+                id='copy-btn'
+                type='button'
               >
                 Copy
               </button>

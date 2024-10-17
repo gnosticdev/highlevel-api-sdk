@@ -25,7 +25,7 @@ export class OauthClient<T extends AccessType>
 	private _accessToken: string | undefined
 	private _refreshToken: string | undefined
 	private readonly userType
-	private client
+	private client: BaseOauthClient
 
 	// avoid conflict with the `expiresAt` getter
 	private _expiresAt: number | undefined
@@ -44,8 +44,16 @@ export class OauthClient<T extends AccessType>
 	 */
 	constructor(config: HighLevelOauthConfig<T>) {
 		this.config = config
+
+		// Set Defaults
 		this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL
 		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL
+		this.scopes = config.scopes ?? []
+		if (this.scopes.length === 0) {
+			console.warn(
+				'No scopes provided, pass the scopes from your app to the scopes param',
+			)
+		}
 		this.userType =
 			config.accessType === 'Sub-Account'
 				? ('Location' as const)
@@ -62,11 +70,10 @@ export class OauthClient<T extends AccessType>
 				}
 				return Promise.resolve(this.tokenData)
 			})
-		const oauthClient = createClient<Oauth.paths>({
+
+		this.client = createClient<Oauth.paths>({
 			baseUrl: this.baseUrl,
 		})
-
-		this.client = oauthClient
 	}
 
 	/**

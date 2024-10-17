@@ -1,5 +1,5 @@
 import type { HighLevelOauthConfig } from '../clients/highlevel/config'
-import { ScopesSchema } from '../generated/v2/other/scopes'
+import { ScopesSchema } from '../generated/v2/custom/scopes'
 import { objectEntries } from '../lib/utils'
 import type { AccessType, ScopeLiterals } from './scopes-types'
 

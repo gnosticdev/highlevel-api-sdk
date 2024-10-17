@@ -182,8 +182,8 @@ app.get('/authorized', async (c) => {
   const accessToken = db.getAccessToken()?.access_token
   return c.html(
     <Result
-      message={accessToken ? 'You are authorized' : 'No token found!'}
       accessToken={accessToken}
+      message={accessToken ? 'You are authorized' : 'No token found!'}
       routes={allRoutes}
     />,
   )

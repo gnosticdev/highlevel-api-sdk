@@ -2,6 +2,13 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.experimental.updateImportsOnPaste": true,
   "typescript.preferences.importModuleSpecifier": "project-relative",
-  "typescript.suggest.paths": false
+  "typescript.suggest.paths": false,
+  "json.schemas": [
+    {
+      "fileMatch": ["schemas/v2/openapi/*.json"],
+      "url": "https://"
+    }
+  ],
+  "json.schemaDownload.enable": true
 
 }

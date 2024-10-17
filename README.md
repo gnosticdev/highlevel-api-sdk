@@ -13,7 +13,10 @@ Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build y
 ## Installation
 
 ```bash
-bun add @gnosticdev/highlevel-sdk
+# endpoint types only
+bun add -d @gnosticdev/highlevel-sdk
+# full client with oauth
+bun add openapi-fetch @gnosticdev/highlevel-sdk
 ```
 
 ## Usage

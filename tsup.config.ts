@@ -9,7 +9,18 @@ const openApiEntries = readdirSync('src/generated/v2/openapi')
 		return acc
 	}, {})
 
+const clientGlob = new Bun.Glob('clients/**/index*.ts')
 const clientEntries: Record<string, string> = readdirSync('src/clients')
+	.filter((file) => file.endsWith('.ts') && !file.endsWith('.d.ts'))
+	.reduce((acc, file) => {
+		acc[`clients/${path.parse(file).name}`] = `src/clients/${file}`
+		return acc
+	}, {})
+
+const configGlob = new Bun.Glob('clients/**/config.ts')
+const configEntries: Record<string, string> = Array.from(
+	configGlob.scanSync({ cwd: './src' }),
+)
 	.filter((file) => file.endsWith('.ts') && !file.endsWith('.d.ts'))
 	.reduce((acc, file) => {
 		acc[`clients/${path.parse(file).name}`] = `src/clients/${file}`
@@ -19,13 +30,12 @@ const clientEntries: Record<string, string> = readdirSync('src/clients')
 const mainBundle = defineConfig({
 	entry: {
 		index: 'src/clients/highlevel/index.ts',
-		'client-config': 'src/clients/highlevel/config.ts',
 		oauth: 'src/clients/oauth/index.ts',
-		'oauth-config': 'src/clients/oauth/config.ts',
 		scopes: 'src/lib/scopes.ts',
 		webhooks: 'src/generated/v2/other/webhooks.ts',
-		...clientEntries,
 		...openApiEntries,
+		...clientEntries,
+		...configEntries,
 	},
 	format: ['esm'],
 	sourcemap: true,

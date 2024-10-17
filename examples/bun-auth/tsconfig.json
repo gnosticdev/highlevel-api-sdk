@@ -1,28 +1,28 @@
 {
 	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": ".",
+		"forceConsistentCasingInFileNames": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx",
-		"target": "ESNext",
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
 		"module": "ESNext",
-		"strict": true,
-		"noEmit": true,
-		"moduleResolution": "Bundler",
 		"moduleDetection": "force",
+		"moduleResolution": "Bundler",
+		"noEmit": true,
 		"noUncheckedIndexedAccess": true,
-		"skipDefaultLibCheck": true,
-		"verbatimModuleSyntax": true,
-		"allowJs": true,
-		"skipLibCheck": true,
-		"preserveSymlinks": true,
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true,
-		"strictNullChecks": true,
-		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"]
-		}
+		},
+		"preserveSymlinks": true,
+		"resolveJsonModule": true,
+		"skipDefaultLibCheck": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"target": "ESNext",
+		"verbatimModuleSyntax": true
 	},
 	"include": ["src"]
 }

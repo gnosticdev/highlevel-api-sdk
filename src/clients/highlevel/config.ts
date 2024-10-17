@@ -1,13 +1,23 @@
 import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
-import type { OauthClient } from '../oauth'
 import type { TokenData } from '../oauth/config'
+
+export type BaseHighLevelConfig = {
+	/**
+	 * base url for each API endpoint. no need to change unless you are proxying requests.
+	 * @default 'https://services.leadconnectorhq.com'
+	 */
+	baseUrl?: string
+}
+
 /**
  * The configuration for the HighLevel API client with OAuth.
- *
- * - Typed endpoints for the HighLevel API
- * - OAuth2 fields and methods to make getting started easier.
  */
 export type HighLevelOauthConfig<T extends AccessType> = {
+	/**
+	 * base url for each API endpoint. no need to change unless you are proxying requests.
+	 * @default 'https://services.leadconnectorhq.com'
+	 */
+	baseUrl?: string
 	/**
 	 * client_id from app settings in marketplace.
 	 *
@@ -27,7 +37,6 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 *
 	 * - `Sub-Account` is same as **Location**.
 	 * - `Company` is same as **Agency**
-	 * @default 'Sub-Account'
 	 */
 	readonly accessType: T
 	/**
@@ -35,12 +44,6 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 * - use `client.getAuthorizationUrl()` to generate the the full auth url including your redirectUri, clientId, and scopes
 	 */
 	readonly redirectUri: string
-	/**
-	 * base url for the api. no need to change unless you are proxying requests.
-	 * @see {@link DEFAULT_BASE_URL}
-	 * @default 'https://services.leadconnectorhq.com'
-	 */
-	readonly baseUrl?: string
 	/**
 	 * Scopes needed for your app. These must be added to your app in the marketplace.
 	 * - available scopes will change depending on your app type.
@@ -68,24 +71,4 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 *
 	 */
 	storageFunction?: (tokenData: TokenData) => Promise<TokenData>
-	/**
-	 * Can pass in a custom oauth client - must implement `OauthClientInterface`.
-	 *
-	 * @example
-	 * ```ts
-	 * const customOauthClient = new OauthClient({...})
-	 * const client = createHighLevelClient({
-	 * 	authCode: '1234567890',
-	 * 	oauthClient: new CustomOauthClient(config)
-	 * })
-	 */
-	oauthClient?: OauthClient<T>
-}
-
-export type BaseHighLevelConfig = {
-	/**
-	 * base url for each API endpoint. no need to change unless you are proxying requests.
-	 * @default 'https://services.leadconnectorhq.com'
-	 */
-	baseUrl?: string
 }

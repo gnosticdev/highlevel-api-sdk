@@ -1,14 +1,12 @@
 {
-	"name": "@gnosticdev/highlevel-sdk",
-	"version": "1.1.5",
 	"author": {
 		"name": "gnosticdev",
 		"url": "https://github.com/gnosticdev"
 	},
-	"repository": {
-		"url": "https://github.com/gnosticdev/highlevel-api-sdk",
-		"type": "git"
+	"dependencies": {
+		"openapi-fetch": "^0.12.2"
 	},
+	"description": "SDK for the HighLevel API",
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.2",
 		"@types/bun": "^1.1.6",
@@ -19,8 +17,6 @@
 		"tsup": "^8.3.0",
 		"typescript": "^5.6.3"
 	},
-
-	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"default": "./dist/index.js",
@@ -31,14 +27,6 @@
 			"default": "./dist/client-config.js",
 			"import": "./dist/client-config.js",
 			"types": "./dist/client-config.d.ts"
-		},
-		"./webhooks": {
-			"default": "./dist/webhooks.js",
-			"import": "./dist/webhooks.js",
-			"types": "./dist/webhooks.d.ts"
-		},
-		"./types/*": {
-			"types": "./dist/types/*.d.ts"
 		},
 		"./oauth": {
 			"default": "./dist/oauth.js",
@@ -54,9 +42,16 @@
 			"default": "./dist/scopes.js",
 			"import": "./dist/scopes.js",
 			"types": "./dist/scopes.d.ts"
+		},
+		"./types/*": {
+			"types": "./dist/types/*.d.ts"
+		},
+		"./webhooks": {
+			"default": "./dist/webhooks.js",
+			"import": "./dist/webhooks.js",
+			"types": "./dist/webhooks.d.ts"
 		}
 	},
-	"description": "SDK for the HighLevel API",
 	"files": ["dist", "README.md", "LICENSE"],
 	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
 	"keywords": [
@@ -70,25 +65,29 @@
 		"marketing"
 	],
 	"license": "MIT",
+	"name": "@gnosticdev/highlevel-sdk",
 	"packageManager": "bun@1.21.1",
 	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gnosticdev/highlevel-api-sdk"
+	},
 	"scripts": {
 		"build-package": "bun --bun tsup --tsconfig tsconfig.build.json",
-		"prepack": "bun test && bun run build-package",
+		"generate-all": "bun run bun run generate-api-json && bun run generate-api-types && bun run generate-webhook-types && bun run generate-scopes",
 		"generate-api-json": "bun scripts/generate-api-json.ts",
 		"generate-api-types": "bun scripts/generate-api-types.ts",
-		"generate-webhook-types": "bun scripts/generate-webhook-types.ts",
 		"generate-scopes": "bun scripts/generate-scopes.ts",
-		"generate-all": "bun run generate-client && bun run generate-api-json && bun run generate-api-types && bun run generate-webhook-types && bun run generate-scopes",
+		"generate-webhook-types": "bun scripts/generate-webhook-types.ts",
 		"lint": "biome check . --write --unsafe",
+		"prepack": "bun test && bun run build-package",
 		"release-it": "release-it",
 		"start-test": "bun test --hot"
 	},
 	"type": "module",
-	"peerDependencies": {
-		"openapi-fetch": "^0.12.2"
-	}
+	"types": "./dist/index.d.ts",
+	"version": "1.1.5"
 }
