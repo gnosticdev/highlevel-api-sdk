@@ -35,17 +35,14 @@
 			"types": "./dist/oauth.d.ts"
 		},
 		"./scopes": {
-			"default": "./dist/scopes.js",
 			"import": "./dist/scopes.js",
 			"types": "./dist/scopes.d.ts"
 		},
 		"./types/*": {
-			"default": "./dist/types/*.js",
 			"import": "./dist/types/*.js",
 			"types": "./dist/types/*.d.ts"
 		},
 		"./webhooks": {
-			"default": "./dist/webhooks.js",
 			"import": "./dist/webhooks.js",
 			"types": "./dist/webhooks.d.ts"
 		}
