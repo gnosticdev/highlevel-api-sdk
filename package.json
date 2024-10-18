@@ -52,6 +52,11 @@
 			"types": "./dist/webhooks.d.ts",
 			"require": "./dist/cjs/webhooks.js",
 			"import": "./dist/webhooks.js"
+		},
+		"./v1": {
+			"types": "./dist/v1/index.d.ts",
+			"require": "./dist/cjs/v1/index.js",
+			"import": "./dist/v1/index.js"
 		}
 	},
 	"files": [
