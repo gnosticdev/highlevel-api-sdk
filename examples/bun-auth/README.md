@@ -2,6 +2,14 @@
 
 This is a simple OAuth2 flow using the HighLevel SDK, Bun, and Hono. There is a simple frontend that initiates the flow, and once logged in, you can view endpoints that require authentication.
 
+## Requirements
+
+- [Bun](https://bun.sh/)
+- Client ID
+- Client Secret
+- Redirect URI
+- HighLevel API Key (for v1 endpoints only)
+
 ## Install
 
 ```bash
@@ -20,7 +28,7 @@ bun install
 
 4. Get your app id, client_id, and client_secret from the app you just created
 
-5. Rename the `.env.example` file to `.env` and fill in your client_id, client_secret, and redirect_uri
+5. Rename the `.env.example` file to `.env` and fill in your CLIENT_ID, CLIENT_SECRET, and REDIRECT_URL
 
 ```bash
 CLIENT_ID="<your client id>"

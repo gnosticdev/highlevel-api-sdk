@@ -8,7 +8,7 @@ import openapiTS, {
 	type SchemaObject,
 	astToString,
 } from 'openapi-typescript'
-import { TempJson, objectKeys } from '../src/lib/utils'
+import { TempFile, objectKeys } from '../src/lib/utils'
 
 if (import.meta.main) {
 	await createV1Types()
@@ -106,7 +106,7 @@ export async function createV1Types() {
 		},
 	}
 
-	await using optionsJson = new TempJson(
+	await using optionsJson = new TempFile(
 		'temp-v1-json.json',
 		JSON.stringify(opts),
 	)

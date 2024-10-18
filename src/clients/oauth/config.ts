@@ -138,6 +138,6 @@ export interface OAuthClientInterface<T extends AccessType> {
 }
 
 export const DEFAULT_BASE_AUTH_URL =
-	'https://marketplace.gohighlevel.com/oauth/chooselocation'
+	'https://marketplace.leadconnectorhq.com/oauth/chooselocation'
 
 export const DEFAULT_BASE_URL = 'https://services.leadconnectorhq.com'

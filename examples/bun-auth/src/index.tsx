@@ -61,7 +61,7 @@ const accessTokenMiddleware: MiddlewareHandler = async (c, next) => {
   if (c.req.path.startsWith('/auth')) {
     await next()
   } else {
-    console.log(kleur.red('------ checking token -----'))
+    console.log(kleur.yellow('------ checking token -----'))
     console.log(kleur.blue(`${c.req.url}`))
 
     const accessToken = await client.oauth.getAccessToken()

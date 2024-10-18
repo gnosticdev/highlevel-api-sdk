@@ -80,18 +80,18 @@ export const Result: FC<{
 
           <script type='module'>
             {raw`
-                            const copyBtn = document.getElementById('copy-btn')
-                            const copyText = document.getElementById('copy-text')
-                            copyBtn.addEventListener('click', (e) => {
-                                navigator.clipboard.writeText(copyText.innerText)
-                                copyBtn.classList.add('copied')
-                                copyBtn.innerText = 'Copied!'
-                                setTimeout(() => {
-                                    copyBtn.classList.remove('copied')
-                                    copyBtn.innerText = 'Copy'
-                                }, 1500)
-                            })
-                        `}
+                  const copyBtn = document.getElementById('copy-btn')
+                  const copyText = document.getElementById('copy-text')
+                  copyBtn.addEventListener('click', (e) => {
+                      navigator.clipboard.writeText(copyText.innerText)
+                      copyBtn.classList.add('copied')
+                      copyBtn.innerText = 'Copied!'
+                      setTimeout(() => {
+                          copyBtn.classList.remove('copied')
+                          copyBtn.innerText = 'Copy'
+                      }, 1500)
+                  })
+              `}
           </script>
         </main>
       ) : (

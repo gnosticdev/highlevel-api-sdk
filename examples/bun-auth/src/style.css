@@ -70,9 +70,10 @@ body {
 				& a {
 					color: #fff;
 					text-decoration: none;
-					&:hover {
-						color: #334cda;
-					}
+				}
+
+				&:hover a {
+					color: #334cda;
 				}
 			}
 		}

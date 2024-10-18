@@ -262,13 +262,3 @@ export function createHighLevelClient<T extends AccessType>(config: {
 	}
 	return new HighLevelClient(config.clientConfig)
 }
-
-const client2 = createHighLevelClient({
-	oauthConfig: {
-		accessType: 'Sub-Account',
-		clientId: 'your-client-id',
-		clientSecret: 'your-client-secret',
-		redirectUri: 'https://yourapp.com/oauth/callback',
-		scopes: ['contacts.readonly', 'contacts.write'],
-	},
-})

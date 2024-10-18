@@ -1,8 +1,8 @@
 import createClient, { type Client } from 'openapi-fetch'
 import type * as Oauth from '../../generated/v2/openapi/oauth'
 import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
-import type { HighLevelOauthConfig } from '../highlevel/config'
 import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../oauth/config'
+import type { HighLevelOauthConfig } from '../v2/config'
 import type {
 	AuthUrlParams,
 	LocationTokenParams,
@@ -98,7 +98,7 @@ export class OauthClient<T extends AccessType>
      * @see https://highlevel.stoplight.io/docs/integrations/a04191c0fabf9-authorization
      * @example
      * ```ts
-        https://marketplace.gohighlevel.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
+        https://marketplace.leadconnectorhq.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
      * ```
      */
 	getAuthorizationURL() {
