@@ -5,8 +5,10 @@
   "typescript.suggest.paths": false,
   "json.schemas": [
     {
-      "fileMatch": ["schemas/v2/openapi/*.json"],
-      "url": "https://"
+      "fileMatch": [
+          "schemas/**/*openapi.json"
+      ],
+      "url":"https://spec.openapis.org/oas/3.1/dialect/base"
     }
   ],
   "json.schemaDownload.enable": true

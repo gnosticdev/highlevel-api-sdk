@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
 import createClient from 'openapi-fetch'
-import {
-	HighLevelClient,
-	HighLevelClientWithOAuth,
-	createHighLevelClient,
-} from '../src/clients/highlevel'
-import type { HighLevelOauthConfig } from '../src/clients/highlevel/config'
 import { type BaseOauthClient, OauthClient } from '../src/clients/oauth'
 import {
 	DEFAULT_BASE_AUTH_URL,
 	DEFAULT_BASE_URL,
 } from '../src/clients/oauth/config'
+import {
+	HighLevelClient,
+	HighLevelClientWithOAuth,
+	createHighLevelClient,
+} from '../src/clients/v2'
+import type { HighLevelOauthConfig } from '../src/clients/v2/config'
 import type * as OAuth from '../src/generated/v2/openapi/oauth'
 import type { AccessType } from '../src/lib/type-utils'
 

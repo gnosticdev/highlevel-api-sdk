@@ -1,0 +1,2 @@
+# treat the long json file schemas/v1/openapi.json as a binary file
+schemas/v1/openapi.json binary

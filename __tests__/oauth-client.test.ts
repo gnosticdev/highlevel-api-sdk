@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
-import type { HighLevelOauthConfig } from '../src/clients/highlevel/config'
 import { OauthClient } from '../src/clients/oauth'
+import type { HighLevelOauthConfig } from '../src/clients/v2/config'
 
 describe('OauthClient', () => {
 	const mockConfig: HighLevelOauthConfig<'Agency'> = {

@@ -1,6 +1,6 @@
 import { mock } from 'bun:test'
-import { HighLevelClient } from '../src/clients/highlevel'
 import { OauthClient } from '../src/clients/oauth'
+import { HighLevelClient } from '../src/clients/v2'
 import type * as Locations from '../src/generated/v2/openapi/locations'
 
 type MockLocationsResponse =

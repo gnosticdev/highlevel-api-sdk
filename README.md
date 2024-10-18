@@ -1,5 +1,8 @@
 # HighLevel API SDK
 
+[![npm version](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk.svg)](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk)
+[![npm downloads](https://img.shields.io/npm/dm/your-package-name.svg)](https://www.npmjs.com/package/your-package-name)
+
 Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build your own apps or use the included clients to interact with the HighLevel API.
 
 ## Features
@@ -42,8 +45,19 @@ const client = createHighLevelClient({
             'locations.write',
             'contacts.readonly',
             // ... other scopes
-        ]
-    }
+        ],
+        // Optional: function to store the token data. If not provided, will be available in memory only.
+        storageFunction: async (tokenData) => {
+            db.saveTokenResponse({
+                access_token: tokenData.access_token,
+                expiresAt: tokenData.expiresAt,
+                refresh_token: tokenData.refresh_token,
+                locationId: tokenData.locationId,
+                userId: tokenData.userId,
+            })
+            return tokenData
+    },
+    },
 })
 
 // Example: Get contacts
@@ -64,12 +78,12 @@ const { data, error } = await client.contacts.GET('/contacts/', {
 
 ### Using the v1 Client
 
+The v1 client adds the authrorization header to all requests.
+
 ```ts
 import { createV1Client } from "@gnosticdev/highlevel-sdk"
 
-const v1Client = createV1Client({
-    apiKey: 'your-api-key'
-})
+const v1Client = createV1Client()
 
 const { data, error } = await v1Client.GET('/v1/contacts', {
     params: {

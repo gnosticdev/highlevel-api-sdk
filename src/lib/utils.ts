@@ -26,7 +26,10 @@ export async function getAuthCodeFromClient() {
 
 export type GetParams<T extends OperationObject> = T['requestBody']
 
-export class TempJson implements AsyncDisposable {
+/**
+ * Creates a temporary file that auto-deletes when the class is disposed of. (e.g. if used in a function, it would delete at the end of the function)
+ */
+export class TempFile implements AsyncDisposable {
 	path: string
 	constructor(path: string, data?: string) {
 		this.path = path

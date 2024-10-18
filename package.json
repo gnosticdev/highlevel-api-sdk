@@ -67,24 +67,26 @@
 	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
 	"keywords": [
 		"highlevel",
+		"highlevel api",
+		"highlevel sdk",
+		"gohighlevel",
 		"api",
 		"sdk",
 		"typescript",
 		"javascript",
-		"gohighlevel",
 		"crm",
 		"marketing"
 	],
 	"license": "MIT",
 	"name": "@gnosticdev/highlevel-sdk",
-	"packageManager": "bun@1.21.1",
+	"packageManager": "bun@1.1.31",
 	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/gnosticdev/highlevel-api-sdk"
+		"url": "https://github.com/gnosticdev/highlevel-sdk"
 	},
 	"scripts": {
 		"build-package": "bun --bun tsup --tsconfig tsconfig.build.json",
@@ -98,6 +100,7 @@
 		"release-it": "release-it",
 		"start-test": "bun test --hot"
 	},
+
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"version": "1.2.4"
