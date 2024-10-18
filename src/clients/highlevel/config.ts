@@ -1,4 +1,4 @@
-import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
+import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
 import type { TokenData } from '../oauth/config'
 
 export type BaseHighLevelConfig = {

@@ -25,14 +25,18 @@ npm add @gnosticdev/highlevel-sdk
 
 ### Using the HighLevel Client
 
+The HighLevel client is the main client for interacting with the HighLevel API. It includes all of the endpoints for both v1 and v2 of the API. It includes a custom OAuth2 client for working with HighLevel's OAuth2 implementation.
+
+_Recommended: store tokens in a DB like SQLite by passing in a storageFunction. Check out the auth example [example](./examples/bun-auth/)_
+
 ```ts
 import { createHighLevelClient } from "@gnosticdev/highlevel-sdk"
 
 const client = createHighLevelClient({
     oauthConfig: {
         accessType: 'Sub-Account',
-        clientId: 'your-client-id',
-        clientSecret: 'your-client-secret',
+        clientId: process.env.HIGHLEVEL_CLIENT_ID,
+        clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET,
         redirectUri: 'http://localhost:3000/oauth/callback',
         scopes: [
             'locations.write',

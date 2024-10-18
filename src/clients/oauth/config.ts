@@ -1,5 +1,5 @@
 import type * as Oauth from '../../generated/v2/openapi/oauth'
-import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
+import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
 
 type AccessTokenRequest =
 	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded'] & {

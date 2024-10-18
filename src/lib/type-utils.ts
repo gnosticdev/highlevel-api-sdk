@@ -1,3 +1,6 @@
+import type { ClientPathsWithMethod } from 'openapi-fetch'
+import type { Method } from 'openapi-typescript'
+import type * as V1 from '../generated/v1/openapi'
 import type { ScopesSchema } from '../generated/v2/custom/scopes'
 /*
  * This file is used to generate the types for the scopes schema.
@@ -102,3 +105,19 @@ export type FilteredScopes<T extends AccessType> = {
 			: never
 	}
 }
+
+/**
+ * Utility to make a key optional in a nested object.
+ */
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+type DeepPartialAt<T, K extends any[]> = K extends [infer First, ...infer Rest]
+	? First extends keyof T
+		? {
+				[P in keyof T]: P extends First
+					? Rest extends []
+						? Partial<T[P]> // Make the final property optional
+						: DeepPartialAt<T[P], Rest> // Recursively traverse
+					: T[P] //
+			}
+		: T
+	: T

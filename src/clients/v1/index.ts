@@ -4,6 +4,7 @@ import type * as V1 from '../../generated/v1/openapi'
 type V1ClientOptions = ClientOptions & {
 	/**
 	 * The api key for the HighLevel Agency or Sub-Account.
+	 * @default process.env.HIGHLEVEL_API_KEY
 	 * @see https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api
 	 */
 	apiKey?: string
@@ -24,8 +25,8 @@ type V1ClientOptions = ClientOptions & {
  *
  * const {data, error} = await client.get('/v1/contacts', {
  * 	params: {
- * 	headers: {
- * 		Authorization: `Bearer ${process.env.HIGHLEVEL_API_KEY}`
+ * 		query: {
+ * 			locationId: '1234567890'
  * 		}
  * 	  }
  * })
@@ -48,12 +49,10 @@ type V1ClientOptions = ClientOptions & {
  * ```
  */
 export function createV1Client(config?: V1ClientOptions) {
-	const client = createClient<V1.paths>({
+	return createClient<V1.paths>({
 		baseUrl: config?.baseUrl ?? 'https://rest.gohighlevel.com',
 		headers: {
 			Authorization: `Bearer ${config?.apiKey ?? process.env.HIGHLEVEL_API_KEY}`,
 		},
 	})
-
-	return client
 }

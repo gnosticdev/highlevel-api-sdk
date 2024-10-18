@@ -44,9 +44,9 @@ export type paths = {
 					 */
 					userId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -103,9 +103,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -180,9 +180,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -234,9 +234,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -305,9 +305,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -372,9 +372,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -482,9 +482,9 @@ export type paths = {
 					 */
 					userId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -555,9 +555,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -640,9 +640,9 @@ export type paths = {
 					 */
 					teamId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -705,9 +705,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -783,9 +783,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -854,9 +854,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -992,9 +992,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -1070,9 +1070,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -1141,9 +1141,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -1213,9 +1213,9 @@ export type paths = {
 					 */
 					status?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -1297,9 +1297,9 @@ export type paths = {
 					 */
 					startAfterId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -1346,9 +1346,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -1423,9 +1423,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -1494,9 +1494,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -1567,9 +1567,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -1651,9 +1651,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -1727,9 +1727,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -1782,9 +1782,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -1865,9 +1865,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -1924,9 +1924,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2000,9 +2000,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -2073,9 +2073,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2143,9 +2143,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2221,9 +2221,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -2276,9 +2276,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2359,9 +2359,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -2418,9 +2418,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2494,9 +2494,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -2566,9 +2566,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2657,9 +2657,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2745,9 +2745,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -2809,9 +2809,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -2880,9 +2880,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -2967,9 +2967,9 @@ export type paths = {
 					 */
 					phone?: number
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -3086,9 +3086,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -3163,9 +3163,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -3217,9 +3217,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -3288,9 +3288,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -3410,9 +3410,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -3487,9 +3487,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -3541,9 +3541,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -3612,9 +3612,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -3779,9 +3779,9 @@ export type paths = {
 					 */
 					startAt?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -3888,9 +3888,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -3966,9 +3966,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -4037,9 +4037,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -4159,9 +4159,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -4236,9 +4236,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -4290,9 +4290,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -4367,9 +4367,9 @@ export type paths = {
 					 */
 					deleteTwilioAccount?: boolean
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -4444,9 +4444,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -4539,9 +4539,9 @@ export type paths = {
 					 */
 					email?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -4678,9 +4678,9 @@ export type paths = {
 					 */
 					startAfterId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -4749,9 +4749,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -4832,9 +4832,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -4891,9 +4891,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -4967,9 +4967,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -5039,9 +5039,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -5139,9 +5139,9 @@ export type paths = {
 					 */
 					subscriptionId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -5213,9 +5213,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -5448,9 +5448,9 @@ export type paths = {
 					 */
 					surveyId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -5557,9 +5557,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -5634,9 +5634,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -5688,9 +5688,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -5759,9 +5759,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -5901,9 +5901,9 @@ export type paths = {
 					 */
 					locationId?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never
@@ -5950,9 +5950,9 @@ export type paths = {
 		post: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -6027,9 +6027,9 @@ export type paths = {
 		get: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -6081,9 +6081,9 @@ export type paths = {
 		put: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 					/** @example application/json */
 					'Content-Type'?: string
 				}
@@ -6152,9 +6152,9 @@ export type paths = {
 		delete: {
 			parameters: {
 				query?: never
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path: {
 					/**
@@ -6284,9 +6284,9 @@ export type paths = {
 					 */
 					email?: string
 				}
-				header: {
+				header?: {
 					/** @description Access Token */
-					Authorization: string
+					Authorization?: string
 				}
 				path?: never
 				cookie?: never

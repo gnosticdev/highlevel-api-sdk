@@ -1,6 +1,6 @@
 import createClient, { type Client } from 'openapi-fetch'
 import type * as Oauth from '../../generated/v2/openapi/oauth'
-import type { AccessType, ScopeLiterals } from '../../lib/scopes-types'
+import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
 import type { HighLevelOauthConfig } from '../highlevel/config'
 import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../oauth/config'
 import type {

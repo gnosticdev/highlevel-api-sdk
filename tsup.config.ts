@@ -13,6 +13,8 @@ const openapiTypeEntries: Record<`types/${string}`, string> = Array.from(
 
 console.log(openapiTypeEntries)
 
+// Output esm and cjs bundles
+
 const mainBundle = defineConfig({
 	entry: {
 		index: 'src/clients/highlevel/index.ts',
@@ -24,15 +26,20 @@ const mainBundle = defineConfig({
 		'configs/oauth': 'src/clients/oauth/config.ts',
 		...openapiTypeEntries,
 	},
-	format: ['esm'],
-	sourcemap: true,
+	format: ['esm', 'cjs'],
 	splitting: false,
+	keepNames: true,
 	clean: true,
 	tsconfig: './tsconfig.build.json',
-	outDir: 'dist',
 	treeshake: false,
 	dts: {
 		resolve: true,
+	},
+	outDir: 'dist',
+	esbuildOptions(options) {
+		if (options.format === 'cjs') {
+			options.outdir = 'dist/cjs'
+		}
 	},
 })
 

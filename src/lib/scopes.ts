@@ -1,7 +1,7 @@
 import type { HighLevelOauthConfig } from '../clients/highlevel/config'
 import { ScopesSchema } from '../generated/v2/custom/scopes'
 import { objectEntries } from '../lib/utils'
-import type { AccessType, ScopeLiterals } from './scopes-types'
+import type { AccessType, ScopeLiterals } from './type-utils'
 
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Agency same as Company. */

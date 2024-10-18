@@ -60,7 +60,7 @@ async function createV1Types() {
 		name: 'Authorization',
 		in: 'header',
 		description: 'Access Token',
-		required: true,
+		required: false,
 		schema: {
 			type: 'string',
 			example: 'Bearer 9c48df2694a849b6089f9d0d3513efe',

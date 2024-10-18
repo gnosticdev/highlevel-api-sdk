@@ -15,6 +15,7 @@
 			"node_modules",
 			"**/_![__tests__]",
 			"dist",
+			"package.json",
 			".wrangler",
 			".vscode",
 			"schemas"

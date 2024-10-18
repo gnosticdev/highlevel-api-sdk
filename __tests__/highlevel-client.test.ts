@@ -12,7 +12,7 @@ import {
 	DEFAULT_BASE_URL,
 } from '../src/clients/oauth/config'
 import type * as OAuth from '../src/generated/v2/openapi/oauth'
-import type { AccessType } from '../src/lib/scopes-types'
+import type { AccessType } from '../src/lib/type-utils'
 
 describe('Base HighLevelClient', () => {
 	let baseClient: HighLevelClient<AccessType>

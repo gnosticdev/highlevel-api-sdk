@@ -26,7 +26,7 @@ import type {
 	AccessType,
 	BaseScopeNames,
 	FilteredScopeNames,
-} from '../../lib/scopes-types'
+} from '../../lib/type-utils'
 import { type BaseOauthClient, OauthClient } from '../oauth'
 import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../oauth/config'
 import type { BaseHighLevelConfig, HighLevelOauthConfig } from './config'
