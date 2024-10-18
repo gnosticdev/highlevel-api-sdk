@@ -1,4 +1,9 @@
+import kleur from 'kleur'
 import type { OperationObject } from 'openapi-typescript'
+
+export function objectKeys<T extends object>(obj: T): (keyof T)[] {
+	return Object.keys(obj) as (keyof T)[]
+}
 
 export function objectEntries<TObj extends object>(
 	obj: TObj,
@@ -20,3 +25,21 @@ export async function getAuthCodeFromClient() {
 }
 
 export type GetParams<T extends OperationObject> = T['requestBody']
+
+export class TempJson implements AsyncDisposable {
+	path: string
+	constructor(path: string, data?: string) {
+		this.path = path
+		if (data) {
+			this.write(data)
+		}
+	}
+
+	async [Symbol.asyncDispose]() {
+		await Bun.$`rm -f ${this.path}`
+		console.log(kleur.red(`Deleted ${this.path}`))
+	}
+	async write(data: string) {
+		await Bun.write(this.path, data)
+	}
+}

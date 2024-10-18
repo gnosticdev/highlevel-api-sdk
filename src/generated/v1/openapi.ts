@@ -60,7 +60,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -70,7 +70,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -80,7 +80,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__get_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -90,7 +90,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__get_422_response']
 					}
 				}
 			}
@@ -125,7 +125,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -135,7 +135,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -145,7 +145,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -155,7 +155,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments__post_422_response']
 					}
 				}
 			}
@@ -202,7 +202,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -212,7 +212,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -222,7 +222,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_get_401_response']
 					}
 				}
 			}
@@ -262,7 +262,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -272,7 +272,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -282,7 +282,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -292,7 +292,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_422_response']
 					}
 				}
 			}
@@ -337,7 +337,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -347,7 +347,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_delete_401_response']
 					}
 				}
 			}
@@ -410,7 +410,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_status_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -420,7 +420,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_status_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -430,7 +430,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_{appointmentId}_status_put_422_response']
 					}
 				}
 			}
@@ -498,7 +498,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_slots_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -508,7 +508,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_slots_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -518,7 +518,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_slots_get_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -528,7 +528,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_appointments_slots_get_422_response']
 					}
 				}
 			}
@@ -577,7 +577,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -587,7 +587,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -597,7 +597,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -607,7 +607,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_422_response']
 					}
 				}
 			}
@@ -656,7 +656,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -666,7 +666,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -676,7 +676,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_get_401_response']
 					}
 				}
 			}
@@ -727,7 +727,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -737,7 +737,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -747,7 +747,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -757,7 +757,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services__post_422_response']
 					}
 				}
 			}
@@ -811,7 +811,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -821,7 +821,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -831,7 +831,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -841,7 +841,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_422_response']
 					}
 				}
 			}
@@ -886,7 +886,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -896,7 +896,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -906,7 +906,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_delete_422_response']
 					}
 				}
 			}
@@ -943,7 +943,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -953,7 +953,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -963,7 +963,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_get_401_response']
 					}
 				}
 			}
@@ -1014,7 +1014,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1024,7 +1024,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1034,7 +1034,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1044,7 +1044,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams__post_422_response']
 					}
 				}
 			}
@@ -1098,7 +1098,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1108,7 +1108,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1118,7 +1118,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1128,7 +1128,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_422_response']
 					}
 				}
 			}
@@ -1173,7 +1173,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1183,7 +1183,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_delete_401_response']
 					}
 				}
 			}
@@ -1229,7 +1229,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_campaigns__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1239,7 +1239,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_campaigns__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1249,7 +1249,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_campaigns__get_401_response']
 					}
 				}
 			}
@@ -1313,7 +1313,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1323,7 +1323,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1333,7 +1333,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts__get_401_response']
 					}
 				}
 			}
@@ -1368,7 +1368,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1378,7 +1378,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1388,7 +1388,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1398,7 +1398,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts__post_422_response']
 					}
 				}
 			}
@@ -1445,7 +1445,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_appointments__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1455,7 +1455,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_appointments__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1465,7 +1465,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_appointments__get_401_response']
 					}
 				}
 			}
@@ -1535,7 +1535,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1545,7 +1545,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1555,7 +1555,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_post_422_response']
 					}
 				}
 			}
@@ -1604,7 +1604,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1614,7 +1614,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1624,7 +1624,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_delete_422_response']
 					}
 				}
 			}
@@ -1683,7 +1683,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_remove-all_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1693,7 +1693,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_remove-all_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1703,7 +1703,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_remove-all_delete_422_response']
 					}
 				}
 			}
@@ -1749,7 +1749,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1759,7 +1759,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1769,7 +1769,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__get_401_response']
 					}
 				}
 			}
@@ -1810,7 +1810,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1820,7 +1820,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1830,7 +1830,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1840,7 +1840,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_422_response']
 					}
 				}
 			}
@@ -1892,7 +1892,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1902,7 +1902,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1912,7 +1912,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_get_401_response']
 					}
 				}
 			}
@@ -1957,7 +1957,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -1967,7 +1967,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -1977,7 +1977,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -1987,7 +1987,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_422_response']
 					}
 				}
 			}
@@ -2037,7 +2037,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2047,7 +2047,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_delete_401_response']
 					}
 				}
 			}
@@ -2101,7 +2101,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2111,7 +2111,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2121,7 +2121,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2131,7 +2131,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_422_response']
 					}
 				}
 			}
@@ -2167,7 +2167,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2177,7 +2177,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2187,7 +2187,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2197,7 +2197,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_422_response']
 					}
 				}
 			}
@@ -2243,7 +2243,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2253,7 +2253,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2263,7 +2263,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__get_401_response']
 					}
 				}
 			}
@@ -2304,7 +2304,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2314,7 +2314,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2324,7 +2324,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2334,7 +2334,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_422_response']
 					}
 				}
 			}
@@ -2386,7 +2386,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2396,7 +2396,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2406,7 +2406,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_get_401_response']
 					}
 				}
 			}
@@ -2451,7 +2451,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2461,7 +2461,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2471,7 +2471,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2481,7 +2481,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_422_response']
 					}
 				}
 			}
@@ -2531,7 +2531,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2541,7 +2541,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_delete_401_response']
 					}
 				}
 			}
@@ -2599,7 +2599,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2609,7 +2609,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2619,7 +2619,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2629,7 +2629,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_422_response']
 					}
 				}
 			}
@@ -2700,7 +2700,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_workflow_{workflowId}_post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2710,7 +2710,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_workflow_{workflowId}_post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2720,7 +2720,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{contactId}_workflow_{workflowId}_post_422_response']
 					}
 				}
 			}
@@ -2767,7 +2767,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2777,7 +2777,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2787,7 +2787,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_get_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2797,7 +2797,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_get_422_response']
 					}
 				}
 			}
@@ -2837,7 +2837,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2847,7 +2847,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2857,7 +2857,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2867,7 +2867,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_put_422_response']
 					}
 				}
 			}
@@ -2912,7 +2912,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -2922,7 +2922,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -2932,7 +2932,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_{id}_delete_422_response']
 					}
 				}
 			}
@@ -2983,7 +2983,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_lookup_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -2993,7 +2993,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_lookup_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3003,7 +3003,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_lookup_get_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3013,7 +3013,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_contacts_lookup_get_422_response']
 					}
 				}
 			}
@@ -3053,7 +3053,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3063,7 +3063,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3073,7 +3073,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields__get_401_response']
 					}
 				}
 			}
@@ -3108,7 +3108,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3118,7 +3118,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3128,7 +3128,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3138,7 +3138,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields__post_422_response']
 					}
 				}
 			}
@@ -3185,7 +3185,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3195,7 +3195,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3205,7 +3205,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_get_401_response']
 					}
 				}
 			}
@@ -3245,7 +3245,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3255,7 +3255,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3265,7 +3265,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3275,7 +3275,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_422_response']
 					}
 				}
 			}
@@ -3320,7 +3320,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3330,7 +3330,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3340,7 +3340,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_delete_422_response']
 					}
 				}
 			}
@@ -3377,7 +3377,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3387,7 +3387,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3397,7 +3397,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values__get_401_response']
 					}
 				}
 			}
@@ -3432,7 +3432,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3442,7 +3442,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3452,7 +3452,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3462,7 +3462,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values__post_422_response']
 					}
 				}
 			}
@@ -3509,7 +3509,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3519,7 +3519,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3529,7 +3529,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_get_401_response']
 					}
 				}
 			}
@@ -3569,7 +3569,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3579,7 +3579,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3589,7 +3589,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3599,7 +3599,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_422_response']
 					}
 				}
 			}
@@ -3644,7 +3644,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3654,7 +3654,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3664,7 +3664,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_custom-values_{customValueId}_delete_422_response']
 					}
 				}
 			}
@@ -3701,7 +3701,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_forms__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3711,7 +3711,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_forms__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3721,7 +3721,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_forms__get_401_response']
 					}
 				}
 			}
@@ -3795,7 +3795,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_forms_submissions_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3805,7 +3805,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_forms_submissions_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3815,7 +3815,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_forms_submissions_get_401_response']
 					}
 				}
 			}
@@ -3855,7 +3855,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3865,7 +3865,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3875,7 +3875,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links__get_401_response']
 					}
 				}
 			}
@@ -3910,7 +3910,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -3920,7 +3920,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -3930,7 +3930,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -3940,7 +3940,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links__post_422_response']
 					}
 				}
 			}
@@ -3994,7 +3994,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links_{linkId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4004,7 +4004,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links_{linkId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4014,7 +4014,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links_{linkId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4024,7 +4024,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links_{linkId}_put_422_response']
 					}
 				}
 			}
@@ -4069,7 +4069,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links_{linkId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4079,7 +4079,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links_{linkId}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4089,7 +4089,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_links_{linkId}_delete_422_response']
 					}
 				}
 			}
@@ -4126,7 +4126,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4136,7 +4136,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4146,7 +4146,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations__get_401_response']
 					}
 				}
 			}
@@ -4181,7 +4181,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4191,7 +4191,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4201,7 +4201,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4211,7 +4211,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations__post_422_response']
 					}
 				}
 			}
@@ -4258,7 +4258,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4268,7 +4268,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4278,7 +4278,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_get_401_response']
 					}
 				}
 			}
@@ -4318,7 +4318,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4328,7 +4328,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4338,7 +4338,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4348,7 +4348,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_put_422_response']
 					}
 				}
 			}
@@ -4389,7 +4389,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_delete_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4399,7 +4399,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4409,7 +4409,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4419,7 +4419,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_delete_422_response']
 					}
 				}
 			}
@@ -4477,7 +4477,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4487,7 +4487,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4497,7 +4497,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4507,7 +4507,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_422_response']
 					}
 				}
 			}
@@ -4555,7 +4555,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_lookup_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4565,7 +4565,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_lookup_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4575,7 +4575,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_locations_lookup_get_401_response']
 					}
 				}
 			}
@@ -4615,7 +4615,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4625,7 +4625,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4635,7 +4635,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines__get_401_response']
 					}
 				}
 			}
@@ -4700,7 +4700,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4710,7 +4710,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4720,7 +4720,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_get_401_response']
 					}
 				}
 			}
@@ -4777,7 +4777,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4787,7 +4787,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4797,7 +4797,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4807,7 +4807,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_422_response']
 					}
 				}
 			}
@@ -4859,7 +4859,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4869,7 +4869,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4879,7 +4879,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_401_response']
 					}
 				}
 			}
@@ -4924,7 +4924,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -4934,7 +4934,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -4944,7 +4944,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -4954,7 +4954,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_422_response']
 					}
 				}
 			}
@@ -5004,7 +5004,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5014,7 +5014,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_delete_401_response']
 					}
 				}
 			}
@@ -5082,7 +5082,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5092,7 +5092,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -5102,7 +5102,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_422_response']
 					}
 				}
 			}
@@ -5155,7 +5155,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_locations_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5165,7 +5165,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_locations_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5175,7 +5175,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_locations_get_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -5185,7 +5185,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_locations_get_422_response']
 					}
 				}
 			}
@@ -5241,7 +5241,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5251,7 +5251,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5261,7 +5261,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -5271,7 +5271,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_422_response']
 					}
 				}
 			}
@@ -5310,7 +5310,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_snapshots__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5320,7 +5320,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_snapshots__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5330,7 +5330,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_snapshots__get_401_response']
 					}
 				}
 			}
@@ -5370,7 +5370,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_surveys__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5380,7 +5380,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_surveys__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5390,7 +5390,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_surveys__get_401_response']
 					}
 				}
 			}
@@ -5464,7 +5464,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_surveys_submissions_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5474,7 +5474,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_surveys_submissions_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5484,7 +5484,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_surveys_submissions_get_401_response']
 					}
 				}
 			}
@@ -5524,7 +5524,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5534,7 +5534,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5544,7 +5544,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags__get_401_response']
 					}
 				}
 			}
@@ -5579,7 +5579,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5589,7 +5589,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5599,7 +5599,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -5609,7 +5609,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags__post_422_response']
 					}
 				}
 			}
@@ -5656,7 +5656,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5666,7 +5666,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5676,7 +5676,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_get_401_response']
 					}
 				}
 			}
@@ -5716,7 +5716,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5726,7 +5726,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5736,7 +5736,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -5746,7 +5746,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_put_422_response']
 					}
 				}
 			}
@@ -5791,7 +5791,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5801,7 +5801,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_delete_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -5811,7 +5811,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_tags_{tagId}_delete_422_response']
 					}
 				}
 			}
@@ -5848,7 +5848,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_timezones__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5858,7 +5858,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_timezones__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5868,7 +5868,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_timezones__get_401_response']
 					}
 				}
 			}
@@ -5917,7 +5917,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5927,7 +5927,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5937,7 +5937,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users__get_401_response']
 					}
 				}
 			}
@@ -5972,7 +5972,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users__post_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -5982,7 +5982,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users__post_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -5992,7 +5992,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users__post_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -6002,7 +6002,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users__post_422_response']
 					}
 				}
 			}
@@ -6049,7 +6049,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -6059,7 +6059,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -6069,7 +6069,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_get_401_response']
 					}
 				}
 			}
@@ -6109,7 +6109,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_put_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -6119,7 +6119,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_put_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -6129,7 +6129,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_put_401_response']
 					}
 				}
 				/** @description Unprocessable Entity (WebDAV) (RFC 4918) */
@@ -6139,7 +6139,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_put_422_response']
 					}
 				}
 			}
@@ -6184,7 +6184,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_delete_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -6194,7 +6194,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_{userId}_delete_401_response']
 					}
 				}
 			}
@@ -6231,7 +6231,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_location_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -6241,7 +6241,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_location_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -6251,7 +6251,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_location_get_401_response']
 					}
 				}
 			}
@@ -6300,7 +6300,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_lookup_get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -6310,7 +6310,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_lookup_get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -6320,7 +6320,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_users_lookup_get_401_response']
 					}
 				}
 			}
@@ -6360,7 +6360,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_workflows__get_200_response']
 					}
 				}
 				/** @description Bad Request */
@@ -6370,7 +6370,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_workflows__get_400_response']
 					}
 				}
 				/** @description Unauthorized */
@@ -6380,7 +6380,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': components['schemas']['_v1_workflows__get_401_response']
 					}
 				}
 			}
@@ -6396,7 +6396,2649 @@ export type paths = {
 }
 export type webhooks = Record<string, never>
 export type components = {
-	schemas: never
+	schemas: {
+		_v1_appointments__get_200_response: {
+			appointments?: {
+				appoinmentStatus?: string
+				calendarId?: string
+				calendarProviderId?: string
+				calendarServiceId?: string
+				contact?: {
+					__moreField__?: string
+					country?: string
+					customField?: {
+						id?: string
+						value?: string
+					}[]
+					email?: string
+					emailLowerCase?: string
+					fingerprint?: string
+					id?: string
+					locationId?: string
+					tags?: string[]
+					timezone?: string
+				}
+				contactId?: string
+				endTime?: string
+				id?: string
+				isRecurring?: boolean
+				locationId?: string
+				selectedTimezone?: string
+				startTime?: string
+				status?: string
+				title?: string
+				userId?: string
+			}[]
+		}
+		_v1_appointments__get_400_response: {
+			msg?: string
+		}
+		_v1_appointments__get_401_response: {
+			msg?: string
+		}
+		_v1_appointments__get_422_response: {
+			endDate?: {
+				message?: string
+				rule?: string
+			}
+			startDate?: {
+				message?: string
+				rule?: string
+			}
+			'userId or calendarProviderId'?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_appointments__post_200_response: {
+			contact?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				timezone?: string
+			}
+			contactId?: string
+			id?: string
+		}
+		_v1_appointments__post_400_response: {
+			msg?: string
+		}
+		_v1_appointments__post_401_response: {
+			msg?: string
+		}
+		_v1_appointments__post_422_response: {
+			calendarId?: {
+				message?: string
+				rule?: string
+			}
+			'email or phone'?: {
+				message?: string
+				rule?: string
+			}
+			selectedSlot?: {
+				message?: string
+				rule?: string
+			}
+			selectedTimezone?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_appointments_{appointmentId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_get_200_response': {
+			appoinmentStatus?: string
+			calendarId?: string
+			calendarProviderId?: string
+			calendarServiceId?: string
+			contact?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				tags?: string[]
+				timezone?: string
+			}
+			contactId?: string
+			endTime?: string
+			id?: string
+			isRecurring?: boolean
+			locationId?: string
+			selectedTimezone?: string
+			startTime?: string
+			status?: string
+			title?: string
+			userId?: string
+		}
+		'_v1_appointments_{appointmentId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_put_200_response': {
+			contact?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				timezone?: string
+			}
+			contactId?: string
+			id?: string
+		}
+		'_v1_appointments_{appointmentId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_put_422_response': {
+			selectedSlot?: {
+				message?: string
+				rule?: string
+			}
+			selectedTimezone?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_appointments_{appointmentId}_status_put_400_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_status_put_401_response': {
+			msg?: string
+		}
+		'_v1_appointments_{appointmentId}_status_put_422_response': {
+			status?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_appointments_slots_get_200_response: {
+			_dates_?: {
+				slots?: string[]
+			}
+		}
+		_v1_appointments_slots_get_400_response: {
+			msg?: string
+		}
+		_v1_appointments_slots_get_401_response: {
+			msg?: string
+		}
+		_v1_appointments_slots_get_422_response: {
+			calendarId?: {
+				message?: string
+				rule?: string
+			}
+			endDate?: {
+				message?: string
+				rule?: string
+			}
+			startDate?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_calendars_check-slug-availability_{slug}_get_200_response': {
+			isSlugAvailable?: boolean
+			slug?: string
+		}
+		'_v1_calendars_check-slug-availability_{slug}_get_400_response': {
+			msg?: string
+		}
+		'_v1_calendars_check-slug-availability_{slug}_get_401_response': {
+			msg?: string
+		}
+		'_v1_calendars_check-slug-availability_{slug}_get_422_response': {
+			'email or phone'?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_calendars_services__post_200_response: {
+			appointmentTitle?: string
+			availability?: {
+				appointmentInfo?: {
+					perDay?: number
+					perSlot?: number
+				}
+				eventTiming?: {
+					slotBuffer?: number
+					slotDuration?: number
+					slotInterval?: number
+				}
+				officeHours?: {
+					friday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					monday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					thursday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					tuesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					wednesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+				}
+				schedule?: {
+					allowBookingAfter?: number
+					allowBookingAfterUnit?: string
+					allowBookingFor?: number
+					allowBookingForUnit?: string
+				}
+			}
+			confirmation?: {
+				form?: {
+					customFormId?: string
+					stickyContact?: boolean
+				}
+				formSubmission?: {
+					content?: string
+					type?: string
+				}
+				notificationAndOther?: {
+					alertEmail?: string
+					customCode?: string
+					facebookPixelId?: string
+					hasAllowCancellation?: boolean
+					hasAllowReschedule?: boolean
+					hasAutoConfirm?: boolean
+					hasGoogleSendInvitationEmail?: boolean
+					hasSendEmailToAssignedMember?: boolean
+					notes?: string
+				}
+			}
+			description?: string
+			eventColor?: string
+			id?: string
+			linkedCalendars?: {
+				clio?: {
+					id?: string
+					name?: string
+				}
+				drchrono?: {
+					id?: string
+					name?: string
+				}
+				google?: {
+					id?: string
+					name?: string
+				}
+			}
+			meetingLocation?: string
+			name?: string
+			syncOption?: string
+			teamId?: string
+			teamMembers?: {
+				meetingLocation?: string
+				priority?: number
+				selected?: boolean
+				userId?: string
+			}[]
+		}
+		_v1_calendars_services__post_400_response: {
+			msg?: string
+		}
+		_v1_calendars_services__post_401_response: {
+			msg?: string
+		}
+		_v1_calendars_services__post_422_response: {
+			appointmentTitle?: {
+				message?: string
+				rule?: string
+			}
+			'availability.eventTiming.slotDuration'?: {
+				message?: string
+				rule?: string
+			}
+			'availability.eventTiming.slotInterval'?: {
+				message?: string
+				rule?: string
+			}
+			'availability.officeHours'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.formSubmission.content'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.formSubmission.type'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.allowCancellation'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.allowReschedule'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.autoConfirm'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.googleInvitationEmails'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.shouldSendAlertEmailsToAssignedMember'?: {
+				message?: string
+				rule?: string
+			}
+			description?: {
+				message?: string
+				rule?: string
+			}
+			eventColor?: {
+				message?: string
+				rule?: string
+			}
+			eventType?: {
+				message?: string
+				rule?: string
+			}
+			name?: {
+				message?: string
+				rule?: string
+			}
+			slug?: {
+				message?: string
+				rule?: string
+			}
+			teamId?: {
+				message?: string
+				rule?: string
+			}
+			teamMembers?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_calendars_services_{serviceId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_calendars_services_{serviceId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_calendars_services_{serviceId}_delete_422_response': {
+			id?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_calendars_services_{serviceId}_put_200_response': {
+			appointmentTitle?: string
+			availability?: {
+				appointmentInfo?: {
+					perDay?: number
+					perSlot?: number
+				}
+				eventTiming?: {
+					slotBuffer?: number
+					slotDuration?: number
+					slotInterval?: number
+				}
+				officeHours?: {
+					friday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					monday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					thursday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					tuesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					wednesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+				}
+				schedule?: {
+					allowBookingAfter?: number
+					allowBookingAfterUnit?: string
+					allowBookingFor?: number
+					allowBookingForUnit?: string
+				}
+			}
+			confirmation?: {
+				form?: {
+					customFormId?: string
+					stickyContact?: boolean
+				}
+				formSubmission?: {
+					content?: string
+					type?: string
+				}
+				notificationAndOther?: {
+					alertEmail?: string
+					customCode?: string
+					facebookPixelId?: string
+					hasAllowCancellation?: boolean
+					hasAllowReschedule?: boolean
+					hasAutoConfirm?: boolean
+					hasGoogleSendInvitationEmail?: boolean
+					hasSendEmailToAssignedMember?: boolean
+					notes?: string
+				}
+			}
+			description?: string
+			eventColor?: string
+			id?: string
+			linkedCalendars?: {
+				clio?: {
+					id?: string
+					name?: string
+				}
+				drchrono?: {
+					id?: string
+					name?: string
+				}
+				google?: {
+					id?: string
+					name?: string
+				}
+			}
+			meetingLocation?: string
+			name?: string
+			syncOption?: string
+			teamId?: string
+			teamMembers?: {
+				meetingLocation?: string
+				priority?: number
+				selected?: boolean
+				userId?: string
+			}[]
+		}
+		'_v1_calendars_services_{serviceId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_calendars_services_{serviceId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_calendars_services_{serviceId}_put_422_response': {
+			appointmentTitle?: {
+				message?: string
+				rule?: string
+			}
+			'availability.eventTiming.slotDuration'?: {
+				message?: string
+				rule?: string
+			}
+			'availability.eventTiming.slotInterval'?: {
+				message?: string
+				rule?: string
+			}
+			'availability.officeHours'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.formSubmission.content'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.formSubmission.type'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.allowCancellation'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.allowReschedule'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.autoConfirm'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.googleInvitationEmails'?: {
+				message?: string
+				rule?: string
+			}
+			'confirmation.notificationAndOther.shouldSendAlertEmailsToAssignedMember'?: {
+				message?: string
+				rule?: string
+			}
+			description?: {
+				message?: string
+				rule?: string
+			}
+			eventColor?: {
+				message?: string
+				rule?: string
+			}
+			eventType?: {
+				message?: string
+				rule?: string
+			}
+			name?: {
+				message?: string
+				rule?: string
+			}
+			slug?: {
+				message?: string
+				rule?: string
+			}
+			teamId?: {
+				message?: string
+				rule?: string
+			}
+			teamMembers?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_calendars_services_get_200_response: {
+			services?: {
+				appointmentTitle?: string
+				availability?: {
+					appointmentInfo?: {
+						perDay?: number
+						perSlot?: number
+					}
+					eventTiming?: {
+						slotBuffer?: number
+						slotDuration?: number
+						slotInterval?: number
+					}
+					officeHours?: {
+						friday?: {
+							closeHour?: number
+							closeMinute?: number
+							openHour?: number
+							openMinute?: number
+						}[]
+						monday?: {
+							closeHour?: number
+							closeMinute?: number
+							openHour?: number
+							openMinute?: number
+						}[]
+						thursday?: {
+							closeHour?: number
+							closeMinute?: number
+							openHour?: number
+							openMinute?: number
+						}[]
+						tuesday?: {
+							closeHour?: number
+							closeMinute?: number
+							openHour?: number
+							openMinute?: number
+						}[]
+						wednesday?: {
+							closeHour?: number
+							closeMinute?: number
+							openHour?: number
+							openMinute?: number
+						}[]
+					}
+					schedule?: {
+						allowBookingAfter?: number
+						allowBookingAfterUnit?: string
+						allowBookingFor?: number
+						allowBookingForUnit?: string
+					}
+				}
+				confirmation?: {
+					form?: {
+						customFormId?: string
+						stickyContact?: boolean
+					}
+					formSubmission?: {
+						content?: string
+						type?: string
+					}
+					notificationAndOther?: {
+						alertEmail?: string
+						customCode?: string
+						facebookPixelId?: string
+						hasAllowCancellation?: boolean
+						hasAllowReschedule?: boolean
+						hasAutoConfirm?: boolean
+						hasGoogleSendInvitationEmail?: boolean
+						hasSendEmailToAssignedMember?: boolean
+						notes?: string
+					}
+				}
+				description?: string
+				eventColor?: string
+				id?: string
+				linkedCalendars?: {
+					clio?: {
+						id?: string
+						name?: string
+					}
+					drchrono?: {
+						id?: string
+						name?: string
+					}
+					google?: {
+						id?: string
+						name?: string
+					}
+				}
+				meetingLocation?: string
+				name?: string
+				syncOption?: string
+				teamId?: string
+				teamMembers?: {
+					meetingLocation?: string
+					priority?: number
+					selected?: boolean
+					userId?: string
+				}[]
+			}[]
+		}
+		_v1_calendars_services_get_400_response: {
+			msg?: string
+		}
+		_v1_calendars_services_get_401_response: {
+			msg?: string
+		}
+		_v1_calendars_teams__post_200_response: {
+			calendarConfig?: {
+				calendarName?: string
+				description?: string
+				link?: string
+				shouldAssignContactToTeamMember?: boolean
+				shouldSkipAssigningContactForExisting?: boolean
+				slug?: string
+			}
+			id?: string
+			members?: {
+				email?: string
+				id?: string
+				name?: string
+			}[]
+			name?: string
+		}
+		_v1_calendars_teams__post_400_response: {
+			msg?: string
+		}
+		_v1_calendars_teams__post_401_response: {
+			msg?: string
+		}
+		_v1_calendars_teams__post_422_response: {
+			'calendarConfig.calendarName'?: {
+				message?: string
+				rule?: string
+			}
+			'calendarConfig.description'?: {
+				message?: string
+				rule?: string
+			}
+			'calendarConfig.slug'?: {
+				message?: string
+				rule?: string
+			}
+			name?: {
+				message?: string
+				rule?: string
+			}
+			userIds?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_calendars_teams_{teamId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_calendars_teams_{teamId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_calendars_teams_{teamId}_put_200_response': {
+			calendarConfig?: {
+				calendarName?: string
+				description?: string
+				link?: string
+				shouldAssignContactToTeamMember?: boolean
+				shouldSkipAssigningContactForExisting?: boolean
+				slug?: string
+			}
+			id?: string
+			members?: {
+				email?: string
+				id?: string
+				name?: string
+			}[]
+			name?: string
+		}
+		'_v1_calendars_teams_{teamId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_calendars_teams_{teamId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_calendars_teams_{teamId}_put_422_response': {
+			'calendarConfig.calendarName'?: {
+				message?: string
+				rule?: string
+			}
+			'calendarConfig.description'?: {
+				message?: string
+				rule?: string
+			}
+			'calendarConfig.slug'?: {
+				message?: string
+				rule?: string
+			}
+			name?: {
+				message?: string
+				rule?: string
+			}
+			userIds?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_calendars_teams_get_200_response: {
+			teams?: {
+				calendarConfig?: {
+					calendarName?: string
+					description?: string
+					link?: string
+					shouldAssignContactToTeamMember?: boolean
+					shouldSkipAssigningContactForExisting?: boolean
+					slug?: string
+				}
+				id?: string
+				members?: {
+					email?: string
+					id?: string
+					name?: string
+				}[]
+				name?: string
+			}[]
+		}
+		_v1_calendars_teams_get_400_response: {
+			msg?: string
+		}
+		_v1_calendars_teams_get_401_response: {
+			msg?: string
+		}
+		_v1_campaigns__get_200_response: {
+			campaigns?: {
+				id?: string
+				name?: string
+				status?: string
+			}[]
+		}
+		_v1_campaigns__get_400_response: {
+			msg?: string
+		}
+		_v1_campaigns__get_401_response: {
+			msg?: string
+		}
+		_v1_contacts__get_200_response: {
+			contacts?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				dateAdded?: string
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				source?: string
+				tags?: string[]
+				timezone?: string
+			}[]
+			meta?: {
+				currentPage?: number
+				nextPage?: number
+				nextPageUrl?: string
+				prevPage?: number
+				startAfter?: number
+				startAfterId?: string
+				total?: number
+			}
+		}
+		_v1_contacts__get_400_response: {
+			msg?: string
+		}
+		_v1_contacts__get_401_response: {
+			msg?: string
+		}
+		_v1_contacts__post_200_response: {
+			contact?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				dateAdded?: string
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				source?: string
+				tags?: string[]
+				timezone?: string
+			}
+		}
+		_v1_contacts__post_400_response: {
+			msg?: string
+		}
+		_v1_contacts__post_401_response: {
+			msg?: string
+		}
+		_v1_contacts__post_422_response: {
+			'email or phone'?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{contactId}_appointments__get_200_response': Record<
+			string,
+			never
+		>
+		'_v1_contacts_{contactId}_appointments__get_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_appointments__get_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_campaigns_{campaignId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_campaigns_{campaignId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_campaigns_{campaignId}_delete_422_response': {
+			tags?: {
+				message?: string
+				rules?: string
+			}
+		}
+		'_v1_contacts_{contactId}_campaigns_{campaignId}_post_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_campaigns_{campaignId}_post_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_campaigns_{campaignId}_post_422_response': {
+			tags?: {
+				message?: string
+				rules?: string
+			}
+		}
+		'_v1_contacts_{contactId}_campaigns_remove-all_delete_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_campaigns_remove-all_delete_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_campaigns_remove-all_delete_422_response': {
+			tags?: {
+				message?: string
+				rules?: string
+			}
+		}
+		'_v1_contacts_{contactId}_notes__get_200_response': {
+			notes?: {
+				body?: string
+				createdAt?: string
+				createdBy?: string
+				id?: string
+			}[]
+		}
+		'_v1_contacts_{contactId}_notes__get_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes__get_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes__post_200_response': {
+			body?: string
+			createdAt?: string
+			createdBy?: string
+			id?: string
+		}
+		'_v1_contacts_{contactId}_notes__post_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes__post_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes__post_422_response': {
+			body?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_get_200_response': {
+			body?: string
+			createdAt?: string
+			createdBy?: string
+			id?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_put_200_response': {
+			body?: string
+			createdAt?: string
+			createdBy?: string
+			id?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_notes_{noteId}_put_422_response': {
+			body?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{contactId}_tags__delete_200_response': {
+			tags?: string[]
+		}
+		'_v1_contacts_{contactId}_tags__delete_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tags__delete_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tags__delete_422_response': {
+			tags?: {
+				message?: string
+				rules?: string
+			}
+		}
+		'_v1_contacts_{contactId}_tags__post_200_response': {
+			tags?: string[]
+		}
+		'_v1_contacts_{contactId}_tags__post_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tags__post_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tags__post_422_response': {
+			tags?: {
+				message?: string
+				rules?: string
+			}
+		}
+		'_v1_contacts_{contactId}_tasks__get_200_response': {
+			tasks?: {
+				assignedTo?: string
+				description?: string
+				dueDate?: string
+				id?: string
+				isCompleted?: boolean
+				title?: string
+			}[]
+		}
+		'_v1_contacts_{contactId}_tasks__get_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks__get_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks__post_200_response': {
+			assignedTo?: string
+			description?: string
+			dueDate?: string
+			id?: string
+			isCompleted?: boolean
+			title?: string
+		}
+		'_v1_contacts_{contactId}_tasks__post_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks__post_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks__post_422_response': {
+			dueDate?: {
+				message?: string
+				rule?: string
+			}
+			title?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_get_200_response': {
+			assignedTo?: string
+			description?: string
+			dueDate?: string
+			id?: string
+			isCompleted?: boolean
+			title?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_put_200_response': {
+			assignedTo?: string
+			description?: string
+			dueDate?: string
+			id?: string
+			isCompleted?: boolean
+			title?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_put_422_response': {
+			dueDate?: {
+				message?: string
+				rule?: string
+			}
+			title?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_status_put_200_response': {
+			assignedTo?: string
+			description?: string
+			dueDate?: string
+			id?: string
+			isCompleted?: boolean
+			title?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_status_put_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_status_put_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_status_put_422_response': {
+			dueDate?: {
+				message?: string
+				rule?: string
+			}
+			title?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{contactId}_workflow_{workflowId}_post_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_workflow_{workflowId}_post_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{contactId}_workflow_{workflowId}_post_422_response': {
+			contactId?: string
+			workflowId?: string
+		}
+		'_v1_contacts_{id}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{id}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{id}_delete_422_response': {
+			id?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{id}_get_200_response': {
+			contact?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				dateAdded?: string
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				source?: string
+				tags?: string[]
+				timezone?: string
+			}
+		}
+		'_v1_contacts_{id}_get_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{id}_get_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{id}_get_422_response': {
+			id?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_contacts_{id}_put_200_response': {
+			contact?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				dateAdded?: string
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				source?: string
+				tags?: string[]
+				timezone?: string
+			}
+		}
+		'_v1_contacts_{id}_put_400_response': {
+			msg?: string
+		}
+		'_v1_contacts_{id}_put_401_response': {
+			msg?: string
+		}
+		'_v1_contacts_{id}_put_422_response': {
+			id?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_contacts_lookup_get_200_response: {
+			contacts?: {
+				__moreField__?: string
+				country?: string
+				customField?: {
+					id?: string
+					value?: string
+				}[]
+				dateAdded?: string
+				email?: string
+				emailLowerCase?: string
+				fingerprint?: string
+				id?: string
+				locationId?: string
+				source?: string
+				tags?: string[]
+				timezone?: string
+			}[]
+		}
+		_v1_contacts_lookup_get_400_response: {
+			msg?: string
+		}
+		_v1_contacts_lookup_get_401_response: {
+			msg?: string
+		}
+		_v1_contacts_lookup_get_422_response: {
+			'email or phone'?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_custom-fields__get_200_response': {
+			customFields?: {
+				dateType?: string
+				fieldKey?: string
+				id?: string
+				name?: string
+				picklistOptions?: string[]
+				placeholder?: string
+				position?: number
+			}[]
+		}
+		'_v1_custom-fields__get_400_response': {
+			msg?: string
+		}
+		'_v1_custom-fields__get_401_response': {
+			msg?: string
+		}
+		'_v1_custom-fields__post_200_response': {
+			dateType?: string
+			fieldKey?: string
+			id?: string
+			name?: string
+			picklistOptions?: string[]
+			placeholder?: string
+			position?: number
+		}
+		'_v1_custom-fields__post_400_response': {
+			msg?: string
+		}
+		'_v1_custom-fields__post_401_response': {
+			msg?: string
+		}
+		'_v1_custom-fields__post_422_response': {
+			dataType?: {
+				message?: string
+				rule?: string
+			}
+			name?: {
+				message?: string
+				rule?: string
+			}
+			'options or acceptedFormat or textBoxListOptions'?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_custom-fields_{customFieldId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_custom-fields_{customFieldId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_custom-fields_{customFieldId}_delete_422_response': {
+			customFieldId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_custom-fields_{customFieldId}_get_200_response': {
+			dateType?: string
+			fieldKey?: string
+			id?: string
+			name?: string
+			picklistOptions?: string[]
+			placeholder?: string
+			position?: number
+		}
+		'_v1_custom-fields_{customFieldId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_custom-fields_{customFieldId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_custom-fields_{customFieldId}_put_200_response': {
+			dateType?: string
+			fieldKey?: string
+			id?: string
+			name?: string
+			picklistOptions?: string[]
+			placeholder?: string
+			position?: number
+		}
+		'_v1_custom-fields_{customFieldId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_custom-fields_{customFieldId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_custom-fields_{customFieldId}_put_422_response': {
+			dataType?: {
+				message?: string
+				rule?: string
+			}
+			name?: {
+				message?: string
+				rule?: string
+			}
+			'options or acceptedFormat or textBoxListOptions'?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_custom-values__get_200_response': {
+			customFields?: {
+				fieldKey?: string
+				id?: string
+				name?: string
+				value?: string
+			}[]
+		}
+		'_v1_custom-values__get_400_response': {
+			msg?: string
+		}
+		'_v1_custom-values__get_401_response': {
+			msg?: string
+		}
+		'_v1_custom-values__post_200_response': {
+			fieldKey?: string
+			id?: string
+			name?: string
+			value?: string
+		}
+		'_v1_custom-values__post_400_response': {
+			msg?: string
+		}
+		'_v1_custom-values__post_401_response': {
+			msg?: string
+		}
+		'_v1_custom-values__post_422_response': {
+			name?: {
+				message?: string
+				rule?: string
+			}
+			value?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_custom-values_{customValueId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_custom-values_{customValueId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_custom-values_{customValueId}_delete_422_response': {
+			customValueId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_custom-values_{customValueId}_get_200_response': {
+			fieldKey?: string
+			id?: string
+			name?: string
+			value?: string
+		}
+		'_v1_custom-values_{customValueId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_custom-values_{customValueId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_custom-values_{customValueId}_put_200_response': {
+			fieldKey?: string
+			id?: string
+			name?: string
+			value?: string
+		}
+		'_v1_custom-values_{customValueId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_custom-values_{customValueId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_custom-values_{customValueId}_put_422_response': {
+			name?: {
+				message?: string
+				rule?: string
+			}
+			value?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_forms__get_200_response: {
+			forms?: {
+				id?: string
+				name?: string
+			}[]
+		}
+		_v1_forms__get_400_response: {
+			msg?: string
+		}
+		_v1_forms__get_401_response: {
+			msg?: string
+		}
+		_v1_forms_submissions_get_200_response: {
+			meta?: {
+				currentPage?: number
+				nextPage?: number
+				prevPage?: number
+				total?: number
+			}
+			submissions?: {
+				__custom_field_id__?: string
+				__submissions_other_field__?: string
+				contactId?: string
+				createdAt?: string
+				formId?: string
+				id?: string
+				pageDetails?: {
+					fbclid?: string
+					referrer?: string
+					source?: string
+					url?: string
+				}
+			}[]
+		}
+		_v1_forms_submissions_get_400_response: {
+			msg?: string
+		}
+		_v1_forms_submissions_get_401_response: {
+			msg?: string
+		}
+		_v1_links__get_200_response: {
+			links?: {
+				fieldKey?: string
+				id?: string
+				locationId?: string
+				name?: string
+				redirectTo?: string
+			}[]
+		}
+		_v1_links__get_400_response: {
+			msg?: string
+		}
+		_v1_links__get_401_response: {
+			msg?: string
+		}
+		_v1_links__post_200_response: {
+			fieldKey?: string
+			id?: string
+			locationId?: string
+			name?: string
+			redirectTo?: string
+		}
+		_v1_links__post_400_response: {
+			msg?: string
+		}
+		_v1_links__post_401_response: {
+			msg?: string
+		}
+		_v1_links__post_422_response: {
+			name?: {
+				message?: string
+				rule?: string
+			}
+			redirectTo?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_links_{linkId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_links_{linkId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_links_{linkId}_delete_422_response': {
+			linkId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_links_{linkId}_put_200_response': {
+			fieldKey?: string
+			id?: string
+			locationId?: string
+			name?: string
+			redirectTo?: string
+		}
+		'_v1_links_{linkId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_links_{linkId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_links_{linkId}_put_422_response': {
+			linkId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_locations__get_200_response: {
+			locations?: {
+				address?: string
+				business?: {
+					address?: string
+					city?: string
+					country?: string
+					name?: string
+					postalCode?: string
+					state?: string
+					timezone?: string
+					website?: string
+				}
+				city?: string
+				country?: string
+				email?: string
+				firstName?: string
+				id?: string
+				lastName?: string
+				name?: string
+				phone?: string
+				postalCode?: string
+				settings?: {
+					allowDuplicateContact?: boolean
+					allowDuplicateOpportunity?: boolean
+					allowFacebookNameMerge?: boolean
+					disableContactTimezone?: boolean
+				}
+				social?: {
+					blogRss?: string
+					facebookUrl?: string
+					foursquare?: string
+					googlePlaceId?: string
+					googlePlus?: string
+					instagram?: string
+					linkedIn?: string
+					pinterest?: string
+					twitter?: string
+					yelp?: string
+					youtube?: string
+				}
+				state?: string
+				timezone?: string
+				website?: string
+			}[]
+		}
+		_v1_locations__get_400_response: {
+			msg?: string
+		}
+		_v1_locations__get_401_response: {
+			msg?: string
+		}
+		_v1_locations__post_200_response: {
+			address?: string
+			business?: {
+				address?: string
+				city?: string
+				country?: string
+				email?: string
+				name?: string
+				postalCode?: string
+				state?: string
+				timezone?: string
+				website?: string
+			}
+			city?: string
+			country?: string
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			settings?: {
+				allowDuplicateContact?: boolean
+				allowDuplicateOpportunity?: boolean
+				allowFacebookNameMerge?: boolean
+				disableContactTimezone?: boolean
+			}
+			social?: {
+				blogRss?: string
+				facebookUrl?: string
+				foursquare?: string
+				googlePlaceId?: string
+				googlePlus?: string
+				instagram?: string
+				linkedIn?: string
+				pinterest?: string
+				twitter?: string
+				yelp?: string
+				youtube?: string
+			}
+			state?: string
+			timezone?: string
+			website?: string
+		}
+		_v1_locations__post_400_response: {
+			msg?: string
+		}
+		_v1_locations__post_401_response: {
+			msg?: string
+		}
+		_v1_locations__post_422_response: {
+			address?: {
+				message?: string
+				rule?: string
+			}
+			businessName?: {
+				message?: string
+				rule?: string
+			}
+			city?: {
+				message?: string
+				rule?: string
+			}
+			country?: {
+				message?: string
+				rule?: string
+			}
+			email?: {
+				message?: string
+				rule?: string
+			}
+			firstName?: {
+				message?: string
+				rule?: string
+			}
+			lastName?: {
+				message?: string
+				rule?: string
+			}
+			phone?: {
+				message?: string
+				rule?: string
+			}
+			postalCode?: {
+				message?: string
+				rule?: string
+			}
+			state?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_locations_{locationId}_delete_200_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_delete_422_response': {
+			locationId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_locations_{locationId}_get_200_response': {
+			address?: string
+			business?: {
+				address?: string
+				city?: string
+				country?: string
+				email?: string
+				name?: string
+				postalCode?: string
+				state?: string
+				timezone?: string
+				website?: string
+			}
+			city?: string
+			country?: string
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			settings?: {
+				allowDuplicateContact?: boolean
+				allowDuplicateOpportunity?: boolean
+				allowFacebookNameMerge?: boolean
+				disableContactTimezone?: boolean
+			}
+			social?: {
+				blogRss?: string
+				facebookUrl?: string
+				foursquare?: string
+				googlePlaceId?: string
+				googlePlus?: string
+				instagram?: string
+				linkedIn?: string
+				pinterest?: string
+				twitter?: string
+				yelp?: string
+				youtube?: string
+			}
+			state?: string
+			timezone?: string
+			website?: string
+		}
+		'_v1_locations_{locationId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_200_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_422_response': {
+			locationId?: {
+				message?: string
+				rule?: string
+			}
+			snapshotId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_locations_{locationId}_put_200_response': {
+			address?: string
+			business?: {
+				address?: string
+				city?: string
+				country?: string
+				email?: string
+				name?: string
+				postalCode?: string
+				state?: string
+				timezone?: string
+				website?: string
+			}
+			city?: string
+			country?: string
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			settings?: {
+				allowDuplicateContact?: boolean
+				allowDuplicateOpportunity?: boolean
+				allowFacebookNameMerge?: boolean
+				disableContactTimezone?: boolean
+			}
+			social?: {
+				blogRss?: string
+				facebookUrl?: string
+				foursquare?: string
+				googlePlaceId?: string
+				googlePlus?: string
+				instagram?: string
+				linkedIn?: string
+				pinterest?: string
+				twitter?: string
+				yelp?: string
+				youtube?: string
+			}
+			state?: string
+			timezone?: string
+			website?: string
+		}
+		'_v1_locations_{locationId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_locations_{locationId}_put_422_response': {
+			address?: {
+				message?: string
+				rule?: string
+			}
+			businessName?: {
+				message?: string
+				rule?: string
+			}
+			city?: {
+				message?: string
+				rule?: string
+			}
+			country?: {
+				message?: string
+				rule?: string
+			}
+			email?: {
+				message?: string
+				rule?: string
+			}
+			firstName?: {
+				message?: string
+				rule?: string
+			}
+			lastName?: {
+				message?: string
+				rule?: string
+			}
+			phone?: {
+				message?: string
+				rule?: string
+			}
+			postalCode?: {
+				message?: string
+				rule?: string
+			}
+			state?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_locations_lookup_get_200_response: {
+			address?: string
+			business?: {
+				address?: string
+				city?: string
+				country?: string
+				email?: string
+				name?: string
+				postalCode?: string
+				state?: string
+				timezone?: string
+				website?: string
+			}
+			city?: string
+			country?: string
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			settings?: {
+				allowDuplicateContact?: boolean
+				allowDuplicateOpportunity?: boolean
+				allowFacebookNameMerge?: boolean
+				disableContactTimezone?: boolean
+			}
+			social?: {
+				blogRss?: string
+				facebookUrl?: string
+				foursquare?: string
+				googlePlaceId?: string
+				googlePlus?: string
+				instagram?: string
+				linkedIn?: string
+				pinterest?: string
+				twitter?: string
+				yelp?: string
+				youtube?: string
+			}
+			state?: string
+			timezone?: string
+			website?: string
+		}
+		_v1_locations_lookup_get_400_response: {
+			msg?: string
+		}
+		_v1_locations_lookup_get_401_response: {
+			msg?: string
+		}
+		_v1_pipelines__get_200_response: {
+			pipelines?: {
+				id?: string
+				name?: string
+				stages?: {
+					id?: string
+					name?: string
+				}[]
+			}[]
+		}
+		_v1_pipelines__get_400_response: {
+			msg?: string
+		}
+		_v1_pipelines__get_401_response: {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities__post_200_response': {
+			assignedTo?: string
+			contact?: {
+				companyName?: string
+				email?: string
+				id?: string
+				name?: string
+				phone?: string
+				tags?: string[]
+			}
+			createdAt?: string
+			id?: string
+			lastStatusChangeAt?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			updatedAt?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities__post_400_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities__post_401_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities__post_422_response': {
+			'contactId or email'?: {
+				message?: string
+				rule?: string
+			}
+			stageId?: {
+				message?: string
+				rule?: string
+			}
+			status?: {
+				message?: string
+				rule?: string
+			}
+			title?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_200_response': {
+			assignedTo?: string
+			contact?: {
+				companyName?: string
+				email?: string
+				id?: string
+				name?: string
+				phone?: string
+				tags?: string[]
+			}
+			createdAt?: string
+			id?: string
+			lastStatusChangeAt?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			updatedAt?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_200_response': {
+			assignedTo?: string
+			contact?: {
+				companyName?: string
+				email?: string
+				id?: string
+				name?: string
+				phone?: string
+				tags?: string[]
+			}
+			createdAt?: string
+			id?: string
+			lastStatusChangeAt?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			updatedAt?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_422_response': {
+			'contactId or email'?: {
+				message?: string
+				rule?: string
+			}
+			stageId?: {
+				message?: string
+				rule?: string
+			}
+			status?: {
+				message?: string
+				rule?: string
+			}
+			title?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_400_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_401_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_422_response': {
+			stageId?: {
+				message?: string
+				rule?: string
+			}
+			status?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_get_200_response': {
+			meta?: {
+				currentPage?: number
+				nextPage?: number
+				nextPageUrl?: string
+				prevPage?: number
+				startAfter?: number
+				startAfterId?: string
+				total?: number
+			}
+			opportunities?: {
+				assignedTo?: string
+				contact?: {
+					companyName?: string
+					email?: string
+					id?: string
+					name?: string
+					phone?: string
+					tags?: string[]
+				}
+				createdAt?: string
+				id?: string
+				lastStatusChangeAt?: string
+				monetaryValue?: number
+				name?: string
+				pipelineId?: string
+				pipelineStageId?: string
+				source?: string
+				status?: string
+				updatedAt?: string
+			}[]
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_get_400_response': {
+			msg?: string
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_get_401_response': {
+			msg?: string
+		}
+		_v1_saas_locations_get_200_response: {
+			locationIds?: string[]
+		}
+		_v1_saas_locations_get_400_response: {
+			msg?: string
+		}
+		_v1_saas_locations_get_401_response: {
+			msg?: string
+		}
+		_v1_saas_locations_get_422_response: {
+			customerId?: {
+				message?: string
+				rule?: string
+			}
+			subscriptionId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_saas_update-saas-subscription_{locationId}_put_200_response': {
+			locationIds?: string[]
+		}
+		'_v1_saas_update-saas-subscription_{locationId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_saas_update-saas-subscription_{locationId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_saas_update-saas-subscription_{locationId}_put_422_response': {
+			customerId?: {
+				message?: string
+				rule?: string
+			}
+			subscriptionId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_snapshots__get_200_response: {
+			snapshots?: {
+				id?: string
+				name?: string
+				type?: string
+			}[]
+		}
+		_v1_snapshots__get_400_response: {
+			msg?: string
+		}
+		_v1_snapshots__get_401_response: {
+			msg?: string
+		}
+		_v1_surveys__get_200_response: {
+			surveys?: {
+				id?: string
+				name?: string
+			}[]
+		}
+		_v1_surveys__get_400_response: {
+			msg?: string
+		}
+		_v1_surveys__get_401_response: {
+			msg?: string
+		}
+		_v1_surveys_submissions_get_200_response: {
+			meta?: {
+				currentPage?: number
+				nextPage?: number
+				prevPage?: number
+				total?: number
+			}
+			submissions?: {
+				__custom_field_id__?: string
+				__submissions_other_field__?: string
+				contactId?: string
+				createdAt?: string
+				id?: string
+				pageDetails?: {
+					fbclid?: string
+					referrer?: string
+					source?: string
+					url?: string
+				}
+				surveyId?: string
+			}[]
+		}
+		_v1_surveys_submissions_get_400_response: {
+			msg?: string
+		}
+		_v1_surveys_submissions_get_401_response: {
+			msg?: string
+		}
+		_v1_tags__get_200_response: {
+			tags?: {
+				id?: string
+				name?: string
+			}[]
+		}
+		_v1_tags__get_400_response: {
+			msg?: string
+		}
+		_v1_tags__get_401_response: {
+			msg?: string
+		}
+		_v1_tags__post_200_response: {
+			id?: string
+			name?: string
+		}
+		_v1_tags__post_400_response: {
+			msg?: string
+		}
+		_v1_tags__post_401_response: {
+			msg?: string
+		}
+		_v1_tags__post_422_response: {
+			name?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_tags_{tagId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_tags_{tagId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_tags_{tagId}_delete_422_response': {
+			customValueId?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_tags_{tagId}_get_200_response': {
+			id?: string
+			name?: string
+		}
+		'_v1_tags_{tagId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_tags_{tagId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_tags_{tagId}_put_200_response': {
+			id?: string
+			name?: string
+		}
+		'_v1_tags_{tagId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_tags_{tagId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_tags_{tagId}_put_422_response': {
+			name?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_timezones__get_200_response: {
+			timezones?: string[]
+		}
+		_v1_timezones__get_400_response: {
+			msg?: string
+		}
+		_v1_timezones__get_401_response: {
+			msg?: string
+		}
+		_v1_users__get_200_response: {
+			users?: {
+				email?: string
+				firstName?: string
+				id?: string
+				lastName?: string
+				permissions?: {
+					adwordsReportingEnabled?: boolean
+					appointmentsEnabled?: boolean
+					assignedDataOnly?: boolean
+					attributionsReportingEnabled?: boolean
+					bulkRequestsEnabled?: boolean
+					campaignsEnabled?: boolean
+					campaignsReadOnly?: boolean
+					contactsEnabled?: boolean
+					conversationsEnabled?: boolean
+					dashboardStatsEnabled?: boolean
+					facebookAdsReportingEnabled?: boolean
+					funnelsEnabled?: boolean
+					leadValueEnabled?: boolean
+					marketingEnabled?: boolean
+					membershipEnabled?: boolean
+					onlineListingsEnabled?: boolean
+					opportunitiesEnabled?: boolean
+					phoneCallEnabled?: boolean
+					reviewsEnabled?: boolean
+					settingsEnabled?: boolean
+					tagsEnabled?: boolean
+					triggersEnabled?: boolean
+					websitesEnabled?: boolean
+					workflowsEnabled?: boolean
+				}
+				roles?: {
+					locationIds?: string[]
+					role?: string
+					type?: string
+				}
+			}[]
+		}
+		_v1_users__get_400_response: {
+			msg?: string
+		}
+		_v1_users__get_401_response: {
+			msg?: string
+		}
+		_v1_users__post_200_response: {
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			permissions?: {
+				adwordsReportingEnabled?: boolean
+				appointmentsEnabled?: boolean
+				assignedDataOnly?: boolean
+				attributionsReportingEnabled?: boolean
+				bulkRequestsEnabled?: boolean
+				campaignsEnabled?: boolean
+				campaignsReadOnly?: boolean
+				contactsEnabled?: boolean
+				conversationsEnabled?: boolean
+				dashboardStatsEnabled?: boolean
+				facebookAdsReportingEnabled?: boolean
+				funnelsEnabled?: boolean
+				leadValueEnabled?: boolean
+				marketingEnabled?: boolean
+				membershipEnabled?: boolean
+				onlineListingsEnabled?: boolean
+				opportunitiesEnabled?: boolean
+				phoneCallEnabled?: boolean
+				reviewsEnabled?: boolean
+				settingsEnabled?: boolean
+				tagsEnabled?: boolean
+				triggersEnabled?: boolean
+				websitesEnabled?: boolean
+				workflowsEnabled?: boolean
+			}
+			roles?: {
+				locationIds?: string[]
+				role?: string
+				type?: string
+			}
+		}
+		_v1_users__post_400_response: {
+			msg?: string
+		}
+		_v1_users__post_401_response: {
+			msg?: string
+		}
+		_v1_users__post_422_response: {
+			email?: {
+				message?: string
+				rule?: string
+			}
+			firstName?: {
+				message?: string
+				rule?: string
+			}
+			lastName?: {
+				message?: string
+				rule?: string
+			}
+			locationIds?: {
+				message?: string
+				rule?: string
+			}
+			permissions?: {
+				message?: string
+				rule?: string
+			}
+			role?: {
+				message?: string
+				rule?: string
+			}
+			type?: {
+				message?: string
+				rule?: string
+			}
+		}
+		'_v1_users_{userId}_delete_400_response': {
+			msg?: string
+		}
+		'_v1_users_{userId}_delete_401_response': {
+			msg?: string
+		}
+		'_v1_users_{userId}_get_200_response': {
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			permissions?: {
+				adwordsReportingEnabled?: boolean
+				appointmentsEnabled?: boolean
+				assignedDataOnly?: boolean
+				attributionsReportingEnabled?: boolean
+				bulkRequestsEnabled?: boolean
+				campaignsEnabled?: boolean
+				campaignsReadOnly?: boolean
+				contactsEnabled?: boolean
+				conversationsEnabled?: boolean
+				dashboardStatsEnabled?: boolean
+				facebookAdsReportingEnabled?: boolean
+				funnelsEnabled?: boolean
+				leadValueEnabled?: boolean
+				marketingEnabled?: boolean
+				membershipEnabled?: boolean
+				onlineListingsEnabled?: boolean
+				opportunitiesEnabled?: boolean
+				phoneCallEnabled?: boolean
+				reviewsEnabled?: boolean
+				settingsEnabled?: boolean
+				tagsEnabled?: boolean
+				triggersEnabled?: boolean
+				websitesEnabled?: boolean
+				workflowsEnabled?: boolean
+			}
+			roles?: {
+				locationIds?: string[]
+				role?: string
+				type?: string
+			}
+		}
+		'_v1_users_{userId}_get_400_response': {
+			msg?: string
+		}
+		'_v1_users_{userId}_get_401_response': {
+			msg?: string
+		}
+		'_v1_users_{userId}_put_200_response': {
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			permissions?: {
+				adwordsReportingEnabled?: boolean
+				appointmentsEnabled?: boolean
+				assignedDataOnly?: boolean
+				attributionsReportingEnabled?: boolean
+				bulkRequestsEnabled?: boolean
+				campaignsEnabled?: boolean
+				campaignsReadOnly?: boolean
+				contactsEnabled?: boolean
+				conversationsEnabled?: boolean
+				dashboardStatsEnabled?: boolean
+				facebookAdsReportingEnabled?: boolean
+				funnelsEnabled?: boolean
+				leadValueEnabled?: boolean
+				marketingEnabled?: boolean
+				membershipEnabled?: boolean
+				onlineListingsEnabled?: boolean
+				opportunitiesEnabled?: boolean
+				phoneCallEnabled?: boolean
+				reviewsEnabled?: boolean
+				settingsEnabled?: boolean
+				tagsEnabled?: boolean
+				triggersEnabled?: boolean
+				websitesEnabled?: boolean
+				workflowsEnabled?: boolean
+			}
+			roles?: {
+				locationIds?: string[]
+				role?: string
+				type?: string
+			}
+		}
+		'_v1_users_{userId}_put_400_response': {
+			msg?: string
+		}
+		'_v1_users_{userId}_put_401_response': {
+			msg?: string
+		}
+		'_v1_users_{userId}_put_422_response': {
+			email?: {
+				message?: string
+				rule?: string
+			}
+			firstName?: {
+				message?: string
+				rule?: string
+			}
+			lastName?: {
+				message?: string
+				rule?: string
+			}
+			locationIds?: {
+				message?: string
+				rule?: string
+			}
+			permissions?: {
+				message?: string
+				rule?: string
+			}
+			role?: {
+				message?: string
+				rule?: string
+			}
+			type?: {
+				message?: string
+				rule?: string
+			}
+		}
+		_v1_users_location_get_200_response: {
+			users?: {
+				email?: string
+				firstName?: string
+				id?: string
+				lastName?: string
+				permissions?: {
+					adwordsReportingEnabled?: boolean
+					appointmentsEnabled?: boolean
+					assignedDataOnly?: boolean
+					attributionsReportingEnabled?: boolean
+					bulkRequestsEnabled?: boolean
+					campaignsEnabled?: boolean
+					campaignsReadOnly?: boolean
+					contactsEnabled?: boolean
+					conversationsEnabled?: boolean
+					dashboardStatsEnabled?: boolean
+					facebookAdsReportingEnabled?: boolean
+					funnelsEnabled?: boolean
+					leadValueEnabled?: boolean
+					marketingEnabled?: boolean
+					membershipEnabled?: boolean
+					onlineListingsEnabled?: boolean
+					opportunitiesEnabled?: boolean
+					phoneCallEnabled?: boolean
+					reviewsEnabled?: boolean
+					settingsEnabled?: boolean
+					tagsEnabled?: boolean
+					triggersEnabled?: boolean
+					websitesEnabled?: boolean
+					workflowsEnabled?: boolean
+				}
+				roles?: {
+					locationIds?: string[]
+					role?: string
+					type?: string
+				}
+			}[]
+		}
+		_v1_users_location_get_400_response: {
+			msg?: string
+		}
+		_v1_users_location_get_401_response: {
+			msg?: string
+		}
+		_v1_users_lookup_get_200_response: {
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			permissions?: {
+				adwordsReportingEnabled?: boolean
+				appointmentsEnabled?: boolean
+				assignedDataOnly?: boolean
+				attributionsReportingEnabled?: boolean
+				bulkRequestsEnabled?: boolean
+				campaignsEnabled?: boolean
+				campaignsReadOnly?: boolean
+				contactsEnabled?: boolean
+				conversationsEnabled?: boolean
+				dashboardStatsEnabled?: boolean
+				facebookAdsReportingEnabled?: boolean
+				funnelsEnabled?: boolean
+				leadValueEnabled?: boolean
+				marketingEnabled?: boolean
+				membershipEnabled?: boolean
+				onlineListingsEnabled?: boolean
+				opportunitiesEnabled?: boolean
+				phoneCallEnabled?: boolean
+				reviewsEnabled?: boolean
+				settingsEnabled?: boolean
+				tagsEnabled?: boolean
+				triggersEnabled?: boolean
+				websitesEnabled?: boolean
+				workflowsEnabled?: boolean
+			}
+			roles?: {
+				locationIds?: string[]
+				role?: string
+				type?: string
+			}
+		}
+		_v1_users_lookup_get_400_response: {
+			msg?: string
+		}
+		_v1_users_lookup_get_401_response: {
+			msg?: string
+		}
+		_v1_workflows__get_200_response: {
+			workflow?: {
+				createdAt?: string
+				id?: string
+				name?: string
+				status?: string
+				updatedAt?: string
+				version?: number
+			}[]
+		}
+		_v1_workflows__get_400_response: {
+			msg?: string
+		}
+		_v1_workflows__get_401_response: {
+			msg?: string
+		}
+	}
 	responses: never
 	parameters: never
 	requestBodies: never
