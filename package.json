@@ -54,9 +54,9 @@
 			"import": "./dist/webhooks.js"
 		},
 		"./v1": {
-			"types": "./dist/v1/index.d.ts",
-			"require": "./dist/cjs/v1/index.js",
-			"import": "./dist/v1/index.js"
+			"types": "./dist/v1.d.ts",
+			"require": "./dist/cjs/v1.js",
+			"import": "./dist/v1.js"
 		}
 	},
 	"files": [
@@ -100,5 +100,5 @@
 	},
 	"type": "module",
 	"types": "./dist/index.d.ts",
-	"version": "1.2.2"
+	"version": "1.2.3"
 }
