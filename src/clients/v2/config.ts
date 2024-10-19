@@ -22,6 +22,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 * client_id from app settings in marketplace.
 	 *
 	 * **Important:** Your client_id and client_secret must have been created after your scopes were added to your app.
+	 * @default process.env.HIGHLEVEL_CLIENT_ID
 	 * @see https://marketplace.gohighlevel.com/apps
 	 */
 	readonly clientId: string
@@ -29,6 +30,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 * client_secret from app settings in marketplace.
 	 *
 	 * **Important:** Your client_id and client_secret must have been created after your scopes were added to your app.
+	 * @default process.env.HIGHLEVEL_CLIENT_SECRET
 	 * @see https://marketplace.gohighlevel.com/apps
 	 */
 	readonly clientSecret: string
@@ -46,13 +48,11 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	readonly redirectUri: string
 	/**
 	 * Scopes needed for your app. These must be added to your app in the marketplace.
-	 * - available scopes will change depending on your app type.
-	 * - can also use either `client.scopes.all()` to use all available scopes for the access type.
-	 * - or use `client.scopes.add()` method to add individual scopes after initialization.
+	 *
+	 * Available scopes will change depending on your app type.
 	 * @see https://marketplace.gohighlevel.com/apps
-	 * @default []
 	 */
-	readonly scopes?: ScopeLiterals<T>[]
+	readonly scopes: ScopeLiterals<T>[]
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
 	 * @default 'https://marketplace.gohighlevel.com/oauth/chooselocation

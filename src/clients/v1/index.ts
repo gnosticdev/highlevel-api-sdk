@@ -1,7 +1,7 @@
 import createClient, { type ClientOptions } from 'openapi-fetch'
 import type * as V1 from '../../generated/v1/openapi'
 
-type V1ClientOptions = ClientOptions & {
+export type V1ClientOptions = ClientOptions & {
 	/**
 	 * The api key for the HighLevel Agency or Sub-Account.
 	 * @default process.env.HIGHLEVEL_API_KEY

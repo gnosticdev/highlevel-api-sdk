@@ -59,6 +59,9 @@ export type SearchInstalledLocationParams = {
 	query: Oauth.operations['get-installed-location']['parameters']['query']
 }
 
+export type GetInstalledLocationResponse =
+	Oauth.components['schemas']['GetInstalledLocationsSuccessfulResponseDto']
+
 /**
  * The response from the server when generating a new access token
  */
@@ -90,7 +93,7 @@ export interface OAuthClientInterface<T extends AccessType> {
         https://marketplace.gohighlevel.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
      * ```
 	 */
-	getAuthorizationURL(): string
+	getAuthorizationUrl(): string
 	/**
 	 * The token response from the server.
 	 */
@@ -113,9 +116,7 @@ export interface OAuthClientInterface<T extends AccessType> {
 	 *  */
 	getInstalledLocations(
 		query: SearchInstalledLocationParams['query'],
-	): Promise<
-		Oauth.operations['get-installed-location']['responses']['200']['content']['application/json']
-	>
+	): Promise<GetInstalledLocationResponse>
 	/**
 	 * generate a location AccessToken from Agency AccessToken
 	 * @param companyId - your agency id

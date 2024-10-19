@@ -29,7 +29,7 @@ export class OauthClient<T extends AccessType>
 
 	// avoid conflict with the `expiresAt` getter
 	private _expiresAt: number | undefined
-	readonly scopes: ScopeLiterals<T>[] = []
+	readonly scopes: ScopeLiterals<T>[]
 	readonly config: HighLevelOauthConfig<T>
 	private readonly baseUrl: string
 	private readonly baseOauthUrl: string
@@ -48,7 +48,7 @@ export class OauthClient<T extends AccessType>
 		// Set Defaults
 		this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL
 		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL
-		this.scopes = config.scopes ?? []
+		this.scopes = config.scopes
 		if (this.scopes.length === 0) {
 			console.warn(
 				'No scopes provided, pass the scopes from your app to the scopes param',
@@ -59,9 +59,6 @@ export class OauthClient<T extends AccessType>
 				? ('Location' as const)
 				: ('Company' as const)
 
-		if (config.scopes && config.scopes.length > 0) {
-			this.scopes = config.scopes as ScopeLiterals<T>[]
-		}
 		this.storeTokenFn =
 			config.storageFunction ??
 			(() => {
@@ -101,7 +98,7 @@ export class OauthClient<T extends AccessType>
         https://marketplace.leadconnectorhq.com/oauth/chooselocation?response_type=code&redirect_uri=https://myapp.com/oauth/callback/gohighlevel&client_id=CLIENT_ID&scope=conversations/message.readonly conversations/message.write
      * ```
      */
-	getAuthorizationURL() {
+	getAuthorizationUrl() {
 		const url = new URL(this.baseOauthUrl)
 		const requiredParams: AuthUrlParams = {
 			client_id: this.config.clientId,

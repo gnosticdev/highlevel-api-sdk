@@ -1,10 +1,10 @@
-import createClient, { type Client, type ClientOptions } from 'openapi-fetch'
 import type * as Businesses from '../../generated/v2/openapi/businesses'
 import type * as Calendars from '../../generated/v2/openapi/calendars'
 import type * as Campaigns from '../../generated/v2/openapi/campaigns'
 import type * as Companies from '../../generated/v2/openapi/companies'
 import type * as Contacts from '../../generated/v2/openapi/contacts'
 import type * as Conversations from '../../generated/v2/openapi/conversations'
+import type * as Courses from '../../generated/v2/openapi/courses'
 import type * as Forms from '../../generated/v2/openapi/forms'
 import type * as Funnels from '../../generated/v2/openapi/funnels'
 import type * as Invoices from '../../generated/v2/openapi/invoices'
@@ -22,6 +22,9 @@ import type * as Surveys from '../../generated/v2/openapi/surveys'
 import type * as Users from '../../generated/v2/openapi/users'
 import type * as Workflows from '../../generated/v2/openapi/workflows'
 
+import type { Client, ClientOptions } from 'openapi-fetch'
+import createClient from 'openapi-fetch'
+
 import type {
 	AccessType,
 	BaseScopeNames,
@@ -30,41 +33,10 @@ import type {
 import { type BaseOauthClient, OauthClient } from '../oauth'
 import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../oauth/config'
 import type { BaseHighLevelConfig, HighLevelOauthConfig } from './config'
+import type { HighLevelClientInterface } from './interface'
 
-type HighLevelClientConfig = BaseHighLevelConfig &
+export type HighLevelClientConfig = BaseHighLevelConfig &
 	Omit<ClientOptions, 'baseUrl'>
-
-interface HighLevelClientInterface<
-	T extends AccessType,
-	TOAuth extends BaseOauthClient | OauthClient<T>,
-> {
-	/**
-	 * Exposed config object for convenience.
-	 */
-	_clientConfig: HighLevelClientConfig
-	oauth: TOAuth
-	businesses: Client<Businesses.paths, `${string}/${string}`>
-	calendars: Client<Calendars.paths, `${string}/${string}`>
-	campaigns: Client<Campaigns.paths, `${string}/${string}`>
-	companies: Client<Companies.paths, `${string}/${string}`>
-	contacts: Client<Contacts.paths, `${string}/${string}`>
-	conversations: Client<Conversations.paths, `${string}/${string}`>
-	forms: Client<Forms.paths, `${string}/${string}`>
-	funnels: Client<Funnels.paths, `${string}/${string}`>
-	invoices: Client<Invoices.paths, `${string}/${string}`>
-	links: Client<Links.paths, `${string}/${string}`>
-	locations: Client<Locations.paths, `${string}/${string}`>
-	medias: Client<Medias.paths, `${string}/${string}`>
-	opportunities: Client<Opportunities.paths, `${string}/${string}`>
-	payments: Client<Payments.paths, `${string}/${string}`>
-	products: Client<Products.paths, `${string}/${string}`>
-	saasApi: Client<SaasApi.paths, `${string}/${string}`>
-	snapshots: Client<Snapshots.paths, `${string}/${string}`>
-	socialMediaPosting: Client<SocialMediaPosting.paths, `${string}/${string}`>
-	surveys: Client<Surveys.paths, `${string}/${string}`>
-	users: Client<Users.paths, `${string}/${string}`>
-	workflows: Client<Workflows.paths, `${string}/${string}`>
-}
 
 /**
  * Default HighLevel API client with typed endpoints.
@@ -98,6 +70,11 @@ export class HighLevelClient<
 	 * Exposed config object for convenience.
 	 */
 	_clientConfig: HighLevelClientConfig
+	/**
+	 * Base OAuth client, if using this you will need to configure the oauth client yourself.
+	 *
+	 * To use the built in OAuth client, use the `createHighLevelClient` function.
+	 */
 	oauth: TOAuth
 	businesses: Client<Businesses.paths, `${string}/${string}`>
 	calendars: Client<Calendars.paths, `${string}/${string}`>
@@ -105,6 +82,7 @@ export class HighLevelClient<
 	companies: Client<Companies.paths, `${string}/${string}`>
 	contacts: Client<Contacts.paths, `${string}/${string}`>
 	conversations: Client<Conversations.paths, `${string}/${string}`>
+	courses: Client<Courses.paths, `${string}/${string}`>
 	forms: Client<Forms.paths, `${string}/${string}`>
 	funnels: Client<Funnels.paths, `${string}/${string}`>
 	invoices: Client<Invoices.paths, `${string}/${string}`>
@@ -138,43 +116,105 @@ export class HighLevelClient<
 		 */
 		clientConfig?: HighLevelClientConfig,
 	) {
-		// Get the baseUrl from the oauthConfig first, then the clientConfig, then the default
-		const baseUrl = clientConfig?.baseUrl ?? DEFAULT_BASE_URL
-		// make sure the baseUrl is set
+		// make sure the baseUrl is set at minimum
 		this._clientConfig = clientConfig
 			? {
+					baseUrl: DEFAULT_BASE_URL,
 					...clientConfig,
-					baseUrl: baseUrl,
 				}
-			: { baseUrl: baseUrl }
+			: { baseUrl: DEFAULT_BASE_URL }
 
-		/**
-		 * Base OAuth client
-		 */
 		this.oauth = createClient<Oauth.paths>(this._clientConfig) as TOAuth
 
+		/**
+		 * Businesses endpoint
+		 */
 		this.businesses = createClient<Businesses.paths>(this._clientConfig)
+		/**
+		 * Calendars endpoint
+		 */
 		this.calendars = createClient<Calendars.paths>(this._clientConfig)
+		/**
+		 * Campaigns endpoint
+		 */
 		this.campaigns = createClient<Campaigns.paths>(this._clientConfig)
+		/**
+		 * Companies endpoint
+		 */
 		this.companies = createClient<Companies.paths>(this._clientConfig)
+		/**
+		 * Courses endpoint
+		 */
+		this.courses = createClient<Courses.paths>(this._clientConfig)
+		/**
+		 * Contacts endpoint
+		 */
 		this.contacts = createClient<Contacts.paths>(this._clientConfig)
+		/**
+		 * Conversations endpoint
+		 */
 		this.conversations = createClient<Conversations.paths>(this._clientConfig)
+		/**
+		 * Forms endpoint
+		 */
 		this.forms = createClient<Forms.paths>(this._clientConfig)
+		/**
+		 * Funnels endpoint
+		 */
 		this.funnels = createClient<Funnels.paths>(this._clientConfig)
+		/**
+		 * Invoices endpoint
+		 */
 		this.invoices = createClient<Invoices.paths>(this._clientConfig)
+		/**
+		 * Links endpoint
+		 */
 		this.links = createClient<Links.paths>(this._clientConfig)
+		/**
+		 * Locations endpoint
+		 */
 		this.locations = createClient<Locations.paths>(this._clientConfig)
+		/**
+		 * Medias endpoint
+		 */
 		this.medias = createClient<Medias.paths>(this._clientConfig)
+		/**
+		 * Opportunities endpoint
+		 */
 		this.opportunities = createClient<Opportunities.paths>(this._clientConfig)
+		/**
+		 * Payments endpoint
+		 */
 		this.payments = createClient<Payments.paths>(this._clientConfig)
+		/**
+		 * Products endpoint
+		 */
 		this.products = createClient<Products.paths>(this._clientConfig)
+		/**
+		 * SaasApi endpoint
+		 */
 		this.saasApi = createClient<SaasApi.paths>(this._clientConfig)
+		/**
+		 * Snapshots endpoint
+		 */
 		this.snapshots = createClient<Snapshots.paths>(this._clientConfig)
+		/**
+		 * SocialMediaPosting endpoint
+		 */
 		this.socialMediaPosting = createClient<SocialMediaPosting.paths>(
 			this._clientConfig,
 		)
+		/**
+		 * Surveys endpoint
+		 */
 		this.surveys = createClient<Surveys.paths>(this._clientConfig)
+		/**
+		 * Users endpoint
+		 */
 		this.users = createClient<Users.paths>(this._clientConfig)
+		/**
+		 * Workflows endpoint
+		 */
 		this.workflows = createClient<Workflows.paths>(this._clientConfig)
 	}
 }
@@ -193,10 +233,7 @@ type SubAccountClientMap = {
 
 type AgencyScopeNames = FilteredScopeNames<'Agency'>
 type AgencyClientMap = {
-	[K in AgencyScopeNames]: Client<
-		BaseScopeNames<'Agency'>,
-		`${string}/${string}`
-	>
+	[K in AgencyScopeNames]: Client<BaseScopeNames<'Agency'>>
 }
 
 /**
@@ -225,7 +262,6 @@ type AgencyClientMap = {
  * })
  * ```
  */
-
 export class HighLevelClientWithOAuth<
 	T extends AccessType,
 	TOAuth extends BaseOauthClient | OauthClient<T> = OauthClient<T>,
