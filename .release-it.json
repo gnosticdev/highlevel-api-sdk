@@ -17,17 +17,12 @@
 		}
 	},
 	"hooks": {
+		"after:bump": ["bunx auto-changelog"],
 		"before:init": ["bun run lint", "bun test", "bun run build"]
 	},
 	"npm": {
 		"access": "public",
 		"allowSameVersion": true,
 		"publish": true
-	},
-	"plugins": {
-		"@release-it/keep-a-changelog": {
-			"addUnreleased": true,
-			"filename": "CHANGELOG.md"
-		}
 	}
 }
