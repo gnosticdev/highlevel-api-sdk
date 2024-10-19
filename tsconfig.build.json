@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"module": "ES2022",
 		"moduleResolution": "Bundler",
-		"noEmit": false,
+		"noEmit": true,
 		"outDir": "./dist",
 		"rootDir": "./src"
 	},

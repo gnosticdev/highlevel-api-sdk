@@ -2,9 +2,12 @@ import { ScopesSchema } from '../generated/v2/custom/scopes'
 import { objectEntries } from '../lib/utils'
 import type { AccessType, ScopeLiterals } from './type-utils'
 
+/**
+ * Helper for building app scopes based on the access type.
+ */
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Agency same as Company. */
-	accessType: T
+	readonly accessType: T
 	/** a Set containing the scopes that have been added so far */
 	collection = new Set<ScopeLiterals<T>>()
 
@@ -50,7 +53,8 @@ export class ScopesBuilder<T extends AccessType> {
 	}
 
 	/**
-	 * Returns a string of all scopes added to the builder so far.\
+	 * Returns a string of all scopes added to the builder so far.
+	 *
 	 * For use in the authorization redirect uri
 	 * @returns a string of the scopes joined by a space
 	 * @example

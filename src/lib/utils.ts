@@ -46,3 +46,29 @@ export class TempFile implements AsyncDisposable {
 		await Bun.write(this.path, data)
 	}
 }
+/**
+ * Converts a string with spaces/dashes/underscores to pascal case.
+ * @param str - The string to convert.
+ * @returns The pascal case string.
+ */
+export function toPascalCase(str: string): string {
+	const camelCaseStr = toCamelCase(str)
+	return camelCaseStr.charAt(0).toUpperCase() + camelCaseStr.slice(1)
+}
+/**
+ * Converts a string with spaces/dashes/underscores to camel case.
+ * @param str - The string to convert.
+ * @returns The camel case string.
+ */
+export function toCamelCase(str: string): string {
+	return str
+		.toLowerCase()
+		.replace(/[-_ ]+./g, (match) =>
+			match.charAt(match.length - 1).toUpperCase(),
+		)
+}
+
+const test = toCamelCase('hello-world')
+console.log(test)
+const test2 = toPascalCase('hello-world')
+console.log(test2)

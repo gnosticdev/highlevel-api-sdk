@@ -1,24 +1,33 @@
 {
-    "$schema": "https://unpkg.com/release-it/schema/release-it.json",
-    "git": {
-        "changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}",
-        "commit": true,
-        "commitMessage": "chore(release): release ${version}",
-        "push": true,
-        "tag": true,
-        "tagAnnotation": "Release ${version}",
-        "tagName": "v${version}"
-    },
-    "github": {
-        "makeLatest": true,
-        "release": true
-    },
-    "npm": {
-        "access": "public",
-        "allowSameVersion": true,
-        "publish": true,
-        "publishConfig": {
-            "registry": "https://registry.npmjs.org/"
-        }
-    }
+	"$schema": "https://unpkg.com/release-it/schema/release-it.json",
+	"git": {
+		"changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}",
+		"commit": true,
+		"commitMessage": "chore(release): release ${version}",
+		"push": true,
+		"tag": true,
+		"tagName": "v${version}"
+	},
+	"github": {
+		"makeLatest": true,
+		"release": true,
+		"releaseName": "${npm.name} v${version}",
+		"releaseNotes": {
+			"changelog": "CHANGELOG.md"
+		}
+	},
+	"hooks": {
+		"before:init": ["bun run lint", "bun test", "bun run build"]
+	},
+	"npm": {
+		"access": "public",
+		"allowSameVersion": true,
+		"publish": true
+	},
+	"plugins": {
+		"@release-it/keep-a-changelog": {
+			"addUnreleased": true,
+			"filename": "CHANGELOG.md"
+		}
+	}
 }

@@ -41,6 +41,7 @@ const client = createHighLevelClient({
         clientId: process.env.HIGHLEVEL_CLIENT_ID,
         clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET,
         redirectUri: 'http://localhost:3000/oauth/callback',
+        // scopes will be limited based on the accessType.
         scopes: [
             'locations.write',
             'contacts.readonly',

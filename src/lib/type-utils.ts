@@ -1,6 +1,3 @@
-import type { ClientPathsWithMethod } from 'openapi-fetch'
-import type { Method } from 'openapi-typescript'
-import type * as V1 from '../generated/v1/openapi'
 import type { ScopesSchema } from '../generated/v2/custom/scopes'
 /*
  * This file is used to generate the types for the scopes schema.
@@ -21,19 +18,14 @@ type Endpoint<TAccessType extends AccessType> = {
 }
 
 /**
- * A helper type to get the keys of a union.
- */
-type KeysOfUnion<ObjectType> = ObjectType extends unknown
-	? keyof ObjectType
-	: never
-
-/**
  * A permission level for a scope name. Pass in a scope name to get the available permissions.
- * @example `readonly`, `write`
+ * @example
+ * ```ts
+ * type T = Permission<'businesses'>
+ * ```
  */
-export type Permission<TScopes extends keyof Scopes> = KeysOfUnion<
-	Scopes[TScopes]
->
+export type Permission<TScopes extends keyof Scopes> = keyof Scopes[TScopes] &
+	string
 
 /**
  * A scope with permission level for a given access type.
@@ -43,29 +35,12 @@ export type ScopeLiterals<TAccessType extends AccessType> = {
 	[K in FilteredScopeNames<TAccessType>]: `${K}.${Permission<K>}`
 }[FilteredScopeNames<TAccessType>]
 
-type SubAccountScopeNames = ScopeLiterals<'Sub-Account'> extends infer T
-	? T extends `${string}/${string}`
-		? never
-		: T extends `${infer S}.${string}`
-			? S
-			: never
-	: never
-
-type AgencyScopeNames = ScopeLiterals<'Agency'> extends infer T
-	? T extends `${string}/${string}`
-		? never
-		: T extends `${infer S}.${string}`
-			? S
-			: never
-	: never
-
 /**
  * The first part of a scope name.
  * @example `BaseScopeNames<'Sub-Account'>` produces `businesses`, `locations`, etc...
  */
-export type BaseScopeNames<T extends AccessType> = T extends 'Sub-Account'
-	? SubAccountScopeNames
-	: AgencyScopeNames
+export type BaseScopeNames<T extends AccessType> =
+	ScopeLiterals<T> extends `${infer S}.${string}` ? S : never
 /**
  * The access type available for a given scope name and permission level.
  */
@@ -110,7 +85,10 @@ export type FilteredScopes<T extends AccessType> = {
  * Utility to make a key optional in a nested object.
  */
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-type DeepPartialAt<T, K extends any[]> = K extends [infer First, ...infer Rest]
+export type DeepPartialAt<T, K extends any[]> = K extends [
+	infer First,
+	...infer Rest,
+]
 	? First extends keyof T
 		? {
 				[P in keyof T]: P extends First

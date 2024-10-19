@@ -15,8 +15,6 @@ if (!API_URL || !USERNAME || !PASSWORD) {
 	throw new Error('DOCS_API_URL, DOCS_USERNAME, and DOCS_PASSWORD must be set')
 }
 
-const CUSTOM_FILES = ['scopes.json', 'webhooks.json']
-
 const TEMP_DIR = 'temp-schemas-json'
 
 if (import.meta.main) {
@@ -41,15 +39,15 @@ async function fetchSchemaList() {
 	}
 	const data = (await response.json()) as ListSchemas
 	const schemas = data.schemas.reduce(
-		(acc: { openapi: string[]; other: string[] }, schema) => {
-			if (CUSTOM_FILES.includes(schema.name)) {
-				acc.other.push(schema.name)
+		(acc: { openapi: string[]; custom: string[] }, schema) => {
+			if (['scopes.json', 'webhooks.json'].includes(schema.name)) {
+				acc.custom.push(schema.name)
 			} else {
 				acc.openapi.push(schema.name)
 			}
 			return acc
 		},
-		{ openapi: [], other: [] },
+		{ openapi: [], custom: [] },
 	)
 	return schemas
 }
@@ -138,7 +136,7 @@ async function main() {
 		// Fetch list of schemas
 		const schemas = await fetchSchemaList()
 		console.log(
-			`Found ${schemas.openapi.length} OpenAPI schemas and ${schemas.other.length} other files`,
+			`Found ${schemas.openapi.length} OpenAPI schemas and ${schemas.custom.length} other files`,
 		)
 
 		// Download OpenAPI schemas to temp directory
@@ -147,7 +145,7 @@ async function main() {
 		}
 
 		// Download custom schemas to temp directory
-		for (const file of schemas.other) {
+		for (const file of schemas.custom) {
 			await downloadSchema(file, path.join(TEMP_DIR, 'custom'), false)
 		}
 
