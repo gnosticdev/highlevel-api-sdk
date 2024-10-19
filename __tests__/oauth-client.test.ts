@@ -23,10 +23,10 @@ describe('OauthClient', () => {
 	})
 
 	it('should generate an authorization URL', () => {
-		const authUrl = client.getAuthorizationURL()
+		const authUrl = client.getAuthorizationUrl()
 		expect(authUrl).toBeString()
 		expect(authUrl).toInclude(
-			'marketplace.gohighlevel.com/oauth/chooselocation',
+			'marketplace.leadconnectorhq.com/oauth/chooselocation',
 		)
 		expect(authUrl).toInclude(mockConfig.clientId)
 		expect(authUrl).toInclude(encodeURIComponent(mockConfig.redirectUri))

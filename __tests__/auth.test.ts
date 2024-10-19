@@ -1,7 +1,6 @@
 import { Database } from 'bun:sqlite'
 import { describe, expect, it } from 'bun:test'
 import { createTokensDB } from '../examples/bun-auth/src/db'
-import type { AccessTokenResponse } from '../src/clients/oauth/config'
 
 const db = createTokensDB(new Database(':memory:'))
 
@@ -29,7 +28,6 @@ describe('auth', () => {
 	})
 	it('should get the token', () => {
 		const token = db.getAccessToken()
-		console.log(Bun.inspect({ token }))
 		expect(token).toBeDefined()
 		expect(token?.access_token).toBe(TOKEN)
 		expect(token?.refresh_token).toBe(REFRESH)
@@ -37,7 +35,6 @@ describe('auth', () => {
 	})
 	it('should get the token by userId', () => {
 		const token = db.getTokenByUserId(USER_ID)
-		console.log(Bun.inspect({ token }))
 		expect(token).toBeDefined()
 		expect(token?.access_token).toBe(TOKEN)
 		expect(token?.refresh_token).toBe(REFRESH)

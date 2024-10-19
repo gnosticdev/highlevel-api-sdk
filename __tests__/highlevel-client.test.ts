@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
-import createClient from 'openapi-fetch'
+import { readdirSync } from 'node:fs'
+import { join } from 'node:path'
+import createClient, { type Client } from 'openapi-fetch'
 import { type BaseOauthClient, OauthClient } from '../src/clients/oauth'
 import {
 	DEFAULT_BASE_AUTH_URL,
@@ -150,8 +152,6 @@ describe('Agency HighLevelClient', () => {
 		expect(data).toEqual(mockLocationsResponse)
 		expect(error).toBeUndefined()
 	})
-
-	// Add more agency specific tests here
 })
 
 describe('createHighLevelClient Defaults', () => {
@@ -161,6 +161,7 @@ describe('createHighLevelClient Defaults', () => {
 			clientSecret: 'test-client-secret',
 			redirectUri: 'http://localhost:3000/callback',
 			accessType: 'Sub-Account',
+			scopes: ['saas/company.write'],
 		}
 
 		const client = createHighLevelClient({ oauthConfig: minimalConfig })
@@ -169,7 +170,6 @@ describe('createHighLevelClient Defaults', () => {
 			...minimalConfig,
 			baseUrl: DEFAULT_BASE_URL,
 			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
-			scopes: [],
 		})
 	})
 
@@ -193,3 +193,80 @@ describe('createHighLevelClient Defaults', () => {
 		})
 	})
 })
+
+describe('HighLevel API Coverage', () => {
+	const highLevelClient = new HighLevelClient()
+	const baseClient = createClient()
+
+	it('should have an openapi-fetch client for each schema', () => {
+		const clientProperties = getClientPropertiesFromSchemas().toSorted()
+
+		expect(highLevelClient).toContainKeys(clientProperties)
+		// get the methods of the high level client
+		const hlClientMethods = Object.keys(highLevelClient)
+			.filter((key) => clientProperties.includes(key))
+			.toSorted()
+		expect(hlClientMethods).toBeArrayOfSize(clientProperties.length)
+
+		// make sure each method is an object, and each object has the main methods
+		const innerClients = hlClientMethods.map(
+			(method) => highLevelClient[method as keyof typeof highLevelClient],
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		) as Client<any, any>[]
+		const notAClient = innerClients.find(
+			(client) =>
+				!(client instanceof Object) &&
+				!['GET', 'POST', 'PUT', 'DELETE', 'TRACE', 'OPTIONS'].includes(client),
+		)
+		const notAFunction = innerClients.find(
+			(client) => typeof client.GET !== 'function',
+		)
+		expect(notAClient).toBeUndefined()
+		expect(notAFunction).toBeUndefined()
+	})
+})
+
+describe('createHighLevelClient', () => {
+	it('should create a client with custom OAuth methods', () => {
+		const client = createHighLevelClient({
+			oauthConfig: {
+				clientId: 'test-client-id',
+				clientSecret: 'test-client-secret',
+				redirectUri: 'http://localhost:3000/callback',
+				accessType: 'Sub-Account',
+				scopes: ['contacts.readonly'],
+			},
+		})
+
+		// Check that it's an instance of HighLevelClientWithOAuth
+		expect(client).toBeInstanceOf(HighLevelClientWithOAuth)
+
+		// Check for custom OAuth methods
+		expect(client.oauth.getAuthorizationUrl).toBeFunction()
+		expect(client.oauth.getAccessToken).toBeFunction()
+		expect(client.oauth.refreshAccessToken).toBeFunction()
+		expect(client.oauth.storeTokenData).toBeFunction()
+		expect(client.oauth.exchangeToken).toBeFunction()
+		expect(client.oauth.getInstalledLocations).toBeFunction()
+		expect(client.oauth.generateLocationToken).toBeFunction()
+
+		// Check that it still has all the API properties
+		const clientProperties = getClientPropertiesFromSchemas()
+		for (const propertyName of clientProperties) {
+			expect(client).toHaveProperty(propertyName)
+			expect(client[propertyName as keyof typeof client]).toBeDefined()
+		}
+	})
+})
+
+function getClientPropertiesFromSchemas() {
+	const schemaDir = join(import.meta.dir, '..', 'schemas', 'v2', 'openapi')
+	const schemaFiles = readdirSync(schemaDir)
+
+	return schemaFiles.map((file) =>
+		file
+			.replace('.openapi.json', '')
+			.replace(/[-\s](.)/g, (_, char) => char.toUpperCase())
+			.replace(/^(.)/, (_, char) => char.toLowerCase()),
+	)
+}
