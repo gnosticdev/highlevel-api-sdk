@@ -1,7 +1,7 @@
 {
 	"$schema": "https://unpkg.com/release-it/schema/release-it.json",
 	"git": {
-		"changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}",
+		"changelog": "bunx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
 		"commit": true,
 		"commitMessage": "chore(release): release ${version}",
 		"push": true,
@@ -9,6 +9,7 @@
 		"tagName": "v${version}"
 	},
 	"github": {
+		"autoGenerate": true,
 		"makeLatest": true,
 		"release": true,
 		"releaseNotes": {

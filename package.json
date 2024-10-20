@@ -97,10 +97,10 @@
 		"generate-webhooks": "bun scripts/generate-webhooks.ts",
 		"lint": "biome check . --write --unsafe",
 		"typecheck": "bun tsc -p tsconfig.json",
-		"release-it": "release-it",
+		"release-it": "GITHUB_TOKEN=$GITHUB_TOKEN release-it",
 		"start-test": "bun test --hot"
 	},
 	"type": "module",
 	"types": "./dist/index.d.ts",
-	"version": "1.2.5"
+	"version": "1.2.6"
 }
