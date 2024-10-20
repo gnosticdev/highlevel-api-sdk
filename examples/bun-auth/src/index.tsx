@@ -83,7 +83,7 @@ app.onError((err, c) => {
 
 // start the login flow
 app.get('/auth', async (c) => {
-  return c.html(<Home buttonLink={client.oauth.getAuthorizationURL()} />)
+  return c.html(<Home buttonLink={client.oauth.getAuthorizationUrl()} />)
 })
 
 /**

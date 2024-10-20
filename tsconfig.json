@@ -24,11 +24,5 @@
 		"target": "ESNext",
 		"verbatimModuleSyntax": true
 	},
-	"exclude": ["node_modules"],
-	"include": [
-		"src/**/*.ts",
-		"__tests__/**/*.ts",
-		"scripts/**/*.ts",
-		"src/**/*.json"
-	]
+	"exclude": ["node_modules"]
 }

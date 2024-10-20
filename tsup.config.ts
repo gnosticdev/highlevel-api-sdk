@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 
 const openapiTypeEntries: Record<`types/${string}`, string> = Array.from(
 	new Bun.Glob('*.ts').scanSync({ cwd: 'src/generated/v2/openapi' }),
-).reduce((acc, file) => {
+).reduce((acc: Record<`types/${string}`, string>, file) => {
 	acc[`types/${path.parse(file).name}`] = path.join(
 		'src/generated/v2/openapi',
 		file,

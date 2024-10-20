@@ -74,7 +74,8 @@ function addComponentSchemas(openapiJson: OpenAPI3) {
 }
 
 export async function createV1Types() {
-	const postmanJson = Bun.resolveSync('schemas/v1/postman.json', process.cwd())
+	const postmanJson = 'schemas/v1/postman.json'
+
 	// convert postman json to openapi json using postman-to-openapi
 	// const openapiYaml = Bun.pathToFileURL('schemas/v1/openapi.yaml')
 	// create temp json options file

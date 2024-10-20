@@ -2,15 +2,6 @@ import { expect, mock, test } from 'bun:test'
 import { createV1Client } from '../src/clients/v1'
 import type * as V1 from '../src/generated/v1/openapi'
 
-// Mock the openapi-fetch module
-mock.module('openapi-fetch', () => {
-	return () => ({
-		GET: mock(),
-		POST: mock(),
-		// Add other methods as needed
-	})
-})
-
 test('V1 Client', () => {
 	const mockApiKey = 'test-api-key'
 	const mockBaseUrl = 'https://test.api.com'
@@ -33,7 +24,7 @@ test('V1 Client', () => {
 	test('should make a GET request to fetch contacts', async () => {
 		const client = createV1Client({ apiKey: mockApiKey })
 
-		const mockResponse: V1.paths['/v1/contacts/']['get']['responses']['200']['content']['application/json'] =
+		const mockResponse: V1.components['schemas']['_v1_contacts__get_200_response'] =
 			{
 				contacts: [
 					{

@@ -22,7 +22,5 @@ dist
 # Bun
 bun.lockb
 
-# scrape storage
-storage
-
+# some examples create a db
 *.sqlite

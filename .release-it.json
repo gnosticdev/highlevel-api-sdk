@@ -16,7 +16,7 @@
 		}
 	},
 	"hooks": {
-		"after:bump": ["bunx auto-changelog"],
+		"after:bump": ["bunx auto-changelog -p"],
 		"before:init": ["bun run lint", "bun test", "bun run build"]
 	},
 	"npm": {
