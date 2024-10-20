@@ -67,8 +67,3 @@ export function toCamelCase(str: string): string {
 			match.charAt(match.length - 1).toUpperCase(),
 		)
 }
-
-const test = toCamelCase('hello-world')
-console.log(test)
-const test2 = toPascalCase('hello-world')
-console.log(test2)

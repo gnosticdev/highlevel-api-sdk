@@ -2,11 +2,10 @@ import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, { astToString } from 'openapi-typescript'
 import { OPENAPI_TYPES_V2_DIR } from '../src/lib/constants'
-import { toCamelCase } from '../src/lib/utils'
+import { generateClientInterface } from './generate-interface'
 import { createV1Types } from './generate-v1-types'
 
 const TEMP_DIR = 'temp-schema-types'
-const CLIENT_INTERFACE_FILE = 'src/clients/v2/interface.ts'
 
 if (import.meta.main) {
 	const maybeFunction = process.argv.at(2)
@@ -74,7 +73,7 @@ export async function createV2Types() {
  * // ['schemas/v2/openapi/oauth.openapi.json', 'schemas/v2/openapi/businesses.openapi.json', ...]
  * ```
  */
-async function getV2OpenApiFiles(): Promise<string[]> {
+export async function getV2OpenApiFiles(): Promise<string[]> {
 	// get all json files with openapi in the path somewhere
 	const glob = new Bun.Glob('schemas/v2/openapi/*.json')
 	const files = await Array.fromAsync(glob.scan())
@@ -109,55 +108,4 @@ async function createOpenApiTypesFile(schemaFileUrl: URL) {
 	)
 	await Bun.write(outFile, data)
 	return outFile
-}
-
-async function generateClientInterface() {
-	const schemaFiles = (await getV2OpenApiFiles())
-		.filter((file) => !file.endsWith('oauth.openapi.json'))
-		.map((file) => {
-			const fileName = path.basename(file).replace('.openapi.json', '')
-			const camelName = toCamelCase(fileName)
-			const pascalName = camelName.charAt(0).toUpperCase() + camelName.slice(1)
-			return { pascalName, camelName, fileName }
-		})
-
-	const importStatements = schemaFiles
-		.map((file) => {
-			return `import type * as ${file.pascalName} from '../../generated/v2/openapi/${file.fileName}'`
-		})
-		.join('\n')
-
-	/**
-	 * The interface properties
-	 */
-	const interfaceProperties = schemaFiles.map((file) => {
-		return `${file.camelName}: Client<${file.pascalName}.paths, \`\${string}/\${string}\`>`
-	})
-
-	const interfaceContent = `
-import type { Client } from 'openapi-fetch'
-import type { BaseOauthClient, OauthClient } from '../oauth'
-${importStatements}
-import type { HighLevelClientConfig } from './index'
-import type { AccessType } from '../../lib/type-utils'
-
-export interface HighLevelClientInterface<
-	T extends AccessType,
-	TOAuth extends BaseOauthClient | OauthClient<T>
-> {
-	/**
-	 * Exposed config object for convenience.
-	 */
-	_clientConfig: HighLevelClientConfig
-	oauth: TOAuth
-	${interfaceProperties.join('\n  ')}
-}
-`
-
-	await Bun.write(CLIENT_INTERFACE_FILE, interfaceContent)
-	console.log(
-		kleur.green(
-			`Successfully generated HighLevelClientInterface in ${CLIENT_INTERFACE_FILE}`,
-		),
-	)
 }
