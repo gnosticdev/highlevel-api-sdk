@@ -30,20 +30,21 @@ export type GetParams<T extends OperationObject> = T['requestBody']
  * Creates a temporary file that auto-deletes when the class is disposed of. (e.g. if used in a function, it would delete at the end of the function)
  */
 export class TempFile implements AsyncDisposable {
-	path: string
-	constructor(path: string, data?: string) {
-		this.path = path
+	filepath: string
+	constructor(filepath: string, data?: string) {
+		this.filepath = filepath
 		if (data) {
 			this.write(data)
 		}
+		console.log(kleur.green(`Created ${this.filepath}`))
 	}
 
 	async [Symbol.asyncDispose]() {
-		await Bun.$`rm -f ${this.path}`
-		console.log(kleur.red(`Deleted ${this.path}`))
+		await Bun.$`rm -f ${this.filepath}`
+		console.log(kleur.red(`Deleted ${this.filepath}`))
 	}
 	async write(data: string) {
-		await Bun.write(this.path, data)
+		await Bun.write(this.filepath, data)
 	}
 }
 /**

@@ -1,34 +1,28 @@
 {
-    "$schema": "https://unpkg.com/release-it/schema/release-it.json",
-    "git": {
-        "changelog": "bunx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
-        "commit": true,
-        "commitMessage": "chore(release): release ${version}",
-        "push": true,
-        "tag": true,
-        "tagName": "v${version}"
-    },
-    "github": {
-        "autoGenerate": true,
-        "makeLatest": true,
-        "release": true,
-        "releaseNotes": {
-            "changelog": "CHANGELOG.md"
-        }
-    },
-    "hooks": {
-        "after:bump": [
-            "bunx auto-changelog -p"
-        ],
-        "before:init": [
-            "bun run lint",
-            "bun test",
-            "bun run build"
-        ]
-    },
-    "npm": {
-        "access": "public",
-        "allowSameVersion": true,
-        "publish": true
-    }
+	"$schema": "https://unpkg.com/release-it/schema/release-it.json",
+	"git": {
+		"changelog": "bunx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
+		"commit": true,
+		"commitMessage": "chore(release): release ${version}",
+		"push": true,
+		"tag": true,
+		"tagName": "v${version}"
+	},
+	"github": {
+		"autoGenerate": true,
+		"makeLatest": true,
+		"release": true,
+		"releaseNotes": {
+			"changelog": "CHANGELOG.md"
+		}
+	},
+	"hooks": {
+		"after:bump": ["bunx auto-changelog -p"],
+		"before:init": ["bun run lint", "bun test", "bun run build"]
+	},
+	"npm": {
+		"access": "public",
+		"allowSameVersion": true,
+		"publish": true
+	}
 }

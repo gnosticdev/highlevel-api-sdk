@@ -18,7 +18,8 @@
 			"package.json",
 			".wrangler",
 			".vscode",
-			"schemas"
+			"schemas",
+			"src/generated/v2/custom/webhooks.ts"
 		],
 		"include": ["**/*[.js,.jsx,.ts,.tsx,.astro,.css,.json,.jsonc]"]
 	},

@@ -1,7 +1,6 @@
 import path from 'node:path'
 import type { OpenAPI3, SchemaObject } from 'openapi-typescript'
-import { objectEntries } from 'src/lib/utils'
-import { CUSTOM_SCHEMAS_DIR } from '../src/lib/constants'
+import { CUSTOM_V2_SCHEMAS_DIR } from '../src/lib/constants'
 
 interface WebhookSchema {
 	title: string
@@ -82,7 +81,7 @@ export function convertWebhooksToOpenAPI(webhooks: WebhookSchema[]): OpenAPI3 {
 
 if (import.meta.main) {
 	const webhooksJSON = await Bun.file(
-		path.join(CUSTOM_SCHEMAS_DIR, 'webhooks.json'),
+		path.join(CUSTOM_V2_SCHEMAS_DIR, 'webhooks.json'),
 	).json()
 	if (!Array.isArray(webhooksJSON)) {
 		throw new Error('Webhooks JSON is not an array')
@@ -98,7 +97,7 @@ if (import.meta.main) {
 	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)
 
 	await Bun.write(
-		path.join(CUSTOM_SCHEMAS_DIR, 'webhooks-openapi.json'),
+		path.join(CUSTOM_V2_SCHEMAS_DIR, 'webhooks-openapi.json'),
 		JSON.stringify(openAPISchema, null, 2),
 	)
 
@@ -107,20 +106,20 @@ if (import.meta.main) {
 	console.log('Generated OpenAPI schema for webhooks')
 }
 
-export async function generateWebhooksModules(openapiJSON: OpenAPI3) {
-	const webhooksComponents = openapiJSON.components?.schemas
-
+export function generateWebhooksModules(openAPISchema: OpenAPI3) {
+	const webhooksComponents = openAPISchema.components?.schemas
 	if (!webhooksComponents) {
 		throw new Error('No components found in webhooks OpenAPI schema')
 	}
 
-	const webhooksModules: string[] = []
+	const imports = `import type { components } from './webhooks-openapi'\n\n`
+	const typeAlias = `type WebhooksOpenAPI = components['schemas']\n\n`
 
-	for (const [key] of objectEntries(webhooksComponents)) {
-		const webhookName = key.replace(/\s+/g, '')
-		const webhookModule = `export type ${webhookName} = import('./webhooks-openapi').components['schemas']['${webhookName}']`
-		webhooksModules.push(webhookModule)
-	}
+	const exports = Object.keys(webhooksComponents)
+		.map((schemaName) => {
+			return `export type ${schemaName} = WebhooksOpenAPI['${schemaName}']`
+		})
+		.join('\n')
 
-	return webhooksModules.join('\n')
+	return imports + typeAlias + exports
 }

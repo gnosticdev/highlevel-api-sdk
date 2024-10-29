@@ -1,7 +1,7 @@
 import path from 'node:path'
 import kleur from 'kleur'
 import { toCamelCase } from '../src/lib/utils'
-import { getV2OpenApiFiles } from './generate-api-types'
+import { getV2OpenApiFiles } from './generate-v2-types'
 
 if (import.meta.main) {
 	await generateClientInterface()

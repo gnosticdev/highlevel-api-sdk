@@ -1,6 +1,6 @@
 import path from 'node:path'
 import openapiTS, { astToString } from 'openapi-typescript'
-import { CUSTOM_SCHEMAS_DIR, CUSTOM_TYPES_DIR } from '../src/lib/constants'
+import { CUSTOM_TYPES_DIR, CUSTOM_V2_SCHEMAS_DIR } from '../src/lib/constants'
 import {
 	convertWebhooksToOpenAPI,
 	generateWebhooksModules,
@@ -20,13 +20,13 @@ if (import.meta.main) {
  */
 async function generateWebhooksTypes() {
 	const webhooksJSON = await Bun.file(
-		path.join(CUSTOM_SCHEMAS_DIR, 'webhooks.json'),
+		path.join(CUSTOM_V2_SCHEMAS_DIR, 'webhooks.json'),
 	).json()
 	/**
 	 * The webhooks.openapi.json file will still stay in the custom schemas directory bc we dont want to mix in with the endpoint schemas.
 	 */
 	const webhooksOpenapiJson = path.join(
-		CUSTOM_SCHEMAS_DIR,
+		CUSTOM_V2_SCHEMAS_DIR,
 		'webhooks.openapi.json',
 	)
 	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)

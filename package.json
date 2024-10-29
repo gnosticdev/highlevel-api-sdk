@@ -90,9 +90,10 @@
   },
   "scripts": {
     "build": "bun --bun tsup",
-    "generate-all": "bun run bun run generate-api-json && bun run generate-api-types && bun run generate-webhooks && bun run generate-scopes",
-    "generate-api-json": "bun scripts/generate-api-json.ts",
-    "generate-api-types": "bun scripts/generate-api-types.ts",
+    "generate-all": "bun run generate-v2-json && bun run generate-v2-types && bun run generate-v1-types && bun run generate-webhooks && bun run generate-scopes",
+    "generate-v2-json": "bun scripts/generate-v2-json.ts",
+    "generate-v2-types": "bun scripts/generate-v2-types.ts",
+    "generate-v1-types": "bun scripts/generate-v1-types.ts",
     "generate-scopes": "bun scripts/generate-scopes.ts",
     "generate-webhooks": "bun scripts/generate-webhooks.ts",
     "lint": "biome check . --write --unsafe",

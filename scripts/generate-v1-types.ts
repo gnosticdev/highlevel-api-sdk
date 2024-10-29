@@ -1,3 +1,4 @@
+import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, {
 	type AnnotatedSchemaObject,
@@ -9,6 +10,8 @@ import openapiTS, {
 	astToString,
 } from 'openapi-typescript'
 import { TempFile, objectKeys } from '../src/lib/utils'
+
+const OPENAPI_JSON_FILE = path.join(process.cwd(), 'schemas/v1/openapi.json')
 
 if (import.meta.main) {
 	await createV1Types()
@@ -73,9 +76,8 @@ function addComponentSchemas(openapiJson: OpenAPI3) {
 	}
 }
 
-export async function createV1Types() {
-	const postmanJson = 'schemas/v1/postman.json'
-
+async function createOpenapiJsonFile() {
+	const POSTMAN_JSON_FILE = path.join(process.cwd(), 'schemas/v1/postman.json')
 	// convert postman json to openapi json using postman-to-openapi
 	// const openapiYaml = Bun.pathToFileURL('schemas/v1/openapi.yaml')
 	// create temp json options file
@@ -96,6 +98,17 @@ export async function createV1Types() {
 		outputFormat: 'json',
 	}
 
+	await using optionsJson = new TempFile(
+		'temp-v1-json.json',
+		JSON.stringify(opts),
+	)
+
+	await Bun.$`bunx --bun postman-to-openapi ${POSTMAN_JSON_FILE} -f ${OPENAPI_JSON_FILE} -o ${optionsJson.filepath}`.quiet()
+	const openapiJson: OpenAPI3 = await Bun.file(OPENAPI_JSON_FILE).json()
+	return openapiJson
+}
+
+export async function createV1Types() {
 	const requiredParams: ParameterObject = {
 		name: 'Authorization',
 		in: 'header',
@@ -107,14 +120,8 @@ export async function createV1Types() {
 		},
 	}
 
-	await using optionsJson = new TempFile(
-		'temp-v1-json.json',
-		JSON.stringify(opts),
-	)
-	const openapiJsonFile = 'schemas/v1/openapi.json'
+	const openapiJson = await createOpenapiJsonFile()
 
-	await Bun.$`bunx --bun postman-to-openapi ${postmanJson} -f ${openapiJsonFile} -o ${optionsJson.path}`.quiet()
-	const openapiJson: OpenAPI3 = await Bun.file(openapiJsonFile).json()
 	// add the required headers to each path's parameters object
 	const paths = openapiJson.paths
 	if (!paths) {
@@ -149,7 +156,7 @@ export async function createV1Types() {
 	addComponentSchemas(openapiJson)
 
 	// create the openapi json file for reference
-	await Bun.write(openapiJsonFile, JSON.stringify(openapiJson))
+	await Bun.write(OPENAPI_JSON_FILE, JSON.stringify(openapiJson))
 
 	console.log(
 		kleur.green('Successfully converted postman json to openapi json'),
