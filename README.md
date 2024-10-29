@@ -91,9 +91,10 @@ const { data, error } = await v1Client.GET('/v1/contacts', {
         query: {
             locationId: '1234567890',
         },
-        header: {
-            Authorization: `Bearer ${process.env.HIGHLEVEL_ACCESS_TOKEN}`,
-        },
+        // Optional: added to all requests by default
+        // header: {
+        //     Authorization: `Bearer ${process.env.HIGHLEVEL_ACCESS_TOKEN}`,
+        // },
     }
 })
 ```

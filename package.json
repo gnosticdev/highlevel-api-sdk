@@ -1,106 +1,109 @@
 {
-	"author": {
-		"name": "gnosticdev",
-		"url": "https://github.com/gnosticdev"
-	},
-	"dependencies": {
-		"openapi-fetch": "^0.12.2"
-	},
-	"description": "SDK for the HighLevel API",
-	"devDependencies": {
-		"@biomejs/biome": "^1.9.2",
-		"@types/bun": "^1.1.6",
-		"kleur": "^4.1.5",
-		"lefthook": "^1.7.17",
-		"openapi-typescript": "7.4.1",
-		"release-it": "^17.6.0",
-		"tsup": "^8.3.0",
-		"typescript": "^5.6.3"
-	},
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"require": "./dist/cjs/index.js",
-			"import": "./dist/index.js"
-		},
-		"./configs": {
-			"types": "./dist/configs/index.d.ts",
-			"require": "./dist/cjs/configs/index.js",
-			"import": "./dist/configs/index.js"
-		},
-		"./configs/*": {
-			"types": "./dist/configs/oauth.d.ts",
-			"require": "./dist/cjs/configs/oauth.js",
-			"import": "./dist/configs/oauth.js"
-		},
-		"./oauth": {
-			"types": "./dist/oauth.d.ts",
-			"require": "./dist/cjs/oauth.js",
-			"import": "./dist/oauth.js"
-		},
-		"./scopes": {
-			"types": "./dist/scopes.d.ts",
-			"require": "./dist/cjs/scopes.js",
-			"import": "./dist/scopes.js"
-		},
-		"./types/*": {
-			"types": "./dist/types/*.d.ts",
-			"require": "./dist/cjs/types/*.js",
-			"import": "./dist/types/*.js"
-		},
-		"./webhooks": {
-			"types": "./dist/webhooks.d.ts",
-			"require": "./dist/cjs/webhooks.js",
-			"import": "./dist/webhooks.js"
-		},
-		"./v1": {
-			"types": "./dist/v1.d.ts",
-			"require": "./dist/cjs/v1.js",
-			"import": "./dist/v1.js"
-		}
-	},
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE"
-	],
-	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
-	"keywords": [
-		"highlevel",
-		"highlevel api",
-		"highlevel sdk",
-		"gohighlevel",
-		"api",
-		"sdk",
-		"typescript",
-		"javascript",
-		"crm",
-		"marketing"
-	],
-	"license": "MIT",
-	"name": "@gnosticdev/highlevel-sdk",
-	"packageManager": "bun@1.1.31",
-	"private": false,
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/gnosticdev/highlevel-sdk"
-	},
-	"scripts": {
-		"build": "bun --bun tsup",
-		"generate-all": "bun run bun run generate-api-json && bun run generate-api-types && bun run generate-webhooks && bun run generate-scopes",
-		"generate-api-json": "bun scripts/generate-api-json.ts",
-		"generate-api-types": "bun scripts/generate-api-types.ts",
-		"generate-scopes": "bun scripts/generate-scopes.ts",
-		"generate-webhooks": "bun scripts/generate-webhooks.ts",
-		"lint": "biome check . --write --unsafe",
-		"typecheck": "bun tsc -p tsconfig.json",
-		"release-it": "bun --env-file .env.local release-it",
-		"start-test": "bun test --hot"
-	},
-	"type": "module",
-	"types": "./dist/index.d.ts",
-	"version": "1.2.7"
+  "author": {
+    "name": "gnosticdev",
+    "url": "https://github.com/gnosticdev"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.12.2"
+  },
+  "description": "SDK for the HighLevel API",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.1.6",
+    "kleur": "^4.1.5",
+    "lefthook": "^1.7.17",
+    "openapi-typescript": "7.4.1",
+    "release-it": "^17.6.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/index.js"
+    },
+    "./configs": {
+      "types": "./dist/configs/index.d.ts",
+      "require": "./dist/cjs/configs/index.js",
+      "import": "./dist/configs/index.js"
+    },
+    "./configs/*": {
+      "types": "./dist/configs/oauth.d.ts",
+      "require": "./dist/cjs/configs/oauth.js",
+      "import": "./dist/configs/oauth.js"
+    },
+    "./oauth": {
+      "types": "./dist/oauth.d.ts",
+      "require": "./dist/cjs/oauth.js",
+      "import": "./dist/oauth.js"
+    },
+    "./scopes": {
+      "types": "./dist/scopes.d.ts",
+      "require": "./dist/cjs/scopes.js",
+      "import": "./dist/scopes.js"
+    },
+    "./types/*": {
+      "types": "./dist/types/*.d.ts",
+      "require": "./dist/cjs/types/*.js",
+      "import": "./dist/types/*.js"
+    },
+    "./webhooks": {
+      "types": "./dist/webhooks.d.ts",
+      "require": "./dist/cjs/webhooks.js",
+      "import": "./dist/webhooks.js"
+    },
+    "./v1": {
+      "types": "./dist/v1.d.ts",
+      "require": "./dist/cjs/v1.js",
+      "import": "./dist/v1.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
+  "keywords": [
+    "highlevel",
+    "highlevel api",
+    "highlevel sdk",
+    "gohighlevel",
+    "api",
+    "sdk",
+    "typescript",
+    "javascript",
+    "crm",
+    "marketing"
+  ],
+  "license": "MIT",
+  "name": "@gnosticdev/highlevel-sdk",
+  "packageManager": "bun@1.1.31",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gnosticdev/highlevel-sdk"
+  },
+  "scripts": {
+    "build": "bun --bun tsup",
+    "generate-all": "bun run bun run generate-api-json && bun run generate-api-types && bun run generate-webhooks && bun run generate-scopes",
+    "generate-api-json": "bun scripts/generate-api-json.ts",
+    "generate-api-types": "bun scripts/generate-api-types.ts",
+    "generate-scopes": "bun scripts/generate-scopes.ts",
+    "generate-webhooks": "bun scripts/generate-webhooks.ts",
+    "lint": "biome check . --write --unsafe",
+    "typecheck": "bun tsc -p tsconfig.json",
+    "release-it": "bun --env-file .env.local release-it",
+    "start-test": "bun test --hot"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "version": "1.2.7",
+  "trustedDependencies": [
+    "@biomejs/biome"
+  ]
 }
