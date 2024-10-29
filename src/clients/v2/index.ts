@@ -286,8 +286,19 @@ export class HighLevelClientWithOAuth<
 	}
 }
 
+/**
+ * Creates a new HighLevel API client with built in oauth support.
+ *
+ * Uses the built in `OAuthClient` by default, but allows for passing in a custom oauth client that extends `OAuthClientInterface`.
+ */
 export function createHighLevelClient<T extends AccessType>(config: {
+	/**
+	 * Configure the OAuth client that gets created
+	 */
 	oauthConfig: HighLevelOauthConfig<T>
+	/**
+	 * Configure the fetch client from `openapi-fetch`
+	 */
 	clientConfig?: HighLevelClientConfig
 }): HighLevelClient<T, OauthClient<T>> {
 	if (config.oauthConfig) {
