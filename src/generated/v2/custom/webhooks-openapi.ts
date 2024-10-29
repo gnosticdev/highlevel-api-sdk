@@ -1706,259 +1706,257 @@ export type webhooks = {
 export type components = {
 	schemas: {
 		AppointmentCreate: {
-			type?: string
-			locationId?: string
 			appointment?: {
-				id?: string
 				address?: string
-				title?: string
-				calendarId?: string
-				contactId?: string
-				groupId?: string
 				appointmentStatus?: string
 				assignedUserId?: string
-				users?: unknown[]
+				calendarId?: string
+				contactId?: string
+				dateAdded?: string
+				dateUpdated?: string
+				endTime?: string
+				groupId?: string
+				id?: string
 				notes?: string
 				source?: string
 				startTime?: string
-				endTime?: string
-				dateAdded?: string
-				dateUpdated?: string
+				title?: string
+				users?: unknown[]
 			}
+			locationId?: string
+			type?: string
 		}
 		AppointmentDelete: {
-			type?: string
-			locationId?: string
 			appointment?: {
-				id?: string
 				address?: string
-				title?: string
-				calendarId?: string
-				contactId?: string
-				groupId?: string
 				appointmentStatus?: string
 				assignedUserId?: string
-				users?: unknown[]
+				calendarId?: string
+				contactId?: string
+				dateAdded?: string
+				dateUpdated?: string
+				endTime?: string
+				groupId?: string
+				id?: string
 				notes?: string
 				source?: string
 				startTime?: string
-				endTime?: string
-				dateAdded?: string
-				dateUpdated?: string
+				title?: string
+				users?: unknown[]
 			}
+			locationId?: string
+			type?: string
 		}
 		AppointmentUpdate: {
-			type?: string
-			locationId?: string
 			appointment?: {
-				id?: string
 				address?: string
-				title?: string
-				calendarId?: string
-				contactId?: string
-				groupId?: string
 				appointmentStatus?: string
 				assignedUserId?: string
-				users?: unknown[]
+				calendarId?: string
+				contactId?: string
+				dateAdded?: string
+				dateUpdated?: string
+				endTime?: string
+				groupId?: string
+				id?: string
 				notes?: string
 				source?: string
 				startTime?: string
-				endTime?: string
-				dateAdded?: string
-				dateUpdated?: string
+				title?: string
+				users?: unknown[]
 			}
+			locationId?: string
+			type?: string
 		}
 		AppInstall: {
-			type?: string
 			appId?: string
 			companyId?: string
 			locationId?: string
-			userId?: string
 			planId?: string
 			trial?: {
 				onTrial?: boolean
 				trialDuration?: number
 				trialStartDate?: Record<string, never>
 			}
+			type?: string
+			userId?: string
 		}
 		AppUninstall: {
-			type?: string
 			appId?: string
 			companyId?: string
 			locationId?: string
+			type?: string
 		}
 		CampaignStatusUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
+			replied?: string
 			status?: string
 			templateId?: string
-			replied?: string
-			dateAdded?: string
+			type?: string
 		}
 		ContactCreate: {
-			type?: string
-			locationId?: string
-			id?: string
 			address1?: string
+			assignedTo?: string
+			attachments?: unknown[]
 			city?: string
 			companyName?: string
 			country?: string
-			source?: string
-			dateAdded?: string
-			dateOfBirth?: string
-			dnd?: boolean
-			email?: string
-			name?: string
-			firstName?: string
-			lastName?: string
-			phone?: string
-			postalCode?: string
-			state?: string
-			tags?: unknown[]
-			website?: string
-			attachments?: unknown[]
-			assignedTo?: string
 			customFields?: {
 				id?: string
 				value?: string | number | unknown[] | Record<string, never>
 			}[]
+			dateAdded?: string
+			dateOfBirth?: string
+			dnd?: boolean
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			locationId?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			source?: string
+			state?: string
+			tags?: unknown[]
+			type?: string
+			website?: string
 		}
 		ContactDelete: {
-			type?: string
-			locationId?: string
-			id?: string
 			address1?: string
+			assignedTo?: string
+			attachments?: unknown[]
 			city?: string
 			companyName?: string
 			country?: string
-			source?: string
-			dateAdded?: string
-			dateOfBirth?: string
-			dnd?: boolean
-			email?: string
-			name?: string
-			firstName?: string
-			lastName?: string
-			phone?: string
-			postalCode?: string
-			state?: string
-			tags?: unknown[]
-			website?: string
-			attachments?: unknown[]
-			assignedTo?: string
 			customFields?: {
 				id?: string
 				value?: string | number | unknown[] | Record<string, never>
 			}[]
+			dateAdded?: string
+			dateOfBirth?: string
+			dnd?: boolean
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			locationId?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			source?: string
+			state?: string
+			tags?: unknown[]
+			type?: string
+			website?: string
 		}
 		ContactTagUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			address1?: string
+			assignedTo?: string
+			attachments?: unknown[]
 			city?: string
 			companyName?: string
 			country?: string
-			source?: string
-			dateAdded?: string
-			dateOfBirth?: string
-			dnd?: boolean
-			email?: string
-			name?: string
-			firstName?: string
-			lastName?: string
-			phone?: string
-			postalCode?: string
-			state?: string
-			tags?: unknown[]
-			website?: string
-			attachments?: unknown[]
-			assignedTo?: string
 			customFields?: {
 				id?: string
 				value?: string | number | unknown[] | Record<string, never>
 			}[]
+			dateAdded?: string
+			dateOfBirth?: string
+			dnd?: boolean
+			email?: string
+			firstName?: string
+			id?: string
+			lastName?: string
+			locationId?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			source?: string
+			state?: string
+			tags?: unknown[]
+			type?: string
+			website?: string
 		}
 		ContactDndUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			address1?: string
+			assignedTo?: string
+			attachments?: unknown[]
 			city?: string
 			companyName?: string
 			country?: string
-			source?: string
+			customFields?: {
+				id?: string
+				value?: string | number | unknown[] | Record<string, never>
+			}[]
 			dateAdded?: string
 			dateOfBirth?: string
 			dnd?: boolean
 			dndSettings?: {
-				SMS?: {
-					status?: string
-					message?: string
+				Call?: {
 					code?: string
+					message?: string
+					status?: string
 				}
 				Email?: {
-					status?: string
-					message?: string
 					code?: string
-				}
-				GMB?: {
-					status?: string
 					message?: string
-					code?: string
+					status?: string
 				}
 				FB?: {
-					status?: string
-					message?: string
 					code?: string
+					message?: string
+					status?: string
+				}
+				GMB?: {
+					code?: string
+					message?: string
+					status?: string
+				}
+				SMS?: {
+					code?: string
+					message?: string
+					status?: string
 				}
 				WhatsApp?: {
-					status?: string
-					message?: string
 					code?: string
-				}
-				Call?: {
-					status?: string
 					message?: string
-					code?: string
+					status?: string
 				}
 			}
 			email?: string
-			name?: string
 			firstName?: string
+			id?: string
 			lastName?: string
+			locationId?: string
+			name?: string
 			phone?: string
 			postalCode?: string
+			source?: string
 			state?: string
 			tags?: unknown[]
+			type?: string
 			website?: string
-			attachments?: unknown[]
-			assignedTo?: string
-			customFields?: {
-				id?: string
-				value?: string | number | unknown[] | Record<string, never>
-			}[]
 		}
 		ConversationProviderOutboundWebhook: {
-			contactId?: string
-			locationId?: string
-			messageId?: string
-			emailMessageId?: string
-			type?: Record<string, never>
 			attachments?: unknown[]
-			message?: string
-			phone?: string
-			emailTo?: string
+			contactId?: string
 			emailFrom?: string
+			emailMessageId?: string
+			emailTo?: string
 			html?: string
+			locationId?: string
+			message?: string
+			messageId?: string
+			phone?: string
 			subject?: string
+			type?: Record<string, never>
 			userId?: string
 		}
 		InboundMessage: {
-			type?: string
-			locationId?: string
 			attachments?: unknown[]
 			body?: string
 			contactId?: string
@@ -1966,725 +1964,734 @@ export type components = {
 			conversationId?: string
 			dateAdded?: string
 			direction?: string
+			locationId?: string
+			messageId?: string
 			messageType?: string
 			status?: string
-			messageId?: string
+			type?: string
 			userId?: string
 		}
 		ConversationUnreadWebhook: {
-			type?: string
-			locationId?: string
-			id?: string
 			contactId?: string
-			unreadCount?: number
-			inbox?: boolean
-			starred?: boolean
 			deleted?: boolean
+			id?: string
+			inbox?: boolean
+			locationId?: string
+			starred?: boolean
+			type?: string
+			unreadCount?: number
 		}
 		ContactUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			address1?: string
+			assignedTo?: string
+			attachments?: unknown[]
 			city?: string
 			companyName?: string
 			country?: string
-			source?: string
+			customFields?: {
+				id?: string
+				value?: string | number | unknown[] | Record<string, never>
+			}[]
 			dateAdded?: string
 			dateOfBirth?: string
 			dnd?: boolean
 			email?: string
-			name?: string
 			firstName?: string
+			id?: string
 			lastName?: string
+			locationId?: string
+			name?: string
 			phone?: string
 			postalCode?: string
+			source?: string
 			state?: string
 			tags?: unknown[]
+			type?: string
 			website?: string
-			attachments?: unknown[]
-			assignedTo?: string
-			customFields?: {
-				id?: string
-				value?: string | number | unknown[] | Record<string, never>
-			}[]
 		}
 		InvoiceCreate: {
 			_id?: string
-			status?: string
-			liveMode?: boolean
-			amountPaid?: number
 			altId?: string
 			altType?: string
-			name?: string
+			amountDue?: number
+			amountPaid?: number
 			businessDetails?: {
-				name?: string
 				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
 				phoneNo?: string
 				website?: string
-				logoUrl?: string
-				customValues?: string[]
 			}
-			invoiceNumber?: string
-			currency?: string
 			contactDetails?: {
-				id?: string
-				phoneNo?: string
-				email?: string
-				customFields?: string[]
-				name?: string
-				address?: {
-					countryCode?: string
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					state?: string
-					postalCode?: string
-				}
 				additionalEmails?: {
 					email?: string
 				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
 				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
 			}
-			issueDate?: string
-			dueDate?: string
+			createdAt?: string
+			currency?: string
 			discount?: {
 				type?: string
 				value?: number
 			}
+			dueDate?: string
 			invoiceItems?: {
-				taxes?: unknown[]
 				_id?: string
-				productId?: string
-				priceId?: string
+				amount?: number
 				currency?: string
 				name?: string
+				priceId?: string
+				productId?: string
 				qty?: number
-				amount?: number
+				taxes?: unknown[]
 			}[]
-			total?: number
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
 			title?: string
-			amountDue?: number
-			createdAt?: string
-			updatedAt?: string
+			total?: number
 			totalSummary?: {
-				subTotal?: number
 				discount?: number
+				subTotal?: number
 			}
+			updatedAt?: string
 		}
 		InvoiceVoid: {
 			_id?: string
-			status?: string
-			liveMode?: boolean
-			amountPaid?: number
 			altId?: string
 			altType?: string
-			name?: string
+			amountDue?: number
+			amountPaid?: number
 			businessDetails?: {
-				name?: string
 				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
 				phoneNo?: string
 				website?: string
-				logoUrl?: string
-				customValues?: string[]
 			}
-			invoiceNumber?: string
-			currency?: string
 			contactDetails?: {
-				id?: string
-				phoneNo?: string
-				email?: string
-				customFields?: string[]
-				name?: string
-				address?: {
-					countryCode?: string
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					state?: string
-					postalCode?: string
-				}
 				additionalEmails?: {
 					email?: string
 				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
 				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
 			}
-			issueDate?: string
-			dueDate?: string
+			createdAt?: string
+			currency?: string
 			discount?: {
 				type?: string
 				value?: number
 			}
+			dueDate?: string
 			invoiceItems?: {
-				taxes?: unknown[]
 				_id?: string
-				productId?: string
-				priceId?: string
+				amount?: number
 				currency?: string
 				name?: string
+				priceId?: string
+				productId?: string
 				qty?: number
-				amount?: number
+				taxes?: unknown[]
 			}[]
-			total?: number
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
 			title?: string
-			amountDue?: number
-			createdAt?: string
-			updatedAt?: string
+			total?: number
 			totalSummary?: {
-				subTotal?: number
 				discount?: number
+				subTotal?: number
 			}
+			updatedAt?: string
 		}
 		InvoiceSent: {
 			_id?: string
-			status?: string
-			liveMode?: boolean
-			amountPaid?: number
 			altId?: string
 			altType?: string
-			name?: string
+			amountDue?: number
+			amountPaid?: number
 			businessDetails?: {
-				name?: string
 				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
 				phoneNo?: string
 				website?: string
-				logoUrl?: string
-				customValues?: string[]
 			}
-			invoiceNumber?: string
-			currency?: string
 			contactDetails?: {
-				id?: string
-				phoneNo?: string
-				email?: string
-				customFields?: string[]
-				name?: string
-				address?: {
-					countryCode?: string
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					state?: string
-					postalCode?: string
-				}
 				additionalEmails?: {
 					email?: string
 				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
 				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
 			}
-			issueDate?: string
-			dueDate?: string
+			createdAt?: string
+			currency?: string
 			discount?: {
 				type?: string
 				value?: number
 			}
+			dueDate?: string
 			invoiceItems?: {
-				taxes?: unknown[]
 				_id?: string
-				productId?: string
-				priceId?: string
+				amount?: number
 				currency?: string
 				name?: string
+				priceId?: string
+				productId?: string
 				qty?: number
-				amount?: number
+				taxes?: unknown[]
 			}[]
-			total?: number
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
 			title?: string
-			amountDue?: number
-			createdAt?: string
-			updatedAt?: string
+			total?: number
 			totalSummary?: {
-				subTotal?: number
 				discount?: number
+				subTotal?: number
 			}
+			updatedAt?: string
 		}
 		InvoicePartiallyPaid: {
 			_id?: string
-			status?: string
-			liveMode?: boolean
-			amountPaid?: number
 			altId?: string
 			altType?: string
-			name?: string
+			amountDue?: number
+			amountPaid?: number
 			businessDetails?: {
-				name?: string
 				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
 				phoneNo?: string
 				website?: string
-				logoUrl?: string
-				customValues?: string[]
 			}
-			invoiceNumber?: string
-			currency?: string
 			contactDetails?: {
-				id?: string
-				phoneNo?: string
-				email?: string
-				customFields?: string[]
-				name?: string
-				address?: {
-					countryCode?: string
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					state?: string
-					postalCode?: string
-				}
 				additionalEmails?: {
 					email?: string
 				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
 				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
 			}
-			issueDate?: string
-			dueDate?: string
+			createdAt?: string
+			currency?: string
 			discount?: {
 				type?: string
 				value?: number
 			}
+			dueDate?: string
 			invoiceItems?: {
-				taxes?: unknown[]
 				_id?: string
-				productId?: string
-				priceId?: string
+				amount?: number
 				currency?: string
 				name?: string
+				priceId?: string
+				productId?: string
 				qty?: number
-				amount?: number
+				taxes?: unknown[]
 			}[]
-			total?: number
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
 			title?: string
-			amountDue?: number
-			createdAt?: string
-			updatedAt?: string
+			total?: number
 			totalSummary?: {
-				subTotal?: number
 				discount?: number
+				subTotal?: number
 			}
+			updatedAt?: string
 		}
 		InvoicePaid: {
 			_id?: string
-			status?: string
-			liveMode?: boolean
-			amountPaid?: number
 			altId?: string
 			altType?: string
-			name?: string
+			amountDue?: number
+			amountPaid?: number
 			businessDetails?: {
-				name?: string
 				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
 				phoneNo?: string
 				website?: string
-				logoUrl?: string
-				customValues?: string[]
 			}
-			invoiceNumber?: string
-			currency?: string
 			contactDetails?: {
-				id?: string
-				phoneNo?: string
-				email?: string
-				customFields?: string[]
-				name?: string
-				address?: {
-					countryCode?: string
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					state?: string
-					postalCode?: string
-				}
 				additionalEmails?: {
 					email?: string
 				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
 				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
 			}
-			issueDate?: string
-			dueDate?: string
+			createdAt?: string
+			currency?: string
 			discount?: {
 				type?: string
 				value?: number
 			}
+			dueDate?: string
 			invoiceItems?: {
-				taxes?: unknown[]
 				_id?: string
-				productId?: string
-				priceId?: string
+				amount?: number
 				currency?: string
 				name?: string
+				priceId?: string
+				productId?: string
 				qty?: number
-				amount?: number
+				taxes?: unknown[]
 			}[]
-			total?: number
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
 			title?: string
-			amountDue?: number
-			createdAt?: string
-			updatedAt?: string
+			total?: number
 			totalSummary?: {
-				subTotal?: number
 				discount?: number
+				subTotal?: number
 			}
+			updatedAt?: string
 		}
 		InvoiceDelete: {
 			_id?: string
-			status?: string
-			liveMode?: boolean
-			amountPaid?: number
 			altId?: string
 			altType?: string
-			name?: string
+			amountDue?: number
+			amountPaid?: number
 			businessDetails?: {
-				name?: string
 				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
 				phoneNo?: string
 				website?: string
-				logoUrl?: string
-				customValues?: string[]
 			}
-			invoiceNumber?: string
-			currency?: string
 			contactDetails?: {
-				id?: string
-				phoneNo?: string
-				email?: string
-				customFields?: string[]
-				name?: string
-				address?: {
-					countryCode?: string
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					state?: string
-					postalCode?: string
-				}
 				additionalEmails?: {
 					email?: string
 				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
 				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
 			}
-			issueDate?: string
-			dueDate?: string
+			createdAt?: string
+			currency?: string
 			discount?: {
 				type?: string
 				value?: number
 			}
+			dueDate?: string
 			invoiceItems?: {
-				taxes?: unknown[]
 				_id?: string
-				productId?: string
-				priceId?: string
+				amount?: number
 				currency?: string
 				name?: string
+				priceId?: string
+				productId?: string
 				qty?: number
-				amount?: number
+				taxes?: unknown[]
 			}[]
-			total?: number
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
 			title?: string
-			amountDue?: number
-			createdAt?: string
-			updatedAt?: string
+			total?: number
 			totalSummary?: {
-				subTotal?: number
 				discount?: number
+				subTotal?: number
 			}
+			updatedAt?: string
 		}
 		InvoiceUpdate: {
 			_id?: string
-			status?: string
-			liveMode?: boolean
-			amountPaid?: number
 			altId?: string
 			altType?: string
-			name?: string
+			amountDue?: number
+			amountPaid?: number
 			businessDetails?: {
-				name?: string
 				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
 				phoneNo?: string
 				website?: string
-				logoUrl?: string
-				customValues?: string[]
 			}
-			invoiceNumber?: string
-			currency?: string
 			contactDetails?: {
-				id?: string
-				phoneNo?: string
-				email?: string
-				customFields?: string[]
-				name?: string
-				address?: {
-					countryCode?: string
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					state?: string
-					postalCode?: string
-				}
 				additionalEmails?: {
 					email?: string
 				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
 				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
 			}
-			issueDate?: string
-			dueDate?: string
+			createdAt?: string
+			currency?: string
 			discount?: {
 				type?: string
 				value?: number
 			}
+			dueDate?: string
 			invoiceItems?: {
-				taxes?: unknown[]
 				_id?: string
-				productId?: string
-				priceId?: string
+				amount?: number
 				currency?: string
 				name?: string
+				priceId?: string
+				productId?: string
 				qty?: number
-				amount?: number
+				taxes?: unknown[]
 			}[]
-			total?: number
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
 			title?: string
-			amountDue?: number
-			createdAt?: string
-			updatedAt?: string
+			total?: number
 			totalSummary?: {
-				subTotal?: number
 				discount?: number
+				subTotal?: number
 			}
+			updatedAt?: string
 		}
 		LCEmailStats: {
-			type?: string
-			locationId?: string
 			companyId?: string
+			locationId?: string
+			type?: string
 			webhookPayload?: {
-				event?: string
-				id?: string
-				timestamp?: number
-				flags?: {
-					'is-authenticated'?: boolean
-					'is-routed'?: boolean
-					'is-big'?: boolean
-					'is-system-test'?: boolean
-					'is-test-mode'?: boolean
-				}
-				message?: {
-					attachments?: unknown[]
-					headers?: {
-						'message-id'?: string
-						from?: string
-						to?: string
-					}
-					size?: number
-				}
-				'log-level'?: string
-				recipient?: string
-				'recipient-domain'?: string
-				tags?: unknown[]
-				'recipient-provider'?: string
 				campaigns?: unknown[]
 				'delivery-status'?: {
 					'attempt-no'?: number
 					code?: number
-					message?: string
 					description?: string
-					'session-seconds'?: number
 					'enhanced-code'?: string
-					'mx-host'?: string
-					utf8?: boolean
 					'i-first-delivery-attempt-seconds'?: number
+					message?: string
+					'mx-host'?: string
+					'session-seconds'?: number
+					utf8?: boolean
 				}
 				envelope?: {
-					sender?: string
-					targets?: string
-					transport?: string
-					'sending-ip'?: string
 					'i-ip-pool-id'?: string
 					'i-ip-pool-name'?: string
+					sender?: string
+					'sending-ip'?: string
+					targets?: string
+					transport?: string
 				}
+				event?: string
+				flags?: {
+					'is-authenticated'?: boolean
+					'is-big'?: boolean
+					'is-routed'?: boolean
+					'is-system-test'?: boolean
+					'is-test-mode'?: boolean
+				}
+				id?: string
+				'log-level'?: string
+				message?: {
+					attachments?: unknown[]
+					headers?: {
+						from?: string
+						'message-id'?: string
+						to?: string
+					}
+					size?: number
+				}
+				recipient?: string
+				'recipient-domain'?: string
+				'recipient-provider'?: string
+				tags?: unknown[]
+				timestamp?: number
 			}
 		}
 		LocationCreate: {
-			type?: string
+			companyId?: string
+			email?: string
 			id?: string
 			name?: string
-			email?: string
 			stripeProductId?: string
-			companyId?: string
+			type?: string
 		}
 		LocationUpdate: {
-			type?: string
+			companyId?: string
+			email?: string
 			id?: string
 			name?: string
-			email?: string
 			stripeProductId?: string
-			companyId?: string
+			type?: string
 		}
 		NoteCreate: {
-			type?: string
-			locationId?: string
-			id?: string
 			body?: string
 			contactId?: string
 			dateAdded?: string
+			id?: string
+			locationId?: string
+			type?: string
 		}
 		NoteDelete: {
-			type?: string
-			locationId?: string
-			id?: string
 			body?: string
 			contactId?: string
 			dateAdded?: string
+			id?: string
+			locationId?: string
+			type?: string
 		}
 		OpportunityCreate: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
 			monetaryValue?: number
 			name?: string
 			pipelineId?: string
 			pipelineStageId?: string
 			source?: string
 			status?: string
-			dateAdded?: string
+			type?: string
 		}
 		OpportunityAssignedToUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
 			monetaryValue?: number
 			name?: string
 			pipelineId?: string
 			pipelineStageId?: string
 			source?: string
 			status?: string
-			dateAdded?: string
+			type?: string
 		}
 		NoteUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			body?: string
 			contactId?: string
 			dateAdded?: string
+			id?: string
+			locationId?: string
+			type?: string
 		}
 		OpportunityDelete: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
 			monetaryValue?: number
 			name?: string
 			pipelineId?: string
 			pipelineStageId?: string
 			source?: string
 			status?: string
-			dateAdded?: string
+			type?: string
 		}
 		OpportunityMonetaryValueUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
 			monetaryValue?: number
 			name?: string
 			pipelineId?: string
 			pipelineStageId?: string
 			source?: string
 			status?: string
-			dateAdded?: string
+			type?: string
 		}
 		OpportunityStageUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
 			monetaryValue?: number
 			name?: string
 			pipelineId?: string
 			pipelineStageId?: string
 			source?: string
 			status?: string
-			dateAdded?: string
+			type?: string
 		}
 		OpportunityStatusUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
 			monetaryValue?: number
 			name?: string
 			pipelineId?: string
 			pipelineStageId?: string
 			source?: string
 			status?: string
-			dateAdded?: string
+			type?: string
 		}
 		OpportunityUpdate: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
 			monetaryValue?: number
 			name?: string
 			pipelineId?: string
 			pipelineStageId?: string
 			source?: string
 			status?: string
-			dateAdded?: string
+			type?: string
 		}
 		OrderCreate: {
-			type?: string
+			_id?: string
 			altId?: string
 			altType?: string
-			_id?: string
-			contactId?: string
-			contactSnapshot?: {
-				locationId?: string
-				id?: string
-				address1?: string
-				city?: string
-				companyName?: string
-				country?: string
-				source?: string
-				dateAdded?: string
-				dateOfBirth?: string
-				dnd?: boolean
-				email?: string
-				name?: string
-				firstName?: string
-				lastName?: string
-				phone?: string
-				postalCode?: string
-				state?: string
-				tags?: unknown[]
-				website?: string
-				attachments?: unknown[]
-				assignedTo?: string
-			}
-			status?: string
-			fulfillmentStatus?: string
-			currency?: string
 			amount?: number
-			liveMode?: boolean
-			items?: {
-				name?: string
-				qty?: number
-				product?: Record<string, never>
-				price?: Record<string, never>
-			}[]
 			amountSummary?: {
 				discount?: number
 				shipping?: number
 				subtotal?: number
 				tax?: number
 			}
+			contactId?: string
+			contactSnapshot?: {
+				address1?: string
+				assignedTo?: string
+				attachments?: unknown[]
+				city?: string
+				companyName?: string
+				country?: string
+				dateAdded?: string
+				dateOfBirth?: string
+				dnd?: boolean
+				email?: string
+				firstName?: string
+				id?: string
+				lastName?: string
+				locationId?: string
+				name?: string
+				phone?: string
+				postalCode?: string
+				source?: string
+				state?: string
+				tags?: unknown[]
+				website?: string
+			}
+			createdAt?: string
+			currency?: string
+			fulfillmentStatus?: string
+			items?: {
+				name?: string
+				price?: Record<string, never>
+				product?: Record<string, never>
+				qty?: number
+			}[]
+			liveMode?: boolean
+			source?: {
+				id?: string
+				meta?: Record<string, never>
+				name?: string
+				subType?: string
+				type?: string
+			}
+			status?: string
 			taxSummary?: {
 				_id?: string
 				amount?: number
@@ -2692,62 +2699,62 @@ export type components = {
 				name?: string
 				rate?: number
 			}[]
-			source?: {
-				id?: string
-				name?: string
-				type?: string
-				subType?: string
-				meta?: Record<string, never>
-			}
-			createdAt?: string
+			type?: string
 			updatedAt?: string
 		}
 		OrderStatusUpdate: {
-			type?: string
+			_id?: string
 			altId?: string
 			altType?: string
-			_id?: string
-			contactId?: string
-			contactSnapshot?: {
-				locationId?: string
-				id?: string
-				address1?: string
-				city?: string
-				companyName?: string
-				country?: string
-				source?: string
-				dateAdded?: string
-				dateOfBirth?: string
-				dnd?: boolean
-				email?: string
-				name?: string
-				firstName?: string
-				lastName?: string
-				phone?: string
-				postalCode?: string
-				state?: string
-				tags?: unknown[]
-				website?: string
-				attachments?: unknown[]
-				assignedTo?: string
-			}
-			status?: string
-			fulfillmentStatus?: string
-			currency?: string
 			amount?: number
-			liveMode?: boolean
-			items?: {
-				name?: string
-				qty?: number
-				product?: Record<string, never>
-				price?: Record<string, never>
-			}[]
 			amountSummary?: {
 				discount?: number
 				shipping?: number
 				subtotal?: number
 				tax?: number
 			}
+			contactId?: string
+			contactSnapshot?: {
+				address1?: string
+				assignedTo?: string
+				attachments?: unknown[]
+				city?: string
+				companyName?: string
+				country?: string
+				dateAdded?: string
+				dateOfBirth?: string
+				dnd?: boolean
+				email?: string
+				firstName?: string
+				id?: string
+				lastName?: string
+				locationId?: string
+				name?: string
+				phone?: string
+				postalCode?: string
+				source?: string
+				state?: string
+				tags?: unknown[]
+				website?: string
+			}
+			createdAt?: string
+			currency?: string
+			fulfillmentStatus?: string
+			items?: {
+				name?: string
+				price?: Record<string, never>
+				product?: Record<string, never>
+				qty?: number
+			}[]
+			liveMode?: boolean
+			source?: {
+				id?: string
+				meta?: Record<string, never>
+				name?: string
+				subType?: string
+				type?: string
+			}
+			status?: string
 			taxSummary?: {
 				_id?: string
 				amount?: number
@@ -2755,19 +2762,10 @@ export type components = {
 				name?: string
 				rate?: number
 			}[]
-			source?: {
-				id?: string
-				name?: string
-				type?: string
-				subType?: string
-				meta?: Record<string, never>
-			}
-			createdAt?: string
+			type?: string
 			updatedAt?: string
 		}
 		OutboundMessage: {
-			type?: string
-			locationId?: string
 			attachments?: unknown[]
 			body?: string
 			contactId?: string
@@ -2775,93 +2773,111 @@ export type components = {
 			conversationId?: string
 			dateAdded?: string
 			direction?: string
-			messageType?: string
-			status?: string
+			locationId?: string
 			messageId?: string
-			userId?: string
+			messageType?: string
 			source?: string
+			status?: string
+			type?: string
+			userId?: string
 		}
 		PriceCreate: {
 			_id?: string
+			allowOutOfStockPurchases?: boolean
+			amount?: number
+			availableQuantity?: number
+			compareAtPrice?: number
+			createdAt?: string
+			currency?: string
+			locationId?: string
 			membershipOffers?: {
+				_id?: string
 				label?: string
 				value?: string
-				_id?: string
 			}[]
-			variantOptionIds?: string[]
-			locationId?: string
-			product?: string
-			userId?: string
 			name?: string
 			priceType?: string
-			currency?: string
-			amount?: number
+			product?: string
 			recurring?: {
 				interval?: string
 				intervalCount?: number
 			}
-			createdAt?: string
-			updatedAt?: string
-			compareAtPrice?: number
 			trackInventory?: null
-			availableQuantity?: number
-			allowOutOfStockPurchases?: boolean
+			updatedAt?: string
+			userId?: string
+			variantOptionIds?: string[]
 		}
 		PriceUpdate: {
 			_id?: string
+			allowOutOfStockPurchases?: boolean
+			amount?: number
+			availableQuantity?: number
+			compareAtPrice?: number
+			createdAt?: string
+			currency?: string
+			locationId?: string
 			membershipOffers?: {
+				_id?: string
 				label?: string
 				value?: string
-				_id?: string
 			}[]
-			variantOptionIds?: string[]
-			locationId?: string
-			product?: string
-			userId?: string
 			name?: string
-			type?: string
-			currency?: string
-			amount?: number
+			product?: string
 			recurring?: {
 				interval?: string
 				intervalCount?: number
 			}
-			createdAt?: string
-			updatedAt?: string
-			compareAtPrice?: number
 			trackInventory?: null
-			availableQuantity?: number
-			allowOutOfStockPurchases?: boolean
+			type?: string
+			updatedAt?: string
+			userId?: string
+			variantOptionIds?: string[]
 		}
 		PriceDelete: {
 			_id?: string
+			allowOutOfStockPurchases?: boolean
+			amount?: number
+			availableQuantity?: number
+			compareAtPrice?: number
+			createdAt?: string
+			currency?: string
+			locationId?: string
 			membershipOffers?: {
+				_id?: string
 				label?: string
 				value?: string
-				_id?: string
 			}[]
-			variantOptionIds?: string[]
-			locationId?: string
-			product?: string
-			userId?: string
 			name?: string
-			type?: string
-			currency?: string
-			amount?: number
+			product?: string
 			recurring?: {
 				interval?: string
 				intervalCount?: number
 			}
-			createdAt?: string
-			updatedAt?: string
-			compareAtPrice?: number
 			trackInventory?: null
-			availableQuantity?: number
-			allowOutOfStockPurchases?: boolean
+			type?: string
+			updatedAt?: string
+			userId?: string
+			variantOptionIds?: string[]
 		}
 		ProductCreate: {
 			_id?: string
+			availableInStore?: boolean
+			createdAt?: string
 			description?: string
+			image?: string
+			locationId?: string
+			medias?: {
+				id?: string
+				isFeatured?: boolean
+				title?: string
+				type?: string
+				url?: string
+			}[]
+			name?: string
+			productType?: string
+			statementDescriptor?: string
+			updatedAt?: string
+			userId?: string
 			variants?: {
 				id?: string
 				name?: string
@@ -2870,26 +2886,26 @@ export type components = {
 					name?: string
 				}[]
 			}[]
-			medias?: {
-				id?: string
-				title?: string
-				url?: string
-				type?: string
-				isFeatured?: boolean
-			}[]
-			locationId?: string
-			name?: string
-			productType?: string
-			availableInStore?: boolean
-			userId?: string
-			createdAt?: string
-			updatedAt?: string
-			statementDescriptor?: string
-			image?: string
 		}
 		ProductUpdate: {
 			_id?: string
+			availableInStore?: boolean
+			createdAt?: string
 			description?: string
+			image?: string
+			locationId?: string
+			medias?: {
+				id?: string
+				isFeatured?: boolean
+				title?: string
+				type?: string
+				url?: string
+			}[]
+			name?: string
+			productType?: string
+			statementDescriptor?: string
+			updatedAt?: string
+			userId?: string
 			variants?: {
 				id?: string
 				name?: string
@@ -2898,26 +2914,26 @@ export type components = {
 					name?: string
 				}[]
 			}[]
-			medias?: {
-				id?: string
-				title?: string
-				url?: string
-				type?: string
-				isFeatured?: boolean
-			}[]
-			locationId?: string
-			name?: string
-			productType?: string
-			availableInStore?: boolean
-			userId?: string
-			createdAt?: string
-			updatedAt?: string
-			statementDescriptor?: string
-			image?: string
 		}
 		ProductDelete: {
 			_id?: string
+			availableInStore?: boolean
+			createdAt?: string
 			description?: string
+			image?: string
+			locationId?: string
+			medias?: {
+				id?: string
+				isFeatured?: boolean
+				title?: string
+				type?: string
+				url?: string
+			}[]
+			name?: string
+			productType?: string
+			statementDescriptor?: string
+			updatedAt?: string
+			userId?: string
 			variants?: {
 				id?: string
 				name?: string
@@ -2926,55 +2942,39 @@ export type components = {
 					name?: string
 				}[]
 			}[]
-			medias?: {
-				id?: string
-				title?: string
-				url?: string
-				type?: string
-				isFeatured?: boolean
-			}[]
-			locationId?: string
-			name?: string
-			productType?: string
-			availableInStore?: boolean
-			userId?: string
-			createdAt?: string
-			updatedAt?: string
-			statementDescriptor?: string
-			image?: string
 		}
 		TaskComplete: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			body?: string
 			contactId?: string
-			title?: string
 			dateAdded?: string
 			dueDate?: string
+			id?: string
+			locationId?: string
+			title?: string
+			type?: string
 		}
 		TaskCreate: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			body?: string
 			contactId?: string
-			title?: string
 			dateAdded?: string
 			dueDate?: string
+			id?: string
+			locationId?: string
+			title?: string
+			type?: string
 		}
 		TaskDelete: {
-			type?: string
-			locationId?: string
-			id?: string
 			assignedTo?: string
 			body?: string
 			contactId?: string
-			title?: string
 			dateAdded?: string
 			dueDate?: string
+			id?: string
+			locationId?: string
+			title?: string
+			type?: string
 		}
 	}
 	responses: never

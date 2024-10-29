@@ -1,92 +1,50 @@
-export type AppointmentCreate =
-	import('./webhooks-openapi').components['schemas']['AppointmentCreate']
-export type AppointmentDelete =
-	import('./webhooks-openapi').components['schemas']['AppointmentDelete']
-export type AppointmentUpdate =
-	import('./webhooks-openapi').components['schemas']['AppointmentUpdate']
-export type AppInstall =
-	import('./webhooks-openapi').components['schemas']['AppInstall']
-export type AppUninstall =
-	import('./webhooks-openapi').components['schemas']['AppUninstall']
-export type CampaignStatusUpdate =
-	import('./webhooks-openapi').components['schemas']['CampaignStatusUpdate']
-export type ContactCreate =
-	import('./webhooks-openapi').components['schemas']['ContactCreate']
-export type ContactDelete =
-	import('./webhooks-openapi').components['schemas']['ContactDelete']
-export type ContactTagUpdate =
-	import('./webhooks-openapi').components['schemas']['ContactTagUpdate']
-export type ContactDndUpdate =
-	import('./webhooks-openapi').components['schemas']['ContactDndUpdate']
-export type ConversationProviderOutboundWebhook =
-	import('./webhooks-openapi').components['schemas']['ConversationProviderOutboundWebhook']
-export type InboundMessage =
-	import('./webhooks-openapi').components['schemas']['InboundMessage']
-export type ConversationUnreadWebhook =
-	import('./webhooks-openapi').components['schemas']['ConversationUnreadWebhook']
-export type ContactUpdate =
-	import('./webhooks-openapi').components['schemas']['ContactUpdate']
-export type InvoiceCreate =
-	import('./webhooks-openapi').components['schemas']['InvoiceCreate']
-export type InvoiceVoid =
-	import('./webhooks-openapi').components['schemas']['InvoiceVoid']
-export type InvoiceSent =
-	import('./webhooks-openapi').components['schemas']['InvoiceSent']
-export type InvoicePartiallyPaid =
-	import('./webhooks-openapi').components['schemas']['InvoicePartiallyPaid']
-export type InvoicePaid =
-	import('./webhooks-openapi').components['schemas']['InvoicePaid']
-export type InvoiceDelete =
-	import('./webhooks-openapi').components['schemas']['InvoiceDelete']
-export type InvoiceUpdate =
-	import('./webhooks-openapi').components['schemas']['InvoiceUpdate']
-export type LCEmailStats =
-	import('./webhooks-openapi').components['schemas']['LCEmailStats']
-export type LocationCreate =
-	import('./webhooks-openapi').components['schemas']['LocationCreate']
-export type LocationUpdate =
-	import('./webhooks-openapi').components['schemas']['LocationUpdate']
-export type NoteCreate =
-	import('./webhooks-openapi').components['schemas']['NoteCreate']
-export type NoteDelete =
-	import('./webhooks-openapi').components['schemas']['NoteDelete']
-export type OpportunityCreate =
-	import('./webhooks-openapi').components['schemas']['OpportunityCreate']
-export type OpportunityAssignedToUpdate =
-	import('./webhooks-openapi').components['schemas']['OpportunityAssignedToUpdate']
-export type NoteUpdate =
-	import('./webhooks-openapi').components['schemas']['NoteUpdate']
-export type OpportunityDelete =
-	import('./webhooks-openapi').components['schemas']['OpportunityDelete']
-export type OpportunityMonetaryValueUpdate =
-	import('./webhooks-openapi').components['schemas']['OpportunityMonetaryValueUpdate']
-export type OpportunityStageUpdate =
-	import('./webhooks-openapi').components['schemas']['OpportunityStageUpdate']
-export type OpportunityStatusUpdate =
-	import('./webhooks-openapi').components['schemas']['OpportunityStatusUpdate']
-export type OpportunityUpdate =
-	import('./webhooks-openapi').components['schemas']['OpportunityUpdate']
-export type OrderCreate =
-	import('./webhooks-openapi').components['schemas']['OrderCreate']
-export type OrderStatusUpdate =
-	import('./webhooks-openapi').components['schemas']['OrderStatusUpdate']
-export type OutboundMessage =
-	import('./webhooks-openapi').components['schemas']['OutboundMessage']
-export type PriceCreate =
-	import('./webhooks-openapi').components['schemas']['PriceCreate']
-export type PriceUpdate =
-	import('./webhooks-openapi').components['schemas']['PriceUpdate']
-export type PriceDelete =
-	import('./webhooks-openapi').components['schemas']['PriceDelete']
-export type ProductCreate =
-	import('./webhooks-openapi').components['schemas']['ProductCreate']
-export type ProductUpdate =
-	import('./webhooks-openapi').components['schemas']['ProductUpdate']
-export type ProductDelete =
-	import('./webhooks-openapi').components['schemas']['ProductDelete']
-export type TaskComplete =
-	import('./webhooks-openapi').components['schemas']['TaskComplete']
-export type TaskCreate =
-	import('./webhooks-openapi').components['schemas']['TaskCreate']
-export type TaskDelete =
-	import('./webhooks-openapi').components['schemas']['TaskDelete']
+import type { components } from './webhooks-openapi'
+
+type WebhooksOpenAPI = components['schemas']
+
+export type AppointmentCreate = WebhooksOpenAPI['AppointmentCreate']
+export type AppointmentDelete = WebhooksOpenAPI['AppointmentDelete']
+export type AppointmentUpdate = WebhooksOpenAPI['AppointmentUpdate']
+export type AppInstall = WebhooksOpenAPI['AppInstall']
+export type AppUninstall = WebhooksOpenAPI['AppUninstall']
+export type CampaignStatusUpdate = WebhooksOpenAPI['CampaignStatusUpdate']
+export type ContactCreate = WebhooksOpenAPI['ContactCreate']
+export type ContactDelete = WebhooksOpenAPI['ContactDelete']
+export type ContactTagUpdate = WebhooksOpenAPI['ContactTagUpdate']
+export type ContactDndUpdate = WebhooksOpenAPI['ContactDndUpdate']
+export type ConversationProviderOutboundWebhook = WebhooksOpenAPI['ConversationProviderOutboundWebhook']
+export type InboundMessage = WebhooksOpenAPI['InboundMessage']
+export type ConversationUnreadWebhook = WebhooksOpenAPI['ConversationUnreadWebhook']
+export type ContactUpdate = WebhooksOpenAPI['ContactUpdate']
+export type InvoiceCreate = WebhooksOpenAPI['InvoiceCreate']
+export type InvoiceVoid = WebhooksOpenAPI['InvoiceVoid']
+export type InvoiceSent = WebhooksOpenAPI['InvoiceSent']
+export type InvoicePartiallyPaid = WebhooksOpenAPI['InvoicePartiallyPaid']
+export type InvoicePaid = WebhooksOpenAPI['InvoicePaid']
+export type InvoiceDelete = WebhooksOpenAPI['InvoiceDelete']
+export type InvoiceUpdate = WebhooksOpenAPI['InvoiceUpdate']
+export type LCEmailStats = WebhooksOpenAPI['LCEmailStats']
+export type LocationCreate = WebhooksOpenAPI['LocationCreate']
+export type LocationUpdate = WebhooksOpenAPI['LocationUpdate']
+export type NoteCreate = WebhooksOpenAPI['NoteCreate']
+export type NoteDelete = WebhooksOpenAPI['NoteDelete']
+export type OpportunityCreate = WebhooksOpenAPI['OpportunityCreate']
+export type OpportunityAssignedToUpdate = WebhooksOpenAPI['OpportunityAssignedToUpdate']
+export type NoteUpdate = WebhooksOpenAPI['NoteUpdate']
+export type OpportunityDelete = WebhooksOpenAPI['OpportunityDelete']
+export type OpportunityMonetaryValueUpdate = WebhooksOpenAPI['OpportunityMonetaryValueUpdate']
+export type OpportunityStageUpdate = WebhooksOpenAPI['OpportunityStageUpdate']
+export type OpportunityStatusUpdate = WebhooksOpenAPI['OpportunityStatusUpdate']
+export type OpportunityUpdate = WebhooksOpenAPI['OpportunityUpdate']
+export type OrderCreate = WebhooksOpenAPI['OrderCreate']
+export type OrderStatusUpdate = WebhooksOpenAPI['OrderStatusUpdate']
+export type OutboundMessage = WebhooksOpenAPI['OutboundMessage']
+export type PriceCreate = WebhooksOpenAPI['PriceCreate']
+export type PriceUpdate = WebhooksOpenAPI['PriceUpdate']
+export type PriceDelete = WebhooksOpenAPI['PriceDelete']
+export type ProductCreate = WebhooksOpenAPI['ProductCreate']
+export type ProductUpdate = WebhooksOpenAPI['ProductUpdate']
+export type ProductDelete = WebhooksOpenAPI['ProductDelete']
+export type TaskComplete = WebhooksOpenAPI['TaskComplete']
+export type TaskCreate = WebhooksOpenAPI['TaskCreate']
+export type TaskDelete = WebhooksOpenAPI['TaskDelete']
