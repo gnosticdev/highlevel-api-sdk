@@ -55,7 +55,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	readonly scopes: ScopeLiterals<T>[]
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
-	 * @default 'https://marketplace.gohighlevel.com/oauth/chooselocation
+	 * @default https://marketplace.leadconnectorhq.com/oauth/chooselocation
 	 */
 	readonly baseAuthUrl?: string
 	/**
