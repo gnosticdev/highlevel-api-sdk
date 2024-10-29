@@ -6,7 +6,7 @@
 		"outDir": "./dist",
 		"rootDir": "./src"
 	},
-	"exclude": ["./src/lib", "node_modules"],
+	"exclude": ["./src/lib"],
 	"extends": "./tsconfig.json",
 	"include": ["./src/**/*"]
 }

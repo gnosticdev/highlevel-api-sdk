@@ -139,6 +139,37 @@ const customValues: LocationCustomValues = [{
 }]
 ```
 
+## Scopes
+
+1. Once you have added your scopes to your app, you can collect them from the dev console on your app's settings page in the Highlevel Marketplace:
+
+    ```ts
+    /**
+     * Navigate to your apps' setting page -  `https://marketplace.highlevel.com/app-settins/<your-app-id>/auth`
+
+     * Press cmd + J on keyboarrd
+     */
+    $$('.n-tag__content')
+        .map((scope) => scope.textContent.trim())
+        .toSorted()
+    ```
+
+2. Copy the resulting array
+3. Create a new ScopesBuilder instance and paste the scopes to it.
+
+    ```ts
+    const client = createHighLevelClient({
+        scopes: [
+            'locations.write',
+            'contacts.readonly',
+            ...
+        ]
+    })
+    ```
+
+```ts
+```
+
 ## Examples
 
 For more detailed usage examples, please check out the [examples directory](./examples).

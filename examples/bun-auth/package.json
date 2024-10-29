@@ -4,7 +4,8 @@
 		"hono": "^4.6.3"
 	},
 	"devDependencies": {
-		"@types/bun": "^1.1.11"
+		"@types/bun": "^1.1.11",
+		"typescript": "^5.6.3"
 	},
 	"license": "MIT",
 	"name": "@gnosticdev/highlevel-bun-auth",

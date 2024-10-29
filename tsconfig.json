@@ -4,8 +4,6 @@
 		"allowSyntheticDefaultImports": true,
 		"baseUrl": ".",
 		"forceConsistentCasingInFileNames": true,
-		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx",
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
 		"module": "ESNext",
 		"moduleDetection": "force",
@@ -24,5 +22,5 @@
 		"target": "ESNext",
 		"verbatimModuleSyntax": true
 	},
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "examples"]
 }
