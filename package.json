@@ -98,7 +98,7 @@
     "generate-webhooks": "bun scripts/generate-webhooks.ts",
     "lint": "biome check . --write --unsafe",
     "typecheck": "bun tsc -p tsconfig.json",
-    "release-it": "bun --env-file .env.local release-it",
+    "release": "bun --env-file .env.local release-it",
     "start-test": "bun test --hot"
   },
   "type": "module",

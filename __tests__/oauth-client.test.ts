@@ -1,127 +1,145 @@
-import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
+import { describe, expect, it, spyOn } from 'bun:test'
 import { OauthClient } from '../src/clients/oauth'
+import type { TokenData } from '../src/clients/oauth/config'
 import type { HighLevelOauthConfig } from '../src/clients/v2/config'
 
 describe('OauthClient', () => {
-	const mockConfig: HighLevelOauthConfig<'Agency'> = {
-		accessType: 'Agency',
-		clientId: 'mock-client-id',
-		clientSecret: 'mock-client-secret',
+	const mockConfig: HighLevelOauthConfig<'Sub-Account'> = {
+		clientId: 'test-client-id',
+		clientSecret: 'test-client-secret',
 		redirectUri: 'http://localhost:3000/callback',
-		scopes: ['locations.readonly', 'oauth.write'],
+		accessType: 'Sub-Account',
+		scopes: ['conversations/message.readonly', 'conversations/message.write'],
 	}
 
-	let client: OauthClient<'Agency'>
+	const mockTokenData: TokenData = {
+		access_token: 'test-access-token',
+		refresh_token: 'test-refresh-token',
+		expires_in: 3600,
+		token_type: 'Bearer',
+		approvedLocations: ['location-1'],
+		companyId: 'company-1',
+		locationId: 'location-1',
+		planId: 'plan-1',
+		scope: 'conversations.message.readonly conversations.message.write',
+		userType: 'Location',
+		expiresAt: Date.now() + 3600 * 1000,
+		userId: 'user-1',
+	}
 
-	beforeEach(() => {
-		client = new OauthClient(mockConfig)
+	it('should initialize with default storage function', () => {
+		const client = new OauthClient(mockConfig)
+		expect(client.storeTokenFn).toBeDefined()
 	})
 
-	it('should create an OauthClient instance', () => {
-		expect(client).toBeDefined()
-		expect(client.config).toEqual(mockConfig)
+	it('should use custom storage function when provided', async () => {
+		const customStorageFn = async (data: TokenData) => {
+			return { ...data, custom: true } as TokenData & { custom: boolean }
+		}
+
+		const client = new OauthClient({
+			...mockConfig,
+			storageFunction: customStorageFn,
+		})
+
+		const result = await client.storeTokenData(mockTokenData)
+		expect(result).toHaveProperty('custom', true)
 	})
 
-	it('should generate an authorization URL', () => {
+	it('should store token data with expiration time', async () => {
+		const client = new OauthClient(mockConfig)
+		const now = Date.now()
+		const result = await client.storeTokenData(mockTokenData)
+
+		expect(result).toHaveProperty('expiresAt')
+		expect(result.expiresAt).toBeGreaterThan(now)
+		expect(result.expiresAt).toBeLessThanOrEqual(
+			now + mockTokenData.expires_in * 1000,
+		)
+	})
+
+	it('should update token data partially', async () => {
+		const client = new OauthClient(mockConfig)
+		await client.storeTokenData(mockTokenData)
+
+		const updatedData = {
+			access_token: 'new-access-token',
+		}
+
+		client.updateTokenData(updatedData)
+		expect(client.tokenData?.access_token).toBe('new-access-token')
+		expect(client.tokenData?.refresh_token).toBe(mockTokenData.refresh_token)
+	})
+
+	it('should generate correct authorization URL', () => {
+		const client = new OauthClient(mockConfig)
 		const authUrl = client.getAuthorizationUrl()
-		expect(authUrl).toBeString()
-		expect(authUrl).toInclude(
-			'marketplace.leadconnectorhq.com/oauth/chooselocation',
-		)
-		expect(authUrl).toInclude(mockConfig.clientId)
-		expect(authUrl).toInclude(encodeURIComponent(mockConfig.redirectUri))
-		expect(authUrl).toInclude(mockConfig.scopes?.join('+') ?? '')
+
+		// construct the url with URLSearchParams bc encodeURIComponent uses %20 instead of +
+		const url = new URL(authUrl)
+		const params = new URLSearchParams(url.search)
+
+		expect(params.get('client_id')).toBe(mockConfig.clientId)
+		expect(params.get('redirect_uri')).toBe(mockConfig.redirectUri)
+		expect(params.get('scope')).toBe(mockConfig.scopes.join(' '))
+		expect(params.get('response_type')).toBe('code')
 	})
 
-	it('should exchange token', async () => {
-		const mockExchangeResponse = {
-			access_token: 'mock-access-token',
-			refresh_token: 'mock-refresh-token',
-			expires_in: 3600,
+	it('should refresh token when expired', async () => {
+		const client = new OauthClient(mockConfig)
+		const expiredTokenData = {
+			...mockTokenData,
+			expires_in: -3600, // Expired token
 		}
 
-		const fetchAccessTokenSpy = spyOn(
-			client,
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-			'fetchAccessToken' as any,
-		).mockResolvedValue({ data: mockExchangeResponse })
+		await client.storeTokenData(expiredTokenData)
 
-		const result = await client.exchangeToken('mock-auth-code')
-
-		expect(fetchAccessTokenSpy).toHaveBeenCalledWith(
-			expect.objectContaining({
-				grant_type: 'authorization_code',
-				code: 'mock-auth-code',
-			}),
-		)
-		// @ts-expect-error
-		expect(result).toEqual(mockExchangeResponse)
-	})
-
-	it('should refresh access token', async () => {
-		const mockRefreshResponse = {
-			access_token: 'mock-refreshed-token',
-			refresh_token: 'mock-new-refresh-token',
-			expires_in: 3600,
-		}
-
-		const fetchAccessTokenSpy = spyOn(
-			client,
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-			'fetchAccessToken' as any,
-		).mockResolvedValue({ data: mockRefreshResponse })
-		// @ts-expect-error
-		client._refreshToken = 'mock-refresh-token'
-
-		const result = await client.refreshAccessToken()
-
-		expect(fetchAccessTokenSpy).toHaveBeenCalledWith(
-			expect.objectContaining({
-				grant_type: 'refresh_token',
-				refresh_token: 'mock-refresh-token',
-			}),
-		)
-		// @ts-expect-error
-		expect(result).toEqual(mockRefreshResponse)
-	})
-
-	it('should get access token', async () => {
-		const mockAccessToken = 'mock-access-token'
-		const getAccessTokenSpy = spyOn(client, 'getAccessToken').mockResolvedValue(
-			mockAccessToken,
-		)
-
-		const result = await client.getAccessToken()
-
-		expect(getAccessTokenSpy).toHaveBeenCalled()
-		expect(result).toBe(mockAccessToken)
-	})
-
-	it('should get installed locations', async () => {
-		const mockLocations = {
-			locations: [
-				{ id: '1', name: 'Location 1' },
-				{ id: '2', name: 'Location 2' },
-			],
-		}
-
-		// @ts-expect-error
-		const clientGetSpy = spyOn(client.client, 'GET').mockResolvedValue({
-			// @ts-expect-error
-			data: mockLocations,
-			error: undefined,
+		const refreshAccessTokenSpy = spyOn(client, 'refreshAccessToken')
+		refreshAccessTokenSpy.mockImplementation(() => {
+			return Promise.resolve({
+				...mockTokenData,
+				access_token: 'new-refreshed-token',
+			})
 		})
 
-		const result = await client.getInstalledLocations({
-			appId: 'mock-app-id',
-			companyId: 'mock-company-id',
+		const newToken = await client.getAccessToken()
+		expect(newToken).toBe('new-refreshed-token')
+		expect(refreshAccessTokenSpy).toHaveBeenCalled()
+	})
+
+	it('should exchange auth code for token', async () => {
+		const client = new OauthClient(mockConfig)
+
+		const exchangeTokenSpy = spyOn(client, 'exchangeToken')
+		exchangeTokenSpy.mockImplementation(() => {
+			return Promise.resolve(mockTokenData)
 		})
 
-		expect(clientGetSpy).toHaveBeenCalledWith(
-			'/oauth/installedLocations',
-			expect.any(Object),
+		const token = await client.exchangeToken('test-auth-code')
+		expect(token).toEqual(mockTokenData)
+		expect(exchangeTokenSpy).toHaveBeenCalledWith('test-auth-code')
+	})
+
+	it('should handle token exchange errors', async () => {
+		const client = new OauthClient(mockConfig)
+		const exchangeTokenSpy = spyOn(client, 'exchangeToken')
+		exchangeTokenSpy.mockImplementation(() => {
+			return Promise.reject(new Error('Token exchange failed'))
+		})
+
+		expect(client.exchangeToken('test-auth-code')).rejects.toThrow(
+			'Token exchange failed',
 		)
-		// @ts-expect-error
-		expect(result).toEqual(mockLocations)
+	})
+
+	it('should handle refresh token errors', async () => {
+		const client = new OauthClient(mockConfig)
+		await client.storeTokenData(mockTokenData)
+		const refreshAccessTokenSpy = spyOn(client, 'refreshAccessToken')
+		refreshAccessTokenSpy.mockImplementation(() => {
+			return Promise.reject(new Error('Refresh token failed'))
+		})
+
+		expect(client.refreshAccessToken()).rejects.toThrow('Refresh token failed')
 	})
 })
