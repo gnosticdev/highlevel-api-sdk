@@ -97,11 +97,11 @@ if (import.meta.main) {
 	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)
 
 	await Bun.write(
-		path.join(CUSTOM_V2_SCHEMAS_DIR, 'webhooks-openapi.json'),
+		path.join(CUSTOM_V2_SCHEMAS_DIR, 'webhooks.openapi.json'),
 		JSON.stringify(openAPISchema, null, 2),
 	)
 
-	await generateWebhooksModules(openAPISchema)
+	generateWebhooksModules(openAPISchema)
 
 	console.log('Generated OpenAPI schema for webhooks')
 }

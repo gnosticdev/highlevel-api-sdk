@@ -43,7 +43,7 @@ async function generateWebhooksTypes() {
 		astToString(openapiTypes, { fileName: 'webhooks' }),
 	)
 
-	const webhooksModules = await generateWebhooksModules(openAPISchema)
+	const webhooksModules = generateWebhooksModules(openAPISchema)
 
 	// write the webhook modules to a file
 	await Bun.write(WEBHOOKS_OUTPUT_TYPES, webhooksModules)

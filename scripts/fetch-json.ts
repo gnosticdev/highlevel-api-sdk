@@ -18,10 +18,34 @@ if (!API_URL || !USERNAME || !PASSWORD) {
 const TEMP_DIR = 'temp-schemas-json'
 
 if (import.meta.main) {
-	main().catch((error) => {
+	try {
+		// Fetch list of schemas
+		const schemas = await fetchSchemaList()
+		console.log(
+			`Found ${schemas.openapi.length} OpenAPI schemas and ${schemas.custom.length} other files`,
+		)
+
+		// Download OpenAPI schemas to temp directory
+		for (const schema of schemas.openapi) {
+			await downloadSchema(schema, path.join(TEMP_DIR, 'openapi'), true)
+		}
+
+		// Download custom schemas to temp directory
+		for (const file of schemas.custom) {
+			await downloadSchema(file, path.join(TEMP_DIR, 'custom'), false)
+		}
+
+		// If we've reached this point, all downloads were successful
+		// move the files from the temp dir to the final dir
+		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ schemas/v2`
+		await Bun.$`rm -rf ${TEMP_DIR}`
+
+		console.log('All schemas downloaded and moved successfully')
+	} catch (error) {
 		console.error('Error downloading schemas', error)
-		process.exit(1)
-	})
+		// Clean up temp directory in case of error
+		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
+	}
 }
 
 /**
@@ -129,37 +153,6 @@ function ensureUniqueOperationIds(
 	}
 
 	return schema
-}
-
-async function main() {
-	try {
-		// Fetch list of schemas
-		const schemas = await fetchSchemaList()
-		console.log(
-			`Found ${schemas.openapi.length} OpenAPI schemas and ${schemas.custom.length} other files`,
-		)
-
-		// Download OpenAPI schemas to temp directory
-		for (const schema of schemas.openapi) {
-			await downloadSchema(schema, path.join(TEMP_DIR, 'openapi'), true)
-		}
-
-		// Download custom schemas to temp directory
-		for (const file of schemas.custom) {
-			await downloadSchema(file, path.join(TEMP_DIR, 'custom'), false)
-		}
-
-		// If we've reached this point, all downloads were successful
-		// move the files from the temp dir to the final dir
-		await Bun.$`rsync -av --delete ${TEMP_DIR}/ schemas/v2`
-		await Bun.$`rm -rf ${TEMP_DIR}`
-
-		console.log('All schemas downloaded and moved successfully')
-	} catch (error) {
-		console.error('Error downloading schemas', error)
-		// Clean up temp directory in case of error
-		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
-	}
 }
 
 type ListSchemas = {

@@ -60,7 +60,7 @@ export async function createV2Types() {
 		console.log(kleur.green('Successfully created all types'))
 
 		// use rsync with checksum so we only move the files that have changed
-		await Bun.$`rsync -av --delete --checksum ${TEMP_DIR}/ ${OPENAPI_TYPES_V2_DIR}/`
+		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ ${OPENAPI_TYPES_V2_DIR}/`
 
 		console.log(kleur.green('Successfully moved all files to final directory'))
 	} catch (error) {

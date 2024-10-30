@@ -15,11 +15,9 @@
 			"node_modules",
 			"**/_![__tests__]",
 			"dist",
-			"package.json",
 			".wrangler",
 			".vscode",
-			"schemas",
-			"src/generated/v2/custom/webhooks.ts"
+			"schemas/v1/postman.json"
 		],
 		"include": ["**/*[.js,.jsx,.ts,.tsx,.astro,.css,.json,.jsonc]"]
 	},
@@ -65,6 +63,21 @@
 			"include": ["./**/*.js"],
 			"linter": {
 				"enabled": false
+			}
+		},
+		{
+			"formatter": {
+				"enabled": true,
+				"indentStyle": "space",
+				"indentWidth": 2,
+				"lineWidth": 120
+			},
+			"include": ["schemas/**/*.json"],
+			"linter": {
+				"enabled": true,
+				"rules": {
+					"recommended": true
+				}
 			}
 		},
 		{
