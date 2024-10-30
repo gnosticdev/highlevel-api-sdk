@@ -237,30 +237,9 @@ type AgencyClientMap = {
 }
 
 /**
- * Creates a new HighLevel API client with built in oauth support.
+ * HighLevelClient with built in OAuth support.
  *
- * Uses the built in `OAuthClient` by default, but allows for passing in a custom oauth client that extends `OAuthClientInterface`.
- *
- * This client has 2 main purposes:
- *
- * 1. Typed endpoints for the HighLevel API
- * 2. OAuth2 support with built in methods to:
- *  - create the auth url
- *  - get auth code from redirect
- *  - get a new access token
- *  - refresh the access token when it expires
- *
- * @example
- * ```ts
- * const client = createHighLevelClient({
- *  oauthConfig: {
- *    redirectUri: 'https://yourapp.com/oauth/callback',
- *    clientId: 'your-client-id',
- *    clientSecret: 'your-client-secret',
- *    accessType: 'Sub-Account',
- *  }
- * })
- * ```
+ * To avoid handling the generic types, use the `createHighLevelClient` function.
  */
 export class HighLevelClientWithOAuth<
 	T extends AccessType,
@@ -290,6 +269,27 @@ export class HighLevelClientWithOAuth<
  * Creates a new HighLevel API client with built in oauth support.
  *
  * Uses the built in `OAuthClient` by default, but allows for passing in a custom oauth client that extends `OAuthClientInterface`.
+ *
+ * This client has 2 main purposes:
+ *
+ * 1. Typed endpoints for the HighLevel API
+ * 2. OAuth2 support with built in methods to:
+ *  - create the auth url
+ *  - get auth code from redirect
+ *  - get a new access token
+ *  - refresh the access token when it expires
+ *
+ * @example
+ * ```ts
+ * const client = createHighLevelClient({
+ *  oauthConfig: {
+ *    accessType: 'Sub-Account',
+ *    clientId: 'your-client-id',
+ *    clientSecret: 'your-client-secret',
+ *    redirectUri: 'https://yourapp.com/oauth/callback',
+ *  }
+ * })
+ * ```
  */
 export function createHighLevelClient<T extends AccessType>(config: {
 	/**

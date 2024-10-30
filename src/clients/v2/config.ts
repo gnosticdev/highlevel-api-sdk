@@ -52,7 +52,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 * Available scopes will change depending on your app type.
 	 * @see https://marketplace.gohighlevel.com/apps
 	 */
-	readonly scopes: ScopeLiterals<T>[]
+	readonly scopes: ScopeLiterals<T>[] | (ScopeLiterals<T> | (string & {}))
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
 	 * @default https://marketplace.leadconnectorhq.com/oauth/chooselocation

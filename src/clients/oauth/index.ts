@@ -25,11 +25,16 @@ export class OauthClient<T extends AccessType>
 	private _accessToken: string | undefined
 	private _refreshToken: string | undefined
 	private readonly userType
-	private client: BaseOauthClient
+	/**
+	 * Underlying oauth client created by `createClient` method from `openapi-fetch`
+	 *
+	 * Most likely do not need to use this unless special use case.
+	 */
+	_client: BaseOauthClient
 
 	// avoid conflict with the `expiresAt` getter
 	private _expiresAt: number | undefined
-	readonly scopes: ScopeLiterals<T>[]
+	readonly scopes: ScopeLiterals<T> | (string & {})
 	readonly config: HighLevelOauthConfig<T>
 	private readonly baseUrl: string
 	private readonly baseOauthUrl: string
@@ -48,7 +53,9 @@ export class OauthClient<T extends AccessType>
 		// Set Defaults
 		this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL
 		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL
-		this.scopes = config.scopes
+		this.scopes = Array.isArray(config.scopes)
+			? config.scopes.join(' ')
+			: config.scopes
 		if (this.scopes.length === 0) {
 			console.warn(
 				'No scopes provided, pass the scopes from your app to the scopes param',
@@ -68,7 +75,7 @@ export class OauthClient<T extends AccessType>
 				return Promise.resolve(this.tokenData)
 			})
 
-		this.client = createClient<Oauth.paths>({
+		this._client = createClient<Oauth.paths>({
 			baseUrl: this.baseUrl,
 		})
 	}
@@ -103,7 +110,7 @@ export class OauthClient<T extends AccessType>
 		const requiredParams: AuthUrlParams = {
 			client_id: this.config.clientId,
 			redirect_uri: this.config.redirectUri,
-			scope: this.scopes.join(' '),
+			scope: this.scopes,
 			response_type: 'code',
 		}
 		const searchParams = new URLSearchParams(requiredParams)
@@ -138,6 +145,8 @@ export class OauthClient<T extends AccessType>
 
 	/**
 	 * Returns a valid access token by either refreshing the token or exchanging the auth code for a new token.
+	 *
+	 * Also stores the token via the `storeTokenData` if provided.
 	 * @param authCode - The authorization code received from the OAuth provider.
 	 * @throws {Error} - If no token response is received or if no auth code or refresh token is provided.
 	 * @returns The access token.
@@ -220,11 +229,15 @@ export class OauthClient<T extends AccessType>
 	}
 
 	/**
-	 * Sends a request to the server to obtain a new token.
+	 * Main method for getting getting a token from HighLevel v2 API.
+	 *
+	 * Sends a `POST` request to the `/oauth/token` endpoint.
+	 *
 	 * @param tokenParams - Auth code params or refresh token params
+	 * @internal
 	 */
 	private async fetchAccessToken(tokenParams: TokenParams) {
-		const { data, error } = await this.client.POST('/oauth/token', {
+		const { data, error } = await this._client.POST('/oauth/token', {
 			body: tokenParams,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -248,7 +261,7 @@ export class OauthClient<T extends AccessType>
 	 * @param locationId - The locationId is the locationId of the location you want to get a token for
 	 */
 	async generateLocationToken({ companyId, locationId }: LocationTokenParams) {
-		const { data, error, response } = await this.client.POST(
+		const { data, error, response } = await this._client.POST(
 			'/oauth/locationToken',
 			{
 				body: {
@@ -285,18 +298,21 @@ export class OauthClient<T extends AccessType>
 	 * @param companyId - the companyId of your agency
 	 */
 	async getInstalledLocations(query: SearchInstalledLocationParams['query']) {
-		const { data, error } = await this.client.GET('/oauth/installedLocations', {
-			params: {
-				query: {
-					...query,
-					appId: query.appId,
-					companyId: query.companyId,
-				},
-				header: {
-					Version: '2021-07-28',
+		const { data, error } = await this._client.GET(
+			'/oauth/installedLocations',
+			{
+				params: {
+					query: {
+						...query,
+						appId: query.appId,
+						companyId: query.companyId,
+					},
+					header: {
+						Version: '2021-07-28',
+					},
 				},
 			},
-		})
+		)
 
 		if (error) {
 			console.error('Error: installed locations', error)

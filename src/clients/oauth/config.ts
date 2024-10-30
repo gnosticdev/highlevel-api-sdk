@@ -126,7 +126,9 @@ export interface OAuthClientInterface<T extends AccessType> {
 		params: LocationTokenParams,
 	): Promise<LocationTokenResponse>
 	/**
-	 * Generates a new access token using the provided authorization code.
+	 * Exchange an authorization code for an access_token.
+	 *
+	 * To refresh a token use the `refreshAccessToken` method
 	 * @param authCode - Parameters required to generate a new token.
 	 * @returns The token response from the server.
 	 * */

@@ -24,6 +24,9 @@ export async function getAuthCodeFromClient() {
 	return authCode
 }
 
+/**
+ * Get the request body from an operation object
+ */
 export type GetParams<T extends OperationObject> = T['requestBody']
 
 /**
