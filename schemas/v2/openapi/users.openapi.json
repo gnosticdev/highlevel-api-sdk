@@ -1,1433 +1,1433 @@
 {
-	"components": {
-		"schemas": {
-			"BadRequestDTO": {
-				"properties": {
-					"message": {
-						"example": "Bad Request",
-						"type": "string"
-					},
-					"statusCode": {
-						"example": 400,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"CreateUserDto": {
-				"properties": {
-					"companyId": {
-						"example": "ve9EPM428h8vShlRW1KT",
-						"type": "string"
-					},
-					"email": {
-						"example": "john@deo.com",
-						"type": "string"
-					},
-					"firstName": {
-						"example": "John",
-						"type": "string"
-					},
-					"lastName": {
-						"example": "Deo",
-						"type": "string"
-					},
-					"locationIds": {
-						"example": ["C2QujeCh8ZnC7al2InWR"],
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"password": {
-						"example": "*******",
-						"type": "string"
-					},
-					"permissions": {
-						"$ref": "#/components/schemas/PermissionsDto"
-					},
-					"phone": {
-						"example": "+18832327657",
-						"type": "string"
-					},
-					"profilePhoto": {
-						"example": "https://img.png",
-						"type": "string"
-					},
-					"role": {
-						"example": "admin",
-						"type": "string"
-					},
-					"scopes": {
-						"description": "Scopes allowed for users. If passed empty all the scopes will be get disabled",
-						"example": ["contacts.write", "campaigns.readonly"],
-						"items": {
-							"enum": [
-								"campaigns.readonly",
-								"campaigns.write",
-								"calendars/events.write",
-								"calendars/events.readonly",
-								"contacts.write",
-								"contacts/bulkActions.write",
-								"workflows.readonly",
-								"workflows.write",
-								"triggers.write",
-								"funnels.write",
-								"websites.write",
-								"opportunities.write",
-								"opportunities/leadValue.readonly",
-								"reporting/phone.readonly",
-								"reporting/adwords.readonly",
-								"reporting/facebookAds.readonly",
-								"reporting/attributions.readonly",
-								"reporting/agent.readonly",
-								"payments.write",
-								"payments/refunds.write",
-								"payments/records.write",
-								"payments/exports.write",
-								"payments/subscriptionsCancel.write",
-								"invoices.write",
-								"invoices.readonly",
-								"invoices/schedule.readonly",
-								"invoices/schedule.write",
-								"invoices/template.readonly",
-								"invoices/template.write",
-								"reputation/review.write",
-								"reputation/listing.write",
-								"conversations.write",
-								"conversations.readonly",
-								"conversations/message.readonly",
-								"conversations/message.write",
-								"contentAI.write",
-								"dashboard/stats.readonly",
-								"locations/tags.write",
-								"locations/tags.readonly",
-								"marketing.write",
-								"eliza.write",
-								"settings.write",
-								"socialplanner/post.write",
-								"marketing/affiliate.write",
-								"blogs.write",
-								"membership.write",
-								"communities.write",
-								"certificates.write",
-								"certificates.readonly",
-								"adPublishing.write",
-								"adPublishing.write",
-								"adPublishing.readonly",
-								"adPublishing.readonly"
-							],
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"scopesAssignedToOnly": {
-						"description": "Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled",
-						"example": ["contacts.write", "campaigns.readonly"],
-						"items": {
-							"enum": [
-								"campaigns.readonly",
-								"campaigns.write",
-								"calendars/events.write",
-								"calendars/events.readonly",
-								"contacts.write",
-								"contacts/bulkActions.write",
-								"workflows.readonly",
-								"workflows.write",
-								"triggers.write",
-								"funnels.write",
-								"websites.write",
-								"opportunities.write",
-								"opportunities/leadValue.readonly",
-								"reporting/phone.readonly",
-								"reporting/adwords.readonly",
-								"reporting/facebookAds.readonly",
-								"reporting/attributions.readonly",
-								"reporting/agent.readonly",
-								"payments.write",
-								"payments/refunds.write",
-								"payments/records.write",
-								"payments/exports.write",
-								"payments/subscriptionsCancel.write",
-								"invoices.write",
-								"invoices.readonly",
-								"invoices/schedule.readonly",
-								"invoices/schedule.write",
-								"invoices/template.readonly",
-								"invoices/template.write",
-								"reputation/review.write",
-								"reputation/listing.write",
-								"conversations.write",
-								"conversations.readonly",
-								"conversations/message.readonly",
-								"conversations/message.write",
-								"contentAI.write",
-								"dashboard/stats.readonly",
-								"locations/tags.write",
-								"locations/tags.readonly",
-								"marketing.write",
-								"eliza.write",
-								"settings.write",
-								"socialplanner/post.write",
-								"marketing/affiliate.write",
-								"blogs.write",
-								"membership.write",
-								"communities.write",
-								"certificates.write",
-								"certificates.readonly",
-								"adPublishing.write",
-								"adPublishing.write",
-								"adPublishing.readonly",
-								"adPublishing.readonly"
-							],
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": {
-						"example": "account",
-						"type": "string"
-					}
-				},
-				"required": [
-					"companyId",
-					"firstName",
-					"lastName",
-					"email",
-					"password",
-					"type",
-					"role",
-					"locationIds",
-					"permissions"
-				],
-				"type": "object"
-			},
-			"DeleteUserSuccessfulResponseDto": {
-				"properties": {
-					"message": {
-						"example": "Queued deleting user with e-mail john@deo.com and name John Deo. Will take effect in a few minutes.",
-						"type": "string"
-					},
-					"succeded": {
-						"example": true,
-						"type": "boolean"
-					}
-				},
-				"type": "object"
-			},
-			"LocationSuccessfulResponseDto": {
-				"properties": {
-					"users": {
-						"items": {
-							"$ref": "#/components/schemas/UserSchema"
-						},
-						"type": "array"
-					}
-				},
-				"type": "object"
-			},
-			"PermissionsDto": {
-				"properties": {
-					"adwordsReportingEnabled": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"affiliateManagerEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"agentReportingEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"appointmentsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"assignedDataOnly": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"attributionsReportingEnabled": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"bloggingEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"botService": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"bulkRequestsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"campaignsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"campaignsReadOnly": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"cancelSubscriptionEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"communitiesEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"contactsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"contentAiEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"conversationsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"dashboardStatsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"exportPaymentsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"facebookAdsReportingEnabled": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"funnelsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"invoiceEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"leadValueEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"marketingEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"membershipEnabled": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"onlineListingsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"opportunitiesEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"paymentsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"phoneCallEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"recordPaymentEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"refundsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"reviewsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"settingsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"socialPlanner": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"tagsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"triggersEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"websitesEnabled": {
-						"default": false,
-						"example": false,
-						"type": "boolean"
-					},
-					"workflowsEnabled": {
-						"default": true,
-						"example": true,
-						"type": "boolean"
-					},
-					"workflowsReadOnly": {
-						"default": false,
-						"example": true,
-						"type": "boolean"
-					}
-				},
-				"type": "object"
-			},
-			"RoleSchema": {
-				"properties": {
-					"locationIds": {
-						"example": ["ve9EPM428h8vShlRW1KT"],
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"role": {
-						"example": "admin",
-						"type": "string"
-					},
-					"type": {
-						"example": "account",
-						"type": "string"
-					}
-				},
-				"type": "object"
-			},
-			"SearchUserSuccessfulResponseDto": {
-				"properties": {
-					"count": {
-						"example": 1231,
-						"type": "number"
-					},
-					"users": {
-						"items": {
-							"$ref": "#/components/schemas/UserSchema"
-						},
-						"type": "array"
-					}
-				},
-				"type": "object"
-			},
-			"UnauthorizedDTO": {
-				"properties": {
-					"error": {
-						"example": "Unauthorized",
-						"type": "string"
-					},
-					"message": {
-						"example": "Invalid token: access token is invalid",
-						"type": "string"
-					},
-					"statusCode": {
-						"example": 401,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"UnprocessableDTO": {
-				"properties": {
-					"error": {
-						"example": "Unprocessable Entity",
-						"type": "string"
-					},
-					"message": {
-						"example": ["Unprocessable Entity"],
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"statusCode": {
-						"example": 422,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"UpdateUserDto": {
-				"properties": {
-					"companyId": {
-						"description": "Company/Agency Id. Required for Agency Level access",
-						"example": "UAXssdawIWAWD",
-						"type": "string"
-					},
-					"email": {
-						"example": "john@deo.com",
-						"type": "string"
-					},
-					"emailChangeOTP": {
-						"description": "OTP to change the email ID of the user",
-						"example": "191344",
-						"type": "string"
-					},
-					"firstName": {
-						"example": "John",
-						"type": "string"
-					},
-					"lastName": {
-						"example": "Deo",
-						"type": "string"
-					},
-					"locationIds": {
-						"example": ["C2QujeCh8ZnC7al2InWR"],
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"password": {
-						"example": "*******",
-						"type": "string"
-					},
-					"permissions": {
-						"$ref": "#/components/schemas/PermissionsDto"
-					},
-					"phone": {
-						"example": "+18832327657",
-						"type": "string"
-					},
-					"profilePhoto": {
-						"example": "https://img.png",
-						"type": "string"
-					},
-					"role": {
-						"example": "admin",
-						"type": "string"
-					},
-					"scopes": {
-						"description": "Scopes allowed for users. If passed empty all the scopes will be get disabled",
-						"example": ["contacts.write", "campaigns.readonly"],
-						"items": {
-							"enum": [
-								"campaigns.readonly",
-								"campaigns.write",
-								"calendars/events.write",
-								"calendars/events.readonly",
-								"contacts.write",
-								"contacts/bulkActions.write",
-								"workflows.readonly",
-								"workflows.write",
-								"triggers.write",
-								"funnels.write",
-								"websites.write",
-								"opportunities.write",
-								"opportunities/leadValue.readonly",
-								"reporting/phone.readonly",
-								"reporting/adwords.readonly",
-								"reporting/facebookAds.readonly",
-								"reporting/attributions.readonly",
-								"reporting/agent.readonly",
-								"payments.write",
-								"payments/refunds.write",
-								"payments/records.write",
-								"payments/exports.write",
-								"payments/subscriptionsCancel.write",
-								"invoices.write",
-								"invoices.readonly",
-								"invoices/schedule.readonly",
-								"invoices/schedule.write",
-								"invoices/template.readonly",
-								"invoices/template.write",
-								"reputation/review.write",
-								"reputation/listing.write",
-								"conversations.write",
-								"conversations.readonly",
-								"conversations/message.readonly",
-								"conversations/message.write",
-								"contentAI.write",
-								"dashboard/stats.readonly",
-								"locations/tags.write",
-								"locations/tags.readonly",
-								"marketing.write",
-								"eliza.write",
-								"settings.write",
-								"socialplanner/post.write",
-								"marketing/affiliate.write",
-								"blogs.write",
-								"membership.write",
-								"communities.write",
-								"certificates.write",
-								"certificates.readonly",
-								"adPublishing.write",
-								"adPublishing.write",
-								"adPublishing.readonly",
-								"adPublishing.readonly"
-							],
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"scopesAssignedToOnly": {
-						"description": "Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled",
-						"example": ["contacts.write", "campaigns.readonly"],
-						"items": {
-							"enum": [
-								"campaigns.readonly",
-								"campaigns.write",
-								"calendars/events.write",
-								"calendars/events.readonly",
-								"contacts.write",
-								"contacts/bulkActions.write",
-								"workflows.readonly",
-								"workflows.write",
-								"triggers.write",
-								"funnels.write",
-								"websites.write",
-								"opportunities.write",
-								"opportunities/leadValue.readonly",
-								"reporting/phone.readonly",
-								"reporting/adwords.readonly",
-								"reporting/facebookAds.readonly",
-								"reporting/attributions.readonly",
-								"reporting/agent.readonly",
-								"payments.write",
-								"payments/refunds.write",
-								"payments/records.write",
-								"payments/exports.write",
-								"payments/subscriptionsCancel.write",
-								"invoices.write",
-								"invoices.readonly",
-								"invoices/schedule.readonly",
-								"invoices/schedule.write",
-								"invoices/template.readonly",
-								"invoices/template.write",
-								"reputation/review.write",
-								"reputation/listing.write",
-								"conversations.write",
-								"conversations.readonly",
-								"conversations/message.readonly",
-								"conversations/message.write",
-								"contentAI.write",
-								"dashboard/stats.readonly",
-								"locations/tags.write",
-								"locations/tags.readonly",
-								"marketing.write",
-								"eliza.write",
-								"settings.write",
-								"socialplanner/post.write",
-								"marketing/affiliate.write",
-								"blogs.write",
-								"membership.write",
-								"communities.write",
-								"certificates.write",
-								"certificates.readonly",
-								"adPublishing.write",
-								"adPublishing.write",
-								"adPublishing.readonly",
-								"adPublishing.readonly"
-							],
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": {
-						"example": "account",
-						"type": "string"
-					}
-				},
-				"type": "object"
-			},
-			"UserSchema": {
-				"properties": {
-					"deleted": {
-						"example": false,
-						"type": "boolean"
-					},
-					"email": {
-						"example": "john@deo.com",
-						"type": "string"
-					},
-					"extension": {
-						"example": "",
-						"type": "string"
-					},
-					"firstName": {
-						"example": "John",
-						"type": "string"
-					},
-					"id": {
-						"example": "0IHuJvc2ofPAAA8GzTRi",
-						"type": "string"
-					},
-					"lastName": {
-						"example": "Deo",
-						"type": "string"
-					},
-					"name": {
-						"example": "John Deo",
-						"type": "string"
-					},
-					"permissions": {
-						"$ref": "#/components/schemas/PermissionsDto"
-					},
-					"phone": {
-						"example": "+1 808-868-8888",
-						"type": "string"
-					},
-					"roles": {
-						"$ref": "#/components/schemas/RoleSchema"
-					}
-				},
-				"type": "object"
-			},
-			"UserSuccessfulResponseDto": {
-				"properties": {
-					"email": {
-						"example": "john@deo.com",
-						"type": "string"
-					},
-					"extension": {
-						"example": "",
-						"type": "string"
-					},
-					"firstName": {
-						"example": "John",
-						"type": "string"
-					},
-					"id": {
-						"example": "0IHuJvc2ofPAAA8GzTRi",
-						"type": "string"
-					},
-					"lastName": {
-						"example": "Deo",
-						"type": "string"
-					},
-					"name": {
-						"example": "John Deo",
-						"type": "string"
-					},
-					"permissions": {
-						"$ref": "#/components/schemas/PermissionsDto"
-					},
-					"phone": {
-						"example": "+1 808-868-8888",
-						"type": "string"
-					},
-					"roles": {
-						"$ref": "#/components/schemas/RoleSchema"
-					}
-				},
-				"type": "object"
-			}
-		},
-		"securitySchemes": {
-			"Agency-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Agency.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"Location-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"bearer": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			}
-		}
-	},
-	"info": {
-		"contact": {},
-		"description": "Documentation for users API",
-		"title": "Users API",
-		"version": "1.0"
-	},
-	"openapi": "3.0.0",
-	"paths": {
-		"/users/": {
-			"get": {
-				"description": "Get User by Location",
-				"operationId": "get-user-by-location",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"example": "ve9EPM428h8vShlRW1KT",
-						"in": "query",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/LocationSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					}
-				},
-				"security": [
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Get User by Location",
-				"tags": ["Users"]
-			},
-			"post": {
-				"description": "Create User",
-				"operationId": "create-user",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/CreateUserDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"201": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UserSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					},
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Create User",
-				"tags": ["Users"]
-			}
-		},
-		"/users/search": {
-			"get": {
-				"description": "Search Users",
-				"operationId": "search-users",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Company ID in which the search needs to be performed",
-						"example": "5DP41231LkQsiKESj6rh",
-						"in": "query",
-						"name": "companyId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "The search term for the user is matched based on the user full name, email or phone",
-						"example": "John",
-						"in": "query",
-						"name": "query",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "No of results to be skipped before returning the result",
-						"example": "1",
-						"in": "query",
-						"name": "skip",
-						"required": false,
-						"schema": {
-							"default": "0",
-							"type": "string"
-						}
-					},
-					{
-						"description": "No of results to be limited before returning the result",
-						"example": "10",
-						"in": "query",
-						"name": "limit",
-						"required": false,
-						"schema": {
-							"default": "25",
-							"type": "string"
-						}
-					},
-					{
-						"description": "Location ID in which the search needs to be performed",
-						"example": "5DP41231LkQsiKESj6rh",
-						"in": "query",
-						"name": "locationId",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Type of the users to be filtered in the search",
-						"example": "agency",
-						"in": "query",
-						"name": "type",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Role of the users to be filtered in the search",
-						"example": "admin",
-						"in": "query",
-						"name": "role",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "List of User IDs to be filtered in the search",
-						"example": "5DP4iH6HLkQsiKESj6rh,5DP4iH6HLkQsiKESj34h",
-						"in": "query",
-						"name": "ids",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "The field on which sort is applied in which the results need to be sorted. Default is based on the first and last name",
-						"example": "dateAdded",
-						"in": "query",
-						"name": "sort",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "The direction in which the results need to be sorted",
-						"example": "asc",
-						"in": "query",
-						"name": "sortDirection",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "enabled2waySync",
-						"required": false,
-						"schema": {
-							"type": "boolean"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SearchUserSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					},
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Search Users",
-				"tags": ["Search"]
-			}
-		},
-		"/users/{userId}": {
-			"delete": {
-				"description": "Delete User",
-				"operationId": "delete-user",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "User Id",
-						"example": "ve9EPM428h8vShlRW1KT",
-						"in": "path",
-						"name": "userId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/DeleteUserSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					},
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Delete User",
-				"tags": ["Users"]
-			},
-			"get": {
-				"description": "Get User",
-				"operationId": "get-user",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "User Id",
-						"example": "ve9EPM428h8vShlRW1KT",
-						"in": "path",
-						"name": "userId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UserSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					},
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Get User",
-				"tags": ["Users"]
-			},
-			"put": {
-				"description": "Update User",
-				"operationId": "update-user",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/UpdateUserDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UserSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					},
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Update User",
-				"tags": ["Users"]
-			}
-		}
-	},
-	"servers": [
-		{
-			"url": "https://services.leadconnectorhq.com"
-		}
-	],
-	"tags": [
-		{
-			"description": "Documentation for users API",
-			"name": "Users"
-		},
-		{
-			"description": "Documentation for users API",
-			"name": "Search"
-		}
-	]
+  "components": {
+    "schemas": {
+      "BadRequestDTO": {
+        "properties": {
+          "message": {
+            "example": "Bad Request",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 400,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "CreateUserDto": {
+        "properties": {
+          "companyId": {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "email": {
+            "example": "john@deo.com",
+            "type": "string"
+          },
+          "firstName": {
+            "example": "John",
+            "type": "string"
+          },
+          "lastName": {
+            "example": "Deo",
+            "type": "string"
+          },
+          "locationIds": {
+            "example": ["C2QujeCh8ZnC7al2InWR"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "password": {
+            "example": "*******",
+            "type": "string"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionsDto"
+          },
+          "phone": {
+            "example": "+18832327657",
+            "type": "string"
+          },
+          "profilePhoto": {
+            "example": "https://img.png",
+            "type": "string"
+          },
+          "role": {
+            "example": "admin",
+            "type": "string"
+          },
+          "scopes": {
+            "description": "Scopes allowed for users. If passed empty all the scopes will be get disabled",
+            "example": ["contacts.write", "campaigns.readonly"],
+            "items": {
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars/events.write",
+                "calendars/events.readonly",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "websites.write",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "reporting/agent.readonly",
+                "payments.write",
+                "payments/refunds.write",
+                "payments/records.write",
+                "payments/exports.write",
+                "payments/subscriptionsCancel.write",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "adPublishing.readonly"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "scopesAssignedToOnly": {
+            "description": "Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled",
+            "example": ["contacts.write", "campaigns.readonly"],
+            "items": {
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars/events.write",
+                "calendars/events.readonly",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "websites.write",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "reporting/agent.readonly",
+                "payments.write",
+                "payments/refunds.write",
+                "payments/records.write",
+                "payments/exports.write",
+                "payments/subscriptionsCancel.write",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "adPublishing.readonly"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "example": "account",
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId",
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "type",
+          "role",
+          "locationIds",
+          "permissions"
+        ],
+        "type": "object"
+      },
+      "DeleteUserSuccessfulResponseDto": {
+        "properties": {
+          "message": {
+            "example": "Queued deleting user with e-mail john@deo.com and name John Deo. Will take effect in a few minutes.",
+            "type": "string"
+          },
+          "succeded": {
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "LocationSuccessfulResponseDto": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserSchema"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "PermissionsDto": {
+        "properties": {
+          "adwordsReportingEnabled": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "affiliateManagerEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "agentReportingEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "appointmentsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "assignedDataOnly": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "attributionsReportingEnabled": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "bloggingEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "botService": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "bulkRequestsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "campaignsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "campaignsReadOnly": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "cancelSubscriptionEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "communitiesEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "contactsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "contentAiEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "conversationsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "dashboardStatsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "exportPaymentsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "facebookAdsReportingEnabled": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "funnelsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "invoiceEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "leadValueEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "marketingEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "membershipEnabled": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "onlineListingsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "opportunitiesEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "paymentsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "phoneCallEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "recordPaymentEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "refundsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "reviewsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "settingsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "socialPlanner": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "tagsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "triggersEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "websitesEnabled": {
+            "default": false,
+            "example": false,
+            "type": "boolean"
+          },
+          "workflowsEnabled": {
+            "default": true,
+            "example": true,
+            "type": "boolean"
+          },
+          "workflowsReadOnly": {
+            "default": false,
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "RoleSchema": {
+        "properties": {
+          "locationIds": {
+            "example": ["ve9EPM428h8vShlRW1KT"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "role": {
+            "example": "admin",
+            "type": "string"
+          },
+          "type": {
+            "example": "account",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SearchUserSuccessfulResponseDto": {
+        "properties": {
+          "count": {
+            "example": 1231,
+            "type": "number"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserSchema"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "UnauthorizedDTO": {
+        "properties": {
+          "error": {
+            "example": "Unauthorized",
+            "type": "string"
+          },
+          "message": {
+            "example": "Invalid token: access token is invalid",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 401,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "UnprocessableDTO": {
+        "properties": {
+          "error": {
+            "example": "Unprocessable Entity",
+            "type": "string"
+          },
+          "message": {
+            "example": ["Unprocessable Entity"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "statusCode": {
+            "example": 422,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateUserDto": {
+        "properties": {
+          "companyId": {
+            "description": "Company/Agency Id. Required for Agency Level access",
+            "example": "UAXssdawIWAWD",
+            "type": "string"
+          },
+          "email": {
+            "example": "john@deo.com",
+            "type": "string"
+          },
+          "emailChangeOTP": {
+            "description": "OTP to change the email ID of the user",
+            "example": "191344",
+            "type": "string"
+          },
+          "firstName": {
+            "example": "John",
+            "type": "string"
+          },
+          "lastName": {
+            "example": "Deo",
+            "type": "string"
+          },
+          "locationIds": {
+            "example": ["C2QujeCh8ZnC7al2InWR"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "password": {
+            "example": "*******",
+            "type": "string"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionsDto"
+          },
+          "phone": {
+            "example": "+18832327657",
+            "type": "string"
+          },
+          "profilePhoto": {
+            "example": "https://img.png",
+            "type": "string"
+          },
+          "role": {
+            "example": "admin",
+            "type": "string"
+          },
+          "scopes": {
+            "description": "Scopes allowed for users. If passed empty all the scopes will be get disabled",
+            "example": ["contacts.write", "campaigns.readonly"],
+            "items": {
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars/events.write",
+                "calendars/events.readonly",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "websites.write",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "reporting/agent.readonly",
+                "payments.write",
+                "payments/refunds.write",
+                "payments/records.write",
+                "payments/exports.write",
+                "payments/subscriptionsCancel.write",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "adPublishing.readonly"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "scopesAssignedToOnly": {
+            "description": "Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled",
+            "example": ["contacts.write", "campaigns.readonly"],
+            "items": {
+              "enum": [
+                "campaigns.readonly",
+                "campaigns.write",
+                "calendars/events.write",
+                "calendars/events.readonly",
+                "contacts.write",
+                "contacts/bulkActions.write",
+                "workflows.readonly",
+                "workflows.write",
+                "triggers.write",
+                "funnels.write",
+                "websites.write",
+                "opportunities.write",
+                "opportunities/leadValue.readonly",
+                "reporting/phone.readonly",
+                "reporting/adwords.readonly",
+                "reporting/facebookAds.readonly",
+                "reporting/attributions.readonly",
+                "reporting/agent.readonly",
+                "payments.write",
+                "payments/refunds.write",
+                "payments/records.write",
+                "payments/exports.write",
+                "payments/subscriptionsCancel.write",
+                "invoices.write",
+                "invoices.readonly",
+                "invoices/schedule.readonly",
+                "invoices/schedule.write",
+                "invoices/template.readonly",
+                "invoices/template.write",
+                "reputation/review.write",
+                "reputation/listing.write",
+                "conversations.write",
+                "conversations.readonly",
+                "conversations/message.readonly",
+                "conversations/message.write",
+                "contentAI.write",
+                "dashboard/stats.readonly",
+                "locations/tags.write",
+                "locations/tags.readonly",
+                "marketing.write",
+                "eliza.write",
+                "settings.write",
+                "socialplanner/post.write",
+                "marketing/affiliate.write",
+                "blogs.write",
+                "membership.write",
+                "communities.write",
+                "certificates.write",
+                "certificates.readonly",
+                "adPublishing.write",
+                "adPublishing.write",
+                "adPublishing.readonly",
+                "adPublishing.readonly"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "example": "account",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UserSchema": {
+        "properties": {
+          "deleted": {
+            "example": false,
+            "type": "boolean"
+          },
+          "email": {
+            "example": "john@deo.com",
+            "type": "string"
+          },
+          "extension": {
+            "example": "",
+            "type": "string"
+          },
+          "firstName": {
+            "example": "John",
+            "type": "string"
+          },
+          "id": {
+            "example": "0IHuJvc2ofPAAA8GzTRi",
+            "type": "string"
+          },
+          "lastName": {
+            "example": "Deo",
+            "type": "string"
+          },
+          "name": {
+            "example": "John Deo",
+            "type": "string"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionsDto"
+          },
+          "phone": {
+            "example": "+1 808-868-8888",
+            "type": "string"
+          },
+          "roles": {
+            "$ref": "#/components/schemas/RoleSchema"
+          }
+        },
+        "type": "object"
+      },
+      "UserSuccessfulResponseDto": {
+        "properties": {
+          "email": {
+            "example": "john@deo.com",
+            "type": "string"
+          },
+          "extension": {
+            "example": "",
+            "type": "string"
+          },
+          "firstName": {
+            "example": "John",
+            "type": "string"
+          },
+          "id": {
+            "example": "0IHuJvc2ofPAAA8GzTRi",
+            "type": "string"
+          },
+          "lastName": {
+            "example": "Deo",
+            "type": "string"
+          },
+          "name": {
+            "example": "John Deo",
+            "type": "string"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionsDto"
+          },
+          "phone": {
+            "example": "+1 808-868-8888",
+            "type": "string"
+          },
+          "roles": {
+            "$ref": "#/components/schemas/RoleSchema"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Agency-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Agency.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "Documentation for users API",
+    "title": "Users API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/users/": {
+      "get": {
+        "description": "Get User by Location",
+        "operationId": "get-user-by-location",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Get User by Location",
+        "tags": ["Users"]
+      },
+      "post": {
+        "description": "Create User",
+        "operationId": "create-user",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          },
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Create User",
+        "tags": ["Users"]
+      }
+    },
+    "/users/search": {
+      "get": {
+        "description": "Search Users",
+        "operationId": "search-users",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Company ID in which the search needs to be performed",
+            "example": "5DP41231LkQsiKESj6rh",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The search term for the user is matched based on the user full name, email or phone",
+            "example": "John",
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "No of results to be skipped before returning the result",
+            "example": "1",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "default": "0",
+              "type": "string"
+            }
+          },
+          {
+            "description": "No of results to be limited before returning the result",
+            "example": "10",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": "25",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location ID in which the search needs to be performed",
+            "example": "5DP41231LkQsiKESj6rh",
+            "in": "query",
+            "name": "locationId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Type of the users to be filtered in the search",
+            "example": "agency",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Role of the users to be filtered in the search",
+            "example": "admin",
+            "in": "query",
+            "name": "role",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "List of User IDs to be filtered in the search",
+            "example": "5DP4iH6HLkQsiKESj6rh,5DP4iH6HLkQsiKESj34h",
+            "in": "query",
+            "name": "ids",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The field on which sort is applied in which the results need to be sorted. Default is based on the first and last name",
+            "example": "dateAdded",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The direction in which the results need to be sorted",
+            "example": "asc",
+            "in": "query",
+            "name": "sortDirection",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "enabled2waySync",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchUserSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          },
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Search Users",
+        "tags": ["Search"]
+      }
+    },
+    "/users/{userId}": {
+      "delete": {
+        "description": "Delete User",
+        "operationId": "delete-user",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "User Id",
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUserSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          },
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Delete User",
+        "tags": ["Users"]
+      },
+      "get": {
+        "description": "Get User",
+        "operationId": "get-user",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "User Id",
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          },
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Get User",
+        "tags": ["Users"]
+      },
+      "put": {
+        "description": "Update User",
+        "operationId": "update-user",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          },
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Update User",
+        "tags": ["Users"]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Documentation for users API",
+      "name": "Users"
+    },
+    {
+      "description": "Documentation for users API",
+      "name": "Search"
+    }
+  ]
 }

@@ -1,528 +1,528 @@
 {
-	"components": {
-		"schemas": {
-			"BadRequestDTO": {
-				"properties": {
-					"message": {
-						"example": "Bad Request",
-						"type": "string"
-					},
-					"statusCode": {
-						"example": 400,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"DeleteLinksSuccessfulResponseDto": {
-				"properties": {
-					"succeded": {
-						"example": true,
-						"type": "boolean"
-					}
-				},
-				"type": "object"
-			},
-			"GetLinkSuccessfulResponseDto": {
-				"properties": {
-					"link": {
-						"$ref": "#/components/schemas/LinkSchema"
-					}
-				},
-				"type": "object"
-			},
-			"GetLinksSuccessfulResponseDto": {
-				"properties": {
-					"links": {
-						"items": {
-							"$ref": "#/components/schemas/LinkSchema"
-						},
-						"type": "array"
-					}
-				},
-				"type": "object"
-			},
-			"LinkSchema": {
-				"properties": {
-					"fieldKey": {
-						"example": "{{trigger_link.n4AriwEnFrGh3tu08W0U}}",
-						"type": "string"
-					},
-					"id": {
-						"example": "n4AriwEnFrGh3tu08W0U",
-						"type": "string"
-					},
-					"locationId": {
-						"example": "ve9EPM428h8vShlRW1KT",
-						"type": "string"
-					},
-					"name": {
-						"example": "first tag",
-						"type": "string"
-					},
-					"redirectTo": {
-						"example": "https://www.google.com/",
-						"type": "string"
-					}
-				},
-				"type": "object"
-			},
-			"LinkUpdateDto": {
-				"properties": {
-					"name": {
-						"example": "first tag",
-						"type": "string"
-					},
-					"redirectTo": {
-						"example": "https://www.google.com/",
-						"type": "string"
-					}
-				},
-				"required": ["name", "redirectTo"],
-				"type": "object"
-			},
-			"LinksDto": {
-				"properties": {
-					"locationId": {
-						"example": "ve9EPM428h8vShlRW1KT",
-						"type": "string"
-					},
-					"name": {
-						"example": "first tag",
-						"type": "string"
-					},
-					"redirectTo": {
-						"example": "https://www.google.com/",
-						"type": "string"
-					}
-				},
-				"required": ["locationId", "name", "redirectTo"],
-				"type": "object"
-			},
-			"UnauthorizedDTO": {
-				"properties": {
-					"error": {
-						"example": "Unauthorized",
-						"type": "string"
-					},
-					"message": {
-						"example": "Invalid token: access token is invalid",
-						"type": "string"
-					},
-					"statusCode": {
-						"example": 401,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"UnprocessableDTO": {
-				"properties": {
-					"error": {
-						"example": "Unprocessable Entity",
-						"type": "string"
-					},
-					"message": {
-						"example": ["Unprocessable Entity"],
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"statusCode": {
-						"example": 422,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			}
-		},
-		"securitySchemes": {
-			"Agency-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Agency.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"Location-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"bearer": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			}
-		}
-	},
-	"info": {
-		"contact": {},
-		"description": "Documentation for links API",
-		"title": "Links API",
-		"version": "1.0"
-	},
-	"openapi": "3.0.0",
-	"paths": {
-		"/links/": {
-			"get": {
-				"description": "Get Links",
-				"operationId": "get-links",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"example": "ve9EPM428h8vShlRW1KT",
-						"in": "query",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/GetLinksSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					}
-				},
-				"security": [
-					{
-						"bearer": []
-					}
-				],
-				"summary": "Get Links",
-				"tags": ["Trigger Links"]
-			},
-			"post": {
-				"description": "Create Link",
-				"operationId": "create-link",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/LinksDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"201": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/GetLinkSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"bearer": []
-					}
-				],
-				"summary": "Create Link",
-				"tags": ["Trigger Links"]
-			}
-		},
-		"/links/{linkId}": {
-			"delete": {
-				"description": "Delete Link",
-				"operationId": "delete-link",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Link Id",
-						"in": "path",
-						"name": "linkId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"201": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/DeleteLinksSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"bearer": []
-					}
-				],
-				"summary": "Delete Link",
-				"tags": ["Trigger Links"]
-			},
-			"put": {
-				"description": "Update Link",
-				"operationId": "update-link",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Link Id",
-						"in": "path",
-						"name": "linkId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/LinkUpdateDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"201": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/GetLinkSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"bearer": []
-					}
-				],
-				"summary": "Update Link",
-				"tags": ["Trigger Links"]
-			}
-		}
-	},
-	"servers": [
-		{
-			"url": "https://services.leadconnectorhq.com"
-		}
-	],
-	"tags": [
-		{
-			"description": "Documentation for links API",
-			"name": "Trigger Links"
-		}
-	]
+  "components": {
+    "schemas": {
+      "BadRequestDTO": {
+        "properties": {
+          "message": {
+            "example": "Bad Request",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 400,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "DeleteLinksSuccessfulResponseDto": {
+        "properties": {
+          "succeded": {
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "GetLinkSuccessfulResponseDto": {
+        "properties": {
+          "link": {
+            "$ref": "#/components/schemas/LinkSchema"
+          }
+        },
+        "type": "object"
+      },
+      "GetLinksSuccessfulResponseDto": {
+        "properties": {
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/LinkSchema"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "LinkSchema": {
+        "properties": {
+          "fieldKey": {
+            "example": "{{trigger_link.n4AriwEnFrGh3tu08W0U}}",
+            "type": "string"
+          },
+          "id": {
+            "example": "n4AriwEnFrGh3tu08W0U",
+            "type": "string"
+          },
+          "locationId": {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "name": {
+            "example": "first tag",
+            "type": "string"
+          },
+          "redirectTo": {
+            "example": "https://www.google.com/",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LinkUpdateDto": {
+        "properties": {
+          "name": {
+            "example": "first tag",
+            "type": "string"
+          },
+          "redirectTo": {
+            "example": "https://www.google.com/",
+            "type": "string"
+          }
+        },
+        "required": ["name", "redirectTo"],
+        "type": "object"
+      },
+      "LinksDto": {
+        "properties": {
+          "locationId": {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "name": {
+            "example": "first tag",
+            "type": "string"
+          },
+          "redirectTo": {
+            "example": "https://www.google.com/",
+            "type": "string"
+          }
+        },
+        "required": ["locationId", "name", "redirectTo"],
+        "type": "object"
+      },
+      "UnauthorizedDTO": {
+        "properties": {
+          "error": {
+            "example": "Unauthorized",
+            "type": "string"
+          },
+          "message": {
+            "example": "Invalid token: access token is invalid",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 401,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "UnprocessableDTO": {
+        "properties": {
+          "error": {
+            "example": "Unprocessable Entity",
+            "type": "string"
+          },
+          "message": {
+            "example": ["Unprocessable Entity"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "statusCode": {
+            "example": 422,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Agency-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Agency.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "Documentation for links API",
+    "title": "Links API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/links/": {
+      "get": {
+        "description": "Get Links",
+        "operationId": "get-links",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLinksSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get Links",
+        "tags": ["Trigger Links"]
+      },
+      "post": {
+        "description": "Create Link",
+        "operationId": "create-link",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinksDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLinkSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create Link",
+        "tags": ["Trigger Links"]
+      }
+    },
+    "/links/{linkId}": {
+      "delete": {
+        "description": "Delete Link",
+        "operationId": "delete-link",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Link Id",
+            "in": "path",
+            "name": "linkId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteLinksSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete Link",
+        "tags": ["Trigger Links"]
+      },
+      "put": {
+        "description": "Update Link",
+        "operationId": "update-link",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Link Id",
+            "in": "path",
+            "name": "linkId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLinkSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update Link",
+        "tags": ["Trigger Links"]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Documentation for links API",
+      "name": "Trigger Links"
+    }
+  ]
 }

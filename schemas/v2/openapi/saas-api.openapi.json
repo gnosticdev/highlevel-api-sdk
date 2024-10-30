@@ -1,634 +1,628 @@
 {
-	"components": {
-		"schemas": {
-			"BulkDisableSaasDto": {
-				"properties": {
-					"locationIds": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					}
-				},
-				"required": ["locationIds"],
-				"type": "object"
-			},
-			"EnableSaasDto": {
-				"properties": {
-					"companyId": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
-					"name": {
-						"type": "string"
-					},
-					"stripeAccountId": {
-						"type": "string"
-					},
-					"stripeCustomerId": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"stripeAccountId",
-					"name",
-					"email",
-					"stripeCustomerId",
-					"companyId"
-				],
-				"type": "object"
-			},
-			"PauseLocationDto": {
-				"properties": {
-					"companyId": {
-						"type": "string"
-					},
-					"paused": {
-						"type": "boolean"
-					}
-				},
-				"required": ["paused", "companyId"],
-				"type": "object"
-			},
-			"UpdateRebillingDto": {
-				"properties": {
-					"config": {
-						"properties": {
-							"enabled": {
-								"example": true,
-								"type": "boolean"
-							},
-							"markup": {
-								"example": 105,
-								"type": "number"
-							},
-							"optIn": {
-								"example": true,
-								"type": "boolean"
-							}
-						},
-						"type": "object"
-					},
-					"locationIds": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"product": {
-						"enum": [
-							"contentAI",
-							"workflow_premium_actions",
-							"workflow_ai",
-							"conversationAI",
-							"whatsApp",
-							"reviewsAI",
-							"Phone",
-							"Email"
-						],
-						"type": "string"
-					}
-				},
-				"required": ["product", "locationIds", "config"],
-				"type": "object"
-			},
-			"UpdateSubscriptionDto": {
-				"properties": {
-					"companyId": {
-						"type": "string"
-					},
-					"customerId": {
-						"type": "string"
-					},
-					"subscriptionId": {
-						"type": "string"
-					}
-				},
-				"required": ["subscriptionId", "customerId", "companyId"],
-				"type": "object"
-			}
-		},
-		"securitySchemes": {
-			"Agency-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Agency.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"Location-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"bearer": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			}
-		}
-	},
-	"info": {
-		"contact": {},
-		"description": "API Service for SaaS",
-		"title": "SaaS API",
-		"version": "1.0"
-	},
-	"openapi": "3.0.0",
-	"paths": {
-		"/saas-api/public-api/bulk-disable-saas/{companyId}": {
-			"post": {
-				"description": "Disable SaaS for locations for given locationIds",
-				"operationId": "bulk-disable-saas",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-04-15"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api channel",
-						"in": "header",
-						"name": "channel",
-						"required": true,
-						"schema": {
-							"enum": ["OAUTH"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api source",
-						"in": "header",
-						"name": "source",
-						"required": true,
-						"schema": {
-							"enum": ["INTEGRATION"],
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "companyId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/BulkDisableSaasDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"201": {
-						"description": ""
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					}
-				],
-				"summary": "Disable SaaS for locations",
-				"tags": ["SaaS"]
-			}
-		},
-		"/saas-api/public-api/enable-saas/{locationId}": {
-			"post": {
-				"description": "Enable SaaS for given locationIds",
-				"operationId": "enable-saas",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-04-15"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api channel",
-						"in": "header",
-						"name": "channel",
-						"required": true,
-						"schema": {
-							"enum": ["OAUTH"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api source",
-						"in": "header",
-						"name": "source",
-						"required": true,
-						"schema": {
-							"enum": ["INTEGRATION"],
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/EnableSaasDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"201": {
-						"description": ""
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					}
-				],
-				"summary": "Enable SaaS for location",
-				"tags": ["SaaS"]
-			}
-		},
-		"/saas-api/public-api/locations": {
-			"get": {
-				"description": "Get locations by stripeCustomerId or stripeSubscriptionId with companyId",
-				"operationId": "locations",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-04-15"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api channel",
-						"in": "header",
-						"name": "channel",
-						"required": true,
-						"schema": {
-							"enum": ["OAUTH"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api source",
-						"in": "header",
-						"name": "source",
-						"required": true,
-						"schema": {
-							"enum": ["INTEGRATION"],
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "customerId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "subscriptionId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "companyId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": ""
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					}
-				],
-				"summary": "Get locations by stripeId with companyId",
-				"tags": ["SaaS"]
-			}
-		},
-		"/saas-api/public-api/pause/{locationId}": {
-			"post": {
-				"description": "Pause Sub account for given locationId",
-				"operationId": "pause-location",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-04-15"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api channel",
-						"in": "header",
-						"name": "channel",
-						"required": true,
-						"schema": {
-							"enum": ["OAUTH"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api source",
-						"in": "header",
-						"name": "source",
-						"required": true,
-						"schema": {
-							"enum": ["INTEGRATION"],
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/PauseLocationDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"201": {
-						"description": ""
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					}
-				],
-				"summary": "Pause location",
-				"tags": ["SaaS"]
-			}
-		},
-		"/saas-api/public-api/update-rebilling/{companyId}": {
-			"post": {
-				"description": "Bulk update rebilling for given locationIds",
-				"operationId": "update-rebilling",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-04-15"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api channel",
-						"in": "header",
-						"name": "channel",
-						"required": true,
-						"schema": {
-							"enum": ["OAUTH"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api source",
-						"in": "header",
-						"name": "source",
-						"required": true,
-						"schema": {
-							"enum": ["INTEGRATION"],
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "companyId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/UpdateRebillingDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"201": {
-						"description": ""
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					}
-				],
-				"summary": "Update Rebilling",
-				"tags": ["SaaS"]
-			}
-		},
-		"/saas-api/public-api/update-saas-subscription/{locationId}": {
-			"put": {
-				"description": "Update SaaS subscription for given locationId and customerId",
-				"operationId": "generate-payment-link",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-04-15"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api channel",
-						"in": "header",
-						"name": "channel",
-						"required": true,
-						"schema": {
-							"enum": ["OAUTH"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Api source",
-						"in": "header",
-						"name": "source",
-						"required": true,
-						"schema": {
-							"enum": ["INTEGRATION"],
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/UpdateSubscriptionDto"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"description": ""
-					}
-				},
-				"security": [
-					{
-						"Agency-Access": []
-					}
-				],
-				"summary": "Update SaaS subscription",
-				"tags": ["SaaS"]
-			}
-		}
-	},
-	"servers": [
-		{
-			"url": "https://services.leadconnectorhq.com"
-		}
-	],
-	"tags": [
-		{
-			"description": "API Service for SaaS",
-			"name": "saas"
-		}
-	]
+  "components": {
+    "schemas": {
+      "BulkDisableSaasDto": {
+        "properties": {
+          "locationIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["locationIds"],
+        "type": "object"
+      },
+      "EnableSaasDto": {
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "stripeAccountId": {
+            "type": "string"
+          },
+          "stripeCustomerId": {
+            "type": "string"
+          }
+        },
+        "required": ["stripeAccountId", "name", "email", "stripeCustomerId", "companyId"],
+        "type": "object"
+      },
+      "PauseLocationDto": {
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "paused": {
+            "type": "boolean"
+          }
+        },
+        "required": ["paused", "companyId"],
+        "type": "object"
+      },
+      "UpdateRebillingDto": {
+        "properties": {
+          "config": {
+            "properties": {
+              "enabled": {
+                "example": true,
+                "type": "boolean"
+              },
+              "markup": {
+                "example": 105,
+                "type": "number"
+              },
+              "optIn": {
+                "example": true,
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "locationIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "product": {
+            "enum": [
+              "contentAI",
+              "workflow_premium_actions",
+              "workflow_ai",
+              "conversationAI",
+              "whatsApp",
+              "reviewsAI",
+              "Phone",
+              "Email"
+            ],
+            "type": "string"
+          }
+        },
+        "required": ["product", "locationIds", "config"],
+        "type": "object"
+      },
+      "UpdateSubscriptionDto": {
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string"
+          }
+        },
+        "required": ["subscriptionId", "customerId", "companyId"],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Agency-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Agency.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "API Service for SaaS",
+    "title": "SaaS API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/saas-api/public-api/bulk-disable-saas/{companyId}": {
+      "post": {
+        "description": "Disable SaaS for locations for given locationIds",
+        "operationId": "bulk-disable-saas",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api channel",
+            "in": "header",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": ["OAUTH"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api source",
+            "in": "header",
+            "name": "source",
+            "required": true,
+            "schema": {
+              "enum": ["INTEGRATION"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "companyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkDisableSaasDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Disable SaaS for locations",
+        "tags": ["SaaS"]
+      }
+    },
+    "/saas-api/public-api/enable-saas/{locationId}": {
+      "post": {
+        "description": "Enable SaaS for given locationIds",
+        "operationId": "enable-saas",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api channel",
+            "in": "header",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": ["OAUTH"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api source",
+            "in": "header",
+            "name": "source",
+            "required": true,
+            "schema": {
+              "enum": ["INTEGRATION"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableSaasDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Enable SaaS for location",
+        "tags": ["SaaS"]
+      }
+    },
+    "/saas-api/public-api/locations": {
+      "get": {
+        "description": "Get locations by stripeCustomerId or stripeSubscriptionId with companyId",
+        "operationId": "locations",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api channel",
+            "in": "header",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": ["OAUTH"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api source",
+            "in": "header",
+            "name": "source",
+            "required": true,
+            "schema": {
+              "enum": ["INTEGRATION"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "customerId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subscriptionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Get locations by stripeId with companyId",
+        "tags": ["SaaS"]
+      }
+    },
+    "/saas-api/public-api/pause/{locationId}": {
+      "post": {
+        "description": "Pause Sub account for given locationId",
+        "operationId": "pause-location",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api channel",
+            "in": "header",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": ["OAUTH"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api source",
+            "in": "header",
+            "name": "source",
+            "required": true,
+            "schema": {
+              "enum": ["INTEGRATION"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PauseLocationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Pause location",
+        "tags": ["SaaS"]
+      }
+    },
+    "/saas-api/public-api/update-rebilling/{companyId}": {
+      "post": {
+        "description": "Bulk update rebilling for given locationIds",
+        "operationId": "update-rebilling",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api channel",
+            "in": "header",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": ["OAUTH"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api source",
+            "in": "header",
+            "name": "source",
+            "required": true,
+            "schema": {
+              "enum": ["INTEGRATION"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "companyId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRebillingDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update Rebilling",
+        "tags": ["SaaS"]
+      }
+    },
+    "/saas-api/public-api/update-saas-subscription/{locationId}": {
+      "put": {
+        "description": "Update SaaS subscription for given locationId and customerId",
+        "operationId": "generate-payment-link",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api channel",
+            "in": "header",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": ["OAUTH"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Api source",
+            "in": "header",
+            "name": "source",
+            "required": true,
+            "schema": {
+              "enum": ["INTEGRATION"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSubscriptionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update SaaS subscription",
+        "tags": ["SaaS"]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "API Service for SaaS",
+      "name": "saas"
+    }
+  ]
 }

@@ -1,672 +1,666 @@
 {
-	"components": {
-		"schemas": {
-			"BadRequestDTO": {
-				"properties": {
-					"message": {
-						"example": "Bad Request",
-						"type": "string"
-					},
-					"statusCode": {
-						"example": 400,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"ContactSessionIds": {
-				"properties": {
-					"ids": {
-						"example": ["session1", "session2"],
-						"items": {
-							"type": "string"
-						},
-						"nullable": true,
-						"type": "array"
-					}
-				},
-				"type": "object"
-			},
-			"EventDataSchema": {
-				"properties": {
-					"adSource": {
-						"example": "example-ad-source",
-						"type": "string"
-					},
-					"contactSessionIds": {
-						"allOf": [
-							{
-								"$ref": "#/components/schemas/ContactSessionIds"
-							}
-						],
-						"nullable": true
-					},
-					"domain": {
-						"example": "example.com",
-						"type": "string"
-					},
-					"fbEventId": {
-						"example": "event-id-789",
-						"type": "string"
-					},
-					"fbc": {
-						"example": "fb.1.123456789.987654321",
-						"type": "string"
-					},
-					"fbp": {
-						"example": "fbp.1.987654321.123456789",
-						"type": "string"
-					},
-					"fingerprint": {
-						"example": "example-fingerprint",
-						"type": "string"
-					},
-					"medium": {
-						"example": "form",
-						"type": "string"
-					},
-					"mediumId": {
-						"example": "medium-id-123",
-						"type": "string"
-					},
-					"page": {
-						"$ref": "#/components/schemas/PageDetailsSchema"
-					},
-					"pageVisitType": {
-						"example": "form",
-						"type": "string"
-					},
-					"parentId": {
-						"example": "parent-id-456",
-						"type": "string"
-					},
-					"parentName": {
-						"example": "Parent Form",
-						"type": "string"
-					},
-					"referrer": {
-						"example": "https://staging.gohighlevel.com",
-						"type": "string"
-					},
-					"source": {
-						"example": "Direct traffic",
-						"type": "string"
-					},
-					"timestamp": {
-						"example": 1234567890,
-						"type": "number"
-					},
-					"type": {
-						"example": "page-visit",
-						"type": "string"
-					},
-					"version": {
-						"example": "v3",
-						"type": "string"
-					}
-				},
-				"type": "object"
-			},
-			"FormsParams": {
-				"properties": {
-					"id": {
-						"example": "YSWdvS4Is98wtIDGnpmI",
-						"type": "string"
-					},
-					"locationId": {
-						"example": "ve9EPM428h8vShlRW1KT",
-						"type": "string"
-					},
-					"name": {
-						"example": "Form 1",
-						"type": "string"
-					}
-				},
-				"type": "object"
-			},
-			"FormsSubmissionsSubmissionsSchema": {
-				"properties": {
-					"contactId": {
-						"example": "DWQ45t2IPVxi9LDu1wBl",
-						"type": "string"
-					},
-					"createdAt": {
-						"example": "2021-06-23T06:07:04.000Z",
-						"type": "string"
-					},
-					"email": {
-						"example": "test@test.com",
-						"type": "string"
-					},
-					"formId": {
-						"example": "YSWdvS4Is98wtIDGnpmI",
-						"type": "string"
-					},
-					"id": {
-						"example": "38303ec7-629a-49e2-888a-cf8bf0b1f97e",
-						"type": "string"
-					},
-					"name": {
-						"example": "test",
-						"type": "string"
-					},
-					"others": {
-						"$ref": "#/components/schemas/othersSchema"
-					}
-				},
-				"type": "object"
-			},
-			"FormsSubmissionsSuccessfulResponseDto": {
-				"properties": {
-					"meta": {
-						"$ref": "#/components/schemas/metaSchema"
-					},
-					"submissions": {
-						"items": {
-							"$ref": "#/components/schemas/FormsSubmissionsSubmissionsSchema"
-						},
-						"type": "array"
-					}
-				},
-				"type": "object"
-			},
-			"FormsSuccessfulResponseDto": {
-				"properties": {
-					"forms": {
-						"items": {
-							"$ref": "#/components/schemas/FormsParams"
-						},
-						"type": "array"
-					},
-					"total": {
-						"description": "Total number of forms",
-						"example": "20",
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"PageDetailsSchema": {
-				"properties": {
-					"title": {
-						"example": "Example Page",
-						"type": "string"
-					},
-					"url": {
-						"example": "https://example.com",
-						"type": "string"
-					}
-				},
-				"type": "object"
-			},
-			"UnauthorizedDTO": {
-				"properties": {
-					"error": {
-						"example": "Unauthorized",
-						"type": "string"
-					},
-					"message": {
-						"example": "Invalid token: access token is invalid",
-						"type": "string"
-					},
-					"statusCode": {
-						"example": 401,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"UnprocessableDTO": {
-				"properties": {
-					"error": {
-						"example": "Unprocessable Entity",
-						"type": "string"
-					},
-					"message": {
-						"example": ["Unprocessable Entity"],
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"statusCode": {
-						"example": 422,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"metaSchema": {
-				"properties": {
-					"currentPage": {
-						"example": 1,
-						"type": "number"
-					},
-					"nextPage": {
-						"example": null,
-						"nullable": true,
-						"type": "number"
-					},
-					"prevPage": {
-						"example": null,
-						"nullable": true,
-						"type": "number"
-					},
-					"total": {
-						"example": 1,
-						"type": "number"
-					}
-				},
-				"type": "object"
-			},
-			"othersSchema": {
-				"properties": {
-					"__custom_field_id__": {
-						"example": "20",
-						"type": "string"
-					},
-					"__submissions_other_field__": {
-						"example": "john@deo.com",
-						"type": "string"
-					},
-					"eventData": {
-						"$ref": "#/components/schemas/EventDataSchema"
-					},
-					"fieldsOriSequance": {
-						"example": [
-							"full_name",
-							"first_name",
-							"last_name",
-							"phone",
-							"email"
-						],
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					}
-				},
-				"type": "object"
-			}
-		},
-		"securitySchemes": {
-			"Agency-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Agency.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"Location-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"bearer": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			}
-		}
-	},
-	"info": {
-		"contact": {},
-		"description": "Documentation for forms API",
-		"title": "Forms API",
-		"version": "1.0"
-	},
-	"openapi": "3.0.0",
-	"paths": {
-		"/forms/": {
-			"get": {
-				"description": "Get Forms",
-				"operationId": "get-forms",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"example": "ve9EPM428h8vShlRW1KT",
-						"in": "query",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"example": 0,
-						"in": "query",
-						"name": "skip",
-						"required": false,
-						"schema": {
-							"type": "number"
-						}
-					},
-					{
-						"description": "Limit Per Page records count. will allow maximum up to 50 and default will be 10",
-						"example": 20,
-						"in": "query",
-						"name": "limit",
-						"required": false,
-						"schema": {
-							"default": 10,
-							"type": "number"
-						}
-					},
-					{
-						"example": "folder",
-						"in": "query",
-						"name": "type",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/FormsSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					}
-				},
-				"security": [
-					{
-						"bearer": []
-					}
-				],
-				"summary": "Get Forms",
-				"tags": ["Forms"]
-			}
-		},
-		"/forms/submissions": {
-			"get": {
-				"description": "Get Forms Submissions",
-				"operationId": "get-forms-submissions",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"example": "ve9EPM428h8vShlRW1KT",
-						"in": "query",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Page No. By default it will be 1",
-						"example": 1,
-						"in": "query",
-						"name": "page",
-						"required": false,
-						"schema": {
-							"default": 1,
-							"type": "number"
-						}
-					},
-					{
-						"description": "Limit Per Page records count. will allow maximum up to 100 and default will be 20",
-						"example": 20,
-						"in": "query",
-						"name": "limit",
-						"required": false,
-						"schema": {
-							"default": 20,
-							"type": "number"
-						}
-					},
-					{
-						"description": "Filter submission by form id",
-						"example": "jjusM6EOngDExnbo2DbU",
-						"in": "query",
-						"name": "formId",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Filter by contactId, name, email or phone no.",
-						"example": "john@deo.com",
-						"in": "query",
-						"name": "q",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Get submission by starting of this date. By default it will be same date of last month(YYYY-MM-DD).",
-						"example": "2020-11-14",
-						"in": "query",
-						"name": "startAt",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD).",
-						"example": "2020-12-14",
-						"in": "query",
-						"name": "endAt",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/FormsSubmissionsSuccessfulResponseDto"
-								}
-							}
-						},
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					},
-					"422": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnprocessableDTO"
-								}
-							}
-						},
-						"description": "Unprocessable Entity"
-					}
-				},
-				"security": [
-					{
-						"bearer": []
-					}
-				],
-				"summary": "Get Forms Submissions",
-				"tags": ["Forms"]
-			}
-		},
-		"/forms/upload-custom-files": {
-			"post": {
-				"description": "Post the necessary fields for the API to upload files. The files need to be a buffer with the key \"< custom_field_id >_< file_id >\". <br /> Here custom field id is the ID of your custom field and file id is a randomly generated id (or uuid) <br /> There is support for multiple file uploads as well. Have multiple fields in the format mentioned.<br />File size is limited to 50 MB.<br /><br /> The allowed file types are: <br> <ul><li>PDF</li><li>DOCX</li><li>DOC</li><li>JPG</li><li>JPEG</li><li>PNG</li><li>GIF</li><li>CSV</li><li>XLSX</li><li>XLS</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>TXT</li><li>SVG</li></ul> <br /><br /> The API will return the updated contact object.",
-				"operationId": "upload-to-custom-fields",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "API Version",
-						"in": "header",
-						"name": "Version",
-						"required": true,
-						"schema": {
-							"enum": ["2021-07-28"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "Contact ID to upload the file to.",
-						"example": "dtEv6KtI27yF92YPm3Zz",
-						"in": "query",
-						"name": "contactId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Location ID of the contact.",
-						"example": "quXmPY59n1zgGBabY1bZ",
-						"in": "query",
-						"name": "locationId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Successful response"
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/BadRequestDTO"
-								}
-							}
-						},
-						"description": "Bad Request"
-					},
-					"401": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UnauthorizedDTO"
-								}
-							}
-						},
-						"description": "Unauthorized"
-					}
-				},
-				"security": [
-					{
-						"bearer": []
-					}
-				],
-				"summary": "Upload files to custom fields",
-				"tags": ["Forms"]
-			}
-		}
-	},
-	"servers": [
-		{
-			"url": "https://services.leadconnectorhq.com"
-		}
-	],
-	"tags": [
-		{
-			"description": "Documentation for forms API",
-			"name": "Forms"
-		}
-	]
+  "components": {
+    "schemas": {
+      "BadRequestDTO": {
+        "properties": {
+          "message": {
+            "example": "Bad Request",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 400,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "ContactSessionIds": {
+        "properties": {
+          "ids": {
+            "example": ["session1", "session2"],
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "EventDataSchema": {
+        "properties": {
+          "adSource": {
+            "example": "example-ad-source",
+            "type": "string"
+          },
+          "contactSessionIds": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactSessionIds"
+              }
+            ],
+            "nullable": true
+          },
+          "domain": {
+            "example": "example.com",
+            "type": "string"
+          },
+          "fbEventId": {
+            "example": "event-id-789",
+            "type": "string"
+          },
+          "fbc": {
+            "example": "fb.1.123456789.987654321",
+            "type": "string"
+          },
+          "fbp": {
+            "example": "fbp.1.987654321.123456789",
+            "type": "string"
+          },
+          "fingerprint": {
+            "example": "example-fingerprint",
+            "type": "string"
+          },
+          "medium": {
+            "example": "form",
+            "type": "string"
+          },
+          "mediumId": {
+            "example": "medium-id-123",
+            "type": "string"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageDetailsSchema"
+          },
+          "pageVisitType": {
+            "example": "form",
+            "type": "string"
+          },
+          "parentId": {
+            "example": "parent-id-456",
+            "type": "string"
+          },
+          "parentName": {
+            "example": "Parent Form",
+            "type": "string"
+          },
+          "referrer": {
+            "example": "https://staging.gohighlevel.com",
+            "type": "string"
+          },
+          "source": {
+            "example": "Direct traffic",
+            "type": "string"
+          },
+          "timestamp": {
+            "example": 1234567890,
+            "type": "number"
+          },
+          "type": {
+            "example": "page-visit",
+            "type": "string"
+          },
+          "version": {
+            "example": "v3",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "FormsParams": {
+        "properties": {
+          "id": {
+            "example": "YSWdvS4Is98wtIDGnpmI",
+            "type": "string"
+          },
+          "locationId": {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "name": {
+            "example": "Form 1",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "FormsSubmissionsSubmissionsSchema": {
+        "properties": {
+          "contactId": {
+            "example": "DWQ45t2IPVxi9LDu1wBl",
+            "type": "string"
+          },
+          "createdAt": {
+            "example": "2021-06-23T06:07:04.000Z",
+            "type": "string"
+          },
+          "email": {
+            "example": "test@test.com",
+            "type": "string"
+          },
+          "formId": {
+            "example": "YSWdvS4Is98wtIDGnpmI",
+            "type": "string"
+          },
+          "id": {
+            "example": "38303ec7-629a-49e2-888a-cf8bf0b1f97e",
+            "type": "string"
+          },
+          "name": {
+            "example": "test",
+            "type": "string"
+          },
+          "others": {
+            "$ref": "#/components/schemas/othersSchema"
+          }
+        },
+        "type": "object"
+      },
+      "FormsSubmissionsSuccessfulResponseDto": {
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/metaSchema"
+          },
+          "submissions": {
+            "items": {
+              "$ref": "#/components/schemas/FormsSubmissionsSubmissionsSchema"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "FormsSuccessfulResponseDto": {
+        "properties": {
+          "forms": {
+            "items": {
+              "$ref": "#/components/schemas/FormsParams"
+            },
+            "type": "array"
+          },
+          "total": {
+            "description": "Total number of forms",
+            "example": "20",
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "PageDetailsSchema": {
+        "properties": {
+          "title": {
+            "example": "Example Page",
+            "type": "string"
+          },
+          "url": {
+            "example": "https://example.com",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UnauthorizedDTO": {
+        "properties": {
+          "error": {
+            "example": "Unauthorized",
+            "type": "string"
+          },
+          "message": {
+            "example": "Invalid token: access token is invalid",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 401,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "UnprocessableDTO": {
+        "properties": {
+          "error": {
+            "example": "Unprocessable Entity",
+            "type": "string"
+          },
+          "message": {
+            "example": ["Unprocessable Entity"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "statusCode": {
+            "example": 422,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "metaSchema": {
+        "properties": {
+          "currentPage": {
+            "example": 1,
+            "type": "number"
+          },
+          "nextPage": {
+            "example": null,
+            "nullable": true,
+            "type": "number"
+          },
+          "prevPage": {
+            "example": null,
+            "nullable": true,
+            "type": "number"
+          },
+          "total": {
+            "example": 1,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "othersSchema": {
+        "properties": {
+          "__custom_field_id__": {
+            "example": "20",
+            "type": "string"
+          },
+          "__submissions_other_field__": {
+            "example": "john@deo.com",
+            "type": "string"
+          },
+          "eventData": {
+            "$ref": "#/components/schemas/EventDataSchema"
+          },
+          "fieldsOriSequance": {
+            "example": ["full_name", "first_name", "last_name", "phone", "email"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Agency-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Agency.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "Documentation for forms API",
+    "title": "Forms API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/forms/": {
+      "get": {
+        "description": "Get Forms",
+        "operationId": "get-forms",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "example": 0,
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Limit Per Page records count. will allow maximum up to 50 and default will be 10",
+            "example": 20,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          },
+          {
+            "example": "folder",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormsSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get Forms",
+        "tags": ["Forms"]
+      }
+    },
+    "/forms/submissions": {
+      "get": {
+        "description": "Get Forms Submissions",
+        "operationId": "get-forms-submissions",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page No. By default it will be 1",
+            "example": 1,
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Limit Per Page records count. will allow maximum up to 100 and default will be 20",
+            "example": 20,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Filter submission by form id",
+            "example": "jjusM6EOngDExnbo2DbU",
+            "in": "query",
+            "name": "formId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by contactId, name, email or phone no.",
+            "example": "john@deo.com",
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Get submission by starting of this date. By default it will be same date of last month(YYYY-MM-DD).",
+            "example": "2020-11-14",
+            "in": "query",
+            "name": "startAt",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Get submission by ending of this date. By default it will be current date(YYYY-MM-DD).",
+            "example": "2020-12-14",
+            "in": "query",
+            "name": "endAt",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormsSubmissionsSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get Forms Submissions",
+        "tags": ["Forms"]
+      }
+    },
+    "/forms/upload-custom-files": {
+      "post": {
+        "description": "Post the necessary fields for the API to upload files. The files need to be a buffer with the key \"< custom_field_id >_< file_id >\". <br /> Here custom field id is the ID of your custom field and file id is a randomly generated id (or uuid) <br /> There is support for multiple file uploads as well. Have multiple fields in the format mentioned.<br />File size is limited to 50 MB.<br /><br /> The allowed file types are: <br> <ul><li>PDF</li><li>DOCX</li><li>DOC</li><li>JPG</li><li>JPEG</li><li>PNG</li><li>GIF</li><li>CSV</li><li>XLSX</li><li>XLS</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>TXT</li><li>SVG</li></ul> <br /><br /> The API will return the updated contact object.",
+        "operationId": "upload-to-custom-fields",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Contact ID to upload the file to.",
+            "example": "dtEv6KtI27yF92YPm3Zz",
+            "in": "query",
+            "name": "contactId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location ID of the contact.",
+            "example": "quXmPY59n1zgGBabY1bZ",
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Upload files to custom fields",
+        "tags": ["Forms"]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Documentation for forms API",
+      "name": "Forms"
+    }
+  ]
 }

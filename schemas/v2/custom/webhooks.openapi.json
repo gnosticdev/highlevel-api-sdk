@@ -1,197 +1,7 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Webhooks API",
-    "version": "1.0.0"
-  },
-  "paths": {},
   "components": {
     "schemas": {
-      "AppointmentCreate": {
-        "type": "object",
-        "properties": {
-          "appointment": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "appointmentStatus": {
-                "type": "string"
-              },
-              "assignedUserId": {
-                "type": "string"
-              },
-              "calendarId": {
-                "type": "string"
-              },
-              "contactId": {
-                "type": "string"
-              },
-              "dateAdded": {
-                "type": "string"
-              },
-              "dateUpdated": {
-                "type": "string"
-              },
-              "endTime": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "notes": {
-                "type": "string"
-              },
-              "source": {
-                "type": "string"
-              },
-              "startTime": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "users": {
-                "type": "array"
-              }
-            },
-            "type": "object"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
-      "AppointmentDelete": {
-        "type": "object",
-        "properties": {
-          "appointment": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "appointmentStatus": {
-                "type": "string"
-              },
-              "assignedUserId": {
-                "type": "string"
-              },
-              "calendarId": {
-                "type": "string"
-              },
-              "contactId": {
-                "type": "string"
-              },
-              "dateAdded": {
-                "type": "string"
-              },
-              "dateUpdated": {
-                "type": "string"
-              },
-              "endTime": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "notes": {
-                "type": "string"
-              },
-              "source": {
-                "type": "string"
-              },
-              "startTime": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "users": {
-                "type": "array"
-              }
-            },
-            "type": "object"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
-      "AppointmentUpdate": {
-        "type": "object",
-        "properties": {
-          "appointment": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "appointmentStatus": {
-                "type": "string"
-              },
-              "assignedUserId": {
-                "type": "string"
-              },
-              "calendarId": {
-                "type": "string"
-              },
-              "contactId": {
-                "type": "string"
-              },
-              "dateAdded": {
-                "type": "string"
-              },
-              "dateUpdated": {
-                "type": "string"
-              },
-              "endTime": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "notes": {
-                "type": "string"
-              },
-              "source": {
-                "type": "string"
-              },
-              "startTime": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "users": {
-                "type": "array"
-              }
-            },
-            "type": "object"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
       "AppInstall": {
-        "type": "object",
         "properties": {
           "appId": {
             "type": "string"
@@ -225,10 +35,10 @@
           "userId": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "AppUninstall": {
-        "type": "object",
         "properties": {
           "appId": {
             "type": "string"
@@ -242,10 +52,193 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
+      },
+      "AppointmentCreate": {
+        "properties": {
+          "appointment": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "appointmentStatus": {
+                "type": "string"
+              },
+              "assignedUserId": {
+                "type": "string"
+              },
+              "calendarId": {
+                "type": "string"
+              },
+              "contactId": {
+                "type": "string"
+              },
+              "dateAdded": {
+                "type": "string"
+              },
+              "dateUpdated": {
+                "type": "string"
+              },
+              "endTime": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "startTime": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AppointmentDelete": {
+        "properties": {
+          "appointment": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "appointmentStatus": {
+                "type": "string"
+              },
+              "assignedUserId": {
+                "type": "string"
+              },
+              "calendarId": {
+                "type": "string"
+              },
+              "contactId": {
+                "type": "string"
+              },
+              "dateAdded": {
+                "type": "string"
+              },
+              "dateUpdated": {
+                "type": "string"
+              },
+              "endTime": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "startTime": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AppointmentUpdate": {
+        "properties": {
+          "appointment": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "appointmentStatus": {
+                "type": "string"
+              },
+              "assignedUserId": {
+                "type": "string"
+              },
+              "calendarId": {
+                "type": "string"
+              },
+              "contactId": {
+                "type": "string"
+              },
+              "dateAdded": {
+                "type": "string"
+              },
+              "dateUpdated": {
+                "type": "string"
+              },
+              "endTime": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "startTime": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "users": {
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "CampaignStatusUpdate": {
-        "type": "object",
         "properties": {
           "contactId": {
             "type": "string"
@@ -271,10 +264,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "ContactCreate": {
-        "type": "object",
         "properties": {
           "address1": {
             "type": "string"
@@ -301,12 +294,7 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "array",
-                    "object"
-                  ]
+                  "type": ["string", "number", "array", "object"]
                 }
               },
               "type": "object"
@@ -361,10 +349,10 @@
           "website": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "ContactDelete": {
-        "type": "object",
         "properties": {
           "address1": {
             "type": "string"
@@ -391,12 +379,7 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "array",
-                    "object"
-                  ]
+                  "type": ["string", "number", "array", "object"]
                 }
               },
               "type": "object"
@@ -451,100 +434,10 @@
           "website": {
             "type": "string"
           }
-        }
-      },
-      "ContactTagUpdate": {
-        "type": "object",
-        "properties": {
-          "address1": {
-            "type": "string"
-          },
-          "assignedTo": {
-            "type": "string"
-          },
-          "attachments": {
-            "type": "array"
-          },
-          "city": {
-            "type": "string"
-          },
-          "companyName": {
-            "type": "string"
-          },
-          "country": {
-            "type": "string"
-          },
-          "customFields": {
-            "items": {
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "array",
-                    "object"
-                  ]
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "dateAdded": {
-            "type": "string"
-          },
-          "dateOfBirth": {
-            "type": "string"
-          },
-          "dnd": {
-            "type": "boolean"
-          },
-          "email": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "postalCode": {
-            "type": "string"
-          },
-          "source": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "tags": {
-            "type": "array"
-          },
-          "type": {
-            "type": "string"
-          },
-          "website": {
-            "type": "string"
-          }
-        }
+        },
+        "type": "object"
       },
       "ContactDndUpdate": {
-        "type": "object",
         "properties": {
           "address1": {
             "type": "string"
@@ -571,12 +464,7 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "array",
-                    "object"
-                  ]
+                  "type": ["string", "number", "array", "object"]
                 }
               },
               "type": "object"
@@ -720,127 +608,10 @@
           "website": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
-      "ConversationProviderOutboundWebhook": {
-        "type": "object",
-        "properties": {
-          "attachments": {
-            "type": "array"
-          },
-          "contactId": {
-            "type": "string"
-          },
-          "emailFrom": {
-            "type": "string"
-          },
-          "emailMessageId": {
-            "type": "string"
-          },
-          "emailTo": {
-            "type": "string"
-          },
-          "html": {
-            "type": "string"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "messageId": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "subject": {
-            "type": "string"
-          },
-          "type": {
-            "type": "Email/SMS"
-          },
-          "userId": {
-            "type": "string"
-          }
-        }
-      },
-      "InboundMessage": {
-        "type": "object",
-        "properties": {
-          "attachments": {
-            "type": "array"
-          },
-          "body": {
-            "type": "string"
-          },
-          "contactId": {
-            "type": "string"
-          },
-          "contentType": {
-            "type": "string"
-          },
-          "conversationId": {
-            "type": "string"
-          },
-          "dateAdded": {
-            "type": "string"
-          },
-          "direction": {
-            "type": "string"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "messageId": {
-            "type": "string"
-          },
-          "messageType": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "userId": {
-            "type": "string"
-          }
-        }
-      },
-      "ConversationUnreadWebhook": {
-        "type": "object",
-        "properties": {
-          "contactId": {
-            "type": "string"
-          },
-          "deleted": {
-            "type": "boolean"
-          },
-          "id": {
-            "type": "string"
-          },
-          "inbox": {
-            "type": "boolean"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "starred": {
-            "type": "boolean"
-          },
-          "type": {
-            "type": "string"
-          },
-          "unreadCount": {
-            "type": "number"
-          }
-        }
-      },
-      "ContactUpdate": {
-        "type": "object",
+      "ContactTagUpdate": {
         "properties": {
           "address1": {
             "type": "string"
@@ -867,12 +638,7 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "array",
-                    "object"
-                  ]
+                  "type": ["string", "number", "array", "object"]
                 }
               },
               "type": "object"
@@ -927,10 +693,212 @@
           "website": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
+      },
+      "ContactUpdate": {
+        "properties": {
+          "address1": {
+            "type": "string"
+          },
+          "assignedTo": {
+            "type": "string"
+          },
+          "attachments": {
+            "type": "array"
+          },
+          "city": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "customFields": {
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": ["string", "number", "array", "object"]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "dateAdded": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string"
+          },
+          "dnd": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array"
+          },
+          "type": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ConversationProviderOutboundWebhook": {
+        "properties": {
+          "attachments": {
+            "type": "array"
+          },
+          "contactId": {
+            "type": "string"
+          },
+          "emailFrom": {
+            "type": "string"
+          },
+          "emailMessageId": {
+            "type": "string"
+          },
+          "emailTo": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "type": {
+            "type": "Email/SMS"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ConversationUnreadWebhook": {
+        "properties": {
+          "contactId": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "inbox": {
+            "type": "boolean"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "starred": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string"
+          },
+          "unreadCount": {
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "InboundMessage": {
+        "properties": {
+          "attachments": {
+            "type": "array"
+          },
+          "body": {
+            "type": "string"
+          },
+          "contactId": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "conversationId": {
+            "type": "string"
+          },
+          "dateAdded": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "messageType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "InvoiceCreate": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -1120,782 +1088,10 @@
           "updatedAt": {
             "type": "string"
           }
-        }
-      },
-      "InvoiceVoid": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "altId": {
-            "type": "string"
-          },
-          "altType": {
-            "type": "string"
-          },
-          "amountDue": {
-            "type": "number"
-          },
-          "amountPaid": {
-            "type": "number"
-          },
-          "businessDetails": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "customValues": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "logoUrl": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              },
-              "website": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "contactDetails": {
-            "properties": {
-              "additionalEmails": {
-                "items": {
-                  "properties": {
-                    "email": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "address": {
-                "properties": {
-                  "addressLine1": {
-                    "type": "string"
-                  },
-                  "addressLine2": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "countryCode": {
-                    "type": "string"
-                  },
-                  "postalCode": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "companyName": {
-                "type": "string"
-              },
-              "customFields": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "email": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "discount": {
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "value": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "dueDate": {
-            "type": "string"
-          },
-          "invoiceItems": {
-            "items": {
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "amount": {
-                  "type": "number"
-                },
-                "currency": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "priceId": {
-                  "type": "string"
-                },
-                "productId": {
-                  "type": "string"
-                },
-                "qty": {
-                  "type": "number"
-                },
-                "taxes": {
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "invoiceNumber": {
-            "type": "string"
-          },
-          "issueDate": {
-            "type": "string"
-          },
-          "liveMode": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "total": {
-            "type": "number"
-          },
-          "totalSummary": {
-            "properties": {
-              "discount": {
-                "type": "number"
-              },
-              "subTotal": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "updatedAt": {
-            "type": "string"
-          }
-        }
-      },
-      "InvoiceSent": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "altId": {
-            "type": "string"
-          },
-          "altType": {
-            "type": "string"
-          },
-          "amountDue": {
-            "type": "number"
-          },
-          "amountPaid": {
-            "type": "number"
-          },
-          "businessDetails": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "customValues": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "logoUrl": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              },
-              "website": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "contactDetails": {
-            "properties": {
-              "additionalEmails": {
-                "items": {
-                  "properties": {
-                    "email": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "address": {
-                "properties": {
-                  "addressLine1": {
-                    "type": "string"
-                  },
-                  "addressLine2": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "countryCode": {
-                    "type": "string"
-                  },
-                  "postalCode": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "companyName": {
-                "type": "string"
-              },
-              "customFields": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "email": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "discount": {
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "value": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "dueDate": {
-            "type": "string"
-          },
-          "invoiceItems": {
-            "items": {
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "amount": {
-                  "type": "number"
-                },
-                "currency": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "priceId": {
-                  "type": "string"
-                },
-                "productId": {
-                  "type": "string"
-                },
-                "qty": {
-                  "type": "number"
-                },
-                "taxes": {
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "invoiceNumber": {
-            "type": "string"
-          },
-          "issueDate": {
-            "type": "string"
-          },
-          "liveMode": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "total": {
-            "type": "number"
-          },
-          "totalSummary": {
-            "properties": {
-              "discount": {
-                "type": "number"
-              },
-              "subTotal": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "updatedAt": {
-            "type": "string"
-          }
-        }
-      },
-      "InvoicePartiallyPaid": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "altId": {
-            "type": "string"
-          },
-          "altType": {
-            "type": "string"
-          },
-          "amountDue": {
-            "type": "number"
-          },
-          "amountPaid": {
-            "type": "number"
-          },
-          "businessDetails": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "customValues": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "logoUrl": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              },
-              "website": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "contactDetails": {
-            "properties": {
-              "additionalEmails": {
-                "items": {
-                  "properties": {
-                    "email": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "address": {
-                "properties": {
-                  "addressLine1": {
-                    "type": "string"
-                  },
-                  "addressLine2": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "countryCode": {
-                    "type": "string"
-                  },
-                  "postalCode": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "companyName": {
-                "type": "string"
-              },
-              "customFields": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "email": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "discount": {
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "value": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "dueDate": {
-            "type": "string"
-          },
-          "invoiceItems": {
-            "items": {
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "amount": {
-                  "type": "number"
-                },
-                "currency": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "priceId": {
-                  "type": "string"
-                },
-                "productId": {
-                  "type": "string"
-                },
-                "qty": {
-                  "type": "number"
-                },
-                "taxes": {
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "invoiceNumber": {
-            "type": "string"
-          },
-          "issueDate": {
-            "type": "string"
-          },
-          "liveMode": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "total": {
-            "type": "number"
-          },
-          "totalSummary": {
-            "properties": {
-              "discount": {
-                "type": "number"
-              },
-              "subTotal": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "updatedAt": {
-            "type": "string"
-          }
-        }
-      },
-      "InvoicePaid": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "altId": {
-            "type": "string"
-          },
-          "altType": {
-            "type": "string"
-          },
-          "amountDue": {
-            "type": "number"
-          },
-          "amountPaid": {
-            "type": "number"
-          },
-          "businessDetails": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "customValues": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "logoUrl": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              },
-              "website": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "contactDetails": {
-            "properties": {
-              "additionalEmails": {
-                "items": {
-                  "properties": {
-                    "email": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "address": {
-                "properties": {
-                  "addressLine1": {
-                    "type": "string"
-                  },
-                  "addressLine2": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "countryCode": {
-                    "type": "string"
-                  },
-                  "postalCode": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "companyName": {
-                "type": "string"
-              },
-              "customFields": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "email": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "phoneNo": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "discount": {
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "value": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "dueDate": {
-            "type": "string"
-          },
-          "invoiceItems": {
-            "items": {
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "amount": {
-                  "type": "number"
-                },
-                "currency": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "priceId": {
-                  "type": "string"
-                },
-                "productId": {
-                  "type": "string"
-                },
-                "qty": {
-                  "type": "number"
-                },
-                "taxes": {
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "invoiceNumber": {
-            "type": "string"
-          },
-          "issueDate": {
-            "type": "string"
-          },
-          "liveMode": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "total": {
-            "type": "number"
-          },
-          "totalSummary": {
-            "properties": {
-              "discount": {
-                "type": "number"
-              },
-              "subTotal": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "updatedAt": {
-            "type": "string"
-          }
-        }
+        },
+        "type": "object"
       },
       "InvoiceDelete": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -2085,10 +1281,589 @@
           "updatedAt": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
+      },
+      "InvoicePaid": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "altId": {
+            "type": "string"
+          },
+          "altType": {
+            "type": "string"
+          },
+          "amountDue": {
+            "type": "number"
+          },
+          "amountPaid": {
+            "type": "number"
+          },
+          "businessDetails": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "customValues": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "logoUrl": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "contactDetails": {
+            "properties": {
+              "additionalEmails": {
+                "items": {
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "address": {
+                "properties": {
+                  "addressLine1": {
+                    "type": "string"
+                  },
+                  "addressLine2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "companyName": {
+                "type": "string"
+              },
+              "customFields": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "email": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "discount": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "invoiceItems": {
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "priceId": {
+                  "type": "string"
+                },
+                "productId": {
+                  "type": "string"
+                },
+                "qty": {
+                  "type": "number"
+                },
+                "taxes": {
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "issueDate": {
+            "type": "string"
+          },
+          "liveMode": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "totalSummary": {
+            "properties": {
+              "discount": {
+                "type": "number"
+              },
+              "subTotal": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "InvoicePartiallyPaid": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "altId": {
+            "type": "string"
+          },
+          "altType": {
+            "type": "string"
+          },
+          "amountDue": {
+            "type": "number"
+          },
+          "amountPaid": {
+            "type": "number"
+          },
+          "businessDetails": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "customValues": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "logoUrl": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "contactDetails": {
+            "properties": {
+              "additionalEmails": {
+                "items": {
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "address": {
+                "properties": {
+                  "addressLine1": {
+                    "type": "string"
+                  },
+                  "addressLine2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "companyName": {
+                "type": "string"
+              },
+              "customFields": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "email": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "discount": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "invoiceItems": {
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "priceId": {
+                  "type": "string"
+                },
+                "productId": {
+                  "type": "string"
+                },
+                "qty": {
+                  "type": "number"
+                },
+                "taxes": {
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "issueDate": {
+            "type": "string"
+          },
+          "liveMode": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "totalSummary": {
+            "properties": {
+              "discount": {
+                "type": "number"
+              },
+              "subTotal": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "InvoiceSent": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "altId": {
+            "type": "string"
+          },
+          "altType": {
+            "type": "string"
+          },
+          "amountDue": {
+            "type": "number"
+          },
+          "amountPaid": {
+            "type": "number"
+          },
+          "businessDetails": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "customValues": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "logoUrl": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "contactDetails": {
+            "properties": {
+              "additionalEmails": {
+                "items": {
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "address": {
+                "properties": {
+                  "addressLine1": {
+                    "type": "string"
+                  },
+                  "addressLine2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "companyName": {
+                "type": "string"
+              },
+              "customFields": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "email": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "discount": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "invoiceItems": {
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "priceId": {
+                  "type": "string"
+                },
+                "productId": {
+                  "type": "string"
+                },
+                "qty": {
+                  "type": "number"
+                },
+                "taxes": {
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "issueDate": {
+            "type": "string"
+          },
+          "liveMode": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "totalSummary": {
+            "properties": {
+              "discount": {
+                "type": "number"
+              },
+              "subTotal": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "InvoiceUpdate": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -2278,10 +2053,203 @@
           "updatedAt": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
+      },
+      "InvoiceVoid": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "altId": {
+            "type": "string"
+          },
+          "altType": {
+            "type": "string"
+          },
+          "amountDue": {
+            "type": "number"
+          },
+          "amountPaid": {
+            "type": "number"
+          },
+          "businessDetails": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "customValues": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "logoUrl": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "contactDetails": {
+            "properties": {
+              "additionalEmails": {
+                "items": {
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "address": {
+                "properties": {
+                  "addressLine1": {
+                    "type": "string"
+                  },
+                  "addressLine2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "companyName": {
+                "type": "string"
+              },
+              "customFields": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "email": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phoneNo": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "discount": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "invoiceItems": {
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "priceId": {
+                  "type": "string"
+                },
+                "productId": {
+                  "type": "string"
+                },
+                "qty": {
+                  "type": "number"
+                },
+                "taxes": {
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "issueDate": {
+            "type": "string"
+          },
+          "liveMode": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "totalSummary": {
+            "properties": {
+              "discount": {
+                "type": "number"
+              },
+              "subTotal": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "LCEmailStats": {
-        "type": "object",
         "properties": {
           "companyId": {
             "type": "string"
@@ -2424,10 +2392,10 @@
             },
             "type": "object"
           }
-        }
+        },
+        "type": "object"
       },
       "LocationCreate": {
-        "type": "object",
         "properties": {
           "companyId": {
             "type": "string"
@@ -2447,10 +2415,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "LocationUpdate": {
-        "type": "object",
         "properties": {
           "companyId": {
             "type": "string"
@@ -2470,10 +2438,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "NoteCreate": {
-        "type": "object",
         "properties": {
           "body": {
             "type": "string"
@@ -2493,10 +2461,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "NoteDelete": {
-        "type": "object",
         "properties": {
           "body": {
             "type": "string"
@@ -2516,92 +2484,10 @@
           "type": {
             "type": "string"
           }
-        }
-      },
-      "OpportunityCreate": {
-        "type": "object",
-        "properties": {
-          "assignedTo": {
-            "type": "string"
-          },
-          "contactId": {
-            "type": "string"
-          },
-          "dateAdded": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "monetaryValue": {
-            "type": "number"
-          },
-          "name": {
-            "type": "string"
-          },
-          "pipelineId": {
-            "type": "string"
-          },
-          "pipelineStageId": {
-            "type": "string"
-          },
-          "source": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
-      "OpportunityAssignedToUpdate": {
-        "type": "object",
-        "properties": {
-          "assignedTo": {
-            "type": "string"
-          },
-          "contactId": {
-            "type": "string"
-          },
-          "dateAdded": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "monetaryValue": {
-            "type": "number"
-          },
-          "name": {
-            "type": "string"
-          },
-          "pipelineId": {
-            "type": "string"
-          },
-          "pipelineStageId": {
-            "type": "string"
-          },
-          "source": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
+        },
+        "type": "object"
       },
       "NoteUpdate": {
-        "type": "object",
         "properties": {
           "body": {
             "type": "string"
@@ -2621,10 +2507,92 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
+      },
+      "OpportunityAssignedToUpdate": {
+        "properties": {
+          "assignedTo": {
+            "type": "string"
+          },
+          "contactId": {
+            "type": "string"
+          },
+          "dateAdded": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "monetaryValue": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pipelineId": {
+            "type": "string"
+          },
+          "pipelineStageId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "OpportunityCreate": {
+        "properties": {
+          "assignedTo": {
+            "type": "string"
+          },
+          "contactId": {
+            "type": "string"
+          },
+          "dateAdded": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "monetaryValue": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pipelineId": {
+            "type": "string"
+          },
+          "pipelineStageId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "OpportunityDelete": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -2662,10 +2630,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "OpportunityMonetaryValueUpdate": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -2703,10 +2671,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "OpportunityStageUpdate": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -2744,10 +2712,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "OpportunityStatusUpdate": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -2785,10 +2753,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "OpportunityUpdate": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -2826,10 +2794,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "OrderCreate": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -3015,10 +2983,10 @@
           "updatedAt": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "OrderStatusUpdate": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -3204,10 +3172,10 @@
           "updatedAt": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "OutboundMessage": {
-        "type": "object",
         "properties": {
           "attachments": {
             "type": "array"
@@ -3251,10 +3219,10 @@
           "userId": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "PriceCreate": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -3332,91 +3300,10 @@
             },
             "type": "array"
           }
-        }
-      },
-      "PriceUpdate": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "allowOutOfStockPurchases": {
-            "type": "boolean"
-          },
-          "amount": {
-            "type": "number"
-          },
-          "availableQuantity": {
-            "type": "number"
-          },
-          "compareAtPrice": {
-            "type": "number"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "membershipOffers": {
-            "items": {
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "label": {
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "name": {
-            "type": "string"
-          },
-          "product": {
-            "type": "string"
-          },
-          "recurring": {
-            "properties": {
-              "interval": {
-                "type": "string"
-              },
-              "intervalCount": {
-                "type": "number"
-              }
-            },
-            "type": "object"
-          },
-          "trackInventory": {
-            "type": "null"
-          },
-          "type": {
-            "type": "string"
-          },
-          "updatedAt": {
-            "type": "string"
-          },
-          "userId": {
-            "type": "string"
-          },
-          "variantOptionIds": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        }
+        },
+        "type": "object"
       },
       "PriceDelete": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -3494,10 +3381,91 @@
             },
             "type": "array"
           }
-        }
+        },
+        "type": "object"
+      },
+      "PriceUpdate": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "allowOutOfStockPurchases": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "availableQuantity": {
+            "type": "number"
+          },
+          "compareAtPrice": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "membershipOffers": {
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "product": {
+            "type": "string"
+          },
+          "recurring": {
+            "properties": {
+              "interval": {
+                "type": "string"
+              },
+              "intervalCount": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "trackInventory": {
+            "type": "null"
+          },
+          "type": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "variantOptionIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
       },
       "ProductCreate": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -3583,99 +3551,10 @@
             },
             "type": "array"
           }
-        }
-      },
-      "ProductUpdate": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "availableInStore": {
-            "type": "boolean"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "locationId": {
-            "type": "string"
-          },
-          "medias": {
-            "items": {
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "isFeatured": {
-                  "type": "boolean"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "url": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "name": {
-            "type": "string"
-          },
-          "productType": {
-            "type": "string"
-          },
-          "statementDescriptor": {
-            "type": "string"
-          },
-          "updatedAt": {
-            "type": "string"
-          },
-          "userId": {
-            "type": "string"
-          },
-          "variants": {
-            "items": {
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "options": {
-                  "items": {
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          }
-        }
+        },
+        "type": "object"
       },
       "ProductDelete": {
-        "type": "object",
         "properties": {
           "_id": {
             "type": "string"
@@ -3761,10 +3640,99 @@
             },
             "type": "array"
           }
-        }
+        },
+        "type": "object"
+      },
+      "ProductUpdate": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "availableInStore": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "medias": {
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "isFeatured": {
+                  "type": "boolean"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "productType": {
+            "type": "string"
+          },
+          "statementDescriptor": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "variants": {
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "options": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
       },
       "TaskComplete": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -3793,10 +3761,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "TaskCreate": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -3825,10 +3793,10 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "TaskDelete": {
-        "type": "object",
         "properties": {
           "assignedTo": {
             "type": "string"
@@ -3857,11 +3825,211 @@
           "type": {
             "type": "string"
           }
-        }
+        },
+        "type": "object"
+      },
+      "UserCreate": {
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "locations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "permissions": {
+            "properties": {
+              "adwordsReportingEnabled": {
+                "type": "boolean"
+              },
+              "affiliateManagerEnabled": {
+                "type": "boolean"
+              },
+              "agentReportingEnabled": {
+                "type": "boolean"
+              },
+              "appointmentsEnabled": {
+                "type": "boolean"
+              },
+              "assignedDataOnly": {
+                "type": "boolean"
+              },
+              "attributionsReportingEnabled": {
+                "type": "boolean"
+              },
+              "bloggingEnabled": {
+                "type": "boolean"
+              },
+              "botService": {
+                "type": "boolean"
+              },
+              "bulkRequestsEnabled": {
+                "type": "boolean"
+              },
+              "campaignsEnabled": {
+                "type": "boolean"
+              },
+              "campaignsReadOnly": {
+                "type": "boolean"
+              },
+              "cancelSubscriptionEnabled": {
+                "type": "boolean"
+              },
+              "communitiesEnabled": {
+                "type": "boolean"
+              },
+              "contactsEnabled": {
+                "type": "boolean"
+              },
+              "contentAiEnabled": {
+                "type": "boolean"
+              },
+              "conversationsEnabled": {
+                "type": "boolean"
+              },
+              "dashboardStatsEnabled": {
+                "type": "boolean"
+              },
+              "facebookAdsReportingEnabled": {
+                "type": "boolean"
+              },
+              "funnelsEnabled": {
+                "type": "boolean"
+              },
+              "invoiceEnabled": {
+                "type": "boolean"
+              },
+              "leadValueEnabled": {
+                "type": "boolean"
+              },
+              "marketingEnabled": {
+                "type": "boolean"
+              },
+              "membershipEnabled": {
+                "type": "boolean"
+              },
+              "onlineListingsEnabled": {
+                "type": "boolean"
+              },
+              "opportunitiesEnabled": {
+                "type": "boolean"
+              },
+              "paymentsEnabled": {
+                "type": "boolean"
+              },
+              "phoneCallEnabled": {
+                "type": "boolean"
+              },
+              "recordPaymentEnabled": {
+                "type": "boolean"
+              },
+              "refundsEnabled": {
+                "type": "boolean"
+              },
+              "reviewsEnabled": {
+                "type": "boolean"
+              },
+              "settingsEnabled": {
+                "type": "boolean"
+              },
+              "socialPlanner": {
+                "type": "boolean"
+              },
+              "tagsEnabled": {
+                "type": "boolean"
+              },
+              "triggersEnabled": {
+                "type": "boolean"
+              },
+              "websitesEnabled": {
+                "type": "boolean"
+              },
+              "workflowsEnabled": {
+                "type": "boolean"
+              },
+              "workflowsReadOnly": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       }
     }
   },
+  "info": {
+    "title": "Webhooks API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {},
   "webhooks": {
+    "AppInstall": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppInstall"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "AppUninstall": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppUninstall"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
     "AppointmentCreate": {
       "post": {
         "requestBody": {
@@ -3905,42 +4073,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/AppointmentUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "AppInstall": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AppInstall"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "AppUninstall": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AppUninstall"
               }
             }
           }
@@ -4006,24 +4138,6 @@
         }
       }
     },
-    "ContactTagUpdate": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContactTagUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
     "ContactDndUpdate": {
       "post": {
         "requestBody": {
@@ -4042,49 +4156,13 @@
         }
       }
     },
-    "ConversationProviderOutboundWebhook": {
+    "ContactTagUpdate": {
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConversationProviderOutboundWebhook"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "InboundMessage": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InboundMessage"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "ConversationUnreadWebhook": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ConversationUnreadWebhook"
+                "$ref": "#/components/schemas/ContactTagUpdate"
               }
             }
           }
@@ -4114,6 +4192,60 @@
         }
       }
     },
+    "ConversationProviderOutboundWebhook": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConversationProviderOutboundWebhook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "ConversationUnreadWebhook": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConversationUnreadWebhook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "InboundMessage": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InboundMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
     "InvoiceCreate": {
       "post": {
         "requestBody": {
@@ -4121,78 +4253,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/InvoiceCreate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "InvoiceVoid": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoiceVoid"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "InvoiceSent": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoiceSent"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "InvoicePartiallyPaid": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoicePartiallyPaid"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook processed successfully"
-          }
-        }
-      }
-    },
-    "InvoicePaid": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InvoicePaid"
               }
             }
           }
@@ -4222,6 +4282,60 @@
         }
       }
     },
+    "InvoicePaid": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoicePaid"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "InvoicePartiallyPaid": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoicePartiallyPaid"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "InvoiceSent": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceSent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
     "InvoiceUpdate": {
       "post": {
         "requestBody": {
@@ -4229,6 +4343,24 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/InvoiceUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "InvoiceVoid": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceVoid"
               }
             }
           }
@@ -4330,13 +4462,13 @@
         }
       }
     },
-    "OpportunityCreate": {
+    "NoteUpdate": {
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OpportunityCreate"
+                "$ref": "#/components/schemas/NoteUpdate"
               }
             }
           }
@@ -4366,13 +4498,13 @@
         }
       }
     },
-    "NoteUpdate": {
+    "OpportunityCreate": {
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NoteUpdate"
+                "$ref": "#/components/schemas/OpportunityCreate"
               }
             }
           }
@@ -4546,13 +4678,13 @@
         }
       }
     },
-    "PriceUpdate": {
+    "PriceDelete": {
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PriceUpdate"
+                "$ref": "#/components/schemas/PriceDelete"
               }
             }
           }
@@ -4564,13 +4696,13 @@
         }
       }
     },
-    "PriceDelete": {
+    "PriceUpdate": {
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PriceDelete"
+                "$ref": "#/components/schemas/PriceUpdate"
               }
             }
           }
@@ -4600,13 +4732,13 @@
         }
       }
     },
-    "ProductUpdate": {
+    "ProductDelete": {
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductUpdate"
+                "$ref": "#/components/schemas/ProductDelete"
               }
             }
           }
@@ -4618,13 +4750,13 @@
         }
       }
     },
-    "ProductDelete": {
+    "ProductUpdate": {
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductDelete"
+                "$ref": "#/components/schemas/ProductUpdate"
               }
             }
           }
@@ -4679,6 +4811,24 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TaskDelete"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "UserCreate": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
               }
             }
           }

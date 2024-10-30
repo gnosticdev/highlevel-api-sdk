@@ -1,318 +1,318 @@
 {
-	"components": {
-		"schemas": {
-			"GetFilesResponseDTO": {
-				"properties": {
-					"files": {
-						"description": "Array of File Objects",
-						"example": {
-							"altId": "locationId",
-							"altType": "location",
-							"name": "file name",
-							"parentId": "parent folder id",
-							"path": "file path",
-							"url": "file url"
-						},
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					}
-				},
-				"required": ["files"],
-				"type": "object"
-			},
-			"UploadFileResponseDTO": {
-				"properties": {
-					"fileId": {
-						"description": "ID of the uploaded file",
-						"example": "file.pdf",
-						"type": "string"
-					}
-				},
-				"required": ["fileId"],
-				"type": "object"
-			}
-		},
-		"securitySchemes": {
-			"Agency-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Agency.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"Location-Access": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			},
-			"bearer": {
-				"bearerFormat": "JWT",
-				"description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-				"in": "header",
-				"name": "Authorization",
-				"scheme": "bearer",
-				"type": "http"
-			}
-		}
-	},
-	"info": {
-		"contact": {},
-		"description": "Documentation for Files API",
-		"title": "Media Library API",
-		"version": "1.0"
-	},
-	"openapi": "3.0.0",
-	"paths": {
-		"/medias/files": {
-			"get": {
-				"description": "Fetches list of files and folders from the media library",
-				"operationId": "fetch-media-content",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"description": "Number of files to skip in listing",
-						"example": "5",
-						"in": "query",
-						"name": "offset",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Number of files to show in the listing",
-						"example": "10",
-						"in": "query",
-						"name": "limit",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Field to sorting the file listing by",
-						"example": "createdAt",
-						"in": "query",
-						"name": "sortBy",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Direction in which file needs to be sorted",
-						"example": "asc",
-						"in": "query",
-						"name": "sortOrder",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Type",
-						"example": "file",
-						"in": "query",
-						"name": "type",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "Query text",
-						"example": "Test file",
-						"in": "query",
-						"name": "query",
-						"required": false,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "AltType",
-						"example": "location",
-						"in": "query",
-						"name": "altType",
-						"required": true,
-						"schema": {
-							"enum": ["agency", "location"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "location or agency Id",
-						"in": "query",
-						"name": "altId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/GetFilesResponseDTO"
-								}
-							}
-						},
-						"description": "Successful response"
-					}
-				},
-				"security": [
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Get List of Files"
-			}
-		},
-		"/medias/upload-file": {
-			"post": {
-				"description": "If hosted is set to true then fileUrl is required. Else file is required. If adding a file, maximum allowed is 25 MB",
-				"operationId": "upload-media-content",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"multipart/form-data": {
-							"schema": {
-								"properties": {
-									"file": {
-										"format": "binary",
-										"type": "string"
-									},
-									"fileUrl": {
-										"type": "string"
-									},
-									"hosted": {
-										"type": "boolean"
-									},
-									"name": {
-										"type": "string"
-									}
-								},
-								"type": "object"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UploadFileResponseDTO"
-								}
-							}
-						},
-						"description": "Successful response"
-					}
-				},
-				"security": [
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Upload File into Media Library"
-			}
-		},
-		"/medias/{id}": {
-			"delete": {
-				"description": "Deletes specific file or folder from the media library",
-				"operationId": "delete-media-content",
-				"parameters": [
-					{
-						"description": "Access Token",
-						"in": "header",
-						"name": "Authorization",
-						"required": true,
-						"schema": {
-							"example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"description": "AltType",
-						"example": "location",
-						"in": "query",
-						"name": "altType",
-						"required": true,
-						"schema": {
-							"enum": ["agency", "location"],
-							"type": "string"
-						}
-					},
-					{
-						"description": "location or agency Id",
-						"in": "query",
-						"name": "altId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Successful response"
-					}
-				},
-				"security": [
-					{
-						"Location-Access": []
-					}
-				],
-				"summary": "Delete File or Folder"
-			}
-		}
-	},
-	"servers": [
-		{
-			"url": "https://services.leadconnectorhq.com"
-		}
-	],
-	"tags": [
-		{
-			"description": "Documentation for Files API",
-			"name": "Medias"
-		}
-	]
+  "components": {
+    "schemas": {
+      "GetFilesResponseDTO": {
+        "properties": {
+          "files": {
+            "description": "Array of File Objects",
+            "example": {
+              "altId": "locationId",
+              "altType": "location",
+              "name": "file name",
+              "parentId": "parent folder id",
+              "path": "file path",
+              "url": "file url"
+            },
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["files"],
+        "type": "object"
+      },
+      "UploadFileResponseDTO": {
+        "properties": {
+          "fileId": {
+            "description": "ID of the uploaded file",
+            "example": "file.pdf",
+            "type": "string"
+          }
+        },
+        "required": ["fileId"],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Agency-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Agency.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "Documentation for Files API",
+    "title": "Media Library API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/medias/files": {
+      "get": {
+        "description": "Fetches list of files and folders from the media library",
+        "operationId": "fetch-media-content",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Number of files to skip in listing",
+            "example": "5",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Number of files to show in the listing",
+            "example": "10",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field to sorting the file listing by",
+            "example": "createdAt",
+            "in": "query",
+            "name": "sortBy",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Direction in which file needs to be sorted",
+            "example": "asc",
+            "in": "query",
+            "name": "sortOrder",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Type",
+            "example": "file",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Query text",
+            "example": "Test file",
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "AltType",
+            "example": "location",
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["agency", "location"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "location or agency Id",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFilesResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Get List of Files"
+      }
+    },
+    "/medias/upload-file": {
+      "post": {
+        "description": "If hosted is set to true then fileUrl is required. Else file is required. If adding a file, maximum allowed is 25 MB",
+        "operationId": "upload-media-content",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string"
+                  },
+                  "fileUrl": {
+                    "type": "string"
+                  },
+                  "hosted": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadFileResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Upload File into Media Library"
+      }
+    },
+    "/medias/{id}": {
+      "delete": {
+        "description": "Deletes specific file or folder from the media library",
+        "operationId": "delete-media-content",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "AltType",
+            "example": "location",
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["agency", "location"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "location or agency Id",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Delete File or Folder"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Documentation for Files API",
+      "name": "Medias"
+    }
+  ]
 }
