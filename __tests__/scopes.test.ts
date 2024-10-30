@@ -6,11 +6,12 @@ const MockSubAccountScopesBuilder = ScopesBuilder<'Sub-Account'>
 
 describe('ScopesBuilder', () => {
 	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })
-	it('should have an accessType property', () => {
-		expect(scopes.accessType).toBe('Sub-Account')
-	})
-	it('should have a collection property', () => {
+	it('should have the correct methods', () => {
 		expect(scopes.collection).toBeInstanceOf(Set)
+		expect(scopes.add).toBeFunction()
+		expect(scopes.has).toBeFunction()
+		expect(scopes.get).toBeFunction()
+		expect(scopes.all).toBeFunction()
 	})
 })
 describe('add', () => {

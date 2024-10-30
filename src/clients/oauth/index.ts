@@ -25,6 +25,7 @@ export class OauthClient<T extends AccessType>
 	private _accessToken: string | undefined
 	private _refreshToken: string | undefined
 	private readonly userType
+
 	/**
 	 * Underlying oauth client created by `createClient` method from `openapi-fetch`
 	 *
@@ -189,7 +190,7 @@ export class OauthClient<T extends AccessType>
 			user_type: this.userType,
 			code: authCode,
 		}
-		const { data, error } = await this.fetchAccessToken(tokenParams)
+		const { data, error } = await this.#fetchAccessToken(tokenParams)
 
 		if (error) {
 			console.error('Error: exchanging token', error)
@@ -218,7 +219,7 @@ export class OauthClient<T extends AccessType>
 			grant_type: 'refresh_token',
 			user_type: this.userType,
 		}
-		const { data, error } = await this.fetchAccessToken(tokenParams)
+		const { data, error } = await this.#fetchAccessToken(tokenParams)
 
 		if (error) {
 			console.error('Error: refreshing token', error)
@@ -234,9 +235,9 @@ export class OauthClient<T extends AccessType>
 	 * Sends a `POST` request to the `/oauth/token` endpoint.
 	 *
 	 * @param tokenParams - Auth code params or refresh token params
-	 * @internal
+	 * @private
 	 */
-	private async fetchAccessToken(tokenParams: TokenParams) {
+	async #fetchAccessToken(tokenParams: TokenParams) {
 		const { data, error } = await this._client.POST('/oauth/token', {
 			body: tokenParams,
 			headers: {

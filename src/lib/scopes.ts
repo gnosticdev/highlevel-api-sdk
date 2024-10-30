@@ -7,7 +7,7 @@ import type { AccessType, ScopeLiterals } from './type-utils'
  */
 export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Agency same as Company. */
-	readonly accessType: T
+	readonly #accessType: T
 	/** a Set containing the scopes that have been added so far */
 	collection = new Set<ScopeLiterals<T>>()
 
@@ -16,7 +16,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * @param accessType - the type of app access needed. 'Sub-Account' is same as 'Location' and 'Agency' is same as Agency
 	 */
 	constructor(config: { accessType: T }) {
-		this.accessType = config.accessType
+		this.#accessType = config.accessType
 	}
 
 	/** add a scope or an array of scopes from the available scopes for this access type */
@@ -41,7 +41,7 @@ export class ScopesBuilder<T extends AccessType> {
 				for (const endpoint of endpoints) {
 					if (
 						Array.isArray(endpoint.accessType) &&
-						endpoint.accessType.includes(this.accessType)
+						endpoint.accessType.includes(this.#accessType)
 					) {
 						literals.add(`${scopeName}.${access}` as ScopeLiterals<T>)
 					}
