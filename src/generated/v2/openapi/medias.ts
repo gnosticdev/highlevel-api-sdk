@@ -71,8 +71,8 @@ export type components = {
 			 *       "altType": "location",
 			 *       "name": "file name",
 			 *       "parentId": "parent folder id",
-			 *       "path": "file path",
-			 *       "url": "file url"
+			 *       "url": "file url",
+			 *       "path": "file path"
 			 *     }
 			 */
 			files: string[]

@@ -696,9 +696,9 @@ export type components = {
 			 */
 			postalCode?: string
 			/** @example {
-			 *       "email": "john.doe@mail.com",
 			 *       "firstName": "John",
-			 *       "lastName": "Doe"
+			 *       "lastName": "Doe",
+			 *       "email": "john.doe@mail.com"
 			 *     } */
 			prospectInfo?: components['schemas']['ProspectInfoDto']
 			/** @description The default settings for location */
@@ -1141,10 +1141,10 @@ export type components = {
 			 * @description Meta data of uploaded files
 			 * @example [
 			 *       {
-			 *         "encoding": "7bit",
 			 *         "fieldname": "FileName.csv",
-			 *         "mimetype": "text/csv",
 			 *         "originalname": "FileName.csv",
+			 *         "encoding": "7bit",
+			 *         "mimetype": "text/csv",
 			 *         "size": 2061,
 			 *         "url": "https://highlevel-private-staging.storage.googleapis.com/location/Ar4JQgIyuzRsVuwD9RSK/custom-Field/UpZLmohmKEQYn0ymqplY/56e0d7fc-085c-4a07-9e1d-6d8fdac7e710.csv"
 			 *       }
@@ -1853,9 +1853,9 @@ export type components = {
 			 */
 			postalCode?: string
 			/** @example {
-			 *       "email": "john.doe@mail.com",
 			 *       "firstName": "John",
-			 *       "lastName": "Doe"
+			 *       "lastName": "Doe",
+			 *       "email": "john.doe@mail.com"
 			 *     } */
 			prospectInfo?: components['schemas']['ProspectInfoDto']
 			/** @description The default settings for location */

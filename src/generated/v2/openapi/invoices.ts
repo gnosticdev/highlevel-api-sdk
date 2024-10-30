@@ -379,14 +379,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -400,14 +400,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -435,14 +435,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -564,14 +564,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -585,14 +585,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -620,14 +620,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -794,14 +794,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -810,14 +810,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -848,14 +848,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -947,14 +947,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -968,14 +968,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -1003,14 +1003,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1097,14 +1097,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1132,14 +1132,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1264,14 +1264,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1280,14 +1280,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -1318,14 +1318,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1404,14 +1404,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1420,14 +1420,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -1458,14 +1458,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1580,14 +1580,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1596,14 +1596,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -1634,14 +1634,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1711,14 +1711,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1732,14 +1732,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -1767,14 +1767,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1832,14 +1832,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1867,14 +1867,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2051,14 +2051,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2072,14 +2072,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -2107,14 +2107,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2339,14 +2339,14 @@ export type components = {
 			/**
 			 * @description Business details which need to be updated
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2429,14 +2429,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2445,14 +2445,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -2483,14 +2483,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2582,14 +2582,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2603,14 +2603,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -2638,14 +2638,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2732,14 +2732,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2767,14 +2767,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2838,14 +2838,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2854,14 +2854,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -2892,14 +2892,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */

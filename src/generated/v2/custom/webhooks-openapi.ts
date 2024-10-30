@@ -1,42 +1,5 @@
 export type paths = Record<string, never>
 export type webhooks = {
-	AppointmentCreate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['AppointmentCreate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	AppointmentDelete: {
 		parameters: {
 			query?: never
@@ -111,6 +74,43 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
+	AppointmentCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['AppointmentCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	AppInstall: {
 		parameters: {
 			query?: never
@@ -130,6 +130,43 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['AppInstall']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	ContactCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['ContactCreate']
 				}
 			}
 			responses: {
@@ -222,7 +259,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	ContactCreate: {
+	ContactDndUpdate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -240,44 +277,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['ContactCreate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	ContactDelete: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['ContactDelete']
+					'application/json': components['schemas']['ContactDndUpdate']
 				}
 			}
 			responses: {
@@ -333,7 +333,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	ContactDndUpdate: {
+	ContactDelete: {
 		parameters: {
 			query?: never
 			header?: never
@@ -351,7 +351,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['ContactDndUpdate']
+					'application/json': components['schemas']['ContactDelete']
 				}
 			}
 			responses: {
@@ -444,7 +444,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	ConversationUnreadWebhook: {
+	InvoiceCreate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -462,7 +462,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['ConversationUnreadWebhook']
+					'application/json': components['schemas']['InvoiceCreate']
 				}
 			}
 			responses: {
@@ -518,7 +518,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	InvoiceCreate: {
+	ConversationUnreadWebhook: {
 		parameters: {
 			query?: never
 			header?: never
@@ -536,44 +536,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['InvoiceCreate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	InvoiceVoid: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['InvoiceVoid']
+					'application/json': components['schemas']['ConversationUnreadWebhook']
 				}
 			}
 			responses: {
@@ -629,43 +592,6 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	InvoicePartiallyPaid: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['InvoicePartiallyPaid']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	InvoicePaid: {
 		parameters: {
 			query?: never
@@ -703,7 +629,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	InvoiceDelete: {
+	InvoiceVoid: {
 		parameters: {
 			query?: never
 			header?: never
@@ -721,7 +647,44 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['InvoiceDelete']
+					'application/json': components['schemas']['InvoiceVoid']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	InvoicePartiallyPaid: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['InvoicePartiallyPaid']
 				}
 			}
 			responses: {
@@ -888,7 +851,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	NoteCreate: {
+	InvoiceDelete: {
 		parameters: {
 			query?: never
 			header?: never
@@ -906,7 +869,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['NoteCreate']
+					'application/json': components['schemas']['InvoiceDelete']
 				}
 			}
 			responses: {
@@ -944,6 +907,80 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['NoteDelete']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	NoteCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['NoteCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	NoteUpdate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['NoteUpdate']
 				}
 			}
 			responses: {
@@ -1018,80 +1055,6 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['OpportunityAssignedToUpdate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	NoteUpdate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['NoteUpdate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	OpportunityDelete: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['OpportunityDelete']
 				}
 			}
 			responses: {
@@ -1221,6 +1184,43 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
+	OpportunityDelete: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['OpportunityDelete']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	OpportunityUpdate: {
 		parameters: {
 			query?: never
@@ -1240,43 +1240,6 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['OpportunityUpdate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	OrderCreate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['OrderCreate']
 				}
 			}
 			responses: {
@@ -1369,7 +1332,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	PriceCreate: {
+	OrderCreate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1387,7 +1350,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['PriceCreate']
+					'application/json': components['schemas']['OrderCreate']
 				}
 			}
 			responses: {
@@ -1554,6 +1517,43 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
+	PriceCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['PriceCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	ProductDelete: {
 		parameters: {
 			query?: never
@@ -1628,43 +1628,6 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	TaskCreate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['TaskCreate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	TaskDelete: {
 		parameters: {
 			query?: never
@@ -1702,1070 +1665,337 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
+	TaskCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['TaskCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	UserCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['UserCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type components = {
 	schemas: {
-		AppointmentCreate: {
-			appointment?: {
-				address?: string
-				appointmentStatus?: string
-				assignedUserId?: string
-				calendarId?: string
-				contactId?: string
-				dateAdded?: string
-				dateUpdated?: string
-				endTime?: string
-				groupId?: string
-				id?: string
-				notes?: string
-				source?: string
-				startTime?: string
-				title?: string
-				users?: unknown[]
-			}
-			locationId?: string
-			type?: string
-		}
 		AppointmentDelete: {
+			type?: string
+			locationId?: string
 			appointment?: {
+				id?: string
 				address?: string
-				appointmentStatus?: string
-				assignedUserId?: string
+				title?: string
 				calendarId?: string
 				contactId?: string
-				dateAdded?: string
-				dateUpdated?: string
-				endTime?: string
 				groupId?: string
-				id?: string
+				appointmentStatus?: string
+				assignedUserId?: string
+				users?: unknown[]
 				notes?: string
 				source?: string
 				startTime?: string
-				title?: string
-				users?: unknown[]
+				endTime?: string
+				dateAdded?: string
+				dateUpdated?: string
 			}
-			locationId?: string
-			type?: string
 		}
 		AppointmentUpdate: {
+			type?: string
+			locationId?: string
 			appointment?: {
+				id?: string
 				address?: string
-				appointmentStatus?: string
-				assignedUserId?: string
+				title?: string
 				calendarId?: string
 				contactId?: string
-				dateAdded?: string
-				dateUpdated?: string
-				endTime?: string
 				groupId?: string
-				id?: string
+				appointmentStatus?: string
+				assignedUserId?: string
+				users?: unknown[]
 				notes?: string
 				source?: string
 				startTime?: string
-				title?: string
-				users?: unknown[]
+				endTime?: string
+				dateAdded?: string
+				dateUpdated?: string
 			}
-			locationId?: string
+		}
+		AppointmentCreate: {
 			type?: string
+			locationId?: string
+			appointment?: {
+				id?: string
+				address?: string
+				title?: string
+				calendarId?: string
+				contactId?: string
+				groupId?: string
+				appointmentStatus?: string
+				assignedUserId?: string
+				users?: unknown[]
+				notes?: string
+				source?: string
+				startTime?: string
+				endTime?: string
+				dateAdded?: string
+				dateUpdated?: string
+			}
 		}
 		AppInstall: {
+			type?: string
 			appId?: string
 			companyId?: string
 			locationId?: string
+			userId?: string
 			planId?: string
 			trial?: {
 				onTrial?: boolean
 				trialDuration?: number
 				trialStartDate?: Record<string, never>
 			}
+		}
+		ContactCreate: {
 			type?: string
-			userId?: string
+			locationId?: string
+			id?: string
+			address1?: string
+			city?: string
+			companyName?: string
+			country?: string
+			source?: string
+			dateAdded?: string
+			dateOfBirth?: string
+			dnd?: boolean
+			email?: string
+			name?: string
+			firstName?: string
+			lastName?: string
+			phone?: string
+			postalCode?: string
+			state?: string
+			tags?: unknown[]
+			website?: string
+			attachments?: unknown[]
+			assignedTo?: string
+			customFields?: {
+				id?: string
+				value?: string | number | unknown[] | Record<string, never>
+			}[]
 		}
 		AppUninstall: {
+			type?: string
 			appId?: string
 			companyId?: string
 			locationId?: string
-			type?: string
 		}
 		CampaignStatusUpdate: {
-			contactId?: string
-			dateAdded?: string
-			id?: string
+			type?: string
 			locationId?: string
-			replied?: string
+			id?: string
+			contactId?: string
 			status?: string
 			templateId?: string
-			type?: string
-		}
-		ContactCreate: {
-			address1?: string
-			assignedTo?: string
-			attachments?: unknown[]
-			city?: string
-			companyName?: string
-			country?: string
-			customFields?: {
-				id?: string
-				value?: string | number | unknown[] | Record<string, never>
-			}[]
+			replied?: string
 			dateAdded?: string
-			dateOfBirth?: string
-			dnd?: boolean
-			email?: string
-			firstName?: string
-			id?: string
-			lastName?: string
-			locationId?: string
-			name?: string
-			phone?: string
-			postalCode?: string
-			source?: string
-			state?: string
-			tags?: unknown[]
-			type?: string
-			website?: string
-		}
-		ContactDelete: {
-			address1?: string
-			assignedTo?: string
-			attachments?: unknown[]
-			city?: string
-			companyName?: string
-			country?: string
-			customFields?: {
-				id?: string
-				value?: string | number | unknown[] | Record<string, never>
-			}[]
-			dateAdded?: string
-			dateOfBirth?: string
-			dnd?: boolean
-			email?: string
-			firstName?: string
-			id?: string
-			lastName?: string
-			locationId?: string
-			name?: string
-			phone?: string
-			postalCode?: string
-			source?: string
-			state?: string
-			tags?: unknown[]
-			type?: string
-			website?: string
-		}
-		ContactTagUpdate: {
-			address1?: string
-			assignedTo?: string
-			attachments?: unknown[]
-			city?: string
-			companyName?: string
-			country?: string
-			customFields?: {
-				id?: string
-				value?: string | number | unknown[] | Record<string, never>
-			}[]
-			dateAdded?: string
-			dateOfBirth?: string
-			dnd?: boolean
-			email?: string
-			firstName?: string
-			id?: string
-			lastName?: string
-			locationId?: string
-			name?: string
-			phone?: string
-			postalCode?: string
-			source?: string
-			state?: string
-			tags?: unknown[]
-			type?: string
-			website?: string
 		}
 		ContactDndUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
 			address1?: string
-			assignedTo?: string
-			attachments?: unknown[]
 			city?: string
 			companyName?: string
 			country?: string
-			customFields?: {
-				id?: string
-				value?: string | number | unknown[] | Record<string, never>
-			}[]
+			source?: string
 			dateAdded?: string
 			dateOfBirth?: string
 			dnd?: boolean
 			dndSettings?: {
-				Call?: {
-					code?: string
-					message?: string
+				SMS?: {
 					status?: string
+					message?: string
+					code?: string
 				}
 				Email?: {
-					code?: string
-					message?: string
 					status?: string
-				}
-				FB?: {
-					code?: string
 					message?: string
-					status?: string
+					code?: string
 				}
 				GMB?: {
-					code?: string
-					message?: string
 					status?: string
+					message?: string
+					code?: string
 				}
-				SMS?: {
-					code?: string
-					message?: string
+				FB?: {
 					status?: string
+					message?: string
+					code?: string
 				}
 				WhatsApp?: {
-					code?: string
-					message?: string
 					status?: string
+					message?: string
+					code?: string
+				}
+				Call?: {
+					status?: string
+					message?: string
+					code?: string
 				}
 			}
 			email?: string
-			firstName?: string
-			id?: string
-			lastName?: string
-			locationId?: string
 			name?: string
+			firstName?: string
+			lastName?: string
 			phone?: string
 			postalCode?: string
-			source?: string
 			state?: string
 			tags?: unknown[]
-			type?: string
 			website?: string
-		}
-		ConversationProviderOutboundWebhook: {
 			attachments?: unknown[]
-			contactId?: string
-			emailFrom?: string
-			emailMessageId?: string
-			emailTo?: string
-			html?: string
-			locationId?: string
-			message?: string
-			messageId?: string
-			phone?: string
-			subject?: string
-			type?: Record<string, never>
-			userId?: string
-		}
-		InboundMessage: {
-			attachments?: unknown[]
-			body?: string
-			contactId?: string
-			contentType?: string
-			conversationId?: string
-			dateAdded?: string
-			direction?: string
-			locationId?: string
-			messageId?: string
-			messageType?: string
-			status?: string
-			type?: string
-			userId?: string
-		}
-		ConversationUnreadWebhook: {
-			contactId?: string
-			deleted?: boolean
-			id?: string
-			inbox?: boolean
-			locationId?: string
-			starred?: boolean
-			type?: string
-			unreadCount?: number
-		}
-		ContactUpdate: {
-			address1?: string
 			assignedTo?: string
-			attachments?: unknown[]
-			city?: string
-			companyName?: string
-			country?: string
 			customFields?: {
 				id?: string
 				value?: string | number | unknown[] | Record<string, never>
 			}[]
+		}
+		ContactTagUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			address1?: string
+			city?: string
+			companyName?: string
+			country?: string
+			source?: string
 			dateAdded?: string
 			dateOfBirth?: string
 			dnd?: boolean
 			email?: string
-			firstName?: string
-			id?: string
-			lastName?: string
-			locationId?: string
 			name?: string
+			firstName?: string
+			lastName?: string
 			phone?: string
 			postalCode?: string
-			source?: string
 			state?: string
 			tags?: unknown[]
-			type?: string
 			website?: string
-		}
-		InvoiceCreate: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
+			attachments?: unknown[]
+			assignedTo?: string
+			customFields?: {
 				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
+				value?: string | number | unknown[] | Record<string, never>
 			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
 		}
-		InvoiceVoid: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
-		}
-		InvoiceSent: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
-		}
-		InvoicePartiallyPaid: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
-		}
-		InvoicePaid: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
-		}
-		InvoiceDelete: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
-		}
-		InvoiceUpdate: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
-		}
-		LCEmailStats: {
-			companyId?: string
-			locationId?: string
+		ContactDelete: {
 			type?: string
-			webhookPayload?: {
-				campaigns?: unknown[]
-				'delivery-status'?: {
-					'attempt-no'?: number
-					code?: number
-					description?: string
-					'enhanced-code'?: string
-					'i-first-delivery-attempt-seconds'?: number
-					message?: string
-					'mx-host'?: string
-					'session-seconds'?: number
-					utf8?: boolean
-				}
-				envelope?: {
-					'i-ip-pool-id'?: string
-					'i-ip-pool-name'?: string
-					sender?: string
-					'sending-ip'?: string
-					targets?: string
-					transport?: string
-				}
-				event?: string
-				flags?: {
-					'is-authenticated'?: boolean
-					'is-big'?: boolean
-					'is-routed'?: boolean
-					'is-system-test'?: boolean
-					'is-test-mode'?: boolean
-				}
-				id?: string
-				'log-level'?: string
-				message?: {
-					attachments?: unknown[]
-					headers?: {
-						from?: string
-						'message-id'?: string
-						to?: string
-					}
-					size?: number
-				}
-				recipient?: string
-				'recipient-domain'?: string
-				'recipient-provider'?: string
-				tags?: unknown[]
-				timestamp?: number
-			}
-		}
-		LocationCreate: {
-			companyId?: string
+			locationId?: string
+			id?: string
+			address1?: string
+			city?: string
+			companyName?: string
+			country?: string
+			source?: string
+			dateAdded?: string
+			dateOfBirth?: string
+			dnd?: boolean
 			email?: string
-			id?: string
 			name?: string
-			stripeProductId?: string
-			type?: string
-		}
-		LocationUpdate: {
-			companyId?: string
-			email?: string
-			id?: string
-			name?: string
-			stripeProductId?: string
-			type?: string
-		}
-		NoteCreate: {
-			body?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			type?: string
-		}
-		NoteDelete: {
-			body?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			type?: string
-		}
-		OpportunityCreate: {
+			firstName?: string
+			lastName?: string
+			phone?: string
+			postalCode?: string
+			state?: string
+			tags?: unknown[]
+			website?: string
+			attachments?: unknown[]
 			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		OpportunityAssignedToUpdate: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		NoteUpdate: {
-			body?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			type?: string
-		}
-		OpportunityDelete: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		OpportunityMonetaryValueUpdate: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		OpportunityStageUpdate: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		OpportunityStatusUpdate: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		OpportunityUpdate: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		OrderCreate: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amount?: number
-			amountSummary?: {
-				discount?: number
-				shipping?: number
-				subtotal?: number
-				tax?: number
-			}
-			contactId?: string
-			contactSnapshot?: {
-				address1?: string
-				assignedTo?: string
-				attachments?: unknown[]
-				city?: string
-				companyName?: string
-				country?: string
-				dateAdded?: string
-				dateOfBirth?: string
-				dnd?: boolean
-				email?: string
-				firstName?: string
+			customFields?: {
 				id?: string
-				lastName?: string
-				locationId?: string
-				name?: string
-				phone?: string
-				postalCode?: string
-				source?: string
-				state?: string
-				tags?: unknown[]
-				website?: string
-			}
-			createdAt?: string
-			currency?: string
-			fulfillmentStatus?: string
-			items?: {
-				name?: string
-				price?: Record<string, never>
-				product?: Record<string, never>
-				qty?: number
+				value?: string | number | unknown[] | Record<string, never>
 			}[]
-			liveMode?: boolean
-			source?: {
-				id?: string
-				meta?: Record<string, never>
-				name?: string
-				subType?: string
-				type?: string
-			}
-			status?: string
-			taxSummary?: {
-				_id?: string
-				amount?: number
-				calculation?: string
-				name?: string
-				rate?: number
-			}[]
-			type?: string
-			updatedAt?: string
 		}
-		OrderStatusUpdate: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amount?: number
-			amountSummary?: {
-				discount?: number
-				shipping?: number
-				subtotal?: number
-				tax?: number
-			}
+		ConversationProviderOutboundWebhook: {
 			contactId?: string
-			contactSnapshot?: {
-				address1?: string
-				assignedTo?: string
-				attachments?: unknown[]
-				city?: string
-				companyName?: string
-				country?: string
-				dateAdded?: string
-				dateOfBirth?: string
-				dnd?: boolean
-				email?: string
-				firstName?: string
-				id?: string
-				lastName?: string
-				locationId?: string
-				name?: string
-				phone?: string
-				postalCode?: string
-				source?: string
-				state?: string
-				tags?: unknown[]
-				website?: string
-			}
-			createdAt?: string
-			currency?: string
-			fulfillmentStatus?: string
-			items?: {
-				name?: string
-				price?: Record<string, never>
-				product?: Record<string, never>
-				qty?: number
-			}[]
-			liveMode?: boolean
-			source?: {
-				id?: string
-				meta?: Record<string, never>
-				name?: string
-				subType?: string
-				type?: string
-			}
-			status?: string
-			taxSummary?: {
-				_id?: string
-				amount?: number
-				calculation?: string
-				name?: string
-				rate?: number
-			}[]
-			type?: string
-			updatedAt?: string
+			locationId?: string
+			messageId?: string
+			emailMessageId?: string
+			type?: Record<string, never>
+			attachments?: unknown[]
+			message?: string
+			phone?: string
+			emailTo?: string
+			emailFrom?: string
+			html?: string
+			subject?: string
+			userId?: string
 		}
-		OutboundMessage: {
+		InboundMessage: {
+			type?: string
+			locationId?: string
 			attachments?: unknown[]
 			body?: string
 			contactId?: string
@@ -2773,111 +2003,876 @@ export type components = {
 			conversationId?: string
 			dateAdded?: string
 			direction?: string
-			locationId?: string
-			messageId?: string
 			messageType?: string
-			source?: string
 			status?: string
-			type?: string
+			messageId?: string
 			userId?: string
 		}
-		PriceCreate: {
+		InvoiceCreate: {
 			_id?: string
-			allowOutOfStockPurchases?: boolean
-			amount?: number
-			availableQuantity?: number
-			compareAtPrice?: number
-			createdAt?: string
-			currency?: string
-			locationId?: string
-			membershipOffers?: {
-				_id?: string
-				label?: string
-				value?: string
-			}[]
+			status?: string
+			liveMode?: boolean
+			amountPaid?: number
+			altId?: string
+			altType?: string
 			name?: string
-			priceType?: string
-			product?: string
-			recurring?: {
-				interval?: string
-				intervalCount?: number
+			businessDetails?: {
+				name?: string
+				address?: string
+				phoneNo?: string
+				website?: string
+				logoUrl?: string
+				customValues?: string[]
 			}
-			trackInventory?: null
+			invoiceNumber?: string
+			currency?: string
+			contactDetails?: {
+				id?: string
+				phoneNo?: string
+				email?: string
+				customFields?: string[]
+				name?: string
+				address?: {
+					countryCode?: string
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					state?: string
+					postalCode?: string
+				}
+				additionalEmails?: {
+					email?: string
+				}[]
+				companyName?: string
+			}
+			issueDate?: string
+			dueDate?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			invoiceItems?: {
+				taxes?: unknown[]
+				_id?: string
+				productId?: string
+				priceId?: string
+				currency?: string
+				name?: string
+				qty?: number
+				amount?: number
+			}[]
+			total?: number
+			title?: string
+			amountDue?: number
+			createdAt?: string
 			updatedAt?: string
+			totalSummary?: {
+				subTotal?: number
+				discount?: number
+			}
+		}
+		ContactUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			address1?: string
+			city?: string
+			companyName?: string
+			country?: string
+			source?: string
+			dateAdded?: string
+			dateOfBirth?: string
+			dnd?: boolean
+			email?: string
+			name?: string
+			firstName?: string
+			lastName?: string
+			phone?: string
+			postalCode?: string
+			state?: string
+			tags?: unknown[]
+			website?: string
+			attachments?: unknown[]
+			assignedTo?: string
+			customFields?: {
+				id?: string
+				value?: string | number | unknown[] | Record<string, never>
+			}[]
+		}
+		ConversationUnreadWebhook: {
+			type?: string
+			locationId?: string
+			id?: string
+			contactId?: string
+			unreadCount?: number
+			inbox?: boolean
+			starred?: boolean
+			deleted?: boolean
+		}
+		InvoiceSent: {
+			_id?: string
+			status?: string
+			liveMode?: boolean
+			amountPaid?: number
+			altId?: string
+			altType?: string
+			name?: string
+			businessDetails?: {
+				name?: string
+				address?: string
+				phoneNo?: string
+				website?: string
+				logoUrl?: string
+				customValues?: string[]
+			}
+			invoiceNumber?: string
+			currency?: string
+			contactDetails?: {
+				id?: string
+				phoneNo?: string
+				email?: string
+				customFields?: string[]
+				name?: string
+				address?: {
+					countryCode?: string
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					state?: string
+					postalCode?: string
+				}
+				additionalEmails?: {
+					email?: string
+				}[]
+				companyName?: string
+			}
+			issueDate?: string
+			dueDate?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			invoiceItems?: {
+				taxes?: unknown[]
+				_id?: string
+				productId?: string
+				priceId?: string
+				currency?: string
+				name?: string
+				qty?: number
+				amount?: number
+			}[]
+			total?: number
+			title?: string
+			amountDue?: number
+			createdAt?: string
+			updatedAt?: string
+			totalSummary?: {
+				subTotal?: number
+				discount?: number
+			}
+		}
+		InvoicePaid: {
+			_id?: string
+			status?: string
+			liveMode?: boolean
+			amountPaid?: number
+			altId?: string
+			altType?: string
+			name?: string
+			businessDetails?: {
+				name?: string
+				address?: string
+				phoneNo?: string
+				website?: string
+				logoUrl?: string
+				customValues?: string[]
+			}
+			invoiceNumber?: string
+			currency?: string
+			contactDetails?: {
+				id?: string
+				phoneNo?: string
+				email?: string
+				customFields?: string[]
+				name?: string
+				address?: {
+					countryCode?: string
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					state?: string
+					postalCode?: string
+				}
+				additionalEmails?: {
+					email?: string
+				}[]
+				companyName?: string
+			}
+			issueDate?: string
+			dueDate?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			invoiceItems?: {
+				taxes?: unknown[]
+				_id?: string
+				productId?: string
+				priceId?: string
+				currency?: string
+				name?: string
+				qty?: number
+				amount?: number
+			}[]
+			total?: number
+			title?: string
+			amountDue?: number
+			createdAt?: string
+			updatedAt?: string
+			totalSummary?: {
+				subTotal?: number
+				discount?: number
+			}
+		}
+		InvoiceVoid: {
+			_id?: string
+			status?: string
+			liveMode?: boolean
+			amountPaid?: number
+			altId?: string
+			altType?: string
+			name?: string
+			businessDetails?: {
+				name?: string
+				address?: string
+				phoneNo?: string
+				website?: string
+				logoUrl?: string
+				customValues?: string[]
+			}
+			invoiceNumber?: string
+			currency?: string
+			contactDetails?: {
+				id?: string
+				phoneNo?: string
+				email?: string
+				customFields?: string[]
+				name?: string
+				address?: {
+					countryCode?: string
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					state?: string
+					postalCode?: string
+				}
+				additionalEmails?: {
+					email?: string
+				}[]
+				companyName?: string
+			}
+			issueDate?: string
+			dueDate?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			invoiceItems?: {
+				taxes?: unknown[]
+				_id?: string
+				productId?: string
+				priceId?: string
+				currency?: string
+				name?: string
+				qty?: number
+				amount?: number
+			}[]
+			total?: number
+			title?: string
+			amountDue?: number
+			createdAt?: string
+			updatedAt?: string
+			totalSummary?: {
+				subTotal?: number
+				discount?: number
+			}
+		}
+		InvoicePartiallyPaid: {
+			_id?: string
+			status?: string
+			liveMode?: boolean
+			amountPaid?: number
+			altId?: string
+			altType?: string
+			name?: string
+			businessDetails?: {
+				name?: string
+				address?: string
+				phoneNo?: string
+				website?: string
+				logoUrl?: string
+				customValues?: string[]
+			}
+			invoiceNumber?: string
+			currency?: string
+			contactDetails?: {
+				id?: string
+				phoneNo?: string
+				email?: string
+				customFields?: string[]
+				name?: string
+				address?: {
+					countryCode?: string
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					state?: string
+					postalCode?: string
+				}
+				additionalEmails?: {
+					email?: string
+				}[]
+				companyName?: string
+			}
+			issueDate?: string
+			dueDate?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			invoiceItems?: {
+				taxes?: unknown[]
+				_id?: string
+				productId?: string
+				priceId?: string
+				currency?: string
+				name?: string
+				qty?: number
+				amount?: number
+			}[]
+			total?: number
+			title?: string
+			amountDue?: number
+			createdAt?: string
+			updatedAt?: string
+			totalSummary?: {
+				subTotal?: number
+				discount?: number
+			}
+		}
+		InvoiceUpdate: {
+			_id?: string
+			status?: string
+			liveMode?: boolean
+			amountPaid?: number
+			altId?: string
+			altType?: string
+			name?: string
+			businessDetails?: {
+				name?: string
+				address?: string
+				phoneNo?: string
+				website?: string
+				logoUrl?: string
+				customValues?: string[]
+			}
+			invoiceNumber?: string
+			currency?: string
+			contactDetails?: {
+				id?: string
+				phoneNo?: string
+				email?: string
+				customFields?: string[]
+				name?: string
+				address?: {
+					countryCode?: string
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					state?: string
+					postalCode?: string
+				}
+				additionalEmails?: {
+					email?: string
+				}[]
+				companyName?: string
+			}
+			issueDate?: string
+			dueDate?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			invoiceItems?: {
+				taxes?: unknown[]
+				_id?: string
+				productId?: string
+				priceId?: string
+				currency?: string
+				name?: string
+				qty?: number
+				amount?: number
+			}[]
+			total?: number
+			title?: string
+			amountDue?: number
+			createdAt?: string
+			updatedAt?: string
+			totalSummary?: {
+				subTotal?: number
+				discount?: number
+			}
+		}
+		LCEmailStats: {
+			type?: string
+			locationId?: string
+			companyId?: string
+			webhookPayload?: {
+				event?: string
+				id?: string
+				timestamp?: number
+				flags?: {
+					'is-authenticated'?: boolean
+					'is-routed'?: boolean
+					'is-big'?: boolean
+					'is-system-test'?: boolean
+					'is-test-mode'?: boolean
+				}
+				message?: {
+					attachments?: unknown[]
+					headers?: {
+						'message-id'?: string
+						from?: string
+						to?: string
+					}
+					size?: number
+				}
+				'log-level'?: string
+				recipient?: string
+				'recipient-domain'?: string
+				tags?: unknown[]
+				'recipient-provider'?: string
+				campaigns?: unknown[]
+				'delivery-status'?: {
+					'attempt-no'?: number
+					code?: number
+					message?: string
+					description?: string
+					'session-seconds'?: number
+					'enhanced-code'?: string
+					'mx-host'?: string
+					utf8?: boolean
+					'i-first-delivery-attempt-seconds'?: number
+				}
+				envelope?: {
+					sender?: string
+					targets?: string
+					transport?: string
+					'sending-ip'?: string
+					'i-ip-pool-id'?: string
+					'i-ip-pool-name'?: string
+				}
+			}
+		}
+		LocationCreate: {
+			type?: string
+			id?: string
+			name?: string
+			email?: string
+			stripeProductId?: string
+			companyId?: string
+		}
+		LocationUpdate: {
+			type?: string
+			id?: string
+			name?: string
+			email?: string
+			stripeProductId?: string
+			companyId?: string
+		}
+		InvoiceDelete: {
+			_id?: string
+			status?: string
+			liveMode?: boolean
+			amountPaid?: number
+			altId?: string
+			altType?: string
+			name?: string
+			businessDetails?: {
+				name?: string
+				address?: string
+				phoneNo?: string
+				website?: string
+				logoUrl?: string
+				customValues?: string[]
+			}
+			invoiceNumber?: string
+			currency?: string
+			contactDetails?: {
+				id?: string
+				phoneNo?: string
+				email?: string
+				customFields?: string[]
+				name?: string
+				address?: {
+					countryCode?: string
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					state?: string
+					postalCode?: string
+				}
+				additionalEmails?: {
+					email?: string
+				}[]
+				companyName?: string
+			}
+			issueDate?: string
+			dueDate?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			invoiceItems?: {
+				taxes?: unknown[]
+				_id?: string
+				productId?: string
+				priceId?: string
+				currency?: string
+				name?: string
+				qty?: number
+				amount?: number
+			}[]
+			total?: number
+			title?: string
+			amountDue?: number
+			createdAt?: string
+			updatedAt?: string
+			totalSummary?: {
+				subTotal?: number
+				discount?: number
+			}
+		}
+		NoteDelete: {
+			type?: string
+			locationId?: string
+			id?: string
+			body?: string
+			contactId?: string
+			dateAdded?: string
+		}
+		NoteCreate: {
+			type?: string
+			locationId?: string
+			id?: string
+			body?: string
+			contactId?: string
+			dateAdded?: string
+		}
+		NoteUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			body?: string
+			contactId?: string
+			dateAdded?: string
+		}
+		OpportunityCreate: {
+			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			contactId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			dateAdded?: string
+		}
+		OpportunityAssignedToUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			contactId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			dateAdded?: string
+		}
+		OpportunityMonetaryValueUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			contactId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			dateAdded?: string
+		}
+		OpportunityStageUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			contactId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			dateAdded?: string
+		}
+		OpportunityStatusUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			contactId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			dateAdded?: string
+		}
+		OpportunityDelete: {
+			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			contactId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			dateAdded?: string
+		}
+		OpportunityUpdate: {
+			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			contactId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			dateAdded?: string
+		}
+		OrderStatusUpdate: {
+			type?: string
+			altId?: string
+			altType?: string
+			_id?: string
+			contactId?: string
+			contactSnapshot?: {
+				locationId?: string
+				id?: string
+				address1?: string
+				city?: string
+				companyName?: string
+				country?: string
+				source?: string
+				dateAdded?: string
+				dateOfBirth?: string
+				dnd?: boolean
+				email?: string
+				name?: string
+				firstName?: string
+				lastName?: string
+				phone?: string
+				postalCode?: string
+				state?: string
+				tags?: unknown[]
+				website?: string
+				attachments?: unknown[]
+				assignedTo?: string
+			}
+			status?: string
+			fulfillmentStatus?: string
+			currency?: string
+			amount?: number
+			liveMode?: boolean
+			items?: {
+				name?: string
+				qty?: number
+				product?: Record<string, never>
+				price?: Record<string, never>
+			}[]
+			amountSummary?: {
+				discount?: number
+				shipping?: number
+				subtotal?: number
+				tax?: number
+			}
+			taxSummary?: {
+				_id?: string
+				amount?: number
+				calculation?: string
+				name?: string
+				rate?: number
+			}[]
+			source?: {
+				id?: string
+				name?: string
+				type?: string
+				subType?: string
+				meta?: Record<string, never>
+			}
+			createdAt?: string
+			updatedAt?: string
+		}
+		OutboundMessage: {
+			type?: string
+			locationId?: string
+			attachments?: unknown[]
+			body?: string
+			contactId?: string
+			contentType?: string
+			conversationId?: string
+			dateAdded?: string
+			direction?: string
+			messageType?: string
+			status?: string
+			messageId?: string
 			userId?: string
-			variantOptionIds?: string[]
+			source?: string
+		}
+		OrderCreate: {
+			type?: string
+			altId?: string
+			altType?: string
+			_id?: string
+			contactId?: string
+			contactSnapshot?: {
+				locationId?: string
+				id?: string
+				address1?: string
+				city?: string
+				companyName?: string
+				country?: string
+				source?: string
+				dateAdded?: string
+				dateOfBirth?: string
+				dnd?: boolean
+				email?: string
+				name?: string
+				firstName?: string
+				lastName?: string
+				phone?: string
+				postalCode?: string
+				state?: string
+				tags?: unknown[]
+				website?: string
+				attachments?: unknown[]
+				assignedTo?: string
+			}
+			status?: string
+			fulfillmentStatus?: string
+			currency?: string
+			amount?: number
+			liveMode?: boolean
+			items?: {
+				name?: string
+				qty?: number
+				product?: Record<string, never>
+				price?: Record<string, never>
+			}[]
+			amountSummary?: {
+				discount?: number
+				shipping?: number
+				subtotal?: number
+				tax?: number
+			}
+			taxSummary?: {
+				_id?: string
+				amount?: number
+				calculation?: string
+				name?: string
+				rate?: number
+			}[]
+			source?: {
+				id?: string
+				name?: string
+				type?: string
+				subType?: string
+				meta?: Record<string, never>
+			}
+			createdAt?: string
+			updatedAt?: string
 		}
 		PriceUpdate: {
 			_id?: string
-			allowOutOfStockPurchases?: boolean
-			amount?: number
-			availableQuantity?: number
-			compareAtPrice?: number
-			createdAt?: string
-			currency?: string
-			locationId?: string
 			membershipOffers?: {
-				_id?: string
 				label?: string
 				value?: string
+				_id?: string
 			}[]
-			name?: string
+			variantOptionIds?: string[]
+			locationId?: string
 			product?: string
+			userId?: string
+			name?: string
+			type?: string
+			currency?: string
+			amount?: number
 			recurring?: {
 				interval?: string
 				intervalCount?: number
 			}
-			trackInventory?: null
-			type?: string
+			createdAt?: string
 			updatedAt?: string
-			userId?: string
-			variantOptionIds?: string[]
+			compareAtPrice?: number
+			trackInventory?: null
+			availableQuantity?: number
+			allowOutOfStockPurchases?: boolean
 		}
 		PriceDelete: {
 			_id?: string
-			allowOutOfStockPurchases?: boolean
-			amount?: number
-			availableQuantity?: number
-			compareAtPrice?: number
-			createdAt?: string
-			currency?: string
-			locationId?: string
 			membershipOffers?: {
-				_id?: string
 				label?: string
 				value?: string
+				_id?: string
 			}[]
-			name?: string
+			variantOptionIds?: string[]
+			locationId?: string
 			product?: string
+			userId?: string
+			name?: string
+			type?: string
+			currency?: string
+			amount?: number
 			recurring?: {
 				interval?: string
 				intervalCount?: number
 			}
-			trackInventory?: null
-			type?: string
+			createdAt?: string
 			updatedAt?: string
-			userId?: string
-			variantOptionIds?: string[]
+			compareAtPrice?: number
+			trackInventory?: null
+			availableQuantity?: number
+			allowOutOfStockPurchases?: boolean
 		}
 		ProductCreate: {
 			_id?: string
-			availableInStore?: boolean
-			createdAt?: string
 			description?: string
-			image?: string
-			locationId?: string
-			medias?: {
-				id?: string
-				isFeatured?: boolean
-				title?: string
-				type?: string
-				url?: string
-			}[]
-			name?: string
-			productType?: string
-			statementDescriptor?: string
-			updatedAt?: string
-			userId?: string
 			variants?: {
 				id?: string
 				name?: string
@@ -2886,26 +2881,26 @@ export type components = {
 					name?: string
 				}[]
 			}[]
+			medias?: {
+				id?: string
+				title?: string
+				url?: string
+				type?: string
+				isFeatured?: boolean
+			}[]
+			locationId?: string
+			name?: string
+			productType?: string
+			availableInStore?: boolean
+			userId?: string
+			createdAt?: string
+			updatedAt?: string
+			statementDescriptor?: string
+			image?: string
 		}
 		ProductUpdate: {
 			_id?: string
-			availableInStore?: boolean
-			createdAt?: string
 			description?: string
-			image?: string
-			locationId?: string
-			medias?: {
-				id?: string
-				isFeatured?: boolean
-				title?: string
-				type?: string
-				url?: string
-			}[]
-			name?: string
-			productType?: string
-			statementDescriptor?: string
-			updatedAt?: string
-			userId?: string
 			variants?: {
 				id?: string
 				name?: string
@@ -2914,26 +2909,52 @@ export type components = {
 					name?: string
 				}[]
 			}[]
+			medias?: {
+				id?: string
+				title?: string
+				url?: string
+				type?: string
+				isFeatured?: boolean
+			}[]
+			locationId?: string
+			name?: string
+			productType?: string
+			availableInStore?: boolean
+			userId?: string
+			createdAt?: string
+			updatedAt?: string
+			statementDescriptor?: string
+			image?: string
+		}
+		PriceCreate: {
+			_id?: string
+			membershipOffers?: {
+				label?: string
+				value?: string
+				_id?: string
+			}[]
+			variantOptionIds?: string[]
+			locationId?: string
+			product?: string
+			userId?: string
+			name?: string
+			priceType?: string
+			currency?: string
+			amount?: number
+			recurring?: {
+				interval?: string
+				intervalCount?: number
+			}
+			createdAt?: string
+			updatedAt?: string
+			compareAtPrice?: number
+			trackInventory?: null
+			availableQuantity?: number
+			allowOutOfStockPurchases?: boolean
 		}
 		ProductDelete: {
 			_id?: string
-			availableInStore?: boolean
-			createdAt?: string
 			description?: string
-			image?: string
-			locationId?: string
-			medias?: {
-				id?: string
-				isFeatured?: boolean
-				title?: string
-				type?: string
-				url?: string
-			}[]
-			name?: string
-			productType?: string
-			statementDescriptor?: string
-			updatedAt?: string
-			userId?: string
 			variants?: {
 				id?: string
 				name?: string
@@ -2942,39 +2963,107 @@ export type components = {
 					name?: string
 				}[]
 			}[]
+			medias?: {
+				id?: string
+				title?: string
+				url?: string
+				type?: string
+				isFeatured?: boolean
+			}[]
+			locationId?: string
+			name?: string
+			productType?: string
+			availableInStore?: boolean
+			userId?: string
+			createdAt?: string
+			updatedAt?: string
+			statementDescriptor?: string
+			image?: string
 		}
 		TaskComplete: {
+			type?: string
+			locationId?: string
+			id?: string
 			assignedTo?: string
 			body?: string
 			contactId?: string
+			title?: string
 			dateAdded?: string
 			dueDate?: string
-			id?: string
-			locationId?: string
-			title?: string
-			type?: string
-		}
-		TaskCreate: {
-			assignedTo?: string
-			body?: string
-			contactId?: string
-			dateAdded?: string
-			dueDate?: string
-			id?: string
-			locationId?: string
-			title?: string
-			type?: string
 		}
 		TaskDelete: {
+			type?: string
+			locationId?: string
+			id?: string
 			assignedTo?: string
 			body?: string
 			contactId?: string
+			title?: string
 			dateAdded?: string
 			dueDate?: string
-			id?: string
-			locationId?: string
-			title?: string
+		}
+		TaskCreate: {
 			type?: string
+			locationId?: string
+			id?: string
+			assignedTo?: string
+			body?: string
+			contactId?: string
+			title?: string
+			dateAdded?: string
+			dueDate?: string
+		}
+		UserCreate: {
+			type?: string
+			locationId?: string
+			companyId?: string
+			id?: string
+			firstName?: string
+			lastName?: string
+			email?: string
+			phone?: string
+			extension?: string
+			role?: string
+			permissions?: {
+				adwordsReportingEnabled?: boolean
+				affiliateManagerEnabled?: boolean
+				agentReportingEnabled?: boolean
+				appointmentsEnabled?: boolean
+				assignedDataOnly?: boolean
+				attributionsReportingEnabled?: boolean
+				bloggingEnabled?: boolean
+				botService?: boolean
+				bulkRequestsEnabled?: boolean
+				campaignsEnabled?: boolean
+				campaignsReadOnly?: boolean
+				cancelSubscriptionEnabled?: boolean
+				communitiesEnabled?: boolean
+				contactsEnabled?: boolean
+				contentAiEnabled?: boolean
+				conversationsEnabled?: boolean
+				dashboardStatsEnabled?: boolean
+				facebookAdsReportingEnabled?: boolean
+				funnelsEnabled?: boolean
+				invoiceEnabled?: boolean
+				leadValueEnabled?: boolean
+				marketingEnabled?: boolean
+				membershipEnabled?: boolean
+				onlineListingsEnabled?: boolean
+				opportunitiesEnabled?: boolean
+				paymentsEnabled?: boolean
+				phoneCallEnabled?: boolean
+				recordPaymentEnabled?: boolean
+				refundsEnabled?: boolean
+				reviewsEnabled?: boolean
+				settingsEnabled?: boolean
+				socialPlanner?: boolean
+				tagsEnabled?: boolean
+				triggersEnabled?: boolean
+				websitesEnabled?: boolean
+				workflowsEnabled?: boolean
+				workflowsReadOnly?: boolean
+			}
+			locations?: string[]
 		}
 	}
 	responses: never
