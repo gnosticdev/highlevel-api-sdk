@@ -81,7 +81,7 @@ describe('OauthClient', () => {
 
 		expect(params.get('client_id')).toBe(mockConfig.clientId)
 		expect(params.get('redirect_uri')).toBe(mockConfig.redirectUri)
-		expect(params.get('scope')).toBe(mockConfig.scopes.join(' '))
+		expect(params.get('scope')).toBe((mockConfig.scopes as string[]).join(' '))
 		expect(params.get('response_type')).toBe('code')
 	})
 

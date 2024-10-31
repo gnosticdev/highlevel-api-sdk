@@ -43,7 +43,9 @@ export class ScopesBuilder<T extends AccessType> {
 						Array.isArray(endpoint.accessType) &&
 						endpoint.accessType.includes(this.#accessType)
 					) {
-						literals.add(`${scopeName}.${access}` as ScopeLiterals<T>)
+						literals.add(
+							`${scopeName.toString()}.${access}` as ScopeLiterals<T>,
+						)
 					}
 				}
 			}

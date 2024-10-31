@@ -3,9 +3,12 @@ import type { ScopesSchema } from '../generated/v2/custom/scopes'
  * This file is used to generate the types for the scopes schema.
  * By changing the accessType to 'Sub-Account' or 'Agency' autocomplete will update with the available types for that accessType.
  *
+ * the `Private` accessType refers to the Private Integrations for a sub-account that allows access to the V2 api without oauth.
+ *
  * _NOTE: The scopes schema are not OpenAPI schemas, which is why they are separated._
  */
-export type AccessType = 'Sub-Account' | 'Agency'
+export type AccessType = 'Sub-Account' | 'Agency' | 'Private'
+
 type Scopes = typeof ScopesSchema
 
 /**
