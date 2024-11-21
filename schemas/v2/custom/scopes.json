@@ -1,4 +1,49 @@
 {
+  "blogs/author": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /blogs/authors",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "blogs/category": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /blogs/categories",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "blogs/check-slug": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /blogs/posts/url-slug-exists",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "blogs/post": {
+    "write": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST /blogs/posts",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "blogs/post-update": {
+    "write": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "PUT /blogs/posts/:postId",
+        "webhookEvents": ""
+      }
+    ]
+  },
   "businesses": {
     "readonly": [
       {
@@ -82,6 +127,11 @@
         "accessType": ["Sub-Account"],
         "methodAndEndpoint": "GET /calendars/blocked-slots",
         "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /calendars/appointments/:appointmentId/notes",
+        "webhookEvents": ""
       }
     ],
     "write": [
@@ -107,7 +157,22 @@
       },
       {
         "accessType": ["Sub-Account"],
-        "methodAndEndpoint": "PUT /calendars/events/appointments /:eventId",
+        "methodAndEndpoint": "PUT /calendars/events/appointments/:eventId",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST /calendars/appointments/:appointmentId/notes",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "PUT /calendars/appointments/:appointmentId/notes/:noteId",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "DELETE /calendars/appointments/:appointmentId/notes/:noteId",
         "webhookEvents": ""
       }
     ]
@@ -425,6 +490,32 @@
       }
     ]
   },
+  "emails/builder": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET emails/builder",
+        "webhookEvents": ""
+      }
+    ],
+    "write": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST emails/builder",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST /emails/builder/data",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "DELETE /emails/builder/:locationId/:templateId",
+        "webhookEvents": ""
+      }
+    ]
+  },
   "forms": {
     "readonly": [
       {
@@ -708,6 +799,16 @@
         "accessType": ["Sub-Account"],
         "methodAndEndpoint": "GET /locations/:locationId/customFields/:id",
         "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /custom-fields/:id",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /custom-field/object-key/:key",
+        "webhookEvents": ""
       }
     ],
     "write": [
@@ -836,6 +937,46 @@
       {
         "accessType": ["Agency"],
         "methodAndEndpoint": "POST /oauth/locationToken",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "objects/record": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /objects/:schemaKey/records/:id",
+        "webhookEvents": ""
+      }
+    ],
+    "write": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST /objects/:schemaKey/records",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "PUT /objects/:schemaKey/records/:id",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "DELETE /objects/:schemaKey/records/:id",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "objects/schema": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /objects/:key",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /objects",
         "webhookEvents": ""
       }
     ]

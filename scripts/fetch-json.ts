@@ -41,6 +41,8 @@ if (import.meta.main) {
 		await Bun.$`rm -rf ${TEMP_DIR}`
 
 		console.log('All schemas downloaded and moved successfully')
+		await Bun.$`bun check --write --unsafe schemas/v2`
+		console.log('All schemas linted successfully')
 	} catch (error) {
 		console.error('Error downloading schemas', error)
 		// Clean up temp directory in case of error
