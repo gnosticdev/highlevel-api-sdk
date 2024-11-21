@@ -30,11 +30,12 @@ npm add @gnosticdev/highlevel-sdk
 
 The HighLevel client is the main client for interacting with the HighLevel API. It includes all of the endpoints for both v1 and v2 of the API. It includes a custom OAuth2 client for working with HighLevel's OAuth2 implementation.
 
-_Recommended: store tokens in a DB like SQLite by passing in a storageFunction. Check out the auth example [example](./examples/bun-auth/)_
+_Recommended: if using OAuth2, store tokens in a DB like SQLite by passing in a storageFunction. Check out the auth example [example](./examples/bun-auth/)_
 
 ```ts
 import { createHighLevelClient } from "@gnosticdev/highlevel-sdk"
 
+// Endpoints with pre-configured OAuth support
 const client = createHighLevelClient({
     oauthConfig: {
         accessType: 'Sub-Account',
@@ -61,7 +62,18 @@ const client = createHighLevelClient({
     },
 })
 
-// Example: Get contacts
+// If using a private integration, you can use the private integration client
+const client = createHighLevelClient({
+    integrationConfig: {
+        privateToken: process.env.HIGHLEVEL_PRIVATE_TOKEN,
+        scopes: ['contacts.readonly'],
+    },
+})
+
+// if using your own OAuth2 implementation
+const client = new HighLevelClient()
+
+// Example: Get contacts with OAuth2
 const { data, error } = await client.contacts.GET('/contacts/', {
     params: {
         query: {
@@ -70,11 +82,20 @@ const { data, error } = await client.contacts.GET('/contacts/', {
             limit: 10,
         },
         header: {
-            Authorization: `Bearer ${process.env.HIGHLEVEL_ACCESS_TOKEN}`,
+            Authorization: `Bearer ${client.oauth.getAccessToken()}`,
             Version: '2021-07-28',
         },
     },
 })
+```
+
+### OAuth2 Support
+
+The oauthclient is available on the HighLevelClient instance. It has specific methods for working with OAuth2.
+
+```ts
+const accessToken = client.oauth.getAccessToken()
+const refreshToken = client.oauth.getRefreshToken()
 ```
 
 ### Using the v1 Client
@@ -168,7 +189,6 @@ const customValues: LocationCustomValues = [{
     ```
 
 ```ts
-```
 
 ## Examples
 

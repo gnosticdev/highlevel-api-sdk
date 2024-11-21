@@ -29,9 +29,7 @@ if (import.meta.main) {
 
 	for await (const file of iter) {
 		const json: OpenAPI3 = await Bun.file(file).json()
-
 		const accessMap = generateAccessMap(json)
-
 		accessMapArray.push(...accessMap)
 	}
 

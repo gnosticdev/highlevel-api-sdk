@@ -7,7 +7,7 @@ import type { ScopesSchema } from '../generated/v2/custom/scopes'
  *
  * _NOTE: The scopes schema are not OpenAPI schemas, which is why they are separated._
  */
-export type AccessType = 'Sub-Account' | 'Agency' | 'Private'
+export type AccessType = 'Sub-Account' | 'Agency'
 
 type Scopes = typeof ScopesSchema
 

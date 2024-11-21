@@ -35,6 +35,9 @@ describe('Base HighLevelClient', () => {
 		expect(baseClient.campaigns).toBeDefined()
 		expect(baseClient.contacts).toBeDefined()
 		expect(baseClient.oauth.GET).toBeFunction()
+	})
+
+	it('should have all OAuth properties defined', () => {
 		expect(baseOauthClient).toContainAllKeys(Object.keys(baseClient.oauth))
 	})
 
