@@ -1,7 +1,7 @@
 import { describe, expect, it, spyOn } from 'bun:test'
-import { OauthClient } from '../src/clients/oauth'
-import type { TokenData } from '../src/clients/oauth/config'
-import type { HighLevelOauthConfig } from '../src/clients/v2/config'
+import type { HighLevelOauthConfig } from 'src/clients/v2/oauth-client'
+import { OauthClientImpl } from '../src/clients/v2/oauth/impl'
+import type { TokenData } from '../src/clients/v2/oauth/types'
 
 describe('OauthClient', () => {
 	const mockConfig: HighLevelOauthConfig<'Sub-Account'> = {
@@ -28,7 +28,7 @@ describe('OauthClient', () => {
 	}
 
 	it('should initialize with default storage function', () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 		expect(client.storeTokenFn).toBeDefined()
 	})
 
@@ -37,7 +37,7 @@ describe('OauthClient', () => {
 			return { ...data, custom: true } as TokenData & { custom: boolean }
 		}
 
-		const client = new OauthClient({
+		const client = new OauthClientImpl({
 			...mockConfig,
 			storageFunction: customStorageFn,
 		})
@@ -47,7 +47,7 @@ describe('OauthClient', () => {
 	})
 
 	it('should store token data with expiration time', async () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 		const now = Date.now()
 		const result = await client.storeTokenData(mockTokenData)
 
@@ -59,7 +59,7 @@ describe('OauthClient', () => {
 	})
 
 	it('should update token data partially', async () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 		await client.storeTokenData(mockTokenData)
 
 		const updatedData = {
@@ -72,7 +72,7 @@ describe('OauthClient', () => {
 	})
 
 	it('should generate correct authorization URL', () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 		const authUrl = client.getAuthorizationUrl()
 
 		// construct the url with URLSearchParams bc encodeURIComponent uses %20 instead of +
@@ -86,7 +86,7 @@ describe('OauthClient', () => {
 	})
 
 	it('should refresh token when expired', async () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 		const expiredTokenData = {
 			...mockTokenData,
 			expires_in: -3600, // Expired token
@@ -108,7 +108,7 @@ describe('OauthClient', () => {
 	})
 
 	it('should exchange auth code for token', async () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 
 		const exchangeTokenSpy = spyOn(client, 'exchangeToken')
 		exchangeTokenSpy.mockImplementation(() => {
@@ -121,7 +121,7 @@ describe('OauthClient', () => {
 	})
 
 	it('should handle token exchange errors', async () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 		const exchangeTokenSpy = spyOn(client, 'exchangeToken')
 		exchangeTokenSpy.mockImplementation(() => {
 			return Promise.reject(new Error('Token exchange failed'))
@@ -133,7 +133,7 @@ describe('OauthClient', () => {
 	})
 
 	it('should handle refresh token errors', async () => {
-		const client = new OauthClient(mockConfig)
+		const client = new OauthClientImpl(mockConfig)
 		await client.storeTokenData(mockTokenData)
 		const refreshAccessTokenSpy = spyOn(client, 'refreshAccessToken')
 		refreshAccessTokenSpy.mockImplementation(() => {

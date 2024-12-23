@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, mock } from 'bun:test'
-import { OauthClient } from '../src/clients/oauth'
-import { HighLevelClient } from '../src/clients/v2'
+import { HighLevelClient } from '../src/clients/v2/default-client'
+import { OauthClientImpl } from '../src/clients/v2/oauth/impl'
 import type * as Locations from '../src/generated/v2/openapi/locations'
 
 type MockLocationsResponse =
@@ -8,11 +8,11 @@ type MockLocationsResponse =
 
 describe('Locations Endpoint', () => {
 	const client = new HighLevelClient()
-	let oauthClient: OauthClient<'Sub-Account'>
+	let oauthClient: OauthClientImpl<'Sub-Account'>
 
 	beforeEach(() => {
 		// Setup OAuth client
-		oauthClient = new OauthClient({
+		oauthClient = new OauthClientImpl({
 			accessType: 'Sub-Account',
 			clientId: process.env.CLIENT_ID!,
 			clientSecret: process.env.CLIENT_SECRET!,
