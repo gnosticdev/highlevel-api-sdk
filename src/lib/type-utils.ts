@@ -1,4 +1,5 @@
 import type { ScopesSchema } from '../generated/v2/custom/scopes'
+
 /*
  * This file is used to generate the types for the scopes schema.
  * By changing the accessType to 'Sub-Account' or 'Agency' autocomplete will update with the available types for that accessType.
