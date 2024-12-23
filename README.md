@@ -7,6 +7,7 @@ Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build y
 
 ## Features
 
+- **NEW** Support for [Private Integrations](https://help.gohighlevel.com/support/solutions/articles/155000003054-private-integrations-everything-you-need-to-know)
 - API Endpoints generated from HighLevel's OpenAPI v3 documentation, using [openapi-typescript](https://openapi-ts.dev/introduction)
 - Fully typed client SDK (using native `fetch`) built with [openapi-fetch](https://openapi-ts.dev/openapi-fetch/)
 - OAuth2 helpers for working with HighLevel's OAuth2 implementation
