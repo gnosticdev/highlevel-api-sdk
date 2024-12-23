@@ -1,8 +1,8 @@
 import createClient, { type Client } from 'openapi-fetch'
-import type * as Oauth from '../../generated/v2/openapi/oauth'
-import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
-import { DEFAULT_BASE_AUTH_URL, DEFAULT_BASE_URL } from '../oauth/config'
-import type { HighLevelOauthConfig } from '../v2/config'
+import type * as Oauth from '../../../generated/v2/openapi/oauth'
+import type { AccessType, ScopeLiterals } from '../../../lib/type-utils'
+import { DEFAULT_BASE_URL } from '../default-client'
+import type { HighLevelOauthConfig } from '../oauth-client'
 import type {
 	AuthUrlParams,
 	LocationTokenParams,
@@ -10,8 +10,16 @@ import type {
 	SearchInstalledLocationParams,
 	TokenData,
 	TokenParams,
-} from './config'
+} from './types'
+import { DEFAULT_BASE_AUTH_URL } from './types'
 
+// ---------------------------------
+// Custom Oauth2 Implementation
+// ---------------------------------
+
+/**
+ * Base `openapi-fetch` client for HighLevel OAuth API
+ */
 export type BaseOauthClient = Client<Oauth.paths, `${string}/${string}`>
 
 /**
@@ -19,11 +27,14 @@ export type BaseOauthClient = Client<Oauth.paths, `${string}/${string}`>
  * You can extend this class to implement your own methods.
  * @see https://highlevel.stoplight.io/docs/integrations/
  */
-export class OauthClient<T extends AccessType>
+export class OauthClientImpl<T extends AccessType>
 	implements OAuthClientInterface<T>
 {
 	private _accessToken: string | undefined
 	private _refreshToken: string | undefined
+	/**
+	 * Type of user that is accessing the API. Only used for generating tokens, similar to `accessType` but uses `Location` or `Company`
+	 */
 	private readonly userType
 
 	/**
@@ -59,7 +70,7 @@ export class OauthClient<T extends AccessType>
 			: config.scopes
 		if (this.scopes.length === 0) {
 			console.warn(
-				'No scopes provided, pass the scopes from your app to the scopes param',
+				'No scopes provided! Pass the scopes set in your app to the scopes param',
 			)
 		}
 		this.userType =

@@ -1,5 +1,5 @@
-import type * as Oauth from '../../generated/v2/openapi/oauth'
-import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
+import type * as Oauth from '../../../generated/v2/openapi/oauth'
+import type { AccessType, ScopeLiterals } from '../../../lib/type-utils'
 
 type AccessTokenRequest =
 	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded'] & {
@@ -101,7 +101,7 @@ export interface OAuthClientInterface<T extends AccessType> {
 	/**
 	 * The scopes needed for your app. These must be added to your app in the marketplace.
 	 */
-	readonly scopes: ScopeLiterals<T> | ScopeLiterals<T>[] | (string & {})
+	readonly scopes: ScopeLiterals<T> | (string & {})
 
 	/**
 	 * Gets the current access token, or generates a new one if needed.
@@ -142,5 +142,3 @@ export interface OAuthClientInterface<T extends AccessType> {
 
 export const DEFAULT_BASE_AUTH_URL =
 	'https://marketplace.leadconnectorhq.com/oauth/chooselocation'
-
-export const DEFAULT_BASE_URL = 'https://services.leadconnectorhq.com'
