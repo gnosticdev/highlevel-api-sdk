@@ -1,21 +1,59 @@
-import type { ClientOptions } from 'openapi-fetch'
 import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
-import type { TokenData } from '../oauth/config'
-
-export type BaseHighLevelConfig = {
-	/**
-	 * base url for each API endpoint. no need to change unless you are proxying requests.
-	 * @default 'https://services.leadconnectorhq.com'
-	 */
-	baseUrl?: string
-}
-
-export type HighLevelClientConfig = BaseHighLevelConfig &
-	Omit<ClientOptions, 'baseUrl'>
+import type { HighLevelClientConfig } from './default-client'
+import { DEFAULT_BASE_URL, HighLevelClient } from './default-client'
+import { OauthClientImpl } from './oauth/impl'
+import { DEFAULT_BASE_AUTH_URL, type TokenData } from './oauth/types'
 
 /**
+ * HighLevelClient with built in OAuth methods.
+ *
+ * To create an instance, use the `createHighLevelClient` function from the main client.
+ *
+ * @see {@link createHighLevelClient}
+ * @example
+ * ```ts
+ * const client = createAuth('oauth', {
+ *   clientId: 'your-client-id',
+ *   clientSecret: 'your-client-secret',
+ *   redirectUri: 'http://localhost:3000/callback',
+ *   accessType: 'Sub-Account',
+ *   scopes: ['contacts.readonly']
+ * })
+ * ```
+ * @internal
+ */
+export class HighLevelClientWithOAuth<
+	T extends AccessType,
+> extends HighLevelClient<T, OauthClientImpl<T>, undefined> {
+	oauth: OauthClientImpl<T>
+
+	constructor(
+		oauthConfig: HighLevelOauthConfig<T>,
+		clientConfig?: HighLevelClientConfig,
+	) {
+		super(clientConfig)
+		const baseUrl =
+			clientConfig?.baseUrl ?? oauthConfig.baseUrl ?? DEFAULT_BASE_URL
+		const _oauthConfig: HighLevelOauthConfig<T> = {
+			...oauthConfig,
+			baseUrl: baseUrl,
+			baseAuthUrl: oauthConfig?.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL,
+			scopes: oauthConfig.scopes ?? [],
+		}
+		this.oauth = new OauthClientImpl(_oauthConfig)
+	}
+}
+
+const client = new HighLevelClientWithOAuth({
+	accessType: 'Sub-Account',
+	clientId: '123',
+	clientSecret: '456',
+	redirectUri: 'http://localhost:3000/callback',
+	scopes: ['contacts.readonly'],
+}) /**
  * The configuration for the HighLevel API client with OAuth.
  */
+
 export type HighLevelOauthConfig<T extends AccessType> = {
 	/**
 	 * base url for each API endpoint. no need to change unless you are proxying requests.
@@ -59,27 +97,19 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	scopes: ScopeLiterals<T>[] | (ScopeLiterals<T> | (string & {}))
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
-	 * @default https://marketplace.leadconnectorhq.com/oauth/chooselocation
+	 * @default `https://marketplace.leadconnectorhq.com/oauth/chooselocation`
 	 */
 	baseAuthUrl?: string
 	/**
 	 * the auth code from the redirect uri
-	 * - use `client.getAuthCode()` to get the auth code from the query params
+	 *
+	 * use `client.getAuthCode()` to get the auth code from the query params
 	 * @see https://highlevel.stoplight.io/docs/integrations/
 	 */
 	authCode?: string
 	/**
 	 * Store the token data in your database or cache
-	 * @param fn - The function to use for storing the token data
-	 * @default stores the token data in memory on the oauth client
-	 *
+	 * @default `(tokenData) => Promise.resolve(tokenData)`
 	 */
 	storageFunction?: (tokenData: TokenData) => Promise<TokenData>
 }
-
-export type PrivateIntegrationConfig<T extends AccessType> =
-	BaseHighLevelConfig & {
-		privateToken: string
-		scopes: ScopeLiterals<T>[]
-		accessType: T
-	}
