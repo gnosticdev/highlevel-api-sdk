@@ -1,22 +1,25 @@
-import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
+import type { AccessType, HighLevelScopes } from '../../lib/type-utils'
+import type { HighLevelClientConfig } from './base'
+import { HighLevelClient } from './base'
 import type { AuthHeaders } from './client-types'
-import type { HighLevelClientConfig } from './default-client'
-import { HighLevelClient } from './default-client'
-import type { BaseOauthClient } from './oauth/impl'
+import { createHighLevelClient } from './factory'
+import type { BaseOauthClient } from './oauth/oauth-impl'
 
 export type PrivateIntegrationConfig<T extends AccessType> = {
 	accessType: T
 	privateToken: string
-	scopes: ScopeLiterals<T>[] | (ScopeLiterals<T> | (string & {}))
+	scopes: HighLevelScopes<T>
 }
 
 /**
  * HighLevel API client using private integration token for authentication.
- * To create an instance, use the `createAuth` function from the main client.
+ * To create an instance, use the `createHighLevelClient` function from the main client.
+ *
+ * @see {@link createHighLevelClient}
  *
  * @example
  * ```ts
- * const client = createAuth('integration', {
+ * const client = createHighLevelClient({}, 'integration', {
  *   privateToken: 'your-token',
  *   accessType: 'Sub-Account',
  *   scopes: ['contacts.readonly']
@@ -37,8 +40,13 @@ export class HighLevelIntegrationClient<
 	 * The scopes for the integration.
 	 *
 	 * _NOTE_: in a private integration, we never send off the scopes like we do in Oauth2, but leaving this here for potential future use.
+	 *
+	 * @example
+	 * ```ts
+	 * const scopes = new ScopesBuilder().all().build()
+	 * ```
 	 */
-	scopes!: ScopeLiterals<T>[] | (ScopeLiterals<T> | (string & {}))
+	scopes!: HighLevelScopes<T>
 
 	constructor(
 		/**

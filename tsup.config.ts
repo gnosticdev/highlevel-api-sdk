@@ -17,12 +17,11 @@ console.log(openapiTypeEntries)
 export default defineConfig((override) => ({
 	entry: {
 		index: 'src/clients/v2/index.ts',
-		oauth: 'src/clients/oauth/index.ts',
+		oauth: 'src/clients/v2/oauth/oauth-impl.ts',
+		oauthTypes: 'src/clients/v2/oauth/oauth-types.ts',
 		v1: 'src/clients/v1/index.ts',
 		scopes: 'src/lib/scopes.ts',
 		webhooks: 'src/generated/v2/custom/webhooks.ts',
-		'configs/index': 'src/clients/v2/config.ts',
-		'configs/oauth': 'src/clients/oauth/config.ts',
 		...openapiTypeEntries,
 	},
 	format: ['esm', 'cjs'],

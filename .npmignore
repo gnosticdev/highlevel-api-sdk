@@ -10,3 +10,4 @@ tests/
 *.test.ts
 *.spec.ts
 tsconfig.json
+examples/

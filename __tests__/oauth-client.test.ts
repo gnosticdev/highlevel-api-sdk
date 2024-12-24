@@ -1,7 +1,7 @@
 import { describe, expect, it, spyOn } from 'bun:test'
-import type { HighLevelOauthConfig } from 'src/clients/v2/oauth-client'
-import { OauthClientImpl } from '../src/clients/v2/oauth/impl'
-import type { TokenData } from '../src/clients/v2/oauth/types'
+import type { HighLevelOauthConfig } from '../src/clients/v2/oauth-client'
+import { OauthClientImpl } from '../src/clients/v2/oauth/oauth-impl'
+import type { TokenData } from '../src/clients/v2/oauth/oauth-types'
 
 describe('OauthClient', () => {
 	const mockConfig: HighLevelOauthConfig<'Sub-Account'> = {

@@ -1,7 +1,6 @@
 import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, { astToString } from 'openapi-typescript'
-import { OPENAPI_TYPES_V2_DIR } from '../src/lib/constants'
 import { generateClientInterface } from './generate-interface'
 
 const TEMP_DIR = path.join(process.cwd(), 'temp-schema-types')
@@ -118,3 +117,4 @@ async function createOpenApiTypesFile(schemaFileUrl: URL) {
 	await Bun.write(outFilePath, data)
 	return outFilePath
 }
+export const OPENAPI_TYPES_V2_DIR = 'src/generated/v2/openapi'

@@ -1,5 +1,5 @@
 import createClient, { type Client } from 'openapi-fetch/src/index.js'
-import type { HighLevelClientConfig } from './default-client'
+import type { HighLevelClientConfig } from './base'
 
 type HTTPMethod =
 	| 'get'
@@ -46,10 +46,8 @@ export type OptionalAuthParamsClient<T> = T extends Client<infer Paths>
 		}>
 	: never
 
-export interface ClientWithAuth<
-	TPaths extends {},
-	M extends string = `${string}/${string}`,
-> extends OptionalAuthParamsClient<Client<TPaths>> {}
+export interface ClientWithAuth<TPaths extends {}>
+	extends OptionalAuthParamsClient<Client<TPaths>> {}
 
 export type AuthHeaders = {
 	/**

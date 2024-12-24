@@ -15,7 +15,6 @@
 		"paths": {
 			"@/*": ["src/*"]
 		},
-		"preserveSymlinks": true,
 		"resolveJsonModule": true,
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true,
@@ -24,5 +23,5 @@
 		"target": "ESNext",
 		"verbatimModuleSyntax": true
 	},
-	"include": ["src"]
+	"include": ["src/**/*"]
 }

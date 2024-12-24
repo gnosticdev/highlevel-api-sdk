@@ -1,6 +1,8 @@
 import { raw } from 'hono/html'
 import type { FC } from 'hono/jsx'
 
+import {} from '@gnosticdev/highlevel-sdk'
+
 const cssFilePath = new URL('./style.css', import.meta.url)
 
 const Layout: FC = async (props) => {

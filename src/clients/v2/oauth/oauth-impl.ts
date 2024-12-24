@@ -1,8 +1,9 @@
 import createClient, { type Client } from 'openapi-fetch'
 import type * as Oauth from '../../../generated/v2/openapi/oauth'
 import type { AccessType, ScopeLiterals } from '../../../lib/type-utils'
-import { DEFAULT_BASE_URL } from '../default-client'
+import { DEFAULT_BASE_URL } from '../base'
 import type { HighLevelOauthConfig } from '../oauth-client'
+import { DEFAULT_BASE_AUTH_URL } from '../oauth-client'
 import type {
 	AuthUrlParams,
 	LocationTokenParams,
@@ -10,8 +11,7 @@ import type {
 	SearchInstalledLocationParams,
 	TokenData,
 	TokenParams,
-} from './types'
-import { DEFAULT_BASE_AUTH_URL } from './types'
+} from './oauth-types'
 
 // ---------------------------------
 // Custom Oauth2 Implementation
@@ -23,7 +23,7 @@ import { DEFAULT_BASE_AUTH_URL } from './types'
 export type BaseOauthClient = Client<Oauth.paths, `${string}/${string}`>
 
 /**
- * This client has built in methods for generating tokens, refreshing tokens, and storing tokens.
+ * This client has built in methods for generating, refreshing, and storing tokens.
  * You can extend this class to implement your own methods.
  * @see https://highlevel.stoplight.io/docs/integrations/
  */
@@ -249,7 +249,7 @@ export class OauthClientImpl<T extends AccessType>
 	 * @private
 	 */
 	async #fetchAccessToken(tokenParams: TokenParams) {
-		const { data, error } = await this._client.POST('/oauth/token', {
+		return this._client.POST('/oauth/token', {
 			body: tokenParams,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -259,12 +259,6 @@ export class OauthClientImpl<T extends AccessType>
 				return new URLSearchParams(_body).toString()
 			},
 		})
-
-		if (error) {
-			return { data: null, error }
-		}
-
-		return { data }
 	}
 
 	/**

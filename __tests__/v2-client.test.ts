@@ -1,21 +1,28 @@
 import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
-import createClient, { type Client } from 'openapi-fetch'
-import { DEFAULT_BASE_URL } from 'src/clients/v2/default-client'
-import { createHighLevelClient } from 'src/clients/v2/factory'
-import type { HighLevelOauthConfig } from 'src/clients/v2/oauth-client'
+import createClient, { type Client, type FetchResponse } from 'openapi-fetch'
+import { DEFAULT_BASE_URL, HighLevelClient } from '../src/clients/v2/base'
 import type { AuthHeaders } from '../src/clients/v2/client-types'
-import { HighLevelClient } from '../src/clients/v2/default-client'
-import { HighLevelClientWithOAuth } from '../src/clients/v2/oauth-client'
+import { createHighLevelClient } from '../src/clients/v2/factory'
+import type { HighLevelOauthConfig } from '../src/clients/v2/oauth-client'
+import {
+	DEFAULT_BASE_AUTH_URL,
+	HighLevelClientWithOAuth,
+} from '../src/clients/v2/oauth-client'
 import {
 	type BaseOauthClient,
 	OauthClientImpl,
-} from '../src/clients/v2/oauth/impl'
-import { DEFAULT_BASE_AUTH_URL } from '../src/clients/v2/oauth/types'
+} from '../src/clients/v2/oauth/oauth-impl'
 import type * as Locations from '../src/generated/v2/openapi/locations'
 import type * as OAuth from '../src/generated/v2/openapi/oauth'
 import type { AccessType } from '../src/lib/type-utils'
+
+type LocationsResponse = FetchResponse<
+	Locations.paths['/locations/search']['get'],
+	Locations.components['schemas']['SearchSuccessfulResponseDto'],
+	'application/json'
+>
 
 describe('Base Client', () => {
 	let baseClient: HighLevelClient<AccessType, BaseOauthClient, AuthHeaders>
@@ -89,17 +96,16 @@ describe('Agency Client', () => {
 		scopes: ['locations.readonly', 'oauth.write'],
 	}
 
-	const mockLocationsResponse: Locations.components['schemas']['SearchSuccessfulResponseDto'] =
-		{
-			data: {
-				locations: [
-					{ id: '1', name: 'Location 1' },
-					{ id: '2', name: 'Location 2' },
-				],
-			},
-			error: undefined,
-			response: new Response(),
-		}
+	const mockLocationsResponse: LocationsResponse = {
+		data: {
+			locations: [
+				{ id: '1', name: 'Location 1' },
+				{ id: '2', name: 'Location 2' },
+			],
+		},
+		error: undefined,
+		response: new Response(),
+	}
 
 	beforeEach(() => {
 		agencyClient = createHighLevelClient({}, 'oauth', agencyOauthConfig)
@@ -119,10 +125,10 @@ describe('Agency Client', () => {
 	})
 
 	it('should fetch locations', async () => {
-		const locationsGetSpy = spyOn(
-			agencyClient.locations,
-			'GET',
-		).mockResolvedValue(mockLocationsResponse)
+		const locationsGetSpy = spyOn(agencyClient.locations, 'GET')
+
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		locationsGetSpy.mockResolvedValueOnce(mockLocationsResponse as any)
 
 		const { data, error } = await agencyClient.locations.GET(
 			'/locations/search',
@@ -155,9 +161,9 @@ describe('Agency Client', () => {
 	})
 })
 
-describe('createHighLevelClient Defaults', () => {
+describe('createHighLevelClient Oauth Client Defaults', () => {
 	it('should apply all defaults as noted in JSDoc comments', () => {
-		const minimalConfig: HighLevelOauthConfig<'Sub-Account'> = {
+		const oathConfig: HighLevelOauthConfig<'Sub-Account'> = {
 			clientId: 'test-client-id',
 			clientSecret: 'test-client-secret',
 			redirectUri: 'http://localhost:3000/callback',
@@ -165,10 +171,10 @@ describe('createHighLevelClient Defaults', () => {
 			scopes: ['saas/company.write'],
 		}
 
-		const client = createHighLevelClient({}, 'oauth', minimalConfig)
+		const client = createHighLevelClient({}, 'oauth', oathConfig)
 
 		expect(client.oauth.config).toEqual({
-			...minimalConfig,
+			...oathConfig,
 			baseUrl: DEFAULT_BASE_URL,
 			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
 		})

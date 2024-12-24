@@ -1,8 +1,17 @@
 import { describe, expect, it } from 'bun:test'
 import { ScopesBuilder } from '../src/lib/scopes'
+import type { ScopeLiterals } from '../src/lib/type-utils'
 
-const MockAgencyScopesBuilder = ScopesBuilder<'Agency'>
-const MockSubAccountScopesBuilder = ScopesBuilder<'Sub-Account'>
+class MockAgencyScopesBuilder extends ScopesBuilder<'Agency'> {}
+class MockSubAccountScopesBuilder<
+	const T extends 'Sub-Account',
+> extends ScopesBuilder<T> {
+	collection: Set<(string & {}) | ScopeLiterals<T>>
+	constructor({ accessType }: { accessType: T }) {
+		super({ accessType })
+		this.collection = new Set()
+	}
+}
 
 describe('ScopesBuilder', () => {
 	const scopes = new MockSubAccountScopesBuilder({ accessType: 'Sub-Account' })

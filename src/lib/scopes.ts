@@ -1,6 +1,6 @@
 import { ScopesSchema } from '../generated/v2/custom/scopes'
 import { objectEntries } from '../lib/utils'
-import type { AccessType, ScopeLiterals } from './type-utils'
+import type { AccessType, HighLevelScopes, ScopeLiterals } from './type-utils'
 
 /**
  * Helper for building app scopes based on the access type.
@@ -9,7 +9,7 @@ export class ScopesBuilder<T extends AccessType> {
 	/** the access level for your app. Sub-Account is same as Location. Agency same as Company. */
 	readonly #accessType: T
 	/** a Set containing the scopes that have been added so far */
-	collection = new Set<ScopeLiterals<T>>()
+	protected collection = new Set<ScopeLiterals<T> | (string & {})>()
 
 	/**
 	 * @constructor
@@ -20,7 +20,7 @@ export class ScopesBuilder<T extends AccessType> {
 	}
 
 	/** add a scope or an array of scopes from the available scopes for this access type */
-	add(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): this {
+	add(scopes: HighLevelScopes<T>): this {
 		if (Array.isArray(scopes)) {
 			this.collection = new Set([...this.collection, ...scopes])
 		} else {
@@ -31,6 +31,7 @@ export class ScopesBuilder<T extends AccessType> {
 
 	/**
 	 * Get **ALL** available scopes for the given access type
+	 *
 	 * @returns an array of all scopes available to the given accessType
 	 */
 	all(): ScopeLiterals<T>[] {
@@ -51,7 +52,7 @@ export class ScopesBuilder<T extends AccessType> {
 			}
 		}
 
-		return Array.from(literals) as ScopeLiterals<T>[]
+		return Array.from<ScopeLiterals<T>>(literals)
 	}
 
 	/**
@@ -75,7 +76,7 @@ export class ScopesBuilder<T extends AccessType> {
 	 * @param scopes - a single scope or an array of scopes
 	 * @returns true if the builder has the scope or scopes, false otherwise
 	 */
-	has(scopes: ScopeLiterals<T> | ScopeLiterals<T>[]): boolean {
+	has(scopes: HighLevelScopes<T>): boolean {
 		if (Array.isArray(scopes)) {
 			return scopes.every((scope) => this.collection.has(scope))
 		}

@@ -39,6 +39,11 @@ export type ScopeLiterals<TAccessType extends AccessType> = {
 	[K in FilteredScopeNames<TAccessType>]: `${K}.${Permission<K>}`
 }[FilteredScopeNames<TAccessType>]
 
+export type HighLevelScopes<T extends AccessType> =
+	| ScopeLiterals<T>
+	| ScopeLiterals<T>[]
+	| (string & {})
+
 /**
  * The first part of a scope name.
  * @example `BaseScopeNames<'Sub-Account'>` produces `businesses`, `locations`, etc...

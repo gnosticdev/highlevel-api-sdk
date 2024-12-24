@@ -1,8 +1,11 @@
-import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
-import type { HighLevelClientConfig } from './default-client'
-import { DEFAULT_BASE_URL, HighLevelClient } from './default-client'
-import { OauthClientImpl } from './oauth/impl'
-import { DEFAULT_BASE_AUTH_URL, type TokenData } from './oauth/types'
+import type { AccessType, HighLevelScopes } from '../../lib/type-utils'
+import type { HighLevelClientConfig } from './base'
+import { DEFAULT_BASE_URL, HighLevelClient } from './base'
+import { OauthClientImpl } from './oauth/oauth-impl'
+import type { TokenData } from './oauth/oauth-types'
+
+export const DEFAULT_BASE_AUTH_URL =
+	'https://marketplace.leadconnectorhq.com/oauth/chooselocation'
 
 /**
  * HighLevelClient with built in OAuth methods.
@@ -50,10 +53,11 @@ const client = new HighLevelClientWithOAuth({
 	clientSecret: '456',
 	redirectUri: 'http://localhost:3000/callback',
 	scopes: ['contacts.readonly'],
-}) /**
+})
+
+/**
  * The configuration for the HighLevel API client with OAuth.
  */
-
 export type HighLevelOauthConfig<T extends AccessType> = {
 	/**
 	 * base url for each API endpoint. no need to change unless you are proxying requests.
@@ -94,7 +98,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 * Available scopes will change depending on your app type.
 	 * @see https://marketplace.gohighlevel.com/apps
 	 */
-	scopes: ScopeLiterals<T>[] | (ScopeLiterals<T> | (string & {}))
+	scopes: HighLevelScopes<T>
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
 	 * @default `https://marketplace.leadconnectorhq.com/oauth/chooselocation`

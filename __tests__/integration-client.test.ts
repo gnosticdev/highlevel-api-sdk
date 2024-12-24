@@ -69,7 +69,7 @@ describe('Integrations Client', () => {
 
 	describe('API calls', () => {
 		let client: HighLevelIntegrationClient<'Sub-Account'>
-		let mockSpy: JestMock.SpyInstance<LocationsClient['GET']>
+		let mockSpy: JestMock.Spied<LocationsClient['GET']>
 
 		beforeEach(() => {
 			client = createHighLevelClient(

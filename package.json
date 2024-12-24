@@ -4,7 +4,6 @@
 		"url": "https://github.com/gnosticdev"
 	},
 	"dependencies": {
-		"hono": "^4.6.11",
 		"openapi-fetch": "^0.13.3"
 	},
 	"description": "SDK for the HighLevel API",
@@ -12,12 +11,11 @@
 		"@biomejs/biome": "^1.9.4",
 		"@types/bun": "^1.1.6",
 		"kleur": "^4.1.5",
-		"lefthook": "^1.7.17",
+		"lefthook": "^1.10.0",
 		"openapi-typescript": "7.4.4",
-		"release-it": "^17.6.0",
+		"release-it": "^17.11.0",
 		"tsup": "^8.3.0",
-		"typescript": "^5.8.0-dev.20241223",
-		"vitest": "^2.1.8"
+		"typescript": "5.6.3"
 	},
 	"exports": {
 		".": {
@@ -25,20 +23,15 @@
 			"require": "./dist/cjs/index.js",
 			"types": "./dist/index.d.ts"
 		},
-		"./configs": {
-			"import": "./dist/configs/index.js",
-			"require": "./dist/cjs/configs/index.js",
-			"types": "./dist/configs/index.d.ts"
-		},
-		"./configs/*": {
-			"import": "./dist/configs/oauth.js",
-			"require": "./dist/cjs/configs/oauth.js",
-			"types": "./dist/configs/oauth.d.ts"
-		},
 		"./oauth": {
 			"import": "./dist/oauth.js",
 			"require": "./dist/cjs/oauth.js",
 			"types": "./dist/oauth.d.ts"
+		},
+		"./oauth/types": {
+			"import": "./dist/oauthTypes.js",
+			"require": "./dist/cjs/oauthTypes.js",
+			"types": "./dist/oauthTypes.d.ts"
 		},
 		"./scopes": {
 			"import": "./dist/scopes.js",
@@ -77,7 +70,7 @@
 	],
 	"license": "MIT",
 	"name": "@gnosticdev/highlevel-sdk",
-	"packageManager": "bun@1.1.31",
+	"packageManager": "bun@1.1.42",
 	"private": false,
 	"publishConfig": {
 		"access": "public"
@@ -100,7 +93,7 @@
 		"start-test": "bun test --hot",
 		"typecheck": "bun tsc -p tsconfig.json"
 	},
-	"trustedDependencies": ["@biomejs/biome"],
+	"trustedDependencies": ["@biomejs/biome", "esbuild", "lefthook"],
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"version": "1.4.0"

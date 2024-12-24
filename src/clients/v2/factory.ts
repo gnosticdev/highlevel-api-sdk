@@ -1,14 +1,14 @@
 import type { Client } from 'openapi-fetch'
 import type { AccessType, FilteredScopeNames } from '../../lib/type-utils'
-import type { HighLevelClientConfig } from './default-client'
-import { HighLevelClient } from './default-client'
+import type { HighLevelClientConfig } from './base'
+import { HighLevelClient } from './base'
 import {
 	HighLevelIntegrationClient,
 	type PrivateIntegrationConfig,
 } from './integration-client'
 import type { HighLevelOauthConfig } from './oauth-client'
 import { HighLevelClientWithOAuth } from './oauth-client'
-import type { BaseOauthClient } from './oauth/impl'
+import type { BaseOauthClient } from './oauth/oauth-impl'
 
 type SubAccountScopeNames = FilteredScopeNames<'Sub-Account'>
 type SubAccountClientMap = {
@@ -40,13 +40,21 @@ function isOauthConfig<T extends AccessType>(
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	config: AuthConfig<T, any>,
 ): config is HighLevelOauthConfig<T> {
-	return 'clientId' in config
+	return 'clientId' in config && 'clientSecret' in config
 }
+
 function isIntegrationConfig<T extends AccessType>(
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	config: AuthConfig<T, any>,
 ): config is PrivateIntegrationConfig<T> {
 	return 'privateToken' in config
+}
+
+class HighLevelSDKError extends Error {
+	constructor(message: string, options: ErrorOptions) {
+		super(message, options)
+		this.name = 'HighLevelSDKError'
+	}
 }
 
 /**
@@ -164,11 +172,13 @@ export function createHighLevelClient<
 		) as TClient
 	}
 
-	throw new Error('Invalid authentication type in createHighLevelClient')
+	throw new HighLevelSDKError(
+		'Invalid authentication type in createHighLevelClient',
+		{
+			cause: {
+				authConfig,
+				clientConfig,
+			},
+		},
+	)
 }
-
-const client = createHighLevelClient({}, 'integration', {
-	accessType: 'Agency',
-	privateToken: '1234567890',
-	scopes: ['saas/company.write'],
-})

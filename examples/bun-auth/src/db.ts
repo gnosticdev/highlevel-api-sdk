@@ -1,5 +1,5 @@
 import type { Database } from 'bun:sqlite'
-import type { AccessTokenResponse } from '@gnosticdev/highlevel-sdk/configs/oauth'
+import type { AccessTokenResponse } from '@gnosticdev/highlevel-sdk/oauth/types'
 
 export type DBTokenData = {
 	id?: number

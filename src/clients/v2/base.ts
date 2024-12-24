@@ -24,7 +24,6 @@ import type * as Workflows from '../../generated/v2/openapi/workflows'
 
 import type { Client, ClientOptions } from 'openapi-fetch'
 import createClient from 'openapi-fetch'
-import type { HeadersOptions } from 'openapi-fetch/src/index.js'
 import type { AccessType } from '../../lib/type-utils'
 import {
 	type AuthHeaders,
@@ -33,7 +32,19 @@ import {
 } from './client-types'
 import { createHighLevelClient } from './factory'
 import type { HighLevelClientInterface } from './interface'
-import type { BaseOauthClient, OauthClientImpl } from './oauth/impl'
+import type { BaseOauthClient, OauthClientImpl } from './oauth/oauth-impl'
+
+export const DEFAULT_BASE_URL = 'https://services.leadconnectorhq.com'
+/**
+ * Configuration used on every request made by the HighLevelClient.
+ */
+export interface HighLevelClientConfig extends ClientOptions {
+	/**
+	 * base url for each API endpoint. no need to change unless you are proxying requests.
+	 * @default 'https://services.leadconnectorhq.com'
+	 */
+	baseUrl?: string
+}
 
 function createClientMaybeAuth<
 	TPaths extends {},
@@ -56,13 +67,14 @@ function createClientMaybeAuth<
 /**
  * Default client for HighLevel API endpoints.
  *
- * _NOTE: use the `createHighLevelClient` function to create an instance of this client._
+ * @remarks use the `createHighLevelClient` function to create an instance of this client without handling generic types.
+ *
  * @see {@link createHighLevelClient}
- * @implements {@link HighLevelClientInterface}
  *
  * @example
  * ```ts
- * const client = new HighLevelClient({})
+ * const client = new HighLevelClient({}, {headers: {Authorization: 'Bearer 1234567890'}})
+ * const locations = client.locations.GET('/locations/search', {query: {name: 'John Doe'}})
  * ```
  */
 export class HighLevelClient<
@@ -287,20 +299,20 @@ export class HighLevelClient<
 		)
 	}
 }
-export const DEFAULT_BASE_URL = 'https://services.leadconnectorhq.com' /**
- * Highlevel client config (`openapi-fetch` client options)
- */
 
-export interface HighLevelClientConfig extends Omit<ClientOptions, 'baseUrl'> {
-	/**
-	 * base url for each API endpoint. no need to change unless you are proxying requests.
-	 * @default 'https://services.leadconnectorhq.com'
-	 */
-	baseUrl?: string
-	/**
-	 * The headers to send with each request.
-	 *
-	 * @default {}
-	 */
-	headers?: HeadersOptions
-}
+const client = new HighLevelClient()
+client.contacts.GET('/contacts/', {
+	params: {
+		header: { Authorization: 'Bearer 1234567890', Version: '2021-07-28' },
+		query: { query: 'John Doe', locationId: '1234567890' },
+	},
+})
+
+// with Authentication headers
+const clientWithAuth = new HighLevelClient(
+	{},
+	{ Authorization: 'Bearer 1234567890', Version: '2021-07-28' },
+)
+clientWithAuth.contacts.GET('/contacts/', {
+	params: { query: { query: 'johndoe@email.com', locationId: '1234567890' } },
+})

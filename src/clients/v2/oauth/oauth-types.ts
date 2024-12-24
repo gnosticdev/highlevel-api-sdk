@@ -139,6 +139,3 @@ export interface OAuthClientInterface<T extends AccessType> {
 	 */
 	refreshAccessToken(): Promise<AccessTokenResponse>
 }
-
-export const DEFAULT_BASE_AUTH_URL =
-	'https://marketplace.leadconnectorhq.com/oauth/chooselocation'

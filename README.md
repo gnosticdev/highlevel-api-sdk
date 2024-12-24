@@ -29,52 +29,69 @@ npm add @gnosticdev/highlevel-sdk
 
 ### Using the HighLevel Client
 
-The HighLevel client is the main client for interacting with the HighLevel API. It includes all of the endpoints for both v1 and v2 of the API. It includes a custom OAuth2 client for working with HighLevel's OAuth2 implementation.
+The HighLevel client can be created with different configurations:
 
-_Recommended: if using OAuth2, store tokens in a DB like SQLite by passing in a storageFunction. Check out the auth example [example](./examples/bun-auth/)_
+- **Basic Client**: Without built-in authentication.
+
+  ```ts
+  const client = createHighLevelClient()
+
+  // or pass in the client config
+  const client = createHighLevelClient({
+    baseUrl: 'https://api.custom-url.com',
+  })
+  ```
+
+- **Client with OAuth**: Requires OAuth configuration.
+
+  ```ts
+  const client = createHighLevelClient({}, 'oauth', {
+      clientId: 'your-client-id',
+      clientSecret: 'your-client-secret',
+      redirectUri: 'http://localhost:3000/callback',
+      accessType: 'Sub-Account',
+      scopes: ['contacts.readonly']
+  })
+  ```
+
+- **Client with Private Integration**: Requires private integration configuration.
+
+  ```ts
+  const client = createHighLevelClient({}, 'integration', {
+      privateToken: 'your-token',
+      accessType: 'Agency',
+      scopes: ['saas/company.write']
+  })
+  ```
+
+### Error Handling
+
+The SDK uses `openapi-fetch` under the hood, which returns both `data` and `error` properties for type-safe error handling.
 
 ```ts
 import { createHighLevelClient } from "@gnosticdev/highlevel-sdk"
 
-// Endpoints with pre-configured OAuth support
-const client = createHighLevelClient({
-    oauthConfig: {
-        accessType: 'Sub-Account',
-        clientId: process.env.HIGHLEVEL_CLIENT_ID,
-        clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET,
-        redirectUri: 'http://localhost:3000/oauth/callback',
-        // scopes will be limited based on the accessType.
-        scopes: [
-            'locations.write',
-            'contacts.readonly',
-            // ... other scopes
-        ],
-        // Optional: function to store the token data. If not provided, will be available in memory only.
-        storageFunction: async (tokenData) => {
-            db.saveTokenResponse({
-                access_token: tokenData.access_token,
-                expiresAt: tokenData.expiresAt,
-                refresh_token: tokenData.refresh_token,
-                locationId: tokenData.locationId,
-                userId: tokenData.userId,
-            })
-            return tokenData
-    },
-    },
+// Create client with OAuth2 support
+const client = createHighLevelClient({}, 'oauth', {
+    clientId: process.env.HIGHLEVEL_CLIENT_ID!,
+    clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET!,
+    redirectUri: 'http://localhost:3000/oauth/callback',
+    accessType: 'Sub-Account',
+    scopes: ['contacts.readonly'],
+    // Optional: store tokens in your database
+    storageFunction: async (tokenData) => {
+        await db.saveTokenResponse({
+            access_token: tokenData.access_token,
+            expiresAt: tokenData.expiresAt,
+            refresh_token: tokenData.refresh_token,
+            locationId: tokenData.locationId,
+            userId: tokenData.userId,
+        })
+        return tokenData
+    }
 })
 
-// If using a private integration, you can use the private integration client
-const client = createHighLevelClient({
-    integrationConfig: {
-        privateToken: process.env.HIGHLEVEL_PRIVATE_TOKEN,
-        scopes: ['contacts.readonly'],
-    },
-})
-
-// if using your own OAuth2 implementation
-const client = new HighLevelClient()
-
-// Example: Get contacts with OAuth2
+// Example: Get contacts with error handling
 const { data, error } = await client.contacts.GET('/contacts/', {
     params: {
         query: {
@@ -82,21 +99,32 @@ const { data, error } = await client.contacts.GET('/contacts/', {
             query: 'John Doe',
             limit: 10,
         },
-        header: {
-            Authorization: `Bearer ${client.oauth.getAccessToken()}`,
-            Version: '2021-07-28',
-        },
     },
 })
+
+if (error) {
+    console.error('Error fetching contacts:', error.message)
+    // Handle error appropriately
+    return
+}
+
+// Type-safe response data
+console.log(data.contacts)
 ```
 
 ### OAuth2 Support
 
-The oauthclient is available on the HighLevelClient instance. It has specific methods for working with OAuth2.
+The OAuth client is available on the HighLevelClient instance when created with OAuth configuration:
 
 ```ts
-const accessToken = client.oauth.getAccessToken()
-const refreshToken = client.oauth.getRefreshToken()
+// Generate authorization URL
+const authUrl = client.oauth.getAuthorizationUrl()
+
+// Exchange auth code for token
+const token = await client.oauth.exchangeToken(authCode)
+
+// Get access token (automatically refreshes if expired)
+const accessToken = await client.oauth.getAccessToken()
 ```
 
 ### Using the v1 Client
@@ -121,25 +149,61 @@ const { data, error } = await v1Client.GET('/v1/contacts', {
 })
 ```
 
-### OAuth2 Support
+### Using the Webhooks Client
 
-The SDK includes built-in OAuth2 support with methods to:
-
-- Create the authorization URL
-- Get auth code from redirect
-- Get a new access token
-- Refresh the access token when it expires
+The SDK includes a typed client for handling HighLevel webhooks. This provides type safety and validation for incoming webhook payloads:
 
 ```ts
-// Generate authorization URL
-const authUrl = client.oauth.getAuthorizationURL()
+import { createWebhooksClient } from "@gnosticdev/highlevel-sdk"
 
-// Exchange auth code for token
-const token = await client.oauth.exchangeToken(authCode)
+const webhooks = createWebhooksClient()
 
-// Get access token (automatically refreshes if expired)
-const accessToken = await client.oauth.getAccessToken()
-```
+// Example: Hono route handler for Contact Create webhook
+app.post('/webhooks/contact-create', async (ctx) => {
+  const { data, error } = await webhooks.ContactCreate.POST({
+    body: ctx.req.body
+  })
+
+  if (error) {
+    console.error('Invalid webhook payload:', error)
+    return res.status(400).json(error)
+  }
+
+  // data is fully typed based on the webhook type
+  console.log('Contact created:', data)
+  res.status(200).end()
+})
+
+// Example: Handle App Installation webhook
+app.post('/webhooks/app-install', async (req, res) => {
+  const { data, error } = await webhooks.AppInstall.POST({
+    body: req.body
+  })
+
+  if (error) {
+    console.error('Invalid app install payload:', error)
+    return res.status(400).json(error)
+  }
+
+  // Handle new app installation
+  const { locationId, userId, companyId } = data
+  await db.saveNewInstallation({ locationId, userId, companyId })
+
+  res.status(200).end()
+})
+
+Available webhook types include:
+- AppointmentCreate
+- AppInstall
+- ContactCreate
+- ContactUpdate
+- NoteCreate
+- NoteUpdate
+- OpportunityCreate
+- UserCreate
+- And more...
+
+The webhooks client provides full type safety and validation for all webhook payloads defined in the HighLevel API.
 
 ### Endpoint Types
 

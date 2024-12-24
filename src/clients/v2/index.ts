@@ -1,4 +1,4 @@
-import { HighLevelClient, type HighLevelClientConfig } from './default-client'
+import { HighLevelClient, type HighLevelClientConfig } from './base'
 import { createHighLevelClient } from './factory'
 import { HighLevelIntegrationClient } from './integration-client'
 import { HighLevelClientWithOAuth } from './oauth-client'

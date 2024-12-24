@@ -26,9 +26,9 @@ import type * as Workflows from '../../generated/v2/openapi/workflows'
 
 import type { Client } from 'openapi-fetch'
 import type { AccessType } from '../../lib/type-utils'
+import type { HighLevelClientConfig } from './base'
 import type { ClientWithAuth } from './client-types'
-import type { HighLevelClientConfig } from './default-client'
-import type { BaseOauthClient, OauthClientImpl } from './oauth/impl'
+import type { BaseOauthClient, OauthClientImpl } from './oauth/oauth-impl'
 
 export interface HighLevelClientInterface<
 	T extends AccessType,
