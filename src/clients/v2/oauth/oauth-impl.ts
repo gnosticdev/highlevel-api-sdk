@@ -17,10 +17,14 @@ import type {
 // Custom Oauth2 Implementation
 // ---------------------------------
 
+function isPromise<T>(value: T | Promise<T>): value is Promise<T> {
+	return typeof value === 'object' && value !== null && 'then' in value
+}
+
 /**
  * Base `openapi-fetch` client for HighLevel OAuth API
  */
-export type BaseOauthClient = Client<Oauth.paths, `${string}/${string}`>
+export type BaseOauthClient = Client<Oauth.paths>
 
 /**
  * This client has built in methods for generating, refreshing, and storing tokens.
@@ -106,7 +110,7 @@ export class OauthClientImpl<T extends AccessType>
 	updateTokenData(updatedTokenData: Partial<TokenData>) {
 		// store
 		this.tokenData = { ...this.tokenData, ...updatedTokenData } as TokenData
-		this.storeTokenData(this.tokenData as TokenData)
+		this.storeTokenFn(this.tokenData)
 	}
 
 	/**

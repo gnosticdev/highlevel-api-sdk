@@ -47,14 +47,6 @@ export class HighLevelClientWithOAuth<
 	}
 }
 
-const client = new HighLevelClientWithOAuth({
-	accessType: 'Sub-Account',
-	clientId: '123',
-	clientSecret: '456',
-	redirectUri: 'http://localhost:3000/callback',
-	scopes: ['contacts.readonly'],
-})
-
 /**
  * The configuration for the HighLevel API client with OAuth.
  */

@@ -11,14 +11,14 @@ const openapiTypeEntries: Record<`types/${string}`, string> = Array.from(
 	return acc
 }, {})
 
-console.log(openapiTypeEntries)
-
 // Output esm and cjs bundles
 export default defineConfig((override) => ({
 	entry: {
 		index: 'src/clients/v2/index.ts',
-		oauth: 'src/clients/v2/oauth/oauth-impl.ts',
-		oauthTypes: 'src/clients/v2/oauth/oauth-types.ts',
+		'oauth-impl': 'src/clients/v2/oauth/oauth-impl.ts',
+		'oauth-types': 'src/clients/v2/oauth/oauth-types.ts',
+		'oauth-client': 'src/clients/v2/oauth-client.ts',
+		'integration-client': 'src/clients/v2/integration-client.ts',
 		v1: 'src/clients/v1/index.ts',
 		scopes: 'src/lib/scopes.ts',
 		webhooks: 'src/generated/v2/custom/webhooks.ts',
