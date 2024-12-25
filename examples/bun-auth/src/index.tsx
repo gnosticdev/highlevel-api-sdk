@@ -2,8 +2,8 @@
 /** @jsxImportSource hono/jsx */
 
 import { Database } from 'bun:sqlite'
+import type { HighLevelOauthConfig } from '@gnosticdev/highlevel-sdk'
 import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
-import type { HighLevelOauthConfig } from '@gnosticdev/highlevel-sdk/configs'
 import type { Serve } from 'bun'
 import { Hono, type MiddlewareHandler } from 'hono'
 import { cors } from 'hono/cors'
@@ -33,23 +33,21 @@ const app = new Hono<{ Variables: HLVariables }>()
 /**
  * Create a single instance of the OauthClient to be used throughout the application
  */
-const client = createHighLevelClient({
-  oauthConfig: {
-    accessType: 'Sub-Account',
-    clientId: process.env.CLIENT_ID!,
-    clientSecret: process.env.CLIENT_SECRET!,
-    scopes: ['locations.readonly', 'users.readonly'],
-    redirectUri: 'http://localhost:3000/auth/callback',
-    storageFunction: async (tokenData) => {
-      db.saveTokenResponse({
-        access_token: tokenData.access_token,
-        expiresAt: tokenData.expiresAt,
-        refresh_token: tokenData.refresh_token,
-        locationId: tokenData.locationId,
-        userId: tokenData.userId,
-      })
-      return tokenData
-    },
+const client = createHighLevelClient({}, 'oauth', {
+  accessType: 'Sub-Account',
+  clientId: process.env.CLIENT_ID!,
+  clientSecret: process.env.CLIENT_SECRET!,
+  scopes: ['locations.readonly', 'users.readonly'],
+  redirectUri: 'http://localhost:3000/auth/callback',
+  storageFunction: async (tokenData) => {
+    db.saveTokenResponse({
+      access_token: tokenData.access_token,
+      expiresAt: tokenData.expiresAt,
+      refresh_token: tokenData.refresh_token,
+      locationId: tokenData.locationId,
+      userId: tokenData.userId,
+    })
+    return tokenData
   },
 })
 
@@ -144,7 +142,9 @@ app.get('/locations', async (c) => {
   })
   if (error) {
     console.error(error)
-    return c.html(<Result message={error.message ?? 'Unknown error'} />)
+    return c.html(
+      <Result message={Array.isArray(error.message) ? error.message.join(', ') : (error.message ?? 'Unknown error')} />,
+    )
   }
   return c.json(data)
 })

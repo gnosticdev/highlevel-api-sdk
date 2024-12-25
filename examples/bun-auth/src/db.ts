@@ -33,9 +33,9 @@ export const getAccessToken = (db: Database): DBTokenData | null => {
 /**
  * Save a token response to the database
  * @param db - The database instance
- * @param dbRow - The token response to save
+ * @param tokenData - The token response to save
  */
-export const saveTokenResponse = (db: Database, dbRow: DBTokenData) => {
+export const saveTokenResponse = (db: Database, tokenData: DBTokenData) => {
 	db.prepare<DBTokenData, InsertDBRow>(
 		`INSERT INTO tokens_table (userId, locationId, access_token, refresh_token, expiresAt)
             VALUES ($userId, $locationId, $access_token, $refresh_token, $expiresAt)
@@ -46,11 +46,11 @@ export const saveTokenResponse = (db: Database, dbRow: DBTokenData) => {
             expiresAt = excluded.expiresAt;
             `,
 	).run({
-		$userId: dbRow.userId,
-		$locationId: dbRow.locationId,
-		$access_token: dbRow.access_token,
-		$expiresAt: dbRow.expiresAt,
-		$refresh_token: dbRow.refresh_token,
+		$userId: tokenData.userId,
+		$locationId: tokenData.locationId,
+		$access_token: tokenData.access_token,
+		$expiresAt: tokenData.expiresAt,
+		$refresh_token: tokenData.refresh_token,
 	})
 }
 
