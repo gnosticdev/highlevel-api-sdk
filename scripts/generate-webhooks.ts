@@ -48,5 +48,5 @@ async function generateWebhooksTypes() {
 	// write the webhook modules to a file
 	await Bun.write(WEBHOOKS_OUTPUT_TYPES, webhooksModules)
 
-	console.log('generated webhooks')
+	console.log('✨ Generated webhook types and modules')
 }
