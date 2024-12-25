@@ -1,3 +1,6 @@
+import type { Client, ClientOptions } from 'openapi-fetch'
+import createClient from 'openapi-fetch'
+
 import type * as Businesses from '../../generated/v2/openapi/businesses'
 import type * as Calendars from '../../generated/v2/openapi/calendars'
 import type * as Campaigns from '../../generated/v2/openapi/campaigns'
@@ -21,20 +24,23 @@ import type * as SocialMediaPosting from '../../generated/v2/openapi/social-medi
 import type * as Surveys from '../../generated/v2/openapi/surveys'
 import type * as Users from '../../generated/v2/openapi/users'
 import type * as Workflows from '../../generated/v2/openapi/workflows'
-
-import type { Client, ClientOptions } from 'openapi-fetch'
-import createClient from 'openapi-fetch'
 import type { AccessType } from '../../lib/type-utils'
+
+import { createHighLevelClient } from '.'
 import {
 	type AuthHeaders,
 	type ClientWithAuth,
 	createClientWithAuth,
 } from './client-types'
-import { createHighLevelClient } from './factory'
 import type { HighLevelClientInterface } from './interface'
 import type { BaseOauthClient, OauthClientImpl } from './oauth/oauth-impl'
 
+/**
+ * default base url for the HighLevel API.
+ * @default 'https://services.leadconnectorhq.com'
+ */
 export const DEFAULT_BASE_URL = 'https://services.leadconnectorhq.com'
+
 /**
  * Configuration used on every request made by the HighLevelClient.
  */
@@ -78,79 +84,160 @@ function createClientMaybeAuth<
  * ```
  */
 export class HighLevelClient<
+	/**
+	 * access level for the client. `Sub-Account` or `Agency`
+	 */
 	T extends AccessType,
+	/**
+	 * oauth client implementation.
+	 */
 	TOauth extends BaseOauthClient | OauthClientImpl<T> = BaseOauthClient,
+	/**
+	 * headers for the client.
+	 */
 	THeaders extends AuthHeaders | undefined = undefined,
 > implements HighLevelClientInterface<T, TOauth>
 {
+	/**
+	 * oauth client implementation.
+	 */
 	oauth: TOauth
+	/**
+	 * businesses client implementation.
+	 */
 	businesses: THeaders extends undefined
 		? Client<Businesses.paths>
 		: ClientWithAuth<Businesses.paths>
+	/**
+	 * invoices client implementation.
+	 */
 	invoices: THeaders extends undefined
 		? Client<Invoices.paths>
 		: ClientWithAuth<Invoices.paths>
+	/**
+	 * opportunities client implementation.
+	 */
 	opportunities: THeaders extends undefined
 		? Client<Opportunities.paths>
 		: ClientWithAuth<Opportunities.paths>
+	/**
+	 * campaigns client implementation.
+	 */
 	campaigns: THeaders extends undefined
 		? Client<Campaigns.paths>
 		: ClientWithAuth<Campaigns.paths>
+	/**
+	 * conversations client implementation.
+	 */
 	conversations: THeaders extends undefined
 		? Client<Conversations.paths>
 		: ClientWithAuth<Conversations.paths>
+	/**
+	 * products client implementation.
+	 */
 	products: THeaders extends undefined
 		? Client<Products.paths>
 		: ClientWithAuth<Products.paths>
+	/**
+	 * courses client implementation.
+	 */
 	courses: THeaders extends undefined
 		? Client<Courses.paths>
 		: ClientWithAuth<Courses.paths>
+	/**
+	 * surveys client implementation.
+	 */
 	surveys: THeaders extends undefined
 		? Client<Surveys.paths>
 		: ClientWithAuth<Surveys.paths>
+	/**
+	 * payments client implementation.
+	 */
 	payments: THeaders extends undefined
 		? Client<Payments.paths>
 		: ClientWithAuth<Payments.paths>
+	/**
+	 * workflows client implementation.
+	 */
 	workflows: THeaders extends undefined
 		? Client<Workflows.paths>
 		: ClientWithAuth<Workflows.paths>
+	/**
+	 * snapshots client implementation.
+	 */
 	snapshots: THeaders extends undefined
 		? Client<Snapshots.paths>
 		: ClientWithAuth<Snapshots.paths>
+	/**
+	 * saasApi client implementation.
+	 */
 	saasApi: THeaders extends undefined
 		? Client<SaasApi.paths>
 		: ClientWithAuth<SaasApi.paths>
+	/**
+	 * users client implementation.
+	 */
 	users: THeaders extends undefined
 		? Client<Users.paths>
 		: ClientWithAuth<Users.paths>
+	/**
+	 * funnels client implementation.
+	 */
 	funnels: THeaders extends undefined
 		? Client<Funnels.paths>
 		: ClientWithAuth<Funnels.paths>
+	/**
+	 * locations client implementation.
+	 */
 	locations: THeaders extends undefined
 		? Client<Locations.paths>
 		: ClientWithAuth<Locations.paths>
+	/**
+	 * links client implementation.
+	 */
 	links: THeaders extends undefined
 		? Client<Links.paths>
 		: ClientWithAuth<Links.paths>
+	/**
+	 * companies client implementation.
+	 */
 	companies: THeaders extends undefined
 		? Client<Companies.paths>
 		: ClientWithAuth<Companies.paths>
+	/**
+	 * contacts client implementation.
+	 */
 	contacts: THeaders extends undefined
 		? Client<Contacts.paths>
 		: ClientWithAuth<Contacts.paths>
+	/**
+	 * forms client implementation.
+	 */
 	forms: THeaders extends undefined
 		? Client<Forms.paths>
 		: ClientWithAuth<Forms.paths>
+	/**
+	 * calendars client implementation.
+	 */
 	calendars: THeaders extends undefined
 		? Client<Calendars.paths>
 		: ClientWithAuth<Calendars.paths>
+	/**
+	 * medias client implementation.
+	 */
 	medias: THeaders extends undefined
 		? Client<Medias.paths>
 		: ClientWithAuth<Medias.paths>
+	/**
+	 * social media posting client implementation.
+	 */
 	socialMediaPosting: THeaders extends undefined
 		? Client<SocialMediaPosting.paths>
 		: ClientWithAuth<SocialMediaPosting.paths>
 
+	/**
+	 * client configuration
+	 */
 	_clientConfig: HighLevelClientConfig
 
 	constructor(
@@ -299,20 +386,3 @@ export class HighLevelClient<
 		)
 	}
 }
-
-const client = new HighLevelClient()
-client.contacts.GET('/contacts/', {
-	params: {
-		header: { Authorization: 'Bearer 1234567890', Version: '2021-07-28' },
-		query: { query: 'John Doe', locationId: '1234567890' },
-	},
-})
-
-// with Authentication headers
-const clientWithAuth = new HighLevelClient(
-	{},
-	{ Authorization: 'Bearer 1234567890', Version: '2021-07-28' },
-)
-clientWithAuth.contacts.GET('/contacts/', {
-	params: { query: { query: 'johndoe@email.com', locationId: '1234567890' } },
-})

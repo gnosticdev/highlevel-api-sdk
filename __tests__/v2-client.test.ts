@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
-import createClient, { type Client, type FetchResponse } from 'openapi-fetch'
+import type { Client, FetchResponse } from 'openapi-fetch'
+import { createHighLevelClient } from '../src/clients/v2'
 import { DEFAULT_BASE_URL, HighLevelClient } from '../src/clients/v2/base'
 import type { AuthHeaders } from '../src/clients/v2/client-types'
-import { createHighLevelClient } from '../src/clients/v2/factory'
 import type { HighLevelOauthConfig } from '../src/clients/v2/oauth-client'
 import {
 	DEFAULT_BASE_AUTH_URL,
@@ -15,7 +15,6 @@ import {
 	OauthClientImpl,
 } from '../src/clients/v2/oauth/oauth-impl'
 import type * as Locations from '../src/generated/v2/openapi/locations'
-import type * as OAuth from '../src/generated/v2/openapi/oauth'
 import type { AccessType } from '../src/lib/type-utils'
 
 type LocationsResponse = FetchResponse<
@@ -30,7 +29,7 @@ describe('Base Client', () => {
 
 	beforeEach(() => {
 		baseClient = new HighLevelClient()
-		baseOauthClient = createClient<OAuth.paths>({ baseUrl: DEFAULT_BASE_URL })
+		baseOauthClient = createHighLevelClient().oauth
 	})
 
 	it('should create base client with default configuration', () => {
