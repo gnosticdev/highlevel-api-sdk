@@ -2,6 +2,7 @@ import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, {
 	type AnnotatedSchemaObject,
+	type MediaTypeObject,
 	type OpenAPI3,
 	type OperationObject,
 	type ParameterObject,
@@ -35,6 +36,37 @@ function generateSchemaFromExample(example: any): SchemaObject {
 	return { type: typeof example as 'string' | 'number' | 'boolean' }
 }
 
+function addExampleAsRequestSchema(
+	example: AnnotatedSchemaObject,
+): SchemaObject {
+	if (typeof example !== 'object' || example === null) {
+		return { type: typeof example as 'string' | 'number' | 'boolean' }
+	}
+
+	if (Array.isArray(example)) {
+		return {
+			type: 'array',
+			items: addExampleAsRequestSchema(example[0]),
+		}
+	}
+
+	const properties: Record<string, SchemaObject> = {}
+	for (const [key, value] of Object.entries(example)) {
+		properties[key] = addExampleAsRequestSchema(value)
+	}
+
+	return {
+		type: 'object',
+		properties,
+		// Make all properties optional for request schemas
+		required: undefined,
+	}
+}
+
+function isMediaTypeObject(obj: unknown): obj is MediaTypeObject {
+	return typeof obj === 'object' && obj !== null && !('$ref' in obj)
+}
+
 function addComponentSchemas(openapiJson: OpenAPI3) {
 	if (!openapiJson.components) {
 		openapiJson.components = {}
@@ -48,8 +80,32 @@ function addComponentSchemas(openapiJson: OpenAPI3) {
 	}
 
 	for (const path of objectKeys(openapiJson.paths)) {
+		if (typeof path === 'number') continue
+
 		for (const method of objectKeys(openapiJson.paths[path]!)) {
 			const operation = openapiJson.paths[path]![method] as OperationObject
+
+			// Handle request body examples
+			if (operation.requestBody && !isReferenceObject(operation.requestBody)) {
+				const jsonContent = operation.requestBody.content?.['application/json']
+				if (
+					jsonContent &&
+					isMediaTypeObject(jsonContent) &&
+					!isReferenceObject(jsonContent.schema) &&
+					jsonContent.schema?.example
+				) {
+					const schemaName = `${path.replace(/\//g, '_')}_${method}_request`
+					openapiJson.components.schemas[schemaName] =
+						addExampleAsRequestSchema(jsonContent.schema.example)
+
+					// Replace the original schema with a reference
+					jsonContent.schema = {
+						$ref: `#/components/schemas/${schemaName}`,
+					}
+				}
+			}
+
+			// Handle response examples (existing code)
 			if (operation.responses) {
 				for (const statusCode of objectKeys(operation.responses)) {
 					const response = operation.responses[statusCode]
@@ -104,7 +160,9 @@ async function createOpenapiJsonFile() {
 	)
 
 	await Bun.$`bunx --bun postman-to-openapi ${POSTMAN_JSON_FILE} -f ${OPENAPI_JSON_FILE} -o ${optionsJson.filepath}`.quiet()
+
 	const openapiJson: OpenAPI3 = await Bun.file(OPENAPI_JSON_FILE).json()
+
 	return openapiJson
 }
 
@@ -162,11 +220,11 @@ export async function createV1Types() {
 		kleur.green('Successfully converted postman json to openapi json'),
 	)
 	// convert openapi json to typescript types using openapi-typescript
-	const openapiTypes = await openapiTS(openapiJson, {
-		defaultNonNullable: true,
+	const openapiTypes = await openapiTS(Bun.pathToFileURL(OPENAPI_JSON_FILE), {
 		version: 3.1,
 		alphabetize: true,
 		exportType: true,
+		emptyObjectsUnknown: true,
 	})
 	const data = astToString(openapiTypes)
 	await Bun.write('src/generated/v1/openapi.ts', data)

@@ -112,9 +112,9 @@ export type paths = {
 				path?: never
 				cookie?: never
 			}
-			requestBody?: {
+			requestBody: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_appointments__post_request']
 				}
 			}
 			responses: {
@@ -251,7 +251,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_request']
 				}
 			}
 			responses: {
@@ -327,7 +327,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -389,7 +389,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_appointments_{appointmentId}_status_put_request']
 				}
 			}
 			responses: {
@@ -716,7 +716,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_calendars_services__post_request']
 				}
 			}
 			responses: {
@@ -800,7 +800,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_request']
 				}
 			}
 			responses: {
@@ -1003,7 +1003,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_calendars_teams__post_request']
 				}
 			}
 			responses: {
@@ -1087,7 +1087,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_request']
 				}
 			}
 			responses: {
@@ -1357,7 +1357,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts__post_request']
 				}
 			}
 			responses: {
@@ -1525,7 +1525,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -1594,7 +1594,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -1673,7 +1673,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -1799,7 +1799,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_request']
 				}
 			}
 			responses: {
@@ -1946,7 +1946,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_request']
 				}
 			}
 			responses: {
@@ -2027,7 +2027,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -2090,7 +2090,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_request']
 				}
 			}
 			responses: {
@@ -2293,7 +2293,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_request']
 				}
 			}
 			responses: {
@@ -2440,7 +2440,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_request']
 				}
 			}
 			responses: {
@@ -2521,7 +2521,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -2588,7 +2588,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_request']
 				}
 			}
 			responses: {
@@ -2679,7 +2679,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{contactId}_workflow_{workflowId}_post_request']
 				}
 			}
 			responses: {
@@ -2690,7 +2690,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -2826,7 +2826,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_contacts_{id}_put_request']
 				}
 			}
 			responses: {
@@ -3097,7 +3097,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_custom-fields__post_request']
 				}
 			}
 			responses: {
@@ -3234,7 +3234,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_request']
 				}
 			}
 			responses: {
@@ -3310,7 +3310,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -3421,7 +3421,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_custom-values__post_request']
 				}
 			}
 			responses: {
@@ -3558,7 +3558,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_request']
 				}
 			}
 			responses: {
@@ -3634,7 +3634,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -3899,7 +3899,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_links__post_request']
 				}
 			}
 			responses: {
@@ -3983,7 +3983,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_links_{linkId}_put_request']
 				}
 			}
 			responses: {
@@ -4059,7 +4059,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -4170,7 +4170,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_locations__post_request']
 				}
 			}
 			responses: {
@@ -4307,7 +4307,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_locations_{locationId}_put_request']
 				}
 			}
 			responses: {
@@ -4466,7 +4466,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_request']
 				}
 			}
 			responses: {
@@ -4766,7 +4766,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_request']
 				}
 			}
 			responses: {
@@ -4913,7 +4913,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_request']
 				}
 			}
 			responses: {
@@ -4994,7 +4994,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -5061,7 +5061,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_request']
 				}
 			}
 			responses: {
@@ -5072,7 +5072,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -5230,7 +5230,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_request']
 				}
 			}
 			responses: {
@@ -5568,7 +5568,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_tags__post_request']
 				}
 			}
 			responses: {
@@ -5705,7 +5705,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_tags_{tagId}_put_request']
 				}
 			}
 			responses: {
@@ -5781,7 +5781,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -5961,7 +5961,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_users__post_request']
 				}
 			}
 			responses: {
@@ -6098,7 +6098,7 @@ export type paths = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': Record<string, never>
+					'application/json': components['schemas']['_v1_users_{userId}_put_request']
 				}
 			}
 			responses: {
@@ -6174,7 +6174,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
-						'application/json': Record<string, never>
+						'application/json': Record<string, unknown>
 					}
 				}
 				/** @description Bad Request */
@@ -6492,6 +6492,13 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_appointments__post_request: {
+			calendarId?: string
+			email?: string
+			phone?: string
+			selectedSlot?: string
+			selectedTimezone?: string
+		}
 		'_v1_appointments_{appointmentId}_delete_400_response': {
 			msg?: string
 		}
@@ -6569,6 +6576,10 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_appointments_{appointmentId}_put_request': {
+			selectedSlot?: string
+			selectedTimezone?: string
+		}
 		'_v1_appointments_{appointmentId}_status_put_400_response': {
 			msg?: string
 		}
@@ -6580,6 +6591,9 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_appointments_{appointmentId}_status_put_request': {
+			status?: string
 		}
 		_v1_appointments_slots_get_200_response: {
 			_dates_?: {
@@ -6802,6 +6816,106 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_calendars_services__post_request: {
+			appointmentTitle?: string
+			availability?: {
+				appointmentInfo?: {
+					perDay?: number
+					perSlot?: number
+				}
+				eventTiming?: {
+					slotBuffer?: number
+					slotDuration?: number
+					slotInterval?: number
+				}
+				officeHours?: {
+					friday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					monday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					saturday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					sunday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					thursday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					tuesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					wednesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+				}
+				schedule?: {
+					allowBookingAfter?: number
+					allowBookingAfterUnit?: string
+					allowBookingFor?: number
+					allowBookingForUnit?: string
+				}
+			}
+			confirmation?: {
+				form?: {
+					customFormId?: string
+					stickyContact?: boolean
+					stripe?: {
+						amount?: number
+						chargeDescription?: string
+						currency?: string
+					}
+				}
+				formSubmission?: {
+					content?: string
+					type?: string
+				}
+				notificationAndOther?: {
+					allowCancellation?: boolean
+					allowReschedule?: boolean
+					autoConfirm?: boolean
+					facebookPixelId?: string
+					googleInvitationEmails?: boolean
+					notes?: string
+					shouldSendAlertEmailsToAssignedMember?: boolean
+				}
+			}
+			description?: string
+			eventColor?: string
+			eventType?: string
+			name?: string
+			slug?: string
+			teamId?: string
+			teamMembers?: {
+				meetingLocation?: string
+				priority?: string
+				selected?: boolean
+				userId?: string
+			}[]
+		}
 		'_v1_calendars_services_{serviceId}_delete_400_response': {
 			msg?: string
 		}
@@ -6994,6 +7108,106 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_calendars_services_{serviceId}_put_request': {
+			appointmentTitle?: string
+			availability?: {
+				appointmentInfo?: {
+					perDay?: number
+					perSlot?: number
+				}
+				eventTiming?: {
+					slotBuffer?: number
+					slotDuration?: number
+					slotInterval?: number
+				}
+				officeHours?: {
+					friday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					monday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					saturday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					sunday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					thursday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					tuesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+					wednesday?: {
+						closeHour?: number
+						closeMinute?: number
+						openHour?: number
+						openMinute?: number
+					}[]
+				}
+				schedule?: {
+					allowBookingAfter?: number
+					allowBookingAfterUnit?: string
+					allowBookingFor?: number
+					allowBookingForUnit?: string
+				}
+			}
+			confirmation?: {
+				form?: {
+					customFormId?: string
+					stickyContact?: boolean
+					stripe?: {
+						amount?: number
+						chargeDescription?: string
+						currency?: string
+					}
+				}
+				formSubmission?: {
+					content?: string
+					type?: string
+				}
+				notificationAndOther?: {
+					allowCancellation?: boolean
+					allowReschedule?: boolean
+					autoConfirm?: boolean
+					facebookPixelId?: string
+					googleInvitationEmails?: boolean
+					notes?: string
+					shouldSendAlertEmailsToAssignedMember?: boolean
+				}
+			}
+			description?: string
+			eventColor?: string
+			eventType?: string
+			name?: string
+			slug?: string
+			teamId?: string
+			teamMembers?: {
+				meetingLocation?: string
+				priority?: string
+				selected?: boolean
+				userId?: string
+			}[]
+		}
 		_v1_calendars_services_get_200_response: {
 			services?: {
 				appointmentTitle?: string
@@ -7147,6 +7361,17 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_calendars_teams__post_request: {
+			calendarConfig?: {
+				calendarName?: string
+				description?: string
+				shouldAssignContactToTeamMember?: boolean
+				shouldSkipAssigningContactForExisting?: boolean
+				slug?: string
+			}
+			name?: string
+			userIds?: string[]
+		}
 		'_v1_calendars_teams_{teamId}_delete_400_response': {
 			msg?: string
 		}
@@ -7197,6 +7422,17 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_calendars_teams_{teamId}_put_request': {
+			calendarConfig?: {
+				calendarName?: string
+				description?: string
+				shouldAssignContactToTeamMember?: boolean
+				shouldSkipAssigningContactForExisting?: boolean
+				slug?: string
+			}
+			name?: string
+			userIds?: string[]
 		}
 		_v1_calendars_teams_get_200_response: {
 			teams?: {
@@ -7301,9 +7537,29 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_contacts__post_request: {
+			address1?: string
+			city?: string
+			companyName?: string
+			country?: string
+			customField?: {
+				__custom_field_id__?: string
+			}
+			dateOfBirth?: string
+			email?: string
+			firstName?: string
+			lastName?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			source?: string
+			state?: string
+			tags?: string[]
+			website?: string
+		}
 		'_v1_contacts_{contactId}_appointments__get_200_response': Record<
 			string,
-			never
+			unknown
 		>
 		'_v1_contacts_{contactId}_appointments__get_400_response': {
 			msg?: string
@@ -7379,6 +7635,10 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_contacts_{contactId}_notes__post_request': {
+			body?: string
+			userId?: string
+		}
 		'_v1_contacts_{contactId}_notes_{noteId}_delete_400_response': {
 			msg?: string
 		}
@@ -7415,6 +7675,10 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_contacts_{contactId}_notes_{noteId}_put_request': {
+			body?: string
+			userId?: string
+		}
 		'_v1_contacts_{contactId}_tags__delete_200_response': {
 			tags?: string[]
 		}
@@ -7444,6 +7708,9 @@ export type components = {
 				message?: string
 				rules?: string
 			}
+		}
+		'_v1_contacts_{contactId}_tags__post_request': {
+			tags?: string[]
 		}
 		'_v1_contacts_{contactId}_tasks__get_200_response': {
 			tasks?: {
@@ -7484,6 +7751,13 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_contacts_{contactId}_tasks__post_request': {
+			assignedTo?: string
+			description?: string
+			dueDate?: string
+			status?: string
+			title?: string
 		}
 		'_v1_contacts_{contactId}_tasks_{taskId}_delete_400_response': {
 			msg?: string
@@ -7529,6 +7803,13 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_put_request': {
+			assignedTo?: string
+			description?: string
+			dueDate?: string
+			status?: string
+			title?: string
+		}
 		'_v1_contacts_{contactId}_tasks_{taskId}_status_put_200_response': {
 			assignedTo?: string
 			description?: string
@@ -7553,6 +7834,9 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_contacts_{contactId}_tasks_{taskId}_status_put_request': {
+			status?: string
+		}
 		'_v1_contacts_{contactId}_workflow_{workflowId}_post_400_response': {
 			msg?: string
 		}
@@ -7562,6 +7846,9 @@ export type components = {
 		'_v1_contacts_{contactId}_workflow_{workflowId}_post_422_response': {
 			contactId?: string
 			workflowId?: string
+		}
+		'_v1_contacts_{contactId}_workflow_{workflowId}_post_request': {
+			eventStartTime?: string
 		}
 		'_v1_contacts_{id}_delete_400_response': {
 			msg?: string
@@ -7636,6 +7923,26 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_contacts_{id}_put_request': {
+			address1?: string
+			city?: string
+			companyName?: string
+			country?: string
+			customField?: {
+				__custom_field_id__?: string
+			}
+			dateOfBirth?: string
+			email?: string
+			firstName?: string
+			lastName?: string
+			name?: string
+			phone?: string
+			postalCode?: string
+			source?: string
+			state?: string
+			tags?: string[]
+			website?: string
 		}
 		_v1_contacts_lookup_get_200_response: {
 			contacts?: {
@@ -7714,6 +8021,20 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_custom-fields__post_request': {
+			acceptedFormat?: string[]
+			dataType?: string
+			isMultipalFile?: boolean
+			maxNumberOfFiles?: number
+			name?: string
+			options?: string[]
+			placeholder?: string
+			position?: number
+			textBoxListOptions?: {
+				label?: string
+				prefillValue?: string
+			}[]
+		}
 		'_v1_custom-fields_{customFieldId}_delete_400_response': {
 			msg?: string
 		}
@@ -7770,6 +8091,20 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_custom-fields_{customFieldId}_put_request': {
+			acceptedFormat?: string[]
+			dataType?: string
+			isMultipalFile?: boolean
+			maxNumberOfFiles?: number
+			name?: string
+			options?: string[]
+			placeholder?: string
+			position?: number
+			textBoxListOptions?: {
+				label?: string
+				prefillValue?: string
+			}[]
+		}
 		'_v1_custom-values__get_200_response': {
 			customFields?: {
 				fieldKey?: string
@@ -7805,6 +8140,10 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_custom-values__post_request': {
+			name?: string
+			value?: string
 		}
 		'_v1_custom-values_{customValueId}_delete_400_response': {
 			msg?: string
@@ -7851,6 +8190,10 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_custom-values_{customValueId}_put_request': {
+			name?: string
+			value?: string
 		}
 		_v1_forms__get_200_response: {
 			forms?: {
@@ -7930,6 +8273,10 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_links__post_request: {
+			name?: string
+			redirectTo?: string
+		}
 		'_v1_links_{linkId}_delete_400_response': {
 			msg?: string
 		}
@@ -7960,6 +8307,10 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_links_{linkId}_put_request': {
+			name?: string
+			redirectTo?: string
 		}
 		_v1_locations__get_200_response: {
 			locations?: {
@@ -8106,6 +8457,51 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_locations__post_request: {
+			address?: string
+			businessName?: string
+			city?: string
+			country?: string
+			email?: string
+			firstName?: string
+			lastName?: string
+			mailgun?: {
+				apiKey?: string
+				domain?: string
+			}
+			phone?: string
+			postalCode?: string
+			settings?: {
+				allowDuplicateContact?: boolean
+				allowDuplicateOpportunity?: boolean
+				allowFacebookNameMerge?: boolean
+				disableContactTimezone?: boolean
+			}
+			snapshot?: {
+				id?: string
+				type?: string
+			}
+			social?: {
+				blogRss?: string
+				facebookUrl?: string
+				foursquare?: string
+				googlePlaceId?: string
+				googlePlus?: string
+				instagram?: string
+				linkedIn?: string
+				pinterest?: string
+				twitter?: string
+				yelp?: string
+				youtube?: string
+			}
+			state?: string
+			timezone?: string
+			twilio?: {
+				authToken?: string
+				sid?: string
+			}
+			website?: string
+		}
 		'_v1_locations_{locationId}_delete_200_response': {
 			msg?: string
 		}
@@ -8190,6 +8586,9 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_request': {
+			override?: boolean
 		}
 		'_v1_locations_{locationId}_put_200_response': {
 			address?: string
@@ -8283,6 +8682,51 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_locations_{locationId}_put_request': {
+			address?: string
+			businessName?: string
+			city?: string
+			country?: string
+			email?: string
+			firstName?: string
+			lastName?: string
+			mailgun?: {
+				apiKey?: string
+				domain?: string
+			}
+			phone?: string
+			postalCode?: string
+			settings?: {
+				allowDuplicateContact?: boolean
+				allowDuplicateOpportunity?: boolean
+				allowFacebookNameMerge?: boolean
+				disableContactTimezone?: boolean
+			}
+			snapshot?: {
+				id?: string
+				type?: string
+			}
+			social?: {
+				blogRss?: string
+				facebookUrl?: string
+				foursquare?: string
+				googlePlaceId?: string
+				googlePlus?: string
+				instagram?: string
+				linkedIn?: string
+				pinterest?: string
+				twitter?: string
+				yelp?: string
+				youtube?: string
+			}
+			state?: string
+			timezone?: string
+			twilio?: {
+				authToken?: string
+				sid?: string
+			}
+			website?: string
 		}
 		_v1_locations_lookup_get_200_response: {
 			address?: string
@@ -8396,6 +8840,20 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_pipelines_{pipelineId}_opportunities__post_request': {
+			assignedTo?: string
+			companyName?: string
+			contactId?: string
+			email?: string
+			monetaryValue?: number
+			name?: string
+			phone?: string
+			source?: string
+			stageId?: string
+			status?: string
+			tags?: string[]
+			title?: string
+		}
 		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_delete_400_response': {
 			msg?: string
 		}
@@ -8474,6 +8932,20 @@ export type components = {
 				rule?: string
 			}
 		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_request': {
+			assignedTo?: string
+			companyName?: string
+			contactId?: string
+			email?: string
+			monetaryValue?: number
+			name?: string
+			phone?: string
+			source?: string
+			stageId?: string
+			status?: string
+			tags?: string[]
+			title?: string
+		}
 		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_400_response': {
 			msg?: string
 		}
@@ -8489,6 +8961,10 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_request': {
+			stageId?: string
+			status?: string
 		}
 		'_v1_pipelines_{pipelineId}_opportunities_get_200_response': {
 			meta?: {
@@ -8565,6 +9041,10 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_saas_update-saas-subscription_{locationId}_put_request': {
+			customerId?: string
+			subscriptionId?: string
 		}
 		_v1_snapshots__get_200_response: {
 			snapshots?: {
@@ -8647,6 +9127,9 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_tags__post_request: {
+			name?: string
+		}
 		'_v1_tags_{tagId}_delete_400_response': {
 			msg?: string
 		}
@@ -8684,6 +9167,9 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_tags_{tagId}_put_request': {
+			name?: string
 		}
 		_v1_timezones__get_200_response: {
 			timezones?: string[]
@@ -8812,6 +9298,41 @@ export type components = {
 				rule?: string
 			}
 		}
+		_v1_users__post_request: {
+			email?: string
+			firstName?: string
+			lastName?: string
+			locationIds?: string[]
+			password?: string
+			permissions?: {
+				adwordsReportingEnabled?: boolean
+				appointmentsEnabled?: boolean
+				assignedDataOnly?: boolean
+				attributionsReportingEnabled?: boolean
+				bulkRequestsEnabled?: boolean
+				campaignsEnabled?: boolean
+				campaignsReadOnly?: boolean
+				contactsEnabled?: boolean
+				conversationsEnabled?: boolean
+				dashboardStatsEnabled?: boolean
+				facebookAdsReportingEnabled?: boolean
+				funnelsEnabled?: boolean
+				leadValueEnabled?: boolean
+				marketingEnabled?: boolean
+				membershipEnabled?: boolean
+				onlineListingsEnabled?: boolean
+				opportunitiesEnabled?: boolean
+				phoneCallEnabled?: boolean
+				reviewsEnabled?: boolean
+				settingsEnabled?: boolean
+				tagsEnabled?: boolean
+				triggersEnabled?: boolean
+				websitesEnabled?: boolean
+				workflowsEnabled?: boolean
+			}
+			role?: string
+			type?: string
+		}
 		'_v1_users_{userId}_delete_400_response': {
 			msg?: string
 		}
@@ -8933,6 +9454,41 @@ export type components = {
 				message?: string
 				rule?: string
 			}
+		}
+		'_v1_users_{userId}_put_request': {
+			email?: string
+			firstName?: string
+			lastName?: string
+			locationIds?: string[]
+			password?: string
+			permissions?: {
+				adwordsReportingEnabled?: boolean
+				appointmentsEnabled?: boolean
+				assignedDataOnly?: boolean
+				attributionsReportingEnabled?: boolean
+				bulkRequestsEnabled?: boolean
+				campaignsEnabled?: boolean
+				campaignsReadOnly?: boolean
+				contactsEnabled?: boolean
+				conversationsEnabled?: boolean
+				dashboardStatsEnabled?: boolean
+				facebookAdsReportingEnabled?: boolean
+				funnelsEnabled?: boolean
+				leadValueEnabled?: boolean
+				marketingEnabled?: boolean
+				membershipEnabled?: boolean
+				onlineListingsEnabled?: boolean
+				opportunitiesEnabled?: boolean
+				phoneCallEnabled?: boolean
+				reviewsEnabled?: boolean
+				settingsEnabled?: boolean
+				tagsEnabled?: boolean
+				triggersEnabled?: boolean
+				websitesEnabled?: boolean
+				workflowsEnabled?: boolean
+			}
+			role?: string
+			type?: string
 		}
 		_v1_users_location_get_200_response: {
 			users?: {
