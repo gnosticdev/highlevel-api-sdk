@@ -56,9 +56,7 @@ export interface V1ClientOptions extends ClientOptions {
  */
 export function createHighLevelV1Client(config: V1ClientOptions) {
 	if (!config.apiKey) {
-		throw new HighLevelSDKError('apiKey is required', {
-			cause: HighLevelSDKErrorCodes.API_KEY_REQUIRED,
-		})
+		throw new HighLevelSDKError('API_KEY_REQUIRED')
 	}
 
 	return createClient<V1.paths>({
