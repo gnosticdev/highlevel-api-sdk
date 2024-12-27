@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "module": "ES2022",
-        "moduleResolution": "Bundler",
-        "noEmit": true,
-        "outDir": "./dist",
-        "preserveSymlinks": true,
-        "rootDir": "./src"
-    },
-    "exclude": ["./src/lib"],
-    "extends": "./tsconfig.json",
-    "include": ["./src/**/*"]
+	"compilerOptions": {
+		"module": "ES2022",
+		"moduleResolution": "Bundler",
+		"noEmit": true,
+		"outDir": "./dist",
+		"preserveSymlinks": true,
+		"rootDir": "./src"
+	},
+	"exclude": ["./src/lib"],
+	"extends": "./tsconfig.json",
+	"include": ["./src/**/*"]
 }

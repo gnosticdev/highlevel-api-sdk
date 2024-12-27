@@ -2,7 +2,7 @@ import type { AccessType, HighLevelScopes } from '../../lib/type-utils'
 import { OauthClientImpl } from '../oauth/impl'
 import type { TokenData } from '../oauth/types'
 import type { HighLevelClientConfig } from './default'
-import { DEFAULT_BASE_URL, HighLevelClient } from './default'
+import { DEFAULT_V2_BASE_URL, HighLevelClient } from './default'
 
 export const DEFAULT_BASE_AUTH_URL =
 	'https://marketplace.leadconnectorhq.com/oauth/chooselocation'
@@ -36,7 +36,7 @@ export class HighLevelClientWithOAuth<
 	) {
 		super(clientConfig)
 		const baseUrl =
-			clientConfig?.baseUrl ?? oauthConfig.baseUrl ?? DEFAULT_BASE_URL
+			clientConfig?.baseUrl ?? oauthConfig.baseUrl ?? DEFAULT_V2_BASE_URL
 		const _oauthConfig: HighLevelOauthConfig<T> = {
 			...oauthConfig,
 			baseUrl: baseUrl,

@@ -2,10 +2,10 @@ import path from 'node:path'
 import { defineConfig } from 'tsup'
 
 const openapiTypeEntries: Record<`types/${string}`, string> = Array.from(
-	new Bun.Glob('*.ts').scanSync({ cwd: 'src/generated/v2/openapi' }),
+	new Bun.Glob('*.ts').scanSync({ cwd: 'src/v2/types/openapi' }),
 ).reduce((acc: Record<`types/${string}`, string>, file) => {
 	acc[`types/${path.parse(file).name}`] = path.join(
-		'src/generated/v2/openapi',
+		'src/v2/types/openapi',
 		file,
 	)
 	return acc
@@ -14,14 +14,11 @@ const openapiTypeEntries: Record<`types/${string}`, string> = Array.from(
 // Output esm and cjs bundles
 export default defineConfig((override) => ({
 	entry: {
-		index: 'src/clients/v2/index.ts',
-		'oauth-impl': 'src/clients/v2/oauth/oauth-impl.ts',
-		'oauth-types': 'src/clients/v2/oauth/oauth-types.ts',
-		'oauth-client': 'src/clients/v2/oauth-client.ts',
-		'integration-client': 'src/clients/v2/integration-client.ts',
-		v1: 'src/clients/v1/index.ts',
+		index: 'src/v2/index.ts',
+		oauth: 'src/v2/oauth/impl.ts',
+		v1: 'src/v1/index.ts',
 		scopes: 'src/lib/scopes.ts',
-		webhooks: 'src/generated/v2/custom/webhooks.ts',
+		webhooks: 'src/v2/webhooks.ts',
 		...openapiTypeEntries,
 	},
 	format: ['esm', 'cjs'],

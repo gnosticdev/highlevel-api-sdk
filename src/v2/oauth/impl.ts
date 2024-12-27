@@ -1,6 +1,6 @@
 import createClient, { type Client } from 'openapi-fetch'
 import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
-import { DEFAULT_BASE_URL } from '../client/default'
+import { DEFAULT_V2_BASE_URL } from '../client/default'
 import type { HighLevelOauthConfig } from '../client/with-oauth'
 import { DEFAULT_BASE_AUTH_URL } from '../client/with-oauth'
 import type * as Oauth from '../types/openapi/oauth'
@@ -13,6 +13,8 @@ import type {
 	TokenData,
 	TokenParams,
 } from './types'
+
+export * from './types'
 
 // ---------------------------------
 // Custom Oauth2 Implementation
@@ -66,7 +68,7 @@ export class OauthClientImpl<T extends AccessType>
 		this.config = config
 
 		// Set Defaults
-		this.baseUrl = config.baseUrl ?? DEFAULT_BASE_URL
+		this.baseUrl = config.baseUrl ?? DEFAULT_V2_BASE_URL
 		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL
 		this.scopes = Array.isArray(config.scopes)
 			? config.scopes.join(' ')

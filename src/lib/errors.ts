@@ -7,20 +7,26 @@ export const HighLevelSDKErrorCodes = {
 } as const
 
 // You could even add standardized messages
-const ERROR_MESSAGES = {
+export const ERROR_MESSAGES = {
 	[HighLevelSDKErrorCodes.INVALID_AUTH_HEADER]:
 		'Authorization header must start with "Bearer "',
 	[HighLevelSDKErrorCodes.INVALID_AUTH_TYPE]:
 		'Invalid authentication type provided',
 	[HighLevelSDKErrorCodes.NO_HANDLER_REGISTERED]:
-		'No handler registered for webhook event',
+		'No handler registered for webhook event: {event}',
 	[HighLevelSDKErrorCodes.INVALID_WEBHOOK_PAYLOAD]: 'Invalid webhook payload',
 	[HighLevelSDKErrorCodes.API_KEY_REQUIRED]: 'apiKey is required',
 } as const
 
 export class HighLevelSDKError extends Error {
-	constructor(message: keyof typeof ERROR_MESSAGES, options?: ErrorOptions) {
-		super(ERROR_MESSAGES[message], options)
+	constructor(
+		message: keyof typeof ERROR_MESSAGES,
+		options?: ErrorOptions & { event?: string },
+	) {
+		const finalMessage = options?.event
+			? ERROR_MESSAGES[message].replace('{event}', options.event)
+			: ERROR_MESSAGES[message]
+		super(finalMessage, options)
 		this.name = 'HighLevelSDKError'
 		this.cause = HighLevelSDKErrorCodes[message]
 	}

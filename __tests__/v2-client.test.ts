@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import type { Client, FetchResponse } from 'openapi-fetch'
 import type { AccessType } from '../src/lib/type-utils'
 import { createHighLevelClient } from '../src/v2'
-import { DEFAULT_BASE_URL, HighLevelClient } from '../src/v2/client/default'
+import { DEFAULT_V2_BASE_URL, HighLevelClient } from '../src/v2/client/default'
 import type { AuthHeaders } from '../src/v2/client/types'
 import type { HighLevelOauthConfig } from '../src/v2/client/with-oauth'
 import {
@@ -30,7 +30,7 @@ describe('Base Client', () => {
 	})
 
 	it('should create base client with default configuration', () => {
-		expect(baseClient._clientConfig.baseUrl).toBe(DEFAULT_BASE_URL)
+		expect(baseClient._clientConfig.baseUrl).toBe(DEFAULT_V2_BASE_URL)
 		expect(baseClient.oauth).toBeDefined()
 	})
 
@@ -74,7 +74,7 @@ describe('SubAccount Client', () => {
 	it('should have correct oauth configuration', () => {
 		expect(subAccountClient.oauth.config).toEqual({
 			...subAccountOauthConfig,
-			baseUrl: DEFAULT_BASE_URL,
+			baseUrl: DEFAULT_V2_BASE_URL,
 			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
 		})
 	})
@@ -115,7 +115,7 @@ describe('Agency Client', () => {
 	it('should have correct oauth configuration', () => {
 		expect(agencyClient.oauth.config).toEqual({
 			...agencyOauthConfig,
-			baseUrl: DEFAULT_BASE_URL,
+			baseUrl: DEFAULT_V2_BASE_URL,
 			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
 		})
 	})
@@ -171,7 +171,7 @@ describe('createHighLevelClient Oauth Client Defaults', () => {
 
 		expect(client.oauth.config).toEqual({
 			...oathConfig,
-			baseUrl: DEFAULT_BASE_URL,
+			baseUrl: DEFAULT_V2_BASE_URL,
 			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
 		})
 	})
@@ -190,7 +190,7 @@ describe('createHighLevelClient Oauth Client Defaults', () => {
 
 		expect(client.oauth.config).toStrictEqual({
 			...customConfig,
-			baseUrl: DEFAULT_BASE_URL,
+			baseUrl: DEFAULT_V2_BASE_URL,
 		})
 	})
 })

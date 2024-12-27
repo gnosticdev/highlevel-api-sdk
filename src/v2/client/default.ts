@@ -39,7 +39,7 @@ import {
  * default base url for the HighLevel API.
  * @default 'https://services.leadconnectorhq.com'
  */
-export const DEFAULT_BASE_URL = 'https://services.leadconnectorhq.com'
+export const DEFAULT_V2_BASE_URL = 'https://services.leadconnectorhq.com'
 
 /**
  * Configuration used on every request made by the HighLevelClient.
@@ -246,10 +246,10 @@ export class HighLevelClient<
 	) {
 		this._clientConfig = clientConfig
 			? {
-					baseUrl: DEFAULT_BASE_URL,
+					baseUrl: DEFAULT_V2_BASE_URL,
 					...clientConfig,
 				}
-			: { baseUrl: DEFAULT_BASE_URL }
+			: { baseUrl: DEFAULT_V2_BASE_URL }
 
 		if (authHeaders) {
 			this._clientConfig.headers = {

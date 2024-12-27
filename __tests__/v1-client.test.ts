@@ -36,10 +36,12 @@ describe('V1 Client', () => {
 				fetch: globalThis.fetch,
 			})
 			await defaultClient.GET('/v1/contacts/', {})
-			expect(fetchSpy).toHaveBeenCalledWith(
+			expect(fetchSpy).toHaveBeenCalled()
+			expect(fetchSpy.mock.calls[0]![0]).toHaveProperty(
+				'url',
 				'https://rest.gohighlevel.com/v1/contacts/',
-				expect.any(Object),
 			)
+
 			it('should use custom baseUrl configuration', async () => {
 				// Test custom baseUrl
 				const customClient = createHighLevelV1Client({
@@ -65,7 +67,13 @@ describe('V1 Client', () => {
 				error: undefined,
 			})
 
-			await client.GET('/v1/contacts/', {})
+			await client.GET('/v1/contacts/', {
+				params: {
+					header: {
+						Authorization: `Bearer ${mockApiKey}`,
+					},
+				},
+			})
 
 			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			const calls = getSpy.mock.calls as any[][]

@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "forceConsistentCasingInFileNames": true,
-        "lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
-        "module": "ESNext",
-        "moduleDetection": "force",
-        "moduleResolution": "Bundler",
-        "noEmit": true,
-        "noUncheckedIndexedAccess": true,
-        "resolveJsonModule": true,
-        "skipDefaultLibCheck": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "strictNullChecks": true,
-        "target": "ESNext",
-        "types": ["bun", "node"],
-        "verbatimModuleSyntax": true
-    },
-    "exclude": ["examples/**/*"],
-    "include": ["src/**/*", "__tests__/**/*", "scripts/**/*"]
+	"compilerOptions": {
+		"allowJs": true,
+		"forceConsistentCasingInFileNames": true,
+		"lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
+		"module": "ESNext",
+		"moduleDetection": "force",
+		"moduleResolution": "Bundler",
+		"noEmit": true,
+		"noUncheckedIndexedAccess": true,
+		"resolveJsonModule": true,
+		"skipDefaultLibCheck": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"target": "ESNext",
+		"types": ["bun", "node"],
+		"verbatimModuleSyntax": true
+	},
+	"exclude": ["examples/**/*"],
+	"include": ["src/**/*", "__tests__/**/*", "scripts/**/*"]
 }

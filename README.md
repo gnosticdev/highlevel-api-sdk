@@ -1,7 +1,7 @@
 # HighLevel API SDK
 
 [![npm version](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk.svg)](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk)
-[![npm downloads](https://img.shields.io/npm/dm/your-package-name.svg)](https://www.npmjs.com/package/your-package-name)
+[![npm downloads](https://img.shields.io/npm/dm/@gnosticdev/highlevel-sdk.svg)](https://www.npmjs.com/package/@gnosticdev/highlevel-sdk)
 
 Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build your own apps or use the included clients to interact with the HighLevel API.
 
@@ -14,6 +14,11 @@ Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build y
 - Scopes builder for easily working with the scopes specified in the HighLevel Marketplace
 - Typed webhooks endpoints
 - Support for both v1 and v2 of the HighLevel API
+
+## Resources
+
+- [API v2 Documentation](https://highlevel.stoplight.io/docs/integrations) (OAuth & Private Integrations)
+- [API v1 Documentation](https://public-api.gohighlevel.com/) (Legacy API Keys)
 
 ## Installation
 
@@ -29,7 +34,7 @@ npm add @gnosticdev/highlevel-sdk
 
 ### Using the HighLevel Client
 
-The HighLevel client can be created with different configurations:
+The HighLevel client uses the v2 API by default (see below for v1 client). It can be created with different configurations:
 
 - **Basic Client**: Without built-in authentication.
 
@@ -160,7 +165,7 @@ console.log(data.contacts)
 The SDK includes a typed client for handling HighLevel webhooks. This provides type safety and validation for incoming webhook payloads:
 
 ```ts
-import { createWebhooksClient } from "@gnosticdev/highlevel-sdk"
+import { createWebhooksClient } from "@gnosticdev/highlevel-sdk/webhooks"
 
 const webhooks = createWebhooksClient()
 
@@ -231,6 +236,30 @@ const customValues: LocationCustomValues = [{
 }]
 ```
 
+### Module Exports
+
+The SDK provides several module exports for better organization and tree-shaking:
+
+```ts
+// Main client
+import { createHighLevelClient } from "@gnosticdev/highlevel-sdk"
+
+// OAuth specific functionality
+import { OAuthClient } from "@gnosticdev/highlevel-sdk/oauth"
+
+// Scopes builder
+import { ScopesBuilder } from "@gnosticdev/highlevel-sdk/scopes"
+
+// V1 API client
+import { createHighLevelV1Client } from "@gnosticdev/highlevel-sdk/v1"
+
+// Webhooks client
+import { createWebhooksClient } from "@gnosticdev/highlevel-sdk/webhooks"
+
+// Types
+import type * as Locations from "@gnosticdev/highlevel-sdk/types/locations"
+```
+
 ## Scopes
 
 1. Once you have added your scopes to your app, you can collect them from the dev console on your app's settings page in the Highlevel Marketplace:
@@ -238,8 +267,7 @@ const customValues: LocationCustomValues = [{
     ```ts
     /**
      * Navigate to your apps' setting page -  `https://marketplace.highlevel.com/app-settins/<your-app-id>/auth`
-
-     * Press cmd + J on keyboarrd
+     * Press cmd + J on keyboard
      */
     $$('.n-tag__content')
         .map((scope) => scope.textContent.trim())
@@ -250,28 +278,28 @@ const customValues: LocationCustomValues = [{
 3. Create a new ScopesBuilder instance and paste the scopes to it.
 
     ```ts
-    const client = createHighLevelClient({
+    const client = createHighLevelClient({}, 'oauth', {
+        clientId: 'your-client-id',
+        clientSecret: 'your-client-secret',
+        redirectUri: 'http://localhost:3000/callback',
         scopes: [
             'locations.write',
             'contacts.readonly',
-            ...
+            // ... your scopes here
         ]
     })
     ```
 
-```ts
-
 ## Examples
 
-For more detailed usage examples, please check out the [examples directory](./examples).
+Check out our example projects in the [examples directory](./examples):
 
-## Documentation
-
-For full documentation and API reference, please visit our [documentation site](https://link-to-your-documentation).
+- `examples/bun-auth`: Example of OAuth2 authentication flow using Bun and Hono
+- More examples coming soon!
 
 ## Contributing
 
-Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 

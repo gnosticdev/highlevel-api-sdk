@@ -1,25 +1,12 @@
 import { beforeEach, describe, expect, it, mock } from 'bun:test'
-import { HighLevelClient } from '../src/v2/client-default'
-import { OauthClientImpl } from '../src/v2/oauth/impl'
+import { createHighLevelClient } from '../src/v2'
 import type * as Locations from '../src/v2/types/openapi/locations'
 
 type MockLocationsResponse =
 	Locations.paths['/locations/{locationId}']['get']['responses']['200']['content']['application/json']
 
 describe('Locations Endpoint', () => {
-	const client = new HighLevelClient()
-	let oauthClient: OauthClientImpl<'Sub-Account'>
-
-	beforeEach(() => {
-		// Setup OAuth client
-		oauthClient = new OauthClientImpl({
-			accessType: 'Sub-Account',
-			clientId: process.env.CLIENT_ID!,
-			clientSecret: process.env.CLIENT_SECRET!,
-			redirectUri: 'http://localhost:3000/auth/callback',
-			scopes: ['locations.readonly'],
-		})
-	})
+	const client = createHighLevelClient()
 
 	describe('GET /locations/{locationId}', () => {
 		const mockGet = mock(client.locations.GET)

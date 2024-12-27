@@ -4,7 +4,7 @@ import { HighLevelSDKError, HighLevelSDKErrorCodes } from '../lib/errors'
 import { createHighLevelClient } from '../v2'
 import type * as V1 from './types/openapi'
 
-const DEFAULT_BASE_URL = 'https://rest.gohighlevel.com'
+const DEFAULT_V1_BASE_URL = 'https://rest.gohighlevel.com'
 
 /**
  * Options for the HighLevel v1 client.
@@ -60,7 +60,7 @@ export function createHighLevelV1Client(config: V1ClientOptions) {
 	}
 
 	return createClient<V1.paths>({
-		baseUrl: config.baseUrl ?? DEFAULT_BASE_URL,
+		baseUrl: config.baseUrl ?? DEFAULT_V1_BASE_URL,
 		headers: {
 			Authorization: `Bearer ${config.apiKey}`,
 		},

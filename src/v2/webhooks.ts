@@ -54,7 +54,7 @@ export class WebhooksClient {
 	async handle<T extends keyof webhooks>(event: T, payload: WebhookPayload<T>) {
 		const handler = this.handlers.get(event)
 		if (!handler) {
-			throw new HighLevelSDKError('NO_HANDLER_REGISTERED')
+			throw new HighLevelSDKError('NO_HANDLER_REGISTERED', { event })
 		}
 
 		// Basic payload validation
