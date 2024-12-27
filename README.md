@@ -129,24 +129,30 @@ const accessToken = await client.oauth.getAccessToken()
 
 ### Using the v1 Client
 
-The v1 client adds the authrorization header to all requests.
+The v1 client requires an API key and automatically adds the authorization header to all requests.
 
 ```ts
-import { createV1Client } from "@gnosticdev/highlevel-sdk"
+import { createHighLevelV1Client } from "@gnosticdev/highlevel-sdk"
 
-const v1Client = createV1Client()
+const v1Client = createHighLevelV1Client({
+    apiKey: process.env.HIGHLEVEL_API_KEY!
+})
 
 const { data, error } = await v1Client.GET('/v1/contacts', {
     params: {
         query: {
             locationId: '1234567890',
-        },
-        // Optional: added to all requests by default
-        // header: {
-        //     Authorization: `Bearer ${process.env.HIGHLEVEL_ACCESS_TOKEN}`,
-        // },
+        }
+        // No need to add Authorization header - it's added automatically
     }
 })
+
+if (error) {
+    console.error('Error fetching contacts:', error)
+    return
+}
+
+console.log(data.contacts)
 ```
 
 ### Using the Webhooks Client

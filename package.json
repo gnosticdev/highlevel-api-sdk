@@ -29,11 +29,6 @@
 			"require": "./dist/cjs/oauth.js",
 			"types": "./dist/oauth.d.ts"
 		},
-		"./oauth/types": {
-			"import": "./dist/oauthTypes.js",
-			"require": "./dist/cjs/oauthTypes.js",
-			"types": "./dist/oauthTypes.d.ts"
-		},
 		"./scopes": {
 			"import": "./dist/scopes.js",
 			"require": "./dist/cjs/scopes.js",
@@ -81,7 +76,7 @@
 		"url": "https://github.com/gnosticdev/highlevel-sdk"
 	},
 	"scripts": {
-		"build": "bun tsup",
+		"build": "bun --bun tsup",
 		"fetch-json": "bun scripts/fetch-json.ts",
 		"generate-all": "bun run fetch-json && bun run generate-v2-types && bun run generate-v1-types && bun run generate-webhooks && bun run generate-scopes && bun run generate-interface",
 		"generate-interface": "bun scripts/generate-interface.ts",
