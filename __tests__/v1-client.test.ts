@@ -1,35 +1,84 @@
 import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
 import type { FetchResponse } from 'openapi-fetch'
-import { createV1Client } from '../src/clients/v1'
-import type * as V1 from '../src/generated/v1/openapi'
+import { createHighLevelV1Client } from '../src/v1'
+import type * as V1 from '../src/v1/types/openapi'
 
 describe('V1 Client', () => {
 	const mockApiKey = 'test-api-key'
-	const mockBaseUrl = 'https://test.api.com'
-	let client: ReturnType<typeof createV1Client>
+	// sends back the request body
+	const mockBaseUrl = 'https://postman-echo.com'
+	let client: ReturnType<typeof createHighLevelV1Client>
 
 	beforeEach(() => {
-		client = createV1Client({ apiKey: mockApiKey })
+		client = createHighLevelV1Client({ apiKey: mockApiKey })
 	})
 
 	describe('Client Configuration', () => {
-		it('should create client with default configuration', () => {
+		it('should throw a HighLevelSDKError if apiKey is not provided', async () => {
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			expect(() => createHighLevelV1Client({} as any)).toThrow(
+				'apiKey is required',
+			)
+		})
+
+		it('should create client with expected methods', () => {
 			expect(client.GET).toBeFunction()
 			expect(client.POST).toBeFunction()
 			expect(client.PUT).toBeFunction()
 			expect(client.DELETE).toBeFunction()
 		})
 
-		it('should create client with custom configuration', () => {
-			const customClient = createV1Client({
+		it('should use correct baseUrl configuration', async () => {
+			const fetchSpy = spyOn(globalThis, 'fetch')
+			// Test default baseUrl
+			const defaultClient = createHighLevelV1Client({
 				apiKey: mockApiKey,
-				baseUrl: mockBaseUrl,
+				fetch: globalThis.fetch,
 			})
-			expect(customClient.GET).toBeFunction()
+			await defaultClient.GET('/v1/contacts/', {})
+			expect(fetchSpy).toHaveBeenCalledWith(
+				'https://rest.gohighlevel.com/v1/contacts/',
+				expect.any(Object),
+			)
+			it('should use custom baseUrl configuration', async () => {
+				// Test custom baseUrl
+				const customClient = createHighLevelV1Client({
+					apiKey: mockApiKey,
+					baseUrl: mockBaseUrl,
+				})
+				const customSpy = spyOn(globalThis, 'fetch')
+				await customClient.GET('/v1/contacts/', {})
+				expect(customSpy).toHaveBeenCalledWith(
+					`${mockBaseUrl}/v1/contacts/`,
+					expect.any(Object),
+				)
+			})
 		})
 	})
 
 	describe('API Methods', () => {
+		it('should automatically include authorization header in requests', async () => {
+			const getSpy = spyOn(client, 'GET')
+			getSpy.mockResolvedValue({
+				data: { contacts: [] },
+				response: new Response(),
+				error: undefined,
+			})
+
+			await client.GET('/v1/contacts/', {})
+
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			const calls = getSpy.mock.calls as any[][]
+			expect(calls[0]![0]).toBe('/v1/contacts/')
+			expect(calls[0]![1]).toEqual({
+				params: expect.objectContaining({
+					header: expect.objectContaining({
+						Authorization: `Bearer ${mockApiKey}`,
+					}),
+				}),
+			})
+		})
+
 		it('should create a contact', async () => {
 			const mockResponse: FetchResponse<
 				V1.paths['/v1/contacts/']['post'],
@@ -77,17 +126,18 @@ describe('V1 Client', () => {
 			const { data, error } = await client.POST('/v1/contacts/', {
 				params: {
 					header: {
-						Authorization: `Bearer ${mockApiKey}`,
 						'Content-Type': 'application/json',
 					},
 				},
 				body: contactData,
 			})
 
-			expect(createContactSpy).toHaveBeenCalledWith('/v1/contacts/', {
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			const calls = createContactSpy.mock.calls as any[][]
+			expect(calls[0]![0]).toBe('/v1/contacts/')
+			expect(calls[0]![1]).toEqual({
 				params: {
 					header: {
-						Authorization: `Bearer ${mockApiKey}`,
 						'Content-Type': 'application/json',
 					},
 				},
@@ -122,15 +172,15 @@ describe('V1 Client', () => {
 			createContactSpy.mockResolvedValue(mockErrorResponse)
 
 			const { data, error } = await client.POST('/v1/contacts/', {
-				params: {
-					header: {
-						Authorization: `Bearer ${mockApiKey}`,
-						'Content-Type': 'application/json',
-					},
-				},
-				body: {},
+				params: { header: { 'Content-Type': 'application/json' } },
 			})
 
+			// @ts-expect-error
+			expect(createContactSpy.mock.calls[0]![0]).toBe('/v1/contacts/')
+			// @ts-expect-error
+			expect(createContactSpy.mock.calls[0]![1]).toEqual({
+				params: { header: { 'Content-Type': 'application/json' } },
+			})
 			expect(data).toBeUndefined()
 			expect(error).toEqual(mockErrorResponse.error)
 		})

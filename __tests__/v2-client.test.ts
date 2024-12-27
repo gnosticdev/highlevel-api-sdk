@@ -2,20 +2,17 @@ import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Client, FetchResponse } from 'openapi-fetch'
-import { createHighLevelClient } from '../src/clients/v2'
-import { DEFAULT_BASE_URL, HighLevelClient } from '../src/clients/v2/base'
-import type { AuthHeaders } from '../src/clients/v2/client-types'
-import type { HighLevelOauthConfig } from '../src/clients/v2/oauth-client'
+import type { AccessType } from '../src/lib/type-utils'
+import { createHighLevelClient } from '../src/v2'
+import { DEFAULT_BASE_URL, HighLevelClient } from '../src/v2/client-default'
+import type { AuthHeaders } from '../src/v2/client-types'
+import type { HighLevelOauthConfig } from '../src/v2/client-with-oauth'
 import {
 	DEFAULT_BASE_AUTH_URL,
 	HighLevelClientWithOAuth,
-} from '../src/clients/v2/oauth-client'
-import {
-	type BaseOauthClient,
-	OauthClientImpl,
-} from '../src/clients/v2/oauth/oauth-impl'
-import type * as Locations from '../src/generated/v2/openapi/locations'
-import type { AccessType } from '../src/lib/type-utils'
+} from '../src/v2/client-with-oauth'
+import { type DefaultOauthClient, OauthClientImpl } from '../src/v2/oauth/impl'
+import type * as Locations from '../src/v2/types/openapi/locations'
 
 type LocationsResponse = FetchResponse<
 	Locations.paths['/locations/search']['get'],
@@ -24,8 +21,8 @@ type LocationsResponse = FetchResponse<
 >
 
 describe('Base Client', () => {
-	let baseClient: HighLevelClient<AccessType, BaseOauthClient, AuthHeaders>
-	let baseOauthClient: BaseOauthClient
+	let baseClient: HighLevelClient<AccessType, DefaultOauthClient, AuthHeaders>
+	let baseOauthClient: DefaultOauthClient
 
 	beforeEach(() => {
 		baseClient = new HighLevelClient()

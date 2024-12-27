@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, mock } from 'bun:test'
-import { HighLevelClient } from '../src/clients/v2/base'
-import { OauthClientImpl } from '../src/clients/v2/oauth/oauth-impl'
-import type * as Locations from '../src/generated/v2/openapi/locations'
+import { HighLevelClient } from '../src/v2/client-default'
+import { OauthClientImpl } from '../src/v2/oauth/impl'
+import type * as Locations from '../src/v2/types/openapi/locations'
 
 type MockLocationsResponse =
 	Locations.paths['/locations/{locationId}']['get']['responses']['200']['content']['application/json']

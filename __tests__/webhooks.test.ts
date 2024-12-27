@@ -1,9 +1,6 @@
 import { describe, expect, it, spyOn } from 'bun:test'
-import {
-	WebhooksClient,
-	createWebhooksClient,
-} from '../src/clients/v2/webhooks'
-import type { ContactCreate } from '../src/generated/v2/custom/webhooks'
+import type { ContactCreate } from '../src/v2/types/custom/webhooks'
+import { WebhooksClient, createWebhooksClient } from '../src/v2/webhooks'
 
 describe('WebhooksClient', () => {
 	// Sample webhook payload based on ContactCreate type
@@ -64,11 +61,12 @@ describe('WebhooksClient', () => {
 		client.on('ContactCreate', async () => {})
 
 		// @ts-expect-error Testing invalid payload
-		await expect(client.handle('ContactCreate', null)).rejects.toThrow(
+		expect(client.handle('ContactCreate', null)).rejects.toThrow(
 			'Invalid webhook payload',
 		)
+
 		// @ts-expect-error Testing invalid payload
-		await expect(client.handle('ContactCreate', undefined)).rejects.toThrow(
+		expect(client.handle('ContactCreate', undefined)).rejects.toThrow(
 			'Invalid webhook payload',
 		)
 	})

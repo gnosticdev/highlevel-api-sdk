@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, spyOn } from 'bun:test'
 import type { Client } from 'openapi-fetch'
-import { createHighLevelClient } from '../src/clients/v2'
-import type { AuthHeaders } from '../src/clients/v2/client-types'
-import type { PrivateIntegrationConfig } from '../src/clients/v2/integration-client'
-import { HighLevelIntegrationClient } from '../src/clients/v2/integration-client'
+import { createHighLevelClient } from '../src/v2'
+import type { AuthHeaders } from '../src/v2/client-types'
+import type { PrivateIntegrationConfig } from '../src/v2/client-with-integration'
+import { HighLevelIntegrationClient } from '../src/v2/client-with-integration'
 
 type LocationsClient = Client<{
 	'/locations/{locationId}': {
