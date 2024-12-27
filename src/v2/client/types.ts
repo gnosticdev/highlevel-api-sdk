@@ -1,5 +1,5 @@
 import createClient, { type Client } from 'openapi-fetch/src/index.js'
-import { HighLevelSDKError, HighLevelSDKErrorCodes } from '../../lib/errors'
+import { HighLevelSDKError } from '../../lib/errors'
 import type { HighLevelClientConfig } from './default'
 
 type HTTPMethod =
@@ -82,12 +82,7 @@ export function createClientWithAuth<TPaths extends {}>(
 	options?: HighLevelClientConfig,
 ): ClientWithAuth<TPaths> {
 	if (!authHeaders.Authorization.startsWith('Bearer ')) {
-		throw new HighLevelSDKError(
-			'Authorization header must start with "Bearer "',
-			{
-				cause: HighLevelSDKErrorCodes.INVALID_AUTH_HEADER,
-			},
-		)
+		throw new HighLevelSDKError('INVALID_AUTH_HEADER')
 	}
 	const config = {
 		...options,

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, spyOn } from 'bun:test'
-import { createClientWithAuth } from '../src/v2/client-types'
+import { createClientWithAuth } from '../src/v2/client/types'
 
 describe('createClientWithAuth', () => {
 	let mockFetch: ReturnType<typeof spyOn>

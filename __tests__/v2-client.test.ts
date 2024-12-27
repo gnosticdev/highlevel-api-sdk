@@ -4,13 +4,13 @@ import { join } from 'node:path'
 import type { Client, FetchResponse } from 'openapi-fetch'
 import type { AccessType } from '../src/lib/type-utils'
 import { createHighLevelClient } from '../src/v2'
-import { DEFAULT_BASE_URL, HighLevelClient } from '../src/v2/client-default'
-import type { AuthHeaders } from '../src/v2/client-types'
-import type { HighLevelOauthConfig } from '../src/v2/client-with-oauth'
+import { DEFAULT_BASE_URL, HighLevelClient } from '../src/v2/client/default'
+import type { AuthHeaders } from '../src/v2/client/types'
+import type { HighLevelOauthConfig } from '../src/v2/client/with-oauth'
 import {
 	DEFAULT_BASE_AUTH_URL,
 	HighLevelClientWithOAuth,
-} from '../src/v2/client-with-oauth'
+} from '../src/v2/client/with-oauth'
 import { type DefaultOauthClient, OauthClientImpl } from '../src/v2/oauth/impl'
 import type * as Locations from '../src/v2/types/openapi/locations'
 

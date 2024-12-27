@@ -1,5 +1,5 @@
 import { describe, expect, it, spyOn } from 'bun:test'
-import type { HighLevelOauthConfig } from '../src/v2/client-with-oauth'
+import type { HighLevelOauthConfig } from '../src/v2/client/with-oauth'
 import { OauthClientImpl } from '../src/v2/oauth/impl'
 import type { TokenData } from '../src/v2/oauth/types'
 
