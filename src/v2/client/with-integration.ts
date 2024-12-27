@@ -1,9 +1,8 @@
-import { createHighLevelClient } from '.'
 import type { AccessType, HighLevelScopes } from '../../lib/type-utils'
-import type { HighLevelClientConfig } from './base'
-import { HighLevelClient } from './base'
-import type { AuthHeaders } from './client-types'
-import type { BaseOauthClient } from './oauth/oauth-impl'
+import type { DefaultOauthClient } from '../oauth/impl'
+import type { HighLevelClientConfig } from './default'
+import { HighLevelClient } from './default'
+import type { AuthHeaders } from './types'
 
 export type PrivateIntegrationConfig<T extends AccessType> = {
 	/**
@@ -46,7 +45,7 @@ export type PrivateIntegrationConfig<T extends AccessType> = {
  */
 export class HighLevelIntegrationClient<
 	T extends AccessType,
-> extends HighLevelClient<T, BaseOauthClient, AuthHeaders> {
+> extends HighLevelClient<T, DefaultOauthClient, AuthHeaders> {
 	/**
 	 * The private token for the integration
 	 *

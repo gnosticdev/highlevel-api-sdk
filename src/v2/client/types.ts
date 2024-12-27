@@ -1,5 +1,6 @@
 import createClient, { type Client } from 'openapi-fetch/src/index.js'
-import type { HighLevelClientConfig } from './base'
+import { HighLevelSDKError, HighLevelSDKErrorCodes } from '../../lib/errors'
+import type { HighLevelClientConfig } from './default'
 
 type HTTPMethod =
 	| 'get'
@@ -34,7 +35,7 @@ type RemoveAuthHeaders<T> = T extends {
  *
  * @see {@link createClientWithAuth}
  */
-export type OptionalAuthParamsClient<T> = T extends Client<infer Paths>
+type OptionalAuthParamsClient<T> = T extends Client<infer Paths>
 	? Client<{
 			[P in keyof Paths]: {
 				[M in keyof Paths[P]]: M extends 'parameters'
@@ -49,6 +50,9 @@ export type OptionalAuthParamsClient<T> = T extends Client<infer Paths>
 export interface ClientWithAuth<TPaths extends {}>
 	extends OptionalAuthParamsClient<Client<TPaths>> {}
 
+/**
+ * Authentication headers for the HighLevel v2 API.
+ */
 export type AuthHeaders = {
 	/**
 	 * The token to use for authentication.
@@ -77,6 +81,14 @@ export function createClientWithAuth<TPaths extends {}>(
 	authHeaders: AuthHeaders,
 	options?: HighLevelClientConfig,
 ): ClientWithAuth<TPaths> {
+	if (!authHeaders.Authorization.startsWith('Bearer ')) {
+		throw new HighLevelSDKError(
+			'Authorization header must start with "Bearer "',
+			{
+				cause: HighLevelSDKErrorCodes.INVALID_AUTH_HEADER,
+			},
+		)
+	}
 	const config = {
 		...options,
 		headers: {

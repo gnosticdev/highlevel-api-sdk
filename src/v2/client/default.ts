@@ -1,39 +1,39 @@
 import type { Client, ClientOptions } from 'openapi-fetch'
 import createClient from 'openapi-fetch'
 
-import type * as Businesses from '../../generated/v2/openapi/businesses'
-import type * as Calendars from '../../generated/v2/openapi/calendars'
-import type * as Campaigns from '../../generated/v2/openapi/campaigns'
-import type * as Companies from '../../generated/v2/openapi/companies'
-import type * as Contacts from '../../generated/v2/openapi/contacts'
-import type * as Conversations from '../../generated/v2/openapi/conversations'
-import type * as Courses from '../../generated/v2/openapi/courses'
-import type * as Forms from '../../generated/v2/openapi/forms'
-import type * as Funnels from '../../generated/v2/openapi/funnels'
-import type * as Invoices from '../../generated/v2/openapi/invoices'
-import type * as Links from '../../generated/v2/openapi/links'
-import type * as Locations from '../../generated/v2/openapi/locations'
-import type * as Medias from '../../generated/v2/openapi/medias'
-import type * as Oauth from '../../generated/v2/openapi/oauth'
-import type * as Opportunities from '../../generated/v2/openapi/opportunities'
-import type * as Payments from '../../generated/v2/openapi/payments'
-import type * as Products from '../../generated/v2/openapi/products'
-import type * as SaasApi from '../../generated/v2/openapi/saas-api'
-import type * as Snapshots from '../../generated/v2/openapi/snapshots'
-import type * as SocialMediaPosting from '../../generated/v2/openapi/social-media-posting'
-import type * as Surveys from '../../generated/v2/openapi/surveys'
-import type * as Users from '../../generated/v2/openapi/users'
-import type * as Workflows from '../../generated/v2/openapi/workflows'
-import type { AccessType } from '../../lib/type-utils'
+import type * as Businesses from '../types/openapi/businesses'
+import type * as Calendars from '../types/openapi/calendars'
+import type * as Campaigns from '../types/openapi/campaigns'
+import type * as Companies from '../types/openapi/companies'
+import type * as Contacts from '../types/openapi/contacts'
+import type * as Conversations from '../types/openapi/conversations'
+import type * as Courses from '../types/openapi/courses'
+import type * as Forms from '../types/openapi/forms'
+import type * as Funnels from '../types/openapi/funnels'
+import type * as Invoices from '../types/openapi/invoices'
+import type * as Links from '../types/openapi/links'
+import type * as Locations from '../types/openapi/locations'
+import type * as Medias from '../types/openapi/medias'
+import type * as Oauth from '../types/openapi/oauth'
+import type * as Opportunities from '../types/openapi/opportunities'
+import type * as Payments from '../types/openapi/payments'
+import type * as Products from '../types/openapi/products'
+import type * as SaasApi from '../types/openapi/saas-api'
+import type * as Snapshots from '../types/openapi/snapshots'
+import type * as SocialMediaPosting from '../types/openapi/social-media-posting'
+import type * as Surveys from '../types/openapi/surveys'
+import type * as Users from '../types/openapi/users'
+import type * as Workflows from '../types/openapi/workflows'
 
-import { createHighLevelClient } from '.'
+import type { AccessType } from '../../lib/type-utils'
+import { createHighLevelClient } from '../index'
+import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
+import type { HighLevelClientInterface } from './interface'
 import {
 	type AuthHeaders,
 	type ClientWithAuth,
 	createClientWithAuth,
-} from './client-types'
-import type { HighLevelClientInterface } from './interface'
-import type { BaseOauthClient, OauthClientImpl } from './oauth/oauth-impl'
+} from './types'
 
 /**
  * default base url for the HighLevel API.
@@ -91,7 +91,7 @@ export class HighLevelClient<
 	/**
 	 * oauth client implementation.
 	 */
-	TOauth extends BaseOauthClient | OauthClientImpl<T> = BaseOauthClient,
+	TOauth extends DefaultOauthClient | OauthClientImpl<T> = DefaultOauthClient,
 	/**
 	 * headers for the client.
 	 */

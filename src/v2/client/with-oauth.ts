@@ -1,8 +1,8 @@
 import type { AccessType, HighLevelScopes } from '../../lib/type-utils'
-import type { HighLevelClientConfig } from './base'
-import { DEFAULT_BASE_URL, HighLevelClient } from './base'
-import { OauthClientImpl } from './oauth/oauth-impl'
-import type { TokenData } from './oauth/oauth-types'
+import { OauthClientImpl } from '../oauth/impl'
+import type { TokenData } from '../oauth/types'
+import type { HighLevelClientConfig } from './default'
+import { DEFAULT_BASE_URL, HighLevelClient } from './default'
 
 export const DEFAULT_BASE_AUTH_URL =
 	'https://marketplace.leadconnectorhq.com/oauth/chooselocation'
