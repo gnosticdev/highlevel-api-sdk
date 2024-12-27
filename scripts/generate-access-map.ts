@@ -8,6 +8,17 @@ import type {
 } from 'openapi-typescript'
 import { objectEntries, objectKeys } from '../src/lib/utils'
 
+/**
+ * **THIS IS A WORK IN PROGRESS**
+ *
+ * The objective is to limit the endpoints based on scopes & access type, since there are a lot of endpoints without an easy way to know which is available.
+ *
+ * This script generates the Access Map - which is used to determine the access types for each endpoint.
+ */
+
+/**
+ * The same as AccessType in the rest of the SDK, but with the added 'Private', which is available to all endpoints.
+ */
 type AccessType = 'Sub-Account' | 'Agency' | 'Private'
 
 /**

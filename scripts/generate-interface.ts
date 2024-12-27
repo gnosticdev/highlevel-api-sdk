@@ -8,7 +8,10 @@ if (import.meta.main) {
 }
 
 export async function generateClientInterface() {
-	const CLIENT_INTERFACE_FILE = 'src/clients/v2/interface.ts'
+	const CLIENT_INTERFACE_FILE = path.join(
+		process.cwd(),
+		'src/v2/client/interface.ts',
+	)
 
 	const schemaFiles = (await getV2OpenApiFiles())
 		.filter((file) => !file.endsWith('oauth.openapi.json'))
@@ -21,7 +24,7 @@ export async function generateClientInterface() {
 
 	const importStatements = schemaFiles
 		.map((file) => {
-			return `import type * as ${file.pascalName} from '../../generated/v2/openapi/${file.fileName}'`
+			return `import type * as ${file.pascalName} from '../types/openapi/${file.fileName}'`
 		})
 		.join('\n')
 
@@ -40,13 +43,13 @@ ${importStatements}
 
 import type { Client } from 'openapi-fetch'
 import type { AccessType } from '../../lib/type-utils'
-import type { ClientWithAuth } from './client-types'
-import type { HighLevelClientConfig } from './default-client'
-import type { BaseOauthClient, OauthClientImpl } from './oauth/impl'
+import type { ClientWithAuth } from './types'
+import type { HighLevelClientConfig } from './default'
+import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
 
 export interface HighLevelClientInterface<
 	T extends AccessType,
-	TOAuth extends BaseOauthClient | OauthClientImpl<T>,
+	TOAuth extends DefaultOauthClient | OauthClientImpl<T>,
 > {
 	/**
 	 * Exposed config object for convenience.
@@ -60,7 +63,7 @@ export interface HighLevelClientInterface<
 	await Bun.write(CLIENT_INTERFACE_FILE, interfaceContent)
 	console.log(
 		kleur.green(
-			`Successfully generated HighLevelClientInterface in ${CLIENT_INTERFACE_FILE}`,
+			`Successfully generated HighLevelClientInterface in ${CLIENT_INTERFACE_FILE.replace(process.cwd(), '')}`,
 		),
 	)
 }

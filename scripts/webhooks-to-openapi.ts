@@ -1,6 +1,6 @@
 import path from 'node:path'
 import type { OpenAPI3, SchemaObject } from 'openapi-typescript'
-import { CUSTOM_V2_SCHEMAS_DIR } from '../src/lib/constants'
+import { CUSTOM_V2_SCHEMAS_DIR } from './constants'
 
 interface WebhookSchema {
 	title: string

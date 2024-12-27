@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { CUSTOM_TYPES_DIR, CUSTOM_V2_SCHEMAS_DIR } from '../src/lib/constants'
+import { CUSTOM_TYPES_DIR, CUSTOM_V2_SCHEMAS_DIR } from './constants'
 
 const SCOPES_OUTPUT_FILE = path.join(CUSTOM_TYPES_DIR, 'scopes.ts')
 

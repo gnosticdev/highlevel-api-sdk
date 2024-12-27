@@ -1,6 +1,6 @@
 import path from 'node:path'
 import openapiTS, { astToString } from 'openapi-typescript'
-import { CUSTOM_TYPES_DIR, CUSTOM_V2_SCHEMAS_DIR } from '../src/lib/constants'
+import { CUSTOM_TYPES_DIR, CUSTOM_V2_SCHEMAS_DIR } from './constants'
 import {
 	convertWebhooksToOpenAPI,
 	generateWebhooksModules,

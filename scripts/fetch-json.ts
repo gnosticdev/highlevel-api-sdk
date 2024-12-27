@@ -7,6 +7,14 @@ import type {
 	ReferenceObject,
 } from 'openapi-typescript'
 
+// ---------------------------------
+/**
+ * This script fetches the OpenAPI schemas from storage and saves them to the schemas/v2 directory.
+ *
+ * It also ensures that the operationIds are unique.
+ */
+// ---------------------------------
+
 const API_URL = process.env.DOCS_API_URL
 const USERNAME = process.env.DOCS_USERNAME
 const PASSWORD = process.env.DOCS_PASSWORD

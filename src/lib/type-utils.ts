@@ -1,4 +1,4 @@
-import type { ScopesSchema } from '../generated/v2/custom/scopes'
+import type { ScopesSchema } from '../v2/types/custom/scopes'
 
 /*
  * This file is used to generate the types for the scopes schema.

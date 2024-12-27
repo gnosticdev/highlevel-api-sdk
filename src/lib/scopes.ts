@@ -1,5 +1,5 @@
-import { ScopesSchema } from '../generated/v2/custom/scopes'
 import { objectEntries } from '../lib/utils'
+import { ScopesSchema } from '../v2/types/custom/scopes'
 import type { AccessType, HighLevelScopes, ScopeLiterals } from './type-utils'
 
 /**
