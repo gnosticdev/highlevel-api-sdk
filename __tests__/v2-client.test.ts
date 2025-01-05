@@ -5,7 +5,6 @@ import type { Client, FetchResponse } from 'openapi-fetch'
 import type { AccessType } from '../src/lib/type-utils'
 import { createHighLevelClient } from '../src/v2'
 import { DEFAULT_V2_BASE_URL, HighLevelClient } from '../src/v2/client/default'
-import type { AuthHeaders } from '../src/v2/client/types'
 import type { HighLevelOauthConfig } from '../src/v2/client/with-oauth'
 import {
 	DEFAULT_BASE_AUTH_URL,
@@ -21,12 +20,12 @@ type LocationsResponse = FetchResponse<
 >
 
 describe('Base Client', () => {
-	let baseClient: HighLevelClient<AccessType, DefaultOauthClient, AuthHeaders>
+	let baseClient: HighLevelClient<AccessType, DefaultOauthClient, undefined>
 	let baseOauthClient: DefaultOauthClient
 
 	beforeEach(() => {
-		baseClient = new HighLevelClient()
-		baseOauthClient = createHighLevelClient().oauth
+		baseClient = createHighLevelClient()
+		baseOauthClient = baseClient.oauth
 	})
 
 	it('should create base client with default configuration', () => {
@@ -35,20 +34,33 @@ describe('Base Client', () => {
 	})
 
 	it('should have all API properties defined', () => {
+		expect(baseClient.calendars).toBeDefined()
+		expect(baseClient.companies).toBeDefined()
+		expect(baseClient.conversations).toBeDefined()
+		expect(baseClient.courses).toBeDefined()
 		expect(baseClient.locations).toBeDefined()
+		expect(baseClient.oauth).toBeDefined()
 		expect(baseClient.campaigns).toBeDefined()
 		expect(baseClient.contacts).toBeDefined()
-		expect(baseClient.oauth.GET).toBeFunction()
+		expect(baseClient.oauth).toBeDefined()
+		expect(baseClient.locations).toBeDefined()
 	})
 
 	it('should have all OAuth properties defined', () => {
-		expect(baseOauthClient).toContainAllKeys(Object.keys(baseClient.oauth))
+		expect(baseOauthClient).toContainKeys([
+			'GET',
+			'POST',
+			'PUT',
+			'DELETE',
+			'TRACE',
+			'OPTIONS',
+		])
 	})
 
 	it('should have base oauth client', () => {
-		expect(baseClient.oauth).toBeDefined()
+		expect(baseOauthClient).toBeDefined()
 		// @ts-expect-error - config is not defined on BaseOauthClient
-		expect(baseClient.oauth.config).toBeUndefined()
+		expect(baseOauthClient.config).toBeUndefined()
 	})
 })
 

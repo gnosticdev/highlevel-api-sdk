@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk.svg)](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk)
 [![npm downloads](https://img.shields.io/npm/dm/@gnosticdev/highlevel-sdk.svg)](https://www.npmjs.com/package/@gnosticdev/highlevel-sdk)
 
-Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build your own apps or use the included clients to interact with the HighLevel API.
+Typescript SDK for working with HighLevel API endpoints. Every endpoint for both v1 and v2 of the API has a fully typed client SDK, and the types are generated from HighLevel's OpenAPI v3 documentation so will always be compatible and up to date.
 
 ## Features
 
@@ -11,9 +11,9 @@ Typed API Endpoints & Clients for HighLevel API. You can use this SDK to build y
 - API Endpoints generated from HighLevel's OpenAPI v3 documentation, using [openapi-typescript](https://openapi-ts.dev/introduction)
 - Fully typed client SDK (using native `fetch`) built with [openapi-fetch](https://openapi-ts.dev/openapi-fetch/)
 - OAuth2 helpers for working with HighLevel's OAuth2 implementation
-- Scopes builder for easily working with the scopes specified in the HighLevel Marketplace
-- Typed webhooks endpoints
-- Support for both v1 and v2 of the HighLevel API
+- Scopes builder for easily adding the appropriate scopes to your app
+- Webhooks client with typed responses
+- Support for both v1 (legacy API keys) and v2 (OAuth & Private Integrations)
 
 ## Resources
 
@@ -50,6 +50,7 @@ The HighLevel client uses the v2 API by default (see below for v1 client). It ca
 - **Client with OAuth**: Requires OAuth configuration.
 
   ```ts
+  // The first argument is always the client config, so pass an empty object if you don't need it
   const client = createHighLevelClient({}, 'oauth', {
       clientId: 'your-client-id',
       clientSecret: 'your-client-secret',
@@ -63,9 +64,9 @@ The HighLevel client uses the v2 API by default (see below for v1 client). It ca
 
   ```ts
   const client = createHighLevelClient({}, 'integration', {
-      privateToken: 'your-token',
+      privateToken: process.env.HIGHLEVEL_PRIVATE_TOKEN!,
       accessType: 'Agency',
-      scopes: ['saas/company.write']
+      scopes: ['saas/company.write', 'saas/company.read']
   })
   ```
 
