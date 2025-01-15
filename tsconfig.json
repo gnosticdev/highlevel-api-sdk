@@ -14,7 +14,7 @@
 		"strict": true,
 		"strictNullChecks": true,
 		"target": "ESNext",
-		"types": ["bun", "node"],
+		"types": ["bun", "node", "./env.d.ts"],
 		"verbatimModuleSyntax": true
 	},
 	"exclude": ["examples/**/*"],

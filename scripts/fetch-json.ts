@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import * as path from 'node:path'
+import kleur from 'kleur'
 import type {
 	Method,
 	OperationObject,
@@ -23,6 +24,8 @@ if (!API_URL || !USERNAME || !PASSWORD) {
 	throw new Error('DOCS_API_URL, DOCS_USERNAME, and DOCS_PASSWORD must be set')
 }
 
+const CUSTOM_SCHEMA_NAMES = ['scopes', 'webhooks']
+
 const TEMP_DIR = 'temp-schemas-json'
 
 if (import.meta.main) {
@@ -34,51 +37,64 @@ if (import.meta.main) {
 		)
 
 		// Download OpenAPI schemas to temp directory
-		for (const schema of schemas.openapi) {
-			await downloadSchema(schema, path.join(TEMP_DIR, 'openapi'), true)
+		console.log(kleur.bgBlue('Downloading OpenAPI schemas'))
+		for (const openapiSchema of schemas.openapi) {
+			await downloadSchema(openapiSchema, path.join(TEMP_DIR, 'openapi'), true)
+			console.log(kleur.cyan(`Downloaded ${openapiSchema.name}`))
 		}
 
 		// Download custom schemas to temp directory
-		for (const file of schemas.custom) {
-			await downloadSchema(file, path.join(TEMP_DIR, 'custom'), false)
+		console.log(kleur.bgBlue('Downloading custom schemas'))
+		for (const customSchema of schemas.custom) {
+			await downloadSchema(customSchema, path.join(TEMP_DIR, 'custom'), false)
+			console.log(kleur.cyan(`Downloaded ${customSchema.name}`))
 		}
 
 		// If we've reached this point, all downloads were successful
 		// move the files from the temp dir to the final dir
 		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ schemas/v2`
-		await Bun.$`rm -rf ${TEMP_DIR}`
-
 		console.log('All schemas downloaded and moved successfully')
-		await Bun.$`bun check --write --unsafe schemas/v2`
+
+		await Bun.$`bun biome check --write --unsafe schemas/v2`
 		console.log('All schemas linted successfully')
 	} catch (error) {
 		console.error('Error downloading schemas', error)
 		// Clean up temp directory in case of error
 		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
+	} finally {
+		await Bun.$`rm -rf ${TEMP_DIR}`
 	}
 }
 
+type FetchSchemaListResponse = {
+	openapi: ListSchemaItem[]
+	custom: ListSchemaItem[]
+}
 /**
  * Fetch the list of schemas from the API, and splits them based on if they are an OpenAPI schema or not (other files).
  */
-async function fetchSchemaList() {
-	const authHeaders = {
-		Authorization: `Basic ${Buffer.from(`${USERNAME}:${PASSWORD}`).toString('base64')}`,
-	}
-	const response = await fetch(`${API_URL}/list-schemas`, {
-		headers: authHeaders,
-	})
+async function fetchSchemaList(): Promise<FetchSchemaListResponse> {
+	// we have a special /schemas/index.json file that contains a list of all the schemas
+	const response = await fetch(`${API_URL}/schemas/index.json`)
 	if (!response.ok) {
 		throw new Error(`Failed to fetch schema list: ${response.statusText}`)
 	}
-	const data = (await response.json()) as ListSchemas
+	const data = (await response.json()) as SchemaList
+	console.log('data', data)
+
 	const schemas = data.schemas.reduce(
-		(acc: { openapi: string[]; custom: string[] }, schema) => {
-			if (['scopes.json', 'webhooks.json'].includes(schema.name)) {
-				acc.custom.push(schema.name)
-			} else {
-				acc.openapi.push(schema.name)
+		(acc: FetchSchemaListResponse, schema) => {
+			const downloadUrl = new URL(schema.downloadUrl, API_URL)
+			schema.downloadUrl = downloadUrl.toString()
+			if (CUSTOM_SCHEMA_NAMES.includes(schema.name)) {
+				acc.custom.push(schema)
+				return acc
 			}
+			// skip the index.json file
+			if (schema.name === 'index') {
+				return acc
+			}
+			acc.openapi.push(schema)
 			return acc
 		},
 		{ openapi: [], custom: [] },
@@ -90,14 +106,20 @@ async function fetchSchemaList() {
  * Download a schema from the API.
  */
 async function downloadSchema(
-	schemaName: string,
+	schema: ListSchemaItem,
 	dir: string,
 	isOpenApi: boolean,
 ) {
-	const response = await fetch(`${API_URL}/${schemaName}`)
+	if (
+		!schema.downloadUrl.startsWith(API_URL) ||
+		!schema.downloadUrl.endsWith('.json')
+	) {
+		throw new Error(`Invalid download URL: ${schema.downloadUrl}`)
+	}
+	const response = await fetch(schema.downloadUrl)
 	if (!response.ok) {
 		throw new Error(
-			`Failed to download schema ${schemaName}: ${response.statusText}`,
+			`Failed to download schema ${schema.downloadUrl}: ${response.statusText}`,
 		)
 	}
 	const content = await response.json()
@@ -105,16 +127,19 @@ async function downloadSchema(
 		? ensureUniqueOperationIds(content)
 		: content
 
-	// Update the filename for OpenAPI schemas
+	// Update the filename for OpenAPI schemas. Dont forget to remove the /schemas/ prefix
 	const fileName = isOpenApi
-		? `${path.basename(schemaName, '.json')}.openapi.json`
-		: schemaName
-
+		? schema.name.concat('.openapi.json')
+		: schema.name.concat('.json')
+	console.log('writing file', fileName)
 	const filePath = path.join(dir, fileName)
 	await Bun.write(filePath, JSON.stringify(processedContent, null, 2))
 	console.log(`Downloaded and processed: ${fileName}`)
 }
 
+/**
+ * Check if the operation is an OperationObject.
+ */
 function isOperationObject(
 	operation: OperationObject | ReferenceObject | undefined,
 ): operation is OperationObject {
@@ -164,11 +189,53 @@ function ensureUniqueOperationIds(
 
 	return schema
 }
-
+/**
+ * From /list-schemas
+ *
+ * @deprecated
+ */
 type ListSchemas = {
 	schemas: {
 		name: string
 		size: number
 		uploaded: string
 	}[]
+}
+
+type SchemaList = {
+	lastUpdated: string
+	totalSchemas: number
+	schemas: ListSchemaItem[]
+}
+
+type ListSchemaItem = {
+	/**
+	 * The name of the schema file.
+	 *
+	 * @example
+	 * 'scopes'
+	 */
+	name: string
+	/**
+	 * The path to the schema file.
+	 *
+	 * @example
+	 * '/schemas/scopes.json'
+	 */
+	path: string
+	/**
+	 * The size of the schema file in bytes.
+	 */
+	size: number
+	/**
+	 * The last modified date of the schema file.
+	 */
+	lastModified: string
+	/**
+	 * The URL to download the schema file.
+	 *
+	 * @example
+	 * '/download/scopes.json'
+	 */
+	downloadUrl: string
 }

@@ -1,0 +1,711 @@
+{
+  "components": {
+    "schemas": {
+      "BadRequestDTO": {
+        "properties": {
+          "message": {
+            "example": "Bad Request",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 400,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "BuilderUpdateSuccessfulDTO": {
+        "properties": {
+          "ok": {
+            "description": "ok",
+            "example": "true",
+            "type": "string"
+          },
+          "previewUrl": {
+            "description": "preview url",
+            "example": "https://example.com",
+            "type": "string"
+          },
+          "templateDownloadUrl": {
+            "description": "template data download url",
+            "example": "https://example.com",
+            "type": "string"
+          },
+          "traceId": {
+            "description": "trace id",
+            "example": "0c52e980-41f6-4be7-8c4b-32332ss",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CreateBuilderDto": {
+        "properties": {
+          "builderVersion": {
+            "default": "2",
+            "enum": ["1", "2"],
+            "type": "string"
+          },
+          "isPlainText": {
+            "example": false,
+            "type": "boolean"
+          },
+          "locationId": {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "title": {
+            "example": "template title",
+            "type": "string"
+          },
+          "type": {
+            "enum": ["html"],
+            "type": "string"
+          },
+          "updatedBy": {
+            "example": "zYy3YOUuHxgomU1uYJty",
+            "type": "string"
+          }
+        },
+        "required": ["locationId", "type"],
+        "type": "object"
+      },
+      "CreateBuilderSuccesfulResponseDto": {
+        "properties": {
+          "redirect": {
+            "description": "template id",
+            "example": "66e811229245fc098765590",
+            "type": "string"
+          },
+          "traceId": {
+            "description": "trace id",
+            "example": "0c52e980-41f6-4be7-8c4b-e2c5a13dc3c2",
+            "type": "string"
+          }
+        },
+        "required": ["redirect", "traceId"],
+        "type": "object"
+      },
+      "DeleteBuilderSuccesfulResponseDto": {
+        "properties": {
+          "ok": {
+            "description": "ok",
+            "example": "true",
+            "type": "string"
+          },
+          "traceId": {
+            "description": "trace id",
+            "example": "0c52e980-41f6-4be7-8c4b-32332ss",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "FetchBuilderSuccesfulResponseDto": {
+        "properties": {
+          "dateAdded": {
+            "description": "date added",
+            "example": "2024-11-12T12:34:36.070Z",
+            "type": "string"
+          },
+          "id": {
+            "description": "id",
+            "example": "67334b231f2fad724062f52b5",
+            "type": "string"
+          },
+          "isPlainText": {
+            "description": "plain text based template",
+            "example": "false",
+            "type": "boolean"
+          },
+          "lastUpdated": {
+            "description": "last updated",
+            "example": "2024-11-12T12:34:36.070Z",
+            "type": "string"
+          },
+          "name": {
+            "description": "template name",
+            "example": "New Template",
+            "type": "string"
+          },
+          "previewUrl": {
+            "description": "preview url",
+            "example": "https://example.com",
+            "type": "string"
+          },
+          "templateType": {
+            "description": "type",
+            "example": "builder",
+            "type": "string"
+          },
+          "updatedBy": {
+            "description": "updated by",
+            "example": "John Doe",
+            "type": "string"
+          },
+          "version": {
+            "description": "version",
+            "example": "1",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "IBuilderJsonMapper": {
+        "properties": {
+          "attrs": {
+            "type": "object"
+          },
+          "elements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "templateSettings": {
+            "$ref": "#/components/schemas/TemplateSettings"
+          }
+        },
+        "required": ["elements", "attrs", "templateSettings"],
+        "type": "object"
+      },
+      "SaveBuilderDataDto": {
+        "properties": {
+          "dnd": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IBuilderJsonMapper"
+              }
+            ],
+            "description": "Provide {elements:[], attrs:{}, templateSettings:{}} for this parameter",
+            "example": "{elements:[], attrs:{}, templateSettings:{}}"
+          },
+          "editorType": {
+            "enum": ["html"],
+            "type": "string"
+          },
+          "html": {
+            "example": "",
+            "type": "string"
+          },
+          "locationId": {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "templateId": {
+            "example": "zYy3YOUuHxgomU1uYJty",
+            "type": "string"
+          },
+          "updatedBy": {
+            "example": "zYy3YOUuHxgomU1uYJty",
+            "type": "string"
+          }
+        },
+        "required": ["locationId", "templateId", "updatedBy", "dnd", "html", "editorType"],
+        "type": "object"
+      },
+      "TemplateSettings": {
+        "properties": {},
+        "type": "object"
+      },
+      "UnauthorizedDTO": {
+        "properties": {
+          "error": {
+            "example": "Unauthorized",
+            "type": "string"
+          },
+          "message": {
+            "example": "Invalid token: access token is invalid",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 401,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "UnprocessableDTO": {
+        "properties": {
+          "error": {
+            "example": "Unprocessable Entity",
+            "type": "string"
+          },
+          "message": {
+            "example": ["Unprocessable Entity"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "statusCode": {
+            "example": 422,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Agency-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "Documentation for emails API",
+    "title": "Email API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/emails/builder": {
+      "get": {
+        "description": "Fetch email templates by location id",
+        "operationId": "fetch-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Max limit 100",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortByDate",
+            "required": false,
+            "schema": {
+              "default": "desc",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "archived",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "builderVersion",
+            "required": false,
+            "schema": {
+              "default": "2",
+              "enum": ["1", "2"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "parentId",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "templatesOnly",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchBuilderSuccesfulResponseDto"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Fetch email templates"
+      },
+      "post": {
+        "description": "Create a new template",
+        "operationId": "create-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBuilderDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBuilderSuccesfulResponseDto"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Create a new template"
+      }
+    },
+    "/emails/builder/data": {
+      "post": {
+        "description": "Update a template",
+        "operationId": "update-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveBuilderDataDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuilderUpdateSuccessfulDTO"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Update a template"
+      }
+    },
+    "/emails/builder/{locationId}/{templateId}": {
+      "delete": {
+        "description": "Delete a template",
+        "operationId": "delete-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "path",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "example": "zYy3YOUuHxgomU1uYJty",
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteBuilderSuccesfulResponseDto"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Delete a template"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Documentation for emails API",
+      "name": "Emails"
+    }
+  ]
+}

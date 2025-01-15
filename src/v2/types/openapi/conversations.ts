@@ -307,6 +307,26 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/conversations/providers/live-chat/typing': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Agent/Ai-Bot is typing a message indicator for live chat
+		 * @description Agent/AI-Bot will call this when they are typing a message in live chat message
+		 */
+		post: operations['live-chat-agent-typing']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/conversations/search': {
 		parameters: {
 			query?: never
@@ -576,6 +596,9 @@ export type components = {
 			 * @example tDtDnQdgm2LXpyiqYvZ6
 			 */
 			locationId: string
+		}
+		CreateLiveChatMessageFeedbackResponse: {
+			success: boolean
 		}
 		DeleteConversationSuccessfulResponse: {
 			/**
@@ -971,6 +994,11 @@ export type components = {
 			emailReplyMode?: 'reply' | 'reply_all'
 			/** @description `emailTo` field is used when you want to send the email to a different email address than the contact's primary email. */
 			emailTo?: string
+			/**
+			 * @description The phone number from which the message is being sent.
+			 * @example +1499499299
+			 */
+			fromNumber?: string
 			html?: string
 			message?: string
 			/** @description Specify the emailId on which the reply needs to go out */
@@ -982,6 +1010,11 @@ export type components = {
 			scheduledTimestamp?: number
 			subject?: string
 			templateId?: string
+			/**
+			 * @description The phone number to which the message is being sent.
+			 * @example +1439499299
+			 */
+			toNumber?: string
 			/** @enum {string} */
 			type:
 				| 'SMS'
@@ -1040,6 +1073,16 @@ export type components = {
 			/** @example Invalid token: access token is invalid */
 			message?: string
 			/** @example 401 */
+			statusCode?: number
+		}
+		UnprocessableDTO: {
+			/** @example Unprocessable Entity */
+			error?: string
+			/** @example [
+			 *       "Unprocessable Entity"
+			 *     ] */
+			message?: string[]
+			/** @example 422 */
 			statusCode?: number
 		}
 		UpdateConversationDto: {
@@ -1101,6 +1144,28 @@ export type components = {
 		}
 		UploadFilesResponseDto: {
 			uploadedFiles: Record<string, never>
+		}
+		UserTypingBody: {
+			/**
+			 * @description Conversation Id
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			conversationId: string
+			/**
+			 * @description Typing status
+			 * @example true
+			 */
+			isTyping: string
+			/**
+			 * @description Location Id
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			locationId: string
+			/**
+			 * @description Visitor Id
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			visitorId: string
 		}
 	}
 	responses: never
@@ -1958,6 +2023,62 @@ export interface operations {
 			}
 		}
 	}
+	'live-chat-agent-typing': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UserTypingBody']
+			}
+		}
+		responses: {
+			/** @description Show typing indicator for live chat */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CreateLiveChatMessageFeedbackResponse']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'search-conversation': {
 		parameters: {
 			query: {
@@ -1971,6 +2092,11 @@ export interface operations {
 				 * @example 9VEmS0si86GW6gXWU89b
 				 */
 				contactId?: string
+				/**
+				 * @description User Id of the follower. Multiple values are comma separated.
+				 * @example ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik
+				 */
+				followers?: string
 				/**
 				 * @description Id of the conversation
 				 * @example ABCHkzuJQ8ZMd4Te84GK

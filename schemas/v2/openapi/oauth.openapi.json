@@ -158,6 +158,11 @@
             "example": "l1C08ntBrFjLS0elLIYU",
             "type": "string"
           },
+          "planId": {
+            "description": "Plan Id of the subscribed plan in paid apps.",
+            "example": "l1C08ntBrFjLS0elLIYU",
+            "type": "string"
+          },
           "scope": {
             "description": "Scopes the following accessToken have access to",
             "example": "conversations/message.readonly conversations/message.write",
@@ -239,37 +244,11 @@
         },
         "type": "object"
       }
-    },
-    "securitySchemes": {
-      "Agency-Access": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Company",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      },
-      "Location-Access": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Location",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      }
     }
   },
   "info": {
-    "contact": {
-      "email": "marketplace@gohighlevel.com",
-      "name": "Gaurav",
-      "url": "wwww.goighlevel.com"
-    },
+    "contact": {},
     "description": "Documentation for OAuth 2.0 API",
-    "license": {
-      "name": "MIT",
-      "url": "www.google.com"
-    },
     "title": "OAuth 2.0",
     "version": "1.0"
   },
@@ -338,6 +317,26 @@
             "in": "query",
             "name": "appId",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filters out locations which are installed for specified app in trial mode",
+            "example": true,
+            "in": "query",
+            "name": "onTrial",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Filters out location which are installed for specified app under the specified planId",
+            "example": true,
+            "in": "query",
+            "name": "planId",
+            "required": false,
             "schema": {
               "type": "string"
             }

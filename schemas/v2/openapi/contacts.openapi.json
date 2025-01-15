@@ -484,6 +484,11 @@
             "nullable": true,
             "type": "string"
           },
+          "assignedTo": {
+            "description": "User's Id",
+            "example": "y0BeYjuRIlDwsDcOHOJo",
+            "type": "string"
+          },
           "city": {
             "example": "Dolomite",
             "nullable": true,
@@ -595,6 +600,11 @@
         "properties": {
           "address1": {
             "example": "3535 1st St N",
+            "type": "string"
+          },
+          "assignedTo": {
+            "description": "User's Id",
+            "example": "y0BeYjuRIlDwsDcOHOJo",
             "type": "string"
           },
           "birthDay": {
@@ -998,10 +1008,6 @@
             "example": "rubika deo",
             "type": "string"
           },
-          "gender": {
-            "example": "male",
-            "type": "string"
-          },
           "id": {
             "example": "seD4PfOuKoVMLkEZqohJ",
             "type": "string"
@@ -1084,9 +1090,24 @@
       },
       "GetEventSchema": {
         "properties": {
+          "address": {
+            "example": "Address",
+            "type": "string"
+          },
           "appoinmentStatus": {
             "example": "confirmed",
             "type": "string"
+          },
+          "appointmentStatus": {
+            "example": "booked",
+            "type": "string"
+          },
+          "assignedResources": {
+            "example": ["YlWd2wuCAZQzh2cH1fVZ", "YlWd2wuCAZQzh2cH1fVZ"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "assignedUserId": {
             "example": "YlWd2wuCAZQzh2cH1fVZ",
@@ -1096,12 +1117,32 @@
             "example": "YlWd2wuCAZQzh2cH1fVZ",
             "type": "string"
           },
+          "contactId": {
+            "example": "YlWd2wuCAZQzh2cH1fVZ",
+            "type": "string"
+          },
+          "dateAdded": {
+            "example": "2021-07-16 11:00:00",
+            "type": "string"
+          },
+          "dateUpdated": {
+            "example": "2021-07-16 11:30:00",
+            "type": "string"
+          },
           "endTime": {
             "example": "2021-07-16 11:30:00",
             "type": "string"
           },
+          "groupId": {
+            "example": "YlWd2wuCAZQzh2cH1fVZ",
+            "type": "string"
+          },
           "id": {
             "example": "YS3jaqqeehkR2Is80miy",
+            "type": "string"
+          },
+          "locationId": {
+            "example": "YlWd2wuCAZQzh2cH1fVZ",
             "type": "string"
           },
           "notes": {
@@ -1119,6 +1160,13 @@
           "title": {
             "example": "Test",
             "type": "string"
+          },
+          "users": {
+            "example": ["YlWd2wuCAZQzh2cH1fVZ", "YlWd2wuCAZQzh2cH1fVZ"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -1334,6 +1382,12 @@
             "nullable": true,
             "type": "string"
           },
+          "assignedTo": {
+            "description": "User's Id",
+            "example": "y0BeYjuRIlDwsDcOHOJo",
+            "nullable": true,
+            "type": "string"
+          },
           "city": {
             "example": "Dolomite",
             "nullable": true,
@@ -1481,6 +1535,11 @@
           "address1": {
             "example": "3535 1st St N",
             "nullable": true,
+            "type": "string"
+          },
+          "assignedTo": {
+            "description": "User's Id",
+            "example": "y0BeYjuRIlDwsDcOHOJo",
             "type": "string"
           },
           "city": {
@@ -1668,7 +1727,7 @@
     "securitySchemes": {
       "Agency-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -1702,7 +1761,8 @@
   "paths": {
     "/contacts/": {
       "get": {
-        "description": "Get Contacts",
+        "deprecated": true,
+        "description": "Get Contacts\n\n **Note:** This API endpoint is deprecated. Please use the [Search Contacts](https://highlevel.stoplight.io/docs/integrations/dbe4f3a00a106-search-contacts) endpoint instead.",
         "operationId": "get-contacts",
         "parameters": [
           {

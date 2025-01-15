@@ -166,6 +166,11 @@ export type components = {
 			 */
 			locationId?: string
 			/**
+			 * @description Plan Id of the subscribed plan in paid apps.
+			 * @example l1C08ntBrFjLS0elLIYU
+			 */
+			planId?: string
+			/**
 			 * @description Scopes the following accessToken have access to
 			 * @example conversations/message.readonly conversations/message.write
 			 */
@@ -250,6 +255,16 @@ export interface operations {
 				 * @example 10
 				 */
 				limit?: string
+				/**
+				 * @description Filters out locations which are installed for specified app in trial mode
+				 * @example true
+				 */
+				onTrial?: boolean
+				/**
+				 * @description Filters out location which are installed for specified app under the specified planId
+				 * @example true
+				 */
+				planId?: string
 				/**
 				 * @description Parameter to search for the installed location by name
 				 * @example location name

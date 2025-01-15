@@ -1,0 +1,900 @@
+{
+  "components": {
+    "schemas": {
+      "BadRequestDTO": {
+        "properties": {
+          "message": {
+            "example": "Bad Request",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 400,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "CreateCustomMenuDTO": {
+        "properties": {
+          "allowCamera": {
+            "description": "Whether to allow camera access (only for iframe mode)",
+            "example": false,
+            "type": "boolean"
+          },
+          "allowMicrophone": {
+            "description": "Whether to allow microphone access (only for iframe mode)",
+            "example": false,
+            "type": "boolean"
+          },
+          "icon": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IconSchema"
+              }
+            ],
+            "description": "Icon information for the custom menu"
+          },
+          "locations": {
+            "description": "List of sub-account IDs where the menu should be shown. This list is applicable only when showOnLocation is true and showToAllLocations is false",
+            "example": ["gfWreTIHL8pDbggBb7af", "67WreTIHL8pDbggBb7ty"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "openMode": {
+            "description": "Mode for opening the menu link",
+            "enum": ["iframe", "new_tab", "current_tab"],
+            "type": "string"
+          },
+          "showOnCompany": {
+            "default": true,
+            "description": "Whether the menu must be displayed on the agency's level",
+            "example": true,
+            "type": "boolean"
+          },
+          "showOnLocation": {
+            "default": true,
+            "description": "Whether the menu must be displayed for sub-accounts level",
+            "example": true,
+            "type": "boolean"
+          },
+          "showToAllLocations": {
+            "default": true,
+            "description": "Whether the menu must be displayed to all sub-accounts",
+            "example": true,
+            "type": "boolean"
+          },
+          "title": {
+            "description": "Title of the custom menu",
+            "example": "Custom Menu",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL of the custom menu",
+            "example": "https://custom-menus.com/",
+            "type": "string"
+          },
+          "userRole": {
+            "description": "Which user-roles should the menu be accessible to?",
+            "enum": ["all", "admin", "user"],
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url",
+          "icon",
+          "showOnCompany",
+          "showOnLocation",
+          "showToAllLocations",
+          "openMode",
+          "locations",
+          "userRole"
+        ],
+        "type": "object"
+      },
+      "CustomMenuSchema": {
+        "properties": {
+          "allowCamera": {
+            "description": "Indicates if camera access is allowed for this menu",
+            "example": false,
+            "type": "boolean"
+          },
+          "allowMicrophone": {
+            "description": "Indicates if microphone access is allowed for this menu",
+            "example": false,
+            "type": "boolean"
+          },
+          "icon": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IconSchemaOptional"
+              }
+            ],
+            "description": "Icon information for the menu item"
+          },
+          "id": {
+            "description": "Unique identifier for the custom menu",
+            "example": "12345",
+            "type": "string"
+          },
+          "locations": {
+            "description": "List of sub-account IDs where the menu should be shown. This list is applicable only when showOnLocation is true and showToAllLocations is false",
+            "example": ["gfWreTIHL8pDbggBb7af", "67WreTIHL8pDbggBb7ty"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "openMode": {
+            "description": "Mode for opening the menu link",
+            "enum": ["iframe", "new_tab", "current_tab"],
+            "type": "string"
+          },
+          "order": {
+            "description": "Order of the custom menu",
+            "example": 1,
+            "type": "number"
+          },
+          "showOnCompany": {
+            "description": "Filter to show only agency-level menu links. When omitted, fetches both agency and sub-account menu links. Ignored if locationId is provided",
+            "example": true,
+            "type": "boolean"
+          },
+          "showOnLocation": {
+            "description": "Whether the menu must be displayed for sub-accounts level",
+            "example": true,
+            "type": "boolean"
+          },
+          "showToAllLocations": {
+            "description": "Whether the menu must be displayed to all sub-accounts",
+            "example": true,
+            "type": "boolean"
+          },
+          "title": {
+            "description": "Title of the custom menu",
+            "example": "Dashboard",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL of the custom menu",
+            "example": "/dashboard",
+            "type": "string"
+          },
+          "userRole": {
+            "description": "Which user-roles should the menu be accessible to?",
+            "enum": ["all", "admin", "user"],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DeleteCustomMenuSuccessfulResponseDTO": {
+        "properties": {
+          "deletedAt": {
+            "description": "Timestamp of when the deletion was performed",
+            "example": "2023-09-12T15:30:45.123Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedMenuId": {
+            "description": "The ID of the deleted custom menu",
+            "example": "12345abcde",
+            "type": "string"
+          },
+          "message": {
+            "description": "A message providing additional information about the deletion operation",
+            "example": "Custom menu successfully deleted",
+            "type": "string"
+          },
+          "success": {
+            "description": "Indicates whether the custom menu was successfully deleted",
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "GetCustomMenusResponseDTO": {
+        "properties": {
+          "customMenus": {
+            "description": "Array of custom menu links",
+            "items": {
+              "$ref": "#/components/schemas/CustomMenuSchema"
+            },
+            "type": "array"
+          },
+          "totalLinks": {
+            "description": "Total number of custom menu records",
+            "example": 100,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "GetSingleCustomMenusSuccessfulResponseDTO": {
+        "properties": {
+          "customMenu": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomMenuSchema"
+              }
+            ],
+            "description": "Single Custom menu link object"
+          }
+        },
+        "type": "object"
+      },
+      "IconSchema": {
+        "properties": {
+          "fontFamily": {
+            "description": "Font family of the icon",
+            "enum": ["fab", "fas", "far"],
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the icon",
+            "example": "yin-yang",
+            "type": "string"
+          }
+        },
+        "required": ["name", "fontFamily"],
+        "type": "object"
+      },
+      "IconSchemaOptional": {
+        "properties": {
+          "fontFamily": {
+            "description": "Font family of the icon",
+            "enum": ["fab", "fas", "far"],
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the icon",
+            "example": "yin-yang",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UnauthorizedDTO": {
+        "properties": {
+          "error": {
+            "example": "Unauthorized",
+            "type": "string"
+          },
+          "message": {
+            "example": "Invalid token: access token is invalid",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 401,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "UnprocessableDTO": {
+        "properties": {
+          "error": {
+            "example": "Unprocessable Entity",
+            "type": "string"
+          },
+          "message": {
+            "example": ["Unprocessable Entity"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "statusCode": {
+            "example": 422,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateCustomMenuDTO": {
+        "properties": {
+          "allowCamera": {
+            "description": "Whether to allow camera access (only for iframe mode)",
+            "example": false,
+            "type": "boolean"
+          },
+          "allowMicrophone": {
+            "description": "Whether to allow microphone access (only for iframe mode)",
+            "example": false,
+            "type": "boolean"
+          },
+          "icon": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IconSchemaOptional"
+              }
+            ],
+            "description": "Icon information for the custom menu"
+          },
+          "locations": {
+            "description": "List of sub-account IDs where the menu should be shown. This list is applicable only when showOnLocation is true and showToAllLocations is false",
+            "example": ["gfWreTIHL8pDbggBb7af", "67WreTIHL8pDbggBb7ty"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "openMode": {
+            "description": "Mode for opening the menu link",
+            "enum": ["iframe", "new_tab", "current_tab"],
+            "type": "string"
+          },
+          "showOnCompany": {
+            "default": true,
+            "description": "Whether the menu must be displayed on the agency's level",
+            "example": true,
+            "type": "boolean"
+          },
+          "showOnLocation": {
+            "default": true,
+            "description": "Whether the menu must be displayed for sub-accounts level",
+            "example": true,
+            "type": "boolean"
+          },
+          "showToAllLocations": {
+            "default": true,
+            "description": "Whether the menu must be displayed to all sub-accounts",
+            "example": true,
+            "type": "boolean"
+          },
+          "title": {
+            "description": "Title of the custom menu",
+            "example": "Custom Menu",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL of the custom menu",
+            "example": "https://custom-menus.com/",
+            "type": "string"
+          },
+          "userRole": {
+            "description": "Which user-roles should the menu be accessible to?",
+            "enum": ["all", "admin", "user"],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateCustomMenuLinkResponseDTO": {
+        "properties": {
+          "customMenu": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomMenuSchema"
+              }
+            ],
+            "description": "Updated custom menu link"
+          },
+          "success": {
+            "description": "Status of update",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Agency-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "Documentation for Custom menus API",
+    "title": "Custom menus API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/custom-menus/": {
+      "get": {
+        "description": "Fetches a collection of custom menus based on specified criteria. This endpoint allows clients to retrieve custom menu configurations, which may include menu items, categories, and associated metadata. The response can be tailored using query parameters for filtering, sorting, and pagination.",
+        "operationId": "get-custom-menus",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier of the location",
+            "example": "5DP4iH6HLkQsiKESj6rh",
+            "in": "query",
+            "name": "locationId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Number of items to skip for pagination",
+            "example": 0,
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Maximum number of items to return",
+            "example": 10,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Search query to filter custom menus by name, supports partial || full names",
+            "example": "custom-menu-link-name",
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter to show only agency-level menu links. When omitted, fetches both agency and sub-account menu links. Ignored if locationId is provided",
+            "example": true,
+            "in": "query",
+            "name": "showOnCompany",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCustomMenusResponseDTO"
+                }
+              }
+            },
+            "description": "Successfully retrieved custom menus. Returns an array of custom menu objects, potentially including their structure, items, and relevant metadata."
+          },
+          "400": {
+            "description": "Bad Request. Invalid query parameters provided."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden. The client does not have necessary permissions to access custom menus."
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Get Custom Menu Links",
+        "tags": ["Custom Menu Links"]
+      },
+      "post": {
+        "description": "Creates a new custom menu for a company. Requires authentication and proper permissions. For Icon Usage Details please refer to  https://doc.clickup.com/8631005/d/h/87cpx-243696/d60fa70db6b92b2",
+        "operationId": "create-custom-menu",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomMenuDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSingleCustomMenusSuccessfulResponseDTO"
+                }
+              }
+            },
+            "description": "Custom menu successfully created"
+          },
+          "400": {
+            "description": "Bad Request - Invalid input"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Create Custom Menu Link",
+        "tags": ["Custom Menu Links"]
+      }
+    },
+    "/custom-menus/{customMenuId}": {
+      "delete": {
+        "description": "Removes a specific custom menu from the system. This operation requires authentication and proper permissions. The custom menu is identified by its unique ID, and the operation is performed within the context of a specific company.",
+        "operationId": "delete-custom-menu",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the custom menu to delete",
+            "example": "62e589c1-c456-47e1-a9a7-cb8900014311",
+            "in": "path",
+            "name": "customMenuId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCustomMenuSuccessfulResponseDTO"
+                }
+              }
+            },
+            "description": "Custom menu successfully deleted"
+          },
+          "400": {
+            "description": "Bad Request. Invalid parameters provided."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden. The client does not have necessary permissions to delete this custom menu."
+          },
+          "404": {
+            "description": "Not Found. The specified custom menu does not exist or has already been deleted."
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Delete Custom Menu Link",
+        "tags": ["Custom Menu Links"]
+      },
+      "get": {
+        "description": "Fetches a single custom menus based on id. This endpoint allows clients to retrieve custom menu configurations, which may include menu items, categories, and associated metadata",
+        "operationId": "get-custom-menu-by-id",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier of the custom menu",
+            "example": "62e589c1-c456-47e1-a9a7-cb8900014311",
+            "in": "path",
+            "name": "customMenuId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSingleCustomMenusSuccessfulResponseDTO"
+                }
+              }
+            },
+            "description": "Successfully retrieved custom menu. Returns a single custom menu object, potentially including its structure, items, and relevant metadata."
+          },
+          "400": {
+            "description": "Bad Request. Invalid query parameters provided."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden. The client does not have necessary permissions to access custom menu."
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Get Custom Menu Link",
+        "tags": ["Custom Menu Links"]
+      },
+      "put": {
+        "description": "Updates an existing custom menu for a given company. Requires authentication and proper permissions.",
+        "operationId": "update-custom-menu",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the custom menu to update",
+            "example": "62e589c1-c456-47e1-a9a7-cb8900014311",
+            "in": "path",
+            "name": "customMenuId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomMenuDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCustomMenuLinkResponseDTO"
+                }
+              }
+            },
+            "description": "Custom menu successfully updated"
+          },
+          "400": {
+            "description": "Bad Request - Invalid input"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions"
+          },
+          "404": {
+            "description": "Not Found - Custom menu or company not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update Custom Menu Link",
+        "tags": ["Custom Menu Links"]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.leadconnectorhq.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Documentation for Custom menus API",
+      "name": "custom-menus"
+    }
+  ]
+}

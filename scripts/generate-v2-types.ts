@@ -1,9 +1,10 @@
 import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, { astToString } from 'openapi-typescript'
+import { OPENAPI_TYPES_V2_DIR } from './constants'
 import { generateClientInterface } from './generate-interface'
 
-const TEMP_DIR = path.join(process.cwd(), 'temp-schema-types')
+const TEMP_DIR = 'temp-schema-types'
 
 /**
  * This script uses the json schemas to generate the typescript types. To keep the schemas up to date, run `bun run generate-v2-json` first.
@@ -60,8 +61,10 @@ export async function createV2Types() {
 
 		// use rsync with checksum so we only move the files that have changed
 		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ ${OPENAPI_TYPES_V2_DIR}/`
-
 		console.log(kleur.green('Successfully moved all files to final directory'))
+
+		await Bun.$`bun biome check . --write --unsafe`
+		console.log(kleur.green('Successfully linted all types'))
 	} catch (error) {
 		console.error(kleur.red('Error generating types:'), error)
 		process.exit(1)
@@ -117,4 +120,3 @@ async function createOpenApiTypesFile(schemaFileUrl: URL) {
 	await Bun.write(outFilePath, data)
 	return outFilePath
 }
-export const OPENAPI_TYPES_V2_DIR = 'src/generated/v2/openapi'

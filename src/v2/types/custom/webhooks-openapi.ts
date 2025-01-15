@@ -74,43 +74,6 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	AppUninstall: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['AppUninstall']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	AppInstall: {
 		parameters: {
 			query?: never
@@ -185,6 +148,43 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
+	AppUninstall: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['AppUninstall']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	CampaignStatusUpdate: {
 		parameters: {
 			query?: never
@@ -222,7 +222,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	ContactDelete: {
+	ContactCreate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -240,7 +240,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['ContactDelete']
+					'application/json': components['schemas']['ContactCreate']
 				}
 			}
 			responses: {
@@ -278,43 +278,6 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['ContactDndUpdate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	ContactCreate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['ContactCreate']
 				}
 			}
 			responses: {
@@ -407,7 +370,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	InboundMessage: {
+	ContactDelete: {
 		parameters: {
 			query?: never
 			header?: never
@@ -425,155 +388,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['InboundMessage']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	ConversationUnreadWebhook: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['ConversationUnreadWebhook']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	InvoiceCreate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['InvoiceCreate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	InvoiceVoid: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['InvoiceVoid']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	InvoiceSent: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['InvoiceSent']
+					'application/json': components['schemas']['ContactDelete']
 				}
 			}
 			responses: {
@@ -629,6 +444,154 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
+	InvoiceCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['InvoiceCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	InboundMessage: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['InboundMessage']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	InvoiceSent: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['InvoiceSent']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	ConversationUnreadWebhook: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['ConversationUnreadWebhook']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	InvoicePartiallyPaid: {
 		parameters: {
 			query?: never
@@ -648,43 +611,6 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['InvoicePartiallyPaid']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	InvoiceDelete: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['InvoiceDelete']
 				}
 			}
 			responses: {
@@ -740,7 +666,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	InvoiceUpdate: {
+	InvoiceVoid: {
 		parameters: {
 			query?: never
 			header?: never
@@ -758,7 +684,44 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['InvoiceUpdate']
+					'application/json': components['schemas']['InvoiceVoid']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	InvoiceDelete: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['InvoiceDelete']
 				}
 			}
 			responses: {
@@ -796,6 +759,80 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['LCEmailStats']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	InvoiceUpdate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['InvoiceUpdate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	LocationCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['LocationCreate']
 				}
 			}
 			responses: {
@@ -962,7 +999,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	LocationCreate: {
+	NoteUpdate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -980,7 +1017,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['LocationCreate']
+					'application/json': components['schemas']['NoteUpdate']
 				}
 			}
 			responses: {
@@ -1073,80 +1110,6 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	OpportunityMonetaryValueUpdate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['OpportunityMonetaryValueUpdate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
-	NoteUpdate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['NoteUpdate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	OpportunityStageUpdate: {
 		parameters: {
 			query?: never
@@ -1221,43 +1184,6 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	OrderStatusUpdate: {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		post: {
-			parameters: {
-				query?: never
-				header?: never
-				path?: never
-				cookie?: never
-			}
-			requestBody?: {
-				content: {
-					'application/json': components['schemas']['OrderStatusUpdate']
-				}
-			}
-			responses: {
-				/** @description Webhook processed successfully */
-				200: {
-					headers: {
-						[name: string]: unknown
-					}
-					content?: never
-				}
-			}
-		}
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	OpportunityUpdate: {
 		parameters: {
 			query?: never
@@ -1295,7 +1221,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	OrderCreate: {
+	OpportunityMonetaryValueUpdate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1313,7 +1239,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['OrderCreate']
+					'application/json': components['schemas']['OpportunityMonetaryValueUpdate']
 				}
 			}
 			responses: {
@@ -1369,7 +1295,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	PriceUpdate: {
+	OrderStatusUpdate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1387,7 +1313,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['PriceUpdate']
+					'application/json': components['schemas']['OrderStatusUpdate']
 				}
 			}
 			responses: {
@@ -1406,7 +1332,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	ProductCreate: {
+	OrderCreate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1424,7 +1350,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['ProductCreate']
+					'application/json': components['schemas']['OrderCreate']
 				}
 			}
 			responses: {
@@ -1480,7 +1406,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	ProductUpdate: {
+	PriceUpdate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1498,7 +1424,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['ProductUpdate']
+					'application/json': components['schemas']['PriceUpdate']
 				}
 			}
 			responses: {
@@ -1517,7 +1443,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	ProductDelete: {
+	PlanChange: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1535,7 +1461,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['ProductDelete']
+					'application/json': components['schemas']['PlanChange']
 				}
 			}
 			responses: {
@@ -1591,7 +1517,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	TaskComplete: {
+	ProductUpdate: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1609,7 +1535,81 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['TaskComplete']
+					'application/json': components['schemas']['ProductUpdate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	ProductCreate: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['ProductCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	ProductDelete: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['ProductDelete']
 				}
 			}
 			responses: {
@@ -1665,7 +1665,7 @@ export type webhooks = {
 		patch?: never
 		trace?: never
 	}
-	TaskDelete: {
+	TaskComplete: {
 		parameters: {
 			query?: never
 			header?: never
@@ -1683,7 +1683,7 @@ export type webhooks = {
 			}
 			requestBody?: {
 				content: {
-					'application/json': components['schemas']['TaskDelete']
+					'application/json': components['schemas']['TaskComplete']
 				}
 			}
 			responses: {
@@ -1721,6 +1721,43 @@ export type webhooks = {
 			requestBody?: {
 				content: {
 					'application/json': components['schemas']['UserCreate']
+				}
+			}
+			responses: {
+				/** @description Webhook processed successfully */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	TaskDelete: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: {
+			parameters: {
+				query?: never
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: {
+				content: {
+					'application/json': components['schemas']['TaskDelete']
 				}
 			}
 			responses: {
@@ -1784,12 +1821,6 @@ export type components = {
 			locationId?: string
 			type?: string
 		}
-		AppUninstall: {
-			appId?: string
-			companyId?: string
-			locationId?: string
-			type?: string
-		}
 		AppInstall: {
 			appId?: string
 			companyId?: string
@@ -1824,6 +1855,12 @@ export type components = {
 			locationId?: string
 			type?: string
 		}
+		AppUninstall: {
+			appId?: string
+			companyId?: string
+			locationId?: string
+			type?: string
+		}
 		CampaignStatusUpdate: {
 			contactId?: string
 			dateAdded?: string
@@ -1834,7 +1871,7 @@ export type components = {
 			templateId?: string
 			type?: string
 		}
-		ContactDelete: {
+		ContactCreate: {
 			address1?: string
 			assignedTo?: string
 			attachments?: unknown[]
@@ -1922,34 +1959,6 @@ export type components = {
 			type?: string
 			website?: string
 		}
-		ContactCreate: {
-			address1?: string
-			assignedTo?: string
-			attachments?: unknown[]
-			city?: string
-			companyName?: string
-			country?: string
-			customFields?: {
-				id?: string
-				value?: string | number | unknown[] | Record<string, never>
-			}[]
-			dateAdded?: string
-			dateOfBirth?: string
-			dnd?: boolean
-			email?: string
-			firstName?: string
-			id?: string
-			lastName?: string
-			locationId?: string
-			name?: string
-			phone?: string
-			postalCode?: string
-			source?: string
-			state?: string
-			tags?: unknown[]
-			type?: string
-			website?: string
-		}
 		ContactTagUpdate: {
 			address1?: string
 			assignedTo?: string
@@ -2006,30 +2015,48 @@ export type components = {
 			type?: string
 			website?: string
 		}
-		InboundMessage: {
+		ContactDelete: {
+			address1?: string
+			assignedTo?: string
 			attachments?: unknown[]
-			body?: string
-			contactId?: string
-			contentType?: string
-			conversationId?: string
+			city?: string
+			companyName?: string
+			country?: string
+			customFields?: {
+				id?: string
+				value?: string | number | unknown[] | Record<string, never>
+			}[]
 			dateAdded?: string
-			direction?: string
-			locationId?: string
-			messageId?: string
-			messageType?: string
-			status?: string
-			type?: string
-			userId?: string
-		}
-		ConversationUnreadWebhook: {
-			contactId?: string
-			deleted?: boolean
+			dateOfBirth?: string
+			dnd?: boolean
+			email?: string
+			firstName?: string
 			id?: string
-			inbox?: boolean
+			lastName?: string
 			locationId?: string
-			starred?: boolean
+			name?: string
+			phone?: string
+			postalCode?: string
+			source?: string
+			state?: string
+			tags?: unknown[]
 			type?: string
-			unreadCount?: number
+			website?: string
+		}
+		ConversationProviderOutboundWebhook: {
+			attachments?: unknown[]
+			contactId?: string
+			emailFrom?: string
+			emailMessageId?: string
+			emailTo?: string
+			html?: string
+			locationId?: string
+			message?: string
+			messageId?: string
+			phone?: string
+			subject?: string
+			type?: Record<string, never>
+			userId?: string
 		}
 		InvoiceCreate: {
 			_id?: string
@@ -2094,68 +2121,20 @@ export type components = {
 			}
 			updatedAt?: string
 		}
-		InvoiceVoid: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
+		InboundMessage: {
+			attachments?: unknown[]
+			body?: string
+			contactId?: string
+			contentType?: string
+			conversationId?: string
+			dateAdded?: string
+			direction?: string
+			locationId?: string
+			messageId?: string
+			messageType?: string
 			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
+			type?: string
+			userId?: string
 		}
 		InvoiceSent: {
 			_id?: string
@@ -2220,85 +2199,17 @@ export type components = {
 			}
 			updatedAt?: string
 		}
-		ConversationProviderOutboundWebhook: {
-			attachments?: unknown[]
+		ConversationUnreadWebhook: {
 			contactId?: string
-			emailFrom?: string
-			emailMessageId?: string
-			emailTo?: string
-			html?: string
+			deleted?: boolean
+			id?: string
+			inbox?: boolean
 			locationId?: string
-			message?: string
-			messageId?: string
-			phone?: string
-			subject?: string
-			type?: Record<string, never>
-			userId?: string
+			starred?: boolean
+			type?: string
+			unreadCount?: number
 		}
 		InvoicePartiallyPaid: {
-			_id?: string
-			altId?: string
-			altType?: string
-			amountDue?: number
-			amountPaid?: number
-			businessDetails?: {
-				address?: string
-				customValues?: string[]
-				logoUrl?: string
-				name?: string
-				phoneNo?: string
-				website?: string
-			}
-			contactDetails?: {
-				additionalEmails?: {
-					email?: string
-				}[]
-				address?: {
-					addressLine1?: string
-					addressLine2?: string
-					city?: string
-					countryCode?: string
-					postalCode?: string
-					state?: string
-				}
-				companyName?: string
-				customFields?: string[]
-				email?: string
-				id?: string
-				name?: string
-				phoneNo?: string
-			}
-			createdAt?: string
-			currency?: string
-			discount?: {
-				type?: string
-				value?: number
-			}
-			dueDate?: string
-			invoiceItems?: {
-				_id?: string
-				amount?: number
-				currency?: string
-				name?: string
-				priceId?: string
-				productId?: string
-				qty?: number
-				taxes?: unknown[]
-			}[]
-			invoiceNumber?: string
-			issueDate?: string
-			liveMode?: boolean
-			name?: string
-			status?: string
-			title?: string
-			total?: number
-			totalSummary?: {
-				discount?: number
-				subTotal?: number
-			}
-			updatedAt?: string
-		}
-		InvoiceDelete: {
 			_id?: string
 			altId?: string
 			altType?: string
@@ -2424,7 +2335,70 @@ export type components = {
 			}
 			updatedAt?: string
 		}
-		InvoiceUpdate: {
+		InvoiceVoid: {
+			_id?: string
+			altId?: string
+			altType?: string
+			amountDue?: number
+			amountPaid?: number
+			businessDetails?: {
+				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
+				phoneNo?: string
+				website?: string
+			}
+			contactDetails?: {
+				additionalEmails?: {
+					email?: string
+				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
+				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
+			}
+			createdAt?: string
+			currency?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			dueDate?: string
+			invoiceItems?: {
+				_id?: string
+				amount?: number
+				currency?: string
+				name?: string
+				priceId?: string
+				productId?: string
+				qty?: number
+				taxes?: unknown[]
+			}[]
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
+			title?: string
+			total?: number
+			totalSummary?: {
+				discount?: number
+				subTotal?: number
+			}
+			updatedAt?: string
+		}
+		InvoiceDelete: {
 			_id?: string
 			altId?: string
 			altType?: string
@@ -2538,6 +2512,77 @@ export type components = {
 				timestamp?: number
 			}
 		}
+		InvoiceUpdate: {
+			_id?: string
+			altId?: string
+			altType?: string
+			amountDue?: number
+			amountPaid?: number
+			businessDetails?: {
+				address?: string
+				customValues?: string[]
+				logoUrl?: string
+				name?: string
+				phoneNo?: string
+				website?: string
+			}
+			contactDetails?: {
+				additionalEmails?: {
+					email?: string
+				}[]
+				address?: {
+					addressLine1?: string
+					addressLine2?: string
+					city?: string
+					countryCode?: string
+					postalCode?: string
+					state?: string
+				}
+				companyName?: string
+				customFields?: string[]
+				email?: string
+				id?: string
+				name?: string
+				phoneNo?: string
+			}
+			createdAt?: string
+			currency?: string
+			discount?: {
+				type?: string
+				value?: number
+			}
+			dueDate?: string
+			invoiceItems?: {
+				_id?: string
+				amount?: number
+				currency?: string
+				name?: string
+				priceId?: string
+				productId?: string
+				qty?: number
+				taxes?: unknown[]
+			}[]
+			invoiceNumber?: string
+			issueDate?: string
+			liveMode?: boolean
+			name?: string
+			status?: string
+			title?: string
+			total?: number
+			totalSummary?: {
+				discount?: number
+				subTotal?: number
+			}
+			updatedAt?: string
+		}
+		LocationCreate: {
+			companyId?: string
+			email?: string
+			id?: string
+			name?: string
+			stripeProductId?: string
+			type?: string
+		}
 		LocationUpdate: {
 			companyId?: string
 			email?: string
@@ -2576,12 +2621,12 @@ export type components = {
 			status?: string
 			type?: string
 		}
-		LocationCreate: {
-			companyId?: string
-			email?: string
+		NoteUpdate: {
+			body?: string
+			contactId?: string
+			dateAdded?: string
 			id?: string
-			name?: string
-			stripeProductId?: string
+			locationId?: string
 			type?: string
 		}
 		OpportunityCreate: {
@@ -2612,28 +2657,6 @@ export type components = {
 			status?: string
 			type?: string
 		}
-		OpportunityMonetaryValueUpdate: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
-		NoteUpdate: {
-			body?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			type?: string
-		}
 		OpportunityStageUpdate: {
 			assignedTo?: string
 			contactId?: string
@@ -2661,6 +2684,50 @@ export type components = {
 			source?: string
 			status?: string
 			type?: string
+		}
+		OpportunityUpdate: {
+			assignedTo?: string
+			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			type?: string
+		}
+		OpportunityMonetaryValueUpdate: {
+			assignedTo?: string
+			contactId?: string
+			dateAdded?: string
+			id?: string
+			locationId?: string
+			monetaryValue?: number
+			name?: string
+			pipelineId?: string
+			pipelineStageId?: string
+			source?: string
+			status?: string
+			type?: string
+		}
+		OutboundMessage: {
+			attachments?: unknown[]
+			body?: string
+			contactId?: string
+			contentType?: string
+			conversationId?: string
+			dateAdded?: string
+			direction?: string
+			locationId?: string
+			messageId?: string
+			messageType?: string
+			source?: string
+			status?: string
+			type?: string
+			userId?: string
 		}
 		OrderStatusUpdate: {
 			_id?: string
@@ -2725,20 +2792,6 @@ export type components = {
 			type?: string
 			updatedAt?: string
 		}
-		OpportunityUpdate: {
-			assignedTo?: string
-			contactId?: string
-			dateAdded?: string
-			id?: string
-			locationId?: string
-			monetaryValue?: number
-			name?: string
-			pipelineId?: string
-			pipelineStageId?: string
-			source?: string
-			status?: string
-			type?: string
-		}
 		OrderCreate: {
 			_id?: string
 			altId?: string
@@ -2802,21 +2855,31 @@ export type components = {
 			type?: string
 			updatedAt?: string
 		}
-		OutboundMessage: {
-			attachments?: unknown[]
-			body?: string
-			contactId?: string
-			contentType?: string
-			conversationId?: string
-			dateAdded?: string
-			direction?: string
+		PriceCreate: {
+			_id?: string
+			allowOutOfStockPurchases?: boolean
+			amount?: number
+			availableQuantity?: number
+			compareAtPrice?: number
+			createdAt?: string
+			currency?: string
 			locationId?: string
-			messageId?: string
-			messageType?: string
-			source?: string
-			status?: string
-			type?: string
+			membershipOffers?: {
+				_id?: string
+				label?: string
+				value?: string
+			}[]
+			name?: string
+			priceType?: string
+			product?: string
+			recurring?: {
+				interval?: string
+				intervalCount?: number
+			}
+			trackInventory?: null
+			updatedAt?: string
 			userId?: string
+			variantOptionIds?: string[]
 		}
 		PriceUpdate: {
 			_id?: string
@@ -2844,7 +2907,49 @@ export type components = {
 			userId?: string
 			variantOptionIds?: string[]
 		}
-		ProductCreate: {
+		PlanChange: {
+			/** @example ve9EPM428h8vShlRW1KT */
+			appId?: string
+			/** @example otg8dTQqGLh3Q6iQI55w */
+			companyId?: string
+			/** @example 66a0419a0dffa47fb5f8b22f */
+			currentPlanId?: string
+			/** @example otg8dTQqGLh3Q6iQI55w */
+			locationId?: string
+			/** @example 66a0419a0dffa47fb5f8b22f */
+			newPlanId?: string
+			/** @example PLAN_CHANGE */
+			type?: string
+			/** @example otg8dTQqGLh3Q6iQI55w */
+			userId?: string
+		}
+		PriceDelete: {
+			_id?: string
+			allowOutOfStockPurchases?: boolean
+			amount?: number
+			availableQuantity?: number
+			compareAtPrice?: number
+			createdAt?: string
+			currency?: string
+			locationId?: string
+			membershipOffers?: {
+				_id?: string
+				label?: string
+				value?: string
+			}[]
+			name?: string
+			product?: string
+			recurring?: {
+				interval?: string
+				intervalCount?: number
+			}
+			trackInventory?: null
+			type?: string
+			updatedAt?: string
+			userId?: string
+			variantOptionIds?: string[]
+		}
+		ProductUpdate: {
 			_id?: string
 			availableInStore?: boolean
 			createdAt?: string
@@ -2872,33 +2977,7 @@ export type components = {
 				}[]
 			}[]
 		}
-		PriceCreate: {
-			_id?: string
-			allowOutOfStockPurchases?: boolean
-			amount?: number
-			availableQuantity?: number
-			compareAtPrice?: number
-			createdAt?: string
-			currency?: string
-			locationId?: string
-			membershipOffers?: {
-				_id?: string
-				label?: string
-				value?: string
-			}[]
-			name?: string
-			priceType?: string
-			product?: string
-			recurring?: {
-				interval?: string
-				intervalCount?: number
-			}
-			trackInventory?: null
-			updatedAt?: string
-			userId?: string
-			variantOptionIds?: string[]
-		}
-		ProductUpdate: {
+		ProductCreate: {
 			_id?: string
 			availableInStore?: boolean
 			createdAt?: string
@@ -2954,43 +3033,6 @@ export type components = {
 				}[]
 			}[]
 		}
-		PriceDelete: {
-			_id?: string
-			allowOutOfStockPurchases?: boolean
-			amount?: number
-			availableQuantity?: number
-			compareAtPrice?: number
-			createdAt?: string
-			currency?: string
-			locationId?: string
-			membershipOffers?: {
-				_id?: string
-				label?: string
-				value?: string
-			}[]
-			name?: string
-			product?: string
-			recurring?: {
-				interval?: string
-				intervalCount?: number
-			}
-			trackInventory?: null
-			type?: string
-			updatedAt?: string
-			userId?: string
-			variantOptionIds?: string[]
-		}
-		TaskComplete: {
-			assignedTo?: string
-			body?: string
-			contactId?: string
-			dateAdded?: string
-			dueDate?: string
-			id?: string
-			locationId?: string
-			title?: string
-			type?: string
-		}
 		TaskCreate: {
 			assignedTo?: string
 			body?: string
@@ -3002,7 +3044,7 @@ export type components = {
 			title?: string
 			type?: string
 		}
-		TaskDelete: {
+		TaskComplete: {
 			assignedTo?: string
 			body?: string
 			contactId?: string
@@ -3063,6 +3105,17 @@ export type components = {
 			}
 			phone?: string
 			role?: string
+			type?: string
+		}
+		TaskDelete: {
+			assignedTo?: string
+			body?: string
+			contactId?: string
+			dateAdded?: string
+			dueDate?: string
+			id?: string
+			locationId?: string
+			title?: string
 			type?: string
 		}
 	}

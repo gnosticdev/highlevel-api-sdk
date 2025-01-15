@@ -105,6 +105,16 @@
         "required": ["funnels", "count", "traceId"],
         "type": "object"
       },
+      "FunnelPageCountResponseDTO": {
+        "properties": {
+          "count": {
+            "example": 20,
+            "type": "number"
+          }
+        },
+        "required": ["count"],
+        "type": "object"
+      },
       "FunnelPageResponseDTO": {
         "properties": {
           "_id": {
@@ -256,7 +266,7 @@
     "securitySchemes": {
       "Agency-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -354,14 +364,6 @@
           {
             "in": "query",
             "name": "name",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "search",
             "required": false,
             "schema": {
               "type": "string"
@@ -756,6 +758,67 @@
           }
         ],
         "summary": "Fetch list of funnel pages",
+        "tags": ["Funnel"]
+      }
+    },
+    "/funnels/page/count": {
+      "get": {
+        "description": "Retrieves count of all funnel pages based on the given query parameters.",
+        "operationId": "getPagesCountByFunnelId",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "funnelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FunnelPageCountResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response - Count of funnel pages returned"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Fetch count of funnel pages",
         "tags": ["Funnel"]
       }
     }

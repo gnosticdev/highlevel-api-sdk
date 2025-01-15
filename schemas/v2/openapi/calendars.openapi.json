@@ -1,6 +1,17 @@
 {
   "components": {
     "schemas": {
+      "AllGroupsSuccessfulResponseDTO": {
+        "properties": {
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/GroupDTO"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "AppointmentCreateSchema": {
         "properties": {
           "address": {
@@ -38,9 +49,29 @@
             "example": false,
             "type": "boolean"
           },
+          "ignoreFreeSlotValidation": {
+            "description": "If true the time slot validation would be avoided for any appointment creation",
+            "example": "true",
+            "type": "boolean"
+          },
           "locationId": {
             "description": "Location Id",
             "example": "C2QujeCh8ZnC7al2InWR",
+            "type": "string"
+          },
+          "meetingLocationType": {
+            "default": "default",
+            "description": "Meeting Location Type: Set to \"custom\" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.",
+            "enum": ["default", "custom"],
+            "example": "custom",
+            "type": "string"
+          },
+          "rrule": {
+            "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true.",
+            "examples": [
+              "RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5",
+              "RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z\nEXDATE:20211105T040000Z,20211105T040000Z"
+            ],
             "type": "string"
           },
           "startTime": {
@@ -74,6 +105,11 @@
             "example": "confirmed",
             "type": "string"
           },
+          "assignedUserId": {
+            "description": "Assigned User Id",
+            "example": "0007BWpSzSwfiuSl0tR2",
+            "type": "string"
+          },
           "calendarId": {
             "description": "Calendar Id",
             "example": "CVokAlI8fgw4WYWoCtQz",
@@ -88,6 +124,26 @@
             "description": "If set to true, the minimum scheduling notice and date range would be ignored",
             "example": false,
             "type": "boolean"
+          },
+          "ignoreFreeSlotValidation": {
+            "description": "If true the time slot validation would be avoided for any appointment update",
+            "example": "true",
+            "type": "boolean"
+          },
+          "meetingLocationType": {
+            "default": "default",
+            "description": "Meeting Location Type: Set to \"custom\" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.",
+            "enum": ["default", "custom"],
+            "example": "custom",
+            "type": "string"
+          },
+          "rrule": {
+            "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true.",
+            "examples": [
+              "RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5",
+              "RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z\nEXDATE:20211105T040000Z,20211105T040000Z"
+            ],
+            "type": "string"
           },
           "startTime": {
             "description": "Start Time",
@@ -144,9 +200,22 @@
             "example": "0TkCdp9PfvLeWKYRRvIz",
             "type": "string"
           },
+          "isRecurring": {
+            "description": "true if the event is recurring otherwise false",
+            "example": "true",
+            "type": "boolean"
+          },
           "locationId": {
             "description": "Location Id",
             "example": "C2QujeCh8ZnC7al2InWR",
+            "type": "string"
+          },
+          "rrule": {
+            "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events",
+            "examples": [
+              "RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5",
+              "RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z\nEXDATE:20211105T040000Z,20211105T040000Z"
+            ],
             "type": "string"
           },
           "startTime": {
@@ -179,10 +248,6 @@
               "$ref": "#/components/schemas/Hour"
             },
             "type": "array"
-          },
-          "id": {
-            "description": "The ID of the custom availability object. It is required while updating or deleting the existing custom date availability",
-            "type": "string"
           }
         },
         "required": ["date", "hours"],
@@ -339,7 +404,7 @@
             "type": "string"
           },
           "calendarType": {
-            "enum": ["round_robin", "event", "class_booking", "collective", "service_booking"],
+            "enum": ["round_robin", "event", "class_booking", "collective", "service_booking", "personal"],
             "type": "string"
           },
           "consentLabel": {
@@ -405,6 +470,14 @@
           "locationId": {
             "example": "ocQHyuzHvysMo5N5VsXc",
             "type": "string"
+          },
+          "lookBusyConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LookBusyConfiguration"
+              }
+            ],
+            "description": "Look Busy Configuration"
           },
           "meetingLocation": {
             "type": "string"
@@ -575,7 +648,7 @@
             "type": "string"
           },
           "calendarType": {
-            "enum": ["round_robin", "event", "class_booking", "collective", "service_booking"],
+            "enum": ["round_robin", "event", "class_booking", "collective", "service_booking", "personal"],
             "type": "string"
           },
           "consentLabel": {
@@ -645,6 +718,14 @@
           "locationId": {
             "example": "ocQHyuzHvysMo5N5VsXc",
             "type": "string"
+          },
+          "lookBusyConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LookBusyConfiguration"
+              }
+            ],
+            "description": "Look Busy Configuration"
           },
           "meetingLocation": {
             "type": "string"
@@ -818,18 +899,36 @@
             "type": "string"
           },
           "id": {
-            "description": "Calendar Event ID",
-            "example": "0007BWpSzSwfiuSl0tR2",
+            "description": "Event Id or Instance id for a recurring event",
+            "examples": ["ocQHyuzHvysMo5N5VsXc", "ocQHyuzHvysMo5N5VsXc_1729821600000_1800"],
             "type": "string"
+          },
+          "isRecurring": {
+            "description": "true if the event is recurring otherwise false",
+            "example": "true",
+            "type": "boolean"
           },
           "locationId": {
             "description": "Location ID",
             "example": "0007BWpSzSwfiuSl0tR2",
             "type": "string"
           },
+          "masterEventId": {
+            "description": "Master event id for a recurring instance",
+            "example": "ocWd2wuBGAQzh2cH1fSZ",
+            "type": "string"
+          },
           "notes": {
             "description": "Notes",
             "example": "Some dummy note",
+            "type": "string"
+          },
+          "rrule": {
+            "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event.",
+            "examples": [
+              "RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5",
+              "RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z\nEXDATE:20211105T040000Z,20211105T040000Z"
+            ],
             "type": "string"
           },
           "startTime": {
@@ -904,6 +1003,96 @@
         ],
         "type": "object"
       },
+      "CalendarResourceByIdResponseDTO": {
+        "properties": {
+          "calendarIds": {
+            "description": "Calendar IDs",
+            "example": ["Jsj0xnlDDjw0SuvX1J13", "oCM5feFC86FAAbcO7lJK"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "capacity": {
+            "description": "Capacity of the resource",
+            "example": 85,
+            "type": "number"
+          },
+          "description": {
+            "description": "Description of the resource",
+            "type": "string"
+          },
+          "isActive": {
+            "description": "Whether the resource is active",
+            "type": "boolean"
+          },
+          "locationId": {
+            "description": "Location ID of the resource",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the resource",
+            "example": "yoga room",
+            "type": "string"
+          },
+          "outOfService": {
+            "description": "Indicates if the resource is out of service",
+            "example": 0,
+            "type": "number"
+          },
+          "quantity": {
+            "description": "Quantity of the resource",
+            "type": "number"
+          },
+          "resourceType": {
+            "enum": ["equipments", "rooms"],
+            "type": "string"
+          }
+        },
+        "required": ["locationId", "name", "resourceType", "isActive", "calendarIds"],
+        "type": "object"
+      },
+      "CalendarResourceResponseDTO": {
+        "properties": {
+          "capacity": {
+            "description": "Capacity of the resource",
+            "example": 85,
+            "type": "number"
+          },
+          "description": {
+            "description": "Description of the resource",
+            "type": "string"
+          },
+          "isActive": {
+            "description": "Whether the resource is active",
+            "type": "boolean"
+          },
+          "locationId": {
+            "description": "Location ID of the resource",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the resource",
+            "example": "yoga room",
+            "type": "string"
+          },
+          "outOfService": {
+            "description": "Indicates if the resource is out of service",
+            "example": 0,
+            "type": "number"
+          },
+          "quantity": {
+            "description": "Quantity of the resource",
+            "type": "number"
+          },
+          "resourceType": {
+            "enum": ["equipments", "rooms"],
+            "type": "string"
+          }
+        },
+        "required": ["locationId", "name", "resourceType", "isActive"],
+        "type": "object"
+      },
       "CalendarUpdateDTO": {
         "properties": {
           "alertEmail": {
@@ -948,7 +1137,7 @@
           "availabilities": {
             "description": "This is only to set the custom availability. For standard availability, use the openHours property",
             "items": {
-              "$ref": "#/components/schemas/Availability"
+              "$ref": "#/components/schemas/UpdateAvailability"
             },
             "type": "array"
           },
@@ -1011,6 +1200,14 @@
           },
           "isLivePaymentMode": {
             "type": "boolean"
+          },
+          "lookBusyConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LookBusyConfiguration"
+              }
+            ],
+            "description": "Look Busy Configuration"
           },
           "meetingLocation": {
             "type": "string"
@@ -1180,9 +1377,6 @@
           "description": {
             "type": "string"
           },
-          "isActive": {
-            "type": "boolean"
-          },
           "locationId": {
             "type": "string"
           },
@@ -1198,16 +1392,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "locationId",
-          "name",
-          "description",
-          "quantity",
-          "outOfService",
-          "capacity",
-          "calendarIds",
-          "isActive"
-        ],
+        "required": ["locationId", "name", "description", "quantity", "outOfService", "capacity", "calendarIds"],
         "type": "object"
       },
       "DeleteAppointmentSchema": {
@@ -1217,6 +1402,15 @@
       "DeleteEventSuccessfulResponseDto": {
         "properties": {
           "succeeded": {
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "DeleteNoteSuccessfulResponseDto": {
+        "properties": {
+          "success": {
             "example": true,
             "type": "boolean"
           }
@@ -1242,6 +1436,57 @@
         },
         "type": "object"
       },
+      "GetCreateUpdateNoteSuccessfulResponseDto": {
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/GetNoteSchema"
+          }
+        },
+        "type": "object"
+      },
+      "GetNoteSchema": {
+        "properties": {
+          "body": {
+            "example": "lorem ipsum",
+            "type": "string"
+          },
+          "contactId": {
+            "example": "TUcmRxWrjqzJS8EjkxNK",
+            "type": "string"
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/NoteCreatedBySchema"
+          },
+          "dateAdded": {
+            "example": "2021-07-08T12:02:11.285Z",
+            "type": "string"
+          },
+          "id": {
+            "example": "HGPcayliwcdoUFzvbTok",
+            "type": "string"
+          },
+          "userId": {
+            "example": "TUcmRxWrjqzJS8EjkxNK",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GetNotesListSuccessfulResponseDto": {
+        "properties": {
+          "hasMore": {
+            "example": true,
+            "type": "boolean"
+          },
+          "notes": {
+            "items": {
+              "$ref": "#/components/schemas/GetNoteSchema"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "GetSlotsSuccessfulResponseDto": {
         "properties": {
           "_dates_": {
@@ -1249,6 +1494,32 @@
           }
         },
         "required": ["_dates_"],
+        "type": "object"
+      },
+      "GroupCreateDTO": {
+        "properties": {
+          "description": {
+            "example": "group description",
+            "type": "string"
+          },
+          "isActive": {
+            "example": true,
+            "type": "boolean"
+          },
+          "locationId": {
+            "example": "ocQHyuzHvysMo5N5VsXc",
+            "type": "string"
+          },
+          "name": {
+            "example": "group a",
+            "type": "string"
+          },
+          "slug": {
+            "example": "15-mins",
+            "type": "string"
+          }
+        },
+        "required": ["locationId", "name", "description", "slug"],
         "type": "object"
       },
       "GroupCreateSuccessfulResponseDTO": {
@@ -1261,12 +1532,6 @@
       },
       "GroupDTO": {
         "properties": {
-          "dateAdded": {
-            "type": "object"
-          },
-          "dateUpdated": {
-            "type": "object"
-          },
           "description": {
             "example": "group description",
             "type": "string"
@@ -1293,35 +1558,6 @@
           }
         },
         "required": ["locationId", "name", "description", "slug"],
-        "type": "object"
-      },
-      "GroupSchema": {
-        "properties": {
-          "description": {
-            "example": "my-team",
-            "type": "string"
-          },
-          "id": {
-            "example": "0TkCdp9PfvLeWKYRRvIz",
-            "type": "string"
-          },
-          "isActive": {
-            "example": true,
-            "type": "boolean"
-          },
-          "locationId": {
-            "example": "ocQHyuzHvysMo5N5VsXc",
-            "type": "string"
-          },
-          "name": {
-            "example": "my-team",
-            "type": "string"
-          },
-          "slug": {
-            "example": "my-team",
-            "type": "string"
-          }
-        },
         "type": "object"
       },
       "GroupStatusUpdateParams": {
@@ -1351,10 +1587,6 @@
             "example": "group description",
             "type": "string"
           },
-          "id": {
-            "example": "ocQHyuzHvysMo5N5VsXc",
-            "type": "string"
-          },
           "name": {
             "example": "group a",
             "type": "string"
@@ -1365,17 +1597,6 @@
           }
         },
         "required": ["name", "description", "slug"],
-        "type": "object"
-      },
-      "GroupsGetSuccessfulResponseDTO": {
-        "properties": {
-          "groups": {
-            "items": {
-              "$ref": "#/components/schemas/GroupSchema"
-            },
-            "type": "array"
-          }
-        },
         "type": "object"
       },
       "Hour": {
@@ -1402,6 +1623,51 @@
           }
         },
         "required": ["openHour", "openMinute", "closeHour", "closeMinute"],
+        "type": "object"
+      },
+      "LookBusyConfiguration": {
+        "properties": {
+          "LookBusyPercentage": {
+            "description": "Percentage of slots that will be hidden",
+            "type": "number"
+          },
+          "enabled": {
+            "default": false,
+            "description": "Apply Look Busy",
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "required": ["enabled", "LookBusyPercentage"],
+        "type": "object"
+      },
+      "NoteCreatedBySchema": {
+        "properties": {
+          "id": {
+            "example": "TUcmRxWr",
+            "type": "string"
+          },
+          "name": {
+            "example": "John Doe",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "NotesDTO": {
+        "properties": {
+          "body": {
+            "description": "Note body",
+            "example": "lorem ipsum",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "userId": {
+            "example": "GCs5KuzPqTls7vWclkEV",
+            "type": "string"
+          }
+        },
+        "required": ["body"],
         "type": "object"
       },
       "OpenHour": {
@@ -1448,6 +1714,16 @@
         },
         "type": "object"
       },
+      "ResourceDeleteResponseDTO": {
+        "properties": {
+          "success": {
+            "description": "Success",
+            "example": "true",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "SlotsSchema": {
         "properties": {
           "slots": {
@@ -1472,7 +1748,7 @@
           "meetingLocationType": {
             "default": "custom",
             "description": "Meeting Location Type. For class booking only the following types are allowed 'custom', 'phone', 'address'. ",
-            "enum": ["custom", "zoom", "gmeet", "phone", "address"],
+            "enum": ["custom", "zoom", "gmeet", "phone", "address", "teams", "booker"],
             "example": "custom",
             "type": "string"
           },
@@ -1506,6 +1782,31 @@
         },
         "type": "object"
       },
+      "UpdateAvailability": {
+        "properties": {
+          "date": {
+            "description": "Formulate the date string in the format of `<YYYY-MM-DD in local timezone>T00:00:00.000Z`.",
+            "example": "2023-09-24T00:00:00.000Z",
+            "type": "string"
+          },
+          "deleted": {
+            "default": false,
+            "type": "boolean"
+          },
+          "hours": {
+            "items": {
+              "$ref": "#/components/schemas/Hour"
+            },
+            "type": "array"
+          },
+          "id": {
+            "description": "The ID of the custom availability object. It is required while updating or deleting the existing custom date availability",
+            "type": "string"
+          }
+        },
+        "required": ["date", "hours"],
+        "type": "object"
+      },
       "UpdateCalendarResourceDTO": {
         "properties": {
           "calendarIds": {
@@ -1519,9 +1820,6 @@
           "capacity": {
             "description": "Capacity of the room.",
             "type": "number"
-          },
-          "deleted": {
-            "type": "boolean"
           },
           "description": {
             "type": "string"
@@ -1544,7 +1842,6 @@
             "type": "number"
           }
         },
-        "required": ["deleted"],
         "type": "object"
       },
       "ValidateGroupSlugPostBody": {
@@ -1576,7 +1873,7 @@
     "securitySchemes": {
       "Agency-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -1779,6 +2076,348 @@
         ],
         "summary": "Create Calendar",
         "tags": ["Calendars"]
+      }
+    },
+    "/calendars/appointments/{appointmentId}/notes": {
+      "get": {
+        "description": "Get Appointment Notes",
+        "operationId": "get-appointment-notes",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Limit of notes to fetch",
+            "example": 10,
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "schema": {
+              "maximum": 20,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Offset of notes to fetch",
+            "example": 0,
+            "in": "query",
+            "name": "offset",
+            "required": true,
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Appointment ID",
+            "in": "path",
+            "name": "appointmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetNotesListSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get Notes",
+        "tags": ["Appointment Notes"]
+      },
+      "post": {
+        "description": "Create Note",
+        "operationId": "create-appointment-note",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Appointment ID",
+            "in": "path",
+            "name": "appointmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotesDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreateUpdateNoteSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create Note",
+        "tags": ["Appointment Notes"]
+      }
+    },
+    "/calendars/appointments/{appointmentId}/notes/{noteId}": {
+      "delete": {
+        "description": "Delete Note",
+        "operationId": "delete-appointment-note",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Appointment ID",
+            "in": "path",
+            "name": "appointmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteNoteSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete Note",
+        "tags": ["Appointment Notes"]
+      },
+      "put": {
+        "description": "Update Note",
+        "operationId": "update-appointment-note",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Appointment ID",
+            "in": "path",
+            "name": "appointmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotesDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreateUpdateNoteSuccessfulResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update Note",
+        "tags": ["Appointment Notes"]
       }
     },
     "/calendars/blocked-slots": {
@@ -2138,8 +2777,17 @@
             }
           },
           {
-            "description": "Event Id",
-            "example": "ocQHyuzHvysMo5N5VsXc",
+            "description": "Event Id or Instance id. For recurring appointments send masterEventId to modify original series.",
+            "examples": {
+              "example1": {
+                "summary": "Event ID",
+                "value": "ocQHyuzHvysMo5N5VsXc"
+              },
+              "example2": {
+                "summary": "Recurring Instance ID",
+                "value": "ocQHyuzHvysMo5N5VsXc_1729821600000_1800"
+              }
+            },
             "in": "path",
             "name": "eventId",
             "required": true,
@@ -2189,7 +2837,7 @@
         "tags": ["Calendar Events"]
       },
       "put": {
-        "description": "Edit appointment by ID",
+        "description": "Update appointment by ID",
         "operationId": "edit-appointment",
         "parameters": [
           {
@@ -2213,8 +2861,17 @@
             }
           },
           {
-            "description": "Event Id",
-            "example": "ocQHyuzHvysMo5N5VsXc",
+            "description": "Event Id or Instance id. For recurring appointments send masterEventId to modify original series.",
+            "examples": {
+              "example1": {
+                "summary": "Event ID",
+                "value": "ocQHyuzHvysMo5N5VsXc"
+              },
+              "example2": {
+                "summary": "Recurring Instance ID",
+                "value": "ocQHyuzHvysMo5N5VsXc_1729821600000_1800"
+              }
+            },
             "in": "path",
             "name": "eventId",
             "required": true,
@@ -2270,7 +2927,7 @@
             "bearer": []
           }
         ],
-        "summary": "Edit Appointment",
+        "summary": "Update Appointment",
         "tags": ["Calendar Events"]
       }
     },
@@ -2353,7 +3010,7 @@
     },
     "/calendars/events/block-slots/{eventId}": {
       "put": {
-        "description": "Edit block slot by ID",
+        "description": "Update block slot by ID",
         "operationId": "edit-block-slot",
         "parameters": [
           {
@@ -2434,7 +3091,7 @@
             "bearer": []
           }
         ],
-        "summary": "Edit Block Slot",
+        "summary": "Update Block Slot",
         "tags": ["Calendar Events"]
       }
     },
@@ -2464,8 +3121,17 @@
             }
           },
           {
-            "description": "Event Id",
-            "example": "ocQHyuzHvysMo5N5VsXc",
+            "description": "Event Id or Instance id. For recurring appointments send masterEventId to modify original series.",
+            "examples": {
+              "example1": {
+                "summary": "Event ID",
+                "value": "ocQHyuzHvysMo5N5VsXc"
+              },
+              "example2": {
+                "summary": "Recurring Instance ID",
+                "value": "ocQHyuzHvysMo5N5VsXc_1729821600000_1800"
+              }
+            },
             "in": "path",
             "name": "eventId",
             "required": true,
@@ -2566,7 +3232,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GroupsGetSuccessfulResponseDTO"
+                  "$ref": "#/components/schemas/AllGroupsSuccessfulResponseDTO"
                 }
               }
             },
@@ -2630,7 +3296,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupDTO"
+                "$ref": "#/components/schemas/GroupCreateDTO"
               }
             }
           },
@@ -2831,7 +3497,7 @@
         "tags": ["Calendar Groups"]
       },
       "put": {
-        "description": "Edit Group",
+        "description": "Update Group by group ID",
         "operationId": "edit-group",
         "parameters": [
           {
@@ -2912,7 +3578,7 @@
             "bearer": []
           }
         ],
-        "summary": "Edit Group",
+        "summary": "Update Group",
         "tags": ["Calendar Groups"]
       }
     },
@@ -3065,6 +3731,16 @@
         ],
         "responses": {
           "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CalendarResourceByIdResponseDTO"
+                  },
+                  "type": "array"
+                }
+              }
+            },
             "description": "Calendar resources listed"
           },
           "400": {
@@ -3143,6 +3819,13 @@
         },
         "responses": {
           "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarResourceByIdResponseDTO"
+                }
+              }
+            },
             "description": "Calendar resource created"
           },
           "400": {
@@ -3222,6 +3905,13 @@
         ],
         "responses": {
           "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceDeleteResponseDTO"
+                }
+              }
+            },
             "description": "Calendar resource deleted"
           },
           "400": {
@@ -3299,6 +3989,13 @@
         ],
         "responses": {
           "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarResourceByIdResponseDTO"
+                }
+              }
+            },
             "description": "Calendar resource fetched"
           },
           "400": {
@@ -3386,6 +4083,13 @@
         },
         "responses": {
           "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarResourceResponseDTO"
+                }
+              }
+            },
             "description": "Calendar resource updated"
           },
           "400": {
@@ -3741,6 +4445,17 @@
                 "type": "string"
               },
               "type": "array"
+            }
+          },
+          {
+            "description": "Apply Look Busy",
+            "example": false,
+            "in": "query",
+            "name": "enableLookBusy",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
             }
           }
         ],

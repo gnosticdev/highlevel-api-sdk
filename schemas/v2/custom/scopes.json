@@ -415,6 +415,15 @@
       }
     ]
   },
+  "conversations/livechat": {
+    "write": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST /conversations/providers/live-chat/typing",
+        "webhookEvents": ""
+      }
+    ]
+  },
   "conversations/message": {
     "readonly": [
       {
@@ -1265,6 +1274,11 @@
       {
         "accessType": ["Sub-Account"],
         "methodAndEndpoint": "PATCH /social-media-posting/:locationId/csv/:id",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST /social-media-posting/:locationId/posts/bulk-delete",
         "webhookEvents": ""
       },
       {

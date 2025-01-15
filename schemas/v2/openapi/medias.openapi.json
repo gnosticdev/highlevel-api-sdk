@@ -51,6 +51,14 @@
         "scheme": "bearer",
         "type": "http"
       },
+      "Only-Location-Access": {
+        "bearerFormat": "JWT",
+        "description": "Use the Access Token generated with user type as Sub-Account.",
+        "in": "header",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "type": "http"
+      },
       "bearer": {
         "bearerFormat": "JWT",
         "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
@@ -81,6 +89,16 @@
             "required": true,
             "schema": {
               "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
               "type": "string"
             }
           },
@@ -179,7 +197,7 @@
         },
         "security": [
           {
-            "Location-Access": []
+            "Only-Location-Access": []
           }
         ],
         "summary": "Get List of Files"
@@ -197,6 +215,16 @@
             "required": true,
             "schema": {
               "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
               "type": "string"
             }
           }
@@ -258,6 +286,16 @@
             "required": true,
             "schema": {
               "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
               "type": "string"
             }
           },

@@ -1,6 +1,7 @@
 import type { Client, ClientOptions } from 'openapi-fetch'
 import createClient from 'openapi-fetch'
 
+import type * as Blogs from '../types/openapi/blogs'
 import type * as Businesses from '../types/openapi/businesses'
 import type * as Calendars from '../types/openapi/calendars'
 import type * as Campaigns from '../types/openapi/campaigns'
@@ -8,6 +9,9 @@ import type * as Companies from '../types/openapi/companies'
 import type * as Contacts from '../types/openapi/contacts'
 import type * as Conversations from '../types/openapi/conversations'
 import type * as Courses from '../types/openapi/courses'
+import type * as CustomMenus from '../types/openapi/custom-menus'
+import type * as EmailIsv from '../types/openapi/email-isv'
+import type * as Emails from '../types/openapi/emails'
 import type * as Forms from '../types/openapi/forms'
 import type * as Funnels from '../types/openapi/funnels'
 import type * as Invoices from '../types/openapi/invoices'
@@ -108,6 +112,18 @@ export class HighLevelClient<
 	businesses: THeaders extends undefined
 		? Client<Businesses.paths>
 		: ClientWithAuth<Businesses.paths>
+	blogs:
+		| Client<Blogs.paths, `${string}/${string}`>
+		| ClientWithAuth<Blogs.paths>
+	customMenus:
+		| Client<CustomMenus.paths, `${string}/${string}`>
+		| ClientWithAuth<CustomMenus.paths>
+	emails:
+		| Client<Emails.paths, `${string}/${string}`>
+		| ClientWithAuth<Emails.paths>
+	emailIsv:
+		| Client<EmailIsv.paths, `${string}/${string}`>
+		| ClientWithAuth<EmailIsv.paths>
 	/**
 	 * invoices client implementation.
 	 */
@@ -261,6 +277,26 @@ export class HighLevelClient<
 		this.oauth = createClient<Oauth.paths>(this._clientConfig) as TOauth
 
 		this.businesses = createClientMaybeAuth<Businesses.paths, THeaders>(
+			authHeaders,
+			this._clientConfig,
+		)
+
+		this.blogs = createClientMaybeAuth<Blogs.paths, THeaders>(
+			authHeaders,
+			this._clientConfig,
+		)
+
+		this.customMenus = createClientMaybeAuth<CustomMenus.paths, THeaders>(
+			authHeaders,
+			this._clientConfig,
+		)
+
+		this.emails = createClientMaybeAuth<Emails.paths, THeaders>(
+			authHeaders,
+			this._clientConfig,
+		)
+
+		this.emailIsv = createClientMaybeAuth<EmailIsv.paths, THeaders>(
 			authHeaders,
 			this._clientConfig,
 		)

@@ -71,6 +71,54 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/calendars/appointments/{appointmentId}/notes': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Notes
+		 * @description Get Appointment Notes
+		 */
+		get: operations['get-appointment-notes']
+		put?: never
+		/**
+		 * Create Note
+		 * @description Create Note
+		 */
+		post: operations['create-appointment-note']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/calendars/appointments/{appointmentId}/notes/{noteId}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		/**
+		 * Update Note
+		 * @description Update Note
+		 */
+		put: operations['update-appointment-note']
+		post?: never
+		/**
+		 * Delete Note
+		 * @description Delete Note
+		 */
+		delete: operations['delete-appointment-note']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/calendars/blocked-slots': {
 		parameters: {
 			query?: never
@@ -164,8 +212,8 @@ export type paths = {
 		 */
 		get: operations['get-appointment']
 		/**
-		 * Edit Appointment
-		 * @description Edit appointment by ID
+		 * Update Appointment
+		 * @description Update appointment by ID
 		 */
 		put: operations['edit-appointment']
 		post?: never
@@ -204,8 +252,8 @@ export type paths = {
 		}
 		get?: never
 		/**
-		 * Edit Block Slot
-		 * @description Edit block slot by ID
+		 * Update Block Slot
+		 * @description Update block slot by ID
 		 */
 		put: operations['edit-block-slot']
 		post?: never
@@ -248,8 +296,8 @@ export type paths = {
 		}
 		get?: never
 		/**
-		 * Edit Group
-		 * @description Edit Group
+		 * Update Group
+		 * @description Update Group by group ID
 		 */
 		put: operations['edit-group']
 		post?: never
@@ -359,6 +407,9 @@ export type paths = {
 export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
+		AllGroupsSuccessfulResponseDTO: {
+			groups?: components['schemas']['GroupDTO'][]
+		}
 		AppointmentCreateSchema: {
 			/**
 			 * @description Appointment Address
@@ -402,10 +453,24 @@ export type components = {
 			 */
 			ignoreDateRange?: boolean
 			/**
+			 * @description If true the time slot validation would be avoided for any appointment creation
+			 * @example true
+			 */
+			ignoreFreeSlotValidation?: boolean
+			/**
 			 * @description Location Id
 			 * @example C2QujeCh8ZnC7al2InWR
 			 */
 			locationId: string
+			/**
+			 * @description Meeting Location Type: Set to "custom" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.
+			 * @default default
+			 * @example custom
+			 * @enum {string}
+			 */
+			meetingLocationType: 'default' | 'custom'
+			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true. */
+			rrule?: string
 			/**
 			 * @description Start Time
 			 * @example 2021-06-23T03:30:00+05:30
@@ -440,6 +505,11 @@ export type components = {
 				| 'noshow'
 				| 'invalid'
 			/**
+			 * @description Assigned User Id
+			 * @example 0007BWpSzSwfiuSl0tR2
+			 */
+			assignedUserId?: string
+			/**
 			 * @description Calendar Id
 			 * @example CVokAlI8fgw4WYWoCtQz
 			 */
@@ -454,6 +524,20 @@ export type components = {
 			 * @example false
 			 */
 			ignoreDateRange?: boolean
+			/**
+			 * @description If true the time slot validation would be avoided for any appointment update
+			 * @example true
+			 */
+			ignoreFreeSlotValidation?: boolean
+			/**
+			 * @description Meeting Location Type: Set to "custom" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.
+			 * @default default
+			 * @example custom
+			 * @enum {string}
+			 */
+			meetingLocationType: 'default' | 'custom'
+			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true. */
+			rrule?: string
 			/**
 			 * @description Start Time
 			 * @example 2021-06-23T03:30:00+05:30
@@ -513,10 +597,17 @@ export type components = {
 			 */
 			id: string
 			/**
+			 * @description true if the event is recurring otherwise false
+			 * @example true
+			 */
+			isRecurring?: boolean
+			/**
 			 * @description Location Id
 			 * @example C2QujeCh8ZnC7al2InWR
 			 */
 			locationId: string
+			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events */
+			rrule?: string
 			/**
 			 * @description Start Time
 			 * @example 2021-06-23T03:30:00+05:30
@@ -537,8 +628,6 @@ export type components = {
 			/** @default false */
 			deleted: boolean
 			hours: components['schemas']['Hour'][]
-			/** @description The ID of the custom availability object. It is required while updating or deleting the existing custom date availability */
-			id?: string
 		}
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -655,6 +744,7 @@ export type components = {
 				| 'class_booking'
 				| 'collective'
 				| 'service_booking'
+				| 'personal'
 			consentLabel?: string
 			/** @example this is used for testing */
 			description?: string
@@ -699,6 +789,8 @@ export type components = {
 			isLivePaymentMode?: boolean
 			/** @example ocQHyuzHvysMo5N5VsXc */
 			locationId: string
+			/** @description Look Busy Configuration */
+			lookBusyConfig?: components['schemas']['LookBusyConfiguration']
 			meetingLocation?: string
 			/** @example test calendar */
 			name: string
@@ -815,6 +907,7 @@ export type components = {
 				| 'class_booking'
 				| 'collective'
 				| 'service_booking'
+				| 'personal'
 			consentLabel?: string
 			/** @example this is used for testing */
 			description?: string
@@ -861,6 +954,8 @@ export type components = {
 			isLivePaymentMode?: boolean
 			/** @example ocQHyuzHvysMo5N5VsXc */
 			locationId: string
+			/** @description Look Busy Configuration */
+			lookBusyConfig?: components['schemas']['LookBusyConfiguration']
 			meetingLocation?: string
 			/** @example test calendar */
 			name: string
@@ -971,21 +1066,30 @@ export type components = {
 			 * @example 9NkT25Vor1v4aQatFsv2
 			 */
 			groupId: string
-			/**
-			 * @description Calendar Event ID
-			 * @example 0007BWpSzSwfiuSl0tR2
-			 */
+			/** @description Event Id or Instance id for a recurring event */
 			id: string
+			/**
+			 * @description true if the event is recurring otherwise false
+			 * @example true
+			 */
+			isRecurring?: boolean
 			/**
 			 * @description Location ID
 			 * @example 0007BWpSzSwfiuSl0tR2
 			 */
 			locationId: string
 			/**
+			 * @description Master event id for a recurring instance
+			 * @example ocWd2wuBGAQzh2cH1fSZ
+			 */
+			masterEventId?: string
+			/**
 			 * @description Notes
 			 * @example Some dummy note
 			 */
 			notes?: string
+			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. */
+			rrule?: string
 			/**
 			 * @description Start Time
 			 * @example 2023-09-25T16:00:00+05:30
@@ -1023,6 +1127,68 @@ export type components = {
 			 */
 			type: 'email'
 		}
+		CalendarResourceByIdResponseDTO: {
+			/**
+			 * @description Calendar IDs
+			 * @example [
+			 *       "Jsj0xnlDDjw0SuvX1J13",
+			 *       "oCM5feFC86FAAbcO7lJK"
+			 *     ]
+			 */
+			calendarIds: string[]
+			/**
+			 * @description Capacity of the resource
+			 * @example 85
+			 */
+			capacity?: number
+			/** @description Description of the resource */
+			description?: string
+			/** @description Whether the resource is active */
+			isActive: boolean
+			/** @description Location ID of the resource */
+			locationId: string
+			/**
+			 * @description Name of the resource
+			 * @example yoga room
+			 */
+			name: string
+			/**
+			 * @description Indicates if the resource is out of service
+			 * @example 0
+			 */
+			outOfService?: number
+			/** @description Quantity of the resource */
+			quantity?: number
+			/** @enum {string} */
+			resourceType: 'equipments' | 'rooms'
+		}
+		CalendarResourceResponseDTO: {
+			/**
+			 * @description Capacity of the resource
+			 * @example 85
+			 */
+			capacity?: number
+			/** @description Description of the resource */
+			description?: string
+			/** @description Whether the resource is active */
+			isActive: boolean
+			/** @description Location ID of the resource */
+			locationId: string
+			/**
+			 * @description Name of the resource
+			 * @example yoga room
+			 */
+			name: string
+			/**
+			 * @description Indicates if the resource is out of service
+			 * @example 0
+			 */
+			outOfService?: number
+			/** @description Quantity of the resource */
+			quantity?: number
+			/** @enum {string} */
+			resourceType: 'equipments' | 'rooms'
+		}
 		CalendarsGetSuccessfulResponseDTO: {
 			calendars?: components['schemas']['CalendarDTO'][]
 		}
@@ -1051,7 +1217,7 @@ export type components = {
 			appoinmentPerSlot?: number
 			autoConfirm?: boolean
 			/** @description This is only to set the custom availability. For standard availability, use the openHours property */
-			availabilities?: components['schemas']['Availability'][]
+			availabilities?: components['schemas']['UpdateAvailability'][]
 			/**
 			 * @default 0
 			 * @enum {number}
@@ -1090,6 +1256,8 @@ export type components = {
 			/** @enum {string} */
 			guestType?: 'count_only' | 'collect_detail'
 			isLivePaymentMode?: boolean
+			/** @description Look Busy Configuration */
+			lookBusyConfig?: components['schemas']['LookBusyConfiguration']
 			meetingLocation?: string
 			/** @example test calendar */
 			name?: string
@@ -1193,7 +1361,6 @@ export type components = {
 			/** @description Capacity of the room. */
 			capacity: number
 			description: string
-			isActive: boolean
 			locationId: string
 			name: string
 			/** @description Quantity of the out of service equipment. */
@@ -1206,21 +1373,56 @@ export type components = {
 			/** @example true */
 			succeeded?: boolean
 		}
+		DeleteNoteSuccessfulResponseDto: {
+			/** @example true */
+			success?: boolean
+		}
 		GetCalendarEventsSuccessfulResponseDTO: {
 			events?: components['schemas']['CalendarEventDTO'][]
 		}
 		GetCalendarEventSuccessfulResponseDTO: {
 			event?: components['schemas']['CalendarEventDTO']
 		}
+		GetCreateUpdateNoteSuccessfulResponseDto: {
+			note?: components['schemas']['GetNoteSchema']
+		}
+		GetNoteSchema: {
+			/** @example lorem ipsum */
+			body?: string
+			/** @example TUcmRxWrjqzJS8EjkxNK */
+			contactId?: string
+			createdBy?: components['schemas']['NoteCreatedBySchema']
+			/** @example 2021-07-08T12:02:11.285Z */
+			dateAdded?: string
+			/** @example HGPcayliwcdoUFzvbTok */
+			id?: string
+			/** @example TUcmRxWrjqzJS8EjkxNK */
+			userId?: string
+		}
+		GetNotesListSuccessfulResponseDto: {
+			/** @example true */
+			hasMore?: boolean
+			notes?: components['schemas']['GetNoteSchema'][]
+		}
 		GetSlotsSuccessfulResponseDto: {
 			_dates_: components['schemas']['SlotsSchema']
+		}
+		GroupCreateDTO: {
+			/** @example group description */
+			description: string
+			/** @example true */
+			isActive?: boolean
+			/** @example ocQHyuzHvysMo5N5VsXc */
+			locationId: string
+			/** @example group a */
+			name: string
+			/** @example 15-mins */
+			slug: string
 		}
 		GroupCreateSuccessfulResponseDTO: {
 			group?: components['schemas']['GroupDTO']
 		}
 		GroupDTO: {
-			dateAdded?: Record<string, never>
-			dateUpdated?: Record<string, never>
 			/** @example group description */
 			description: string
 			/** @example ocQHyuzHvysMo5N5VsXc */
@@ -1233,23 +1435,6 @@ export type components = {
 			name: string
 			/** @example 15-mins */
 			slug: string
-		}
-		GroupSchema: {
-			/** @example my-team */
-			description?: string
-			/** @example 0TkCdp9PfvLeWKYRRvIz */
-			id?: string
-			/** @example true */
-			isActive?: boolean
-			/** @example ocQHyuzHvysMo5N5VsXc */
-			locationId?: string
-			/** @example my-team */
-			name?: string
-			/** @example my-team */
-			slug?: string
-		}
-		GroupsGetSuccessfulResponseDTO: {
-			groups?: components['schemas']['GroupSchema'][]
 		}
 		GroupStatusUpdateParams: {
 			/**
@@ -1268,8 +1453,6 @@ export type components = {
 		GroupUpdateDTO: {
 			/** @example group description */
 			description: string
-			/** @example ocQHyuzHvysMo5N5VsXc */
-			id?: string
 			/** @example group a */
 			name: string
 			/** @example 15-mins */
@@ -1280,6 +1463,31 @@ export type components = {
 			closeMinute: number
 			openHour: number
 			openMinute: number
+		}
+		LookBusyConfiguration: {
+			/**
+			 * @description Apply Look Busy
+			 * @default false
+			 * @example true
+			 */
+			enabled: boolean
+			/** @description Percentage of slots that will be hidden */
+			LookBusyPercentage: number
+		}
+		NoteCreatedBySchema: {
+			/** @example TUcmRxWr */
+			id?: string
+			/** @example John Doe */
+			name?: string
+		}
+		NotesDTO: {
+			/**
+			 * @description Note body
+			 * @example lorem ipsum
+			 */
+			body: string
+			/** @example GCs5KuzPqTls7vWclkEV */
+			userId?: string
 		}
 		OpenHour: {
 			daysOfTheWeek: number[]
@@ -1301,6 +1509,13 @@ export type components = {
 			/** @enum {string} */
 			freq?: 'DAILY' | 'WEEKLY' | 'MONTHLY'
 		}
+		ResourceDeleteResponseDTO: {
+			/**
+			 * @description Success
+			 * @example true
+			 */
+			success?: boolean
+		}
 		SlotsSchema: {
 			slots: string[]
 		}
@@ -1314,7 +1529,14 @@ export type components = {
 			 * @example custom
 			 * @enum {string}
 			 */
-			meetingLocationType: 'custom' | 'zoom' | 'gmeet' | 'phone' | 'address'
+			meetingLocationType:
+				| 'custom'
+				| 'zoom'
+				| 'gmeet'
+				| 'phone'
+				| 'address'
+				| 'teams'
+				| 'booker'
 			/**
 			 * @default 0.5
 			 * @enum {number}
@@ -1331,6 +1553,18 @@ export type components = {
 			/** @example 401 */
 			statusCode?: number
 		}
+		UpdateAvailability: {
+			/**
+			 * @description Formulate the date string in the format of `<YYYY-MM-DD in local timezone>T00:00:00.000Z`.
+			 * @example 2023-09-24T00:00:00.000Z
+			 */
+			date: string
+			/** @default false */
+			deleted: boolean
+			hours: components['schemas']['Hour'][]
+			/** @description The ID of the custom availability object. It is required while updating or deleting the existing custom date availability */
+			id?: string
+		}
 		UpdateCalendarResourceDTO: {
 			/** @description Service calendar IDs to be mapped with the resource.
 			 *
@@ -1340,7 +1574,6 @@ export type components = {
 			calendarIds?: string[]
 			/** @description Capacity of the room. */
 			capacity?: number
-			deleted: boolean
 			description?: string
 			isActive?: boolean
 			locationId?: string
@@ -1635,6 +1868,11 @@ export interface operations {
 		parameters: {
 			query: {
 				/**
+				 * @description Apply Look Busy
+				 * @example false
+				 */
+				enableLookBusy?: boolean
+				/**
 				 * @description End Date
 				 * @example 1601490599999
 				 */
@@ -1684,6 +1922,209 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['GetSlotsSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'get-appointment-notes': {
+		parameters: {
+			query: {
+				/**
+				 * @description Limit of notes to fetch
+				 * @example 10
+				 */
+				limit: number
+				/**
+				 * @description Offset of notes to fetch
+				 * @example 0
+				 */
+				offset: number
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Appointment ID */
+				appointmentId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetNotesListSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'create-appointment-note': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Appointment ID */
+				appointmentId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['NotesDTO']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetCreateUpdateNoteSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'update-appointment-note': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Appointment ID */
+				appointmentId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['NotesDTO']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetCreateUpdateNoteSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'delete-appointment-note': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Appointment ID */
+				appointmentId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['DeleteNoteSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -1864,10 +2305,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Event Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Event Id or Instance id. For recurring appointments send masterEventId to modify original series. */
 				eventId: string
 			}
 			cookie?: never
@@ -1964,10 +2402,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Event Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Event Id or Instance id. For recurring appointments send masterEventId to modify original series. */
 				eventId: string
 			}
 			cookie?: never
@@ -2013,10 +2448,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Event Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Event Id or Instance id. For recurring appointments send masterEventId to modify original series. */
 				eventId: string
 			}
 			cookie?: never
@@ -2182,7 +2614,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['GroupsGetSuccessfulResponseDTO']
+					'application/json': components['schemas']['AllGroupsSuccessfulResponseDTO']
 				}
 			}
 			/** @description Bad Request */
@@ -2219,7 +2651,7 @@ export interface operations {
 		}
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['GroupDTO']
+				'application/json': components['schemas']['GroupCreateDTO']
 			}
 		}
 		responses: {
@@ -2480,7 +2912,9 @@ export interface operations {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['CalendarResourceByIdResponseDTO'][]
+				}
 			}
 			/** @description Bad Request */
 			400: {
@@ -2528,7 +2962,9 @@ export interface operations {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['CalendarResourceByIdResponseDTO']
+				}
 			}
 			/** @description Bad Request */
 			400: {
@@ -2574,7 +3010,9 @@ export interface operations {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['CalendarResourceByIdResponseDTO']
+				}
 			}
 			/** @description Bad Request */
 			400: {
@@ -2624,7 +3062,9 @@ export interface operations {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['CalendarResourceResponseDTO']
+				}
 			}
 			/** @description Bad Request */
 			400: {
@@ -2670,7 +3110,9 @@ export interface operations {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['ResourceDeleteResponseDTO']
+				}
 			}
 			/** @description Bad Request */
 			400: {

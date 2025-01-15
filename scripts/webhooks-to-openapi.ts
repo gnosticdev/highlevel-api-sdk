@@ -2,7 +2,7 @@ import path from 'node:path'
 import type { OpenAPI3, SchemaObject } from 'openapi-typescript'
 import { CUSTOM_V2_SCHEMAS_DIR } from './constants'
 
-interface WebhookSchema {
+export interface WebhookSchema {
 	title: string
 	jsonSchema: {
 		type: string
@@ -10,10 +10,15 @@ interface WebhookSchema {
 	}
 }
 
-function isWebhookSchema(webhook: unknown): webhook is WebhookSchema {
+/**
+ * Checks that a json object is the custom webhook schema type
+ */
+export function isWebhookSchema(webhook: unknown): webhook is WebhookSchema {
 	return (
 		typeof webhook === 'object' &&
 		webhook !== null &&
+		'title' in webhook &&
+		'jsonSchema' in webhook &&
 		typeof (webhook as WebhookSchema).title === 'string' &&
 		typeof (webhook as WebhookSchema).jsonSchema === 'object' &&
 		(webhook as WebhookSchema).jsonSchema !== null &&
@@ -79,6 +84,25 @@ export function convertWebhooksToOpenAPI(webhooks: WebhookSchema[]): OpenAPI3 {
 	return openAPISchema
 }
 
+/**
+ * Validates an array of webhook schemas and separates them into valid and invalid schemas
+ */
+export function validateWebhooks(webhooksJSON: unknown[]): {
+	validSchemas: WebhookSchema[]
+	invalidSchemas: unknown[]
+} {
+	const invalidSchemas: unknown[] = []
+	const validSchemas: WebhookSchema[] = []
+	for (const webhook of webhooksJSON) {
+		if (isWebhookSchema(webhook)) {
+			validSchemas.push(webhook)
+		} else {
+			invalidSchemas.push(webhook)
+		}
+	}
+	return { validSchemas, invalidSchemas }
+}
+
 if (import.meta.main) {
 	const webhooksJSON = await Bun.file(
 		path.join(CUSTOM_V2_SCHEMAS_DIR, 'webhooks.json'),
@@ -86,15 +110,9 @@ if (import.meta.main) {
 	if (!Array.isArray(webhooksJSON)) {
 		throw new Error('Webhooks JSON is not an array')
 	}
-	const invalidSchemas = webhooksJSON.filter(
-		(webhook) => !isWebhookSchema(webhook),
-	)
-	if (invalidSchemas.length > 0) {
-		throw new Error(
-			`Invalid webhook schemas: ${invalidSchemas.map((webhook) => webhook.title).join(', ')}`,
-		)
-	}
-	const openAPISchema = convertWebhooksToOpenAPI(webhooksJSON)
+
+	const { validSchemas } = validateWebhooks(webhooksJSON)
+	const openAPISchema = convertWebhooksToOpenAPI(validSchemas)
 
 	await Bun.write(
 		path.join(CUSTOM_V2_SCHEMAS_DIR, 'webhooks.openapi.json'),

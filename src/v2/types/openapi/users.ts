@@ -88,6 +88,8 @@ export type components = {
 			email: string
 			/** @example John */
 			firstName: string
+			/** @example true */
+			isEjectedUser: boolean
 			/** @example Deo */
 			lastName: string
 			/** @example [
@@ -96,7 +98,7 @@ export type components = {
 			locationIds: string[]
 			/** @example ******* */
 			password: string
-			permissions: components['schemas']['PermissionsDto']
+			permissions?: components['schemas']['PermissionsDto']
 			/** @example +18832327657 */
 			phone?: string
 			/** @example https://img.png */
@@ -104,7 +106,7 @@ export type components = {
 			/** @example admin */
 			role: string
 			/**
-			 * @description Scopes allowed for users. If passed empty all the scopes will be get disabled
+			 * @description Scopes allowed for users. Only scopes that have been passed will be enabled. Note:- If passed empty all the scopes will be get disabled
 			 * @example [
 			 *       "contacts.write",
 			 *       "campaigns.readonly"
@@ -122,6 +124,8 @@ export type components = {
 				| 'triggers.write'
 				| 'funnels.write'
 				| 'websites.write'
+				| 'medias.write'
+				| 'medias.readonly'
 				| 'opportunities.write'
 				| 'opportunities/leadValue.readonly'
 				| 'reporting/phone.readonly'
@@ -129,6 +133,8 @@ export type components = {
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
 				| 'reporting/agent.readonly'
+				| 'reporting/reports.write'
+				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -161,12 +167,20 @@ export type components = {
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
-				| 'adPublishing.write'
 				| 'adPublishing.readonly'
-				| 'adPublishing.readonly'
+				| 'private-integration-location.readonly'
+				| 'private-integration-location.write'
+				| 'private-integration-company.readonly'
+				| 'private-integration-company.write'
+				| 'native-integrations.readonly'
+				| 'native-integrations.write'
+				| 'wordpress.write'
+				| 'wordpress.read'
+				| 'custom-menu-link.readonly'
+				| 'custom-menu-link.write'
 			)[]
 			/**
-			 * @description Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled
+			 * @description Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled
 			 * @example [
 			 *       "contacts.write",
 			 *       "campaigns.readonly"
@@ -184,6 +198,8 @@ export type components = {
 				| 'triggers.write'
 				| 'funnels.write'
 				| 'websites.write'
+				| 'medias.write'
+				| 'medias.readonly'
 				| 'opportunities.write'
 				| 'opportunities/leadValue.readonly'
 				| 'reporting/phone.readonly'
@@ -191,6 +207,8 @@ export type components = {
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
 				| 'reporting/agent.readonly'
+				| 'reporting/reports.write'
+				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -223,9 +241,17 @@ export type components = {
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
-				| 'adPublishing.write'
 				| 'adPublishing.readonly'
-				| 'adPublishing.readonly'
+				| 'private-integration-location.readonly'
+				| 'private-integration-location.write'
+				| 'private-integration-company.readonly'
+				| 'private-integration-company.write'
+				| 'native-integrations.readonly'
+				| 'native-integrations.write'
+				| 'wordpress.write'
+				| 'wordpress.read'
+				| 'custom-menu-link.readonly'
+				| 'custom-menu-link.write'
 			)[]
 			/** @example account */
 			type: string
@@ -436,6 +462,8 @@ export type components = {
 			 *       "ve9EPM428h8vShlRW1KT"
 			 *     ] */
 			locationIds?: string[]
+			/** @example true */
+			restrictSubAccount?: boolean
 			/** @example admin */
 			role?: string
 			/** @example account */
@@ -479,6 +507,8 @@ export type components = {
 			emailChangeOTP?: string
 			/** @example John */
 			firstName?: string
+			/** @example true */
+			isEjectedUser: boolean
 			/** @example Deo */
 			lastName?: string
 			/** @example [
@@ -495,7 +525,7 @@ export type components = {
 			/** @example admin */
 			role?: string
 			/**
-			 * @description Scopes allowed for users. If passed empty all the scopes will be get disabled
+			 * @description Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the scopes will be get disabled
 			 * @example [
 			 *       "contacts.write",
 			 *       "campaigns.readonly"
@@ -513,6 +543,8 @@ export type components = {
 				| 'triggers.write'
 				| 'funnels.write'
 				| 'websites.write'
+				| 'medias.write'
+				| 'medias.readonly'
 				| 'opportunities.write'
 				| 'opportunities/leadValue.readonly'
 				| 'reporting/phone.readonly'
@@ -520,6 +552,8 @@ export type components = {
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
 				| 'reporting/agent.readonly'
+				| 'reporting/reports.write'
+				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -552,12 +586,20 @@ export type components = {
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
-				| 'adPublishing.write'
 				| 'adPublishing.readonly'
-				| 'adPublishing.readonly'
+				| 'private-integration-location.readonly'
+				| 'private-integration-location.write'
+				| 'private-integration-company.readonly'
+				| 'private-integration-company.write'
+				| 'native-integrations.readonly'
+				| 'native-integrations.write'
+				| 'wordpress.write'
+				| 'wordpress.read'
+				| 'custom-menu-link.readonly'
+				| 'custom-menu-link.write'
 			)[]
 			/**
-			 * @description Assigned Scopes allowed for users. If passed empty all the assigned scopes will be get disabled
+			 * @description Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled
 			 * @example [
 			 *       "contacts.write",
 			 *       "campaigns.readonly"
@@ -575,6 +617,8 @@ export type components = {
 				| 'triggers.write'
 				| 'funnels.write'
 				| 'websites.write'
+				| 'medias.write'
+				| 'medias.readonly'
 				| 'opportunities.write'
 				| 'opportunities/leadValue.readonly'
 				| 'reporting/phone.readonly'
@@ -582,6 +626,8 @@ export type components = {
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
 				| 'reporting/agent.readonly'
+				| 'reporting/reports.write'
+				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -614,9 +660,17 @@ export type components = {
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
-				| 'adPublishing.write'
 				| 'adPublishing.readonly'
-				| 'adPublishing.readonly'
+				| 'private-integration-location.readonly'
+				| 'private-integration-location.write'
+				| 'private-integration-company.readonly'
+				| 'private-integration-company.write'
+				| 'native-integrations.readonly'
+				| 'native-integrations.write'
+				| 'wordpress.write'
+				| 'wordpress.read'
+				| 'custom-menu-link.readonly'
+				| 'custom-menu-link.write'
 			)[]
 			/** @example account */
 			type?: string
@@ -640,6 +694,73 @@ export type components = {
 			/** @example +1 808-868-8888 */
 			phone?: string
 			roles?: components['schemas']['RoleSchema']
+			/** @enum {string} */
+			scopes?:
+				| 'campaigns.readonly'
+				| 'campaigns.write'
+				| 'calendars/events.write'
+				| 'calendars/events.readonly'
+				| 'contacts.write'
+				| 'contacts/bulkActions.write'
+				| 'workflows.readonly'
+				| 'workflows.write'
+				| 'triggers.write'
+				| 'funnels.write'
+				| 'websites.write'
+				| 'medias.write'
+				| 'medias.readonly'
+				| 'opportunities.write'
+				| 'opportunities/leadValue.readonly'
+				| 'reporting/phone.readonly'
+				| 'reporting/adwords.readonly'
+				| 'reporting/facebookAds.readonly'
+				| 'reporting/attributions.readonly'
+				| 'reporting/agent.readonly'
+				| 'reporting/reports.write'
+				| 'reporting/reports.readonly'
+				| 'payments.write'
+				| 'payments/refunds.write'
+				| 'payments/records.write'
+				| 'payments/exports.write'
+				| 'payments/subscriptionsCancel.write'
+				| 'invoices.write'
+				| 'invoices.readonly'
+				| 'invoices/schedule.readonly'
+				| 'invoices/schedule.write'
+				| 'invoices/template.readonly'
+				| 'invoices/template.write'
+				| 'reputation/review.write'
+				| 'reputation/listing.write'
+				| 'conversations.write'
+				| 'conversations.readonly'
+				| 'conversations/message.readonly'
+				| 'conversations/message.write'
+				| 'contentAI.write'
+				| 'dashboard/stats.readonly'
+				| 'locations/tags.write'
+				| 'locations/tags.readonly'
+				| 'marketing.write'
+				| 'eliza.write'
+				| 'settings.write'
+				| 'socialplanner/post.write'
+				| 'marketing/affiliate.write'
+				| 'blogs.write'
+				| 'membership.write'
+				| 'communities.write'
+				| 'certificates.write'
+				| 'certificates.readonly'
+				| 'adPublishing.write'
+				| 'adPublishing.readonly'
+				| 'private-integration-location.readonly'
+				| 'private-integration-location.write'
+				| 'private-integration-company.readonly'
+				| 'private-integration-company.write'
+				| 'native-integrations.readonly'
+				| 'native-integrations.write'
+				| 'wordpress.write'
+				| 'wordpress.read'
+				| 'custom-menu-link.readonly'
+				| 'custom-menu-link.write'
 		}
 		UserSuccessfulResponseDto: {
 			/** @example john@deo.com */
@@ -658,6 +779,73 @@ export type components = {
 			/** @example +1 808-868-8888 */
 			phone?: string
 			roles?: components['schemas']['RoleSchema']
+			/** @enum {string} */
+			scopes?:
+				| 'campaigns.readonly'
+				| 'campaigns.write'
+				| 'calendars/events.write'
+				| 'calendars/events.readonly'
+				| 'contacts.write'
+				| 'contacts/bulkActions.write'
+				| 'workflows.readonly'
+				| 'workflows.write'
+				| 'triggers.write'
+				| 'funnels.write'
+				| 'websites.write'
+				| 'medias.write'
+				| 'medias.readonly'
+				| 'opportunities.write'
+				| 'opportunities/leadValue.readonly'
+				| 'reporting/phone.readonly'
+				| 'reporting/adwords.readonly'
+				| 'reporting/facebookAds.readonly'
+				| 'reporting/attributions.readonly'
+				| 'reporting/agent.readonly'
+				| 'reporting/reports.write'
+				| 'reporting/reports.readonly'
+				| 'payments.write'
+				| 'payments/refunds.write'
+				| 'payments/records.write'
+				| 'payments/exports.write'
+				| 'payments/subscriptionsCancel.write'
+				| 'invoices.write'
+				| 'invoices.readonly'
+				| 'invoices/schedule.readonly'
+				| 'invoices/schedule.write'
+				| 'invoices/template.readonly'
+				| 'invoices/template.write'
+				| 'reputation/review.write'
+				| 'reputation/listing.write'
+				| 'conversations.write'
+				| 'conversations.readonly'
+				| 'conversations/message.readonly'
+				| 'conversations/message.write'
+				| 'contentAI.write'
+				| 'dashboard/stats.readonly'
+				| 'locations/tags.write'
+				| 'locations/tags.readonly'
+				| 'marketing.write'
+				| 'eliza.write'
+				| 'settings.write'
+				| 'socialplanner/post.write'
+				| 'marketing/affiliate.write'
+				| 'blogs.write'
+				| 'membership.write'
+				| 'communities.write'
+				| 'certificates.write'
+				| 'certificates.readonly'
+				| 'adPublishing.write'
+				| 'adPublishing.readonly'
+				| 'private-integration-location.readonly'
+				| 'private-integration-location.write'
+				| 'private-integration-company.readonly'
+				| 'private-integration-company.write'
+				| 'native-integrations.readonly'
+				| 'native-integrations.write'
+				| 'wordpress.write'
+				| 'wordpress.read'
+				| 'custom-menu-link.readonly'
+				| 'custom-menu-link.write'
 		}
 	}
 	responses: never
@@ -671,7 +859,7 @@ export interface operations {
 	'get-user-by-location': {
 		parameters: {
 			query: {
-				/** @example ve9EPM428h8vShlRW1KT */
+				/** @example s4BtzHFWmT28mbb85uPa */
 				locationId: string
 			}
 			header: {
@@ -779,13 +967,7 @@ export interface operations {
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
-			path: {
-				/**
-				 * @description User Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
-				userId: string
-			}
+			path?: never
 			cookie?: never
 		}
 		requestBody?: never
@@ -893,13 +1075,7 @@ export interface operations {
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
-			path: {
-				/**
-				 * @description User Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
-				userId: string
-			}
+			path?: never
 			cookie?: never
 		}
 		requestBody?: never

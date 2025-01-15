@@ -183,6 +183,34 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/social-media-posting/{locationId}/posts/bulk-delete': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Bulk Delete Social Planner Posts
+		 * @description Deletes multiple posts based on the provided list of post IDs.
+		 *                       This operation is useful for clearing up large numbers of posts efficiently.
+		 *
+		 *     Note:
+		 *
+		 *     1.The maximum number of posts that can be deleted in a single request is '50'.
+		 *
+		 *     2.However, It will only get deleted in Highlevel database but still
+		 *                        it is recommended to be cautious of this operation.
+		 */
+		post: operations['bulk-delete-social-planner-posts']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/social-media-posting/{locationId}/posts/list': {
 		parameters: {
 			query?: never
@@ -403,13 +431,45 @@ export type paths = {
 		}
 		/**
 		 * Get Twitter profile
-		 * @description Get Twitter profile
+		 * @deprecated
+		 * @description <div><div>
+		 *       <span style= "display: inline-block;
+		 *         width: 25px; height: 25px;
+		 *         background-color: red;
+		 *         color: black;
+		 *         font-weight: bold;
+		 *         font-size: 24px;
+		 *         text-align: center;
+		 *         line-height: 20px;
+		 *         border: 2px solid black;
+		 *         border-radius: 20%;
+		 *         margin-right: 10px;">
+		 *         !
+		 *       </span>
+		 *       <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span>
+		 *     </div></div>
 		 */
 		get: operations['get-twitter-profile']
 		put?: never
 		/**
 		 * Attach Twitter profile
-		 * @description Attach Twitter profile
+		 * @deprecated
+		 * @description <div><div>
+		 *       <span style= "display: inline-block;
+		 *         width: 25px; height: 25px;
+		 *         background-color: red;
+		 *         color: black;
+		 *         font-weight: bold;
+		 *         font-size: 24px;
+		 *         text-align: center;
+		 *         line-height: 20px;
+		 *         border: 2px solid black;
+		 *         border-radius: 20%;
+		 *         margin-right: 10px;">
+		 *         !
+		 *       </span>
+		 *       <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span>
+		 *     </div></div>
 		 */
 		post: operations['attach-twitter-profile']
 		delete?: never
@@ -673,28 +733,23 @@ export type paths = {
 		}
 		/**
 		 * Starts OAuth For Twitter Account
-		 * @description Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to Twitter login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function.
-		 *       ### Sample code to listen to event data:
-		 *         window.addEventListener('message',
-		 *           function(e) {
-		 *             if (e.data && e.data.page === 'social_media_posting') {
-		 *             const { actionType, page, platform, placement, accountId, reconnectAccounts } = e.data
-		 *             }
-		 *           },
-		 *         false)
-		 *       ### Event Data Response:
-		 *         {
-		 *           actionType: string,            Ex: "close"
-		 *           page: string,                  Ex: "social-media-posting"
-		 *           platform: string,              Ex: "twitter"
-		 *           placement: string,             Ex: "placement"
-		 *           accountId: string,             Ex: "658a9b6833b91e0ecb8f3958"
-		 *           reconnectAccounts: string[]]   Ex: ["658a9b6833b91e0ecb834acd", "efd2daa9b6833b91e0ecb8f3511"]
-		 *         }
-		 *       ### The accountId retrieved from above data can be used to fetch Twitter account details using below API -
-		 *       API: '/social-media-posting/oauth/twitter/accounts/:accountId'
-		 *
-		 *       Method: GET
+		 * @deprecated
+		 * @description <div><div>
+		 *       <span style= "display: inline-block;
+		 *         width: 25px; height: 25px;
+		 *         background-color: red;
+		 *         color: black;
+		 *         font-weight: bold;
+		 *         font-size: 24px;
+		 *         text-align: center;
+		 *         line-height: 20px;
+		 *         border: 2px solid black;
+		 *         border-radius: 20%;
+		 *         margin-right: 10px;">
+		 *         !
+		 *       </span>
+		 *       <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span>
+		 *     </div></div>
 		 */
 		get: operations['start-twitter-oauth']
 		put?: never
@@ -826,6 +881,34 @@ export type components = {
 			message?: string
 			/** @example 400 */
 			statusCode?: number
+		}
+		BulkDeletePostSuccessfulResponseSchema: {
+			deletedCount?: number
+		}
+		BulkDeleteResponseDto: {
+			/**
+			 * @description Message
+			 * @example Posts Deleted Successfully
+			 */
+			message: string
+			/**
+			 * @description Message and deleted count
+			 * @example {
+			 *       "deletedCount": 10,
+			 *       "message": "Posts deleted successfully"
+			 *     }
+			 */
+			results: unknown
+			/**
+			 * @description Status Code
+			 * @example 201
+			 */
+			statusCode: number
+			/**
+			 * @description Success or Failure
+			 * @example true
+			 */
+			success: boolean
 		}
 		CategorySchema: {
 			/**
@@ -1295,6 +1378,15 @@ export type components = {
 			/** @description Post Id */
 			postId: string
 		}
+		DeletePostsDto: {
+			/**
+			 * @description Requested Results
+			 * @example [
+			 *       "662791ee3f216822d7da0c8c"
+			 *     ]
+			 */
+			postIds?: string[]
+		}
 		DeletePostSuccessfulResponseDTO: {
 			/**
 			 * @description Message
@@ -1367,8 +1459,8 @@ export type components = {
 			/** @example false */
 			isExpired?: boolean
 			/** @example {
-			 *       "hasGoogleUpdated": true,
-			 *       "canDelete": true
+			 *       "canDelete": true,
+			 *       "hasGoogleUpdated": true
 			 *     } */
 			meta?: Record<string, never>
 			/** @example Sample Account */
@@ -2396,32 +2488,32 @@ export type components = {
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
 			/** @example {
-			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name",
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
-			 *       },
-			 *       "storeCode": "122",
-			 *       "isVerified": "true",
-			 *       "verified": true,
-			 *       "protected": true,
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "isVerified": "true",
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
+			 *       "page": {
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name"
+			 *       },
+			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "protected": true,
+			 *       "storeCode": "122",
 			 *       "storefrontAddress": {
-			 *         "regionCode": "30021",
-			 *         "languageCode": "E001",
-			 *         "postalCode": "1221",
-			 *         "administrativeArea": "Down Town",
-			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ]
-			 *       }
+			 *         ],
+			 *         "administrativeArea": "Down Town",
+			 *         "languageCode": "E001",
+			 *         "locality": "Louis Street",
+			 *         "postalCode": "1221",
+			 *         "regionCode": "30021"
+			 *       },
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
+			 *       "verified": true
 			 *     } */
 			meta?: Record<string, never>
 			/** @example Account Name */
@@ -2461,32 +2553,32 @@ export type components = {
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
 			/** @example {
-			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name",
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
-			 *       },
-			 *       "storeCode": "122",
-			 *       "isVerified": "true",
-			 *       "verified": true,
-			 *       "protected": true,
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "isVerified": "true",
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
+			 *       "page": {
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name"
+			 *       },
+			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "protected": true,
+			 *       "storeCode": "122",
 			 *       "storefrontAddress": {
-			 *         "regionCode": "30021",
-			 *         "languageCode": "E001",
-			 *         "postalCode": "1221",
-			 *         "administrativeArea": "Down Town",
-			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ]
-			 *       }
+			 *         ],
+			 *         "administrativeArea": "Down Town",
+			 *         "languageCode": "E001",
+			 *         "locality": "Louis Street",
+			 *         "postalCode": "1221",
+			 *         "regionCode": "30021"
+			 *       },
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
+			 *       "verified": true
 			 *     } */
 			meta?: Record<string, never>
 			/** @example Account Name */
@@ -2586,32 +2678,32 @@ export type components = {
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
 			/** @example {
-			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name",
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
-			 *       },
-			 *       "storeCode": "122",
-			 *       "isVerified": "true",
-			 *       "verified": true,
-			 *       "protected": true,
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "isVerified": "true",
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
+			 *       "page": {
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name"
+			 *       },
+			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "protected": true,
+			 *       "storeCode": "122",
 			 *       "storefrontAddress": {
-			 *         "regionCode": "30021",
-			 *         "languageCode": "E001",
-			 *         "postalCode": "1221",
-			 *         "administrativeArea": "Down Town",
-			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ]
-			 *       }
+			 *         ],
+			 *         "administrativeArea": "Down Town",
+			 *         "languageCode": "E001",
+			 *         "locality": "Louis Street",
+			 *         "postalCode": "1221",
+			 *         "regionCode": "30021"
+			 *       },
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
+			 *       "verified": true
 			 *     } */
 			meta?: Record<string, never>
 			/** @example Profile Name */
@@ -2670,32 +2762,32 @@ export type components = {
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
 			/** @example {
-			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name",
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
-			 *       },
-			 *       "storeCode": "122",
-			 *       "isVerified": "true",
-			 *       "verified": true,
-			 *       "protected": true,
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "isVerified": "true",
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
+			 *       "page": {
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name"
+			 *       },
+			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "protected": true,
+			 *       "storeCode": "122",
 			 *       "storefrontAddress": {
-			 *         "regionCode": "30021",
-			 *         "languageCode": "E001",
-			 *         "postalCode": "1221",
-			 *         "administrativeArea": "Down Town",
-			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ]
-			 *       }
+			 *         ],
+			 *         "administrativeArea": "Down Town",
+			 *         "languageCode": "E001",
+			 *         "locality": "Louis Street",
+			 *         "postalCode": "1221",
+			 *         "regionCode": "30021"
+			 *       },
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
+			 *       "verified": true
 			 *     } */
 			meta?: Record<string, never>
 			/** @example Profile Name */
@@ -2794,32 +2886,32 @@ export type components = {
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
 			/** @example {
-			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name",
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
-			 *       },
-			 *       "storeCode": "122",
-			 *       "isVerified": "true",
-			 *       "verified": true,
-			 *       "protected": true,
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "isVerified": "true",
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
+			 *       "page": {
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name"
+			 *       },
+			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "protected": true,
+			 *       "storeCode": "122",
 			 *       "storefrontAddress": {
-			 *         "regionCode": "30021",
-			 *         "languageCode": "E001",
-			 *         "postalCode": "1221",
-			 *         "administrativeArea": "Down Town",
-			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ]
-			 *       }
+			 *         ],
+			 *         "administrativeArea": "Down Town",
+			 *         "languageCode": "E001",
+			 *         "locality": "Louis Street",
+			 *         "postalCode": "1221",
+			 *         "regionCode": "30021"
+			 *       },
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
+			 *       "verified": true
 			 *     } */
 			meta?: Record<string, never>
 			/** @example Account Name */
@@ -2881,32 +2973,32 @@ export type components = {
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
 			/** @example {
-			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name",
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
-			 *       },
-			 *       "storeCode": "122",
-			 *       "isVerified": "true",
-			 *       "verified": true,
-			 *       "protected": true,
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "isVerified": "true",
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
 			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
+			 *       "page": {
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name"
+			 *       },
+			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "protected": true,
+			 *       "storeCode": "122",
 			 *       "storefrontAddress": {
-			 *         "regionCode": "30021",
-			 *         "languageCode": "E001",
-			 *         "postalCode": "1221",
-			 *         "administrativeArea": "Down Town",
-			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ]
-			 *       }
+			 *         ],
+			 *         "administrativeArea": "Down Town",
+			 *         "languageCode": "E001",
+			 *         "locality": "Louis Street",
+			 *         "postalCode": "1221",
+			 *         "regionCode": "30021"
+			 *       },
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
+			 *       "verified": true
 			 *     } */
 			meta?: Record<string, never>
 			/** @example Profile Name */
@@ -4047,6 +4139,76 @@ export interface operations {
 			}
 		}
 	}
+	'bulk-delete-social-planner-posts': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['DeletePostsDto']
+			}
+		}
+		responses: {
+			/** @description Posts deleted successfully */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BulkDeleteResponseDto']
+				}
+			}
+			/** @description Cannot delete more than 50 posts at a time. */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description No posts found with the given IDs. */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+			/** @description An error occurred while trying to delete the posts. Please try again later. */
+			500: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
 	'get-posts': {
 		parameters: {
 			query?: never
@@ -5169,7 +5331,7 @@ export interface operations {
 				 */
 				reconnect?: string
 				/**
-				 * @description Facebook Account Id
+				 * @description User ID
 				 * @example u37swmmLbA02zgqKPpxITe2
 				 */
 				userId: string

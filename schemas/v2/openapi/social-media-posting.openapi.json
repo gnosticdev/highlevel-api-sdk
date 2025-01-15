@@ -222,6 +222,42 @@
         },
         "type": "object"
       },
+      "BulkDeletePostSuccessfulResponseSchema": {
+        "properties": {
+          "deletedCount": {
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "BulkDeleteResponseDto": {
+        "properties": {
+          "message": {
+            "description": "Message",
+            "example": "Posts Deleted Successfully",
+            "type": "string"
+          },
+          "results": {
+            "description": "Message and deleted count",
+            "example": {
+              "deletedCount": 10,
+              "message": "Posts deleted successfully"
+            }
+          },
+          "statusCode": {
+            "description": "Status Code",
+            "example": 201,
+            "type": "number"
+          },
+          "success": {
+            "description": "Success or Failure",
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "required": ["success", "statusCode", "message", "results"],
+        "type": "object"
+      },
       "CSVDefaultDTO": {
         "properties": {
           "userId": {
@@ -908,6 +944,19 @@
         "properties": {
           "postId": {
             "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DeletePostsDto": {
+        "properties": {
+          "postIds": {
+            "description": "Requested Results",
+            "example": ["662791ee3f216822d7da0c8c"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -3610,7 +3659,7 @@
     "securitySchemes": {
       "Agency-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -3678,7 +3727,7 @@
             }
           },
           {
-            "description": "Facebook Account Id",
+            "description": "User ID",
             "example": "u37swmmLbA02zgqKPpxITe2",
             "in": "query",
             "name": "userId",
@@ -4304,7 +4353,8 @@
     },
     "/social-media-posting/oauth/twitter/start": {
       "get": {
-        "description": "Open the API in a window with appropriate params and headers instead of using the Curl. User is navigated to Twitter login OAuth screen. On successful login, listen on window object for message where event listener returns data in its callback function. \n  ### Sample code to listen to event data:\n    window.addEventListener('message', \n      function(e) {\n        if (e.data && e.data.page === 'social_media_posting') {\n        const { actionType, page, platform, placement, accountId, reconnectAccounts } = e.data\n        }\n      },\n    false)\n  ### Event Data Response:\n    {\n      actionType: string,            Ex: \"close\" \n      page: string,                  Ex: \"social-media-posting\" \n      platform: string,              Ex: \"twitter\" \n      placement: string,             Ex: \"placement\" \n      accountId: string,             Ex: \"658a9b6833b91e0ecb8f3958\" \n      reconnectAccounts: string[]]   Ex: [\"658a9b6833b91e0ecb834acd\", \"efd2daa9b6833b91e0ecb8f3511\"] \n    }\n  ### The accountId retrieved from above data can be used to fetch Twitter account details using below API -\n  API: '/social-media-posting/oauth/twitter/accounts/:accountId' \n\n  Method: GET",
+        "deprecated": true,
+        "description": "<div><div>\n  <span style= \"display: inline-block;\n    width: 25px; height: 25px;\n    background-color: red;\n    color: black;\n    font-weight: bold;\n    font-size: 24px;\n    text-align: center;\n    line-height: 20px;\n    border: 2px solid black;\n    border-radius: 20%;\n    margin-right: 10px;\">\n    !\n  </span>\n  <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span>\n</div></div>",
         "operationId": "start-twitter-oauth",
         "parameters": [
           {
@@ -4403,11 +4453,6 @@
             "description": "Unprocessable Entity"
           }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "summary": "Starts OAuth For Twitter Account",
         "tags": ["Oauth | Twitter"]
       }
@@ -5521,7 +5566,8 @@
     },
     "/social-media-posting/oauth/{locationId}/twitter/accounts/{accountId}": {
       "get": {
-        "description": "Get Twitter profile",
+        "deprecated": true,
+        "description": "<div><div>\n  <span style= \"display: inline-block;\n    width: 25px; height: 25px;\n    background-color: red;\n    color: black;\n    font-weight: bold;\n    font-size: 24px;\n    text-align: center;\n    line-height: 20px;\n    border: 2px solid black;\n    border-radius: 20%;\n    margin-right: 10px;\">\n    !\n  </span>\n  <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span>\n</div></div>",
         "operationId": "get-twitter-profile",
         "parameters": [
           {
@@ -5607,16 +5653,12 @@
             "description": "Unprocessable Entity"
           }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "summary": "Get Twitter profile",
         "tags": ["Oauth | Twitter"]
       },
       "post": {
-        "description": "Attach Twitter profile",
+        "deprecated": true,
+        "description": "<div><div>\n  <span style= \"display: inline-block;\n    width: 25px; height: 25px;\n    background-color: red;\n    color: black;\n    font-weight: bold;\n    font-size: 24px;\n    text-align: center;\n    line-height: 20px;\n    border: 2px solid black;\n    border-radius: 20%;\n    margin-right: 10px;\">\n    !\n  </span>\n  <span><strong>As of December 4, 2024, X (formerly Twitter) is no longer supported. We apologise for any inconvenience.</strong></span>\n</div></div>",
         "operationId": "attach-twitter-profile",
         "parameters": [
           {
@@ -5712,11 +5754,6 @@
             "description": "Unprocessable Entity"
           }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "summary": "Attach Twitter profile",
         "tags": ["Oauth | Twitter"]
       }
@@ -6864,6 +6901,94 @@
           }
         ],
         "summary": "Create post",
+        "tags": ["Post"]
+      }
+    },
+    "/social-media-posting/{locationId}/posts/bulk-delete": {
+      "post": {
+        "description": "Deletes multiple posts based on the provided list of post IDs. \n                  This operation is useful for clearing up large numbers of posts efficiently. \n                  \nNote: \n                  \n1.The maximum number of posts that can be deleted in a single request is '50'.\n                  \n2.However, It will only get deleted in Highlevel database but still\n                   it is recommended to be cautious of this operation.",
+        "operationId": "bulk-delete-social-planner-posts",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeletePostsDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDeleteResponseDto"
+                }
+              }
+            },
+            "description": "Posts deleted successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Cannot delete more than 50 posts at a time."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "No posts found with the given IDs."
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "An error occurred while trying to delete the posts. Please try again later."
+          }
+        },
+        "summary": "Bulk Delete Social Planner Posts",
         "tags": ["Post"]
       }
     },

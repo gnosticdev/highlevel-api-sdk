@@ -3222,6 +3222,39 @@
         },
         "type": "object"
       },
+      "PlanChange": {
+        "properties": {
+          "appId": {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "companyId": {
+            "example": "otg8dTQqGLh3Q6iQI55w",
+            "type": "string"
+          },
+          "currentPlanId": {
+            "example": "66a0419a0dffa47fb5f8b22f",
+            "type": "string"
+          },
+          "locationId": {
+            "example": "otg8dTQqGLh3Q6iQI55w",
+            "type": "string"
+          },
+          "newPlanId": {
+            "example": "66a0419a0dffa47fb5f8b22f",
+            "type": "string"
+          },
+          "type": {
+            "example": "PLAN_CHANGE",
+            "type": "string"
+          },
+          "userId": {
+            "example": "otg8dTQqGLh3Q6iQI55w",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "PriceCreate": {
         "properties": {
           "_id": {
@@ -4649,6 +4682,24 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/OutboundMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        }
+      }
+    },
+    "PlanChange": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanChange"
               }
             }
           }

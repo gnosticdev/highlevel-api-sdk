@@ -103,6 +103,26 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/funnels/page/count': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Fetch count of funnel pages
+		 * @description Retrieves count of all funnel pages based on the given query parameters.
+		 */
+		get: operations['getPagesCountByFunnelId']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
 export type components = {
@@ -144,6 +164,11 @@ export type components = {
 			 *       "dateUpdated": "2024-04-29T15:00:28.465Z",
 			 *       "deleted": false,
 			 *       "domainId": "",
+			 *       "faviconUrl": "",
+			 *       "globalSectionVersion": 1,
+			 *       "globalSectionsPath": "funnel/SkIDfu0S4m3NYQyvWHC6/global-sections-1",
+			 *       "globalSectionsUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/funnel%2FSkIDfu0S4m3NYQyvWHC6%2Fglobal-sections-1?alt=media&token=9cc5c211-093b-4751-aeba-19282ac92955",
+			 *       "isStoreActive": false,
 			 *       "locationId": "ojQjykmwNIU88vfsfzvH",
 			 *       "name": "Chaitanya Copy",
 			 *       "orderFormVersion": 2,
@@ -162,20 +187,19 @@ export type components = {
 			 *           "url": "/newtestifypath"
 			 *         }
 			 *       ],
-			 *       "type": "funnel",
-			 *       "updatedAt": "2024-04-29T15:00:34.233Z",
-			 *       "faviconUrl": "",
-			 *       "globalSectionVersion": 1,
-			 *       "globalSectionsPath": "funnel/SkIDfu0S4m3NYQyvWHC6/global-sections-1",
-			 *       "globalSectionsUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/funnel%2FSkIDfu0S4m3NYQyvWHC6%2Fglobal-sections-1?alt=media&token=9cc5c211-093b-4751-aeba-19282ac92955",
-			 *       "isStoreActive": false,
 			 *       "trackingCodeBody": "",
 			 *       "trackingCodeHead": "",
+			 *       "type": "funnel",
+			 *       "updatedAt": "2024-04-29T15:00:34.233Z",
 			 *       "url": "/chaitanya"
 			 *     } */
 			funnels: Record<string, never>
 			/** @example 03774d31-a57e-4b4f-95c7-315ce61969f1 */
 			traceId: string
+		}
+		FunnelPageCountResponseDTO: {
+			/** @example 20 */
+			count: number
 		}
 		FunnelPageResponseDTO: {
 			/** @example 0yJbP3q7t7pLmeTWRAE2 */
@@ -288,7 +312,6 @@ export interface operations {
 				name?: string
 				offset?: string
 				parentId?: string
-				search?: string
 				type?: string
 			}
 			header: {
@@ -492,6 +515,33 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['FunnelPageResponseDTO']
+				}
+			}
+		}
+	}
+	getPagesCountByFunnelId: {
+		parameters: {
+			query: {
+				funnelId: string
+				locationId: string
+				name?: string
+			}
+			header?: {
+				/** @description Access Token */
+				Authorization?: string
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response - Count of funnel pages returned */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['FunnelPageCountResponseDTO']
 				}
 			}
 		}

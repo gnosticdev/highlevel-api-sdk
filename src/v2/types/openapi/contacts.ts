@@ -8,7 +8,10 @@ export type paths = {
 		}
 		/**
 		 * Get Contacts
+		 * @deprecated
 		 * @description Get Contacts
+		 *
+		 *      **Note:** This API endpoint is deprecated. Please use the [Search Contacts](https://highlevel.stoplight.io/docs/integrations/dbe4f3a00a106-search-contacts) endpoint instead.
 		 */
 		get: operations['get-contacts']
 		put?: never
@@ -635,6 +638,11 @@ export type components = {
 		CreateContactDto: {
 			/** @example 3535 1st St N */
 			address1?: string | null
+			/**
+			 * @description User's Id
+			 * @example y0BeYjuRIlDwsDcOHOJo
+			 */
+			assignedTo?: string
 			/** @example Dolomite */
 			city?: string | null
 			/** @example DGS VolMAX */
@@ -683,6 +691,11 @@ export type components = {
 		CreateContactSchema: {
 			/** @example 3535 1st St N */
 			address1?: string
+			/**
+			 * @description User's Id
+			 * @example y0BeYjuRIlDwsDcOHOJo
+			 */
+			assignedTo?: string
 			/** @example 25 */
 			birthDay?: number
 			/** @example 8 */
@@ -902,8 +915,6 @@ export type components = {
 			firstNameLowerCase?: string
 			/** @example rubika deo */
 			fullNameLowerCase?: string
-			/** @example male */
-			gender?: string
 			/** @example seD4PfOuKoVMLkEZqohJ */
 			id?: string
 			/** @example test */
@@ -944,16 +955,35 @@ export type components = {
 			note?: components['schemas']['GetNoteSchema']
 		}
 		GetEventSchema: {
+			/** @example Address */
+			address?: string
 			/** @example confirmed */
 			appoinmentStatus?: string
+			/** @example booked */
+			appointmentStatus?: string
+			/** @example [
+			 *       "YlWd2wuCAZQzh2cH1fVZ",
+			 *       "YlWd2wuCAZQzh2cH1fVZ"
+			 *     ] */
+			assignedResources?: string[]
 			/** @example YlWd2wuCAZQzh2cH1fVZ */
 			assignedUserId?: string
 			/** @example YlWd2wuCAZQzh2cH1fVZ */
 			calendarId?: string
+			/** @example YlWd2wuCAZQzh2cH1fVZ */
+			contactId?: string
+			/** @example 2021-07-16 11:00:00 */
+			dateAdded?: string
+			/** @example 2021-07-16 11:30:00 */
+			dateUpdated?: string
 			/** @example 2021-07-16 11:30:00 */
 			endTime?: string
+			/** @example YlWd2wuCAZQzh2cH1fVZ */
+			groupId?: string
 			/** @example YS3jaqqeehkR2Is80miy */
 			id?: string
+			/** @example YlWd2wuCAZQzh2cH1fVZ */
+			locationId?: string
 			/** @example test */
 			notes?: string
 			/** @example 2021-07-16 11:00:00 */
@@ -962,6 +992,11 @@ export type components = {
 			status?: string
 			/** @example Test */
 			title?: string
+			/** @example [
+			 *       "YlWd2wuCAZQzh2cH1fVZ",
+			 *       "YlWd2wuCAZQzh2cH1fVZ"
+			 *     ] */
+			users?: string[]
 		}
 		GetEventsSuccessfulResponseDto: {
 			events?: components['schemas']['GetEventSchema'][]
@@ -1051,6 +1086,11 @@ export type components = {
 		UpdateContactDto: {
 			/** @example 3535 1st St N */
 			address1?: string | null
+			/**
+			 * @description User's Id
+			 * @example y0BeYjuRIlDwsDcOHOJo
+			 */
+			assignedTo?: string | null
 			/** @example Dolomite */
 			city?: string | null
 			/** @example US */
@@ -1117,6 +1157,11 @@ export type components = {
 		UpsertContactDto: {
 			/** @example 3535 1st St N */
 			address1?: string | null
+			/**
+			 * @description User's Id
+			 * @example y0BeYjuRIlDwsDcOHOJo
+			 */
+			assignedTo?: string
 			/** @example Dolomite */
 			city?: string | null
 			/** @example DGS VolMAX */
