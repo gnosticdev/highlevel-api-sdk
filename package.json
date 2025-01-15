@@ -50,7 +50,11 @@
 			"types": "./dist/webhooks.d.ts"
 		}
 	},
-	"files": ["dist", "README.md", "LICENSE"],
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
 	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
 	"keywords": [
 		"highlevel",
@@ -89,8 +93,12 @@
 		"start-test": "bun test --hot",
 		"typecheck": "bun tsc -p tsconfig.json"
 	},
-	"trustedDependencies": ["@biomejs/biome", "esbuild", "lefthook"],
+	"trustedDependencies": [
+		"@biomejs/biome",
+		"esbuild",
+		"lefthook"
+	],
 	"type": "module",
 	"types": "./dist/index.d.ts",
-	"version": "2.0.0"
+	"version": "2.1.0"
 }
