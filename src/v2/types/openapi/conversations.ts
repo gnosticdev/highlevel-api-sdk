@@ -298,7 +298,7 @@ export type paths = {
 		put?: never
 		/**
 		 * Upload file attachments
-		 * @description Post the necessary fields for the API to upload files. The files need to be a buffer with the key "fileAttachment". <br /><br /> The allowed file types are: <br> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li></ul> <br /><br /> The API will return an object with the URLs
+		 * @description Post the necessary fields for the API to upload files. The files need to be a buffer with the key "fileAttachment". <br /><br /> The allowed file types are: <br> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li><li>MP3</li><li>WAV</li></ul> <br /><br /> The API will return an object with the URLs
 		 */
 		post: operations['upload-file-attachments']
 		delete?: never
@@ -395,6 +395,48 @@ export type components = {
 			 */
 			status: number
 		}
+		ConversationCreateResponseDto: {
+			/**
+			 * @description Unique identifier of the team member assigned to this conversation
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
+			assignedTo?: string
+			/**
+			 * @description Unique identifier of the contact associated with this conversation
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
+			contactId: string
+			/**
+			 * @description Date when the conversation was created
+			 * @example 2023-10-01T12:00:00Z
+			 */
+			dateAdded: string
+			/**
+			 * @description Date when the conversation was last updated
+			 * @example 2023-10-01T12:00:00Z
+			 */
+			dateUpdated: string
+			/**
+			 * @description Flag indicating if this conversation has been deleted
+			 * @example false
+			 */
+			deleted: boolean
+			/**
+			 * @description Unique identifier for the conversation
+			 * @example tDtDnQdgm2LXpyiqYvZ6
+			 */
+			id: string
+			/**
+			 * @description Date of the last message in the conversation
+			 * @example 2023-10-01T12:00:00Z
+			 */
+			lastMessageDate: string
+			/**
+			 * @description Unique identifier of the business location where this conversation takes place
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
+			locationId: string
+		}
 		ConversationDto: {
 			/**
 			 * @description Assigned User ID as string
@@ -432,7 +474,7 @@ export type components = {
 			 */
 			lastMessageDate?: string
 			/**
-			 * @description Type of the last message sent/receieved in the conversation.
+			 * @description Type of the last message sent/received in the conversation.
 			 * @example TYPE_CALL
 			 * @enum {string}
 			 */
@@ -470,7 +512,8 @@ export type components = {
 				| 'TYPE_ACTIVITY_APPOINTMENT'
 				| 'TYPE_FACEBOOK_COMMENT'
 				| 'TYPE_INSTAGRAM_COMMENT'
-				| 'TYPE_ACTIVITY'
+				| 'TYPE_CUSTOM_CALL'
+				| 'TYPE_INTERNAL_COMMENT'
 			/**
 			 * @description Location ID as string
 			 * @example tDtDnQdgm2LXpyiqYvZ6
@@ -499,17 +542,17 @@ export type components = {
 			 */
 			contactId: string
 			/**
-			 * @description Name of the contact in case the Full Name is missing, may contain the company name or the contact email
+			 * @description Alternative display name for the contact - used when full name is not available
 			 * @example John Doe Company
 			 */
 			contactName: string
 			/**
-			 * @description Email of the contact
+			 * @description Primary email address of the contact
 			 * @example johndoe@mailingdomain.com
 			 */
 			email: string
 			/**
-			 * @description Full name of the contact
+			 * @description Complete name of the contact (first and last name)
 			 * @example John Doe
 			 */
 			fullName: string
@@ -519,12 +562,12 @@ export type components = {
 			 */
 			id: string
 			/**
-			 * @description Last Message Body of the conversation
+			 * @description Content of the most recent message in the conversation
 			 * @example This is a sample message body
 			 */
 			lastMessageBody: string
 			/**
-			 * @description Last message type of the conversation
+			 * @description Channel/type of the most recent message (SMS, Email, Call, etc)
 			 * @example TYPE_SMS
 			 * @enum {string}
 			 */
@@ -562,25 +605,31 @@ export type components = {
 				| 'TYPE_ACTIVITY_APPOINTMENT'
 				| 'TYPE_FACEBOOK_COMMENT'
 				| 'TYPE_INSTAGRAM_COMMENT'
-				| 'TYPE_ACTIVITY'
+				| 'TYPE_CUSTOM_CALL'
+				| 'TYPE_INTERNAL_COMMENT'
 			/**
 			 * @description Location Id
 			 * @example ABCHkzuJQ8ZMd4Te84GK
 			 */
 			locationId: string
 			/**
-			 * @description Phone number of the contact
+			 * @description Primary phone number of the contact
 			 * @example +15550001234
 			 */
 			phone: string
 			/**
-			 * @description Type of the conversation
+			 * @description Primary channel/type of the conversation (Phone, Email, etc)
 			 * @example TYPE_PHONE
 			 * @enum {string}
 			 */
-			type: 'TYPE_PHONE' | 'TYPE_EMAIL' | 'TYPE_FB_MESSENGER' | 'TYPE_REVIEW'
+			type:
+				| 'TYPE_PHONE'
+				| 'TYPE_EMAIL'
+				| 'TYPE_FB_MESSENGER'
+				| 'TYPE_REVIEW'
+				| 'TYPE_GROUP_SMS'
 			/**
-			 * @description Unread count of the messages in the conversation
+			 * @description Number of unread messages in this conversation
 			 * @example 1
 			 */
 			unreadCount: number
@@ -596,6 +645,15 @@ export type components = {
 			 * @example tDtDnQdgm2LXpyiqYvZ6
 			 */
 			locationId: string
+		}
+		CreateConversationSuccessResponse: {
+			/** @description Conversation data of the provided conversation ID. */
+			conversation: components['schemas']['ConversationCreateResponseDto']
+			/**
+			 * @description Indicates whether the API request was successful.
+			 * @example true
+			 */
+			success: boolean
 		}
 		CreateLiveChatMessageFeedbackResponse: {
 			success: boolean
@@ -625,14 +683,47 @@ export type components = {
 			type: string
 		}
 		GetConversationByIdResponse: {
-			assignedTo: string
+			/**
+			 * @description Unique identifier of the team member currently responsible for handling this conversation
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
+			assignedTo?: string
+			/**
+			 * @description Unique identifier of the contact associated with this conversation
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
 			contactId: string
+			/**
+			 * @description Flag indicating if this conversation has been moved to trash/deleted
+			 * @example false
+			 */
 			deleted: boolean
+			/**
+			 * @description Unique identifier for this specific conversation thread
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
 			id: string
+			/**
+			 * @description Flag indicating if this conversation is currently in the main inbox view
+			 * @example true
+			 */
 			inbox: boolean
+			/**
+			 * @description Unique identifier of the business location where this conversation takes place
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
 			locationId: string
+			/**
+			 * @description Flag indicating if this conversation has been marked as important/starred by the user
+			 * @example true
+			 */
 			starred?: boolean
+			/** @description Communication channel type for this conversation: 1 (Phone), 2 (Email), 3 (Facebook Messenger), 4 (Review), 5 (Group SMS), 6 (Internal Chat - coming soon) */
 			type: number
+			/**
+			 * @description Number of messages in this conversation that have not been read by the user
+			 * @example 1
+			 */
 			unreadCount: number
 		}
 		GetConversationSuccessfulResponse: {
@@ -664,6 +755,11 @@ export type components = {
 			contentType: string
 			/** @example ve9EPM428h8vShlRW1KT */
 			conversationId: string
+			/**
+			 * @description Conversation provider ID
+			 * @example cI08i1Bls3iTB9bKgF01
+			 */
+			conversationProviderId?: string
 			/** @example 2024-03-27T18:13:49.000Z */
 			dateAdded: string
 			/** @enum {string} */
@@ -678,7 +774,7 @@ export type components = {
 			/** @description In case of reply, email message Id of the reply to email */
 			replyToMessageId?: string
 			/**
-			 * @description Email Message source
+			 * @description Email source
 			 * @enum {string}
 			 */
 			source?: 'workflow' | 'bulk_actions' | 'campaign' | 'api' | 'app'
@@ -714,6 +810,11 @@ export type components = {
 			contentType: string
 			/** @example ve9EPM428h8vShlRW1KT */
 			conversationId: string
+			/**
+			 * @description Conversation Provider Id
+			 * @example ve9EPM428kjkvShlRW1KT
+			 */
+			conversationProviderId?: string
 			/** @example 2024-03-27T18:13:49.000Z */
 			dateAdded: string
 			/** @enum {string} */
@@ -762,18 +863,8 @@ export type components = {
 				| 'TYPE_FACEBOOK_COMMENT'
 				| 'TYPE_INSTAGRAM_COMMENT'
 				| 'TYPE_CUSTOM_CALL'
-				| 'TYPE_ACTIVITY'
-			/**
-			 * @description meta will contain email, for message type 3 (email). messageIds is list of all email message ids under the message thread
-			 * @example {
-			 *       "email": {
-			 *         "messageIds": [
-			 *           "p1mRSHeLDhAms5q0LMr4"
-			 *         ]
-			 *       }
-			 *     }
-			 */
-			meta?: Record<string, never>
+				| 'TYPE_INTERNAL_COMMENT'
+			meta?: components['schemas']['MessageMeta']
 			/**
 			 * @description Message source
 			 * @enum {string}
@@ -781,15 +872,17 @@ export type components = {
 			source?: 'workflow' | 'bulk_actions' | 'campaign' | 'api' | 'app'
 			/** @enum {string} */
 			status?:
-				| 'pending'
-				| 'scheduled'
-				| 'sent'
-				| 'delivered'
-				| 'read'
-				| 'undelivered'
 				| 'connected'
+				| 'delivered'
 				| 'failed'
 				| 'opened'
+				| 'pending'
+				| 'read'
+				| 'scheduled'
+				| 'sent'
+				| 'undelivered'
+				| 'clicked'
+				| 'opt_out'
 			/** @example 1 */
 			type: number
 			/**
@@ -844,6 +937,39 @@ export type components = {
 			 */
 			transcript: string
 		}
+		MessageMeta: {
+			/**
+			 * @description Call duration in seconds
+			 * @example 120
+			 */
+			callDuration?: string
+			/**
+			 * @description Call status - can be pending, completed, answered, busy, no-answer, failed, canceled, or voicemail
+			 * @example completed
+			 * @enum {string}
+			 */
+			callStatus?:
+				| 'pending'
+				| 'completed'
+				| 'answered'
+				| 'busy'
+				| 'no-answer'
+				| 'failed'
+				| 'canceled'
+				| 'voicemail'
+			/**
+			 * @description meta will contain email, for message type 3 (email). messageIds is list of all email message ids under the message thread
+			 * @example {
+			 *       "email": {
+			 *         "messageIds": [
+			 *           "ve9EPM428kjkvShlRW1KT",
+			 *           "ve9EPs1028kjkvShlRW1KT"
+			 *         ]
+			 *       }
+			 *     }
+			 */
+			email?: Record<string, never>
+		}
 		ProcessMessageBodyDto: {
 			/**
 			 * @description external mail provider's message id
@@ -894,11 +1020,14 @@ export type components = {
 			 *     ]
 			 */
 			emailCc?: string[]
-			/** @description From Email Address */
+			/**
+			 * @description Email address to send from. This field is associated with the contact record and cannot be dynamically changed.
+			 * @example sender@company.com
+			 */
 			emailFrom?: string
 			/** @description Send the email message id for which this email should be threaded. This is for replying to a specific email */
 			emailMessageId?: string
-			/** @description To Email Address */
+			/** @description Recipient email address. This field is associated with the contact record and cannot be dynamically changed. */
 			emailTo?: string
 			/** @description HTML Body of Email */
 			html?: string
@@ -983,48 +1112,112 @@ export type components = {
 			total: number
 		}
 		SendMessageBodyDto: {
+			/**
+			 * @description ID of the associated appointment
+			 * @example appt123
+			 */
 			appointmentId?: string
+			/**
+			 * @description Array of attachment URLs
+			 * @example [
+			 *       "https://storage.com/file1.pdf",
+			 *       "https://storage.com/file2.jpg"
+			 *     ]
+			 */
 			attachments?: string[]
+			/**
+			 * @description ID of the contact receiving the message
+			 * @example abc123def456
+			 */
 			contactId: string
+			/**
+			 * @description ID of conversation provider
+			 * @example provider123
+			 */
 			conversationProviderId?: string
+			/**
+			 * @description Array of BCC email addresses
+			 * @example [
+			 *       "bcc1@company.com",
+			 *       "bcc2@company.com"
+			 *     ]
+			 */
 			emailBcc?: string[]
+			/**
+			 * @description Array of CC email addresses
+			 * @example [
+			 *       "cc1@company.com",
+			 *       "cc2@company.com"
+			 *     ]
+			 */
 			emailCc?: string[]
+			/**
+			 * @description Email address to send from
+			 * @example sender@company.com
+			 */
 			emailFrom?: string
-			/** @enum {string} */
+			/**
+			 * @description Mode for email replies
+			 * @example reply_all
+			 * @enum {string}
+			 */
 			emailReplyMode?: 'reply' | 'reply_all'
-			/** @description `emailTo` field is used when you want to send the email to a different email address than the contact's primary email. */
+			/**
+			 * @description Email address to send to, if different from contact's primary email. This should be a valid email address associated with the contact.
+			 * @example recipient@company.com
+			 */
 			emailTo?: string
 			/**
-			 * @description The phone number from which the message is being sent.
+			 * @description Phone number used as the sender number for outbound messages
 			 * @example +1499499299
 			 */
 			fromNumber?: string
+			/**
+			 * @description HTML content of the message
+			 * @example <p>Hello World</p>
+			 */
 			html?: string
+			/**
+			 * @description Text content of the message
+			 * @example Hello, how can I help you today?
+			 */
 			message?: string
-			/** @description Specify the emailId on which the reply needs to go out */
+			/**
+			 * @description ID of message being replied to
+			 * @example msg123
+			 */
 			replyMessageId?: string
 			/**
 			 * @description UTC Timestamp (in seconds) at which the message should be scheduled
 			 * @example 1669287863
 			 */
 			scheduledTimestamp?: number
+			/**
+			 * @description Subject line for email messages
+			 * @example Important Update
+			 */
 			subject?: string
+			/**
+			 * @description ID of message template
+			 * @example template123
+			 */
 			templateId?: string
 			/**
-			 * @description The phone number to which the message is being sent.
+			 * @description ID of message thread. For email messages, this is the message ID that contains multiple email messages in the thread
+			 * @example thread123
+			 */
+			threadId?: string
+			/**
+			 * @description Recipient phone number for outbound messages
 			 * @example +1439499299
 			 */
 			toNumber?: string
-			/** @enum {string} */
-			type:
-				| 'SMS'
-				| 'Email'
-				| 'WhatsApp'
-				| 'GMB'
-				| 'IG'
-				| 'FB'
-				| 'Custom'
-				| 'Live_Chat'
+			/**
+			 * @description Type of message being sent
+			 * @example Email
+			 * @enum {string}
+			 */
+			type: 'SMS' | 'Email' | 'WhatsApp' | 'IG' | 'FB' | 'Custom' | 'Live_Chat'
 		}
 		SendMessageResponseDto: {
 			/**
@@ -1118,7 +1311,7 @@ export type components = {
 			 * @example read
 			 * @enum {string}
 			 */
-			status: 'read' | 'pending' | 'delivered' | 'failed'
+			status: 'delivered' | 'failed' | 'pending' | 'read'
 		}
 		UploadFilesDto: {
 			attachmentUrls: string[]
@@ -1162,7 +1355,7 @@ export type components = {
 			 */
 			locationId: string
 			/**
-			 * @description Visitor Id
+			 * @description visitorId is the Unique ID assigned to each Live chat visitor. visitorId will be added soon in <a href="https://highlevel.stoplight.io/docs/integrations/00c5ff21f0030-get-contact" target="_blank">GET Contact API</a>
 			 * @example ve9EPM428h8vShlRW1KT
 			 */
 			visitorId: string
@@ -1200,7 +1393,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['GetConversationSuccessfulResponse']
+					'application/json': components['schemas']['CreateConversationSuccessResponse']
 				}
 			}
 			/** @description Bad Request */
@@ -1233,10 +1426,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Conversation ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Conversation ID as string */
 				conversationId: string
 			}
 			cookie?: never
@@ -1282,10 +1472,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Conversation ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Conversation ID as string */
 				conversationId: string
 			}
 			cookie?: never
@@ -1335,10 +1522,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Conversation ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Conversation ID as string */
 				conversationId: string
 			}
 			cookie?: never
@@ -1377,20 +1561,11 @@ export interface operations {
 	'get-messages': {
 		parameters: {
 			query?: {
-				/**
-				 * @description Message ID of the last message in the list as a string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Message ID of the last message in the list as a string */
 				lastMessageId?: string
-				/**
-				 * @description Number of messages to be fetched from the conversation. Default limit is 20
-				 * @example 20
-				 */
+				/** @description Number of messages to be fetched from the conversation. Default limit is 20 */
 				limit?: number
-				/**
-				 * @description Types of message to fetched separated with comma
-				 * @example TYPE_SMS,TYPE_CALL
-				 */
+				/** @description Types of message to fetched separated with comma */
 				type?:
 					| 'TYPE_CALL'
 					| 'TYPE_SMS'
@@ -1399,12 +1574,13 @@ export interface operations {
 					| 'TYPE_GMB'
 					| 'TYPE_INSTAGRAM'
 					| 'TYPE_WHATSAPP'
+					| 'TYPE_ACTIVITY_APPOINTMENT'
 					| 'TYPE_ACTIVITY_CONTACT'
 					| 'TYPE_ACTIVITY_INVOICE'
 					| 'TYPE_ACTIVITY_PAYMENT'
 					| 'TYPE_ACTIVITY_OPPORTUNITY'
 					| 'TYPE_LIVE_CHAT'
-					| 'TYPE_ACTIVITY_APPOINTMENT'
+					| 'TYPE_INTERNAL_COMMENTS'
 			}
 			header: {
 				/** @description Access Token */
@@ -1413,10 +1589,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Conversation ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Conversation ID as string */
 				conversationId: string
 			}
 			cookie?: never
@@ -1462,15 +1635,9 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Location ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Location ID as string */
 				locationId: string
-				/**
-				 * @description Message ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Message ID as string */
 				messageId: string
 			}
 			cookie?: never
@@ -1516,15 +1683,9 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Location ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Location ID as string */
 				locationId: string
-				/**
-				 * @description Message ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Message ID as string */
 				messageId: string
 			}
 			cookie?: never
@@ -1664,15 +1825,9 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Location ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Location ID as string */
 				locationId: string
-				/**
-				 * @description Message ID as string
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Message ID as string */
 				messageId: string
 			}
 			cookie?: never
@@ -1720,10 +1875,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Message Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
+				/** @description Message Id */
 				messageId: string
 			}
 			cookie?: never
@@ -1769,10 +1921,7 @@ export interface operations {
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Message Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
+				/** @description Message Id */
 				messageId: string
 			}
 			cookie?: never
@@ -1820,10 +1969,7 @@ export interface operations {
 				Authorization: string
 			}
 			path: {
-				/**
-				 * @description Email Message Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
+				/** @description Email Message Id */
 				emailMessageId: string
 			}
 			cookie?: never
@@ -2082,40 +2228,19 @@ export interface operations {
 	'search-conversation': {
 		parameters: {
 			query: {
-				/**
-				 * @description Assigned to user Id. Multiple values are comma separated. "unassigned" is used to fetch all unassigned conversations
-				 * @example ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik
-				 */
+				/** @description User IDs that conversations are assigned to. Multiple IDs can be provided as comma-separated values. Use "unassigned" to fetch conversations not assigned to any user. */
 				assignedTo?: string
-				/**
-				 * @description Contact Id
-				 * @example 9VEmS0si86GW6gXWU89b
-				 */
+				/** @description Contact Id */
 				contactId?: string
-				/**
-				 * @description User Id of the follower. Multiple values are comma separated.
-				 * @example ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik
-				 */
+				/** @description User IDs of followers to filter conversations by. Multiple IDs can be provided as comma-separated values. */
 				followers?: string
-				/**
-				 * @description Id of the conversation
-				 * @example ABCHkzuJQ8ZMd4Te84GK
-				 */
+				/** @description Id of the conversation */
 				id?: string
-				/**
-				 * @description Action of the last outbound message in the conversation as string.
-				 * @example manual
-				 */
+				/** @description Action of the last outbound message in the conversation as string. */
 				lastMessageAction?: 'automated' | 'manual'
-				/**
-				 * @description Direction of the last message in the conversation as string.
-				 * @example inbound
-				 */
+				/** @description Direction of the last message in the conversation as string. */
 				lastMessageDirection?: 'inbound' | 'outbound'
-				/**
-				 * @description Type of the last message in the conversation as a string
-				 * @example TYPE_SMS
-				 */
+				/** @description Type of the last message in the conversation as a string */
 				lastMessageType?:
 					| 'TYPE_CALL'
 					| 'TYPE_SMS'
@@ -2150,64 +2275,34 @@ export interface operations {
 					| 'TYPE_ACTIVITY_APPOINTMENT'
 					| 'TYPE_FACEBOOK_COMMENT'
 					| 'TYPE_INSTAGRAM_COMMENT'
-					| 'TYPE_ACTIVITY'
-				/**
-				 * @description Limit of conversations - Default is 20
-				 * @example 20
-				 */
+					| 'TYPE_CUSTOM_CALL'
+					| 'TYPE_INTERNAL_COMMENT'
+				/** @description Limit of conversations - Default is 20 */
 				limit?: number
-				/**
-				 * @description Location Id
-				 * @example ABCHkzuJQ8ZMd4Te84GK
-				 */
+				/** @description Location Id */
 				locationId: string
-				/**
-				 * @description Search paramater as a string
-				 * @example Search string
-				 */
+				/** @description User Id of the mention. Multiple values are comma separated. */
+				mentions?: string
+				/** @description Search paramater as a string */
 				query?: string
-				/**
-				 * @description Id of score profile on which conversations should get filtered out, works with scoreProfileMin & scoreProfileMax
-				 * @example ABCHkzuJQ8ZMd4Te84GK
-				 */
+				/** @description Id of score profile on which conversations should get filtered out, works with scoreProfileMin & scoreProfileMax */
 				scoreProfile?: string
-				/**
-				 * @description Maximum value for score
-				 * @example ABCHkzuJQ8ZMd4Te84GK
-				 */
+				/** @description Maximum value for score */
 				scoreProfileMax?: number
-				/**
-				 * @description Minimum value for score
-				 * @example ABCHkzuJQ8ZMd4Te84GK
-				 */
+				/** @description Minimum value for score */
 				scoreProfileMin?: number
-				/**
-				 * @description Sort paramater - asc or desc
-				 * @example asc
-				 */
+				/** @description Sort paramater - asc or desc */
 				sort?: 'asc' | 'desc'
-				/**
-				 * @description The sorting of the conversation to be filtered as - manual messages or all messages
-				 * @example last_message_date
-				 */
+				/** @description The sorting of the conversation to be filtered as - manual messages or all messages */
 				sortBy?:
 					| 'last_manual_message_date'
 					| 'last_message_date'
 					| 'score_profile'
-				/**
-				 * @description Id of score profile on which sortBy.ScoreProfile should sort on
-				 * @example ABCHkzuJQ8ZMd4Te84GK
-				 */
+				/** @description Id of score profile on which sortBy.ScoreProfile should sort on */
 				sortScoreProfile?: string
-				/**
-				 * @description Search to begin after the specified date - should contain the sort value of the last document
-				 * @example 1600854
-				 */
+				/** @description Search to begin after the specified date - should contain the sort value of the last document */
 				startAfterDate?: Record<string, never>
-				/**
-				 * @description The status of the conversation to be filtered - all, read, unread, starred
-				 * @example all
-				 */
+				/** @description The status of the conversation to be filtered - all, read, unread, starred  */
 				status?: 'all' | 'read' | 'unread' | 'starred' | 'recents'
 			}
 			header: {

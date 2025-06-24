@@ -1,6 +1,6 @@
 import { describe, expect, it, spyOn } from 'bun:test'
 import type { ContactCreate } from '../src/v2/types/custom/webhooks'
-import { WebhooksClient, createWebhooksClient } from '../src/v2/webhooks'
+import { createWebhooksClient, WebhooksClient } from '../src/v2/webhooks'
 
 describe('WebhooksClient', () => {
 	// Sample webhook payload based on ContactCreate type

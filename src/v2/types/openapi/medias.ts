@@ -146,6 +146,8 @@ export interface operations {
 				 * @example 5
 				 */
 				offset?: string
+				/** @description parent id or folder id */
+				parentId?: string
 				/**
 				 * @description Query text
 				 * @example Test file
@@ -209,6 +211,7 @@ export interface operations {
 					fileUrl?: string
 					hosted?: boolean
 					name?: string
+					parentId?: string
 				}
 			}
 		}

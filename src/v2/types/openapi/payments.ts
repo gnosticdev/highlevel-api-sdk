@@ -1,4 +1,56 @@
 export type paths = {
+	'/payments/coupon': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Fetch Coupon
+		 * @description The "Get Coupon Details" API enables you to retrieve comprehensive information about a specific coupon using either its unique identifier or promotional code. Use this endpoint to view coupon parameters, usage statistics, validity periods, and other promotional details.
+		 */
+		get: operations['get-coupon']
+		/**
+		 * Update Coupon
+		 * @description The "Update Coupon" API enables you to modify existing coupon details such as discount values, validity periods, usage limits, and other promotional parameters. Use this endpoint to adjust or extend promotional offers for your customers.
+		 */
+		put: operations['update-coupon']
+		/**
+		 * Create Coupon
+		 * @description The "Create Coupon" API allows you to create a new promotional coupon with customizable parameters such as discount amount, validity period, usage limits, and applicable products. Use this endpoint to set up promotional offers and special discounts for your customers.
+		 */
+		post: operations['create-coupon']
+		/**
+		 * Delete Coupon
+		 * @description The "Delete Coupon" API allows you to permanently remove a coupon from your system using its unique identifier. Use this endpoint to discontinue promotional offers or clean up unused coupons. Note that this action cannot be undone.
+		 */
+		delete: operations['delete-coupon']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/payments/coupon/list': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * List Coupons
+		 * @description The "List Coupons" API allows you to retrieve a list of all coupons available in your location. Use this endpoint to view all promotional offers and special discounts for your customers.
+		 */
+		get: operations['list-coupons']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/payments/custom-provider/connect': {
 		parameters: {
 			query?: never
@@ -251,6 +303,43 @@ export type components = {
 			 */
 			subtotal: number
 		}
+		ApplyToFuturePaymentsConfig: {
+			/**
+			 * @description Duration the coupon to be applied in a subscription
+			 * @example 5
+			 */
+			duration: number
+			/**
+			 * @description Type of the duration
+			 * @example months
+			 * @enum {string}
+			 */
+			durationType: 'months'
+			/**
+			 * @description Type of the config
+			 * @example forever | fixed
+			 * @enum {string}
+			 */
+			type: 'forever' | 'fixed'
+		}
+		ApplyToFuturePaymentsConfigDto: {
+			/**
+			 * @description Duration value for fixed type configurations
+			 * @example 3
+			 */
+			duration?: number
+			/**
+			 * @description Duration type for fixed configurations (e.g. months)
+			 * @example months
+			 */
+			durationType?: string
+			/**
+			 * @description Type of future payments configuration
+			 * @example fixed
+			 * @enum {string}
+			 */
+			type: 'forever' | 'fixed'
+		}
 		BadRequestDTO: {
 			/** @example Bad Request */
 			message?: string
@@ -331,6 +420,278 @@ export type components = {
 			 * @example 2024-01-23T09:57:04.846Z
 			 */
 			updatedAt: string
+		}
+		CouponDto: {
+			/**
+			 * @description Unique MongoDB identifier for the coupon
+			 * @example 67f6c132d9485f9dacd5f123
+			 */
+			_id: string
+			/**
+			 * @description Location or company ID
+			 * @example 79t07PzK8Tvf73d12312
+			 */
+			altId: string
+			/**
+			 * @description Type of entity (location or company)
+			 * @example location
+			 */
+			altType: string
+			/**
+			 * @description Indicates if the coupon applies to future recurring payments
+			 * @example true
+			 */
+			applyToFuturePayments: boolean
+			/** @description Configuration for how the coupon applies to future payments */
+			applyToFuturePaymentsConfig: components['schemas']['ApplyToFuturePaymentsConfigDto']
+			/**
+			 * @description Redemption code for the coupon
+			 * @example NEWT6
+			 */
+			code: string
+			/**
+			 * @description Creation timestamp
+			 * @example 2025-04-09T18:49:22.026Z
+			 */
+			createdAt: string
+			/**
+			 * @description Indicates if the coupon has been deleted
+			 * @example false
+			 */
+			deleted: boolean
+			/**
+			 * @description Type of discount (percentage or amount)
+			 * @example percentage
+			 * @enum {string}
+			 */
+			discountType: 'percentage' | 'amount'
+			/**
+			 * @description Value of the discount (percentage or fixed amount)
+			 * @example 25
+			 */
+			discountValue: number
+			/**
+			 * @description End date when the coupon expires
+			 * @example 2025-05-30T18:30:00.000Z
+			 */
+			endDate?: string
+			/**
+			 * @description Indicates if this is an affiliate coupon
+			 * @example false
+			 */
+			hasAffiliateCoupon: boolean
+			/**
+			 * @description Maximum number of times a customer can use this coupon (0 for unlimited)
+			 * @example 5
+			 */
+			limitPerCustomer: number
+			/**
+			 * @description Display name of the coupon
+			 * @example NEWT6
+			 */
+			name: string
+			/**
+			 * @description Date when the coupon becomes active
+			 * @example 2025-04-30T18:30:00.000Z
+			 */
+			startDate: string
+			/**
+			 * @description Current status of the coupon
+			 * @example scheduled
+			 * @enum {string}
+			 */
+			status: 'scheduled' | 'active' | 'expired'
+			/**
+			 * @description Last update timestamp
+			 * @example 2025-04-09T18:49:22.026Z
+			 */
+			updatedAt: string
+			/**
+			 * @description Number of times the coupon has been used
+			 * @example 12
+			 */
+			usageCount: number
+			/**
+			 * @description User ID associated with the coupon (if applicable)
+			 * @example q0m15dTLGeiGOXG123123
+			 */
+			userId?: string
+		}
+		CreateCouponParams: {
+			/**
+			 * @description Location Id
+			 * @example BQdAwxa0ky1iK2sstLGJ
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			/**
+			 * @description Is Coupon applicable on upcoming subscription transactions
+			 * @default true
+			 * @example true
+			 */
+			applyToFuturePayments: boolean
+			/**
+			 * @description If coupon is applicable on upcoming subscription transactions, how many months should it be applicable for a subscription
+			 * @default {
+			 *       "type": "forever"
+			 *     }
+			 * @example [
+			 *       {
+			 *         "duration": 5,
+			 *         "durationType": "months",
+			 *         "type": "fixed"
+			 *       },
+			 *       {
+			 *         "type": "forever"
+			 *       }
+			 *     ]
+			 */
+			applyToFuturePaymentsConfig: components['schemas']['ApplyToFuturePaymentsConfig']
+			/**
+			 * @description Coupon Code
+			 * @example LEVELUPDAY2022
+			 */
+			code: string
+			/**
+			 * @description Discount Type
+			 * @example amount
+			 * @enum {string}
+			 */
+			discountType: 'percentage' | 'amount'
+			/**
+			 * @description Discount Value
+			 * @example 10
+			 */
+			discountValue: number
+			/**
+			 * @description End date in YYYY-MM-DDTHH:mm:ssZ format
+			 * @example 2023-01-31T22:45:00.000Z
+			 */
+			endDate?: string
+			/**
+			 * @description Limits whether a coupon can be redeemed only once per customer.
+			 * @default false
+			 * @example true
+			 */
+			limitPerCustomer: boolean
+			/**
+			 * @description Coupon Name
+			 * @example New Year Sale
+			 */
+			name: string
+			/**
+			 * @description Product Ids
+			 * @example [
+			 *       "6241712be68f7a98102ba272"
+			 *     ]
+			 */
+			productIds?: string[]
+			/**
+			 * @description Start date in YYYY-MM-DDTHH:mm:ssZ format
+			 * @example 2023-01-01T22:45:00.000Z
+			 */
+			startDate: string
+			/**
+			 * @description Max number of times coupon can be used
+			 * @example 10
+			 */
+			usageLimit?: number
+		}
+		CreateCouponResponseDto: {
+			/**
+			 * @description Unique MongoDB identifier for the coupon
+			 * @example 67f6c132d9485f9dacd5f123
+			 */
+			_id: string
+			/**
+			 * @description Location Id
+			 * @example 79t07PzK8Tvf73d12312
+			 */
+			altId: string
+			/**
+			 * @description Type of entity
+			 * @example location
+			 */
+			altType: string
+			/**
+			 * @description Indicates if the coupon applies to future recurring payments
+			 * @example true
+			 */
+			applyToFuturePayments: boolean
+			/** @description Configuration for how the coupon applies to future payments */
+			applyToFuturePaymentsConfig: components['schemas']['ApplyToFuturePaymentsConfigDto']
+			/**
+			 * @description Redemption code for the coupon
+			 * @example NEWT6
+			 */
+			code: string
+			/**
+			 * @description Creation timestamp
+			 * @example 2025-04-09T18:49:22.026Z
+			 */
+			createdAt: string
+			/**
+			 * @description Type of discount (percentage or amount)
+			 * @example percentage
+			 * @enum {string}
+			 */
+			discountType: 'percentage' | 'amount'
+			/**
+			 * @description Value of the discount (percentage or fixed amount)
+			 * @example 25
+			 */
+			discountValue: number
+			/**
+			 * @description End date when the coupon expires
+			 * @example 2025-05-30T18:30:00.000Z
+			 */
+			endDate?: string
+			/**
+			 * @description Maximum number of times a customer can use this coupon (0 for unlimited)
+			 * @example 5
+			 */
+			limitPerCustomer: number
+			/**
+			 * @description Display name of the coupon
+			 * @example NEWT6
+			 */
+			name: string
+			/**
+			 * @description Date when the coupon becomes active
+			 * @example 2025-04-30T18:30:00.000Z
+			 */
+			startDate: string
+			/**
+			 * @description Current status of the coupon
+			 * @example scheduled
+			 * @enum {string}
+			 */
+			status: 'scheduled' | 'active' | 'expired'
+			/**
+			 * @description Unique identifier for tracing this API request
+			 * @example c667b18d-8f5e-44cf-a914
+			 */
+			traceId: string
+			/**
+			 * @description Last update timestamp
+			 * @example 2025-04-09T18:49:22.026Z
+			 */
+			updatedAt: string
+			/**
+			 * @description Number of times the coupon has been used
+			 * @example 12
+			 */
+			usageCount: number
+			/**
+			 * @description User ID associated with the coupon (if applicable)
+			 * @example q0m15dTLGeiGOXG123123
+			 */
+			userId?: string
 		}
 		CreateCustomProvidersDto: {
 			/**
@@ -826,6 +1187,36 @@ export type components = {
 			userId?: string
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
+		}
+		DeleteCouponParams: {
+			/**
+			 * @description Location Id
+			 * @example BQdAwxa0ky1iK2sstLGJ
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			/**
+			 * @description Coupon Id
+			 * @example 6241712be68f7a98102ba272
+			 */
+			id: string
+		}
+		DeleteCouponResponseDto: {
+			/**
+			 * @description Indicates whether the delete was successful
+			 * @example true
+			 */
+			success: boolean
+			/**
+			 * @description Unique identifier for tracing this API request
+			 * @example c667b18d-8f5e-44cf-a914
+			 */
+			traceId: string
 		}
 		DeleteCustomProvidersConfigDto: {
 			/**
@@ -1442,6 +1833,20 @@ export type components = {
 			 */
 			updatedAt: string
 		}
+		ListCouponsResponseDto: {
+			/** @description Array of coupon objects */
+			data: components['schemas']['CouponDto'][]
+			/**
+			 * @description Total number of coupons matching the query criteria
+			 * @example 20
+			 */
+			totalCount: number
+			/**
+			 * @description Unique identifier for tracing this API request
+			 * @example c667b18d-8f5e-44cf-a914
+			 */
+			traceId: string
+		}
 		ListFulfillmentResponseDto: {
 			/** @description An array of fulfilled items */
 			data: components['schemas']['FulfillmentSchema'][]
@@ -2030,6 +2435,96 @@ export type components = {
 			/** @example 422 */
 			statusCode?: number
 		}
+		UpdateCouponParams: {
+			/**
+			 * @description Location Id
+			 * @example BQdAwxa0ky1iK2sstLGJ
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			/**
+			 * @description Is Coupon applicable on upcoming subscription transactions
+			 * @default true
+			 * @example true
+			 */
+			applyToFuturePayments: boolean
+			/**
+			 * @description If coupon is applicable on upcoming subscription transactions, how many months should it be applicable for a subscription
+			 * @default {
+			 *       "type": "forever"
+			 *     }
+			 * @example [
+			 *       {
+			 *         "duration": 5,
+			 *         "durationType": "months",
+			 *         "type": "fixed"
+			 *       },
+			 *       {
+			 *         "type": "forever"
+			 *       }
+			 *     ]
+			 */
+			applyToFuturePaymentsConfig: components['schemas']['ApplyToFuturePaymentsConfig']
+			/**
+			 * @description Coupon Code
+			 * @example LEVELUPDAY2022
+			 */
+			code: string
+			/**
+			 * @description Discount Type
+			 * @example amount
+			 * @enum {string}
+			 */
+			discountType: 'percentage' | 'amount'
+			/**
+			 * @description Discount Value
+			 * @example 10
+			 */
+			discountValue: number
+			/**
+			 * @description End date in YYYY-MM-DDTHH:mm:ssZ format
+			 * @example 2023-01-31T22:45:00.000Z
+			 */
+			endDate?: string
+			/**
+			 * @description Coupon Id
+			 * @example 6241712be68f7a98102ba272
+			 */
+			id: string
+			/**
+			 * @description Limits whether a coupon can be redeemed only once per customer.
+			 * @default false
+			 * @example true
+			 */
+			limitPerCustomer: boolean
+			/**
+			 * @description Coupon Name
+			 * @example New Year Sale
+			 */
+			name: string
+			/**
+			 * @description Product Ids
+			 * @example [
+			 *       "6241712be68f7a98102ba272"
+			 *     ]
+			 */
+			productIds?: string[]
+			/**
+			 * @description Start date in YYYY-MM-DDTHH:mm:ssZ format
+			 * @example 2023-01-01T22:45:00.000Z
+			 */
+			startDate: string
+			/**
+			 * @description Max number of times coupon can be used
+			 * @example 10
+			 */
+			usageLimit?: number
+		}
 	}
 	responses: never
 	parameters: never
@@ -2039,6 +2534,210 @@ export type components = {
 }
 export type $defs = Record<string, never>
 export interface operations {
+	'get-coupon': {
+		parameters: {
+			query: {
+				/** @description Location Id */
+				altId: string
+				/** @description Alt Type */
+				altType: 'location'
+				/** @description Coupon code */
+				code: string
+				/** @description Coupon id */
+				id: string
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CreateCouponResponseDto']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'update-coupon': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateCouponParams']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CreateCouponResponseDto']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'create-coupon': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CreateCouponParams']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CreateCouponResponseDto']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'delete-coupon': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['DeleteCouponParams']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['DeleteCouponResponseDto']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'list-coupons': {
+		parameters: {
+			query: {
+				/** @description Location Id */
+				altId: string
+				/** @description Alt Type */
+				altType: 'location'
+				/** @description Maximum number of coupons to return */
+				limit?: number
+				/** @description Number of coupons to skip for pagination */
+				offset?: number
+				/** @description Search term to filter coupons by name or code */
+				search?: string
+				/** @description Filter coupons by status */
+				status?: 'scheduled' | 'active' | 'expired'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ListCouponsResponseDto']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'fetch-config': {
 		parameters: {
 			query: {

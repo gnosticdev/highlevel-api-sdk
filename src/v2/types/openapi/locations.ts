@@ -2240,15 +2240,9 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Custom Field Id
-				 * @example 00NhGCcN1tlO8ZHcu7Wb
-				 */
+				/** @description Custom Field Id or Field Key (e.g. "contact.first_name" or "opportunity.pipeline_id") */
 				id: string
-				/**
-				 * @description Location Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
+				/** @description Location Id */
 				locationId: string
 			}
 			cookie?: never

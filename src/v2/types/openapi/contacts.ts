@@ -334,6 +334,26 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/contacts/bulk/tags/update/{type}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Update Contacts Tags
+		 * @description Allows you to update tags to multiple contacts at once, you can add or remove tags from the contacts
+		 */
+		post: operations['create-association']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/contacts/business/{businessId}': {
 		parameters: {
 			query?: never
@@ -948,6 +968,11 @@ export type components = {
 			timezone?: string
 			/** @example read */
 			type?: string
+			/**
+			 * @description visitorId is the Unique ID assigned to each Live chat visitor.
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			visitorId?: string
 			/** @example https://www.tesla.com */
 			website?: string
 		}
@@ -957,8 +982,6 @@ export type components = {
 		GetEventSchema: {
 			/** @example Address */
 			address?: string
-			/** @example confirmed */
-			appoinmentStatus?: string
 			/** @example booked */
 			appointmentStatus?: string
 			/** @example [
@@ -1137,6 +1160,80 @@ export type components = {
 			contact?: components['schemas']['GetContectByIdSchema']
 			/** @example true */
 			succeded?: boolean
+		}
+		UpdateTagsDTO: {
+			/**
+			 * @description list of contact ids to be processed
+			 * @example [
+			 *       "qFSqySFkVvNzOSqgGqFi",
+			 *       "abcdef",
+			 *       "qFSqySFkVvNzOSqgGqFi",
+			 *       "3ualbhnV7j3n3a9r2moD"
+			 *     ]
+			 */
+			contacts: string[]
+			/**
+			 * @description location id from where the bulk request is executed
+			 * @example asdrwHvLUxlfw5SqKVCN
+			 */
+			locationId: string
+			/**
+			 * @description Option to implement remove all tags. If true, all tags will be removed from the contacts. Can only be used with remove type.
+			 * @example false
+			 */
+			removeAllTags?: boolean
+			/**
+			 * @description list of tags to be added or removed
+			 * @example [
+			 *       "tag1",
+			 *       "tag2"
+			 *     ]
+			 */
+			tags: string[]
+		}
+		UpdateTagsResponseDTO: {
+			/**
+			 * @description Number of errors encountered during the operation
+			 * @example 3
+			 */
+			errorCount: number
+			/**
+			 * @description Responses for each contact processed
+			 * @example [
+			 *       {
+			 *         "contactId": "qFSqySFkVvNzOSqgGqFi",
+			 *         "message": "Tags updated",
+			 *         "oldTags": [
+			 *           "tag-1",
+			 *           "tag-2"
+			 *         ],
+			 *         "tagsAdded": [],
+			 *         "tagsRemoved": [],
+			 *         "type": "success"
+			 *       },
+			 *       {
+			 *         "contactId": "abcdef",
+			 *         "message": "contact id is not a valid firebase id",
+			 *         "type": "error"
+			 *       },
+			 *       {
+			 *         "contactId": "qFSqySFkVvNzOSqgGqFi",
+			 *         "message": "contact is deleted",
+			 *         "type": "error"
+			 *       },
+			 *       {
+			 *         "contactId": "3ualbhnV7j3n3a9r2moD",
+			 *         "message": "contact does not belong to location",
+			 *         "type": "error"
+			 *       }
+			 *     ]
+			 */
+			responses: string[]
+			/**
+			 * @description Indicates if the operation was successful
+			 * @example true
+			 */
+			succeded: boolean
 		}
 		UpdateTaskBody: {
 			/** @example hxHGVRb1YJUscrCB8eXK */
@@ -2847,6 +2944,59 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['ContactsBulkUpateResponse']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'create-association': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/**
+				 * @description Tags operation type
+				 * @example add
+				 */
+				type: 'add' | 'remove'
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateTagsDTO']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UpdateTagsResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
 				}
 			}
 			/** @description Unprocessable Entity */

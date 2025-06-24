@@ -2,15 +2,15 @@ import path from 'node:path'
 import kleur from 'kleur'
 import openapiTS, {
 	type AnnotatedSchemaObject,
+	astToString,
 	type MediaTypeObject,
 	type OpenAPI3,
 	type OperationObject,
 	type ParameterObject,
 	type ReferenceObject,
 	type SchemaObject,
-	astToString,
 } from 'openapi-typescript'
-import { TempFile, objectKeys } from '../src/lib/utils'
+import { objectKeys, TempFile } from '../src/lib/utils'
 
 const OPENAPI_JSON_FILE = path.join(process.cwd(), 'schemas/v1/openapi.json')
 

@@ -71,6 +71,55 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/calendars/{calendarId}/notifications': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get notifications
+		 * @description Get calendar notifications based on query
+		 */
+		get: operations['get-event-notification']
+		put?: never
+		/**
+		 * Create notification
+		 * @description Create Calendar notifications, either one or multiple. All notification settings must be for single calendar only
+		 */
+		post: operations['create-event-notification']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/calendars/{calendarId}/notifications/{notificationId}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get notification
+		 * @description Find Event notification by notificationId
+		 */
+		get: operations['find-event-notification']
+		/**
+		 * Update notification
+		 * @description Update Event notification by id
+		 */
+		put: operations['update-event-notification']
+		post?: never
+		/** @description Delete notification */
+		delete: operations['delete-event-notification']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/calendars/appointments/{appointmentId}/notes': {
 		parameters: {
 			query?: never
@@ -453,7 +502,7 @@ export type components = {
 			 */
 			ignoreDateRange?: boolean
 			/**
-			 * @description If true the time slot validation would be avoided for any appointment creation
+			 * @description If true the time slot validation would be avoided for any appointment creation (even the ignoreDateRange)
 			 * @example true
 			 */
 			ignoreFreeSlotValidation?: boolean
@@ -463,12 +512,34 @@ export type components = {
 			 */
 			locationId: string
 			/**
-			 * @description Meeting Location Type: Set to "custom" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.
+			 * @description The unique identifier for the meeting location.
+			 *     - This value can be found in `calendar.locationConfigurations`or `calendar.teamMembers[].locationConfigurations`
 			 * @default default
+			 * @example custom_0
+			 */
+			meetingLocationId: string
+			/**
+			 * @description Meeting location type.
+			 *     - If `address` is provided in the request body, the `meetingLocationType` defaults to **custom**.
 			 * @example custom
 			 * @enum {string}
 			 */
-			meetingLocationType: 'default' | 'custom'
+			meetingLocationType?:
+				| 'custom'
+				| 'zoom'
+				| 'gmeet'
+				| 'phone'
+				| 'address'
+				| 'ms_teams'
+				| 'google'
+			/**
+			 * @description Flag to override location config
+			 *     - **false** - If only `meetingLocationId` is provided
+			 *     - **true** - If only `meetingLocationType` is provided
+			 *
+			 * @example true
+			 */
+			overrideLocationConfig?: boolean
 			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true. */
 			rrule?: string
 			/**
@@ -525,17 +596,39 @@ export type components = {
 			 */
 			ignoreDateRange?: boolean
 			/**
-			 * @description If true the time slot validation would be avoided for any appointment update
+			 * @description If true the time slot validation would be avoided for any appointment creation (even the ignoreDateRange)
 			 * @example true
 			 */
 			ignoreFreeSlotValidation?: boolean
 			/**
-			 * @description Meeting Location Type: Set to "custom" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.
+			 * @description The unique identifier for the meeting location.
+			 *     - This value can be found in `calendar.locationConfigurations`or `calendar.teamMembers[].locationConfigurations`
 			 * @default default
+			 * @example custom_0
+			 */
+			meetingLocationId: string
+			/**
+			 * @description Meeting location type.
+			 *     - If `address` is provided in the request body, the `meetingLocationType` defaults to **custom**.
 			 * @example custom
 			 * @enum {string}
 			 */
-			meetingLocationType: 'default' | 'custom'
+			meetingLocationType?:
+				| 'custom'
+				| 'zoom'
+				| 'gmeet'
+				| 'phone'
+				| 'address'
+				| 'ms_teams'
+				| 'google'
+			/**
+			 * @description Flag to override location config
+			 *     - **false** - If only `meetingLocationId` is provided
+			 *     - **true** - If only `meetingLocationType` is provided
+			 *
+			 * @example true
+			 */
+			overrideLocationConfig?: boolean
 			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true. */
 			rrule?: string
 			/**
@@ -606,6 +699,12 @@ export type components = {
 			 * @example C2QujeCh8ZnC7al2InWR
 			 */
 			locationId: string
+			/**
+			 * @description Meeting Location Type
+			 * @default default
+			 * @example custom
+			 */
+			meetingLocationType: string
 			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events */
 			rrule?: string
 			/**
@@ -731,10 +830,13 @@ export type components = {
 			/** @description This is only to set the custom availability. For standard availability, use the openHours property */
 			availabilities?: components['schemas']['Availability'][]
 			/**
-			 * @default 0
+			 * @description Determines which availability type to consider:
+			 *     - **1**: Only custom availabilities will be used.
+			 *     - **0**: Only open hours will be used.
+			 *     - **null**: Both custom availabilities and open hours will be considered.
 			 * @enum {number}
 			 */
-			availabilityType: 0 | 1
+			availabilityType?: 0 | 1
 			/** @example https://path-to-image.com */
 			calendarCoverImage?: string
 			/** @enum {string} */
@@ -787,15 +889,24 @@ export type components = {
 			 */
 			isActive: boolean
 			isLivePaymentMode?: boolean
+			/** @description Meeting location configuration for event calendar */
+			locationConfigurations?: components['schemas']['LocationConfiguration'][]
 			/** @example ocQHyuzHvysMo5N5VsXc */
 			locationId: string
 			/** @description Look Busy Configuration */
 			lookBusyConfig?: components['schemas']['LookBusyConfiguration']
-			meetingLocation?: string
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.
+			 */
+			readonly meetingLocation?: string
 			/** @example test calendar */
 			name: string
 			notes?: string
-			/** @description Calendar Notifications */
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.
+			 */
 			notifications?: components['schemas']['CalendarNotification'][]
 			/** @description This is only to set the standard availability. For custom availability, use the availabilities property */
 			openHours?: components['schemas']['OpenHour'][]
@@ -894,10 +1005,13 @@ export type components = {
 			/** @description This is only to set the custom availability. For standard availability, use the openHours property */
 			availabilities?: components['schemas']['Availability'][]
 			/**
-			 * @default 0
+			 * @description Determines which availability type to consider:
+			 *     - **1**: Only custom availabilities will be used.
+			 *     - **0**: Only open hours will be used.
+			 *     - **null**: Both custom availabilities and open hours will be considered.
 			 * @enum {number}
 			 */
-			availabilityType: 0 | 1
+			availabilityType?: 0 | 1
 			/** @example https://path-to-image.com */
 			calendarCoverImage?: string
 			/** @enum {string} */
@@ -952,15 +1066,24 @@ export type components = {
 			 */
 			isActive: boolean
 			isLivePaymentMode?: boolean
+			/** @description Meeting location configuration for event calendar */
+			locationConfigurations?: components['schemas']['LocationConfigurationResponse'][]
 			/** @example ocQHyuzHvysMo5N5VsXc */
 			locationId: string
 			/** @description Look Busy Configuration */
 			lookBusyConfig?: components['schemas']['LookBusyConfiguration']
-			meetingLocation?: string
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.
+			 */
+			readonly meetingLocation?: string
 			/** @example test calendar */
 			name: string
 			notes?: string
-			/** @description Calendar Notifications */
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.
+			 */
 			notifications?: components['schemas']['CalendarNotification'][]
 			/** @description This is only to set the standard availability. For custom availability, use the availabilities property */
 			openHours?: components['schemas']['OpenHour'][]
@@ -1006,8 +1129,8 @@ export type components = {
 			/** @example test1 */
 			slug?: string
 			stickyContact?: boolean
-			/** @description Team members are required for calendars of type: Round Robin, Collective, Class, Service. */
-			teamMembers?: components['schemas']['TeamMember'][]
+			/** @description Team members are for calendars of type: Round Robin, Collective, Class, Service. */
+			teamMembers?: components['schemas']['TeamMemberResponse'][]
 			/** @example test1 */
 			widgetSlug?: string
 			/**
@@ -1046,6 +1169,8 @@ export type components = {
 			 * @example 9NkT25Vor1v4aQatFsv2
 			 */
 			contactId: string
+			/** @description Appointment booked by metadata */
+			createdBy?: components['schemas']['CreatedOrUpdatedBy']
 			/**
 			 * @description Date Added
 			 * @example 2023-09-25T16:00:00+05:30
@@ -1126,6 +1251,76 @@ export type components = {
 			 * @enum {string}
 			 */
 			type: 'email'
+		}
+		CalendarNotificationDeleteResponseDTO: {
+			/** @description Result of delete/update operation */
+			message: string
+		}
+		CalendarNotificationResponseDTO: {
+			/** @description Notification ID */
+			_id?: string
+			/** @example [
+			 *       "example1@email.com",
+			 *       "example2@email.com"
+			 *     ] */
+			additionalEmailIds?: string[]
+			/** @example [
+			 *       {
+			 *         "timeOffset": 1,
+			 *         "unit": "hours"
+			 *       }
+			 *     ] */
+			afterTime?: components['schemas']['SchedulesDTO'][]
+			/**
+			 * @example calendar
+			 * @enum {string}
+			 */
+			altType?: 'calendar'
+			/** @example [
+			 *       {
+			 *         "timeOffset": 1,
+			 *         "unit": "hours"
+			 *       }
+			 *     ] */
+			beforeTime?: components['schemas']['SchedulesDTO'][]
+			/** @example This is a test notification */
+			body?: string
+			/** @example 0as9d8as0d */
+			calendarId?: string
+			/**
+			 * @example email
+			 * @enum {string}
+			 */
+			channel?: 'email' | 'inApp'
+			/** @example false */
+			deleted?: boolean
+			/** @example true */
+			isActive?: boolean
+			/**
+			 * @example confirmation
+			 * @enum {string}
+			 */
+			notificationType?:
+				| 'booked'
+				| 'confirmation'
+				| 'cancellation'
+				| 'reminder'
+				| 'followup'
+				| 'reschedule'
+			/**
+			 * @example contact
+			 * @enum {string}
+			 */
+			receiverType?: 'contact' | 'guest' | 'assignedUser' | 'emails'
+			/** @example [
+			 *       "user1",
+			 *       "user2"
+			 *     ] */
+			selectedUsers?: string[]
+			/** @example Test Notification */
+			subject?: string
+			/** @example 0as9d8as0d */
+			templateId?: string
 		}
 		CalendarResourceByIdResponseDTO: {
 			/**
@@ -1219,10 +1414,13 @@ export type components = {
 			/** @description This is only to set the custom availability. For standard availability, use the openHours property */
 			availabilities?: components['schemas']['UpdateAvailability'][]
 			/**
-			 * @default 0
+			 * @description Determines which availability type to consider:
+			 *     - **1**: Only custom availabilities will be used.
+			 *     - **0**: Only open hours will be used.
+			 *     - **null**: Both the custom availabilities and open hours will be considered.
 			 * @enum {number}
 			 */
-			availabilityType: 0 | 1
+			availabilityType?: 0 | 1
 			calendarCoverImage?: string
 			consentLabel?: string
 			/** @example this is used for testing */
@@ -1255,14 +1453,24 @@ export type components = {
 			groupId?: string
 			/** @enum {string} */
 			guestType?: 'count_only' | 'collect_detail'
+			isActive?: boolean
 			isLivePaymentMode?: boolean
+			/** @description Meeting location configuration for event calendar */
+			locationConfigurations?: components['schemas']['LocationConfiguration'][]
 			/** @description Look Busy Configuration */
 			lookBusyConfig?: components['schemas']['LookBusyConfiguration']
-			meetingLocation?: string
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.
+			 */
+			readonly meetingLocation?: string
 			/** @example test calendar */
 			name?: string
 			notes?: string
-			/** @description Calendar Notifications */
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.
+			 */
 			notifications?: components['schemas']['CalendarNotification'][]
 			openHours?: components['schemas']['OpenHour'][]
 			pixelId?: string
@@ -1351,6 +1559,74 @@ export type components = {
 			 */
 			title: string
 		}
+		CreateCalendarNotificationDTO: {
+			/**
+			 * @description Additional email addresses to receive notifications.
+			 * @example [
+			 *       "example1@email.com",
+			 *       "example2@email.com"
+			 *     ]
+			 */
+			additionalEmailIds?: string[]
+			/**
+			 * @description Specifies the time after which the follow-up notification should be sent. This is not required for other notification types.
+			 * @example [
+			 *       {
+			 *         "timeOffset": 1,
+			 *         "unit": "hours"
+			 *       }
+			 *     ]
+			 */
+			afterTime?: components['schemas']['SchedulesDTO'][]
+			/**
+			 * @description Specifies the time before which the reminder notification should be sent. This is not required for other notification types.
+			 * @example [
+			 *       {
+			 *         "timeOffset": 1,
+			 *         "unit": "hours"
+			 *       }
+			 *     ]
+			 */
+			beforeTime?: components['schemas']['SchedulesDTO'][]
+			/** @description Body  for email notification. Not necessary for in-App notification */
+			body?: string
+			/**
+			 * @description Notification channel
+			 * @enum {string}
+			 */
+			channel: 'email' | 'inApp'
+			/** @description from address for email notification */
+			fromAddress?: string
+			/** @description from name for email notification */
+			fromName?: string
+			/**
+			 * @description Is the notification active
+			 * @default true
+			 */
+			isActive: boolean
+			/**
+			 * @description Notification type
+			 * @enum {string}
+			 */
+			notificationType:
+				| 'booked'
+				| 'confirmation'
+				| 'cancellation'
+				| 'reminder'
+				| 'followup'
+				| 'reschedule'
+			/**
+			 * @description notification recipient type
+			 * @enum {string}
+			 */
+			receiverType: 'contact' | 'guest' | 'assignedUser' | 'emails'
+			/** @description selected user for in-App notification */
+			selectedUsers?: string[]
+			/** @description Subject  for email notification. Not necessary for in-App notification */
+			subject?: string
+			/** @description Template ID for email notification. Not necessary for in-App notification */
+			templateId?: string
+		}
 		CreateCalendarResourceDTO: {
 			/** @description Service calendar IDs to be mapped with the resource.
 			 *
@@ -1367,6 +1643,12 @@ export type components = {
 			outOfService: number
 			/** @description Quantity of the equipment. */
 			quantity: number
+		}
+		CreatedOrUpdatedBy: {
+			/** @description The source of the appointment */
+			source: string
+			/** @description The ID of the user who created or updated the appointment */
+			userId?: string
 		}
 		DeleteAppointmentSchema: Record<string, never>
 		DeleteEventSuccessfulResponseDto: {
@@ -1464,6 +1746,47 @@ export type components = {
 			openHour: number
 			openMinute: number
 		}
+		LocationConfiguration: {
+			/**
+			 * @description Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type
+			 * @example custom
+			 * @enum {string}
+			 */
+			kind:
+				| 'custom'
+				| 'zoom_conference'
+				| 'google_conference'
+				| 'inbound_call'
+				| 'outbound_call'
+				| 'physical'
+				| 'booker'
+				| 'ms_teams_conference'
+			/** @description Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind */
+			location?: string
+		}
+		LocationConfigurationResponse: {
+			/**
+			 * @description Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type
+			 * @example custom
+			 * @enum {string}
+			 */
+			kind:
+				| 'custom'
+				| 'zoom_conference'
+				| 'google_conference'
+				| 'inbound_call'
+				| 'outbound_call'
+				| 'physical'
+				| 'booker'
+				| 'ms_teams_conference'
+			/** @description Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind */
+			location?: string
+			/**
+			 * @description Unique ID used to select a specific meeting location
+			 * @example my_conference_id
+			 */
+			meetingId?: string
+		}
 		LookBusyConfiguration: {
 			/**
 			 * @description Apply Look Busy
@@ -1516,20 +1839,66 @@ export type components = {
 			 */
 			success?: boolean
 		}
+		SchedulesDTO: {
+			timeOffset?: number
+			unit?: string
+		}
 		SlotsSchema: {
 			slots: string[]
 		}
 		TeamMember: {
 			/** @description Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary. */
 			isPrimary?: boolean
-			meetingLocation?: string
+			/** @description Meeting location configuration for event calendar.
+			 *     - *Multiple locations are allowed only when one team member is selected.*
+			 *     - *For **Class booking** and **Collective** calendars, only one location configuration is allowed for each team member.* */
+			locationConfigurations?: components['schemas']['LocationConfiguration'][]
 			/**
-			 * @description Meeting Location Type. For class booking only the following types are allowed 'custom', 'phone', 'address'.
+			 * @deprecated
+			 * @description 🚨 Deprecated! Use `locationConfigurations.location` instead.
+			 */
+			readonly meetingLocation?: string
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Use `locationConfigurations.kind` instead.
 			 * @default custom
 			 * @example custom
 			 * @enum {string}
 			 */
-			meetingLocationType:
+			readonly meetingLocationType:
+				| 'custom'
+				| 'zoom'
+				| 'gmeet'
+				| 'phone'
+				| 'address'
+				| 'teams'
+				| 'booker'
+			/**
+			 * @default 0.5
+			 * @enum {number}
+			 */
+			priority: 0 | 0.5 | 1
+			/** @example ocQHyuzHvysMo5N5VsXc */
+			userId: string
+		}
+		TeamMemberResponse: {
+			/** @description Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary. */
+			isPrimary?: boolean
+			/** @description Meeting location configurations */
+			locationConfigurations?: components['schemas']['LocationConfigurationResponse'][]
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Use `locationConfigurations.location` instead.
+			 */
+			readonly meetingLocation?: string
+			/**
+			 * @deprecated
+			 * @description 🚨 Deprecated! Use `locationConfigurations.kind` instead.
+			 * @default custom
+			 * @example custom
+			 * @enum {string}
+			 */
+			readonly meetingLocationType:
 				| 'custom'
 				| 'zoom'
 				| 'gmeet'
@@ -1564,6 +1933,88 @@ export type components = {
 			hours: components['schemas']['Hour'][]
 			/** @description The ID of the custom availability object. It is required while updating or deleting the existing custom date availability */
 			id?: string
+		}
+		UpdateCalendarNotificationsDTO: {
+			/**
+			 * @description Additional email addresses to receive notifications.
+			 * @example [
+			 *       "example1@email.com",
+			 *       "example2@email.com"
+			 *     ]
+			 */
+			additionalEmailIds?: string[]
+			/**
+			 * @description Specifies the time after which the follow-up notification should be sent.
+			 * @example [
+			 *       {
+			 *         "timeOffset": 1,
+			 *         "unit": "hours"
+			 *       }
+			 *     ]
+			 */
+			afterTime?: components['schemas']['SchedulesDTO'][]
+			/**
+			 * @description Specifies the ID of the model associated with the notification. This can be extended to support additional models in the future.
+			 * @example D7JP6b67AgWqTtfGaQcw
+			 */
+			altId?: string
+			/**
+			 * @description Specifies the model associated with the notification. This can be extended to support additional models in the future. For now only Calendars is supported
+			 * @default calendar
+			 * @enum {string}
+			 */
+			altType: 'calendar'
+			/**
+			 * @description Specifies the time before which the reminder notification should be sent.
+			 * @example [
+			 *       {
+			 *         "timeOffset": 1,
+			 *         "unit": "hours"
+			 *       }
+			 *     ]
+			 */
+			beforeTime?: components['schemas']['SchedulesDTO'][]
+			/** @description Body  for email notification. Not necessary for in-App notification */
+			body?: string
+			/**
+			 * @description Notification channel
+			 * @enum {string}
+			 */
+			channel?: 'email' | 'inApp'
+			/**
+			 * @description Marks the notification as deleted (soft delete)
+			 * @default false
+			 */
+			deleted: boolean
+			/** @description From address for email notification */
+			fromAddress?: string
+			/** @description From name for email notification */
+			fromName?: string
+			/**
+			 * @description Is the notification active
+			 * @default true
+			 */
+			isActive: boolean
+			/**
+			 * @description Notification type
+			 * @enum {string}
+			 */
+			notificationType?:
+				| 'booked'
+				| 'confirmation'
+				| 'cancellation'
+				| 'reminder'
+				| 'followup'
+				| 'reschedule'
+			/**
+			 * @description Notification recipient type
+			 * @enum {string}
+			 */
+			receiverType?: 'contact' | 'guest' | 'assignedUser' | 'emails'
+			/** @description Subject  for email notification. Not necessary for in-App notification */
+			subject?: string
+			/** @description Template ID for email notification */
+			templateId?: string
 		}
 		UpdateCalendarResourceDTO: {
 			/** @description Service calendar IDs to be mapped with the resource.
@@ -1873,12 +2324,12 @@ export interface operations {
 				 */
 				enableLookBusy?: boolean
 				/**
-				 * @description End Date
+				 * @description End Date (**⚠️ Important:** Date range cannot be more than 31 days)
 				 * @example 1601490599999
 				 */
 				endDate: number
 				/**
-				 * @description Start Date
+				 * @description Start Date (**⚠️ Important:** Date range cannot be more than 31 days)
 				 * @example 1548898600000
 				 */
 				startDate: number
@@ -1922,6 +2373,253 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['GetSlotsSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'get-event-notification': {
+		parameters: {
+			query?: {
+				/** @description Specifies the ID of the model associated with the notification. This can be extended to support additional models in the future. */
+				altId?: string
+				/** @description Specifies the model associated with the notification. This can be extended to support additional models in the future. For now only Calendars is supported */
+				altType?: 'calendar'
+				deleted?: boolean
+				isActive?: boolean
+				/** @description Number of records to return */
+				limit?: number
+				/** @description Number of records to skip */
+				skip?: number
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				calendarId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CalendarNotificationResponseDTO'][]
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'create-event-notification': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				calendarId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CreateCalendarNotificationDTO'][]
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CalendarNotificationResponseDTO'][]
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'find-event-notification': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				calendarId: string
+				notificationId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CalendarNotificationResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'update-event-notification': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				calendarId: string
+				notificationId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateCalendarNotificationsDTO']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CalendarNotificationDeleteResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'delete-event-notification': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				calendarId: string
+				notificationId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CalendarNotificationDeleteResponseDTO']
 				}
 			}
 			/** @description Bad Request */
@@ -2155,10 +2853,7 @@ export interface operations {
 				 * @example BqTwX8QFwXzpegMve9EQ
 				 */
 				calendarId?: string
-				/**
-				 * @description End Time (in millis)
-				 * @example 1680978599999
-				 */
+				/** @description End Time (in millis) */
 				endTime: string
 				/**
 				 * @description Either of groupId, calendarId or userId is required

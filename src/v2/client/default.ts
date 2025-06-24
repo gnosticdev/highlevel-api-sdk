@@ -1,6 +1,7 @@
 import type { Client, ClientOptions } from 'openapi-fetch'
 import createClient from 'openapi-fetch'
-
+import type { AccessType } from '../../lib/type-utils'
+import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
 import type * as Blogs from '../types/openapi/blogs'
 import type * as Businesses from '../types/openapi/businesses'
 import type * as Calendars from '../types/openapi/calendars'
@@ -28,10 +29,6 @@ import type * as SocialMediaPosting from '../types/openapi/social-media-posting'
 import type * as Surveys from '../types/openapi/surveys'
 import type * as Users from '../types/openapi/users'
 import type * as Workflows from '../types/openapi/workflows'
-
-import type { AccessType } from '../../lib/type-utils'
-import { createHighLevelClient } from '../index'
-import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
 import type { HighLevelClientInterface } from './interface'
 import {
 	type AuthHeaders,

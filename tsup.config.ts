@@ -23,7 +23,7 @@ export default defineConfig((override) => ({
 	},
 	format: ['esm', 'cjs'],
 	splitting: false,
-	outExtension: (c) => ({ js: '.js', dts: '.d.ts' }),
+	outExtension: (_c) => ({ js: '.js', dts: '.d.ts' }),
 	keepNames: true,
 	clean: true,
 	tsconfig: './tsconfig.build.json',

@@ -63,6 +63,26 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/emails/schedule': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Campaigns
+		 * @description Get Campaigns
+		 */
+		get: operations['fetch-campaigns']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
 export type components = {
@@ -101,14 +121,26 @@ export type components = {
 			 * @enum {string}
 			 */
 			builderVersion: '1' | '2'
+			/** @enum {string} */
+			importProvider: 'mailchimp' | 'active_campaign' | 'kajabi'
+			/** @example https://tplshare.com/fhYJ3Mi */
+			importURL?: string
 			/** @example false */
 			isPlainText?: boolean
 			/** @example ve9EPM428h8vShlRW1KT */
 			locationId: string
+			/** @example Template1 */
+			name?: string
+			/** @example zYy3YOUuHxgomU1uYJty */
+			parentId?: string
+			/** @example  */
+			templateDataUrl?: string
+			/** @example template_library */
+			templateSource?: string
 			/** @example template title */
 			title?: string
 			/** @enum {string} */
-			type: 'html'
+			type: 'html' | 'folder' | 'import' | 'builder' | 'blank'
 			/** @example zYy3YOUuHxgomU1uYJty */
 			updatedBy?: string
 		}
@@ -188,22 +220,75 @@ export type components = {
 			elements: string[]
 			templateSettings: components['schemas']['TemplateSettings']
 		}
+		InvalidLocationDTO: {
+			/** @example The token does not have access to this location */
+			message?: string
+			/** @example 403 */
+			statusCode?: number
+		}
+		NotFoundDTO: {
+			/** @example The requested resource was not found */
+			error?: string
+			/** @example Not Found */
+			message?: string
+			/** @example 404 */
+			statusCode?: number
+		}
 		SaveBuilderDataDto: {
-			/**
-			 * @description Provide {elements:[], attrs:{}, templateSettings:{}} for this parameter
-			 * @example {elements:[], attrs:{}, templateSettings:{}}
-			 */
+			/** @example {elements:[], attrs:{}, templateSettings:{}} */
 			dnd: components['schemas']['IBuilderJsonMapper']
 			/** @enum {string} */
-			editorType: 'html'
+			editorType: 'html' | 'builder'
 			/** @example  */
 			html: string
+			/** @example false */
+			isPlainText?: boolean
 			/** @example ve9EPM428h8vShlRW1KT */
 			locationId: string
+			/** @example zYy3YOUuHxgomU1uYJty */
+			previewText?: string
 			/** @example zYy3YOUuHxgomU1uYJty */
 			templateId: string
 			/** @example zYy3YOUuHxgomU1uYJty */
 			updatedBy: string
+		}
+		ScheduleDto: {
+			__v: number
+			_id: string
+			archived: boolean
+			bulkActionVersion: string
+			campaignType: string
+			child: string[]
+			childCount: number
+			createdAt: string
+			deleted: boolean
+			documentId: string
+			downloadUrl: string
+			enableResendToUnopened: boolean
+			hasTracking: boolean
+			hasUtmTracking: boolean
+			id: string
+			isPlainText: boolean
+			locationId: string
+			migrated: boolean
+			/** @example Untitled new campaign */
+			name: string
+			parentId: string
+			repeatAfter: string
+			sendDays: string[]
+			status: string
+			templateDataDownloadUrl: string
+			templateId: string
+			templateType: string
+			updatedAt: string
+		}
+		ScheduleFetchSuccessfulDTO: {
+			/** @description The list of campaigns */
+			schedules: components['schemas']['ScheduleDto'][]
+			/** @description The total number of campaigns */
+			total: string[]
+			/** @description Trace Id */
+			traceId: string
 		}
 		TemplateSettings: Record<string, never>
 		UnauthorizedDTO: {
@@ -238,13 +323,15 @@ export interface operations {
 			query: {
 				archived?: string
 				builderVersion?: '1' | '2'
-				/** @description Max limit 100 */
 				limit?: string
 				/** @example ve9EPM428h8vShlRW1KT */
 				locationId: string
 				name?: string
 				offset?: string
+				/** @example ve9EPM428h8vShlRW1KT */
+				originId?: string
 				parentId?: string
+				search?: string
 				sortByDate?: string
 				templatesOnly?: string
 			}
@@ -482,6 +569,151 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content?: never
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'fetch-campaigns': {
+		parameters: {
+			query: {
+				/**
+				 * @description Filter archived campaigns
+				 * @example false
+				 */
+				archived?: boolean
+				/**
+				 * @description Return only campaigns, excluding folders
+				 * @default false
+				 * @example false
+				 */
+				campaignsOnly?: boolean
+				/** @description Filter by email delivery status */
+				emailStatus?:
+					| 'all'
+					| 'not-started'
+					| 'paused'
+					| 'cancelled'
+					| 'processing'
+					| 'resumed'
+					| 'next-drip'
+					| 'complete'
+					| 'success'
+					| 'error'
+					| 'waiting'
+					| 'queued'
+					| 'queueing'
+					| 'reading'
+					| 'scheduled'
+				/**
+				 * @description Maximum number of campaigns to return. Defaults to 10, maximum is 100
+				 * @example 7
+				 */
+				limit?: number
+				/**
+				 * @description When true, returns only essential campaign fields like id, templateDataDownloadUrl, updatedAt, type, templateType, templateId, downloadUrl and isPlainText. When false, returns complete campaign data including meta information, bulkRequestStatusInfo, ABTestInfo, resendScheduleInfo and all other campaign properties
+				 * @default false
+				 * @example false
+				 */
+				limitedFields?: boolean
+				/**
+				 * @description Location ID to fetch campaigns from
+				 * @example ohjiah0wdg3bzmzacvd6
+				 */
+				locationId: string
+				/**
+				 * @description Filter campaigns by name
+				 * @example Black Friday Campaign
+				 */
+				name?: string
+				/**
+				 * @description Number of campaigns to skip for pagination
+				 * @example 0
+				 */
+				offset?: number
+				/**
+				 * @description Filter campaigns by parent folder ID
+				 * @example folder123
+				 */
+				parentId?: string
+				/**
+				 * @description When true, returns campaign statistics including delivered count, opened count, clicked count and revenue if available for the campaign. When false, returns campaign data without statistics.
+				 * @default true
+				 * @example true
+				 */
+				showStats?: boolean
+				/** @description Filter by schedule status */
+				status?:
+					| 'active'
+					| 'pause'
+					| 'complete'
+					| 'cancelled'
+					| 'retry'
+					| 'draft'
+					| 'resend-scheduled'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Success */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ScheduleFetchSuccessfulDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description The token does not have access to this location */
+			403: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['InvalidLocationDTO']
+				}
+			}
+			/** @description Not Found */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['NotFoundDTO']
+				}
 			}
 			/** @description Unprocessable Entity */
 			422: {

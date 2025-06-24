@@ -29,10 +29,33 @@ export type paths = {
 		get?: never
 		put?: never
 		/**
-		 * Enable SaaS for location
-		 * @description Enable SaaS for given locationIds
+		 * Enable SaaS for Sub-Account (Formerly Location)
+		 * @description <div>
+		 *                       <p>Enable SaaS for Sub-Account (Formerly Location) based on the data provided</p>
+		 *                       <div>
+		 *                         <span style= "display: inline-block;
+		 *                                     width: 25px; height: 25px;
+		 *                                     background-color: yellow;
+		 *                                     color: black;
+		 *                                     font-weight: bold;
+		 *                                     font-size: 24px;
+		 *                                     text-align: center;
+		 *                                     line-height: 22px;
+		 *                                     border: 2px solid black;
+		 *                                     border-radius: 10%;
+		 *                                     margin-right: 10px;">
+		 *                                     !
+		 *                           </span>
+		 *                           <span>
+		 *                             <strong>
+		 *                               This feature is only available on Agency Pro ($497) plan.
+		 *                             </strong>
+		 *                           </span>
+		 *                       </div>
+		 *                     </div>
+		 *
 		 */
-		post: operations['enable-saas']
+		post: operations['enable-saas-location']
 		delete?: never
 		options?: never
 		head?: never
@@ -128,35 +151,57 @@ export type components = {
 		}
 		EnableSaasDto: {
 			companyId: string
-			email: string
-			name: string
-			stripeAccountId: string
-			stripeCustomerId: string
+			/**
+			 * @description Agency subaccount used for payment provider integration(Required Only for SaaS V2)
+			 * @example 1QDPY5FpU9DlKp7RQ8BXfywx
+			 */
+			contactId?: string
+			description?: string
+			/**
+			 * @description Email of the stripe customer(Required only for SaaS V1)
+			 * @example john.doe@example.com
+			 */
+			email?: string
+			/**
+			 * @description Denotes if it is a saas v2 or v1 sub-account
+			 * @example true
+			 */
+			isSaaSV2: boolean
+			/**
+			 * @description Name of the stripe customer(Required only for SaaS V1)
+			 * @example John Doe
+			 */
+			name?: string
+			/**
+			 * @description Required only while pre-configuring saas subscription
+			 * @example price_1QDPY5FpU9DlKp7RQ8BXfywx
+			 */
+			priceId?: string
+			providerLocationId?: string
+			/**
+			 * @description Required only while pre-configuring saas subscription
+			 * @example 1QDPY5FpU9DlKp7RQ8BXfywx
+			 */
+			saasPlanId?: string
+			/**
+			 * @description Stripe account id(Required only for SaaS V1)
+			 * @example acct_1QDPY5FpU9DlKp7RQ8BXfywx
+			 */
+			stripeAccountId?: string
+			/**
+			 * @description Stripe customer id if exists(Required only for SaaS V1)
+			 * @example cus_1QDPY5FpU9DlKp7RQ8BXfywx
+			 */
+			stripeCustomerId?: string
 		}
 		PauseLocationDto: {
 			companyId: string
 			paused: boolean
 		}
 		UpdateRebillingDto: {
-			config: {
-				/** @example true */
-				enabled?: boolean
-				/** @example 105 */
-				markup?: number
-				/** @example true */
-				optIn?: boolean
-			}
+			config: Record<string, never>
 			locationIds: string[]
-			/** @enum {string} */
-			product:
-				| 'contentAI'
-				| 'workflow_premium_actions'
-				| 'workflow_ai'
-				| 'conversationAI'
-				| 'whatsApp'
-				| 'reviewsAI'
-				| 'Phone'
-				| 'Email'
+			product: string
 		}
 		UpdateSubscriptionDto: {
 			companyId: string
@@ -204,7 +249,7 @@ export interface operations {
 			}
 		}
 	}
-	'enable-saas': {
+	'enable-saas-location': {
 		parameters: {
 			query?: never
 			header: {

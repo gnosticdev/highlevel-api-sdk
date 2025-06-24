@@ -75,7 +75,7 @@ export type components = {
 			client_secret: string
 			code?: string
 			/** @enum {string} */
-			grant_type: 'authorization_code' | 'refresh_token'
+			grant_type: 'authorization_code' | 'refresh_token' | 'client_credentials'
 			/**
 			 * @description The redirect URI for your application
 			 * @example https://myapp.com/oauth/callback/gohighlevel
@@ -106,6 +106,8 @@ export type components = {
 			companyId?: string
 			/** @example 86399 */
 			expires_in?: number
+			/** @example Bearer */
+			isBulkInstallation?: boolean
 			/**
 			 * @description Location ID - Present only for Sub-Account Access Token
 			 * @example l1C08ntBrFjLS0elLIYU
@@ -235,46 +237,24 @@ export interface operations {
 	'get-installed-location': {
 		parameters: {
 			query: {
-				/**
-				 * @description Parameter to search by the appId
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Parameter to search by the appId */
 				appId: string
-				/**
-				 * @description Parameter to search by the companyId
-				 * @example tDtDnQdgm2LXpyiqYvZ6
-				 */
+				/** @description Parameter to search by the companyId */
 				companyId: string
-				/**
-				 * @description Filters out location which are installed for specified app under the specified company
-				 * @example true
-				 */
+				/** @description Filters out location which are installed for specified app under the specified company */
 				isInstalled?: boolean
-				/**
-				 * @description Parameter to limit the number installed locations
-				 * @example 10
-				 */
+				/** @description Parameter to limit the number installed locations */
 				limit?: string
-				/**
-				 * @description Filters out locations which are installed for specified app in trial mode
-				 * @example true
-				 */
+				/** @description Filters out locations which are installed for specified app in trial mode */
 				onTrial?: boolean
-				/**
-				 * @description Filters out location which are installed for specified app under the specified planId
-				 * @example true
-				 */
+				/** @description Filters out location which are installed for specified app under the specified planId */
 				planId?: string
-				/**
-				 * @description Parameter to search for the installed location by name
-				 * @example location name
-				 */
+				/** @description Parameter to search for the installed location by name */
 				query?: string
-				/**
-				 * @description Parameter to skip the number installed locations
-				 * @example 1
-				 */
+				/** @description Parameter to skip the number installed locations */
 				skip?: string
+				/** @description VersionId of the app */
+				versionId?: string
 			}
 			header: {
 				/** @description API Version */

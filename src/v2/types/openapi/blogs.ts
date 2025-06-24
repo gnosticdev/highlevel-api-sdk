@@ -69,9 +69,29 @@ export type paths = {
 		get?: never
 		/**
 		 * Update Blog Post
-		 * @description The "Update Blog Post" API allows you create blog post for any given blog site. Please use blogs/post-update.write
+		 * @description The "Update Blog Post" API allows you update blog post for any given blog site. Please use blogs/post-update.write
 		 */
 		put: operations['update-blog-post']
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/blogs/posts/all': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Blog posts by Blog ID
+		 * @description The "Get Blog posts by Blog ID" API allows you get blog posts for any given blog site using blog ID.Please use blogs/posts.readonly
+		 */
+		get: operations['get-blog-post']
+		put?: never
 		post?: never
 		delete?: never
 		options?: never
@@ -99,13 +119,45 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/blogs/site/all': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Blogs by Location ID
+		 * @description The "Get Blogs by Location ID" API allows you get blogs using Location ID.Please use blogs/list.readonly
+		 */
+		get: operations['get-blogs']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
 export type components = {
 	schemas: {
+		AuthorResponseDTO: {
+			/** @example lMOzIQZne5m6zQ528sT6 */
+			_id: string
+			/** @example https://tryghl.blog/post/technology */
+			canonicalLink: string
+			/** @example lMOzIQZne5m6zQ528sT6 */
+			locationId: string
+			/** @example HighLevel */
+			name: string
+			/** @example 2025-01-03T11:06:35.822Z */
+			updatedAt: string
+		}
 		AuthorsResponseDTO: {
 			/** @description Array of authors */
-			authors: unknown[]
+			authors: components['schemas']['AuthorResponseDTO'][]
 		}
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -113,40 +165,180 @@ export type components = {
 			/** @example 400 */
 			statusCode?: number
 		}
+		BlogGetResponseWrapperDTO: {
+			/** @description Object containing response data of blog */
+			data: components['schemas']['BlogResponseDTO'][]
+		}
 		BlogPostCreateResponseWrapperDTO: {
 			/** @description Object containing response data of blog post create. */
-			data: Record<string, never>
+			data: components['schemas']['BlogPostResponseDTO']
+		}
+		BlogPostGetResponseWrapperDTO: {
+			/** @description Object containing response data of blog posts */
+			blogs: components['schemas']['BlogPostResponseDTO'][]
+		}
+		BlogPostResponseDTO: {
+			/**
+			 * @description Unique identifier of the blog post
+			 * @example 66c381b38be80858b9af62b6
+			 */
+			_id: string
+			/**
+			 * @description Indicates whether the blog post is archived
+			 * @example false
+			 */
+			archived: boolean
+			/**
+			 * @description Identifier of the author of the blog post
+			 * @example 659ec9634a3796e4e47cc360
+			 */
+			author?: string
+			/**
+			 * @description Canonical link of the blog post
+			 * @example https://blog.chatgpts.agency/post/test-8384
+			 */
+			canonicalLink?: string
+			/**
+			 * @description Array of category IDs associated with the blog post
+			 * @example [
+			 *       "659ecabc4a37969a2b7cc370",
+			 *       "6683abde331c041f32c07aee"
+			 *     ]
+			 */
+			categories: string[]
+			/**
+			 * @description Description of the blog post
+			 * @example Description
+			 */
+			description: string
+			/**
+			 * @description Alternative text for the blog post image
+			 * @example alt
+			 */
+			imageAltText: string
+			/**
+			 * @description URL of the image associated with the blog post
+			 * @example https://storage.googleapis.com/ghl-test/fACm0Ojm5oC70G3DcFmE/media/66b5aa3b1745b2713a8d033f.jpeg
+			 */
+			imageUrl: string
+			/**
+			 * @description Timestamp when the blog post was published
+			 * @example 2024-08-19T17:14:57.000Z
+			 */
+			publishedAt: string
+			/**
+			 * @description Publication status of the blog post
+			 * @example PUBLISHED
+			 */
+			status: string
+			/**
+			 * @description Array of tags associated with the blog post
+			 * @example [
+			 *       "Apple",
+			 *       "Banana"
+			 *     ]
+			 */
+			tags?: string[]
+			/**
+			 * @description Title of the blog post
+			 * @example Banana is good source of energy
+			 */
+			title: string
+			/**
+			 * @description Timestamp when the blog post was last updated
+			 * @example 2024-08-19T17:32:36.182Z
+			 */
+			updatedAt: string
+			/**
+			 * @description URL slug for the blog post
+			 * @example banana-good-energy
+			 */
+			urlSlug: string
 		}
 		BlogPostUpdateResponseWrapperDTO: {
 			/** @description Object containing response data of blog post update */
-			updatedBlogPost: Record<string, never>
+			updatedBlogPost: components['schemas']['BlogPostResponseDTO']
+		}
+		BlogResponseDTO: {
+			/**
+			 * @description Unique identifier of the blog
+			 * @example lMOzIQZne5m6zQ528sT6
+			 */
+			_id: string
+			/**
+			 * @description Name of the blog
+			 * @example My blog
+			 */
+			name: string
 		}
 		CategoriesResponseDTO: {
 			/** @description Array of categories */
-			categories: unknown[]
+			categories: components['schemas']['CategoryResponseDTO'][]
+		}
+		CategoryResponseDTO: {
+			/** @example lMOzIQZne5m6zQ528sT6 */
+			_id: string
+			/** @example https://tryghl.blog/doc/category/agency-growth */
+			canonicalLink: string
+			/** @example HighLevel */
+			label?: string
+			/** @example lMOzIQZne5m6zQ528sT6 */
+			locationId: string
+			/** @example 2025-01-03T11:06:35.822Z */
+			updatedAt: string
+			/** @example agency-growth */
+			urlSlug: string
 		}
 		CreateBlogPostParams: {
-			archived?: boolean
+			/**
+			 * @description This needs to be author id, which you can get from the author get api call.
+			 * @example 6683abde331c041f32c07aea
+			 */
 			author: string
-			/** @description You can find the blog id from blog site dashboard link */
+			/**
+			 * @description You can find the blog id from blog site dashboard link
+			 * @example Blog ID
+			 */
 			blogId: string
-			canonicalLink: string
+			/** @example https://tryghl.blog/post/testing-unsplash */
+			canonicalLink?: string
+			/**
+			 * @description This needs to be array of category ids, which you can get from the category get api call.
+			 * @example [
+			 *       "9c48df2694a849b6089f9d0d3513efe",
+			 *       "6683abde331c041f32c07aee"
+			 *     ]
+			 */
 			categories: string[]
-			currentVersion?: string
+			/** @example A short description */
 			description: string
+			/** @example Alt text for your blog image */
 			imageAltText: string
+			/** @example Image URl */
 			imageUrl: string
+			/** @example Location ID */
 			locationId: string
-			metaData?: Record<string, never>
+			/**
+			 * @description Provide ISO timestamp
+			 * @example 2025-02-05T18:30:47.000Z
+			 */
 			publishedAt: string
 			/** @example <h1>Your blog content</h1> */
 			rawHTML: string
-			readTimeInMinutes: number
-			status: string
-			tags: string[]
+			/**
+			 * @example This can be PUBLISHED OR SCHEDULED OR ARCHIVED OR DRAFT
+			 * @enum {string}
+			 */
+			status: 'DRAFT' | 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED'
+			/** @example [
+			 *       "blog",
+			 *       "seo"
+			 *     ] */
+			tags?: string[]
+			/** @example Your blog title */
 			title: string
+			/** @example any-blog-post-url */
 			urlSlug: string
-			wordCount: number
 		}
 		UnauthorizedDTO: {
 			/** @example Unauthorized */
@@ -167,32 +359,55 @@ export type components = {
 			statusCode?: number
 		}
 		UpdateBlogPostParams: {
-			author?: string
-			/** @example ZiMMOp3ZEdnsZ4qPAjW0 */
-			blogId?: string
+			/**
+			 * @description This needs to be author id, which you can get from the author get api call.
+			 * @example 6683abde331c041f32c07aea
+			 */
+			author: string
+			/**
+			 * @description You can find the blog id from blog site dashboard link
+			 * @example Blog ID
+			 */
+			blogId: string
+			/** @example https://tryghl.blog/post/testing-unsplash */
 			canonicalLink?: string
-			categories?: string[]
-			/** @example blog post description for SEO */
-			description?: string
-			/** @example Alt text for blog image for SEO */
-			imageAltText?: string
-			/** @example https://storage.googleapis.com/ghl-test/rLu1WubT5lUfPEHMhIWK/media/62c2f2df18f2ab8db2a77b98.jpeg */
-			imageUrl?: string
-			/** @example fACm0Ojm5oC70G3DcFmE */
+			/**
+			 * @description This needs to be array of category ids, which you can get from the category get api call.
+			 * @example [
+			 *       "9c48df2694a849b6089f9d0d3513efe",
+			 *       "6683abde331c041f32c07aee"
+			 *     ]
+			 */
+			categories: string[]
+			/** @example A short description */
+			description: string
+			/** @example Alt text for your blog image */
+			imageAltText: string
+			/** @example Image URl */
+			imageUrl: string
+			/** @example Location ID */
 			locationId: string
-			/** @example 2024-09-25T11:31:58.045Z */
-			publishedAt?: string
-			/** @example Plain HTML/TEXT for blog post */
-			rawHTML?: string
-			/** @example 4.16 */
-			readTimeInMinutes?: number
-			status: string
+			/**
+			 * @description Provide ISO timestamp
+			 * @example 2025-02-05T18:30:47.000Z
+			 */
+			publishedAt: string
+			/** @example <h1>Your blog content</h1> */
+			rawHTML: string
+			/**
+			 * @example PUBLISHED
+			 * @enum {string}
+			 */
+			status: 'DRAFT' | 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED'
+			/** @example [
+			 *       "blog",
+			 *       "seo"
+			 *     ] */
 			tags?: string[]
-			/** @example Title of the blog */
+			/** @example Your blog title */
 			title: string
-			urlSlug?: string
-			/** @example 550 */
-			wordCount?: number
+			/** @example any-blog-post-url */
+			urlSlug: string
 		}
 		UrlSlugCheckResponseDTO: {
 			/** @description Indicates whether the url slug exists or not */
@@ -446,6 +661,74 @@ export interface operations {
 			}
 		}
 	}
+	'get-blog-post': {
+		parameters: {
+			query: {
+				/** @example 66f429b8afdce84227a4610d */
+				blogId: string
+				/** @example 4 */
+				limit: number
+				/** @example ve9EPM428h8vShlRW1KT */
+				locationId: string
+				/** @example 0 */
+				offset: number
+				/**
+				 * @description search for any post by name
+				 * @example ai news
+				 */
+				searchTerm?: string
+				/** @example PUBLISHED */
+				status?: 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED' | 'DRAFT'
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BlogPostGetResponseWrapperDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'check-url-slug-exists': {
 		parameters: {
 			query: {
@@ -473,6 +756,70 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['UrlSlugCheckResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'get-blogs': {
+		parameters: {
+			query: {
+				/** @example 4 */
+				limit: number
+				/** @example ve9EPM428h8vShlRW1KT */
+				locationId: string
+				/**
+				 * @description search for any post by name
+				 * @example ai news
+				 */
+				searchTerm?: string
+				/** @example 0 */
+				skip: number
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BlogGetResponseWrapperDTO']
 				}
 			}
 			/** @description Bad Request */
