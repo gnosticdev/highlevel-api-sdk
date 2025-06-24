@@ -26,6 +26,15 @@
       }
     ]
   },
+  "blogs/list": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /blogs/site/all",
+        "webhookEvents": ""
+      }
+    ]
+  },
   "blogs/post": {
     "write": [
       {
@@ -40,6 +49,15 @@
       {
         "accessType": ["Sub-Account"],
         "methodAndEndpoint": "PUT /blogs/posts/:postId",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "blogs/posts": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /blogs/posts/all",
         "webhookEvents": ""
       }
     ]
@@ -132,6 +150,16 @@
         "accessType": ["Sub-Account"],
         "methodAndEndpoint": "GET /calendars/appointments/:appointmentId/notes",
         "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /calendars/:calendarId/notifications/:notificationId",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "GET /calendars/:calendarId/notifications",
+        "webhookEvents": ""
       }
     ],
     "write": [
@@ -173,6 +201,21 @@
       {
         "accessType": ["Sub-Account"],
         "methodAndEndpoint": "DELETE /calendars/appointments/:appointmentId/notes/:noteId",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "POST /calendars/:calendarId/notifications",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "PUT /calendars/:calendarId/notifications/:notificationId",
+        "webhookEvents": ""
+      },
+      {
+        "accessType": ["Sub-Account"],
+        "methodAndEndpoint": "DELETE /calendars/:calendarId/notifications/:notificationId",
         "webhookEvents": ""
       }
     ]
@@ -521,6 +564,15 @@
       {
         "accessType": ["Sub-Account"],
         "methodAndEndpoint": "DELETE /emails/builder/:locationId/:templateId",
+        "webhookEvents": ""
+      }
+    ]
+  },
+  "emails/schedule": {
+    "readonly": [
+      {
+        "accessType": ["Sub-Account", "Agency"],
+        "methodAndEndpoint": "GET emails/schedule",
         "webhookEvents": ""
       }
     ]

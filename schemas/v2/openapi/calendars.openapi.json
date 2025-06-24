@@ -50,8 +50,8 @@
             "type": "boolean"
           },
           "ignoreFreeSlotValidation": {
-            "description": "If true the time slot validation would be avoided for any appointment creation",
-            "example": "true",
+            "description": "If true the time slot validation would be avoided for any appointment creation (even the ignoreDateRange)",
+            "example": true,
             "type": "boolean"
           },
           "locationId": {
@@ -59,12 +59,22 @@
             "example": "C2QujeCh8ZnC7al2InWR",
             "type": "string"
           },
-          "meetingLocationType": {
+          "meetingLocationId": {
             "default": "default",
-            "description": "Meeting Location Type: Set to \"custom\" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.",
-            "enum": ["default", "custom"],
+            "description": "The unique identifier for the meeting location.\n- This value can be found in `calendar.locationConfigurations`or `calendar.teamMembers[].locationConfigurations`",
+            "example": "custom_0",
+            "type": "string"
+          },
+          "meetingLocationType": {
+            "description": "Meeting location type. \n- If `address` is provided in the request body, the `meetingLocationType` defaults to **custom**.",
+            "enum": ["custom", "zoom", "gmeet", "phone", "address", "ms_teams", "google"],
             "example": "custom",
             "type": "string"
+          },
+          "overrideLocationConfig": {
+            "description": "Flag to override location config\n- **false** - If only `meetingLocationId` is provided\n- **true** - If only `meetingLocationType` is provided\n",
+            "example": true,
+            "type": "boolean"
           },
           "rrule": {
             "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true.",
@@ -126,16 +136,26 @@
             "type": "boolean"
           },
           "ignoreFreeSlotValidation": {
-            "description": "If true the time slot validation would be avoided for any appointment update",
-            "example": "true",
+            "description": "If true the time slot validation would be avoided for any appointment creation (even the ignoreDateRange)",
+            "example": true,
             "type": "boolean"
           },
-          "meetingLocationType": {
+          "meetingLocationId": {
             "default": "default",
-            "description": "Meeting Location Type: Set to \"custom\" to update the meeting location for the appointment, overriding the default calendar settings for meeting location.",
-            "enum": ["default", "custom"],
+            "description": "The unique identifier for the meeting location.\n- This value can be found in `calendar.locationConfigurations`or `calendar.teamMembers[].locationConfigurations`",
+            "example": "custom_0",
+            "type": "string"
+          },
+          "meetingLocationType": {
+            "description": "Meeting location type. \n- If `address` is provided in the request body, the `meetingLocationType` defaults to **custom**.",
+            "enum": ["custom", "zoom", "gmeet", "phone", "address", "ms_teams", "google"],
             "example": "custom",
             "type": "string"
+          },
+          "overrideLocationConfig": {
+            "description": "Flag to override location config\n- **false** - If only `meetingLocationId` is provided\n- **true** - If only `meetingLocationType` is provided\n",
+            "example": true,
+            "type": "boolean"
           },
           "rrule": {
             "description": "RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true.",
@@ -208,6 +228,12 @@
           "locationId": {
             "description": "Location Id",
             "example": "C2QujeCh8ZnC7al2InWR",
+            "type": "string"
+          },
+          "meetingLocationType": {
+            "default": "default",
+            "description": "Meeting Location Type",
+            "example": "custom",
             "type": "string"
           },
           "rrule": {
@@ -395,7 +421,7 @@
             "type": "array"
           },
           "availabilityType": {
-            "default": 0,
+            "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both custom availabilities and open hours will be considered.",
             "enum": [0, 1],
             "type": "number"
           },
@@ -467,6 +493,13 @@
           "isLivePaymentMode": {
             "type": "boolean"
           },
+          "locationConfigurations": {
+            "description": "Meeting location configuration for event calendar",
+            "items": {
+              "$ref": "#/components/schemas/LocationConfiguration"
+            },
+            "type": "array"
+          },
           "locationId": {
             "example": "ocQHyuzHvysMo5N5VsXc",
             "type": "string"
@@ -480,6 +513,9 @@
             "description": "Look Busy Configuration"
           },
           "meetingLocation": {
+            "deprecated": true,
+            "description": "🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.",
+            "readOnly": true,
             "type": "string"
           },
           "name": {
@@ -490,7 +526,8 @@
             "type": "string"
           },
           "notifications": {
-            "description": "Calendar Notifications",
+            "deprecated": true,
+            "description": "🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.",
             "items": {
               "$ref": "#/components/schemas/CalendarNotification"
             },
@@ -639,7 +676,7 @@
             "type": "array"
           },
           "availabilityType": {
-            "default": 0,
+            "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both custom availabilities and open hours will be considered.",
             "enum": [0, 1],
             "type": "number"
           },
@@ -715,6 +752,13 @@
           "isLivePaymentMode": {
             "type": "boolean"
           },
+          "locationConfigurations": {
+            "description": "Meeting location configuration for event calendar",
+            "items": {
+              "$ref": "#/components/schemas/LocationConfigurationResponse"
+            },
+            "type": "array"
+          },
           "locationId": {
             "example": "ocQHyuzHvysMo5N5VsXc",
             "type": "string"
@@ -728,6 +772,9 @@
             "description": "Look Busy Configuration"
           },
           "meetingLocation": {
+            "deprecated": true,
+            "description": "🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.",
+            "readOnly": true,
             "type": "string"
           },
           "name": {
@@ -738,7 +785,8 @@
             "type": "string"
           },
           "notifications": {
-            "description": "Calendar Notifications",
+            "deprecated": true,
+            "description": "🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.",
             "items": {
               "$ref": "#/components/schemas/CalendarNotification"
             },
@@ -812,9 +860,9 @@
             "type": "boolean"
           },
           "teamMembers": {
-            "description": "Team members are required for calendars of type: Round Robin, Collective, Class, Service.",
+            "description": "Team members are for calendars of type: Round Robin, Collective, Class, Service.",
             "items": {
-              "$ref": "#/components/schemas/TeamMember"
+              "$ref": "#/components/schemas/TeamMemberResponse"
             },
             "type": "array"
           },
@@ -877,6 +925,14 @@
             "description": "Contact ID",
             "example": "9NkT25Vor1v4aQatFsv2",
             "type": "string"
+          },
+          "createdBy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreatedOrUpdatedBy"
+              }
+            ],
+            "description": "Appointment booked by metadata"
           },
           "dateAdded": {
             "description": "Date Added",
@@ -1001,6 +1057,107 @@
           "shouldSendToSelectedUsers",
           "selectedUsers"
         ],
+        "type": "object"
+      },
+      "CalendarNotificationDeleteResponseDTO": {
+        "properties": {
+          "message": {
+            "description": "Result of delete/update operation",
+            "type": "string"
+          }
+        },
+        "required": ["message"],
+        "type": "object"
+      },
+      "CalendarNotificationResponseDTO": {
+        "properties": {
+          "_id": {
+            "description": "Notification ID",
+            "type": "string"
+          },
+          "additionalEmailIds": {
+            "example": ["example1@email.com", "example2@email.com"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "afterTime": {
+            "example": [
+              {
+                "timeOffset": 1,
+                "unit": "hours"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SchedulesDTO"
+            },
+            "type": "array"
+          },
+          "altType": {
+            "enum": ["calendar"],
+            "example": "calendar",
+            "type": "string"
+          },
+          "beforeTime": {
+            "example": [
+              {
+                "timeOffset": 1,
+                "unit": "hours"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SchedulesDTO"
+            },
+            "type": "array"
+          },
+          "body": {
+            "example": "This is a test notification",
+            "type": "string"
+          },
+          "calendarId": {
+            "example": "0as9d8as0d",
+            "type": "string"
+          },
+          "channel": {
+            "enum": ["email", "inApp"],
+            "example": "email",
+            "type": "string"
+          },
+          "deleted": {
+            "example": false,
+            "type": "boolean"
+          },
+          "isActive": {
+            "example": true,
+            "type": "boolean"
+          },
+          "notificationType": {
+            "enum": ["booked", "confirmation", "cancellation", "reminder", "followup", "reschedule"],
+            "example": "confirmation",
+            "type": "string"
+          },
+          "receiverType": {
+            "enum": ["contact", "guest", "assignedUser", "emails"],
+            "example": "contact",
+            "type": "string"
+          },
+          "selectedUsers": {
+            "example": ["user1", "user2"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "subject": {
+            "example": "Test Notification",
+            "type": "string"
+          },
+          "templateId": {
+            "example": "0as9d8as0d",
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "CalendarResourceByIdResponseDTO": {
@@ -1142,7 +1299,7 @@
             "type": "array"
           },
           "availabilityType": {
-            "default": 0,
+            "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both the custom availabilities and open hours will be considered.",
             "enum": [0, 1],
             "type": "number"
           },
@@ -1198,8 +1355,18 @@
             "enum": ["count_only", "collect_detail"],
             "type": "string"
           },
+          "isActive": {
+            "type": "boolean"
+          },
           "isLivePaymentMode": {
             "type": "boolean"
+          },
+          "locationConfigurations": {
+            "description": "Meeting location configuration for event calendar",
+            "items": {
+              "$ref": "#/components/schemas/LocationConfiguration"
+            },
+            "type": "array"
           },
           "lookBusyConfig": {
             "allOf": [
@@ -1210,6 +1377,9 @@
             "description": "Look Busy Configuration"
           },
           "meetingLocation": {
+            "deprecated": true,
+            "description": "🚨 Deprecated! Use `locationConfigurations.location` or `teamMembers[].locationConfigurations.location` instead.",
+            "readOnly": true,
             "type": "string"
           },
           "name": {
@@ -1220,7 +1390,8 @@
             "type": "string"
           },
           "notifications": {
-            "description": "Calendar Notifications",
+            "deprecated": true,
+            "description": "🚨 Deprecated! Please use 'Calendar Notifications APIs' instead.",
             "items": {
               "$ref": "#/components/schemas/CalendarNotification"
             },
@@ -1360,6 +1531,93 @@
         "required": ["id", "locationId", "title", "startTime", "endTime"],
         "type": "object"
       },
+      "CreateCalendarNotificationDTO": {
+        "properties": {
+          "additionalEmailIds": {
+            "description": "Additional email addresses to receive notifications.",
+            "example": ["example1@email.com", "example2@email.com"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "afterTime": {
+            "description": "Specifies the time after which the follow-up notification should be sent. This is not required for other notification types.",
+            "example": [
+              {
+                "timeOffset": 1,
+                "unit": "hours"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SchedulesDTO"
+            },
+            "type": "array"
+          },
+          "beforeTime": {
+            "description": "Specifies the time before which the reminder notification should be sent. This is not required for other notification types.",
+            "example": [
+              {
+                "timeOffset": 1,
+                "unit": "hours"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SchedulesDTO"
+            },
+            "type": "array"
+          },
+          "body": {
+            "description": "Body  for email notification. Not necessary for in-App notification",
+            "type": "string"
+          },
+          "channel": {
+            "description": "Notification channel",
+            "enum": ["email", "inApp"],
+            "type": "string"
+          },
+          "fromAddress": {
+            "description": "from address for email notification",
+            "type": "string"
+          },
+          "fromName": {
+            "description": "from name for email notification",
+            "type": "string"
+          },
+          "isActive": {
+            "default": true,
+            "description": "Is the notification active",
+            "type": "boolean"
+          },
+          "notificationType": {
+            "description": "Notification type",
+            "enum": ["booked", "confirmation", "cancellation", "reminder", "followup", "reschedule"],
+            "type": "string"
+          },
+          "receiverType": {
+            "description": "notification recipient type",
+            "enum": ["contact", "guest", "assignedUser", "emails"],
+            "type": "string"
+          },
+          "selectedUsers": {
+            "description": "selected user for in-App notification",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "subject": {
+            "description": "Subject  for email notification. Not necessary for in-App notification",
+            "type": "string"
+          },
+          "templateId": {
+            "description": "Template ID for email notification. Not necessary for in-App notification",
+            "type": "string"
+          }
+        },
+        "required": ["receiverType", "channel", "notificationType"],
+        "type": "object"
+      },
       "CreateCalendarResourceDTO": {
         "properties": {
           "calendarIds": {
@@ -1393,6 +1651,20 @@
           }
         },
         "required": ["locationId", "name", "description", "quantity", "outOfService", "capacity", "calendarIds"],
+        "type": "object"
+      },
+      "CreatedOrUpdatedBy": {
+        "properties": {
+          "source": {
+            "description": "The source of the appointment",
+            "type": "string"
+          },
+          "userId": {
+            "description": "The ID of the user who created or updated the appointment",
+            "type": "string"
+          }
+        },
+        "required": ["source"],
         "type": "object"
       },
       "DeleteAppointmentSchema": {
@@ -1625,6 +1897,63 @@
         "required": ["openHour", "openMinute", "closeHour", "closeMinute"],
         "type": "object"
       },
+      "LocationConfiguration": {
+        "properties": {
+          "kind": {
+            "description": "Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type",
+            "enum": [
+              "custom",
+              "zoom_conference",
+              "google_conference",
+              "inbound_call",
+              "outbound_call",
+              "physical",
+              "booker",
+              "ms_teams_conference"
+            ],
+            "example": "custom",
+            "type": "string"
+          },
+          "location": {
+            "description": "Address for meeting location. Not applicable on \"zoom_conference\", \"google_conference\" and \"ms_teams_conference\" kind",
+            "examples": ["+14455550132", "http://meet.google.com/your-meeting-location"],
+            "type": "string"
+          }
+        },
+        "required": ["kind"],
+        "type": "object"
+      },
+      "LocationConfigurationResponse": {
+        "properties": {
+          "kind": {
+            "description": "Type of meeting location. zoom_conference/google_conference/ms_teams_conference is not supported in event calendar type",
+            "enum": [
+              "custom",
+              "zoom_conference",
+              "google_conference",
+              "inbound_call",
+              "outbound_call",
+              "physical",
+              "booker",
+              "ms_teams_conference"
+            ],
+            "example": "custom",
+            "type": "string"
+          },
+          "location": {
+            "description": "Address for meeting location. Not applicable on \"zoom_conference\", \"google_conference\" and \"ms_teams_conference\" kind",
+            "examples": ["+14455550132", "http://meet.google.com/your-meeting-location"],
+            "type": "string"
+          },
+          "meetingId": {
+            "description": "Unique ID used to select a specific meeting location",
+            "example": "my_conference_id",
+            "type": "string"
+          }
+        },
+        "required": ["kind"],
+        "type": "object"
+      },
       "LookBusyConfiguration": {
         "properties": {
           "LookBusyPercentage": {
@@ -1724,6 +2053,17 @@
         },
         "type": "object"
       },
+      "SchedulesDTO": {
+        "properties": {
+          "timeOffset": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "SlotsSchema": {
         "properties": {
           "slots": {
@@ -1742,14 +2082,67 @@
             "description": "Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary.",
             "type": "boolean"
           },
+          "locationConfigurations": {
+            "description": "Meeting location configuration for event calendar.\n- *Multiple locations are allowed only when one team member is selected.*\n- *For **Class booking** and **Collective** calendars, only one location configuration is allowed for each team member.*",
+            "items": {
+              "$ref": "#/components/schemas/LocationConfiguration"
+            },
+            "type": "array"
+          },
           "meetingLocation": {
+            "deprecated": true,
+            "description": "🚨 Deprecated! Use `locationConfigurations.location` instead.",
+            "readOnly": true,
             "type": "string"
           },
           "meetingLocationType": {
             "default": "custom",
-            "description": "Meeting Location Type. For class booking only the following types are allowed 'custom', 'phone', 'address'. ",
+            "deprecated": true,
+            "description": "🚨 Deprecated! Use `locationConfigurations.kind` instead.",
             "enum": ["custom", "zoom", "gmeet", "phone", "address", "teams", "booker"],
             "example": "custom",
+            "readOnly": true,
+            "type": "string"
+          },
+          "priority": {
+            "default": 0.5,
+            "enum": [0, 0.5, 1],
+            "type": "number"
+          },
+          "userId": {
+            "example": "ocQHyuzHvysMo5N5VsXc",
+            "type": "string"
+          }
+        },
+        "required": ["userId"],
+        "type": "object"
+      },
+      "TeamMemberResponse": {
+        "properties": {
+          "isPrimary": {
+            "description": "Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary.",
+            "type": "boolean"
+          },
+          "locationConfigurations": {
+            "description": "Meeting location configurations",
+            "items": {
+              "$ref": "#/components/schemas/LocationConfigurationResponse"
+            },
+            "type": "array"
+          },
+          "meetingLocation": {
+            "deprecated": true,
+            "description": "🚨 Deprecated! Use `locationConfigurations.location` instead.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "meetingLocationType": {
+            "default": "custom",
+            "deprecated": true,
+            "description": "🚨 Deprecated! Use `locationConfigurations.kind` instead.",
+            "enum": ["custom", "zoom", "gmeet", "phone", "address", "teams", "booker"],
+            "example": "custom",
+            "readOnly": true,
             "type": "string"
           },
           "priority": {
@@ -1805,6 +2198,101 @@
           }
         },
         "required": ["date", "hours"],
+        "type": "object"
+      },
+      "UpdateCalendarNotificationsDTO": {
+        "properties": {
+          "additionalEmailIds": {
+            "description": "Additional email addresses to receive notifications.",
+            "example": ["example1@email.com", "example2@email.com"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "afterTime": {
+            "description": "Specifies the time after which the follow-up notification should be sent.",
+            "example": [
+              {
+                "timeOffset": 1,
+                "unit": "hours"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SchedulesDTO"
+            },
+            "type": "array"
+          },
+          "altId": {
+            "description": "Specifies the ID of the model associated with the notification. This can be extended to support additional models in the future.",
+            "example": "D7JP6b67AgWqTtfGaQcw",
+            "type": "string"
+          },
+          "altType": {
+            "default": "calendar",
+            "description": "Specifies the model associated with the notification. This can be extended to support additional models in the future. For now only Calendars is supported",
+            "enum": ["calendar"],
+            "type": "string"
+          },
+          "beforeTime": {
+            "description": "Specifies the time before which the reminder notification should be sent.",
+            "example": [
+              {
+                "timeOffset": 1,
+                "unit": "hours"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SchedulesDTO"
+            },
+            "type": "array"
+          },
+          "body": {
+            "description": "Body  for email notification. Not necessary for in-App notification",
+            "type": "string"
+          },
+          "channel": {
+            "description": "Notification channel",
+            "enum": ["email", "inApp"],
+            "type": "string"
+          },
+          "deleted": {
+            "default": false,
+            "description": "Marks the notification as deleted (soft delete)",
+            "type": "boolean"
+          },
+          "fromAddress": {
+            "description": "From address for email notification",
+            "type": "string"
+          },
+          "fromName": {
+            "description": "From name for email notification",
+            "type": "string"
+          },
+          "isActive": {
+            "default": true,
+            "description": "Is the notification active",
+            "type": "boolean"
+          },
+          "notificationType": {
+            "description": "Notification type",
+            "enum": ["booked", "confirmation", "cancellation", "reminder", "followup", "reschedule"],
+            "type": "string"
+          },
+          "receiverType": {
+            "description": "Notification recipient type",
+            "enum": ["contact", "guest", "assignedUser", "emails"],
+            "type": "string"
+          },
+          "subject": {
+            "description": "Subject  for email notification. Not necessary for in-App notification",
+            "type": "string"
+          },
+          "templateId": {
+            "description": "Template ID for email notification",
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "UpdateCalendarResourceDTO": {
@@ -2497,7 +2985,6 @@
           },
           {
             "description": "End Time (in millis)",
-            "example": "1680978599999",
             "in": "query",
             "name": "endTime",
             "required": true,
@@ -3005,7 +3492,7 @@
           }
         ],
         "summary": "Create Block Slot",
-        "tags": ["Calendar Events"]
+        "tags": ["Calendars"]
       }
     },
     "/calendars/events/block-slots/{eventId}": {
@@ -4395,7 +4882,7 @@
             }
           },
           {
-            "description": "Start Date",
+            "description": "Start Date (**⚠️ Important:** Date range cannot be more than 31 days)",
             "example": 1548898600000,
             "in": "query",
             "name": "startDate",
@@ -4405,7 +4892,7 @@
             }
           },
           {
-            "description": "End Date",
+            "description": "End Date (**⚠️ Important:** Date range cannot be more than 31 days)",
             "example": 1601490599999,
             "in": "query",
             "name": "endDate",
@@ -4498,6 +4985,459 @@
         ],
         "summary": "Get Free Slots",
         "tags": ["Calendars"]
+      }
+    },
+    "/calendars/{calendarId}/notifications": {
+      "get": {
+        "description": "Get calendar notifications based on query",
+        "operationId": "get-event-notification",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specifies the model associated with the notification. This can be extended to support additional models in the future. For now only Calendars is supported",
+            "in": "query",
+            "name": "altType",
+            "required": false,
+            "schema": {
+              "default": "calendar",
+              "enum": ["calendar"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Specifies the ID of the model associated with the notification. This can be extended to support additional models in the future.",
+            "in": "query",
+            "name": "altId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "isActive",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "deleted",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Number of records to return",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Number of records to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CalendarNotificationResponseDTO"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "summary": "Get notifications",
+        "tags": ["Calendar Notifications"]
+      },
+      "post": {
+        "description": "Create Calendar notifications, either one or multiple. All notification settings must be for single calendar only",
+        "operationId": "create-event-notification",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/CreateCalendarNotificationDTO"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CalendarNotificationResponseDTO"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "summary": "Create notification",
+        "tags": ["Calendar Notifications"]
+      }
+    },
+    "/calendars/{calendarId}/notifications/{notificationId}": {
+      "delete": {
+        "description": "Delete notification",
+        "operationId": "delete-event-notification",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "notificationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarNotificationDeleteResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "summary": "",
+        "tags": ["Calendar Notifications"]
+      },
+      "get": {
+        "description": "Find Event notification by notificationId",
+        "operationId": "find-event-notification",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "notificationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarNotificationResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "summary": "Get notification",
+        "tags": ["Calendar Notifications"]
+      },
+      "put": {
+        "description": "Update Event notification by id",
+        "operationId": "update-event-notification",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-04-15"],
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "notificationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCalendarNotificationsDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarNotificationDeleteResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "summary": "Update notification",
+        "tags": ["Calendar Notifications"]
       }
     }
   },

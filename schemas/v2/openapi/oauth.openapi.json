@@ -37,6 +37,10 @@
             "example": 86399,
             "type": "number"
           },
+          "isBulkInstallation": {
+            "example": "Bearer",
+            "type": "boolean"
+          },
           "locationId": {
             "description": "Location ID - Present only for Sub-Account Access Token",
             "example": "l1C08ntBrFjLS0elLIYU",
@@ -85,7 +89,7 @@
             "type": "string"
           },
           "grant_type": {
-            "enum": ["authorization_code", "refresh_token"],
+            "enum": ["authorization_code", "refresh_token", "client_credentials"],
             "type": "string"
           },
           "redirect_uri": {
@@ -261,83 +265,93 @@
         "parameters": [
           {
             "description": "Parameter to skip the number installed locations",
-            "example": "1",
             "in": "query",
             "name": "skip",
             "required": false,
             "schema": {
               "default": "0",
+              "example": "1",
               "type": "string"
             }
           },
           {
             "description": "Parameter to limit the number installed locations",
-            "example": "10",
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
               "default": "20",
+              "example": "10",
               "type": "string"
             }
           },
           {
             "description": "Parameter to search for the installed location by name",
-            "example": "location name",
             "in": "query",
             "name": "query",
             "required": false,
             "schema": {
+              "example": "location name",
               "type": "string"
             }
           },
           {
             "description": "Filters out location which are installed for specified app under the specified company",
-            "example": true,
             "in": "query",
             "name": "isInstalled",
             "required": false,
             "schema": {
+              "example": true,
               "type": "boolean"
             }
           },
           {
             "description": "Parameter to search by the companyId",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "query",
             "name": "companyId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           },
           {
             "description": "Parameter to search by the appId",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "query",
             "name": "appId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
+              "type": "string"
+            }
+          },
+          {
+            "description": "VersionId of the app",
+            "in": "query",
+            "name": "versionId",
+            "required": false,
+            "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           },
           {
             "description": "Filters out locations which are installed for specified app in trial mode",
-            "example": true,
             "in": "query",
             "name": "onTrial",
             "required": false,
             "schema": {
+              "example": true,
               "type": "boolean"
             }
           },
           {
             "description": "Filters out location which are installed for specified app under the specified planId",
-            "example": true,
             "in": "query",
             "name": "planId",
             "required": false,
             "schema": {
+              "example": true,
               "type": "string"
             }
           },

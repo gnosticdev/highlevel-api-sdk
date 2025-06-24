@@ -1073,6 +1073,11 @@
             "example": "read",
             "type": "string"
           },
+          "visitorId": {
+            "description": "visitorId is the Unique ID assigned to each Live chat visitor.",
+            "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
           "website": {
             "example": "https://www.tesla.com",
             "type": "string"
@@ -1092,10 +1097,6 @@
         "properties": {
           "address": {
             "example": "Address",
-            "type": "string"
-          },
-          "appoinmentStatus": {
-            "example": "confirmed",
             "type": "string"
           },
           "appointmentStatus": {
@@ -1493,6 +1494,88 @@
             "type": "boolean"
           }
         },
+        "type": "object"
+      },
+      "UpdateTagsDTO": {
+        "properties": {
+          "contacts": {
+            "description": "list of contact ids to be processed",
+            "example": ["qFSqySFkVvNzOSqgGqFi", "abcdef", "qFSqySFkVvNzOSqgGqFi", "3ualbhnV7j3n3a9r2moD"],
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 500,
+            "type": "array"
+          },
+          "locationId": {
+            "description": "location id from where the bulk request is executed",
+            "example": "asdrwHvLUxlfw5SqKVCN",
+            "type": "string"
+          },
+          "removeAllTags": {
+            "description": "Option to implement remove all tags. If true, all tags will be removed from the contacts. Can only be used with remove type.",
+            "example": false,
+            "type": "boolean"
+          },
+          "tags": {
+            "description": "list of tags to be added or removed",
+            "example": ["tag1", "tag2"],
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "type": "array"
+          }
+        },
+        "required": ["contacts", "tags", "locationId"],
+        "type": "object"
+      },
+      "UpdateTagsResponseDTO": {
+        "properties": {
+          "errorCount": {
+            "description": "Number of errors encountered during the operation",
+            "example": 3,
+            "type": "number"
+          },
+          "responses": {
+            "description": "Responses for each contact processed",
+            "example": [
+              {
+                "contactId": "qFSqySFkVvNzOSqgGqFi",
+                "message": "Tags updated",
+                "oldTags": ["tag-1", "tag-2"],
+                "tagsAdded": [],
+                "tagsRemoved": [],
+                "type": "success"
+              },
+              {
+                "contactId": "abcdef",
+                "message": "contact id is not a valid firebase id",
+                "type": "error"
+              },
+              {
+                "contactId": "qFSqySFkVvNzOSqgGqFi",
+                "message": "contact is deleted",
+                "type": "error"
+              },
+              {
+                "contactId": "3ualbhnV7j3n3a9r2moD",
+                "message": "contact does not belong to location",
+                "type": "error"
+              }
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "succeded": {
+            "description": "Indicates if the operation was successful",
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "required": ["succeded", "errorCount", "responses"],
         "type": "object"
       },
       "UpdateTaskBody": {
@@ -2032,6 +2115,94 @@
           }
         },
         "summary": "Add/Remove Contacts From Business",
+        "tags": ["Bulk"]
+      }
+    },
+    "/contacts/bulk/tags/update/{type}": {
+      "post": {
+        "description": "Allows you to update tags to multiple contacts at once, you can add or remove tags from the contacts",
+        "operationId": "create-association",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Tags operation type",
+            "example": "add",
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "enum": ["add", "remove"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTagsDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTagsResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Update Contacts Tags",
         "tags": ["Bulk"]
       }
     },

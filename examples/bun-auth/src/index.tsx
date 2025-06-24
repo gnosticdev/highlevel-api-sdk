@@ -206,7 +206,7 @@ const allRoutes = app.routes.filter((r) => !r.path.includes('*') && !r.path.matc
 /**
  * Port must match what we used in the callback url in the app settings
  */
-const PORT = process.env.PORT ? Number.parseInt(process.env.PORT) : 3000
+const PORT = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 3000
 
 export default {
   fetch: app.fetch,

@@ -46,6 +46,14 @@
             "enum": ["1", "2"],
             "type": "string"
           },
+          "importProvider": {
+            "enum": ["mailchimp", "active_campaign", "kajabi"],
+            "type": "string"
+          },
+          "importURL": {
+            "example": "https://tplshare.com/fhYJ3Mi",
+            "type": "string"
+          },
           "isPlainText": {
             "example": false,
             "type": "boolean"
@@ -54,12 +62,28 @@
             "example": "ve9EPM428h8vShlRW1KT",
             "type": "string"
           },
+          "name": {
+            "example": "Template1",
+            "type": "string"
+          },
+          "parentId": {
+            "example": "zYy3YOUuHxgomU1uYJty",
+            "type": "string"
+          },
+          "templateDataUrl": {
+            "example": "",
+            "type": "string"
+          },
+          "templateSource": {
+            "example": "template_library",
+            "type": "string"
+          },
           "title": {
             "example": "template title",
             "type": "string"
           },
           "type": {
-            "enum": ["html"],
+            "enum": ["html", "folder", "import", "builder", "blank"],
             "type": "string"
           },
           "updatedBy": {
@@ -67,7 +91,7 @@
             "type": "string"
           }
         },
-        "required": ["locationId", "type"],
+        "required": ["locationId", "type", "importProvider"],
         "type": "object"
       },
       "CreateBuilderSuccesfulResponseDto": {
@@ -169,6 +193,36 @@
         "required": ["elements", "attrs", "templateSettings"],
         "type": "object"
       },
+      "InvalidLocationDTO": {
+        "properties": {
+          "message": {
+            "example": "The token does not have access to this location",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 403,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "NotFoundDTO": {
+        "properties": {
+          "error": {
+            "example": "The requested resource was not found",
+            "type": "string"
+          },
+          "message": {
+            "example": "Not Found",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 404,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
       "SaveBuilderDataDto": {
         "properties": {
           "dnd": {
@@ -177,19 +231,26 @@
                 "$ref": "#/components/schemas/IBuilderJsonMapper"
               }
             ],
-            "description": "Provide {elements:[], attrs:{}, templateSettings:{}} for this parameter",
             "example": "{elements:[], attrs:{}, templateSettings:{}}"
           },
           "editorType": {
-            "enum": ["html"],
+            "enum": ["html", "builder"],
             "type": "string"
           },
           "html": {
             "example": "",
             "type": "string"
           },
+          "isPlainText": {
+            "example": "false",
+            "type": "boolean"
+          },
           "locationId": {
             "example": "ve9EPM428h8vShlRW1KT",
+            "type": "string"
+          },
+          "previewText": {
+            "example": "zYy3YOUuHxgomU1uYJty",
             "type": "string"
           },
           "templateId": {
@@ -202,6 +263,152 @@
           }
         },
         "required": ["locationId", "templateId", "updatedBy", "dnd", "html", "editorType"],
+        "type": "object"
+      },
+      "ScheduleDto": {
+        "properties": {
+          "__v": {
+            "type": "number"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "bulkActionVersion": {
+            "type": "string"
+          },
+          "campaignType": {
+            "type": "string"
+          },
+          "child": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "childCount": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "documentId": {
+            "type": "string"
+          },
+          "downloadUrl": {
+            "type": "string"
+          },
+          "enableResendToUnopened": {
+            "type": "boolean"
+          },
+          "hasTracking": {
+            "type": "boolean"
+          },
+          "hasUtmTracking": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isPlainText": {
+            "type": "boolean"
+          },
+          "locationId": {
+            "type": "string"
+          },
+          "migrated": {
+            "type": "boolean"
+          },
+          "name": {
+            "example": "Untitled new campaign",
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "repeatAfter": {
+            "type": "string"
+          },
+          "sendDays": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "status": {
+            "type": "string"
+          },
+          "templateDataDownloadUrl": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "templateType": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "repeatAfter",
+          "id",
+          "parentId",
+          "childCount",
+          "campaignType",
+          "bulkActionVersion",
+          "_id",
+          "status",
+          "sendDays",
+          "deleted",
+          "migrated",
+          "archived",
+          "hasTracking",
+          "isPlainText",
+          "hasUtmTracking",
+          "enableResendToUnopened",
+          "locationId",
+          "templateId",
+          "templateType",
+          "createdAt",
+          "updatedAt",
+          "__v",
+          "documentId",
+          "downloadUrl",
+          "templateDataDownloadUrl",
+          "child"
+        ],
+        "type": "object"
+      },
+      "ScheduleFetchSuccessfulDTO": {
+        "properties": {
+          "schedules": {
+            "description": "The list of campaigns",
+            "items": {
+              "$ref": "#/components/schemas/ScheduleDto"
+            },
+            "type": "array"
+          },
+          "total": {
+            "description": "The total number of campaigns",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "traceId": {
+            "description": "Trace Id",
+            "type": "string"
+          }
+        },
+        "required": ["schedules", "total", "traceId"],
         "type": "object"
       },
       "TemplateSettings": {
@@ -306,7 +513,6 @@
             }
           },
           {
-            "description": "Max limit 100",
             "in": "query",
             "name": "limit",
             "required": false,
@@ -321,6 +527,15 @@
             "required": false,
             "schema": {
               "default": 0,
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "default": "",
               "type": "string"
             }
           },
@@ -367,6 +582,15 @@
             "required": false,
             "schema": {
               "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "example": "ve9EPM428h8vShlRW1KT",
+            "in": "query",
+            "name": "originId",
+            "required": false,
+            "schema": {
               "type": "string"
             }
           },
@@ -435,7 +659,8 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Fetch email templates"
+        "summary": "Fetch email templates",
+        "tags": ["Templates"]
       },
       "post": {
         "description": "Create a new template",
@@ -517,7 +742,8 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Create a new template"
+        "summary": "Create a new template",
+        "tags": ["Templates"]
       }
     },
     "/emails/builder/data": {
@@ -601,7 +827,8 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Update a template"
+        "summary": "Update a template",
+        "tags": ["Templates"]
       }
     },
     "/emails/builder/{locationId}/{templateId}": {
@@ -693,7 +920,231 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Delete a template"
+        "summary": "Delete a template",
+        "tags": ["Templates"]
+      }
+    },
+    "/emails/schedule": {
+      "get": {
+        "description": "Get Campaigns",
+        "operationId": "fetch-campaigns",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location ID to fetch campaigns from",
+            "example": "ohjiah0wdg3bzmzacvd6",
+            "in": "query",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of campaigns to return. Defaults to 10, maximum is 100",
+            "example": "7",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Number of campaigns to skip for pagination",
+            "example": "0",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Filter by schedule status",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "default": "active",
+              "enum": ["active", "pause", "complete", "cancelled", "retry", "draft", "resend-scheduled"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by email delivery status",
+            "in": "query",
+            "name": "emailStatus",
+            "required": false,
+            "schema": {
+              "default": "complete",
+              "enum": [
+                "all",
+                "not-started",
+                "paused",
+                "cancelled",
+                "processing",
+                "resumed",
+                "next-drip",
+                "complete",
+                "success",
+                "error",
+                "waiting",
+                "queued",
+                "queueing",
+                "reading",
+                "scheduled"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter campaigns by name",
+            "example": "Black Friday Campaign",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter campaigns by parent folder ID",
+            "example": "folder123",
+            "in": "query",
+            "name": "parentId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "default": false,
+            "description": "When true, returns only essential campaign fields like id, templateDataDownloadUrl, updatedAt, type, templateType, templateId, downloadUrl and isPlainText. When false, returns complete campaign data including meta information, bulkRequestStatusInfo, ABTestInfo, resendScheduleInfo and all other campaign properties",
+            "example": "false",
+            "in": "query",
+            "name": "limitedFields",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Filter archived campaigns",
+            "example": "false",
+            "in": "query",
+            "name": "archived",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "default": false,
+            "description": "Return only campaigns, excluding folders",
+            "example": "false",
+            "in": "query",
+            "name": "campaignsOnly",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "default": true,
+            "description": "When true, returns campaign statistics including delivered count, opened count, clicked count and revenue if available for the campaign. When false, returns campaign data without statistics.",
+            "example": "true",
+            "in": "query",
+            "name": "showStats",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleFetchSuccessfulDTO"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidLocationDTO"
+                }
+              }
+            },
+            "description": "The token does not have access to this location"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundDTO"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Get Campaigns",
+        "tags": ["Campaigns"]
       }
     }
   },

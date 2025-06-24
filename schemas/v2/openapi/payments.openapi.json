@@ -17,6 +17,51 @@
         "required": ["subtotal"],
         "type": "object"
       },
+      "ApplyToFuturePaymentsConfig": {
+        "properties": {
+          "duration": {
+            "description": "Duration the coupon to be applied in a subscription",
+            "example": 5,
+            "type": "number"
+          },
+          "durationType": {
+            "description": "Type of the duration",
+            "enum": ["months"],
+            "example": "months",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of the config",
+            "enum": ["forever", "fixed"],
+            "example": "forever | fixed",
+            "type": "string"
+          }
+        },
+        "required": ["type", "duration", "durationType"],
+        "type": "object"
+      },
+      "ApplyToFuturePaymentsConfigDto": {
+        "properties": {
+          "duration": {
+            "description": "Duration value for fixed type configurations",
+            "example": 3,
+            "type": "number"
+          },
+          "durationType": {
+            "description": "Duration type for fixed configurations (e.g. months)",
+            "example": "months",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of future payments configuration",
+            "enum": ["forever", "fixed"],
+            "example": "fixed",
+            "type": "string"
+          }
+        },
+        "required": ["type"],
+        "type": "object"
+      },
       "BadRequestDTO": {
         "properties": {
           "message": {
@@ -134,6 +179,342 @@
           "deleted",
           "createdAt",
           "updatedAt"
+        ],
+        "type": "object"
+      },
+      "CouponDto": {
+        "properties": {
+          "_id": {
+            "description": "Unique MongoDB identifier for the coupon",
+            "example": "67f6c132d9485f9dacd5f123",
+            "type": "string"
+          },
+          "altId": {
+            "description": "Location or company ID",
+            "example": "79t07PzK8Tvf73d12312",
+            "type": "string"
+          },
+          "altType": {
+            "description": "Type of entity (location or company)",
+            "example": "location",
+            "type": "string"
+          },
+          "applyToFuturePayments": {
+            "description": "Indicates if the coupon applies to future recurring payments",
+            "example": true,
+            "type": "boolean"
+          },
+          "applyToFuturePaymentsConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApplyToFuturePaymentsConfigDto"
+              }
+            ],
+            "description": "Configuration for how the coupon applies to future payments"
+          },
+          "code": {
+            "description": "Redemption code for the coupon",
+            "example": "NEWT6",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "Creation timestamp",
+            "example": "2025-04-09T18:49:22.026Z",
+            "type": "string"
+          },
+          "deleted": {
+            "description": "Indicates if the coupon has been deleted",
+            "example": false,
+            "type": "boolean"
+          },
+          "discountType": {
+            "description": "Type of discount (percentage or amount)",
+            "enum": ["percentage", "amount"],
+            "example": "percentage",
+            "type": "string"
+          },
+          "discountValue": {
+            "description": "Value of the discount (percentage or fixed amount)",
+            "example": 25,
+            "type": "number"
+          },
+          "endDate": {
+            "description": "End date when the coupon expires",
+            "example": "2025-05-30T18:30:00.000Z",
+            "type": "string"
+          },
+          "hasAffiliateCoupon": {
+            "description": "Indicates if this is an affiliate coupon",
+            "example": false,
+            "type": "boolean"
+          },
+          "limitPerCustomer": {
+            "description": "Maximum number of times a customer can use this coupon (0 for unlimited)",
+            "example": 5,
+            "type": "number"
+          },
+          "name": {
+            "description": "Display name of the coupon",
+            "example": "NEWT6",
+            "type": "string"
+          },
+          "startDate": {
+            "description": "Date when the coupon becomes active",
+            "example": "2025-04-30T18:30:00.000Z",
+            "type": "string"
+          },
+          "status": {
+            "description": "Current status of the coupon",
+            "enum": ["scheduled", "active", "expired"],
+            "example": "scheduled",
+            "type": "string"
+          },
+          "updatedAt": {
+            "description": "Last update timestamp",
+            "example": "2025-04-09T18:49:22.026Z",
+            "type": "string"
+          },
+          "usageCount": {
+            "description": "Number of times the coupon has been used",
+            "example": 12,
+            "type": "number"
+          },
+          "userId": {
+            "description": "User ID associated with the coupon (if applicable)",
+            "example": "q0m15dTLGeiGOXG123123",
+            "type": "string"
+          }
+        },
+        "required": [
+          "_id",
+          "usageCount",
+          "hasAffiliateCoupon",
+          "deleted",
+          "limitPerCustomer",
+          "altId",
+          "altType",
+          "name",
+          "code",
+          "discountType",
+          "discountValue",
+          "status",
+          "startDate",
+          "applyToFuturePayments",
+          "applyToFuturePaymentsConfig",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object"
+      },
+      "CreateCouponParams": {
+        "properties": {
+          "altId": {
+            "description": "Location Id",
+            "example": "BQdAwxa0ky1iK2sstLGJ",
+            "type": "string"
+          },
+          "altType": {
+            "description": "Alt Type",
+            "enum": ["location"],
+            "example": "location",
+            "type": "string"
+          },
+          "applyToFuturePayments": {
+            "default": true,
+            "description": "Is Coupon applicable on upcoming subscription transactions",
+            "example": true,
+            "type": "boolean"
+          },
+          "applyToFuturePaymentsConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApplyToFuturePaymentsConfig"
+              }
+            ],
+            "default": {
+              "type": "forever"
+            },
+            "description": "If coupon is applicable on upcoming subscription transactions, how many months should it be applicable for a subscription",
+            "example": [
+              {
+                "duration": 5,
+                "durationType": "months",
+                "type": "fixed"
+              },
+              {
+                "type": "forever"
+              }
+            ]
+          },
+          "code": {
+            "description": "Coupon Code",
+            "example": "LEVELUPDAY2022",
+            "type": "string"
+          },
+          "discountType": {
+            "description": "Discount Type",
+            "enum": ["percentage", "amount"],
+            "example": "amount",
+            "type": "string"
+          },
+          "discountValue": {
+            "description": "Discount Value",
+            "example": 10,
+            "type": "number"
+          },
+          "endDate": {
+            "description": "End date in YYYY-MM-DDTHH:mm:ssZ format",
+            "example": "2023-01-31T22:45:00.000Z",
+            "type": "string"
+          },
+          "limitPerCustomer": {
+            "default": false,
+            "description": "Limits whether a coupon can be redeemed only once per customer.",
+            "example": true,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Coupon Name",
+            "example": "New Year Sale",
+            "type": "string"
+          },
+          "productIds": {
+            "description": "Product Ids",
+            "example": ["6241712be68f7a98102ba272"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "startDate": {
+            "description": "Start date in YYYY-MM-DDTHH:mm:ssZ format",
+            "example": "2023-01-01T22:45:00.000Z",
+            "type": "string"
+          },
+          "usageLimit": {
+            "description": "Max number of times coupon can be used",
+            "example": 10,
+            "type": "number"
+          }
+        },
+        "required": ["altId", "altType", "name", "code", "discountType", "discountValue", "startDate"],
+        "type": "object"
+      },
+      "CreateCouponResponseDto": {
+        "properties": {
+          "_id": {
+            "description": "Unique MongoDB identifier for the coupon",
+            "example": "67f6c132d9485f9dacd5f123",
+            "type": "string"
+          },
+          "altId": {
+            "description": "Location Id",
+            "example": "79t07PzK8Tvf73d12312",
+            "type": "string"
+          },
+          "altType": {
+            "description": "Type of entity",
+            "example": "location",
+            "type": "string"
+          },
+          "applyToFuturePayments": {
+            "description": "Indicates if the coupon applies to future recurring payments",
+            "example": true,
+            "type": "boolean"
+          },
+          "applyToFuturePaymentsConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApplyToFuturePaymentsConfigDto"
+              }
+            ],
+            "description": "Configuration for how the coupon applies to future payments"
+          },
+          "code": {
+            "description": "Redemption code for the coupon",
+            "example": "NEWT6",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "Creation timestamp",
+            "example": "2025-04-09T18:49:22.026Z",
+            "type": "string"
+          },
+          "discountType": {
+            "description": "Type of discount (percentage or amount)",
+            "enum": ["percentage", "amount"],
+            "example": "percentage",
+            "type": "string"
+          },
+          "discountValue": {
+            "description": "Value of the discount (percentage or fixed amount)",
+            "example": 25,
+            "type": "number"
+          },
+          "endDate": {
+            "description": "End date when the coupon expires",
+            "example": "2025-05-30T18:30:00.000Z",
+            "type": "string"
+          },
+          "limitPerCustomer": {
+            "description": "Maximum number of times a customer can use this coupon (0 for unlimited)",
+            "example": 5,
+            "type": "number"
+          },
+          "name": {
+            "description": "Display name of the coupon",
+            "example": "NEWT6",
+            "type": "string"
+          },
+          "startDate": {
+            "description": "Date when the coupon becomes active",
+            "example": "2025-04-30T18:30:00.000Z",
+            "type": "string"
+          },
+          "status": {
+            "description": "Current status of the coupon",
+            "enum": ["scheduled", "active", "expired"],
+            "example": "scheduled",
+            "type": "string"
+          },
+          "traceId": {
+            "description": "Unique identifier for tracing this API request",
+            "example": "c667b18d-8f5e-44cf-a914",
+            "type": "string"
+          },
+          "updatedAt": {
+            "description": "Last update timestamp",
+            "example": "2025-04-09T18:49:22.026Z",
+            "type": "string"
+          },
+          "usageCount": {
+            "description": "Number of times the coupon has been used",
+            "example": 12,
+            "type": "number"
+          },
+          "userId": {
+            "description": "User ID associated with the coupon (if applicable)",
+            "example": "q0m15dTLGeiGOXG123123",
+            "type": "string"
+          }
+        },
+        "required": [
+          "_id",
+          "usageCount",
+          "limitPerCustomer",
+          "altId",
+          "altType",
+          "name",
+          "code",
+          "discountType",
+          "discountValue",
+          "status",
+          "startDate",
+          "applyToFuturePayments",
+          "applyToFuturePaymentsConfig",
+          "createdAt",
+          "updatedAt",
+          "traceId"
         ],
         "type": "object"
       },
@@ -728,6 +1109,44 @@
           }
         },
         "required": ["_id", "locationId", "name", "productType", "createdAt", "updatedAt"],
+        "type": "object"
+      },
+      "DeleteCouponParams": {
+        "properties": {
+          "altId": {
+            "description": "Location Id",
+            "example": "BQdAwxa0ky1iK2sstLGJ",
+            "type": "string"
+          },
+          "altType": {
+            "description": "Alt Type",
+            "enum": ["location"],
+            "example": "location",
+            "type": "string"
+          },
+          "id": {
+            "description": "Coupon Id",
+            "example": "6241712be68f7a98102ba272",
+            "type": "string"
+          }
+        },
+        "required": ["altId", "altType", "id"],
+        "type": "object"
+      },
+      "DeleteCouponResponseDto": {
+        "properties": {
+          "success": {
+            "description": "Indicates whether the delete was successful",
+            "example": true,
+            "type": "boolean"
+          },
+          "traceId": {
+            "description": "Unique identifier for tracing this API request",
+            "example": "c667b18d-8f5e-44cf-a914",
+            "type": "string"
+          }
+        },
+        "required": ["success", "traceId"],
         "type": "object"
       },
       "DeleteCustomProvidersConfigDto": {
@@ -1462,6 +1881,29 @@
         ],
         "type": "object"
       },
+      "ListCouponsResponseDto": {
+        "properties": {
+          "data": {
+            "description": "Array of coupon objects",
+            "items": {
+              "$ref": "#/components/schemas/CouponDto"
+            },
+            "type": "array"
+          },
+          "totalCount": {
+            "description": "Total number of coupons matching the query criteria",
+            "example": 20,
+            "type": "number"
+          },
+          "traceId": {
+            "description": "Unique identifier for tracing this API request",
+            "example": "c667b18d-8f5e-44cf-a914",
+            "type": "string"
+          }
+        },
+        "required": ["data", "totalCount", "traceId"],
+        "type": "object"
+      },
       "ListFulfillmentResponseDto": {
         "properties": {
           "data": {
@@ -2190,12 +2632,111 @@
           }
         },
         "type": "object"
+      },
+      "UpdateCouponParams": {
+        "properties": {
+          "altId": {
+            "description": "Location Id",
+            "example": "BQdAwxa0ky1iK2sstLGJ",
+            "type": "string"
+          },
+          "altType": {
+            "description": "Alt Type",
+            "enum": ["location"],
+            "example": "location",
+            "type": "string"
+          },
+          "applyToFuturePayments": {
+            "default": true,
+            "description": "Is Coupon applicable on upcoming subscription transactions",
+            "example": true,
+            "type": "boolean"
+          },
+          "applyToFuturePaymentsConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApplyToFuturePaymentsConfig"
+              }
+            ],
+            "default": {
+              "type": "forever"
+            },
+            "description": "If coupon is applicable on upcoming subscription transactions, how many months should it be applicable for a subscription",
+            "example": [
+              {
+                "duration": 5,
+                "durationType": "months",
+                "type": "fixed"
+              },
+              {
+                "type": "forever"
+              }
+            ]
+          },
+          "code": {
+            "description": "Coupon Code",
+            "example": "LEVELUPDAY2022",
+            "type": "string"
+          },
+          "discountType": {
+            "description": "Discount Type",
+            "enum": ["percentage", "amount"],
+            "example": "amount",
+            "type": "string"
+          },
+          "discountValue": {
+            "description": "Discount Value",
+            "example": 10,
+            "type": "number"
+          },
+          "endDate": {
+            "description": "End date in YYYY-MM-DDTHH:mm:ssZ format",
+            "example": "2023-01-31T22:45:00.000Z",
+            "type": "string"
+          },
+          "id": {
+            "description": "Coupon Id",
+            "example": "6241712be68f7a98102ba272",
+            "type": "string"
+          },
+          "limitPerCustomer": {
+            "default": false,
+            "description": "Limits whether a coupon can be redeemed only once per customer.",
+            "example": true,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Coupon Name",
+            "example": "New Year Sale",
+            "type": "string"
+          },
+          "productIds": {
+            "description": "Product Ids",
+            "example": ["6241712be68f7a98102ba272"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "startDate": {
+            "description": "Start date in YYYY-MM-DDTHH:mm:ssZ format",
+            "example": "2023-01-01T22:45:00.000Z",
+            "type": "string"
+          },
+          "usageLimit": {
+            "description": "Max number of times coupon can be used",
+            "example": 10,
+            "type": "number"
+          }
+        },
+        "required": ["altId", "altType", "name", "code", "discountType", "discountValue", "startDate", "id"],
+        "type": "object"
       }
     },
     "securitySchemes": {
       "Agency-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
+        "description": "Use the Access Token generated with user type as Company",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -2203,7 +2744,7 @@
       },
       "Location-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "description": "Use the Access Token generated with user type as Location",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -2211,7 +2752,7 @@
       },
       "bearer": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "description": "Use the Access Token generated with user type as Location",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -2227,6 +2768,420 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/payments/coupon": {
+      "delete": {
+        "description": "The \"Delete Coupon\" API allows you to permanently remove a coupon from your system using its unique identifier. Use this endpoint to discontinue promotional offers or clean up unused coupons. Note that this action cannot be undone.",
+        "operationId": "delete-coupon",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCouponParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCouponResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Delete Coupon",
+        "tags": ["Coupons"]
+      },
+      "get": {
+        "description": "The \"Get Coupon Details\" API enables you to retrieve comprehensive information about a specific coupon using either its unique identifier or promotional code. Use this endpoint to view coupon parameters, usage statistics, validity periods, and other promotional details.",
+        "operationId": "get-coupon",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location Id",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "example": "BQdAwxa0ky1iK2sstLGJ",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Alt Type",
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["location"],
+              "example": "location",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Coupon id",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "6241712be68f7a98102ba272",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Coupon code",
+            "in": "query",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "example": "DEAL50",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCouponResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Fetch Coupon",
+        "tags": ["Coupons"]
+      },
+      "post": {
+        "description": "The \"Create Coupon\" API allows you to create a new promotional coupon with customizable parameters such as discount amount, validity period, usage limits, and applicable products. Use this endpoint to set up promotional offers and special discounts for your customers.",
+        "operationId": "create-coupon",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCouponParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCouponResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Create Coupon",
+        "tags": ["Coupons"]
+      },
+      "put": {
+        "description": "The \"Update Coupon\" API enables you to modify existing coupon details such as discount values, validity periods, usage limits, and other promotional parameters. Use this endpoint to adjust or extend promotional offers for your customers.",
+        "operationId": "update-coupon",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCouponParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCouponResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "Update Coupon",
+        "tags": ["Coupons"]
+      }
+    },
+    "/payments/coupon/list": {
+      "get": {
+        "description": "The \"List Coupons\" API allows you to retrieve a list of all coupons available in your location. Use this endpoint to view all promotional offers and special discounts for your customers.",
+        "operationId": "list-coupons",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location Id",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "example": "BQdAwxa0ky1iK2sstLGJ",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Alt Type",
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["location"],
+              "example": "location",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of coupons to return",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Number of coupons to skip for pagination",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Filter coupons by status",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": ["scheduled", "active", "expired"],
+              "example": "active",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search term to filter coupons by name or code",
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "example": "DEAL50",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCouponsResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          }
+        ],
+        "summary": "List Coupons",
+        "tags": ["Coupons"]
+      }
+    },
     "/payments/custom-provider/connect": {
       "get": {
         "description": "API for fetching an existing payment config for given location",

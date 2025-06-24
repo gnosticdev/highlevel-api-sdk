@@ -51,6 +51,52 @@
         "required": ["status", "message"],
         "type": "object"
       },
+      "ConversationCreateResponseDto": {
+        "properties": {
+          "assignedTo": {
+            "description": "Unique identifier of the team member assigned to this conversation",
+            "example": "ve9EPM428kjkvShlRW1KT",
+            "type": "string"
+          },
+          "contactId": {
+            "description": "Unique identifier of the contact associated with this conversation",
+            "example": "ve9EPM428kjkvShlRW1KT",
+            "type": "string"
+          },
+          "dateAdded": {
+            "description": "Date when the conversation was created",
+            "example": "2023-10-01T12:00:00Z",
+            "type": "string"
+          },
+          "dateUpdated": {
+            "description": "Date when the conversation was last updated",
+            "example": "2023-10-01T12:00:00Z",
+            "type": "string"
+          },
+          "deleted": {
+            "description": "Flag indicating if this conversation has been deleted",
+            "example": false,
+            "type": "boolean"
+          },
+          "id": {
+            "description": "Unique identifier for the conversation",
+            "example": "tDtDnQdgm2LXpyiqYvZ6",
+            "type": "string"
+          },
+          "lastMessageDate": {
+            "description": "Date of the last message in the conversation",
+            "example": "2023-10-01T12:00:00Z",
+            "type": "string"
+          },
+          "locationId": {
+            "description": "Unique identifier of the business location where this conversation takes place",
+            "example": "ve9EPM428kjkvShlRW1KT",
+            "type": "string"
+          }
+        },
+        "required": ["id", "dateUpdated", "dateAdded", "deleted", "contactId", "locationId", "lastMessageDate"],
+        "type": "object"
+      },
       "ConversationDto": {
         "properties": {
           "assignedTo": {
@@ -89,7 +135,7 @@
             "type": "string"
           },
           "lastMessageType": {
-            "description": "Type of the last message sent/receieved in the conversation.",
+            "description": "Type of the last message sent/received in the conversation.",
             "enum": [
               "TYPE_CALL",
               "TYPE_SMS",
@@ -124,7 +170,8 @@
               "TYPE_ACTIVITY_APPOINTMENT",
               "TYPE_FACEBOOK_COMMENT",
               "TYPE_INSTAGRAM_COMMENT",
-              "TYPE_ACTIVITY"
+              "TYPE_CUSTOM_CALL",
+              "TYPE_INTERNAL_COMMENT"
             ],
             "example": "TYPE_CALL",
             "type": "string"
@@ -161,17 +208,17 @@
             "type": "string"
           },
           "contactName": {
-            "description": "Name of the contact in case the Full Name is missing, may contain the company name or the contact email",
+            "description": "Alternative display name for the contact - used when full name is not available",
             "example": "John Doe Company",
             "type": "string"
           },
           "email": {
-            "description": "Email of the contact",
+            "description": "Primary email address of the contact",
             "example": "johndoe@mailingdomain.com",
             "type": "string"
           },
           "fullName": {
-            "description": "Full name of the contact",
+            "description": "Complete name of the contact (first and last name)",
             "example": "John Doe",
             "type": "string"
           },
@@ -181,12 +228,12 @@
             "type": "string"
           },
           "lastMessageBody": {
-            "description": "Last Message Body of the conversation",
+            "description": "Content of the most recent message in the conversation",
             "example": "This is a sample message body",
             "type": "string"
           },
           "lastMessageType": {
-            "description": "Last message type of the conversation",
+            "description": "Channel/type of the most recent message (SMS, Email, Call, etc)",
             "enum": [
               "TYPE_CALL",
               "TYPE_SMS",
@@ -221,7 +268,8 @@
               "TYPE_ACTIVITY_APPOINTMENT",
               "TYPE_FACEBOOK_COMMENT",
               "TYPE_INSTAGRAM_COMMENT",
-              "TYPE_ACTIVITY"
+              "TYPE_CUSTOM_CALL",
+              "TYPE_INTERNAL_COMMENT"
             ],
             "example": "TYPE_SMS",
             "type": "string"
@@ -232,18 +280,18 @@
             "type": "string"
           },
           "phone": {
-            "description": "Phone number of the contact",
+            "description": "Primary phone number of the contact",
             "example": "+15550001234",
             "type": "string"
           },
           "type": {
-            "description": "Type of the conversation",
-            "enum": ["TYPE_PHONE", "TYPE_EMAIL", "TYPE_FB_MESSENGER", "TYPE_REVIEW"],
+            "description": "Primary channel/type of the conversation (Phone, Email, etc)",
+            "enum": ["TYPE_PHONE", "TYPE_EMAIL", "TYPE_FB_MESSENGER", "TYPE_REVIEW", "TYPE_GROUP_SMS"],
             "example": "TYPE_PHONE",
             "type": "string"
           },
           "unreadCount": {
-            "description": "Unread count of the messages in the conversation",
+            "description": "Number of unread messages in this conversation",
             "example": 1,
             "type": "number"
           }
@@ -277,6 +325,25 @@
           }
         },
         "required": ["locationId", "contactId"],
+        "type": "object"
+      },
+      "CreateConversationSuccessResponse": {
+        "properties": {
+          "conversation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConversationCreateResponseDto"
+              }
+            ],
+            "description": "Conversation data of the provided conversation ID."
+          },
+          "success": {
+            "description": "Indicates whether the API request was successful.",
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "required": ["success", "conversation"],
         "type": "object"
       },
       "CreateLiveChatMessageFeedbackResponse": {
@@ -323,34 +390,51 @@
       "GetConversationByIdResponse": {
         "properties": {
           "assignedTo": {
+            "description": "Unique identifier of the team member currently responsible for handling this conversation",
+            "example": "ve9EPM428kjkvShlRW1KT",
             "type": "string"
           },
           "contactId": {
+            "description": "Unique identifier of the contact associated with this conversation",
+            "example": "ve9EPM428kjkvShlRW1KT",
             "type": "string"
           },
           "deleted": {
+            "description": "Flag indicating if this conversation has been moved to trash/deleted",
+            "example": false,
             "type": "boolean"
           },
           "id": {
+            "description": "Unique identifier for this specific conversation thread",
+            "example": "ve9EPM428kjkvShlRW1KT",
             "type": "string"
           },
           "inbox": {
+            "description": "Flag indicating if this conversation is currently in the main inbox view",
+            "example": true,
             "type": "boolean"
           },
           "locationId": {
+            "description": "Unique identifier of the business location where this conversation takes place",
+            "example": "ve9EPM428kjkvShlRW1KT",
             "type": "string"
           },
           "starred": {
+            "description": "Flag indicating if this conversation has been marked as important/starred by the user",
+            "example": true,
             "type": "boolean"
           },
           "type": {
+            "description": "Communication channel type for this conversation: 1 (Phone), 2 (Email), 3 (Facebook Messenger), 4 (Review), 5 (Group SMS), 6 (Internal Chat - coming soon)",
             "type": "number"
           },
           "unreadCount": {
+            "description": "Number of messages in this conversation that have not been read by the user",
+            "example": 1,
             "type": "number"
           }
         },
-        "required": ["contactId", "locationId", "deleted", "inbox", "type", "unreadCount", "assignedTo", "id"],
+        "required": ["contactId", "locationId", "deleted", "inbox", "type", "unreadCount", "id"],
         "type": "object"
       },
       "GetConversationSuccessfulResponse": {
@@ -416,6 +500,11 @@
             "example": "ve9EPM428h8vShlRW1KT",
             "type": "string"
           },
+          "conversationProviderId": {
+            "description": "Conversation provider ID",
+            "example": "cI08i1Bls3iTB9bKgF01",
+            "type": "string"
+          },
           "dateAdded": {
             "example": "2024-03-27T18:13:49.000Z",
             "type": "string"
@@ -445,7 +534,7 @@
             "type": "string"
           },
           "source": {
-            "description": "Email Message source",
+            "description": "Email source",
             "enum": ["workflow", "bulk_actions", "campaign", "api", "app"],
             "type": "string"
           },
@@ -520,6 +609,11 @@
             "example": "ve9EPM428h8vShlRW1KT",
             "type": "string"
           },
+          "conversationProviderId": {
+            "description": "Conversation Provider Id",
+            "example": "ve9EPM428kjkvShlRW1KT",
+            "type": "string"
+          },
           "dateAdded": {
             "example": "2024-03-27T18:13:49.000Z",
             "type": "string"
@@ -573,19 +667,13 @@
               "TYPE_FACEBOOK_COMMENT",
               "TYPE_INSTAGRAM_COMMENT",
               "TYPE_CUSTOM_CALL",
-              "TYPE_ACTIVITY"
+              "TYPE_INTERNAL_COMMENT"
             ],
             "example": "SMS",
             "type": "string"
           },
           "meta": {
-            "description": "meta will contain email, for message type 3 (email). messageIds is list of all email message ids under the message thread",
-            "example": {
-              "email": {
-                "messageIds": ["p1mRSHeLDhAms5q0LMr4"]
-              }
-            },
-            "type": "object"
+            "$ref": "#/components/schemas/MessageMeta"
           },
           "source": {
             "description": "Message source",
@@ -594,15 +682,17 @@
           },
           "status": {
             "enum": [
+              "connected",
+              "delivered",
+              "failed",
+              "opened",
               "pending",
+              "read",
               "scheduled",
               "sent",
-              "delivered",
-              "read",
               "undelivered",
-              "connected",
-              "failed",
-              "opened"
+              "clicked",
+              "opt_out"
             ],
             "type": "string"
           },
@@ -688,6 +778,31 @@
         "required": ["lastMessageId", "nextPage", "messages"],
         "type": "object"
       },
+      "MessageMeta": {
+        "properties": {
+          "callDuration": {
+            "description": "Call duration in seconds",
+            "example": 120,
+            "type": "string"
+          },
+          "callStatus": {
+            "description": "Call status - can be pending, completed, answered, busy, no-answer, failed, canceled, or voicemail",
+            "enum": ["pending", "completed", "answered", "busy", "no-answer", "failed", "canceled", "voicemail"],
+            "example": "completed",
+            "type": "string"
+          },
+          "email": {
+            "description": "meta will contain email, for message type 3 (email). messageIds is list of all email message ids under the message thread",
+            "example": {
+              "email": {
+                "messageIds": ["ve9EPM428kjkvShlRW1KT", "ve9EPs1028kjkvShlRW1KT"]
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "ProcessMessageBodyDto": {
         "properties": {
           "altId": {
@@ -748,7 +863,8 @@
             "type": "array"
           },
           "emailFrom": {
-            "description": "From Email Address",
+            "description": "Email address to send from. This field is associated with the contact record and cannot be dynamically changed.",
+            "example": "sender@company.com",
             "type": "string"
           },
           "emailMessageId": {
@@ -756,7 +872,7 @@
             "type": "string"
           },
           "emailTo": {
-            "description": "To Email Address",
+            "description": "Recipient email address. This field is associated with the contact record and cannot be dynamically changed.",
             "type": "string"
           },
           "html": {
@@ -881,56 +997,78 @@
       "SendMessageBodyDto": {
         "properties": {
           "appointmentId": {
+            "description": "ID of the associated appointment",
+            "example": "appt123",
             "type": "string"
           },
           "attachments": {
+            "description": "Array of attachment URLs",
+            "example": ["https://storage.com/file1.pdf", "https://storage.com/file2.jpg"],
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "contactId": {
+            "description": "ID of the contact receiving the message",
+            "example": "abc123def456",
             "type": "string"
           },
           "conversationProviderId": {
+            "description": "ID of conversation provider",
+            "example": "provider123",
             "type": "string"
           },
           "emailBcc": {
+            "description": "Array of BCC email addresses",
+            "example": ["bcc1@company.com", "bcc2@company.com"],
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "emailCc": {
+            "description": "Array of CC email addresses",
+            "example": ["cc1@company.com", "cc2@company.com"],
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "emailFrom": {
+            "description": "Email address to send from",
+            "example": "sender@company.com",
             "type": "string"
           },
           "emailReplyMode": {
+            "description": "Mode for email replies",
             "enum": ["reply", "reply_all"],
+            "example": "reply_all",
             "type": "string"
           },
           "emailTo": {
-            "description": "`emailTo` field is used when you want to send the email to a different email address than the contact's primary email.",
+            "description": "Email address to send to, if different from contact's primary email. This should be a valid email address associated with the contact.",
+            "example": "recipient@company.com",
             "type": "string"
           },
           "fromNumber": {
-            "description": "The phone number from which the message is being sent.",
+            "description": "Phone number used as the sender number for outbound messages",
             "example": "+1499499299",
             "type": "string"
           },
           "html": {
+            "description": "HTML content of the message",
+            "example": "<p>Hello World</p>",
             "type": "string"
           },
           "message": {
+            "description": "Text content of the message",
+            "example": "Hello, how can I help you today?",
             "type": "string"
           },
           "replyMessageId": {
-            "description": "Specify the emailId on which the reply needs to go out",
+            "description": "ID of message being replied to",
+            "example": "msg123",
             "type": "string"
           },
           "scheduledTimestamp": {
@@ -939,18 +1077,29 @@
             "type": "number"
           },
           "subject": {
+            "description": "Subject line for email messages",
+            "example": "Important Update",
             "type": "string"
           },
           "templateId": {
+            "description": "ID of message template",
+            "example": "template123",
+            "type": "string"
+          },
+          "threadId": {
+            "description": "ID of message thread. For email messages, this is the message ID that contains multiple email messages in the thread",
+            "example": "thread123",
             "type": "string"
           },
           "toNumber": {
-            "description": "The phone number to which the message is being sent.",
+            "description": "Recipient phone number for outbound messages",
             "example": "+1439499299",
             "type": "string"
           },
           "type": {
-            "enum": ["SMS", "Email", "WhatsApp", "GMB", "IG", "FB", "Custom", "Live_Chat"],
+            "description": "Type of message being sent",
+            "enum": ["SMS", "Email", "WhatsApp", "IG", "FB", "Custom", "Live_Chat"],
+            "example": "Email",
             "type": "string"
           }
         },
@@ -1098,7 +1247,7 @@
           },
           "status": {
             "description": "Message status",
-            "enum": ["read", "pending", "delivered", "failed"],
+            "enum": ["delivered", "failed", "pending", "read"],
             "example": "read",
             "type": "string"
           }
@@ -1170,7 +1319,7 @@
             "type": "string"
           },
           "visitorId": {
-            "description": "Visitor Id",
+            "description": "visitorId is the Unique ID assigned to each Live chat visitor. visitorId will be added soon in <a href=\"https://highlevel.stoplight.io/docs/integrations/00c5ff21f0030-get-contact\" target=\"_blank\">GET Contact API</a>",
             "example": "ve9EPM428h8vShlRW1KT",
             "type": "string"
           }
@@ -1255,7 +1404,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetConversationSuccessfulResponse"
+                  "$ref": "#/components/schemas/CreateConversationSuccessResponse"
                 }
               }
             },
@@ -1318,21 +1467,21 @@
           },
           {
             "description": "Location ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "locationId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           },
           {
             "description": "Message ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "messageId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           }
@@ -1408,21 +1557,21 @@
           },
           {
             "description": "Location ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "locationId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           },
           {
             "description": "Message ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "messageId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           }
@@ -1573,11 +1722,11 @@
           },
           {
             "description": "Email Message Id",
-            "example": "ve9EPM428h8vShlRW1KT",
             "in": "path",
             "name": "emailMessageId",
             "required": true,
             "schema": {
+              "example": "ve9EPM428h8vShlRW1KT",
               "type": "string"
             }
           }
@@ -1786,7 +1935,7 @@
     },
     "/conversations/messages/upload": {
       "post": {
-        "description": "Post the necessary fields for the API to upload files. The files need to be a buffer with the key \"fileAttachment\". <br /><br /> The allowed file types are: <br> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li></ul> <br /><br /> The API will return an object with the URLs",
+        "description": "Post the necessary fields for the API to upload files. The files need to be a buffer with the key \"fileAttachment\". <br /><br /> The allowed file types are: <br> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li><li>MP3</li><li>WAV</li></ul> <br /><br /> The API will return an object with the URLs",
         "operationId": "upload-file-attachments",
         "parameters": [
           {
@@ -1975,21 +2124,21 @@
           },
           {
             "description": "Location ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "locationId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           },
           {
             "description": "Message ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "messageId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           }
@@ -2066,11 +2215,11 @@
           },
           {
             "description": "Message Id",
-            "example": "ve9EPM428h8vShlRW1KT",
             "in": "path",
             "name": "messageId",
             "required": true,
             "schema": {
+              "example": "ve9EPM428h8vShlRW1KT",
               "type": "string"
             }
           }
@@ -2143,11 +2292,11 @@
           },
           {
             "description": "Message Id",
-            "example": "ve9EPM428h8vShlRW1KT",
             "in": "path",
             "name": "messageId",
             "required": true,
             "schema": {
+              "example": "ve9EPM428h8vShlRW1KT",
               "type": "string"
             }
           }
@@ -2317,62 +2466,72 @@
           },
           {
             "description": "Location Id",
-            "example": "ABCHkzuJQ8ZMd4Te84GK",
             "in": "query",
             "name": "locationId",
             "required": true,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK",
               "type": "string"
             }
           },
           {
             "description": "Contact Id",
-            "example": "9VEmS0si86GW6gXWU89b",
             "in": "query",
             "name": "contactId",
             "required": false,
             "schema": {
+              "example": "9VEmS0si86GW6gXWU89b",
               "type": "string"
             }
           },
           {
-            "description": "Assigned to user Id. Multiple values are comma separated. \"unassigned\" is used to fetch all unassigned conversations",
-            "example": "ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik",
+            "description": "User IDs that conversations are assigned to. Multiple IDs can be provided as comma-separated values. Use \"unassigned\" to fetch conversations not assigned to any user.",
             "in": "query",
             "name": "assignedTo",
             "required": false,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik",
               "type": "string"
             }
           },
           {
-            "description": "User Id of the follower. Multiple values are comma separated.",
-            "example": "ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik",
+            "description": "User IDs of followers to filter conversations by. Multiple IDs can be provided as comma-separated values.",
             "in": "query",
             "name": "followers",
             "required": false,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik",
+              "type": "string"
+            }
+          },
+          {
+            "description": "User Id of the mention. Multiple values are comma separated.",
+            "in": "query",
+            "name": "mentions",
+            "required": false,
+            "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK,fGiae4CHkzoskh8thsik",
               "type": "string"
             }
           },
           {
             "description": "Search paramater as a string",
-            "example": "Search string",
             "in": "query",
             "name": "query",
             "required": false,
             "schema": {
+              "example": "Search string",
               "type": "string"
             }
           },
           {
             "description": "Sort paramater - asc or desc",
-            "example": "asc",
             "in": "query",
             "name": "sort",
             "required": false,
             "schema": {
               "enum": ["asc", "desc"],
+              "example": "asc",
               "type": "string"
             }
           },
@@ -2386,37 +2545,36 @@
               }
             ],
             "description": "Search to begin after the specified date - should contain the sort value of the last document",
-            "example": 1600854,
             "in": "query",
             "name": "startAfterDate",
             "required": false,
             "schema": {
+              "example": 1600854,
               "type": "any"
             }
           },
           {
             "description": "Id of the conversation",
-            "example": "ABCHkzuJQ8ZMd4Te84GK",
             "in": "query",
             "name": "id",
             "required": false,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK",
               "type": "string"
             }
           },
           {
             "description": "Limit of conversations - Default is 20",
-            "example": 20,
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
+              "example": 20,
               "type": "number"
             }
           },
           {
             "description": "Type of the last message in the conversation as a string",
-            "example": "TYPE_SMS",
             "in": "query",
             "name": "lastMessageType",
             "required": false,
@@ -2455,92 +2613,94 @@
                 "TYPE_ACTIVITY_APPOINTMENT",
                 "TYPE_FACEBOOK_COMMENT",
                 "TYPE_INSTAGRAM_COMMENT",
-                "TYPE_ACTIVITY"
+                "TYPE_CUSTOM_CALL",
+                "TYPE_INTERNAL_COMMENT"
               ],
+              "example": "TYPE_SMS",
               "type": "string"
             }
           },
           {
             "description": "Action of the last outbound message in the conversation as string.",
-            "example": "manual",
             "in": "query",
             "name": "lastMessageAction",
             "required": false,
             "schema": {
               "enum": ["automated", "manual"],
+              "example": "manual",
               "type": "string"
             }
           },
           {
             "description": "Direction of the last message in the conversation as string.",
-            "example": "inbound",
             "in": "query",
             "name": "lastMessageDirection",
             "required": false,
             "schema": {
               "enum": ["inbound", "outbound"],
+              "example": "inbound",
               "type": "string"
             }
           },
           {
             "description": "The status of the conversation to be filtered - all, read, unread, starred ",
-            "example": "all",
             "in": "query",
             "name": "status",
             "required": false,
             "schema": {
               "enum": ["all", "read", "unread", "starred", "recents"],
+              "example": "all",
               "type": "string"
             }
           },
           {
             "description": "The sorting of the conversation to be filtered as - manual messages or all messages",
-            "example": "last_message_date",
             "in": "query",
             "name": "sortBy",
             "required": false,
             "schema": {
               "enum": ["last_manual_message_date", "last_message_date", "score_profile"],
+              "example": "last_message_date",
               "type": "string"
             }
           },
           {
             "description": "Id of score profile on which sortBy.ScoreProfile should sort on",
-            "example": "ABCHkzuJQ8ZMd4Te84GK",
             "in": "query",
             "name": "sortScoreProfile",
             "required": false,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK",
               "type": "string"
             }
           },
           {
             "description": "Id of score profile on which conversations should get filtered out, works with scoreProfileMin & scoreProfileMax",
-            "example": "ABCHkzuJQ8ZMd4Te84GK",
             "in": "query",
             "name": "scoreProfile",
             "required": false,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK",
               "type": "string"
             }
           },
           {
             "description": "Minimum value for score",
-            "example": "ABCHkzuJQ8ZMd4Te84GK",
             "in": "query",
             "name": "scoreProfileMin",
             "required": false,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK",
               "type": "number"
             }
           },
           {
             "description": "Maximum value for score",
-            "example": "ABCHkzuJQ8ZMd4Te84GK",
             "in": "query",
             "name": "scoreProfileMax",
             "required": false,
             "schema": {
+              "example": "ABCHkzuJQ8ZMd4Te84GK",
               "type": "number"
             }
           }
@@ -2613,11 +2773,11 @@
           },
           {
             "description": "Conversation ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "conversationId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           }
@@ -2688,11 +2848,11 @@
           },
           {
             "description": "Conversation ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "conversationId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           }
@@ -2763,11 +2923,11 @@
           },
           {
             "description": "Conversation ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "conversationId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           }
@@ -2850,37 +3010,36 @@
           },
           {
             "description": "Conversation ID as string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "path",
             "name": "conversationId",
             "required": true,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           },
           {
             "description": "Message ID of the last message in the list as a string",
-            "example": "tDtDnQdgm2LXpyiqYvZ6",
             "in": "query",
             "name": "lastMessageId",
             "required": false,
             "schema": {
+              "example": "tDtDnQdgm2LXpyiqYvZ6",
               "type": "string"
             }
           },
           {
             "description": "Number of messages to be fetched from the conversation. Default limit is 20",
-            "example": 20,
             "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
+              "example": 20,
               "type": "number"
             }
           },
           {
             "description": "Types of message to fetched separated with comma",
-            "example": "TYPE_SMS,TYPE_CALL",
             "in": "query",
             "name": "type",
             "required": false,
@@ -2893,13 +3052,15 @@
                 "TYPE_GMB",
                 "TYPE_INSTAGRAM",
                 "TYPE_WHATSAPP",
+                "TYPE_ACTIVITY_APPOINTMENT",
                 "TYPE_ACTIVITY_CONTACT",
                 "TYPE_ACTIVITY_INVOICE",
                 "TYPE_ACTIVITY_PAYMENT",
                 "TYPE_ACTIVITY_OPPORTUNITY",
                 "TYPE_LIVE_CHAT",
-                "TYPE_ACTIVITY_APPOINTMENT"
+                "TYPE_INTERNAL_COMMENTS"
               ],
+              "example": "TYPE_SMS,TYPE_CALL",
               "type": "string"
             }
           }

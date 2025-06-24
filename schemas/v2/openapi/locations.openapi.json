@@ -2047,7 +2047,7 @@
     "securitySchemes": {
       "Agency-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -2958,17 +2958,26 @@
           },
           {
             "description": "Location Id",
-            "example": "ve9EPM428h8vShlRW1KT",
             "in": "path",
             "name": "locationId",
             "required": true,
             "schema": {
+              "example": "ve9EPM428h8vShlRW1KT",
               "type": "string"
             }
           },
           {
-            "description": "Custom Field Id",
-            "example": "00NhGCcN1tlO8ZHcu7Wb",
+            "description": "Custom Field Id or Field Key (e.g. \"contact.first_name\" or \"opportunity.pipeline_id\")",
+            "examples": {
+              "field_key": {
+                "summary": "Custom Field Key",
+                "value": "contact.first_name"
+              },
+              "id": {
+                "summary": "Custom Field ID",
+                "value": "00NhGCcN1tlO8ZHcu7Wb"
+              }
+            },
             "in": "path",
             "name": "id",
             "required": true,

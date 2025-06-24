@@ -1,8 +1,6 @@
 import { raw } from 'hono/html'
 import type { FC } from 'hono/jsx'
 
-import {} from '@gnosticdev/highlevel-sdk'
-
 const cssFilePath = new URL('./style.css', import.meta.url)
 
 const Layout: FC = async (props) => {
@@ -15,17 +13,14 @@ const Layout: FC = async (props) => {
           href='https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css'
           rel='stylesheet'
         />
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: */}
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: bc */}
         <style dangerouslySetInnerHTML={{ __html: cssText }} />
       </head>
       <body>{props.children}</body>
     </html>
   )
 }
-export const Home: FC<{ buttonLink?: string; notice?: string }> = (props: {
-  buttonLink?: string
-  notice?: string
-}) => {
+export const Home: FC<{ buttonLink?: string; notice?: string }> = (props: { buttonLink?: string; notice?: string }) => {
   return (
     <Layout>
       <main>
@@ -48,11 +43,7 @@ export const Result: FC<{
   message: string
   accessToken?: string
   routes?: string[]
-}> = (props: {
-  message: string
-  accessToken?: string
-  routes?: string[]
-}) => {
+}> = (props: { message: string; accessToken?: string; routes?: string[] }) => {
   return (
     <Layout>
       {props.accessToken ? (

@@ -1,12 +1,6 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"assists": {
-		"actions": {
-			"source": { "sortJsxProps": "on", "useSortedKeys": "on" }
-		},
-		"enabled": true,
-		"ignore": ["package.json"]
-	},
+	"$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+
 	"css": {
 		"formatter": {
 			"enabled": true
@@ -14,21 +8,26 @@
 	},
 
 	"files": {
-		"ignore": [
-			"node_modules",
-			"**/_![__tests__]",
-			"dist",
-			".wrangler",
-			".vscode",
-			"schemas/v1/postman.json"
-		],
-		"include": ["**/*[.js,.jsx,.ts,.tsx,.astro,.css,.json,.jsonc]"]
+		"includes": [
+			"**/*.js",
+			"**/*.ts",
+			"**/*.tsx",
+			"**/*.json",
+			"**/*.jsonc",
+			"!**/node_modules",
+			"!**/_!\\[__tests__\\]",
+			"!**/dist",
+			"!**/.wrangler",
+			"!**/.vscode",
+			"!**/schemas/v1/postman.json"
+		]
 	},
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": true
 	},
 	"javascript": {
+		"assist": { "enabled": true },
 		"formatter": {
 			"jsxQuoteStyle": "single",
 			"quoteStyle": "single",
@@ -36,7 +35,7 @@
 		}
 	},
 	"json": {
-		"assists": {
+		"assist": {
 			"enabled": true
 		},
 		"parser": {
@@ -57,16 +56,24 @@
 			},
 			"recommended": true,
 			"style": {
-				"noNonNullAssertion": "off"
+				"noNonNullAssertion": "off",
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
 			}
 		}
 	},
-	"organizeImports": {
-		"enabled": true
-	},
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"overrides": [
 		{
-			"include": ["./**/*.js"],
+			"includes": ["**/*.js"],
 			"linter": {
 				"enabled": false
 			}
@@ -78,7 +85,7 @@
 				"indentWidth": 2,
 				"lineWidth": 120
 			},
-			"include": ["schemas/**/*.json"],
+			"includes": ["**/schemas/**/*.json"],
 			"linter": {
 				"enabled": true,
 				"rules": {
@@ -95,7 +102,7 @@
 				"indentWidth": 2,
 				"lineWidth": 120
 			},
-			"include": ["./**/*.tsx"]
+			"includes": ["**/*.tsx"]
 		}
 	],
 	"vcs": {

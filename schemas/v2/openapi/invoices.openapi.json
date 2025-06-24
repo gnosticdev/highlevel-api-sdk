@@ -46,10 +46,84 @@
         },
         "type": "object"
       },
+      "AltDto": {
+        "properties": {
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          }
+        },
+        "required": ["altId", "altType"],
+        "type": "object"
+      },
+      "AttachmentsDto": {
+        "properties": {
+          "id": {
+            "description": "Id of the file selected",
+            "example": "6241712be68f7a98102ba272",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the file ",
+            "example": "Electronics.pdf",
+            "type": "string"
+          },
+          "size": {
+            "description": "Size of the file",
+            "example": 10000,
+            "type": "number"
+          },
+          "type": {
+            "description": "Type of the file",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL of the file",
+            "example": "https://example.com/digital-delivery",
+            "type": "string"
+          }
+        },
+        "required": ["id", "name", "url", "type", "size"],
+        "type": "object"
+      },
+      "AutoInvoice": {
+        "properties": {},
+        "type": "object"
+      },
+      "AutoInvoicingDto": {
+        "properties": {
+          "directPayments": {
+            "description": "Direct Payments",
+            "example": true,
+            "type": "boolean"
+          },
+          "enabled": {
+            "description": "Enable Auto Invoice",
+            "example": true,
+            "type": "boolean"
+          }
+        },
+        "required": ["enabled"],
+        "type": "object"
+      },
       "AutoPaymentDetailsDto": {
         "properties": {
+          "bacsDirectDebit": {
+            "$ref": "#/components/schemas/BacsDirectDebitDTO"
+          },
+          "becsDirectDebit": {
+            "$ref": "#/components/schemas/BecsDirectDebitDTO"
+          },
           "card": {
             "$ref": "#/components/schemas/CardDto"
+          },
+          "cardId": {
+            "type": "string"
           },
           "customerId": {
             "type": "string"
@@ -59,6 +133,9 @@
           },
           "paymentMethodId": {
             "type": "string"
+          },
+          "sepaDirectDebit": {
+            "$ref": "#/components/schemas/SepaDirectDebitDTO"
           },
           "type": {
             "type": "string"
@@ -265,6 +342,18 @@
         "required": ["altId", "altType", "id", "autoPayment"],
         "type": "object"
       },
+      "BacsDirectDebitDTO": {
+        "properties": {
+          "last4": {
+            "type": "string"
+          },
+          "sort_code": {
+            "type": "string"
+          }
+        },
+        "required": ["sort_code", "last4"],
+        "type": "object"
+      },
       "BadRequestDTO": {
         "properties": {
           "message": {
@@ -276,6 +365,22 @@
             "type": "number"
           }
         },
+        "type": "object"
+      },
+      "BecsDirectDebitDTO": {
+        "properties": {
+          "bsb_number": {
+            "type": "string"
+          },
+          "last4": {
+            "type": "string"
+          }
+        },
+        "required": ["bsb_number", "last4"],
+        "type": "object"
+      },
+      "BusinessDetails": {
+        "properties": {},
         "type": "object"
       },
       "BusinessDetailsDto": {
@@ -526,6 +631,10 @@
         "required": ["number"],
         "type": "object"
       },
+      "ContactDetails": {
+        "properties": {},
+        "type": "object"
+      },
       "ContactDetailsDto": {
         "properties": {
           "additionalEmails": {
@@ -567,11 +676,165 @@
           },
           "phoneNo": {
             "description": "Contact Phone Number",
-            "example": "+1-214-559-6993",
+            "example": "+1234567890",
             "type": "string"
           }
         },
         "required": ["id", "name"],
+        "type": "object"
+      },
+      "CreateEstimatesDto": {
+        "properties": {
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "autoInvoice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutoInvoicingDto"
+              }
+            ],
+            "description": "Auto invoice for the estimate",
+            "example": {
+              "directPayments": true,
+              "enabled": true
+            }
+          },
+          "automaticTaxesEnabled": {
+            "default": false,
+            "description": "Automatic taxes enabled for the Estimate",
+            "example": true,
+            "type": "boolean"
+          },
+          "businessDetails": {
+            "$ref": "#/components/schemas/BusinessDetailsDto"
+          },
+          "contactDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactDetailsDto"
+              }
+            ],
+            "description": "Contact information to send the estimate to"
+          },
+          "currency": {
+            "description": "Currency code",
+            "example": "USD",
+            "type": "string"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/DiscountDto"
+          },
+          "estimateNumber": {
+            "description": "Estimate Number, if not specified will take in the next valid estimate number",
+            "example": 1001,
+            "type": "number"
+          },
+          "estimateNumberPrefix": {
+            "default": "EST-",
+            "description": "Prefix for the estimate number",
+            "example": "EST-",
+            "type": "string"
+          },
+          "expiryDate": {
+            "description": "expiry date estimate",
+            "example": "2024-08-10",
+            "type": "string"
+          },
+          "frequencySettings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FrequencySettingsDto"
+              }
+            ],
+            "description": "frequency settings for the estimate"
+          },
+          "issueDate": {
+            "description": "issue date estimate",
+            "example": "2024-08-07",
+            "type": "string"
+          },
+          "items": {
+            "description": "An array of items for the estimate.",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceItemDto"
+            },
+            "type": "array"
+          },
+          "liveMode": {
+            "default": true,
+            "description": "livemode for estimate",
+            "example": true,
+            "type": "boolean"
+          },
+          "meta": {
+            "description": "Meta data for the estimate",
+            "example": {
+              "key": "value"
+            },
+            "type": "object"
+          },
+          "name": {
+            "description": "Estimate Name",
+            "example": "Home Service Estimate",
+            "type": "string"
+          },
+          "sendEstimateDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SendEstimateDto"
+              }
+            ],
+            "description": "When sending estimate directly while saving"
+          },
+          "sentTo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SentToDto"
+              }
+            ],
+            "description": "Email and sent to details for the estimate"
+          },
+          "termsNotes": {
+            "description": "Terms notes, Also supports HTML markups",
+            "example": "<p>This is a default terms.</p>",
+            "type": "string"
+          },
+          "title": {
+            "description": "Title for the estimate",
+            "example": "ESTIMATE",
+            "type": "string"
+          },
+          "userId": {
+            "description": "User Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "name",
+          "businessDetails",
+          "currency",
+          "items",
+          "discount",
+          "contactDetails",
+          "frequencySettings"
+        ],
         "type": "object"
       },
       "CreateInvoiceDto": {
@@ -586,6 +849,18 @@
             "enum": ["location"],
             "example": "location",
             "type": "string"
+          },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
           },
           "businessDetails": {
             "$ref": "#/components/schemas/BusinessDetailsDto"
@@ -616,6 +891,11 @@
             "example": "1001",
             "type": "string"
           },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
+          },
           "issueDate": {
             "description": "Issue date in YYYY-MM-DD format",
             "example": "2023-01-01",
@@ -628,6 +908,14 @@
             },
             "type": "array"
           },
+          "lateFeesConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesConfigurationDto"
+              }
+            ],
+            "description": "late fees configuration"
+          },
           "liveMode": {
             "type": "boolean"
           },
@@ -636,6 +924,22 @@
             "example": "New Invoice",
             "type": "string"
           },
+          "paymentMethods": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethodDto"
+              }
+            ],
+            "description": "Payment Methods for Invoices"
+          },
+          "paymentSchedule": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentScheduleDto"
+              }
+            ],
+            "description": "split invoice into payment schedule summing up to full invoice amount"
+          },
           "sentTo": {
             "$ref": "#/components/schemas/SentToDto"
           },
@@ -643,6 +947,14 @@
             "description": "Terms notes, Also supports HTML markups",
             "example": "<p>This is a default terms.</p>",
             "type": "string"
+          },
+          "tipsConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipsConfigurationDto"
+              }
+            ],
+            "description": "tips configuration for the invoice"
           },
           "title": {
             "description": "Title for the invoice",
@@ -663,6 +975,54 @@
           "sentTo",
           "liveMode"
         ],
+        "type": "object"
+      },
+      "CreateInvoiceFromEstimateDto": {
+        "properties": {
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "markAsInvoiced": {
+            "description": "Mark Estimate as Invoiced",
+            "example": true,
+            "type": "boolean"
+          },
+          "version": {
+            "description": "Version of the update request",
+            "enum": ["v1", "v2"],
+            "example": "v2",
+            "type": "string"
+          }
+        },
+        "required": ["altId", "altType", "markAsInvoiced"],
+        "type": "object"
+      },
+      "CreateInvoiceFromEstimateResponseDTO": {
+        "properties": {
+          "estimate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EstimateResponseDto"
+              }
+            ],
+            "description": "Estimate details"
+          },
+          "invoice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+              }
+            ],
+            "description": "Invoice details"
+          }
+        },
+        "required": ["estimate", "invoice"],
         "type": "object"
       },
       "CreateInvoiceResponseDto": {
@@ -691,12 +1051,17 @@
             "example": 0,
             "type": "number"
           },
+          "automaticTaxesCalculated": {
+            "description": "Is Automatic taxes calculated for the Invoice items",
+            "example": true,
+            "type": "boolean"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDetailsDto"
-              }
-            ],
             "description": "Business Details",
             "example": {
               "address": {
@@ -709,14 +1074,10 @@
               "name": "Alex",
               "phoneNo": "+1-214-559-6993",
               "website": "www.example.com"
-            }
+            },
+            "type": "object"
           },
           "contactDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactDetailsDto"
-              }
-            ],
             "description": "Contact Details",
             "example": {
               "address": {
@@ -727,7 +1088,8 @@
               "id": "c6tZZU0rJBf30ZXx9Gli",
               "name": "Alex",
               "phoneNo": "+1-214-559-6993"
-            }
+            },
+            "type": "object"
           },
           "createdAt": {
             "description": "created at",
@@ -740,16 +1102,12 @@
             "type": "string"
           },
           "discount": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DiscountDto"
-              }
-            ],
             "description": "Discount",
             "example": {
               "type": "percentage",
               "value": 0
-            }
+            },
+            "type": "object"
           },
           "dueDate": {
             "description": "Due date in YYYY-MM-DD format",
@@ -794,6 +1152,10 @@
             "description": "Name of the invoice",
             "example": "New Invoice",
             "type": "string"
+          },
+          "paymentSchedule": {
+            "description": "split invoice into payment schedule summing up to full invoice amount",
+            "type": "object"
           },
           "status": {
             "description": "Invoice Status",
@@ -853,6 +1215,18 @@
             "example": "location",
             "type": "string"
           },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
             "$ref": "#/components/schemas/BusinessDetailsDto"
           },
@@ -865,11 +1239,24 @@
           "discount": {
             "$ref": "#/components/schemas/DiscountDto"
           },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/InvoiceItemDto"
             },
             "type": "array"
+          },
+          "lateFeesConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesConfigurationDto"
+              }
+            ],
+            "description": "Late fees configuration for the invoices"
           },
           "liveMode": {
             "type": "boolean"
@@ -877,11 +1264,27 @@
           "name": {
             "type": "string"
           },
+          "paymentMethods": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethodDto"
+              }
+            ],
+            "description": "Payment Methods for Invoices"
+          },
           "schedule": {
             "$ref": "#/components/schemas/ScheduleOptionsDto"
           },
           "termsNotes": {
             "type": "string"
+          },
+          "tipsConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipsConfigurationDto"
+              }
+            ],
+            "description": "Configuration for tips on invoices"
           },
           "title": {
             "type": "string"
@@ -1081,6 +1484,18 @@
             "example": "location",
             "type": "string"
           },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
             "$ref": "#/components/schemas/BusinessDetailsDto"
           },
@@ -1093,19 +1508,48 @@
           "internal": {
             "type": "boolean"
           },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/InvoiceItemDto"
             },
             "type": "array"
           },
+          "lateFeesConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesConfigurationDto"
+              }
+            ],
+            "description": "Late fees configuration for the invoices"
+          },
           "name": {
             "description": "Name of the template",
             "example": "New Template",
             "type": "string"
           },
+          "paymentMethods": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethodDto"
+              }
+            ],
+            "description": "Payment Methods for Invoices"
+          },
           "termsNotes": {
             "type": "string"
+          },
+          "tipsConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipsConfigurationDto"
+              }
+            ],
+            "description": "Configuration for tips on invoices"
           },
           "title": {
             "description": "Template title",
@@ -1173,6 +1617,11 @@
               "type": "percentage",
               "value": 0
             }
+          },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
           },
           "items": {
             "description": "Invoice Items",
@@ -1255,6 +1704,11 @@
             "example": "18:45:00",
             "type": "string"
           },
+          "endType": {
+            "description": "End type like after, by, count",
+            "example": "by",
+            "type": "string"
+          },
           "interval": {
             "example": 2,
             "type": "number"
@@ -1283,6 +1737,11 @@
             "description": "Start time in HH:mm:ss format",
             "example": "20:45:00",
             "type": "string"
+          },
+          "useStartAsPrimaryUserAccepted": {
+            "description": "Start as primary user accepted date",
+            "example": true,
+            "type": "boolean"
           }
         },
         "required": ["intervalType", "interval", "startDate"],
@@ -1314,12 +1773,17 @@
             "example": 0,
             "type": "number"
           },
+          "automaticTaxesCalculated": {
+            "description": "Is Automatic taxes calculated for the Invoice items",
+            "example": true,
+            "type": "boolean"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDetailsDto"
-              }
-            ],
             "description": "Business Details",
             "example": {
               "address": {
@@ -1332,14 +1796,10 @@
               "name": "Alex",
               "phoneNo": "+1-214-559-6993",
               "website": "www.example.com"
-            }
+            },
+            "type": "object"
           },
           "contactDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactDetailsDto"
-              }
-            ],
             "description": "Contact Details",
             "example": {
               "address": {
@@ -1350,7 +1810,8 @@
               "id": "c6tZZU0rJBf30ZXx9Gli",
               "name": "Alex",
               "phoneNo": "+1-214-559-6993"
-            }
+            },
+            "type": "object"
           },
           "createdAt": {
             "description": "created at",
@@ -1363,16 +1824,12 @@
             "type": "string"
           },
           "discount": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DiscountDto"
-              }
-            ],
             "description": "Discount",
             "example": {
               "type": "percentage",
               "value": 0
-            }
+            },
+            "type": "object"
           },
           "dueDate": {
             "description": "Due date in YYYY-MM-DD format",
@@ -1417,6 +1874,10 @@
             "description": "Name of the invoice",
             "example": "New Invoice",
             "type": "string"
+          },
+          "paymentSchedule": {
+            "description": "split invoice into payment schedule summing up to full invoice amount",
+            "type": "object"
           },
           "status": {
             "description": "Invoice Status",
@@ -1489,12 +1950,17 @@
             "example": 0,
             "type": "number"
           },
+          "automaticTaxesCalculated": {
+            "description": "Is Automatic taxes calculated for the Invoice items",
+            "example": true,
+            "type": "boolean"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDetailsDto"
-              }
-            ],
             "description": "Business Details",
             "example": {
               "address": {
@@ -1507,14 +1973,10 @@
               "name": "Alex",
               "phoneNo": "+1-214-559-6993",
               "website": "www.example.com"
-            }
+            },
+            "type": "object"
           },
           "contactDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactDetailsDto"
-              }
-            ],
             "description": "Contact Details",
             "example": {
               "address": {
@@ -1525,7 +1987,8 @@
               "id": "c6tZZU0rJBf30ZXx9Gli",
               "name": "Alex",
               "phoneNo": "+1-214-559-6993"
-            }
+            },
+            "type": "object"
           },
           "createdAt": {
             "description": "created at",
@@ -1538,16 +2001,12 @@
             "type": "string"
           },
           "discount": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DiscountDto"
-              }
-            ],
             "description": "Discount",
             "example": {
               "type": "percentage",
               "value": 0
-            }
+            },
+            "type": "object"
           },
           "dueDate": {
             "description": "Due date in YYYY-MM-DD format",
@@ -1592,6 +2051,10 @@
             "description": "Name of the invoice",
             "example": "New Invoice",
             "type": "string"
+          },
+          "paymentSchedule": {
+            "description": "split invoice into payment schedule summing up to full invoice amount",
+            "type": "object"
           },
           "status": {
             "description": "Invoice Status",
@@ -1669,6 +2132,14 @@
             "example": "percentage",
             "type": "string"
           },
+          "validOnProductIds": {
+            "description": "Product Ids on which discount is applicable",
+            "example": "[ '6579751d56f60276e5bd4154' ]",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "value": {
             "default": 0,
             "description": "Discount Value",
@@ -1677,6 +2148,692 @@
           }
         },
         "required": ["type"],
+        "type": "object"
+      },
+      "EstimateIdParam": {
+        "properties": {
+          "estimateId": {
+            "description": "Estimate Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "type": "string"
+          }
+        },
+        "required": ["estimateId"],
+        "type": "object"
+      },
+      "EstimateResponseDto": {
+        "properties": {
+          "__v": {
+            "description": "Version number",
+            "example": 0,
+            "type": "number"
+          },
+          "_id": {
+            "description": "Unique identifier",
+            "example": "67ac9a51106ee8311e911XXXX",
+            "type": "string"
+          },
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "attachments": {
+            "description": "Attachments",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "autoInvoice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutoInvoice"
+              }
+            ],
+            "description": "Auto-invoice settings for the estimate",
+            "example": {
+              "directPayments": false,
+              "enabled": true
+            }
+          },
+          "automaticTaxesCalculated": {
+            "description": "Indicates if automatic taxes were calculated",
+            "example": true,
+            "type": "boolean"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Indicates if automatic taxes are enabled for this estimate",
+            "example": false,
+            "type": "boolean"
+          },
+          "businessDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessDetails"
+              }
+            ],
+            "description": "Business details associated with the estimate",
+            "example": {
+              "address": {
+                "addressLine1": "address line 1",
+                "city": "Test City",
+                "countryCode": "US",
+                "postalCode": "12345",
+                "state": "State Name"
+              },
+              "customValues": [
+                {
+                  "fieldKey": "{{custom_values.test}}",
+                  "id": "5DYTWoiQvWiIJZXX44XXX",
+                  "name": "Test",
+                  "value": "Test's Custom Value"
+                }
+              ],
+              "logoUrl": "your_image-url",
+              "name": "Business name",
+              "phoneNo": "+1 1234567890",
+              "website": "www.example.com"
+            }
+          },
+          "companyId": {
+            "description": "Company identifier associated with the estimate",
+            "example": "COMP12345",
+            "type": "string"
+          },
+          "contactDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactDetails"
+              }
+            ],
+            "description": "Contact details for the estimate",
+            "example": {
+              "address": {
+                "countryCode": "US"
+              },
+              "email": "email@test.com",
+              "id": "jvzfKTNdE7OYXXXXXX",
+              "name": "Contact Name",
+              "phoneNo": "+911111111114"
+            }
+          },
+          "createdAt": {
+            "description": "Timestamp when created",
+            "example": "2025-02-12T13:17:47.416Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency code",
+            "example": "USD",
+            "type": "string"
+          },
+          "deleted": {
+            "description": "Indicates if deleted",
+            "example": false,
+            "type": "boolean"
+          },
+          "discount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DiscountDto"
+              }
+            ],
+            "description": "Discount details for the estimate template",
+            "example": {
+              "type": "percentage",
+              "value": 0
+            }
+          },
+          "estimateActionHistory": {
+            "description": "History of actions taken on the estimate",
+            "example": [
+              {
+                "action": "Created",
+                "timestamp": "2023-06-15T10:00:00.000Z"
+              }
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "estimateNumberPrefix": {
+            "description": "Estimate number prefix",
+            "example": "EST-",
+            "type": "string"
+          },
+          "expiryDate": {
+            "description": "Date when the estimate expires",
+            "example": "2023-07-15T00:00:00.000Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "frequencySettings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FrequencySettingsDto"
+              }
+            ],
+            "description": "Frequency settings for recurring estimates",
+            "examples": [
+              {
+                "enabled": false
+              },
+              {
+                "enabled": true,
+                "schedule": {
+                  "rrule": {
+                    "count": "5",
+                    "dayOfMonth": 1,
+                    "endType": "after",
+                    "interval": 1,
+                    "intervalType": "monthly",
+                    "numOfWeek": 0,
+                    "startDate": "2025-02-12"
+                  }
+                }
+              },
+              {
+                "enabled": true,
+                "schedule": {
+                  "rrule": {
+                    "dayOfMonth": 1,
+                    "endDate": "2025-02-24",
+                    "endType": "by",
+                    "interval": 1,
+                    "intervalType": "monthly",
+                    "numOfWeek": 0,
+                    "startDate": "2025-02-12"
+                  }
+                }
+              },
+              {
+                "enabled": true,
+                "schedule": {
+                  "rrule": {
+                    "dayOfMonth": 1,
+                    "endType": "never",
+                    "interval": 1,
+                    "intervalType": "monthly",
+                    "numOfWeek": 0,
+                    "startDate": "2025-02-12"
+                  }
+                }
+              }
+            ]
+          },
+          "issueDate": {
+            "description": "Date when the estimate was issued",
+            "example": "2023-06-15T00:00:00.000Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "items": {
+            "description": "An array of items",
+            "example": [
+              {
+                "_id": "67ac9a51106ee8311e911XXXX",
+                "amount": 9.99,
+                "currency": "USD",
+                "description": "<p>Futuristic anti-gravity racing</p>",
+                "name": "TEST",
+                "priceId": "67ac9a51106ee8311e911XXXX",
+                "productId": "67ac9a51106ee8311e911XXXX",
+                "qty": 1,
+                "taxInclusive": false,
+                "taxes": [],
+                "type": "one_time"
+              },
+              {
+                "_id": "67ac9a51106ee8311e911XXXX",
+                "amount": 500,
+                "currency": "USD",
+                "description": "",
+                "name": "TEST2",
+                "priceId": "67ac9a51106ee8311e911XXXX",
+                "productId": "67ac9a51106ee8311e911XXXX",
+                "qty": 1,
+                "taxInclusive": true,
+                "taxes": [
+                  {
+                    "_id": "67ac9a51106ee8311e911XXXX",
+                    "calculation": "exclusive",
+                    "name": "TaxTwo",
+                    "rate": 8.5
+                  }
+                ],
+                "type": "recurring"
+              }
+            ],
+            "items": {
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "lastVisitedAt": {
+            "description": "Timestamp when the estimate was last visited",
+            "example": "2023-06-20T08:30:00.000Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "liveMode": {
+            "description": "Indicates if it is in live mode",
+            "example": true,
+            "type": "boolean"
+          },
+          "meta": {
+            "description": "Additional metadata associated with the estimate",
+            "example": {
+              "key": "value"
+            },
+            "type": "object"
+          },
+          "name": {
+            "description": "Name",
+            "example": "Estimate Name",
+            "type": "string"
+          },
+          "sentBy": {
+            "description": "User who sent the estimate",
+            "example": "user@example.com",
+            "type": "string"
+          },
+          "sentTo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SentTo"
+              }
+            ],
+            "description": "Recipient details for the estimate",
+            "example": {
+              "email": ["test@example.com"],
+              "phoneNo": ["+1 99444444444"]
+            }
+          },
+          "termsNotes": {
+            "description": "Terms and conditions for the estimate, supports HTML markup",
+            "example": "<p>All services are subject to availability.</p>",
+            "type": "string"
+          },
+          "title": {
+            "description": "Title",
+            "example": "ESTIMATE",
+            "type": "string"
+          },
+          "total": {
+            "description": "Total amount",
+            "example": 1222.03,
+            "type": "number"
+          },
+          "totalamountInUSD": {
+            "description": "Total amount in USD",
+            "example": 1500.75,
+            "type": "number"
+          },
+          "traceId": {
+            "description": "Trace ID for logging and debugging",
+            "example": "010c7a01-857f-4619-970d-xyxyxyxy",
+            "type": "string"
+          },
+          "updatedAt": {
+            "description": "Timestamp when last updated",
+            "example": "2025-02-12T13:17:47.416Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedBy": {
+            "description": "User Id of who last updated",
+            "example": "3HIpOF9NIc5ltriQXXXX",
+            "type": "string"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "_id",
+          "liveMode",
+          "deleted",
+          "name",
+          "currency",
+          "businessDetails",
+          "items",
+          "discount",
+          "total",
+          "createdAt",
+          "updatedAt",
+          "__v",
+          "automaticTaxesEnabled",
+          "companyId",
+          "contactDetails",
+          "issueDate",
+          "expiryDate",
+          "automaticTaxesCalculated",
+          "meta",
+          "estimateActionHistory",
+          "sentTo",
+          "frequencySettings",
+          "lastVisitedAt",
+          "totalamountInUSD",
+          "traceId"
+        ],
+        "type": "object"
+      },
+      "EstimateTemplateResponseDTO": {
+        "properties": {
+          "__v": {
+            "description": "Version number",
+            "example": 0,
+            "type": "number"
+          },
+          "_id": {
+            "description": "Unique identifier",
+            "example": "67ac9a51106ee8311e911XXXX",
+            "type": "string"
+          },
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "attachments": {
+            "description": "Attachments",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Indicates if automatic taxes are enabled for this estimate",
+            "example": false,
+            "type": "boolean"
+          },
+          "businessDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessDetails"
+              }
+            ],
+            "description": "Business details associated with the estimate",
+            "example": {
+              "address": {
+                "addressLine1": "address line 1",
+                "city": "Test City",
+                "countryCode": "US",
+                "postalCode": "12345",
+                "state": "State Name"
+              },
+              "customValues": [
+                {
+                  "fieldKey": "{{custom_values.test}}",
+                  "id": "5DYTWoiQvWiIJZXX44XXX",
+                  "name": "Test",
+                  "value": "Test's Custom Value"
+                }
+              ],
+              "logoUrl": "your_image-url",
+              "name": "Business name",
+              "phoneNo": "+1 1234567890",
+              "website": "www.example.com"
+            }
+          },
+          "createdAt": {
+            "description": "Timestamp when created",
+            "example": "2025-02-12T13:17:47.416Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency code",
+            "example": "USD",
+            "type": "string"
+          },
+          "deleted": {
+            "description": "Indicates if deleted",
+            "example": false,
+            "type": "boolean"
+          },
+          "discount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DiscountDto"
+              }
+            ],
+            "description": "Discount details for the estimate template",
+            "example": {
+              "type": "percentage",
+              "value": 0
+            }
+          },
+          "estimateNumberPrefix": {
+            "description": "Estimate number prefix",
+            "example": "EST-",
+            "type": "string"
+          },
+          "items": {
+            "description": "An array of items",
+            "example": [
+              {
+                "_id": "67ac9a51106ee8311e911XXXX",
+                "amount": 9.99,
+                "currency": "USD",
+                "description": "<p>Futuristic anti-gravity racing</p>",
+                "name": "TEST",
+                "priceId": "67ac9a51106ee8311e911XXXX",
+                "productId": "67ac9a51106ee8311e911XXXX",
+                "qty": 1,
+                "taxInclusive": false,
+                "taxes": [],
+                "type": "one_time"
+              },
+              {
+                "_id": "67ac9a51106ee8311e911XXXX",
+                "amount": 500,
+                "currency": "USD",
+                "description": "",
+                "name": "TEST2",
+                "priceId": "67ac9a51106ee8311e911XXXX",
+                "productId": "67ac9a51106ee8311e911XXXX",
+                "qty": 1,
+                "taxInclusive": true,
+                "taxes": [
+                  {
+                    "_id": "67ac9a51106ee8311e911XXXX",
+                    "calculation": "exclusive",
+                    "name": "TaxTwo",
+                    "rate": 8.5
+                  }
+                ],
+                "type": "recurring"
+              }
+            ],
+            "items": {
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "liveMode": {
+            "description": "Indicates if it is in live mode",
+            "example": true,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name",
+            "example": "Estimate Name",
+            "type": "string"
+          },
+          "termsNotes": {
+            "description": "Terms and conditions for the estimate, supports HTML markup",
+            "example": "<p>All services are subject to availability.</p>",
+            "type": "string"
+          },
+          "title": {
+            "description": "Title",
+            "example": "ESTIMATE",
+            "type": "string"
+          },
+          "total": {
+            "description": "Total amount",
+            "example": 1222.03,
+            "type": "number"
+          },
+          "updatedAt": {
+            "description": "Timestamp when last updated",
+            "example": "2025-02-12T13:17:47.416Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedBy": {
+            "description": "User Id of who last updated",
+            "example": "3HIpOF9NIc5ltriQXXXX",
+            "type": "string"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "_id",
+          "liveMode",
+          "deleted",
+          "name",
+          "currency",
+          "businessDetails",
+          "items",
+          "discount",
+          "total",
+          "createdAt",
+          "updatedAt",
+          "__v",
+          "automaticTaxesEnabled"
+        ],
+        "type": "object"
+      },
+      "EstimateTemplatesDto": {
+        "properties": {
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "automaticTaxesEnabled": {
+            "default": false,
+            "description": "Automatic taxes enabled for the Estimate",
+            "example": true,
+            "type": "boolean"
+          },
+          "businessDetails": {
+            "$ref": "#/components/schemas/BusinessDetailsDto"
+          },
+          "currency": {
+            "description": "Currency code",
+            "example": "USD",
+            "type": "string"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/DiscountDto"
+          },
+          "estimateNumberPrefix": {
+            "default": "EST-",
+            "description": "Prefix for the estimate number",
+            "example": "EST-",
+            "type": "string"
+          },
+          "items": {
+            "description": "An array of items for the estimate.",
+            "items": {
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "liveMode": {
+            "default": true,
+            "description": "livemode for estimate",
+            "example": true,
+            "type": "boolean"
+          },
+          "meta": {
+            "description": "Meta data for the estimate",
+            "example": {
+              "key": "value"
+            },
+            "type": "object"
+          },
+          "name": {
+            "description": "Estimate Name",
+            "example": "Home Service Estimate Template",
+            "type": "string"
+          },
+          "sendEstimateDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SendEstimateDto"
+              }
+            ],
+            "description": "When sending estimate directly while saving"
+          },
+          "termsNotes": {
+            "description": "Terms notes, Also supports HTML markups",
+            "example": "<p>This is a default terms.</p>",
+            "type": "string"
+          },
+          "title": {
+            "description": "Title for the estimate",
+            "example": "ESTIMATE",
+            "type": "string"
+          }
+        },
+        "required": ["altId", "altType", "name", "businessDetails", "currency", "items", "discount"],
+        "type": "object"
+      },
+      "FrequencySettingsDto": {
+        "properties": {
+          "enabled": {
+            "description": "enabled for the frequency settings",
+            "example": true,
+            "type": "boolean"
+          },
+          "schedule": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScheduleOptionsDto"
+              }
+            ],
+            "description": "schedule setting for the estimate"
+          }
+        },
+        "required": ["enabled", "schedule"],
+        "type": "object"
+      },
+      "GenerateEstimateNumberResponse": {
+        "properties": {
+          "estimateNumber": {
+            "type": "number"
+          },
+          "traceId": {
+            "type": "string"
+          }
+        },
+        "required": ["estimateNumber", "traceId"],
         "type": "object"
       },
       "GenerateInvoiceNumberResponseDto": {
@@ -1715,12 +2872,17 @@
             "example": 0,
             "type": "number"
           },
+          "automaticTaxesCalculated": {
+            "description": "Is Automatic taxes calculated for the Invoice items",
+            "example": true,
+            "type": "boolean"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDetailsDto"
-              }
-            ],
             "description": "Business Details",
             "example": {
               "address": {
@@ -1733,14 +2895,10 @@
               "name": "Alex",
               "phoneNo": "+1-214-559-6993",
               "website": "www.example.com"
-            }
+            },
+            "type": "object"
           },
           "contactDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactDetailsDto"
-              }
-            ],
             "description": "Contact Details",
             "example": {
               "address": {
@@ -1751,7 +2909,8 @@
               "id": "c6tZZU0rJBf30ZXx9Gli",
               "name": "Alex",
               "phoneNo": "+1-214-559-6993"
-            }
+            },
+            "type": "object"
           },
           "createdAt": {
             "description": "created at",
@@ -1764,16 +2923,12 @@
             "type": "string"
           },
           "discount": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DiscountDto"
-              }
-            ],
             "description": "Discount",
             "example": {
               "type": "percentage",
               "value": 0
-            }
+            },
+            "type": "object"
           },
           "dueDate": {
             "description": "Due date in YYYY-MM-DD format",
@@ -1818,6 +2973,18 @@
             "description": "Name of the invoice",
             "example": "New Invoice",
             "type": "string"
+          },
+          "paymentSchedule": {
+            "description": "split invoice into payment schedule summing up to full invoice amount",
+            "type": "object"
+          },
+          "remindersConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RemindersConfigurationDto"
+              }
+            ],
+            "description": "Reminders Configuration"
           },
           "status": {
             "description": "Invoice Status",
@@ -2093,6 +3260,11 @@
               "value": 0
             }
           },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
+          },
           "items": {
             "description": "Invoice Items",
             "example": [
@@ -2149,6 +3321,11 @@
             "example": 999,
             "type": "number"
           },
+          "automaticTaxCategoryId": {
+            "description": "Tax category id for calculating automatic tax",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
           "currency": {
             "description": "Currency",
             "example": "USD",
@@ -2158,6 +3335,10 @@
             "description": "Invoice descriptions",
             "example": "ABC Corp.",
             "type": "string"
+          },
+          "isSetupFeeItem": {
+            "description": "Setupfee item, only created when 1st invoice of recurring schedule is generated",
+            "type": "boolean"
           },
           "name": {
             "description": "Invoice Item Name",
@@ -2179,12 +3360,24 @@
             "example": 1,
             "type": "number"
           },
+          "taxInclusive": {
+            "default": false,
+            "description": "true if item amount is tax inclusive",
+            "example": true,
+            "type": "boolean"
+          },
           "taxes": {
             "description": "Tax",
             "items": {
               "$ref": "#/components/schemas/ItemTaxDto"
             },
             "type": "array"
+          },
+          "type": {
+            "description": "Price type of the item",
+            "enum": ["one_time", "recurring"],
+            "example": "one_time",
+            "type": "string"
           }
         },
         "required": ["name", "currency", "amount", "qty"],
@@ -2228,6 +3421,144 @@
           }
         },
         "required": ["_id", "name", "rate", "calculation"],
+        "type": "object"
+      },
+      "LateFeesConfigurationDto": {
+        "properties": {
+          "enable": {
+            "description": "Enable late fees",
+            "example": true,
+            "type": "boolean"
+          },
+          "frequency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesFrequencyDto"
+              }
+            ],
+            "description": "Late Fees Frequency"
+          },
+          "grace": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesGraceDto"
+              }
+            ],
+            "description": "Late Fees Grace"
+          },
+          "maxLateFees": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesMaxFeesDto"
+              }
+            ],
+            "description": "Max late fees payable"
+          },
+          "type": {
+            "description": "Late Fees Type",
+            "enum": ["fixed", "percentage"],
+            "example": "fixed",
+            "type": "string"
+          },
+          "value": {
+            "description": "Late Fees Value",
+            "example": 10,
+            "type": "number"
+          }
+        },
+        "required": ["enable", "value", "type", "frequency"],
+        "type": "object"
+      },
+      "LateFeesFrequencyDto": {
+        "properties": {
+          "interval": {
+            "description": "Late fees interval",
+            "enum": ["minute", "hour", "day", "week", "month", "one_time"],
+            "example": "day",
+            "type": "string"
+          },
+          "intervalCount": {
+            "description": "Late fees interval count",
+            "example": 10,
+            "type": "number"
+          }
+        },
+        "required": ["interval"],
+        "type": "object"
+      },
+      "LateFeesGraceDto": {
+        "properties": {
+          "interval": {
+            "description": "Late fees grace interval",
+            "enum": ["day"],
+            "example": "day",
+            "type": "string"
+          },
+          "intervalCount": {
+            "description": "Late fees grace interval count",
+            "example": 10,
+            "type": "number"
+          }
+        },
+        "required": ["intervalCount", "interval"],
+        "type": "object"
+      },
+      "LateFeesMaxFeesDto": {
+        "properties": {
+          "type": {
+            "enum": ["fixed"],
+            "example": "fixed",
+            "type": "string"
+          },
+          "value": {
+            "description": "10",
+            "example": "Max late fees to pay",
+            "type": "number"
+          }
+        },
+        "required": ["type", "value"],
+        "type": "object"
+      },
+      "ListEstimateTemplateResponseDTO": {
+        "properties": {
+          "data": {
+            "description": "List of estimate templates",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "totalCount": {
+            "description": "Total number of estimate templates available",
+            "type": "number"
+          },
+          "traceId": {
+            "description": "Unique identifier for tracing the request",
+            "type": "string"
+          }
+        },
+        "required": ["data", "totalCount", "traceId"],
+        "type": "object"
+      },
+      "ListEstimatesResponseDTO": {
+        "properties": {
+          "estimates": {
+            "description": "List of estimates",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "total": {
+            "description": "Total number of estimates",
+            "type": "number"
+          },
+          "traceId": {
+            "description": "Unique identifier for tracing the request",
+            "type": "string"
+          }
+        },
+        "required": ["estimates", "total", "traceId"],
         "type": "object"
       },
       "ListInvoicesResponseDto": {
@@ -2285,6 +3616,50 @@
         "properties": {},
         "type": "object"
       },
+      "PatchInvoiceStatsLastViewedDto": {
+        "properties": {
+          "invoiceId": {
+            "description": "Invoice Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          }
+        },
+        "required": ["invoiceId"],
+        "type": "object"
+      },
+      "PaymentMethodDto": {
+        "properties": {
+          "stripe": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StripePaymentMethodDto"
+              }
+            ],
+            "description": "Payment Method"
+          }
+        },
+        "required": ["stripe"],
+        "type": "object"
+      },
+      "PaymentScheduleDto": {
+        "properties": {
+          "schedules": {
+            "description": "payment schedule item",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "description": "Payment schedule type",
+            "enum": ["fixed", "percentage"],
+            "example": "percentage",
+            "type": "string"
+          }
+        },
+        "required": ["type", "schedules"],
+        "type": "object"
+      },
       "RecordPaymentDto": {
         "properties": {
           "altId": {
@@ -2309,6 +3684,9 @@
           "cheque": {
             "$ref": "#/components/schemas/ChequeDto"
           },
+          "meta": {
+            "type": "object"
+          },
           "mode": {
             "description": "manual payment method",
             "enum": ["cash", "card", "cheque", "bank_transfer", "other"],
@@ -2319,6 +3697,14 @@
             "description": "Any note to be recorded with the transaction",
             "example": "This was a direct payment",
             "type": "string"
+          },
+          "paymentScheduleIds": {
+            "description": "Payment Schedule Ids to be recorded against the invoice.",
+            "example": ["6578278e879ad2646715ba9c"],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": ["altId", "altType", "mode", "card", "cheque", "notes"],
@@ -2336,6 +3722,141 @@
           }
         },
         "required": ["success", "invoice"],
+        "type": "object"
+      },
+      "ReminderDto": {
+        "properties": {
+          "emailSubject": {
+            "description": "Subject of the reminder",
+            "example": "Reminder",
+            "type": "string"
+          },
+          "emailTemplate": {
+            "description": "Email template to be used for sending reminders",
+            "example": "default",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Flag indicating if the reminder is enabled or not",
+            "example": true,
+            "type": "boolean"
+          },
+          "endTime": {
+            "description": "Business Hour End Time",
+            "example": "5:00 PM",
+            "type": "string"
+          },
+          "intervalType": {
+            "description": "Interval type for the reminder",
+            "enum": ["yearly", "monthly", "weekly", "daily", "hourly", "minutely", "secondly"],
+            "example": "daily",
+            "type": "string"
+          },
+          "maxReminders": {
+            "description": "Maximum number of reminders that can be sent",
+            "example": 3,
+            "type": "number"
+          },
+          "reminderId": {
+            "description": "Unique identifier for the reminder",
+            "example": "9333e45f-a27d-4659-90e5-76c5ef06d094",
+            "type": "string"
+          },
+          "reminderInvoiceCondition": {
+            "description": "Condition for sending the reminder",
+            "enum": ["invoice_sent", "invoice_overdue"],
+            "example": "invoice_sent",
+            "type": "string"
+          },
+          "reminderName": {
+            "description": "Name of the reminder",
+            "example": "Special Reminder",
+            "type": "string"
+          },
+          "reminderNumber": {
+            "description": "frequency gap of the reminder to exeucte",
+            "example": 10,
+            "type": "number"
+          },
+          "reminderTime": {
+            "description": "Time condition for the reminder",
+            "enum": ["before", "after"],
+            "example": "before",
+            "type": "string"
+          },
+          "smsTemplate": {
+            "description": "SMS template to be used for sending reminders",
+            "example": "default",
+            "type": "string"
+          },
+          "startTime": {
+            "description": "Business Hour Start Time",
+            "example": "9:00 AM",
+            "type": "string"
+          },
+          "timezone": {
+            "description": "Timezone at which reminder will be sent",
+            "example": "businessTZ",
+            "type": "string"
+          }
+        },
+        "required": [
+          "enabled",
+          "emailTemplate",
+          "smsTemplate",
+          "emailSubject",
+          "reminderId",
+          "reminderName",
+          "reminderTime",
+          "intervalType",
+          "maxReminders",
+          "reminderInvoiceCondition",
+          "reminderNumber"
+        ],
+        "type": "object"
+      },
+      "ReminderExecutionDetailsList": {
+        "properties": {},
+        "type": "object"
+      },
+      "ReminderSettingsDto": {
+        "properties": {
+          "defaultEmailTemplateId": {
+            "description": "default template Id of reminder",
+            "example": "dhwjqi2899012990w2u",
+            "type": "string"
+          },
+          "reminders": {
+            "description": "List of reminders",
+            "items": {
+              "$ref": "#/components/schemas/ReminderDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["defaultEmailTemplateId", "reminders"],
+        "type": "object"
+      },
+      "RemindersConfigurationDto": {
+        "properties": {
+          "reminderExecutionDetailsList": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ReminderExecutionDetailsList"
+              }
+            ],
+            "description": "List of reminders"
+          },
+          "reminderSettings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ReminderSettingsDto"
+              }
+            ],
+            "description": "Reminder settings"
+          }
+        },
+        "required": ["reminderExecutionDetailsList", "reminderSettings"],
         "type": "object"
       },
       "ScheduleInvoiceScheduleDto": {
@@ -2544,6 +4065,48 @@
         },
         "type": "object"
       },
+      "SendEstimateDto": {
+        "properties": {
+          "action": {
+            "enum": ["sms_and_email", "send_manually", "email", "sms"],
+            "type": "string"
+          },
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "estimateName": {
+            "description": "estimate name",
+            "example": "Estimate",
+            "type": "string"
+          },
+          "liveMode": {
+            "description": "livemode for estimate",
+            "example": true,
+            "type": "boolean"
+          },
+          "sentFrom": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceSettingsSenderConfigurationDto"
+              }
+            ],
+            "description": "sender details for invoice, valid only if invoice is not sent manually"
+          },
+          "userId": {
+            "description": "Please ensure that the UserId corresponds to an authorized personnel, either by an employee ID or agency ID, to access this location. This account will serve as the primary channel for all future communications and updates.",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          }
+        },
+        "required": ["altId", "altType", "action", "liveMode", "userId"],
+        "type": "object"
+      },
       "SendInvoiceDto": {
         "properties": {
           "action": {
@@ -2560,6 +4123,14 @@
             "enum": ["location"],
             "example": "location",
             "type": "string"
+          },
+          "autoPayment": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutoPaymentDetailsDto"
+              }
+            ],
+            "description": "auto-payment configuration"
           },
           "liveMode": {
             "type": "boolean"
@@ -2594,6 +4165,10 @@
           }
         },
         "required": ["invoice", "smsData", "emailData"],
+        "type": "object"
+      },
+      "SentTo": {
+        "properties": {},
         "type": "object"
       },
       "SentToDto": {
@@ -2634,6 +4209,32 @@
         "required": ["email"],
         "type": "object"
       },
+      "SepaDirectDebitDTO": {
+        "properties": {
+          "bank_code": {
+            "type": "string"
+          },
+          "branch_code": {
+            "type": "string"
+          },
+          "last4": {
+            "type": "string"
+          }
+        },
+        "required": ["bank_code", "last4", "branch_code"],
+        "type": "object"
+      },
+      "StripePaymentMethodDto": {
+        "properties": {
+          "enableBankDebitOnly": {
+            "description": "Enable Bank Debit Only",
+            "example": false,
+            "type": "boolean"
+          }
+        },
+        "required": ["enableBankDebitOnly"],
+        "type": "object"
+      },
       "Text2PayDto": {
         "properties": {
           "action": {
@@ -2652,6 +4253,18 @@
             "enum": ["location"],
             "example": "location",
             "type": "string"
+          },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
           },
           "businessDetails": {
             "$ref": "#/components/schemas/BusinessDetailsDto"
@@ -2691,6 +4304,11 @@
             "example": "1001",
             "type": "string"
           },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
+          },
           "issueDate": {
             "description": "Issue date in YYYY-MM-DD format",
             "example": "2023-01-01",
@@ -2703,6 +4321,14 @@
             },
             "type": "array"
           },
+          "lateFeesConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesConfigurationDto"
+              }
+            ],
+            "description": "late fees configuration"
+          },
           "liveMode": {
             "type": "boolean"
           },
@@ -2711,6 +4337,22 @@
             "example": "New Invoice",
             "type": "string"
           },
+          "paymentMethods": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethodDto"
+              }
+            ],
+            "description": "Payment Methods for Invoices"
+          },
+          "paymentSchedule": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentScheduleDto"
+              }
+            ],
+            "description": "split invoice into payment schedule summing up to full invoice amount"
+          },
           "sentTo": {
             "$ref": "#/components/schemas/SentToDto"
           },
@@ -2718,6 +4360,14 @@
             "description": "Terms notes, Also supports HTML markups",
             "example": "<p>This is a default terms.</p>",
             "type": "string"
+          },
+          "tipsConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipsConfigurationDto"
+              }
+            ],
+            "description": "tips configuration for the invoice"
           },
           "title": {
             "description": "Title for the invoice",
@@ -2733,7 +4383,6 @@
           "altId",
           "altType",
           "name",
-          "businessDetails",
           "currency",
           "items",
           "contactDetails",
@@ -2758,6 +4407,25 @@
         "required": ["invoice", "invoiceUrl"],
         "type": "object"
       },
+      "TipsConfigurationDto": {
+        "properties": {
+          "tipsEnabled": {
+            "description": "Tips enabled status",
+            "example": true,
+            "type": "boolean"
+          },
+          "tipsPercentage": {
+            "description": "Percentage of tips allowed",
+            "example": [5, 10, 15],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["tipsPercentage", "tipsEnabled"],
+        "type": "object"
+      },
       "TotalSummaryDto": {
         "properties": {
           "discount": {
@@ -2769,9 +4437,14 @@
             "description": "subTotal",
             "example": 999,
             "type": "number"
+          },
+          "tax": {
+            "description": "tax",
+            "example": 0,
+            "type": "number"
           }
         },
-        "required": ["subTotal", "discount"],
+        "required": ["subTotal", "discount", "tax"],
         "type": "object"
       },
       "USBankAccountDto": {
@@ -2823,6 +4496,333 @@
         },
         "type": "object"
       },
+      "UpdateAndScheduleInvoiceScheduleResponseDto": {
+        "properties": {
+          "_id": {
+            "description": "Schedule Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "businessDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessDetailsDto"
+              }
+            ],
+            "description": "Business Details",
+            "example": {
+              "address": {
+                "addressLine1": "9931 Beechwood",
+                "city": "St. Houston",
+                "countryCode": "USA",
+                "postalCode": "559-6993",
+                "state": "TX"
+              },
+              "name": "Alex",
+              "phoneNo": "+1-214-559-6993",
+              "website": "www.example.com"
+            }
+          },
+          "compiledTermsNotes": {
+            "description": "Compiled terms notes",
+            "example": "Confidential",
+            "type": "string"
+          },
+          "contactDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactDetailsDto"
+              }
+            ],
+            "description": "Contact Details",
+            "example": {
+              "address": {
+                "countryCode": "US"
+              },
+              "customFields": [],
+              "email": "alex@example.com",
+              "id": "c6tZZU0rJBf30ZXx9Gli",
+              "name": "Alex",
+              "phoneNo": "+1-214-559-6993"
+            }
+          },
+          "createdAt": {
+            "description": "created at",
+            "example": "2023-12-12T09:27:42.355Z",
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency",
+            "example": "USD",
+            "type": "string"
+          },
+          "discount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DiscountDto"
+              }
+            ],
+            "description": "Discount",
+            "example": {
+              "type": "percentage",
+              "value": 0
+            }
+          },
+          "invoices": {
+            "description": "List of invoices",
+            "items": {
+              "$ref": "#/components/schemas/DefaultInvoiceResponseDto"
+            },
+            "type": "array"
+          },
+          "items": {
+            "description": "Invoice Items",
+            "example": [
+              {
+                "_id": "c6tZZU0rJBf30ZXx9Gli",
+                "amount": 999,
+                "currency": "USD",
+                "name": "Macbook Pro",
+                "priceId": "c6tZZU0rJBf30ZXx9Gli",
+                "productId": "c6tZZU0rJBf30ZXx9Gli",
+                "qty": 1,
+                "taxes": []
+              }
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "liveMode": {
+            "description": "Live Mode",
+            "example": false,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name of the invoice",
+            "example": "New Invoice",
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/ScheduleOptionsDto"
+          },
+          "status": {
+            "description": "Schedule Status",
+            "example": "draft",
+            "type": "object"
+          },
+          "termsNotes": {
+            "description": "Terms notes",
+            "example": "Confidential",
+            "type": "string"
+          },
+          "title": {
+            "description": "Title",
+            "example": "INVOICE",
+            "type": "string"
+          },
+          "total": {
+            "description": "Total Amount",
+            "example": 999,
+            "type": "number"
+          },
+          "updatedAt": {
+            "description": "updated at",
+            "example": "2023-12-12T09:27:42.355Z",
+            "type": "string"
+          }
+        },
+        "required": [
+          "_id",
+          "status",
+          "liveMode",
+          "altId",
+          "altType",
+          "name",
+          "invoices",
+          "businessDetails",
+          "currency",
+          "contactDetails",
+          "items",
+          "total",
+          "title",
+          "termsNotes",
+          "compiledTermsNotes",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object"
+      },
+      "UpdateEstimateDto": {
+        "properties": {
+          "altId": {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "enum": ["location"],
+            "type": "string"
+          },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "autoInvoice": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutoInvoicingDto"
+              }
+            ],
+            "description": "Auto invoice for the estimate",
+            "example": {
+              "directPayments": true,
+              "enabled": true
+            }
+          },
+          "automaticTaxesEnabled": {
+            "default": false,
+            "description": "Automatic taxes enabled for the Estimate",
+            "example": true,
+            "type": "boolean"
+          },
+          "businessDetails": {
+            "$ref": "#/components/schemas/BusinessDetailsDto"
+          },
+          "contactDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactDetailsDto"
+              }
+            ],
+            "description": "Contact information to send the estimate to"
+          },
+          "currency": {
+            "description": "Currency code",
+            "example": "USD",
+            "type": "string"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/DiscountDto"
+          },
+          "estimateNumber": {
+            "description": "Estimate Number, if not specified will take in the next valid estimate number",
+            "example": 1001,
+            "type": "number"
+          },
+          "estimateNumberPrefix": {
+            "default": "EST-",
+            "description": "Prefix for the estimate number",
+            "example": "EST-",
+            "type": "string"
+          },
+          "estimateStatus": {
+            "description": "Estimate Status",
+            "enum": ["all", "draft", "sent", "accepted", "declined", "invoiced", "viewed"],
+            "example": "sent",
+            "type": "string"
+          },
+          "expiryDate": {
+            "description": "expiry date estimate",
+            "example": "2024-08-10",
+            "type": "string"
+          },
+          "frequencySettings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FrequencySettingsDto"
+              }
+            ],
+            "description": "frequency settings for the estimate"
+          },
+          "issueDate": {
+            "description": "issue date estimate",
+            "example": "2024-08-07",
+            "type": "string"
+          },
+          "items": {
+            "description": "An array of items for the estimate.",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceItemDto"
+            },
+            "type": "array"
+          },
+          "liveMode": {
+            "default": true,
+            "description": "livemode for estimate",
+            "example": true,
+            "type": "boolean"
+          },
+          "meta": {
+            "description": "Meta data for the estimate",
+            "example": {
+              "key": "value"
+            },
+            "type": "object"
+          },
+          "name": {
+            "description": "Estimate Name",
+            "example": "Home Service Estimate",
+            "type": "string"
+          },
+          "sendEstimateDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SendEstimateDto"
+              }
+            ],
+            "description": "When sending estimate directly while saving"
+          },
+          "sentTo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SentToDto"
+              }
+            ],
+            "description": "Email and sent to details for the estimate"
+          },
+          "termsNotes": {
+            "description": "Terms notes, Also supports HTML markups",
+            "example": "<p>This is a default terms.</p>",
+            "type": "string"
+          },
+          "title": {
+            "description": "Title for the estimate",
+            "example": "ESTIMATE",
+            "type": "string"
+          },
+          "userId": {
+            "description": "User Id",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          }
+        },
+        "required": [
+          "altId",
+          "altType",
+          "name",
+          "businessDetails",
+          "currency",
+          "items",
+          "discount",
+          "contactDetails",
+          "frequencySettings"
+        ],
+        "type": "object"
+      },
       "UpdateInvoiceDto": {
         "properties": {
           "altId": {
@@ -2835,6 +4835,18 @@
             "enum": ["location"],
             "example": "location",
             "type": "string"
+          },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
           },
           "businessDetails": {
             "allOf": [
@@ -2893,6 +4905,11 @@
             "example": "1001",
             "type": "string"
           },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
+          },
           "issueDate": {
             "description": "Issue date in YYYY-MM-DD format",
             "example": "2023-01-01",
@@ -2907,18 +4924,70 @@
             "example": "New Invoice",
             "type": "string"
           },
+          "paymentMethods": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethodDto"
+              }
+            ],
+            "description": "Payment Methods for Invoices"
+          },
+          "paymentSchedule": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentScheduleDto"
+              }
+            ],
+            "description": "split invoice into payment schedule summing up to full invoice amount"
+          },
           "termsNotes": {
             "description": "Terms notes, Also supports HTML markups",
             "example": "<p>This is a default terms.</p>",
             "type": "string"
           },
+          "tipsConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipsConfigurationDto"
+              }
+            ],
+            "description": "tips configuration for the invoice"
+          },
           "title": {
             "description": "Title for the invoice",
             "example": "INVOICE",
             "type": "string"
+          },
+          "xeroDetails": {
+            "type": "object"
           }
         },
         "required": ["altId", "altType", "name", "currency", "invoiceItems", "issueDate", "dueDate"],
+        "type": "object"
+      },
+      "UpdateInvoiceLateFeesConfigurationDto": {
+        "properties": {
+          "altId": {
+            "description": "location Id / company Id based on altType",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "description": "Alt Type",
+            "enum": ["location"],
+            "example": "location",
+            "type": "string"
+          },
+          "lateFeesConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LateFeesConfigurationDto"
+              }
+            ],
+            "description": "late fees configuration"
+          }
+        },
+        "required": ["altId", "altType", "lateFeesConfiguration"],
         "type": "object"
       },
       "UpdateInvoiceResponseDto": {
@@ -2947,12 +5016,17 @@
             "example": 0,
             "type": "number"
           },
+          "automaticTaxesCalculated": {
+            "description": "Is Automatic taxes calculated for the Invoice items",
+            "example": true,
+            "type": "boolean"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDetailsDto"
-              }
-            ],
             "description": "Business Details",
             "example": {
               "address": {
@@ -2965,14 +5039,10 @@
               "name": "Alex",
               "phoneNo": "+1-214-559-6993",
               "website": "www.example.com"
-            }
+            },
+            "type": "object"
           },
           "contactDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactDetailsDto"
-              }
-            ],
             "description": "Contact Details",
             "example": {
               "address": {
@@ -2983,7 +5053,8 @@
               "id": "c6tZZU0rJBf30ZXx9Gli",
               "name": "Alex",
               "phoneNo": "+1-214-559-6993"
-            }
+            },
+            "type": "object"
           },
           "createdAt": {
             "description": "created at",
@@ -2996,16 +5067,12 @@
             "type": "string"
           },
           "discount": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DiscountDto"
-              }
-            ],
             "description": "Discount",
             "example": {
               "type": "percentage",
               "value": 0
-            }
+            },
+            "type": "object"
           },
           "dueDate": {
             "description": "Due date in YYYY-MM-DD format",
@@ -3050,6 +5117,10 @@
             "description": "Name of the invoice",
             "example": "New Invoice",
             "type": "string"
+          },
+          "paymentSchedule": {
+            "description": "split invoice into payment schedule summing up to full invoice amount",
+            "type": "object"
           },
           "status": {
             "description": "Invoice Status",
@@ -3108,6 +5179,13 @@
             "enum": ["location"],
             "example": "location",
             "type": "string"
+          },
+          "attachments": {
+            "description": "attachments for the invoice",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentsDto"
+            },
+            "type": "array"
           },
           "businessDetails": {
             "$ref": "#/components/schemas/BusinessDetailsDto"
@@ -3430,6 +5508,11 @@
               "value": 0
             }
           },
+          "invoiceNumberPrefix": {
+            "description": "prefix for invoice number",
+            "example": "INV-",
+            "type": "string"
+          },
           "items": {
             "description": "Invoice Items",
             "example": [
@@ -3479,6 +5562,31 @@
         ],
         "type": "object"
       },
+      "UpdatePaymentMethodsConfigurationDto": {
+        "properties": {
+          "altId": {
+            "description": "location Id / company Id based on altType",
+            "example": "6578278e879ad2646715ba9c",
+            "type": "string"
+          },
+          "altType": {
+            "description": "Alt Type",
+            "enum": ["location"],
+            "example": "location",
+            "type": "string"
+          },
+          "paymentMethods": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethodDto"
+              }
+            ],
+            "description": "Payment Methods for Invoices"
+          }
+        },
+        "required": ["altId", "altType"],
+        "type": "object"
+      },
       "VoidInvoiceDto": {
         "properties": {
           "altId": {
@@ -3522,12 +5630,17 @@
             "example": 0,
             "type": "number"
           },
+          "automaticTaxesCalculated": {
+            "description": "Is Automatic taxes calculated for the Invoice items",
+            "example": true,
+            "type": "boolean"
+          },
+          "automaticTaxesEnabled": {
+            "description": "Automatic taxes enabled for the Invoice",
+            "example": true,
+            "type": "boolean"
+          },
           "businessDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDetailsDto"
-              }
-            ],
             "description": "Business Details",
             "example": {
               "address": {
@@ -3540,14 +5653,10 @@
               "name": "Alex",
               "phoneNo": "+1-214-559-6993",
               "website": "www.example.com"
-            }
+            },
+            "type": "object"
           },
           "contactDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactDetailsDto"
-              }
-            ],
             "description": "Contact Details",
             "example": {
               "address": {
@@ -3558,7 +5667,8 @@
               "id": "c6tZZU0rJBf30ZXx9Gli",
               "name": "Alex",
               "phoneNo": "+1-214-559-6993"
-            }
+            },
+            "type": "object"
           },
           "createdAt": {
             "description": "created at",
@@ -3571,16 +5681,12 @@
             "type": "string"
           },
           "discount": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DiscountDto"
-              }
-            ],
             "description": "Discount",
             "example": {
               "type": "percentage",
               "value": 0
-            }
+            },
+            "type": "object"
           },
           "dueDate": {
             "description": "Due date in YYYY-MM-DD format",
@@ -3625,6 +5731,10 @@
             "description": "Name of the invoice",
             "example": "New Invoice",
             "type": "string"
+          },
+          "paymentSchedule": {
+            "description": "split invoice into payment schedule summing up to full invoice amount",
+            "type": "object"
           },
           "status": {
             "description": "Invoice Status",
@@ -3675,7 +5785,7 @@
     "securitySchemes": {
       "Agency-Access": {
         "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
         "in": "header",
         "name": "Authorization",
         "scheme": "bearer",
@@ -3799,7 +5909,7 @@
             "name": "paymentMode",
             "required": false,
             "schema": {
-              "enum": ["default", "live"],
+              "enum": ["default", "live", "test"],
               "type": "string"
             }
           },
@@ -3830,6 +5940,28 @@
             "name": "offset",
             "required": true,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The field on which sorting should be applied",
+            "example": "issueDate",
+            "in": "query",
+            "name": "sortField",
+            "required": false,
+            "schema": {
+              "enum": ["issueDate"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The order of sort which should be applied for the sortField",
+            "example": "descend",
+            "in": "query",
+            "name": "sortOrder",
+            "required": false,
+            "schema": {
+              "enum": ["ascend", "descend"],
               "type": "string"
             }
           }
@@ -3974,6 +6106,1360 @@
         ],
         "summary": "Create Invoice",
         "tags": ["Invoice"]
+      }
+    },
+    "/invoices/estimate": {
+      "post": {
+        "description": "Create a new estimate with the provided details",
+        "operationId": "create-new-estimate",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEstimatesDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateResponseDto"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Create New Estimate",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/list": {
+      "get": {
+        "description": "Get a paginated list of estimates",
+        "operationId": "list-estimates",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["location"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "startAt in YYYY-MM-DD format",
+            "example": "2023-01-01",
+            "in": "query",
+            "name": "startAt",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "endAt in YYYY-MM-DD format",
+            "example": "2023-01-01",
+            "in": "query",
+            "name": "endAt",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "search text for estimates name",
+            "example": "Home services estimate",
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "estimate status",
+            "example": "sent",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": ["all", "draft", "sent", "accepted", "declined", "invoiced", "viewed"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Contact ID for the estimate",
+            "example": "AmuzcoPBpgKeccNsFlib",
+            "in": "query",
+            "name": "contactId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Limit the number of items to return",
+            "example": 10,
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Number of items to skip",
+            "example": 10,
+            "in": "query",
+            "name": "offset",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEstimatesResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "List Estimates",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/number/generate": {
+      "get": {
+        "description": "Get the next estimate number for the given location",
+        "operationId": "generate-estimate-number",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["location"],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateEstimateNumberResponse"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Generate Estimate Number",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/stats/last-visited-at": {
+      "patch": {
+        "description": "API to update estimate last visited at by estimate id",
+        "operationId": "update-estimate-last-visited-at",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstimateIdParam"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update estimate last visited at",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/template": {
+      "get": {
+        "description": "Get a list of estimate templates or a specific template by ID",
+        "operationId": "list-estimate-templates",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["location"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "To search for an estimate template by id / name",
+            "example": "Alex",
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Limit the number of items to return",
+            "example": 10,
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Number of items to skip",
+            "example": 10,
+            "in": "query",
+            "name": "offset",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEstimateTemplateResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "List Estimate Templates",
+        "tags": ["Estimate"]
+      },
+      "post": {
+        "description": "Create a new estimate template",
+        "operationId": "create-estimate-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstimateTemplatesDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateTemplateResponseDTO"
+                }
+              }
+            },
+            "description": "Successfully created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Create Estimate Template",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/template/preview": {
+      "get": {
+        "description": "Get a preview of an estimate template",
+        "operationId": "preview-estimate-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Location Id or Agency Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "query",
+            "name": "altId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "altType",
+            "required": true,
+            "schema": {
+              "enum": ["location"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Template Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "in": "query",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateTemplateResponseDTO"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Preview Estimate Template",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/template/{templateId}": {
+      "delete": {
+        "description": "Delete an existing estimate template",
+        "operationId": "delete-estimate-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Template Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AltDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateTemplateResponseDTO"
+                }
+              }
+            },
+            "description": "Successfully deleted"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Delete Estimate Template",
+        "tags": ["Estimate"]
+      },
+      "put": {
+        "description": "Update an existing estimate template",
+        "operationId": "update-estimate-template",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Template Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstimateTemplatesDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateTemplateResponseDTO"
+                }
+              }
+            },
+            "description": "Successfully updated"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update Estimate Template",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/{estimateId}": {
+      "delete": {
+        "description": "Delete an existing estimate",
+        "operationId": "delete-estimate",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Estimate Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "in": "path",
+            "name": "estimateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AltDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateResponseDto"
+                }
+              }
+            },
+            "description": "Successfully Deleted"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Delete Estimate",
+        "tags": ["Estimate"]
+      },
+      "put": {
+        "description": "Update an existing estimate with new details",
+        "operationId": "update-estimate",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Estimate Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "in": "path",
+            "name": "estimateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEstimateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateResponseDto"
+                }
+              }
+            },
+            "description": "Successfully updated"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update Estimate",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/{estimateId}/invoice": {
+      "post": {
+        "description": "Create a new invoice from an existing estimate",
+        "operationId": "create-invoice-from-estimate",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Estimate Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "in": "path",
+            "name": "estimateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvoiceFromEstimateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateInvoiceFromEstimateResponseDTO"
+                }
+              }
+            },
+            "description": "Successfully Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Create Invoice from Estimate",
+        "tags": ["Estimate"]
+      }
+    },
+    "/invoices/estimate/{estimateId}/send": {
+      "post": {
+        "description": "API to send estimate by estimate id",
+        "operationId": "send-estimate",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Estimate Id",
+            "example": "5f9d6d8b1b2d2c001f2d9e4b",
+            "in": "path",
+            "name": "estimateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendEstimateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateResponseDto"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Send Estimate",
+        "tags": ["Estimate"]
       }
     },
     "/invoices/generate-invoice-number": {
@@ -4166,7 +7652,7 @@
             "name": "paymentMode",
             "required": false,
             "schema": {
-              "enum": ["default", "live"],
+              "enum": ["default", "live", "test"],
               "type": "string"
             }
           },
@@ -4951,6 +8437,169 @@
         "tags": ["Schedule"]
       }
     },
+    "/invoices/schedule/{scheduleId}/updateAndSchedule": {
+      "post": {
+        "description": "API to update scheduled recurring invoice",
+        "operationId": "update-and-schedule-invoice-schedule",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Schedule Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateAndScheduleInvoiceScheduleResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update scheduled recurring invoice",
+        "tags": ["Schedule"]
+      }
+    },
+    "/invoices/stats/last-visited-at": {
+      "patch": {
+        "description": "API to update invoice last visited at by invoice id",
+        "operationId": "update-invoice-last-visited-at",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchInvoiceStatsLastViewedDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update invoice last visited at",
+        "tags": ["Invoice"]
+      }
+    },
     "/invoices/template": {
       "get": {
         "description": "API to get list of templates",
@@ -5043,7 +8692,7 @@
             "name": "paymentMode",
             "required": false,
             "schema": {
-              "enum": ["default", "live"],
+              "enum": ["default", "live", "test"],
               "type": "string"
             }
           },
@@ -5528,6 +9177,206 @@
         "tags": ["Template"]
       }
     },
+    "/invoices/template/{templateId}/late-fees-configuration": {
+      "patch": {
+        "description": "API to update template late fees configuration by template id",
+        "operationId": "update-invoice-late-fees-configuration",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Template Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvoiceLateFeesConfigurationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateInvoiceTemplateResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update template late fees configuration",
+        "tags": ["Template"]
+      }
+    },
+    "/invoices/template/{templateId}/payment-methods-configuration": {
+      "patch": {
+        "description": "API to update template late fees configuration by template id",
+        "operationId": "update-invoice-late-fees-configuration_patch",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Template Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaymentMethodsConfigurationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateInvoiceTemplateResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update template late fees configuration",
+        "tags": ["Template"]
+      }
+    },
     "/invoices/text2pay": {
       "post": {
         "description": "API to create or update a text2pay invoice",
@@ -5941,6 +9790,106 @@
           }
         ],
         "summary": "Update invoice",
+        "tags": ["Invoice"]
+      }
+    },
+    "/invoices/{invoiceId}/late-fees-configuration": {
+      "patch": {
+        "description": "API to update invoice late fees configuration by invoice id",
+        "operationId": "update-invoice-late-fees-configuration_patch_1",
+        "parameters": [
+          {
+            "description": "Access Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
+              "type": "string"
+            }
+          },
+          {
+            "description": "API Version",
+            "in": "header",
+            "name": "Version",
+            "required": true,
+            "schema": {
+              "enum": ["2021-07-28"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Invoice Id",
+            "example": "6578278e879ad2646715ba9c",
+            "in": "path",
+            "name": "invoiceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvoiceLateFeesConfigurationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateInvoiceResponseDto"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestDTO"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableDTO"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Location-Access": []
+          },
+          {
+            "Agency-Access": []
+          }
+        ],
+        "summary": "Update invoice late fees configuration",
         "tags": ["Invoice"]
       }
     },
