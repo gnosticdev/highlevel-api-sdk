@@ -10,6 +10,20 @@ import type { HighLevelOauthConfig } from './client/with-oauth'
 import { HighLevelClientWithOAuth } from './client/with-oauth'
 import type { DefaultOauthClient } from './oauth/impl'
 
+export type { HighLevelClientConfig } from './client/default'
+// Export client classes and types for direct import
+export { HighLevelClient } from './client/default'
+export type { HighLevelClientInterface } from './client/interface'
+export type {
+	AuthHeaders,
+	ClientWithAuth,
+} from './client/types'
+export { createClientWithAuth } from './client/types'
+export type { PrivateIntegrationConfig } from './client/with-integration'
+export { HighLevelIntegrationClient } from './client/with-integration'
+export type { HighLevelOauthConfig } from './client/with-oauth'
+export { HighLevelClientWithOAuth } from './client/with-oauth'
+
 // TODO: use this to limit the endpoints available to sub-account and agency clients
 // type SubAccountScopeNames = FilteredScopeNames<'Sub-Account'>
 // type SubAccountClientMap = {

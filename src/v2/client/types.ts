@@ -1,6 +1,7 @@
 import createClient, { type Client } from 'openapi-fetch/src/index.js'
 import { HighLevelSDKError } from '../../lib/errors'
-import type { HighLevelClientConfig } from './default'
+import type * as defaultClient from './default'
+import type * as withIntegration from './with-integration'
 
 type HTTPMethod =
 	| 'get'
@@ -79,7 +80,7 @@ export type AuthHeaders = {
  */
 export function createClientWithAuth<TPaths extends {}>(
 	authHeaders: AuthHeaders,
-	options?: HighLevelClientConfig,
+	options?: defaultClient.HighLevelClientConfig,
 ): ClientWithAuth<TPaths> {
 	if (!authHeaders.Authorization.startsWith('Bearer ')) {
 		throw new HighLevelSDKError('INVALID_AUTH_HEADER')
@@ -95,3 +96,7 @@ export function createClientWithAuth<TPaths extends {}>(
 		...config,
 	}) as ClientWithAuth<TPaths>
 }
+
+export type HighLevelClient = typeof defaultClient.HighLevelClient
+export type HighLevelIntegrationClient =
+	typeof withIntegration.HighLevelIntegrationClient
