@@ -109,18 +109,18 @@ export class HighLevelClient<
 	businesses: THeaders extends undefined
 		? Client<Businesses.paths>
 		: ClientWithAuth<Businesses.paths>
-	blogs:
-		| Client<Blogs.paths, `${string}/${string}`>
-		| ClientWithAuth<Blogs.paths>
-	customMenus:
-		| Client<CustomMenus.paths, `${string}/${string}`>
-		| ClientWithAuth<CustomMenus.paths>
-	emails:
-		| Client<Emails.paths, `${string}/${string}`>
-		| ClientWithAuth<Emails.paths>
-	emailIsv:
-		| Client<EmailIsv.paths, `${string}/${string}`>
-		| ClientWithAuth<EmailIsv.paths>
+	blogs: THeaders extends undefined
+		? Client<Blogs.paths>
+		: ClientWithAuth<Blogs.paths>
+	customMenus: THeaders extends undefined
+		? Client<CustomMenus.paths>
+		: ClientWithAuth<CustomMenus.paths>
+	emails: THeaders extends undefined
+		? Client<Emails.paths>
+		: ClientWithAuth<Emails.paths>
+	emailIsv: THeaders extends undefined
+		? Client<EmailIsv.paths>
+		: ClientWithAuth<EmailIsv.paths>
 	/**
 	 * invoices client implementation.
 	 */
