@@ -1,0 +1,7 @@
+{
+	"apiKeyHelper": "/workspace/.env.sh",
+	"permissions": {
+		"allow": ["WebFetch(domain:github.com)", "Bash(mkdir:*)"],
+		"deny": []
+	}
+}

@@ -24,3 +24,5 @@ bun.lockb
 
 # some examples create a db
 *.sqlite
+.env.sh
+.devcontainer
