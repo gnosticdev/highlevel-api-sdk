@@ -1,768 +1,680 @@
 {
-  "components": {
-    "schemas": {
-      "BadRequestDTO": {
-        "properties": {
-          "message": {
-            "example": "Bad Request",
-            "type": "string"
-          },
-          "statusCode": {
-            "example": 400,
-            "type": "number"
-          }
-        },
-        "type": "object"
-      },
-      "BusinessCreatedByOrUpdatedBy": {
-        "properties": {},
-        "type": "object"
-      },
-      "BusinessDto": {
-        "properties": {
-          "address": {
-            "description": "address",
-            "type": "string"
-          },
-          "city": {
-            "description": "city",
-            "type": "string"
-          },
-          "country": {
-            "description": "country",
-            "example": "united states",
-            "type": "string"
-          },
-          "createdAt": {
-            "description": "Creation Time",
-            "format": "date-time",
-            "type": "string"
-          },
-          "createdBy": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessCreatedByOrUpdatedBy"
-              }
-            ],
-            "description": "Created By"
-          },
-          "description": {
-            "description": "description",
-            "type": "string"
-          },
-          "email": {
-            "description": "email",
-            "example": "abc@microsoft.com",
-            "type": "string"
-          },
-          "id": {
-            "description": "Business Id",
-            "example": "63771dcac1116f0e21de8e12",
-            "type": "string"
-          },
-          "locationId": {
-            "description": "locaitonId",
-            "type": "string"
-          },
-          "name": {
-            "description": "Business Name",
-            "example": "Microsoft",
-            "type": "string"
-          },
-          "phone": {
-            "description": "phone number",
-            "type": "string"
-          },
-          "postalCode": {
-            "description": "postal code",
-            "type": "string"
-          },
-          "state": {
-            "description": "state",
-            "type": "string"
-          },
-          "updatedAt": {
-            "description": "Last updation time",
-            "format": "date-time",
-            "type": "string"
-          },
-          "updatedBy": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessCreatedByOrUpdatedBy"
-              }
-            ],
-            "description": "updated By"
-          },
-          "website": {
-            "description": "website",
-            "example": "microsoft.com",
-            "type": "string"
-          }
-        },
-        "required": ["id", "name", "locationId"],
-        "type": "object"
-      },
-      "CreateBusinessDto": {
-        "properties": {
-          "address": {
-            "example": "street adress",
-            "type": "string"
-          },
-          "city": {
-            "example": "new york",
-            "type": "string"
-          },
-          "country": {
-            "example": "us",
-            "type": "string"
-          },
-          "description": {
-            "example": "business description",
-            "type": "string"
-          },
-          "email": {
-            "example": "john@deo.com",
-            "type": "string"
-          },
-          "locationId": {
-            "example": "5DP4iH6HLkQsiKESj6rh",
-            "type": "string"
-          },
-          "name": {
-            "example": "Microsoft",
-            "type": "string"
-          },
-          "phone": {
-            "example": "+18832327657",
-            "type": "string"
-          },
-          "postalCode": {
-            "example": "12312312",
-            "type": "string"
-          },
-          "state": {
-            "example": "new york",
-            "type": "string"
-          },
-          "website": {
-            "example": "www.xyz.com",
-            "type": "string"
-          }
-        },
-        "required": ["name", "locationId"],
-        "type": "object"
-      },
-      "DeleteBusinessResponseDto": {
-        "properties": {
-          "success": {
-            "description": "Success value",
-            "example": true,
-            "type": "boolean"
-          }
-        },
-        "required": ["success"],
-        "type": "object"
-      },
-      "GetBusinessByIdResponseDto": {
-        "properties": {
-          "business": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDto"
-              }
-            ],
-            "description": "Business Response"
-          }
-        },
-        "required": ["business"],
-        "type": "object"
-      },
-      "GetBusinessByLocationResponseDto": {
-        "properties": {
-          "businesses": {
-            "description": "Business Response",
-            "items": {
-              "$ref": "#/components/schemas/BusinessDto"
-            },
-            "type": "array"
-          }
-        },
-        "required": ["businesses"],
-        "type": "object"
-      },
-      "UnauthorizedDTO": {
-        "properties": {
-          "error": {
-            "example": "Unauthorized",
-            "type": "string"
-          },
-          "message": {
-            "example": "Invalid token: access token is invalid",
-            "type": "string"
-          },
-          "statusCode": {
-            "example": 401,
-            "type": "number"
-          }
-        },
-        "type": "object"
-      },
-      "UnprocessableDTO": {
-        "properties": {
-          "error": {
-            "example": "Unprocessable Entity",
-            "type": "string"
-          },
-          "message": {
-            "example": ["Unprocessable Entity"],
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "statusCode": {
-            "example": 422,
-            "type": "number"
-          }
-        },
-        "type": "object"
-      },
-      "UpdateBusinessDto": {
-        "properties": {
-          "address": {
-            "example": "street adress",
-            "type": "string"
-          },
-          "city": {
-            "example": "new york",
-            "type": "string"
-          },
-          "country": {
-            "example": "us",
-            "type": "string"
-          },
-          "description": {
-            "example": "business description",
-            "type": "string"
-          },
-          "email": {
-            "example": "john@deo.com",
-            "type": "string"
-          },
-          "name": {
-            "example": "Microsoft",
-            "type": "string"
-          },
-          "phone": {
-            "example": "+18832327657",
-            "type": "string"
-          },
-          "postalCode": {
-            "example": "12312312",
-            "type": "string"
-          },
-          "state": {
-            "example": "new york",
-            "type": "string"
-          },
-          "website": {
-            "example": "www.xyz.com",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "UpdateBusinessResponseDto": {
-        "properties": {
-          "buiseness": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BusinessDto"
-              }
-            ],
-            "description": "Business Response"
-          },
-          "success": {
-            "description": "Success Value",
-            "example": true,
-            "type": "boolean"
-          }
-        },
-        "required": ["success", "buiseness"],
-        "type": "object"
-      }
-    },
-    "securitySchemes": {
-      "Agency-Access": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      },
-      "Location-Access": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      },
-      "bearer": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      }
-    }
-  },
-  "info": {
-    "contact": {},
-    "description": "Documentation for business API",
-    "title": "Business API",
-    "version": "1.0"
-  },
   "openapi": "3.0.0",
   "paths": {
-    "/businesses/": {
-      "get": {
-        "description": "Get Businesses by Location",
-        "operationId": "get-businesses-by-location",
-        "parameters": [
-          {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-              "type": "string"
-            }
-          },
-          {
-            "description": "API Version",
-            "in": "header",
-            "name": "Version",
-            "required": true,
-            "schema": {
-              "enum": ["2021-07-28"],
-              "type": "string"
-            }
-          },
-          {
-            "example": "5DP4iH6HLkQsiKESj6rh",
-            "in": "query",
-            "name": "locationId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetBusinessByLocationResponseDto"
-                }
-              }
-            },
-            "description": "Successful response"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestDTO"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedDTO"
-                }
-              }
-            },
-            "description": "Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Get Businesses by Location",
-        "tags": ["Businesses"]
-      },
-      "post": {
-        "description": "Create Business",
-        "operationId": "create-business",
-        "parameters": [
-          {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-              "type": "string"
-            }
-          },
-          {
-            "description": "API Version",
-            "in": "header",
-            "name": "Version",
-            "required": true,
-            "schema": {
-              "enum": ["2021-07-28"],
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateBusinessDto"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateBusinessResponseDto"
-                }
-              }
-            },
-            "description": "Successful response"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestDTO"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedDTO"
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnprocessableDTO"
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Create Business",
-        "tags": ["Businesses"]
-      }
-    },
     "/businesses/{businessId}": {
-      "delete": {
-        "description": "Delete Business",
-        "operationId": "delete-Business",
-        "parameters": [
-          {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-              "type": "string"
-            }
-          },
-          {
-            "description": "API Version",
-            "in": "header",
-            "name": "Version",
-            "required": true,
-            "schema": {
-              "enum": ["2021-07-28"],
-              "type": "string"
-            }
-          },
-          {
-            "example": "5DP4iH6HLkQsiKESj6rh",
-            "in": "path",
-            "name": "businessId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteBusinessResponseDto"
-                }
-              }
-            },
-            "description": "Successful response"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestDTO"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedDTO"
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnprocessableDTO"
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Delete Business",
-        "tags": ["Businesses"]
-      },
-      "get": {
-        "description": "Get Business",
-        "operationId": "get-business",
-        "parameters": [
-          {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-              "type": "string"
-            }
-          },
-          {
-            "description": "API Version",
-            "in": "header",
-            "name": "Version",
-            "required": true,
-            "schema": {
-              "enum": ["2021-07-28"],
-              "type": "string"
-            }
-          },
-          {
-            "example": "5DP4iH6HLkQsiKESj6rh",
-            "in": "path",
-            "name": "businessId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetBusinessByIdResponseDto"
-                }
-              }
-            },
-            "description": "Successful response"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestDTO"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedDTO"
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnprocessableDTO"
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Get Business",
-        "tags": ["Businesses"]
-      },
       "put": {
-        "description": "Update Business",
         "operationId": "update-business",
+        "summary": "Update Business",
+        "description": "Update Business",
         "parameters": [
           {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-              "type": "string"
-            }
-          },
-          {
-            "description": "API Version",
-            "in": "header",
             "name": "Version",
+            "in": "header",
+            "description": "API Version",
             "required": true,
             "schema": {
-              "enum": ["2021-07-28"],
-              "type": "string"
+              "type": "string",
+              "enum": ["2021-07-28"]
             }
           },
           {
-            "example": "5DP4iH6HLkQsiKESj6rh",
-            "in": "path",
             "name": "businessId",
             "required": true,
+            "in": "path",
+            "example": "5DP4iH6HLkQsiKESj6rh",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateBusinessDto"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
+            "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateBusinessResponseDto"
                 }
               }
-            },
-            "description": "Successful response"
+            }
           },
           "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BadRequestDTO"
+                  "$ref": "../common/common-schemas.json#/components/schemas/BadRequestDTO"
                 }
               }
-            },
-            "description": "Bad Request"
+            }
           },
           "401": {
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnauthorizedDTO"
                 }
               }
-            },
-            "description": "Unauthorized"
+            }
           },
           "422": {
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableDTO"
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnprocessableDTO"
                 }
               }
-            },
-            "description": "Unprocessable Entity"
+            }
           }
         },
+        "tags": ["Businesses"],
         "security": [
           {
-            "bearer": []
+            "bearer": ["businesses.write"]
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "delete-Business",
+        "summary": "Delete Business",
+        "description": "Delete Business",
+        "parameters": [
+          {
+            "name": "Version",
+            "in": "header",
+            "description": "API Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["2021-07-28"]
+            }
+          },
+          {
+            "name": "businessId",
+            "required": true,
+            "in": "path",
+            "example": "5DP4iH6HLkQsiKESj6rh",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
-        "summary": "Update Business",
-        "tags": ["Businesses"]
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteBusinessResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/BadRequestDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnprocessableDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Businesses"],
+        "security": [
+          {
+            "bearer": ["businesses.write"]
+          }
+        ]
+      },
+      "get": {
+        "operationId": "get-business",
+        "summary": "Get Business",
+        "description": "Get Business",
+        "parameters": [
+          {
+            "name": "Version",
+            "in": "header",
+            "description": "API Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["2021-07-28"]
+            }
+          },
+          {
+            "name": "businessId",
+            "required": true,
+            "in": "path",
+            "example": "5DP4iH6HLkQsiKESj6rh",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBusinessByIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/BadRequestDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnprocessableDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Businesses"],
+        "security": [
+          {
+            "bearer": ["businesses.readonly"]
+          }
+        ]
+      }
+    },
+    "/businesses/": {
+      "get": {
+        "operationId": "get-businesses-by-location",
+        "summary": "Get Businesses by Location",
+        "description": "Get Businesses by Location",
+        "parameters": [
+          {
+            "name": "Version",
+            "in": "header",
+            "description": "API Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["2021-07-28"]
+            }
+          },
+          {
+            "name": "locationId",
+            "required": true,
+            "in": "query",
+            "example": "5DP4iH6HLkQsiKESj6rh",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBusinessByLocationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/BadRequestDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Businesses"],
+        "security": [
+          {
+            "bearer": ["businesses.readonly"]
+          }
+        ]
+      },
+      "post": {
+        "operationId": "create-business",
+        "summary": "Create Business",
+        "description": "Create Business",
+        "parameters": [
+          {
+            "name": "Version",
+            "in": "header",
+            "description": "API Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["2021-07-28"]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBusinessDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBusinessResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/BadRequestDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnauthorizedDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnprocessableDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Businesses"],
+        "security": [
+          {
+            "bearer": ["businesses.write"]
+          }
+        ]
       }
     }
   },
+  "info": {
+    "title": "Business API",
+    "description": "Documentation for business API",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Businesses",
+      "description": "Documentation for business API"
+    }
+  ],
   "servers": [
     {
       "url": "https://services.leadconnectorhq.com"
     }
   ],
-  "tags": [
-    {
-      "description": "Documentation for business API",
-      "name": "Businesses"
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "type": "http"
+      },
+      "Location-Access": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "type": "http"
+      },
+      "Location-Access-Only": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Sub-Account.",
+        "type": "http"
+      },
+      "Agency-Access": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "BusinessCreatedByOrUpdatedBy": {
+        "type": "object",
+        "properties": {}
+      },
+      "BusinessDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Business Id",
+            "example": "63771dcac1116f0e21de8e12"
+          },
+          "name": {
+            "type": "string",
+            "description": "Business Name",
+            "example": "Microsoft"
+          },
+          "phone": {
+            "type": "string",
+            "description": "phone number"
+          },
+          "email": {
+            "type": "string",
+            "description": "email",
+            "example": "abc@microsoft.com"
+          },
+          "website": {
+            "type": "string",
+            "description": "website",
+            "example": "microsoft.com"
+          },
+          "address": {
+            "type": "string",
+            "description": "address"
+          },
+          "city": {
+            "type": "string",
+            "description": "city"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "state": {
+            "type": "string",
+            "description": "state"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "postal code"
+          },
+          "country": {
+            "type": "string",
+            "description": "country",
+            "example": "united states"
+          },
+          "updatedBy": {
+            "description": "updated By",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessCreatedByOrUpdatedBy"
+              }
+            ]
+          },
+          "locationId": {
+            "type": "string",
+            "description": "locaitonId"
+          },
+          "createdBy": {
+            "description": "Created By",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessCreatedByOrUpdatedBy"
+              }
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Creation Time"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Last updation time"
+          }
+        },
+        "required": ["id", "name", "locationId"]
+      },
+      "GetBusinessByLocationResponseDto": {
+        "type": "object",
+        "properties": {
+          "businesses": {
+            "description": "Business Response",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BusinessDto"
+            }
+          }
+        },
+        "required": ["businesses"]
+      },
+      "CreateBusinessDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Microsoft"
+          },
+          "locationId": {
+            "type": "string",
+            "example": "5DP4iH6HLkQsiKESj6rh"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+18832327657"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@deo.com"
+          },
+          "website": {
+            "type": "string",
+            "example": "www.xyz.com"
+          },
+          "address": {
+            "type": "string",
+            "example": "street adress"
+          },
+          "city": {
+            "type": "string",
+            "example": "new york"
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "12312312"
+          },
+          "state": {
+            "type": "string",
+            "example": "new york"
+          },
+          "country": {
+            "type": "string",
+            "example": "us"
+          },
+          "description": {
+            "type": "string",
+            "example": "business description"
+          }
+        },
+        "required": ["name", "locationId"]
+      },
+      "UpdateBusinessResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success Value",
+            "example": true
+          },
+          "buiseness": {
+            "description": "Business Response",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessDto"
+              }
+            ]
+          }
+        },
+        "required": ["success", "buiseness"]
+      },
+      "UpdateBusinessDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Microsoft"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+18832327657"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@deo.com"
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "12312312"
+          },
+          "website": {
+            "type": "string",
+            "example": "www.xyz.com"
+          },
+          "address": {
+            "type": "string",
+            "example": "street adress"
+          },
+          "state": {
+            "type": "string",
+            "example": "new york"
+          },
+          "city": {
+            "type": "string",
+            "example": "new york"
+          },
+          "country": {
+            "type": "string",
+            "example": "us"
+          },
+          "description": {
+            "type": "string",
+            "example": "business description"
+          }
+        }
+      },
+      "DeleteBusinessResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success value",
+            "example": true
+          }
+        },
+        "required": ["success"]
+      },
+      "GetBusinessByIdResponseDto": {
+        "type": "object",
+        "properties": {
+          "business": {
+            "description": "Business Response",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BusinessDto"
+              }
+            ]
+          }
+        },
+        "required": ["business"]
+      }
     }
-  ]
+  },
+  "x-tagGroups": {
+    "name": "Business",
+    "tags": ["Businesses"]
+  }
 }

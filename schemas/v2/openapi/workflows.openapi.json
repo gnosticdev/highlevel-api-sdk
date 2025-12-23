@@ -1,166 +1,27 @@
 {
-  "components": {
-    "schemas": {
-      "BadRequestDTO": {
-        "properties": {
-          "message": {
-            "example": "Bad Request",
-            "type": "string"
-          },
-          "statusCode": {
-            "example": 400,
-            "type": "number"
-          }
-        },
-        "type": "object"
-      },
-      "GetWorkflowSuccessfulResponseDto": {
-        "properties": {
-          "workflows": {
-            "items": {
-              "$ref": "#/components/schemas/WorkflowSchema"
-            },
-            "type": "array"
-          }
-        },
-        "type": "object"
-      },
-      "UnauthorizedDTO": {
-        "properties": {
-          "error": {
-            "example": "Unauthorized",
-            "type": "string"
-          },
-          "message": {
-            "example": "Invalid token: access token is invalid",
-            "type": "string"
-          },
-          "statusCode": {
-            "example": 401,
-            "type": "number"
-          }
-        },
-        "type": "object"
-      },
-      "UnprocessableDTO": {
-        "properties": {
-          "error": {
-            "example": "Unprocessable Entity",
-            "type": "string"
-          },
-          "message": {
-            "example": ["Unprocessable Entity"],
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "statusCode": {
-            "example": 422,
-            "type": "number"
-          }
-        },
-        "type": "object"
-      },
-      "WorkflowSchema": {
-        "properties": {
-          "createdAt": {
-            "example": "2021-05-26T11:33:49.000Z",
-            "type": "string"
-          },
-          "id": {
-            "example": "78559bb3-b920-461e-b010-7b2a2816d2a9",
-            "type": "string"
-          },
-          "locationId": {
-            "example": "eBG6WapS3v4ZqwA45MTxtYJ",
-            "type": "string"
-          },
-          "name": {
-            "example": "First Workflow",
-            "type": "string"
-          },
-          "status": {
-            "example": "draft",
-            "type": "string"
-          },
-          "updatedAt": {
-            "example": "2021-05-26T11:33:49.000Z",
-            "type": "string"
-          },
-          "version": {
-            "example": 2,
-            "type": "number"
-          }
-        },
-        "type": "object"
-      }
-    },
-    "securitySchemes": {
-      "Agency-Access": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Agency.",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      },
-      "Location-Access": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      },
-      "bearer": {
-        "bearerFormat": "JWT",
-        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
-        "in": "header",
-        "name": "Authorization",
-        "scheme": "bearer",
-        "type": "http"
-      }
-    }
-  },
-  "info": {
-    "contact": {},
-    "description": "Documentation for workflows API",
-    "title": "workflows API",
-    "version": "1.0"
-  },
   "openapi": "3.0.0",
   "paths": {
     "/workflows/": {
       "get": {
-        "description": "Get Workflow",
         "operationId": "get-workflow",
+        "summary": "Get Workflow",
+        "description": "Get Workflow",
         "parameters": [
           {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "example": "Bearer 9c48df2694a849b6089f9d0d3513efe",
-              "type": "string"
-            }
-          },
-          {
-            "description": "API Version",
-            "in": "header",
             "name": "Version",
+            "in": "header",
+            "description": "API Version",
             "required": true,
             "schema": {
-              "enum": ["2021-07-28"],
-              "type": "string"
+              "type": "string",
+              "enum": ["2021-07-28"]
             }
           },
           {
-            "example": "ve9EPM428h8vShlRW1KT",
-            "in": "query",
             "name": "locationId",
             "required": true,
+            "in": "query",
+            "example": "ve9EPM428h8vShlRW1KT",
             "schema": {
               "type": "string"
             }
@@ -168,65 +29,156 @@
         ],
         "responses": {
           "200": {
+            "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetWorkflowSuccessfulResponseDto"
                 }
               }
-            },
-            "description": "Successful response"
+            }
           },
           "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BadRequestDTO"
+                  "$ref": "../common/common-schemas.json#/components/schemas/BadRequestDTO"
                 }
               }
-            },
-            "description": "Bad Request"
+            }
           },
           "401": {
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedDTO"
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnauthorizedDTO"
                 }
               }
-            },
-            "description": "Unauthorized"
+            }
           },
           "422": {
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableDTO"
+                  "$ref": "../common/common-schemas.json#/components/schemas/UnprocessableDTO"
                 }
               }
-            },
-            "description": "Unprocessable Entity"
+            }
           }
         },
+        "tags": ["Workflows"],
         "security": [
           {
-            "bearer": []
+            "bearer": ["workflows.readonly"]
           }
-        ],
-        "summary": "Get Workflow",
-        "tags": ["Workflows"]
+        ]
       }
     }
   },
+  "info": {
+    "title": "workflows API",
+    "description": "Documentation for workflows API",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Workflows",
+      "description": "Documentation for workflows API"
+    }
+  ],
   "servers": [
     {
       "url": "https://services.leadconnectorhq.com"
     }
   ],
-  "tags": [
-    {
-      "description": "Documentation for workflows API",
-      "name": "Workflows"
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "type": "http"
+      },
+      "Location-Access": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Sub-Account (OR) Private Integration Token of Sub-Account.",
+        "type": "http"
+      },
+      "Location-Access-Only": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Sub-Account.",
+        "type": "http"
+      },
+      "Agency-Access": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Use the Access Token generated with user type as Agency (OR) Private Integration Token of Agency.",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "WorkflowSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "78559bb3-b920-461e-b010-7b2a2816d2a9"
+          },
+          "name": {
+            "type": "string",
+            "example": "First Workflow"
+          },
+          "status": {
+            "type": "string",
+            "example": "draft"
+          },
+          "version": {
+            "type": "number",
+            "example": 2
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2021-05-26T11:33:49.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2021-05-26T11:33:49.000Z"
+          },
+          "locationId": {
+            "type": "string",
+            "example": "eBG6WapS3v4ZqwA45MTxtYJ"
+          }
+        }
+      },
+      "GetWorkflowSuccessfulResponseDto": {
+        "type": "object",
+        "properties": {
+          "workflows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkflowSchema"
+            }
+          }
+        }
+      }
     }
-  ]
+  },
+  "x-tagGroups": {
+    "name": "Workflows",
+    "tags": ["Workflows"]
+  }
 }
