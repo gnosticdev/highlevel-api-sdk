@@ -1,10 +1,12 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "json.schemas": [
-        {
-            "fileMatch": ["schemas/**/*openapi.json"],
-            "url": "https://spec.openapis.org/oas/3.1/dialect/base"
-        }
-    ],
-    "json.schemaDownload.enable": true
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"json.schemas": [
+		{
+			"fileMatch": ["schemas/**/*openapi.json"],
+			"url": "https://spec.openapis.org/oas/3.1/dialect/base"
+		}
+	],
+	"bun.test.enable": true,
+
+	"json.schemaDownload.enable": true
 }

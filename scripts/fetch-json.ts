@@ -189,18 +189,6 @@ function ensureUniqueOperationIds(
 
 	return schema
 }
-/**
- * From /list-schemas
- *
- * @deprecated
- */
-type ListSchemas = {
-	schemas: {
-		name: string
-		size: number
-		uploaded: string
-	}[]
-}
 
 type SchemaList = {
 	lastUpdated: string
