@@ -8,19 +8,7 @@
 	},
 
 	"files": {
-		"includes": [
-			"**/*.js",
-			"**/*.ts",
-			"**/*.tsx",
-			"**/*.json",
-			"**/*.jsonc",
-			"!**/node_modules",
-			"!**/_!\\[__tests__\\]",
-			"!**/dist",
-			"!**/.wrangler",
-			"!**/.vscode",
-			"!**/schemas/v1/postman.json"
-		]
+		"includes": ["**", "!**/schemas/v1/postman.json"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -53,6 +41,9 @@
 			"nursery": {
 				"recommended": true,
 				"useSortedClasses": "warn"
+			},
+			"suspicious": {
+				"noExplicitAny": "off"
 			},
 			"recommended": true,
 			"style": {
