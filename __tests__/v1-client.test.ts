@@ -1,4 +1,13 @@
-import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	jest,
+	mock,
+	spyOn,
+} from 'bun:test'
 import type { FetchResponse } from 'openapi-fetch'
 import { createHighLevelV1Client } from '../src/v1'
 import type * as V1 from '../src/v1/types/openapi'
@@ -6,16 +15,20 @@ import type * as V1 from '../src/v1/types/openapi'
 describe('V1 Client', () => {
 	const mockApiKey = 'test-api-key'
 	// sends back the request body
-	const mockBaseUrl = 'https://postman-echo.com'
+
 	let client: ReturnType<typeof createHighLevelV1Client>
 
 	beforeEach(() => {
 		client = createHighLevelV1Client({ apiKey: mockApiKey })
 	})
 
+	afterEach(() => {
+		mock.restore()
+		jest.clearAllMocks()
+	})
+
 	describe('Client Configuration', () => {
 		it('should throw a HighLevelSDKError if apiKey is not provided', async () => {
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			expect(() => createHighLevelV1Client({} as any)).toThrow(
 				'apiKey is required',
 			)
@@ -37,24 +50,29 @@ describe('V1 Client', () => {
 			})
 			await defaultClient.GET('/v1/contacts/', {})
 			expect(fetchSpy).toHaveBeenCalled()
-			expect(fetchSpy.mock.calls[0]![0]).toHaveProperty(
-				'url',
-				'https://rest.gohighlevel.com/v1/contacts/',
+			expect(fetchSpy.mock.calls[0]![0]).toEqual(
+				expect.objectContaining({
+					url: 'https://rest.gohighlevel.com/v1/contacts/',
+				}),
 			)
+		})
 
-			it('should use custom baseUrl configuration', async () => {
-				// Test custom baseUrl
-				const customClient = createHighLevelV1Client({
-					apiKey: mockApiKey,
-					baseUrl: mockBaseUrl,
-				})
-				const customSpy = spyOn(globalThis, 'fetch')
-				await customClient.GET('/v1/contacts/', {})
-				expect(customSpy).toHaveBeenCalledWith(
-					`${mockBaseUrl}/v1/contacts/`,
-					expect.any(Object),
-				)
+		it('should use custom baseUrl configuration', async () => {
+			const mockBaseUrl = 'https://postman-echo.com'
+			const fetchSpy = spyOn(globalThis, 'fetch')
+			// Test custom baseUrl
+			const customClient = createHighLevelV1Client({
+				apiKey: mockApiKey,
+				baseUrl: mockBaseUrl,
+				fetch: fetchSpy,
 			})
+			await customClient.GET('/v1/contacts/', {})
+			expect(fetchSpy).toHaveBeenCalled()
+			expect(fetchSpy.mock.calls[0]![0]).toEqual(
+				expect.objectContaining({
+					url: `${mockBaseUrl}/v1/contacts/`,
+				}),
+			)
 		})
 	})
 
@@ -75,7 +93,6 @@ describe('V1 Client', () => {
 				},
 			})
 
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			const calls = getSpy.mock.calls as any[][]
 			expect(calls[0]![0]).toBe('/v1/contacts/')
 			expect(calls[0]![1]).toEqual({
@@ -140,7 +157,6 @@ describe('V1 Client', () => {
 				body: contactData,
 			})
 
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			const calls = createContactSpy.mock.calls as any[][]
 			expect(calls[0]![0]).toBe('/v1/contacts/')
 			expect(calls[0]![1]).toEqual({
