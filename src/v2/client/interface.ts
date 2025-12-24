@@ -4,32 +4,41 @@
 import type { Client } from 'openapi-fetch'
 import type { AccessType } from '../../lib/type-utils'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
-import type * as Blogs from '../types/openapi/blogs'
-import type * as Businesses from '../types/openapi/businesses'
-import type * as Calendars from '../types/openapi/calendars'
-import type * as Campaigns from '../types/openapi/campaigns'
-import type * as Companies from '../types/openapi/companies'
-import type * as Contacts from '../types/openapi/contacts'
-import type * as Conversations from '../types/openapi/conversations'
-import type * as Courses from '../types/openapi/courses'
-import type * as CustomMenus from '../types/openapi/custom-menus'
-import type * as EmailIsv from '../types/openapi/email-isv'
-import type * as Emails from '../types/openapi/emails'
-import type * as Forms from '../types/openapi/forms'
-import type * as Funnels from '../types/openapi/funnels'
-import type * as Invoices from '../types/openapi/invoices'
-import type * as Links from '../types/openapi/links'
-import type * as Locations from '../types/openapi/locations'
-import type * as Medias from '../types/openapi/medias'
-import type * as Opportunities from '../types/openapi/opportunities'
-import type * as Payments from '../types/openapi/payments'
-import type * as Products from '../types/openapi/products'
-import type * as SaasApi from '../types/openapi/saas-api'
-import type * as Snapshots from '../types/openapi/snapshots'
-import type * as SocialMediaPosting from '../types/openapi/social-media-posting'
-import type * as Surveys from '../types/openapi/surveys'
-import type * as Users from '../types/openapi/users'
-import type * as Workflows from '../types/openapi/workflows'
+import type { paths as AgenciesPaths } from '../types/openapi/agencies'
+import type { paths as AssociationsPaths } from '../types/openapi/associations'
+import type { paths as BlogsPaths } from '../types/openapi/blogs'
+import type { paths as BusinessesPaths } from '../types/openapi/businesses'
+import type { paths as CalendarsPaths } from '../types/openapi/calendars'
+import type { paths as CampaignsPaths } from '../types/openapi/campaigns'
+import type { paths as CompaniesPaths } from '../types/openapi/companies'
+import type { paths as ContactsPaths } from '../types/openapi/contacts'
+import type { paths as ConversationsPaths } from '../types/openapi/conversations'
+import type { paths as CoursesPaths } from '../types/openapi/courses'
+import type { paths as CustomFieldsPaths } from '../types/openapi/custom-fields'
+import type { paths as CustomMenusPaths } from '../types/openapi/custom-menus'
+import type { paths as EmailIsvPaths } from '../types/openapi/email-isv'
+import type { paths as EmailsPaths } from '../types/openapi/emails'
+import type { paths as FormsPaths } from '../types/openapi/forms'
+import type { paths as FunnelsPaths } from '../types/openapi/funnels'
+import type { paths as InvoicesPaths } from '../types/openapi/invoices'
+import type { paths as LinksPaths } from '../types/openapi/links'
+import type { paths as LocationsPaths } from '../types/openapi/locations'
+import type { paths as MarketplacePaths } from '../types/openapi/marketplace'
+import type { paths as MediasPaths } from '../types/openapi/medias'
+import type { paths as ObjectsPaths } from '../types/openapi/objects'
+import type { paths as OpportunitiesPaths } from '../types/openapi/opportunities'
+import type { paths as PaymentsPaths } from '../types/openapi/payments'
+import type { paths as PhoneSystemPaths } from '../types/openapi/phone-system'
+import type { paths as ProductsPaths } from '../types/openapi/products'
+import type { paths as ProposalsPaths } from '../types/openapi/proposals'
+import type { paths as SaasApiPaths } from '../types/openapi/saas-api'
+import type { paths as SnapshotsPaths } from '../types/openapi/snapshots'
+import type { paths as SocialMediaPostingPaths } from '../types/openapi/social-media-posting'
+import type { paths as StorePaths } from '../types/openapi/store'
+import type { paths as SurveysPaths } from '../types/openapi/surveys'
+import type { paths as UsersPaths } from '../types/openapi/users'
+import type { paths as VoiceAiPaths } from '../types/openapi/voice-ai'
+import type { paths as WorkflowsPaths } from '../types/openapi/workflows'
 import type { HighLevelClientConfig } from './default'
 import type { ClientWithAuth } from './types'
 
@@ -42,36 +51,41 @@ export interface HighLevelClientInterface<
 	 */
 	_clientConfig: HighLevelClientConfig
 	oauth: TOAuth
-	invoices: Client<Invoices.paths> | ClientWithAuth<Invoices.paths>
+	objects: Client<ObjectsPaths> | ClientWithAuth<ObjectsPaths>
+	invoices: Client<InvoicesPaths> | ClientWithAuth<InvoicesPaths>
 	socialMediaPosting:
-		| Client<SocialMediaPosting.paths>
-		| ClientWithAuth<SocialMediaPosting.paths>
-	customMenus: Client<CustomMenus.paths> | ClientWithAuth<CustomMenus.paths>
-	opportunities:
-		| Client<Opportunities.paths>
-		| ClientWithAuth<Opportunities.paths>
-	campaigns: Client<Campaigns.paths> | ClientWithAuth<Campaigns.paths>
-	businesses: Client<Businesses.paths> | ClientWithAuth<Businesses.paths>
-	conversations:
-		| Client<Conversations.paths>
-		| ClientWithAuth<Conversations.paths>
-	products: Client<Products.paths> | ClientWithAuth<Products.paths>
-	courses: Client<Courses.paths> | ClientWithAuth<Courses.paths>
-	surveys: Client<Surveys.paths> | ClientWithAuth<Surveys.paths>
-	emails: Client<Emails.paths> | ClientWithAuth<Emails.paths>
-	payments: Client<Payments.paths> | ClientWithAuth<Payments.paths>
-	emailIsv: Client<EmailIsv.paths> | ClientWithAuth<EmailIsv.paths>
-	workflows: Client<Workflows.paths> | ClientWithAuth<Workflows.paths>
-	snapshots: Client<Snapshots.paths> | ClientWithAuth<Snapshots.paths>
-	saasApi: Client<SaasApi.paths> | ClientWithAuth<SaasApi.paths>
-	users: Client<Users.paths> | ClientWithAuth<Users.paths>
-	funnels: Client<Funnels.paths> | ClientWithAuth<Funnels.paths>
-	locations: Client<Locations.paths> | ClientWithAuth<Locations.paths>
-	links: Client<Links.paths> | ClientWithAuth<Links.paths>
-	blogs: Client<Blogs.paths> | ClientWithAuth<Blogs.paths>
-	companies: Client<Companies.paths> | ClientWithAuth<Companies.paths>
-	contacts: Client<Contacts.paths> | ClientWithAuth<Contacts.paths>
-	forms: Client<Forms.paths> | ClientWithAuth<Forms.paths>
-	calendars: Client<Calendars.paths> | ClientWithAuth<Calendars.paths>
-	medias: Client<Medias.paths> | ClientWithAuth<Medias.paths>
+		| Client<SocialMediaPostingPaths>
+		| ClientWithAuth<SocialMediaPostingPaths>
+	customMenus: Client<CustomMenusPaths> | ClientWithAuth<CustomMenusPaths>
+	customFields: Client<CustomFieldsPaths> | ClientWithAuth<CustomFieldsPaths>
+	opportunities: Client<OpportunitiesPaths> | ClientWithAuth<OpportunitiesPaths>
+	campaigns: Client<CampaignsPaths> | ClientWithAuth<CampaignsPaths>
+	businesses: Client<BusinessesPaths> | ClientWithAuth<BusinessesPaths>
+	marketplace: Client<MarketplacePaths> | ClientWithAuth<MarketplacePaths>
+	conversations: Client<ConversationsPaths> | ClientWithAuth<ConversationsPaths>
+	voiceAi: Client<VoiceAiPaths> | ClientWithAuth<VoiceAiPaths>
+	products: Client<ProductsPaths> | ClientWithAuth<ProductsPaths>
+	courses: Client<CoursesPaths> | ClientWithAuth<CoursesPaths>
+	surveys: Client<SurveysPaths> | ClientWithAuth<SurveysPaths>
+	emails: Client<EmailsPaths> | ClientWithAuth<EmailsPaths>
+	payments: Client<PaymentsPaths> | ClientWithAuth<PaymentsPaths>
+	emailIsv: Client<EmailIsvPaths> | ClientWithAuth<EmailIsvPaths>
+	phoneSystem: Client<PhoneSystemPaths> | ClientWithAuth<PhoneSystemPaths>
+	workflows: Client<WorkflowsPaths> | ClientWithAuth<WorkflowsPaths>
+	snapshots: Client<SnapshotsPaths> | ClientWithAuth<SnapshotsPaths>
+	saasApi: Client<SaasApiPaths> | ClientWithAuth<SaasApiPaths>
+	associations: Client<AssociationsPaths> | ClientWithAuth<AssociationsPaths>
+	users: Client<UsersPaths> | ClientWithAuth<UsersPaths>
+	funnels: Client<FunnelsPaths> | ClientWithAuth<FunnelsPaths>
+	locations: Client<LocationsPaths> | ClientWithAuth<LocationsPaths>
+	links: Client<LinksPaths> | ClientWithAuth<LinksPaths>
+	blogs: Client<BlogsPaths> | ClientWithAuth<BlogsPaths>
+	companies: Client<CompaniesPaths> | ClientWithAuth<CompaniesPaths>
+	contacts: Client<ContactsPaths> | ClientWithAuth<ContactsPaths>
+	store: Client<StorePaths> | ClientWithAuth<StorePaths>
+	agencies: Client<AgenciesPaths> | ClientWithAuth<AgenciesPaths>
+	forms: Client<FormsPaths> | ClientWithAuth<FormsPaths>
+	proposals: Client<ProposalsPaths> | ClientWithAuth<ProposalsPaths>
+	calendars: Client<CalendarsPaths> | ClientWithAuth<CalendarsPaths>
+	medias: Client<MediasPaths> | ClientWithAuth<MediasPaths>
 }
