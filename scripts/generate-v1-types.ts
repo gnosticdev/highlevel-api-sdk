@@ -18,7 +18,6 @@ if (import.meta.main) {
 	await createV1Types()
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function generateSchemaFromExample(example: any): SchemaObject {
 	if (Array.isArray(example)) {
 		return {
@@ -256,7 +255,6 @@ function addExampleAsResponseSchema(
 	}
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function isReferenceObject(obj: any): obj is ReferenceObject {
 	return typeof obj === 'object' && obj !== null && '$ref' in obj
 }

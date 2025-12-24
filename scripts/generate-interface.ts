@@ -53,6 +53,8 @@ import type { ClientWithAuth } from './types'
 import type { HighLevelClientConfig } from './default'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
 
+
+
 export interface HighLevelClientInterface<
 	T extends AccessType,
 	TOAuth extends DefaultOauthClient | OauthClientImpl<T>,

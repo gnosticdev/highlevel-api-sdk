@@ -39,6 +39,16 @@ if (import.meta.main) {
 		// Download OpenAPI schemas to temp directory
 		console.log(kleur.bgBlue('Downloading OpenAPI schemas'))
 		for (const openapiSchema of schemas.openapi) {
+			// common-schemas are referened via '../common/common-schemas.json' so need to be downloaded to a different directory
+			if (openapiSchema.name === 'common-schemas') {
+				await downloadSchema(
+					openapiSchema,
+					path.join(TEMP_DIR, 'common'),
+					false,
+				)
+				continue
+			}
+			// all other openapi schemas are referenced via '#/components/schemas/...' so need to be downloaded to the openapi directory
 			await downloadSchema(openapiSchema, path.join(TEMP_DIR, 'openapi'), true)
 			console.log(kleur.cyan(`Downloaded ${openapiSchema.name}`))
 		}
@@ -59,10 +69,8 @@ if (import.meta.main) {
 		console.log('All schemas linted successfully')
 	} catch (error) {
 		console.error('Error downloading schemas', error)
-		// Clean up temp directory in case of error
-		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
 	} finally {
-		await Bun.$`rm -rf ${TEMP_DIR}`
+		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
 	}
 }
 
