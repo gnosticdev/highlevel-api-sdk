@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/opportunities/': {
 		parameters: {
 			query?: never
@@ -153,7 +153,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -162,15 +162,19 @@ export type components = {
 			statusCode?: number
 		}
 		CreateAddFollowersSuccessfulResponseDto: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "sx6wyHhbFdRXh302Lunr",
 			 *       "sx6wyHhbFdRXh302LLss"
-			 *     ] */
+			 *     ]
+			 */
 			followers?: string[]
-			/** @example [
+			/**
+			 * @example [
 			 *       "Mx6wyHhbFdRXh302Luer",
 			 *       "Ka6wyHhbFdRXh302LLsAm"
-			 *     ] */
+			 *     ]
+			 */
 			followersAdded?: string[]
 		}
 		CreateDto: {
@@ -211,10 +215,12 @@ export type components = {
 			id: string
 		}
 		customFieldsInputArraySchema: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "test",
 			 *       "test2"
-			 *     ] */
+			 *     ]
+			 */
 			field_value?: string[]
 			/** @example 6dvNaf7VhkQ9snc5vnjJ */
 			id: string
@@ -244,15 +250,19 @@ export type components = {
 			key?: string
 		}
 		DeleteFollowersSuccessfulResponseDto: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "sx6wyHhbFdRXh302Lunr",
 			 *       "sx6wyHhbFdRXh302LLss"
-			 *     ] */
+			 *     ]
+			 */
 			followers?: string[]
-			/** @example [
+			/**
+			 * @example [
 			 *       "Mx6wyHhbFdRXh302Luer",
 			 *       "Ka6wyHhbFdRXh302LLsAm"
-			 *     ] */
+			 *     ]
+			 */
 			followersRemoved?: string[]
 		}
 		DeleteUpdateOpportunitySuccessfulResponseDto: {
@@ -260,10 +270,12 @@ export type components = {
 			succeded?: boolean
 		}
 		FollowersDTO: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "sx6wyHhbFdRXh302Lunr",
 			 *       "sx6wyHhbFdRXh302Lunr"
-			 *     ] */
+			 *     ]
+			 */
 			followers: string[]
 		}
 		GetPipelinesSuccessfulResponseDto: {
@@ -370,9 +382,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -453,8 +467,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -509,8 +521,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -567,8 +577,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -629,8 +637,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -687,8 +693,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -749,8 +753,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -811,8 +813,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -876,8 +876,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -918,34 +916,17 @@ export interface operations {
 	'search-opportunity': {
 		parameters: {
 			query: {
-				/** @example 082goXVW3lIExEQPOnd3 */
 				assigned_to?: string
-				/**
-				 * @description Campaign Id
-				 * @example Y2I9XM7aO1hncuSOlc9L
-				 */
+				/** @description Campaign Id */
 				campaignId?: string
-				/**
-				 * @description Contact Id
-				 * @example WFwVrSSjZ2CNHbZThQX2
-				 */
+				/** @description Contact Id */
 				contact_id?: string
-				/** @example US */
 				country?: string
-				/**
-				 * @description Start date
-				 * @example mm-dd-yyyy
-				 */
+				/** @description Start date */
 				date?: string
-				/**
-				 * @description End date
-				 * @example mm-dd-yyyy
-				 */
+				/** @description End date */
 				endDate?: string
-				/**
-				 * @description get Calender event in contact
-				 * @example false
-				 */
+				/** @description get Calender event in contact */
 				getCalendarEvents?: boolean
 				/**
 				 * @description get Notes in contact
@@ -957,48 +938,26 @@ export interface operations {
 				 * @example false
 				 */
 				getTasks?: boolean
-				/**
-				 * @description Opportunity Id
-				 * @example 123akv4LFn6C9frZoy3e
-				 */
+				/** @description Opportunity Id */
 				id?: string
 				/** @description Limit Per Page records count. will allow maximum up to 100 and default will be 20 */
 				limit?: number
-				/**
-				 * @description Location Id
-				 * @example i2SpAtBVHSVea1sL6oah
-				 */
+				/** @description Location Id */
 				location_id: string
-				/** @example added_asc */
 				order?: string
 				page?: number
-				/**
-				 * @description Pipeline Id
-				 * @example bCkKGpDsyPP4peuKowkG
-				 */
+				/** @description Pipeline Id */
 				pipeline_id?: string
-				/**
-				 * @description stage Id
-				 * @example 7915dedc-8f18-44d5-8bc3-77c04e994a10
-				 */
+				/** @description stage Id */
 				pipeline_stage_id?: string
-				/** @example john@deo.com */
 				q?: string
-				/**
-				 * @description Start After
-				 * @example 1628008053263
-				 */
+				/** @description Start After */
 				startAfter?: string
-				/**
-				 * @description Start After Id
-				 * @example UIaE1WjAwWKdlyD7osQI
-				 */
+				/** @description Start After Id */
 				startAfterId?: string
 				status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1049,8 +1008,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}

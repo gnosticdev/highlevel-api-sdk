@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/invoices/': {
 		parameters: {
 			query?: never
@@ -68,7 +68,7 @@ export type paths = {
 		 * Update invoice late fees configuration
 		 * @description API to update invoice late fees configuration by invoice id
 		 */
-		patch: operations['update-invoice-late-fees-configuration_patch_1']
+		patch: operations['update-invoice-late-fees-configuration']
 		trace?: never
 	}
 	'/invoices/{invoiceId}/record-payment': {
@@ -584,7 +584,7 @@ export type paths = {
 		 * Update template late fees configuration
 		 * @description API to update template late fees configuration by template id
 		 */
-		patch: operations['update-invoice-late-fees-configuration']
+		patch: operations['update-invoice-template-late-fees-configuration']
 		trace?: never
 	}
 	'/invoices/template/{templateId}/payment-methods-configuration': {
@@ -604,7 +604,7 @@ export type paths = {
 		 * Update template late fees configuration
 		 * @description API to update template late fees configuration by template id
 		 */
-		patch: operations['update-invoice-late-fees-configuration_patch']
+		patch: operations['update-invoice-payment-methods-configuration']
 		trace?: never
 	}
 	'/invoices/text2pay': {
@@ -629,7 +629,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		AdditionalEmailsDto: {
 			/** @example alex@example.com */
@@ -741,14 +741,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -762,14 +762,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -797,14 +797,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -935,14 +935,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -956,14 +956,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -991,14 +991,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1067,7 +1067,7 @@ export type components = {
 			 * @description Contact Email
 			 * @example alex@example.com
 			 */
-			email?: string
+			email: string
 			/**
 			 * @description Contact ID
 			 * @example 6578278e879ad2646715ba9c
@@ -1082,7 +1082,7 @@ export type components = {
 			 * @description Contact Phone Number
 			 * @example +1234567890
 			 */
-			phoneNo?: string
+			phoneNo: string
 		}
 		CreateEstimatesDto: {
 			/**
@@ -1097,8 +1097,8 @@ export type components = {
 			/**
 			 * @description Auto invoice for the estimate
 			 * @example {
-			 *       "directPayments": true,
-			 *       "enabled": true
+			 *       "enabled": true,
+			 *       "directPayments": true
 			 *     }
 			 */
 			autoInvoice?: components['schemas']['AutoInvoicingDto']
@@ -1155,11 +1155,15 @@ export type components = {
 			 *     }
 			 */
 			meta?: Record<string, never>
+			/** @description miscellaneous charges for the estimate */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Estimate Name
 			 * @example Home Service Estimate
 			 */
 			name: string
+			/** @description Payment Schedule Config for the estimate */
+			paymentScheduleConfig?: components['schemas']['PaymentScheduleConfigDto']
 			/** @description When sending estimate directly while saving */
 			sendEstimateDetails?: components['schemas']['SendEstimateDto']
 			/** @description Email and sent to details for the estimate */
@@ -1233,6 +1237,8 @@ export type components = {
 			/** @description late fees configuration */
 			lateFeesConfiguration?: components['schemas']['LateFeesConfigurationDto']
 			liveMode: boolean
+			/** @description miscellaneous charges for the invoice */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Invoice Name
 			 * @example New Invoice
@@ -1318,14 +1324,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1334,14 +1340,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: Record<string, never>
@@ -1372,14 +1378,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1466,6 +1472,8 @@ export type components = {
 			/** @description Late fees configuration for the invoices */
 			lateFeesConfiguration?: components['schemas']['LateFeesConfigurationDto']
 			liveMode: boolean
+			/** @description miscellaneous charges for the invoice */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			name: string
 			/** @description Payment Methods for Invoices */
 			paymentMethods?: components['schemas']['PaymentMethodDto']
@@ -1491,14 +1499,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1512,14 +1520,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -1547,14 +1555,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1627,6 +1635,8 @@ export type components = {
 			items: components['schemas']['InvoiceItemDto'][]
 			/** @description Late fees configuration for the invoices */
 			lateFeesConfiguration?: components['schemas']['LateFeesConfigurationDto']
+			/** @description miscellaneous charges for the invoice */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Name of the template
 			 * @example New Template
@@ -1659,14 +1669,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1699,14 +1709,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -1851,14 +1861,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -1867,14 +1877,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: Record<string, never>
@@ -1905,14 +1915,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2003,14 +2013,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2019,14 +2029,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: Record<string, never>
@@ -2057,14 +2067,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2183,8 +2193,8 @@ export type components = {
 			/**
 			 * @description Auto-invoice settings for the estimate
 			 * @example {
-			 *       "directPayments": false,
-			 *       "enabled": true
+			 *       "enabled": true,
+			 *       "directPayments": false
 			 *     }
 			 */
 			autoInvoice?: components['schemas']['AutoInvoice']
@@ -2201,25 +2211,25 @@ export type components = {
 			/**
 			 * @description Business details associated with the estimate
 			 * @example {
+			 *       "logoUrl": "your_image-url",
+			 *       "name": "Business name",
 			 *       "address": {
 			 *         "addressLine1": "address line 1",
 			 *         "city": "Test City",
+			 *         "state": "State Name",
 			 *         "countryCode": "US",
-			 *         "postalCode": "12345",
-			 *         "state": "State Name"
+			 *         "postalCode": "12345"
 			 *       },
+			 *       "phoneNo": "+1 1234567890",
+			 *       "website": "www.example.com",
 			 *       "customValues": [
 			 *         {
+			 *           "name": "Test",
 			 *           "fieldKey": "{{custom_values.test}}",
 			 *           "id": "5DYTWoiQvWiIJZXX44XXX",
-			 *           "name": "Test",
 			 *           "value": "Test's Custom Value"
 			 *         }
-			 *       ],
-			 *       "logoUrl": "your_image-url",
-			 *       "name": "Business name",
-			 *       "phoneNo": "+1 1234567890",
-			 *       "website": "www.example.com"
+			 *       ]
 			 *     }
 			 */
 			businessDetails: components['schemas']['BusinessDetails']
@@ -2231,13 +2241,13 @@ export type components = {
 			/**
 			 * @description Contact details for the estimate
 			 * @example {
-			 *       "address": {
-			 *         "countryCode": "US"
-			 *       },
-			 *       "email": "email@test.com",
 			 *       "id": "jvzfKTNdE7OYXXXXXX",
 			 *       "name": "Contact Name",
-			 *       "phoneNo": "+911111111114"
+			 *       "phoneNo": "+911111111114",
+			 *       "email": "email@test.com",
+			 *       "address": {
+			 *         "countryCode": "US"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetails']
@@ -2286,7 +2296,53 @@ export type components = {
 			 * @example 2023-07-15T00:00:00.000Z
 			 */
 			expiryDate: string
-			/** @description Frequency settings for recurring estimates */
+			/**
+			 * @description Frequency settings for recurring estimates
+			 * @example {
+			 *       "enabled": false
+			 *     }
+			 * @example {
+			 *       "enabled": true,
+			 *       "schedule": {
+			 *         "rrule": {
+			 *           "intervalType": "monthly",
+			 *           "numOfWeek": 0,
+			 *           "dayOfMonth": 1,
+			 *           "interval": 1,
+			 *           "startDate": "2025-02-12",
+			 *           "endType": "after",
+			 *           "count": "5"
+			 *         }
+			 *       }
+			 *     }
+			 * @example {
+			 *       "enabled": true,
+			 *       "schedule": {
+			 *         "rrule": {
+			 *           "intervalType": "monthly",
+			 *           "numOfWeek": 0,
+			 *           "dayOfMonth": 1,
+			 *           "interval": 1,
+			 *           "startDate": "2025-02-12",
+			 *           "endType": "by",
+			 *           "endDate": "2025-02-24"
+			 *         }
+			 *       }
+			 *     }
+			 * @example {
+			 *       "enabled": true,
+			 *       "schedule": {
+			 *         "rrule": {
+			 *           "intervalType": "monthly",
+			 *           "numOfWeek": 0,
+			 *           "dayOfMonth": 1,
+			 *           "interval": 1,
+			 *           "startDate": "2025-02-12",
+			 *           "endType": "never"
+			 *         }
+			 *       }
+			 *     }
+			 */
 			frequencySettings: components['schemas']['FrequencySettingsDto']
 			/**
 			 * Format: date-time
@@ -2298,36 +2354,36 @@ export type components = {
 			 * @description An array of items
 			 * @example [
 			 *       {
-			 *         "_id": "67ac9a51106ee8311e911XXXX",
-			 *         "amount": 9.99,
-			 *         "currency": "USD",
-			 *         "description": "<p>Futuristic anti-gravity racing</p>",
-			 *         "name": "TEST",
-			 *         "priceId": "67ac9a51106ee8311e911XXXX",
-			 *         "productId": "67ac9a51106ee8311e911XXXX",
-			 *         "qty": 1,
-			 *         "taxInclusive": false,
 			 *         "taxes": [],
+			 *         "taxInclusive": false,
+			 *         "_id": "67ac9a51106ee8311e911XXXX",
+			 *         "description": "<p>Futuristic anti-gravity racing</p>",
+			 *         "currency": "USD",
+			 *         "productId": "67ac9a51106ee8311e911XXXX",
+			 *         "priceId": "67ac9a51106ee8311e911XXXX",
+			 *         "amount": 9.99,
+			 *         "qty": 1,
+			 *         "name": "TEST",
 			 *         "type": "one_time"
 			 *       },
 			 *       {
-			 *         "_id": "67ac9a51106ee8311e911XXXX",
-			 *         "amount": 500,
-			 *         "currency": "USD",
-			 *         "description": "",
-			 *         "name": "TEST2",
-			 *         "priceId": "67ac9a51106ee8311e911XXXX",
-			 *         "productId": "67ac9a51106ee8311e911XXXX",
-			 *         "qty": 1,
-			 *         "taxInclusive": true,
 			 *         "taxes": [
 			 *           {
 			 *             "_id": "67ac9a51106ee8311e911XXXX",
-			 *             "calculation": "exclusive",
 			 *             "name": "TaxTwo",
-			 *             "rate": 8.5
+			 *             "rate": 8.5,
+			 *             "calculation": "exclusive"
 			 *           }
 			 *         ],
+			 *         "taxInclusive": true,
+			 *         "_id": "67ac9a51106ee8311e911XXXX",
+			 *         "productId": "67ac9a51106ee8311e911XXXX",
+			 *         "priceId": "67ac9a51106ee8311e911XXXX",
+			 *         "currency": "USD",
+			 *         "name": "TEST2",
+			 *         "qty": 1,
+			 *         "amount": 500,
+			 *         "description": "",
 			 *         "type": "recurring"
 			 *       }
 			 *     ]
@@ -2438,25 +2494,25 @@ export type components = {
 			/**
 			 * @description Business details associated with the estimate
 			 * @example {
+			 *       "logoUrl": "your_image-url",
+			 *       "name": "Business name",
 			 *       "address": {
 			 *         "addressLine1": "address line 1",
 			 *         "city": "Test City",
+			 *         "state": "State Name",
 			 *         "countryCode": "US",
-			 *         "postalCode": "12345",
-			 *         "state": "State Name"
+			 *         "postalCode": "12345"
 			 *       },
+			 *       "phoneNo": "+1 1234567890",
+			 *       "website": "www.example.com",
 			 *       "customValues": [
 			 *         {
+			 *           "name": "Test",
 			 *           "fieldKey": "{{custom_values.test}}",
 			 *           "id": "5DYTWoiQvWiIJZXX44XXX",
-			 *           "name": "Test",
 			 *           "value": "Test's Custom Value"
 			 *         }
-			 *       ],
-			 *       "logoUrl": "your_image-url",
-			 *       "name": "Business name",
-			 *       "phoneNo": "+1 1234567890",
-			 *       "website": "www.example.com"
+			 *       ]
 			 *     }
 			 */
 			businessDetails: components['schemas']['BusinessDetails']
@@ -2493,36 +2549,36 @@ export type components = {
 			 * @description An array of items
 			 * @example [
 			 *       {
-			 *         "_id": "67ac9a51106ee8311e911XXXX",
-			 *         "amount": 9.99,
-			 *         "currency": "USD",
-			 *         "description": "<p>Futuristic anti-gravity racing</p>",
-			 *         "name": "TEST",
-			 *         "priceId": "67ac9a51106ee8311e911XXXX",
-			 *         "productId": "67ac9a51106ee8311e911XXXX",
-			 *         "qty": 1,
-			 *         "taxInclusive": false,
 			 *         "taxes": [],
+			 *         "taxInclusive": false,
+			 *         "_id": "67ac9a51106ee8311e911XXXX",
+			 *         "description": "<p>Futuristic anti-gravity racing</p>",
+			 *         "currency": "USD",
+			 *         "productId": "67ac9a51106ee8311e911XXXX",
+			 *         "priceId": "67ac9a51106ee8311e911XXXX",
+			 *         "amount": 9.99,
+			 *         "qty": 1,
+			 *         "name": "TEST",
 			 *         "type": "one_time"
 			 *       },
 			 *       {
-			 *         "_id": "67ac9a51106ee8311e911XXXX",
-			 *         "amount": 500,
-			 *         "currency": "USD",
-			 *         "description": "",
-			 *         "name": "TEST2",
-			 *         "priceId": "67ac9a51106ee8311e911XXXX",
-			 *         "productId": "67ac9a51106ee8311e911XXXX",
-			 *         "qty": 1,
-			 *         "taxInclusive": true,
 			 *         "taxes": [
 			 *           {
 			 *             "_id": "67ac9a51106ee8311e911XXXX",
-			 *             "calculation": "exclusive",
 			 *             "name": "TaxTwo",
-			 *             "rate": 8.5
+			 *             "rate": 8.5,
+			 *             "calculation": "exclusive"
 			 *           }
 			 *         ],
+			 *         "taxInclusive": true,
+			 *         "_id": "67ac9a51106ee8311e911XXXX",
+			 *         "productId": "67ac9a51106ee8311e911XXXX",
+			 *         "priceId": "67ac9a51106ee8311e911XXXX",
+			 *         "currency": "USD",
+			 *         "name": "TEST2",
+			 *         "qty": 1,
+			 *         "amount": 500,
+			 *         "description": "",
 			 *         "type": "recurring"
 			 *       }
 			 *     ]
@@ -2609,6 +2665,8 @@ export type components = {
 			 *     }
 			 */
 			meta?: Record<string, never>
+			/** @description miscellaneous charges for the estimate */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Estimate Name
 			 * @example Home Service Estimate Template
@@ -2683,14 +2741,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2699,14 +2757,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: Record<string, never>
@@ -2737,14 +2795,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2818,14 +2876,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2839,14 +2897,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -2874,14 +2932,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -2939,14 +2997,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -2979,14 +3037,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -3080,7 +3138,7 @@ export type components = {
 		ItemTaxDto: {
 			_id: string
 			/** @enum {string} */
-			calculation: 'exclusive'
+			calculation?: 'exclusive'
 			description?: string
 			name: string
 			rate: number
@@ -3200,6 +3258,32 @@ export type components = {
 			/** @description Payment Method */
 			stripe: components['schemas']['StripePaymentMethodDto']
 		}
+		PaymentScheduleConfigDto: {
+			/** @description Due date type configuration */
+			dateConfig: components['schemas']['PaymentScheduleDateConfigDto']
+			/** @description Payment Schedule Items */
+			schedules: unknown[][]
+			/**
+			 * @description Payment Schedule Type
+			 * @example fixed
+			 * @enum {string}
+			 */
+			type: 'fixed' | 'percentage'
+		}
+		PaymentScheduleDateConfigDto: {
+			/**
+			 * @description Deposit date type
+			 * @example estimate_accepted
+			 * @enum {string}
+			 */
+			depositDateType: 'estimate_accepted' | 'custom'
+			/**
+			 * @description Payment Schedule Date Type
+			 * @example regular_interval
+			 * @enum {string}
+			 */
+			scheduleDateType: 'regular_interval' | 'custom'
+		}
 		PaymentScheduleDto: {
 			/** @description payment schedule item */
 			schedules: string[]
@@ -3209,6 +3293,39 @@ export type components = {
 			 * @enum {string}
 			 */
 			type: 'fixed' | 'percentage'
+		}
+		ProcessingFeeDto: {
+			/** @description charges for the processing fee */
+			charges: unknown[][]
+			/**
+			 * @description collected miscellaneous charges
+			 * @example 10
+			 */
+			collectedMiscellaneousCharges?: number
+			/** @description paid miscellaneous charges */
+			paidCharges?: components['schemas']['ProcessingFeePaidChargeDto'][]
+		}
+		ProcessingFeePaidChargeDto: {
+			/**
+			 * @description id of the processing fee
+			 * @example 673d01d7d547648a8dab6211
+			 */
+			_id: string
+			/**
+			 * @description amount of the processing fee
+			 * @example 10
+			 */
+			amount: number
+			/**
+			 * @description charge for the processing fee
+			 * @example 10
+			 */
+			charge: number
+			/**
+			 * @description name of the processing fee
+			 * @example Processing Fee
+			 */
+			name: string
 		}
 		RecordPaymentDto: {
 			/**
@@ -3229,6 +3346,11 @@ export type components = {
 			amount?: number
 			card: components['schemas']['CardDto']
 			cheque: components['schemas']['ChequeDto']
+			/**
+			 * @description Updated At to be recorded against the invoice.
+			 * @example 2025-03-19T05:03:00.000Z
+			 */
+			fulfilledAt?: string
 			meta?: Record<string, never>
 			/**
 			 * @description manual payment method
@@ -3387,14 +3509,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -3408,14 +3530,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -3443,14 +3565,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -3663,6 +3785,8 @@ export type components = {
 			/** @description late fees configuration */
 			lateFeesConfiguration?: components['schemas']['LateFeesConfigurationDto']
 			liveMode: boolean
+			/** @description miscellaneous charges for the invoice */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Invoice Name
 			 * @example New Invoice
@@ -3737,9 +3861,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -3760,14 +3886,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -3781,14 +3907,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -3816,14 +3942,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -3878,8 +4004,8 @@ export type components = {
 			/**
 			 * @description Auto invoice for the estimate
 			 * @example {
-			 *       "directPayments": true,
-			 *       "enabled": true
+			 *       "enabled": true,
+			 *       "directPayments": true
 			 *     }
 			 */
 			autoInvoice?: components['schemas']['AutoInvoicingDto']
@@ -3949,11 +4075,15 @@ export type components = {
 			 *     }
 			 */
 			meta?: Record<string, never>
+			/** @description miscellaneous charges for the estimate */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Estimate Name
 			 * @example Home Service Estimate
 			 */
 			name: string
+			/** @description Payment Schedule Config for the estimate */
+			paymentScheduleConfig?: components['schemas']['PaymentScheduleConfigDto']
 			/** @description When sending estimate directly while saving */
 			sendEstimateDetails?: components['schemas']['SendEstimateDto']
 			/** @description Email and sent to details for the estimate */
@@ -3996,14 +4126,14 @@ export type components = {
 			/**
 			 * @description Business details which need to be updated
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -4049,6 +4179,8 @@ export type components = {
 			issueDate: string
 			/** @description Payment mode */
 			liveMode?: boolean
+			/** @description miscellaneous charges for the invoice */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Name to be updated
 			 * @example New Invoice
@@ -4123,14 +4255,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -4139,14 +4271,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: Record<string, never>
@@ -4177,14 +4309,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -4259,6 +4391,8 @@ export type components = {
 			discount: components['schemas']['DiscountDto']
 			items: components['schemas']['InvoiceItemDto'][]
 			liveMode: boolean
+			/** @description miscellaneous charges for the invoice */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			name: string
 			schedule: components['schemas']['ScheduleOptionsDto']
 			termsNotes?: string
@@ -4280,14 +4414,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -4301,14 +4435,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: components['schemas']['ContactDetailsDto']
@@ -4336,14 +4470,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -4402,6 +4536,8 @@ export type components = {
 			discount?: components['schemas']['DiscountDto']
 			internal?: boolean
 			items: components['schemas']['InvoiceItemDto'][]
+			/** @description miscellaneous charges for the invoice */
+			miscellaneousCharges?: components['schemas']['ProcessingFeeDto']
 			/**
 			 * @description Name of the template
 			 * @example New Template
@@ -4430,14 +4566,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -4470,14 +4606,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -4566,14 +4702,14 @@ export type components = {
 			/**
 			 * @description Business Details
 			 * @example {
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "addressLine1": "9931 Beechwood",
 			 *         "city": "St. Houston",
+			 *         "state": "TX",
 			 *         "countryCode": "USA",
-			 *         "postalCode": "559-6993",
-			 *         "state": "TX"
+			 *         "postalCode": "559-6993"
 			 *       },
-			 *       "name": "Alex",
 			 *       "phoneNo": "+1-214-559-6993",
 			 *       "website": "www.example.com"
 			 *     }
@@ -4582,14 +4718,14 @@ export type components = {
 			/**
 			 * @description Contact Details
 			 * @example {
+			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
+			 *       "phoneNo": "+1-214-559-6993",
+			 *       "email": "alex@example.com",
+			 *       "customFields": [],
+			 *       "name": "Alex",
 			 *       "address": {
 			 *         "countryCode": "US"
-			 *       },
-			 *       "customFields": [],
-			 *       "email": "alex@example.com",
-			 *       "id": "c6tZZU0rJBf30ZXx9Gli",
-			 *       "name": "Alex",
-			 *       "phoneNo": "+1-214-559-6993"
+			 *       }
 			 *     }
 			 */
 			contactDetails: Record<string, never>
@@ -4620,14 +4756,14 @@ export type components = {
 			 * @description Invoice Items
 			 * @example [
 			 *       {
+			 *         "taxes": [],
 			 *         "_id": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "amount": 999,
+			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
+			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "currency": "USD",
 			 *         "name": "Macbook Pro",
-			 *         "priceId": "c6tZZU0rJBf30ZXx9Gli",
-			 *         "productId": "c6tZZU0rJBf30ZXx9Gli",
 			 *         "qty": 1,
-			 *         "taxes": []
+			 *         "amount": 999
 			 *       }
 			 *     ]
 			 */
@@ -4694,67 +4830,32 @@ export interface operations {
 	'list-invoices': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
-				/**
-				 * @description Contact ID for the invoice
-				 * @example AmuzcoPBpgKeccNsFlib
-				 */
+				/** @description Contact ID for the invoice */
 				contactId?: string
-				/**
-				 * @description endAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description endAt in YYYY-MM-DD format */
 				endAt?: string
-				/**
-				 * @description Limit the number of items to return
-				 * @example 10
-				 */
+				/** @description Limit the number of items to return */
 				limit: string
-				/**
-				 * @description Number of items to skip
-				 * @example 10
-				 */
+				/** @description Number of items to skip */
 				offset: string
-				/**
-				 * @description payment mode
-				 * @example live
-				 */
+				/** @description payment mode */
 				paymentMode?: 'default' | 'live' | 'test'
-				/**
-				 * @description To search for an invoice by id / name / email / phoneNo
-				 * @example Alex
-				 */
+				/** @description To search for an invoice by id / name / email / phoneNo */
 				search?: string
-				/**
-				 * @description The field on which sorting should be applied
-				 * @example issueDate
-				 */
+				/** @description The field on which sorting should be applied */
 				sortField?: 'issueDate'
-				/**
-				 * @description The order of sort which should be applied for the sortField
-				 * @example descend
-				 */
+				/** @description The order of sort which should be applied for the sortField */
 				sortOrder?: 'ascend' | 'descend'
-				/**
-				 * @description startAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description startAt in YYYY-MM-DD format */
 				startAt?: string
 				/** @description status to be filtered */
 				status?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4805,8 +4906,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4860,28 +4959,17 @@ export interface operations {
 	'get-invoice': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Invoice Id */
 				invoiceId: string
 			}
 			cookie?: never
@@ -4930,16 +5018,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Invoice Id */
 				invoiceId: string
 			}
 			cookie?: never
@@ -4991,28 +5074,17 @@ export interface operations {
 	'delete-invoice': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Invoice Id */
 				invoiceId: string
 			}
 			cookie?: never
@@ -5057,20 +5129,15 @@ export interface operations {
 			}
 		}
 	}
-	'update-invoice-late-fees-configuration_patch_1': {
+	'update-invoice-late-fees-configuration': {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Invoice Id */
 				invoiceId: string
 			}
 			cookie?: never
@@ -5123,16 +5190,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Invoice Id */
 				invoiceId: string
 			}
 			cookie?: never
@@ -5185,16 +5247,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Invoice Id */
 				invoiceId: string
 			}
 			cookie?: never
@@ -5247,16 +5304,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Invoice Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Invoice Id */
 				invoiceId: string
 			}
 			cookie?: never
@@ -5309,8 +5361,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5365,16 +5415,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Estimate Id
-				 * @example 5f9d6d8b1b2d2c001f2d9e4b
-				 */
+				/** @description Estimate Id */
 				estimateId: string
 			}
 			cookie?: never
@@ -5427,16 +5472,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Estimate Id
-				 * @example 5f9d6d8b1b2d2c001f2d9e4b
-				 */
+				/** @description Estimate Id */
 				estimateId: string
 			}
 			cookie?: never
@@ -5489,16 +5529,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Estimate Id
-				 * @example 5f9d6d8b1b2d2c001f2d9e4b
-				 */
+				/** @description Estimate Id */
 				estimateId: string
 			}
 			cookie?: never
@@ -5551,16 +5586,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Estimate Id
-				 * @example 5f9d6d8b1b2d2c001f2d9e4b
-				 */
+				/** @description Estimate Id */
 				estimateId: string
 			}
 			cookie?: never
@@ -5612,46 +5642,22 @@ export interface operations {
 	'list-estimates': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location Id or Agency Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Location Id or Agency Id */
 				altId: string
 				altType: 'location'
-				/**
-				 * @description Contact ID for the estimate
-				 * @example AmuzcoPBpgKeccNsFlib
-				 */
+				/** @description Contact ID for the estimate */
 				contactId?: string
-				/**
-				 * @description endAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description endAt in YYYY-MM-DD format */
 				endAt?: string
-				/**
-				 * @description Limit the number of items to return
-				 * @example 10
-				 */
+				/** @description Limit the number of items to return */
 				limit: string
-				/**
-				 * @description Number of items to skip
-				 * @example 10
-				 */
+				/** @description Number of items to skip */
 				offset: string
-				/**
-				 * @description search text for estimates name
-				 * @example Home services estimate
-				 */
+				/** @description search text for estimates name */
 				search?: string
-				/**
-				 * @description startAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description startAt in YYYY-MM-DD format */
 				startAt?: string
-				/**
-				 * @description estimate status
-				 * @example sent
-				 */
+				/** @description estimate status */
 				status?:
 					| 'all'
 					| 'draft'
@@ -5662,8 +5668,6 @@ export interface operations {
 					| 'viewed'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5713,16 +5717,11 @@ export interface operations {
 	'generate-estimate-number': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location Id or Agency Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Location Id or Agency Id */
 				altId: string
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5773,8 +5772,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5816,31 +5813,17 @@ export interface operations {
 	'list-estimate-templates': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location Id or Agency Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Location Id or Agency Id */
 				altId: string
 				altType: 'location'
-				/**
-				 * @description Limit the number of items to return
-				 * @example 10
-				 */
+				/** @description Limit the number of items to return */
 				limit: string
-				/**
-				 * @description Number of items to skip
-				 * @example 10
-				 */
+				/** @description Number of items to skip */
 				offset: string
-				/**
-				 * @description To search for an estimate template by id / name
-				 * @example Alex
-				 */
+				/** @description To search for an estimate template by id / name */
 				search?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5891,8 +5874,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5947,16 +5928,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Template Id
-				 * @example 5f9d6d8b1b2d2c001f2d9e4b
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			cookie?: never
@@ -6009,16 +5985,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Template Id
-				 * @example 5f9d6d8b1b2d2c001f2d9e4b
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			cookie?: never
@@ -6070,21 +6041,13 @@ export interface operations {
 	'preview-estimate-template': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location Id or Agency Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Location Id or Agency Id */
 				altId: string
 				altType: 'location'
-				/**
-				 * @description Template Id
-				 * @example 5f9d6d8b1b2d2c001f2d9e4b
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -6139,8 +6102,6 @@ export interface operations {
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -6190,52 +6151,26 @@ export interface operations {
 	'list-invoice-schedules': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
-				/**
-				 * @description endAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description endAt in YYYY-MM-DD format */
 				endAt?: string
-				/**
-				 * @description Limit the number of items to return
-				 * @example 10
-				 */
+				/** @description Limit the number of items to return */
 				limit: string
-				/**
-				 * @description Number of items to skip
-				 * @example 10
-				 */
+				/** @description Number of items to skip */
 				offset: string
-				/**
-				 * @description payment mode
-				 * @example live
-				 */
+				/** @description payment mode */
 				paymentMode?: 'default' | 'live' | 'test'
-				/**
-				 * @description To search for an invoice by id / name / email / phoneNo
-				 * @example Alex
-				 */
+				/** @description To search for an invoice by id / name / email / phoneNo */
 				search?: string
-				/**
-				 * @description startAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description startAt in YYYY-MM-DD format */
 				startAt?: string
 				/** @description status to be filtered */
 				status?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -6286,8 +6221,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -6341,28 +6274,17 @@ export interface operations {
 	'get-invoice-schedule': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Schedule Id */
 				scheduleId: string
 			}
 			cookie?: never
@@ -6411,16 +6333,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Schedule Id */
 				scheduleId: string
 			}
 			cookie?: never
@@ -6472,28 +6389,17 @@ export interface operations {
 	'delete-invoice-schedule': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Schedule Id */
 				scheduleId: string
 			}
 			cookie?: never
@@ -6542,16 +6448,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Schedule Id */
 				scheduleId: string
 			}
 			cookie?: never
@@ -6604,16 +6505,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Schedule Id */
 				scheduleId: string
 			}
 			cookie?: never
@@ -6666,16 +6562,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Schedule Id */
 				scheduleId: string
 			}
 			cookie?: never
@@ -6728,16 +6619,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Schedule Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Schedule Id */
 				scheduleId: string
 			}
 			cookie?: never
@@ -6786,8 +6672,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -6829,52 +6713,26 @@ export interface operations {
 	'list-invoice-templates': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
-				/**
-				 * @description endAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description endAt in YYYY-MM-DD format */
 				endAt?: string
-				/**
-				 * @description Limit the number of items to return
-				 * @example 10
-				 */
+				/** @description Limit the number of items to return */
 				limit: string
-				/**
-				 * @description Number of items to skip
-				 * @example 10
-				 */
+				/** @description Number of items to skip */
 				offset: string
-				/**
-				 * @description payment mode
-				 * @example live
-				 */
+				/** @description payment mode */
 				paymentMode?: 'default' | 'live' | 'test'
-				/**
-				 * @description To search for an invoice by id / name / email / phoneNo
-				 * @example Alex
-				 */
+				/** @description To search for an invoice by id / name / email / phoneNo */
 				search?: string
-				/**
-				 * @description startAt in YYYY-MM-DD format
-				 * @example 2023-01-01
-				 */
+				/** @description startAt in YYYY-MM-DD format */
 				startAt?: string
 				/** @description status to be filtered */
 				status?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -6925,8 +6783,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -6980,28 +6836,17 @@ export interface operations {
 	'get-invoice-template': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Template Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			cookie?: never
@@ -7050,16 +6895,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Template Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			cookie?: never
@@ -7111,28 +6951,17 @@ export interface operations {
 	'delete-invoice-template': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Template Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			cookie?: never
@@ -7177,20 +7006,15 @@ export interface operations {
 			}
 		}
 	}
-	'update-invoice-late-fees-configuration': {
+	'update-invoice-template-late-fees-configuration': {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Template Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			cookie?: never
@@ -7239,20 +7063,15 @@ export interface operations {
 			}
 		}
 	}
-	'update-invoice-late-fees-configuration_patch': {
+	'update-invoice-payment-methods-configuration': {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Template Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Template Id */
 				templateId: string
 			}
 			cookie?: never
@@ -7305,8 +7124,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}

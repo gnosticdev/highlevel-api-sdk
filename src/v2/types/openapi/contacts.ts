@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/contacts/': {
 		parameters: {
 			query?: never
@@ -305,10 +305,10 @@ export type paths = {
 		 */
 		post: operations['add-contact-to-workflow']
 		/**
-		 * Delete Contact to Workflow
-		 * @description Delete Contact to Workflow
+		 * Delete Contact from Workflow
+		 * @description Delete Contact from Workflow
 		 */
-		delete: operations['delete-contact-to-workflow']
+		delete: operations['delete-contact-from-workflow']
 		options?: never
 		head?: never
 		patch?: never
@@ -325,7 +325,7 @@ export type paths = {
 		put?: never
 		/**
 		 * Add/Remove Contacts From Business
-		 * @description Add/Remove Contacts From Business
+		 * @description Add/Remove Contacts From Business . Passing a `null` businessId will remove the businessId from the contacts
 		 */
 		post: operations['add-remove-contact-from-business']
 		delete?: never
@@ -403,7 +403,7 @@ export type paths = {
 		}
 		/**
 		 * Get Duplicate Contact
-		 * @description Get Duplicate Contact.<br><br>If `Allow Duplicate Contact` is disabled under Settings, the global unique identifier will be used for searching the contact. If the setting is enabled, first priority for search is `email` and the second priority will be `phone`.
+		 * @description Get Duplicate Contact.<br/><br/>If `Allow Duplicate Contact` is disabled under Settings, the global unique identifier will be used for searching the contact. If the setting is enabled, first priority for search is `email` and the second priority will be `phone`.
 		 */
 		get: operations['get-duplicate-contact']
 		put?: never
@@ -425,7 +425,7 @@ export type paths = {
 		put?: never
 		/**
 		 * Upsert Contact
-		 * @description Please find the list of acceptable values for the `country` field  <a href="https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list" target="_blank">here</a><br><br>If `Allow Duplicate Contact` is disabled under Settings, the global unique identifier will be used for de-duplication. If the setting is enabled, a new contact will get created with the shared details.
+		 * @description Please find the list of acceptable values for the `country` field  <a href="https://highlevel.stoplight.io/docs/integrations/ZG9jOjI4MzUzNDIy-country-list" target="_blank">here</a><br/><br/>The Upsert API will adhere to the configuration defined under the “Allow Duplicate Contact” setting at the Location level. If the setting is configured to check both Email and Phone, the API will attempt to identify an existing contact based on the priority sequence specified in the setting, and will create or update the contact accordingly.<br/><br/>If two separate contacts already exist—one with the same email and another with the same phone—and an upsert request includes both the email and phone, the API will update the contact that matches the first field in the configured sequence, and ignore the second field to prevent duplication.
 		 */
 		post: operations['upsert-contact']
 		delete?: never
@@ -436,7 +436,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		AddContactToCampaignDto: Record<string, never>
 		AttributionSource: {
@@ -474,16 +474,33 @@ export type components = {
 			/** @example 400 */
 			statusCode?: number
 		}
+		CheckboxField: {
+			/**
+			 * @example [
+			 *       "test",
+			 *       "test2"
+			 *     ]
+			 */
+			field_value?: string[]
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
 		Contact: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "john@example.com",
 			 *       "jane@example.com"
-			 *     ] */
+			 *     ]
+			 */
 			additionalEmails?: string[]
-			/** @example [
+			/**
+			 * @example [
 			 *       "123456789",
 			 *       "987654321"
-			 *     ] */
+			 *     ]
+			 */
 			additionalPhones?: string[]
 			/** @example 123 Main Street */
 			address?: string
@@ -512,14 +529,20 @@ export type components = {
 			/** @example john@example.com */
 			email?: string
 			/** @example john */
+			firstName?: string
+			/** @example john */
 			firstNameLowerCase?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "682goXVW3lIExEQPOnd3",
 			 *       "582goXVW3lIExEQPOnd3"
-			 *     ] */
+			 *     ]
+			 */
 			followers?: string[]
 			/** @example 102goXVW3lIExEQPOnd3 */
 			id?: string
+			/** @example doe */
+			lastName?: string
 			/** @example doe */
 			lastNameLowerCase?: string
 			/** @example 502goXVW3lIExEQPOnd3 */
@@ -531,19 +554,23 @@ export type components = {
 			phoneLabel?: string
 			/** @example 12345 */
 			postalCode?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       1234,
 			 *       "102goXVW3lIExEQPOnd3"
-			 *     ] */
+			 *     ]
+			 */
 			searchAfter?: string[]
 			/** @example Website */
 			source?: string
 			/** @example California */
 			state?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "tag-1",
 			 *       "tag-2"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 			/** @example lead */
 			type?: string
@@ -563,9 +590,11 @@ export type components = {
 			status: string
 		}
 		ContactsBulkUpateResponse: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "pOC0uJ97VYOKH2m3fkMD"
-			 *     ] */
+			 *     ]
+			 */
 			ids: string[]
 			/** @example true */
 			success: boolean
@@ -573,10 +602,12 @@ export type components = {
 		ContactsBusinessUpdate: {
 			/** @example 63b7ec34ea409a9a8bd2a4ff */
 			businessId: string | null
-			/** @example [
+			/**
+			 * @example [
 			 *       "IDqvFHGColiyK6jiatuz",
 			 *       "pOC0uJ97VYOKH2m3fkMD"
-			 *     ] */
+			 *     ]
+			 */
 			ids: string[]
 			/** @example PX8m5VwxEbcpFlzYEPVG */
 			locationId: string
@@ -619,10 +650,12 @@ export type components = {
 			locationId?: string
 			/** @example xyz form */
 			source?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "nisi sint commodo amet",
 			 *       "consequat"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 			/** @example Asia/Calcutta */
 			timezone?: string
@@ -637,22 +670,28 @@ export type components = {
 			succeded?: boolean
 		}
 		CreateAddFollowersSuccessfulResponseDto: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "sx6wyHhbFdRXh302Lunr",
 			 *       "sx6wyHhbFdRXh302LLss"
-			 *     ] */
+			 *     ]
+			 */
 			followers?: string[]
-			/** @example [
+			/**
+			 * @example [
 			 *       "Mx6wyHhbFdRXh302Luer",
 			 *       "Ka6wyHhbFdRXh302LLsAm"
-			 *     ] */
+			 *     ]
+			 */
 			followersAdded?: string[]
 		}
 		CreateAddTagSuccessfulResponseDto: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "minim",
 			 *       "velit magna"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 		}
 		CreateContactDto: {
@@ -670,9 +709,15 @@ export type components = {
 			/** @example US */
 			country?: string
 			customFields?: (
-				| components['schemas']['customFieldsInputStringSchema']
-				| components['schemas']['customFieldsInputArraySchema']
-				| components['schemas']['customFieldsInputObjectSchema']
+				| components['schemas']['TextField']
+				| components['schemas']['LargeTextField']
+				| components['schemas']['SingleSelectField']
+				| components['schemas']['RadioField']
+				| components['schemas']['NumericField']
+				| components['schemas']['MonetoryField']
+				| components['schemas']['CheckboxField']
+				| components['schemas']['MultiSelectField']
+				| components['schemas']['FileField']
 			)[]
 			/** @example true */
 			dnd?: boolean
@@ -698,10 +743,12 @@ export type components = {
 			source?: string
 			/** @example AL */
 			state?: string | null
-			/** @example [
+			/**
+			 * @example [
 			 *       "nisi sint commodo amet",
 			 *       "consequat"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 			/** @example America/Chihuahua */
 			timezone?: string | null
@@ -774,10 +821,12 @@ export type components = {
 			source?: string
 			/** @example AL */
 			state?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "nisi sint commodo amet",
 			 *       "consequat"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 			/** @example read */
 			type?: string
@@ -794,10 +843,12 @@ export type components = {
 			succeded?: boolean
 		}
 		CreateDeleteTagSuccessfulResponseDto: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "minim",
 			 *       "velit magna"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 		}
 		CreateTaskParams: {
@@ -823,10 +874,12 @@ export type components = {
 			value?: string
 		}
 		customFieldsInputArraySchema: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "test",
 			 *       "test2"
-			 *     ] */
+			 *     ]
+			 */
 			field_value?: string[]
 			/** @example 6dvNaf7VhkQ9snc5vnjJ */
 			id: string
@@ -860,15 +913,19 @@ export type components = {
 			succeded?: boolean
 		}
 		DeleteFollowersSuccessfulResponseDto: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "sx6wyHhbFdRXh302Lunr",
 			 *       "sx6wyHhbFdRXh302LLss"
-			 *     ] */
+			 *     ]
+			 */
 			followers?: string[]
-			/** @example [
+			/**
+			 * @example [
 			 *       "Mx6wyHhbFdRXh302Luer",
 			 *       "Ka6wyHhbFdRXh302LLsAm"
-			 *     ] */
+			 *     ]
+			 */
 			followersRemoved?: string[]
 		}
 		DeleteNoteSuccessfulResponseDto: {
@@ -893,11 +950,36 @@ export type components = {
 			SMS?: components['schemas']['DndSettingSchema']
 			WhatsApp?: components['schemas']['DndSettingSchema']
 		}
+		FileField: {
+			/**
+			 * @example {
+			 *       "f31175d4-2b06-4fc6-b7bc-74cd814c68cb": {
+			 *         "meta": {
+			 *           "fieldname": "1HeGizb13P0odwgOgKSs",
+			 *           "originalname": "IMG_20231215_164412935.jpg",
+			 *           "encoding": "7bit",
+			 *           "mimetype": "image/jpeg",
+			 *           "size": 1786611,
+			 *           "uuid": "f31175d4-2b06-4fc6-b7bc-74cd814c68cb"
+			 *         },
+			 *         "url": "https://services.leadconnectorhq.com/documents/download/w2M9qTZ0ZJz8rGt02jdJ",
+			 *         "documentId": "w2M9qTZ0ZJz8rGt02jdJ"
+			 *       }
+			 *     }
+			 */
+			field_value?: Record<string, never>
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
 		FollowersDTO: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "sx6wyHhbFdRXh302Lunr",
 			 *       "sx6wyHhbFdRXh302Lunr"
-			 *     ] */
+			 *     ]
+			 */
 			followers: string[]
 		}
 		GetContectByIdSchema: {
@@ -959,10 +1041,12 @@ export type components = {
 			ssn?: string
 			/** @example AL */
 			state?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "nisi sint commodo amet",
 			 *       "consequat"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 			/** @example  */
 			timezone?: string
@@ -984,10 +1068,12 @@ export type components = {
 			address?: string
 			/** @example booked */
 			appointmentStatus?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "YlWd2wuCAZQzh2cH1fVZ",
 			 *       "YlWd2wuCAZQzh2cH1fVZ"
-			 *     ] */
+			 *     ]
+			 */
 			assignedResources?: string[]
 			/** @example YlWd2wuCAZQzh2cH1fVZ */
 			assignedUserId?: string
@@ -1015,10 +1101,12 @@ export type components = {
 			status?: string
 			/** @example Test */
 			title?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "YlWd2wuCAZQzh2cH1fVZ",
 			 *       "YlWd2wuCAZQzh2cH1fVZ"
-			 *     ] */
+			 *     ]
+			 */
 			users?: string[]
 		}
 		GetEventsSuccessfulResponseDto: {
@@ -1047,11 +1135,56 @@ export type components = {
 		InboundDndSettingsSchema: {
 			all?: components['schemas']['InboundDndSettingSchema']
 		}
+		LargeTextField: {
+			/** @example My Text */
+			field_value?: string
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
+		MonetoryField: {
+			/** @example 100.5 */
+			field_value?: Record<string, never>
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
+		MultiSelectField: {
+			/**
+			 * @example [
+			 *       "test",
+			 *       "test2"
+			 *     ]
+			 */
+			field_value?: string[]
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
 		NotesDTO: {
 			/** @example lorem ipsum */
 			body: string
 			/** @example GCs5KuzPqTls7vWclkEV */
 			userId?: string
+		}
+		NumericField: {
+			/** @example 100 */
+			field_value?: Record<string, never>
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
+		RadioField: {
+			/** @example My Selected Option */
+			field_value?: string
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
 		}
 		SearchBodyV2DTO: Record<string, never>
 		SearchContactSuccessResponseDto: {
@@ -1059,11 +1192,21 @@ export type components = {
 			/** @example 120 */
 			total: number
 		}
+		SingleSelectField: {
+			/** @example My Selected Option */
+			field_value?: string
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
 		TagsDTO: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "minim",
 			 *       "velit magna"
-			 *     ] */
+			 *     ]
+			 */
 			tags: string[]
 		}
 		TaskByIsSuccessfulResponseDto: {
@@ -1088,6 +1231,14 @@ export type components = {
 		TasksListSuccessfulResponseDto: {
 			tasks?: components['schemas']['TaskSchema'][]
 		}
+		TextField: {
+			/** @example My Text */
+			field_value?: string
+			/** @example 6dvNaf7VhkQ9snc5vnjJ */
+			id: string
+			/** @example my_custom_field */
+			key?: string
+		}
 		UnauthorizedDTO: {
 			/** @example Unauthorized */
 			error?: string
@@ -1099,9 +1250,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -1119,9 +1272,15 @@ export type components = {
 			/** @example US */
 			country?: string
 			customFields?: (
-				| components['schemas']['customFieldsInputStringSchema']
-				| components['schemas']['customFieldsInputArraySchema']
-				| components['schemas']['customFieldsInputObjectSchema']
+				| components['schemas']['TextField']
+				| components['schemas']['LargeTextField']
+				| components['schemas']['SingleSelectField']
+				| components['schemas']['RadioField']
+				| components['schemas']['NumericField']
+				| components['schemas']['MonetoryField']
+				| components['schemas']['CheckboxField']
+				| components['schemas']['MultiSelectField']
+				| components['schemas']['FileField']
 			)[]
 			/** @example true */
 			dnd?: boolean
@@ -1178,15 +1337,15 @@ export type components = {
 			 */
 			locationId: string
 			/**
-			 * @description Option to implement remove all tags. If true, all tags will be removed from the contacts. Can only be used with remove type.
+			 * @description Option to implement remove all tags. if true, all tags will be removed from the contacts. Can only be used with remove type.
 			 * @example false
 			 */
 			removeAllTags?: boolean
 			/**
 			 * @description list of tags to be added or removed
 			 * @example [
-			 *       "tag1",
-			 *       "tag2"
+			 *       "tag-1",
+			 *       "tag-2"
 			 *     ]
 			 */
 			tags: string[]
@@ -1194,7 +1353,7 @@ export type components = {
 		UpdateTagsResponseDTO: {
 			/**
 			 * @description Number of errors encountered during the operation
-			 * @example 3
+			 * @example 0
 			 */
 			errorCount: number
 			/**
@@ -1203,13 +1362,13 @@ export type components = {
 			 *       {
 			 *         "contactId": "qFSqySFkVvNzOSqgGqFi",
 			 *         "message": "Tags updated",
+			 *         "type": "success",
 			 *         "oldTags": [
 			 *           "tag-1",
 			 *           "tag-2"
 			 *         ],
 			 *         "tagsAdded": [],
-			 *         "tagsRemoved": [],
-			 *         "type": "success"
+			 *         "tagsRemoved": []
 			 *       },
 			 *       {
 			 *         "contactId": "abcdef",
@@ -1266,9 +1425,15 @@ export type components = {
 			/** @example US */
 			country?: string
 			customFields?: (
-				| components['schemas']['customFieldsInputStringSchema']
-				| components['schemas']['customFieldsInputArraySchema']
-				| components['schemas']['customFieldsInputObjectSchema']
+				| components['schemas']['TextField']
+				| components['schemas']['LargeTextField']
+				| components['schemas']['SingleSelectField']
+				| components['schemas']['RadioField']
+				| components['schemas']['NumericField']
+				| components['schemas']['MonetoryField']
+				| components['schemas']['CheckboxField']
+				| components['schemas']['MultiSelectField']
+				| components['schemas']['FileField']
 			)[]
 			/** @example true */
 			dnd?: boolean
@@ -1325,35 +1490,18 @@ export interface operations {
 	'get-contacts': {
 		parameters: {
 			query: {
-				/**
-				 * @description Limit Per Page records count. will allow maximum up to 100 and default will be 20
-				 * @example 20
-				 */
+				/** @description Limit Per Page records count. will allow maximum up to 100 and default will be 20 */
 				limit?: number
-				/**
-				 * @description Location Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
+				/** @description Location Id */
 				locationId: string
-				/**
-				 * @description Contact Query
-				 * @example John
-				 */
+				/** @description Contact Query */
 				query?: string
-				/**
-				 * @description Start Afte
-				 * @example 1603870249758
-				 */
+				/** @description Start Afte */
 				startAfter?: number
-				/**
-				 * @description Start After Id
-				 * @example UIaE1WjAwWKdlyD7osQI
-				 */
+				/** @description Start After Id */
 				startAfterId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1404,8 +1552,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1460,16 +1606,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1518,16 +1659,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1580,16 +1716,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1638,16 +1769,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1696,21 +1822,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Campaigns Id
-				 * @example Y2I9XM7aO1hncuSOlc9L
-				 */
+				/** @description Campaigns Id */
 				campaignId: string
-				/**
-				 * @description Contact Id
-				 * @example 3bZD1nQzbul0MCancbQD
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1763,21 +1881,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Campaigns Id
-				 * @example Y2I9XM7aO1hncuSOlc9L
-				 */
+				/** @description Campaigns Id */
 				campaignId: string
-				/**
-				 * @description Contact Id
-				 * @example 3bZD1nQzbul0MCancbQD
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1826,16 +1936,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example 3bZD1nQzbul0MCancbQD
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1884,16 +1989,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302Lunr
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -1946,16 +2046,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302Lunr
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -2008,16 +2103,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -2057,16 +2147,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -2119,21 +2204,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Note Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Note Id */
 				id: string
 			}
 			cookie?: never
@@ -2182,21 +2259,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Note Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Note Id */
 				id: string
 			}
 			cookie?: never
@@ -2249,21 +2318,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Note Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Note Id */
 				id: string
 			}
 			cookie?: never
@@ -2312,16 +2373,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -2374,16 +2430,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -2436,16 +2487,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -2485,16 +2531,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
 			}
 			cookie?: never
@@ -2547,21 +2588,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Task Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Task Id */
 				taskId: string
 			}
 			cookie?: never
@@ -2601,21 +2634,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Task Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Task Id */
 				taskId: string
 			}
 			cookie?: never
@@ -2668,21 +2693,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Task Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Task Id */
 				taskId: string
 			}
 			cookie?: never
@@ -2722,21 +2739,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Task Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Task Id */
 				taskId: string
 			}
 			cookie?: never
@@ -2789,21 +2798,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Workflow Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Workflow Id */
 				workflowId: string
 			}
 			cookie?: never
@@ -2852,25 +2853,17 @@ export interface operations {
 			}
 		}
 	}
-	'delete-contact-to-workflow': {
+	'delete-contact-from-workflow': {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Contact Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Contact Id */
 				contactId: string
-				/**
-				 * @description Workflow Id
-				 * @example sx6wyHhbFdRXh302LLNR
-				 */
+				/** @description Workflow Id */
 				workflowId: string
 			}
 			cookie?: never
@@ -2923,8 +2916,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2961,8 +2952,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3013,18 +3002,12 @@ export interface operations {
 	'get-contacts-by-businessId': {
 		parameters: {
 			query: {
-				/** @example 10 */
 				limit?: string
-				/** @example 5DP4iH6HLkQsiKESj6rh */
 				locationId: string
-				/** @example contact name */
 				query?: string
-				/** @example 10 */
 				skip?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3077,8 +3060,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3091,57 +3072,40 @@ export interface operations {
 			}
 		}
 		responses: {
-			/** @description Successful response */
+			/** @description Success */
 			200: {
 				headers: {
 					[name: string]: unknown
 				}
-				content: {
-					'application/json': components['schemas']['SearchContactSuccessResponseDto']
-				}
+				content?: never
 			}
 			/** @description Bad Request */
 			400: {
 				headers: {
 					[name: string]: unknown
 				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
+				content?: never
 			}
 			/** @description Unauthorized */
 			401: {
 				headers: {
 					[name: string]: unknown
 				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
+				content?: never
 			}
 		}
 	}
 	'get-duplicate-contact': {
 		parameters: {
 			query: {
-				/**
-				 * @description Email - Pass in URL Encoded form. i.e test+abc@gmail.com will become `test%2Babc%40gmail.com`
-				 * @example abc@abc.com
-				 */
+				/** @description Email - Pass in URL Encoded form. i.e test+abc@gmail.com will become `test%2Babc%40gmail.com` */
 				email?: string
-				/**
-				 * @description Location Id
-				 * @example sadadya1u12basyhasd
-				 */
+				/** @description Location Id */
 				locationId: string
-				/**
-				 * @description Phone Number - Pass in URL Encoded form. i.e +1423164516 will become `%2B1423164516`
-				 * @example +1423164516
-				 */
+				/** @description Phone Number - Pass in URL Encoded form. i.e +1423164516 will become `%2B1423164516` */
 				number?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3180,8 +3144,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}

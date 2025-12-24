@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/links/': {
 		parameters: {
 			query?: never
@@ -47,9 +47,49 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/links/id/{linkId}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Link by ID
+		 * @description Get a single link by its ID
+		 */
+		get: operations['get-link-by-id']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/links/search': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Search Trigger Links
+		 * @description Get list of links by searching
+		 */
+		get: operations['search-trigger-links']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -104,9 +144,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -123,12 +165,9 @@ export interface operations {
 	'get-links': {
 		parameters: {
 			query: {
-				/** @example ve9EPM428h8vShlRW1KT */
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -170,8 +209,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -226,8 +263,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -285,8 +320,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -332,6 +365,107 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'get-link-by-id': {
+		parameters: {
+			query: {
+				/** @description Location Id */
+				locationId: string
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/** @description Link Id */
+				linkId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetLinkSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'search-trigger-links': {
+		parameters: {
+			query: {
+				/** @description Limit on number of search results */
+				limit?: number
+				/** @description Location Id */
+				locationId: string
+				/** @description Search query as a string */
+				query?: string
+				/** @description Numbers of query results to skip */
+				skip?: number
+			}
+			header: {
+				/** @description Access Token */
+				Authorization: string
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetLinksSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
 				}
 			}
 		}

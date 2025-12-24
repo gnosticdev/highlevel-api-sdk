@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/payments/coupon': {
 		parameters: {
 			query?: never
@@ -44,6 +44,26 @@ export type paths = {
 		 */
 		get: operations['list-coupons']
 		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/payments/custom-provider/capabilities': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		/**
+		 * Custom-provider marketplace app update capabilities
+		 * @description Toggle capabilities for the marketplace app tied to the OAuth client
+		 */
+		put: operations['custom-provider-marketplace-app-update-capabilities']
 		post?: never
 		delete?: never
 		options?: never
@@ -113,7 +133,7 @@ export type paths = {
 		 * Deleting an existing integration
 		 * @description API to delete an association for an app and location
 		 */
-		delete: operations['create-integration_delete']
+		delete: operations['delete-integration']
 		options?: never
 		head?: never
 		patch?: never
@@ -207,6 +227,66 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/payments/orders/{orderId}/notes': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * List Order Notes
+		 * @description List all notes of an order
+		 */
+		get: operations['list-order-notes']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/payments/orders/{orderId}/record-payment': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Record Order Payment
+		 * @description The "Record Order Payment" API allows to record a payment for an order. Use this endpoint to record payment for an order and update the order status to "Paid".
+		 */
+		post: operations['record-order-payment']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/payments/orders/migrate-order-ps': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * migration Endpoint for Order Payment Status
+		 * @description Process to migrate all the older orders and based on the statuses introduce the payment statuses as well
+		 */
+		post: operations['post-migrate-order-payment-status']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/payments/subscriptions': {
 		parameters: {
 			query?: never
@@ -289,7 +369,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		AmountSummary: {
 			/**
@@ -345,6 +425,25 @@ export type components = {
 			message?: string
 			/** @example 400 */
 			statusCode?: number
+		}
+		CardDto: {
+			/**
+			 * @description Last 4 digit of the card
+			 * @example 1234
+			 */
+			last4: string
+			/**
+			 * @example mastercard
+			 * @enum {string}
+			 */
+			type: 'visa' | 'mastercard' | 'other'
+		}
+		ChequeDto: {
+			/**
+			 * @description check number
+			 * @example 129-129-129-912
+			 */
+			number: string
 		}
 		ConnectCustomProvidersConfigDto: {
 			/** @description Live config containing api-key and publishable key for live payments */
@@ -428,12 +527,12 @@ export type components = {
 			 */
 			_id: string
 			/**
-			 * @description Location or company ID
+			 * @description Location Id
 			 * @example 79t07PzK8Tvf73d12312
 			 */
 			altId: string
 			/**
-			 * @description Type of entity (location or company)
+			 * @description Type of entity
 			 * @example location
 			 */
 			altType: string
@@ -455,11 +554,6 @@ export type components = {
 			 */
 			createdAt: string
 			/**
-			 * @description Indicates if the coupon has been deleted
-			 * @example false
-			 */
-			deleted: boolean
-			/**
 			 * @description Type of discount (percentage or amount)
 			 * @example percentage
 			 * @enum {string}
@@ -475,11 +569,6 @@ export type components = {
 			 * @example 2025-05-30T18:30:00.000Z
 			 */
 			endDate?: string
-			/**
-			 * @description Indicates if this is an affiliate coupon
-			 * @example false
-			 */
-			hasAffiliateCoupon: boolean
 			/**
 			 * @description Maximum number of times a customer can use this coupon (0 for unlimited)
 			 * @example 5
@@ -542,9 +631,9 @@ export type components = {
 			 *     }
 			 * @example [
 			 *       {
+			 *         "type": "fixed",
 			 *         "duration": 5,
-			 *         "durationType": "months",
-			 *         "type": "fixed"
+			 *         "durationType": "months"
 			 *       },
 			 *       {
 			 *         "type": "forever"
@@ -719,6 +808,11 @@ export type components = {
 			 * @example https://testsubscription.paypal.com
 			 */
 			queryUrl: string
+			/**
+			 * @description Whether the config supports subscription schedule or not. true represents config supports subscription schedule
+			 * @example true
+			 */
+			supportsSubscriptionSchedule: boolean
 		}
 		CreateCustomProvidersResponseSchema: {
 			/**
@@ -1096,6 +1190,11 @@ export type components = {
 			 */
 			_id: string
 			/**
+			 * @description Tax category ID for Automatic taxes calculation.
+			 * @example 65d71377c326ea78e1c47df5
+			 */
+			automaticTaxCategoryId?: string
+			/**
 			 * @description Indicates whether the product is available in-store.
 			 * @example true
 			 */
@@ -1131,7 +1230,7 @@ export type components = {
 			 */
 			isLabelEnabled: boolean
 			/**
-			 * @description Is automatic attachment of taxes enabled for the product
+			 * @description The field indicates whether taxes are enabled for the product or not.
 			 * @default false
 			 * @example true
 			 */
@@ -1413,6 +1512,11 @@ export type components = {
 			 */
 			amountSummary?: components['schemas']['AmountSummary']
 			/**
+			 * @description Automatic taxes applied for the Order
+			 * @example true
+			 */
+			automaticTaxesCalculated?: boolean
+			/**
 			 * @description Contact id corresponding to the order.
 			 * @example XPLSw2SVagl12LMDeTmQ
 			 */
@@ -1478,6 +1582,11 @@ export type components = {
 			 * @example completed
 			 */
 			status: string
+			/**
+			 * @description Provider name for automatic tax calculation
+			 * @example taxjar
+			 */
+			taxCalculationProvider?: Record<string, never>
 			/**
 			 * @description Trace id of the order.
 			 * @example d3b16a92-a8ed-4e6b-8467-844750f78ed5
@@ -1732,6 +1841,11 @@ export type components = {
 			 * @example false
 			 */
 			markAsTest?: boolean
+			/**
+			 * @description ID of the contact that was merged from.
+			 * @example XPLSw2SVagl12LMDeTmQ
+			 */
+			mergedFromContactId?: string
 			/**
 			 * @description Meta details of the transaction.
 			 * @example { stepId: "af7c731e-e36f-4152-bd1a-3f69a31d6d6d", pageId: "A8ltotc2jZxurJba4e3Y", pageUrl: "/v2/preview/A8ltotc2jZxurJba4e3Y" }
@@ -2035,6 +2149,15 @@ export type components = {
 				| 'email_campaign'
 				| 'payments_dashboard'
 				| 'shopify'
+				| 'subscription_view'
+				| 'store_upsell'
+				| 'woocommerce'
+				| 'service'
+				| 'meeting'
+				| 'imported_csv'
+				| 'qr_code'
+				| 'saas_one_time'
+				| 'saas_subscription'
 			/** @enum {string} */
 			type:
 				| 'funnel'
@@ -2052,6 +2175,50 @@ export type components = {
 				| 'survey'
 				| 'payment_link'
 				| 'external'
+		}
+		PostRecordOrderPaymentBody: {
+			/**
+			 * @description location Id / company Id based on altType
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType: 'location'
+			/**
+			 * @description Amount to be paid against the invoice.
+			 * @example 100
+			 */
+			amount?: number
+			/** @description Details of Card if used for payment */
+			card?: components['schemas']['CardDto']
+			/** @description Details of the Cheque if used for payment */
+			cheque?: components['schemas']['ChequeDto']
+			/** @description Indicates if the order is intended to be a partial payment. */
+			isPartialPayment?: boolean
+			/** @description Meta data to be recorded with the transaction */
+			meta?: Record<string, never>
+			/**
+			 * @description manual payment method
+			 * @example card
+			 * @enum {string}
+			 */
+			mode: 'cash' | 'card' | 'cheque' | 'bank_transfer' | 'other'
+			/**
+			 * @description Any note to be recorded with the transaction
+			 * @example This was a direct payment
+			 */
+			notes?: string
+		}
+		PostRecordOrderPaymentResponse: {
+			/**
+			 * @description Success status of the request
+			 * @example true
+			 */
+			success: boolean
 		}
 		ProductLabelDto: {
 			/**
@@ -2376,6 +2543,12 @@ export type components = {
 			 */
 			entityType?: string
 			/**
+			 * Format: date-time
+			 * @description The charged timestamp of the transaction.
+			 * @example 2023-11-20T10:27:36.515Z
+			 */
+			fulfilledAt: string
+			/**
 			 * @description Ip address from where transaction was initiated.
 			 * @example 107.178.194.224
 			 */
@@ -2385,6 +2558,11 @@ export type components = {
 			 * @example false
 			 */
 			liveMode?: boolean
+			/**
+			 * @description ID of the contact that was merged from.
+			 * @example XPLSw2SVagl12LMDeTmQ
+			 */
+			mergedFromContactId?: string
 			/**
 			 * @description Transaction payment method details.
 			 * @example { card: { "brand": "discover", "last4": "0012" } }
@@ -2428,9 +2606,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -2460,9 +2640,9 @@ export type components = {
 			 *     }
 			 * @example [
 			 *       {
+			 *         "type": "fixed",
 			 *         "duration": 5,
-			 *         "durationType": "months",
-			 *         "type": "fixed"
+			 *         "durationType": "months"
 			 *       },
 			 *       {
 			 *         "type": "forever"
@@ -2525,6 +2705,30 @@ export type components = {
 			 */
 			usageLimit?: number
 		}
+		UpdateCustomProviderCapabilitiesDto: {
+			/**
+			 * @description Company id. Mandatory if locationId is not provided
+			 * @example Yjnwuduw83e8x30sm0
+			 */
+			companyId?: string
+			/**
+			 * @description Location / Sub-account id. Mandatory if companyId is not provided
+			 * @example Yjnwuduw83e8x30sm0
+			 */
+			locationId?: string
+			/**
+			 * @description Whether the marketplace app supports subscription schedules or not
+			 * @example true
+			 */
+			supportsSubscriptionSchedules: boolean
+		}
+		UpdateCustomProviderCapabilitiesResponseSchema: {
+			/**
+			 * @description Whether the custom provider capabilities are updated or not. true represents capabilities are updated
+			 * @example true
+			 */
+			success: boolean
+		}
 	}
 	responses: never
 	parameters: never
@@ -2547,8 +2751,6 @@ export interface operations {
 				id: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2581,8 +2783,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2619,8 +2819,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2657,8 +2855,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2708,8 +2904,6 @@ export interface operations {
 				status?: 'scheduled' | 'active' | 'expired'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2738,6 +2932,60 @@ export interface operations {
 			}
 		}
 	}
+	'custom-provider-marketplace-app-update-capabilities': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateCustomProviderCapabilitiesDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UpdateCustomProviderCapabilitiesResponseSchema']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'fetch-config': {
 		parameters: {
 			query: {
@@ -2748,8 +2996,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2806,8 +3052,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2868,8 +3112,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2930,8 +3172,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2982,7 +3222,7 @@ export interface operations {
 			}
 		}
 	}
-	'create-integration_delete': {
+	'delete-integration': {
 		parameters: {
 			query: {
 				/**
@@ -2992,8 +3232,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3065,8 +3303,6 @@ export interface operations {
 				offset?: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3117,8 +3353,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3234,8 +3468,6 @@ export interface operations {
 				status?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3291,19 +3523,12 @@ export interface operations {
 				 */
 				altId: string
 				/**
-				 * @description AltType is the type of identifier.
-				 * @example location
-				 */
-				altType: string
-				/**
 				 * @description LocationId is the id of the sub-account.
 				 * @example 3SwdhCu3svxI8AKsPJt6
 				 */
 				locationId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3367,8 +3592,6 @@ export interface operations {
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3425,8 +3648,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3479,6 +3700,161 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'list-order-notes': {
+		parameters: {
+			query: {
+				/** @description Location Id or Agency Id */
+				altId: string
+				altType: 'location'
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/** @description ID of the order that needs to be returned */
+				orderId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'record-order-payment': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/** @description MongoDB Order ID */
+				orderId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['PostRecordOrderPaymentBody']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['PostRecordOrderPaymentResponse']
+				}
+			}
+			/** @description Order not found */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'post-migrate-order-payment-status': {
+		parameters: {
+			query: {
+				/** @description AltId is the unique identifier e.g: location id. */
+				altId: string
+				/** @description LocationId is the id of the sub-account. */
+				locationId?: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
 				}
 			}
 		}
@@ -3548,8 +3924,6 @@ export interface operations {
 				startAt?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3611,8 +3985,6 @@ export interface operations {
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3740,8 +4112,6 @@ export interface operations {
 				subscriptionId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3808,8 +4178,6 @@ export interface operations {
 				locationId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}

@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/courses/courses-exporter/public/import': {
 		parameters: {
 			query?: never
@@ -21,7 +21,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		CategoryInterface: {
 			posts?: components['schemas']['PostInterface'][]
@@ -138,8 +138,8 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
+				/** @description API Version */
+				Version: '2021-07-28'
 			}
 			path?: never
 			cookie?: never

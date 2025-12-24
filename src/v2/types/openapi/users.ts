@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/users/': {
 		parameters: {
 			query?: never
@@ -71,9 +71,29 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/users/search/filter-by-email': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Filter Users by Email
+		 * @description Filter users by company ID, deleted status, and email array
+		 */
+		post: operations['filter-users-by-email']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -90,9 +110,11 @@ export type components = {
 			firstName: string
 			/** @example Deo */
 			lastName: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "C2QujeCh8ZnC7al2InWR"
-			 *     ] */
+			 *     ]
+			 */
 			locationIds: string[]
 			/** @example ******* */
 			password: string
@@ -113,14 +135,19 @@ export type components = {
 			scopes?: (
 				| 'campaigns.readonly'
 				| 'campaigns.write'
+				| 'calendars.readonly'
 				| 'calendars/events.write'
-				| 'calendars/events.readonly'
+				| 'calendars/groups.write'
+				| 'calendars.write'
 				| 'contacts.write'
 				| 'contacts/bulkActions.write'
 				| 'workflows.readonly'
 				| 'workflows.write'
 				| 'triggers.write'
 				| 'funnels.write'
+				| 'forms.write'
+				| 'surveys.write'
+				| 'quizzes.write'
 				| 'websites.write'
 				| 'medias.write'
 				| 'medias.readonly'
@@ -131,9 +158,10 @@ export type components = {
 				| 'reporting/adwords.readonly'
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
+				| 'prospecting/auditReport.write'
+				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
-				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -147,6 +175,7 @@ export type components = {
 				| 'invoices/template.write'
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
+				| 'reputation/reviewsAIAgents.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -200,6 +229,7 @@ export type components = {
 				| 'blogs.write'
 				| 'membership.write'
 				| 'communities.write'
+				| 'gokollab.write'
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
@@ -216,8 +246,38 @@ export type components = {
 				| 'wordpress.write'
 				| 'wordpress.read'
 				| 'custom-menu-link.write'
+				| 'qrcodes.write'
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
+				| 'loginas.write'
+				| 'snapshots/api.readonly'
+				| 'snapshots/api.create'
+				| 'snapshots/api.edit'
+				| 'snapshots/api.push'
+				| 'snapshots/api.refresh'
+				| 'snapshots/api.share'
+				| 'snapshots/api.delete'
+				| 'internaltools.location-transfer.write'
+				| 'internaltools.location-transfer.readonly'
+				| 'affiliateportal.write'
+				| 'affiliateportal.readonly'
+				| 'companies.write'
+				| 'internaltools.billing.write'
+				| 'internaltools.billing.readonly'
+				| 'internaltools.billing-common.readonly'
+				| 'internaltools.billing-common.write'
+				| 'voice-ai-agents.write'
+				| 'voice-ai-agent-goals.readonly'
+				| 'voice-ai-agent-goals.write'
+				| 'voice-ai-dashboard.readonly'
+				| 'agency/launchpad.write'
+				| 'agency/launchpad.readonly'
+				| 'launchpad.write'
+				| 'launchpad.readonly'
+				| 'text-ai-agents.write'
+				| 'text-ai-agent-goals.readonly'
+				| 'text-ai-agent-goals.write'
+				| 'text-ai-agent-training.write'
 			)[]
 			/**
 			 * @description Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled
@@ -229,14 +289,19 @@ export type components = {
 			scopesAssignedToOnly?: (
 				| 'campaigns.readonly'
 				| 'campaigns.write'
+				| 'calendars.readonly'
 				| 'calendars/events.write'
-				| 'calendars/events.readonly'
+				| 'calendars/groups.write'
+				| 'calendars.write'
 				| 'contacts.write'
 				| 'contacts/bulkActions.write'
 				| 'workflows.readonly'
 				| 'workflows.write'
 				| 'triggers.write'
 				| 'funnels.write'
+				| 'forms.write'
+				| 'surveys.write'
+				| 'quizzes.write'
 				| 'websites.write'
 				| 'medias.write'
 				| 'medias.readonly'
@@ -247,9 +312,10 @@ export type components = {
 				| 'reporting/adwords.readonly'
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
+				| 'prospecting/auditReport.write'
+				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
-				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -263,6 +329,7 @@ export type components = {
 				| 'invoices/template.write'
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
+				| 'reputation/reviewsAIAgents.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -316,6 +383,7 @@ export type components = {
 				| 'blogs.write'
 				| 'membership.write'
 				| 'communities.write'
+				| 'gokollab.write'
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
@@ -332,8 +400,38 @@ export type components = {
 				| 'wordpress.write'
 				| 'wordpress.read'
 				| 'custom-menu-link.write'
+				| 'qrcodes.write'
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
+				| 'loginas.write'
+				| 'snapshots/api.readonly'
+				| 'snapshots/api.create'
+				| 'snapshots/api.edit'
+				| 'snapshots/api.push'
+				| 'snapshots/api.refresh'
+				| 'snapshots/api.share'
+				| 'snapshots/api.delete'
+				| 'internaltools.location-transfer.write'
+				| 'internaltools.location-transfer.readonly'
+				| 'affiliateportal.write'
+				| 'affiliateportal.readonly'
+				| 'companies.write'
+				| 'internaltools.billing.write'
+				| 'internaltools.billing.readonly'
+				| 'internaltools.billing-common.readonly'
+				| 'internaltools.billing-common.write'
+				| 'voice-ai-agents.write'
+				| 'voice-ai-agent-goals.readonly'
+				| 'voice-ai-agent-goals.write'
+				| 'voice-ai-dashboard.readonly'
+				| 'agency/launchpad.write'
+				| 'agency/launchpad.readonly'
+				| 'launchpad.write'
+				| 'launchpad.readonly'
+				| 'text-ai-agents.write'
+				| 'text-ai-agent-goals.readonly'
+				| 'text-ai-agent-goals.write'
+				| 'text-ai-agent-training.write'
 			)[]
 			/** @example account */
 			type: string
@@ -343,6 +441,44 @@ export type components = {
 			message?: string
 			/** @example true */
 			succeded?: boolean
+		}
+		FilterByEmailDto: {
+			/**
+			 * @description Company ID to filter users
+			 * @example 5DP41231LkQsiKESj6rh
+			 */
+			companyId: string
+			/**
+			 * @description Filter deleted users
+			 * @default false
+			 * @example false
+			 */
+			deleted: boolean
+			/**
+			 * @description Array of email addresses to filter users
+			 * @example [
+			 *       "user1@example.com",
+			 *       "user2@example.com"
+			 *     ]
+			 */
+			emails: string[]
+			/**
+			 * @description No of results to be limited before returning the result
+			 * @default 25
+			 * @example 10
+			 */
+			limit: string
+			/**
+			 * @description Projection fields to return. Use "all" for all fields, or specify comma-separated field names. Default returns only id and email
+			 * @example all
+			 */
+			projection?: string
+			/**
+			 * @description No of results to be skipped before returning the result
+			 * @default 0
+			 * @example 1
+			 */
+			skip: string
 		}
 		LocationSuccessfulResponseDto: {
 			users?: components['schemas']['UserSchema'][]
@@ -540,9 +676,11 @@ export type components = {
 			workflowsReadOnly: boolean
 		}
 		RoleSchema: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "ve9EPM428h8vShlRW1KT"
-			 *     ] */
+			 *     ]
+			 */
 			locationIds?: string[]
 			/** @example true */
 			restrictSubAccount?: boolean
@@ -567,9 +705,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -593,13 +733,13 @@ export type components = {
 			emailChangeOTP?: string
 			/** @example John */
 			firstName?: string
-			/** @example true */
-			isEjectedUser: boolean
 			/** @example Deo */
 			lastName?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "C2QujeCh8ZnC7al2InWR"
-			 *     ] */
+			 *     ]
+			 */
 			locationIds?: string[]
 			/** @example ******* */
 			password?: string
@@ -620,14 +760,19 @@ export type components = {
 			scopes?: (
 				| 'campaigns.readonly'
 				| 'campaigns.write'
+				| 'calendars.readonly'
 				| 'calendars/events.write'
-				| 'calendars/events.readonly'
+				| 'calendars/groups.write'
+				| 'calendars.write'
 				| 'contacts.write'
 				| 'contacts/bulkActions.write'
 				| 'workflows.readonly'
 				| 'workflows.write'
 				| 'triggers.write'
 				| 'funnels.write'
+				| 'forms.write'
+				| 'surveys.write'
+				| 'quizzes.write'
 				| 'websites.write'
 				| 'medias.write'
 				| 'medias.readonly'
@@ -638,9 +783,10 @@ export type components = {
 				| 'reporting/adwords.readonly'
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
+				| 'prospecting/auditReport.write'
+				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
-				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -654,6 +800,7 @@ export type components = {
 				| 'invoices/template.write'
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
+				| 'reputation/reviewsAIAgents.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -707,6 +854,7 @@ export type components = {
 				| 'blogs.write'
 				| 'membership.write'
 				| 'communities.write'
+				| 'gokollab.write'
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
@@ -723,8 +871,38 @@ export type components = {
 				| 'wordpress.write'
 				| 'wordpress.read'
 				| 'custom-menu-link.write'
+				| 'qrcodes.write'
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
+				| 'loginas.write'
+				| 'snapshots/api.readonly'
+				| 'snapshots/api.create'
+				| 'snapshots/api.edit'
+				| 'snapshots/api.push'
+				| 'snapshots/api.refresh'
+				| 'snapshots/api.share'
+				| 'snapshots/api.delete'
+				| 'internaltools.location-transfer.write'
+				| 'internaltools.location-transfer.readonly'
+				| 'affiliateportal.write'
+				| 'affiliateportal.readonly'
+				| 'companies.write'
+				| 'internaltools.billing.write'
+				| 'internaltools.billing.readonly'
+				| 'internaltools.billing-common.readonly'
+				| 'internaltools.billing-common.write'
+				| 'voice-ai-agents.write'
+				| 'voice-ai-agent-goals.readonly'
+				| 'voice-ai-agent-goals.write'
+				| 'voice-ai-dashboard.readonly'
+				| 'agency/launchpad.write'
+				| 'agency/launchpad.readonly'
+				| 'launchpad.write'
+				| 'launchpad.readonly'
+				| 'text-ai-agents.write'
+				| 'text-ai-agent-goals.readonly'
+				| 'text-ai-agent-goals.write'
+				| 'text-ai-agent-training.write'
 			)[]
 			/**
 			 * @description Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled
@@ -736,14 +914,19 @@ export type components = {
 			scopesAssignedToOnly?: (
 				| 'campaigns.readonly'
 				| 'campaigns.write'
+				| 'calendars.readonly'
 				| 'calendars/events.write'
-				| 'calendars/events.readonly'
+				| 'calendars/groups.write'
+				| 'calendars.write'
 				| 'contacts.write'
 				| 'contacts/bulkActions.write'
 				| 'workflows.readonly'
 				| 'workflows.write'
 				| 'triggers.write'
 				| 'funnels.write'
+				| 'forms.write'
+				| 'surveys.write'
+				| 'quizzes.write'
 				| 'websites.write'
 				| 'medias.write'
 				| 'medias.readonly'
@@ -754,9 +937,10 @@ export type components = {
 				| 'reporting/adwords.readonly'
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
+				| 'prospecting/auditReport.write'
+				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
-				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -770,6 +954,7 @@ export type components = {
 				| 'invoices/template.write'
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
+				| 'reputation/reviewsAIAgents.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -823,6 +1008,7 @@ export type components = {
 				| 'blogs.write'
 				| 'membership.write'
 				| 'communities.write'
+				| 'gokollab.write'
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
@@ -839,8 +1025,38 @@ export type components = {
 				| 'wordpress.write'
 				| 'wordpress.read'
 				| 'custom-menu-link.write'
+				| 'qrcodes.write'
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
+				| 'loginas.write'
+				| 'snapshots/api.readonly'
+				| 'snapshots/api.create'
+				| 'snapshots/api.edit'
+				| 'snapshots/api.push'
+				| 'snapshots/api.refresh'
+				| 'snapshots/api.share'
+				| 'snapshots/api.delete'
+				| 'internaltools.location-transfer.write'
+				| 'internaltools.location-transfer.readonly'
+				| 'affiliateportal.write'
+				| 'affiliateportal.readonly'
+				| 'companies.write'
+				| 'internaltools.billing.write'
+				| 'internaltools.billing.readonly'
+				| 'internaltools.billing-common.readonly'
+				| 'internaltools.billing-common.write'
+				| 'voice-ai-agents.write'
+				| 'voice-ai-agent-goals.readonly'
+				| 'voice-ai-agent-goals.write'
+				| 'voice-ai-dashboard.readonly'
+				| 'agency/launchpad.write'
+				| 'agency/launchpad.readonly'
+				| 'launchpad.write'
+				| 'launchpad.readonly'
+				| 'text-ai-agents.write'
+				| 'text-ai-agent-goals.readonly'
+				| 'text-ai-agent-goals.write'
+				| 'text-ai-agent-training.write'
 			)[]
 			/** @example account */
 			type?: string
@@ -875,14 +1091,19 @@ export type components = {
 			scopes?:
 				| 'campaigns.readonly'
 				| 'campaigns.write'
+				| 'calendars.readonly'
 				| 'calendars/events.write'
-				| 'calendars/events.readonly'
+				| 'calendars/groups.write'
+				| 'calendars.write'
 				| 'contacts.write'
 				| 'contacts/bulkActions.write'
 				| 'workflows.readonly'
 				| 'workflows.write'
 				| 'triggers.write'
 				| 'funnels.write'
+				| 'forms.write'
+				| 'surveys.write'
+				| 'quizzes.write'
 				| 'websites.write'
 				| 'medias.write'
 				| 'medias.readonly'
@@ -893,9 +1114,10 @@ export type components = {
 				| 'reporting/adwords.readonly'
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
+				| 'prospecting/auditReport.write'
+				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
-				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -909,6 +1131,7 @@ export type components = {
 				| 'invoices/template.write'
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
+				| 'reputation/reviewsAIAgents.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -962,6 +1185,7 @@ export type components = {
 				| 'blogs.write'
 				| 'membership.write'
 				| 'communities.write'
+				| 'gokollab.write'
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
@@ -978,8 +1202,38 @@ export type components = {
 				| 'wordpress.write'
 				| 'wordpress.read'
 				| 'custom-menu-link.write'
+				| 'qrcodes.write'
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
+				| 'loginas.write'
+				| 'snapshots/api.readonly'
+				| 'snapshots/api.create'
+				| 'snapshots/api.edit'
+				| 'snapshots/api.push'
+				| 'snapshots/api.refresh'
+				| 'snapshots/api.share'
+				| 'snapshots/api.delete'
+				| 'internaltools.location-transfer.write'
+				| 'internaltools.location-transfer.readonly'
+				| 'affiliateportal.write'
+				| 'affiliateportal.readonly'
+				| 'companies.write'
+				| 'internaltools.billing.write'
+				| 'internaltools.billing.readonly'
+				| 'internaltools.billing-common.readonly'
+				| 'internaltools.billing-common.write'
+				| 'voice-ai-agents.write'
+				| 'voice-ai-agent-goals.readonly'
+				| 'voice-ai-agent-goals.write'
+				| 'voice-ai-dashboard.readonly'
+				| 'agency/launchpad.write'
+				| 'agency/launchpad.readonly'
+				| 'launchpad.write'
+				| 'launchpad.readonly'
+				| 'text-ai-agents.write'
+				| 'text-ai-agent-goals.readonly'
+				| 'text-ai-agent-goals.write'
+				| 'text-ai-agent-training.write'
 		}
 		UserSuccessfulResponseDto: {
 			/** @example john@deo.com */
@@ -1009,14 +1263,19 @@ export type components = {
 			scopes?:
 				| 'campaigns.readonly'
 				| 'campaigns.write'
+				| 'calendars.readonly'
 				| 'calendars/events.write'
-				| 'calendars/events.readonly'
+				| 'calendars/groups.write'
+				| 'calendars.write'
 				| 'contacts.write'
 				| 'contacts/bulkActions.write'
 				| 'workflows.readonly'
 				| 'workflows.write'
 				| 'triggers.write'
 				| 'funnels.write'
+				| 'forms.write'
+				| 'surveys.write'
+				| 'quizzes.write'
 				| 'websites.write'
 				| 'medias.write'
 				| 'medias.readonly'
@@ -1027,9 +1286,10 @@ export type components = {
 				| 'reporting/adwords.readonly'
 				| 'reporting/facebookAds.readonly'
 				| 'reporting/attributions.readonly'
+				| 'prospecting/auditReport.write'
+				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
-				| 'reporting/reports.readonly'
 				| 'payments.write'
 				| 'payments/refunds.write'
 				| 'payments/records.write'
@@ -1043,6 +1303,7 @@ export type components = {
 				| 'invoices/template.write'
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
+				| 'reputation/reviewsAIAgents.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -1096,6 +1357,7 @@ export type components = {
 				| 'blogs.write'
 				| 'membership.write'
 				| 'communities.write'
+				| 'gokollab.write'
 				| 'certificates.write'
 				| 'certificates.readonly'
 				| 'adPublishing.write'
@@ -1112,8 +1374,38 @@ export type components = {
 				| 'wordpress.write'
 				| 'wordpress.read'
 				| 'custom-menu-link.write'
+				| 'qrcodes.write'
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
+				| 'loginas.write'
+				| 'snapshots/api.readonly'
+				| 'snapshots/api.create'
+				| 'snapshots/api.edit'
+				| 'snapshots/api.push'
+				| 'snapshots/api.refresh'
+				| 'snapshots/api.share'
+				| 'snapshots/api.delete'
+				| 'internaltools.location-transfer.write'
+				| 'internaltools.location-transfer.readonly'
+				| 'affiliateportal.write'
+				| 'affiliateportal.readonly'
+				| 'companies.write'
+				| 'internaltools.billing.write'
+				| 'internaltools.billing.readonly'
+				| 'internaltools.billing-common.readonly'
+				| 'internaltools.billing-common.write'
+				| 'voice-ai-agents.write'
+				| 'voice-ai-agent-goals.readonly'
+				| 'voice-ai-agent-goals.write'
+				| 'voice-ai-dashboard.readonly'
+				| 'agency/launchpad.write'
+				| 'agency/launchpad.readonly'
+				| 'launchpad.write'
+				| 'launchpad.readonly'
+				| 'text-ai-agents.write'
+				| 'text-ai-agent-goals.readonly'
+				| 'text-ai-agent-goals.write'
+				| 'text-ai-agent-training.write'
 		}
 	}
 	responses: never
@@ -1127,12 +1419,9 @@ export interface operations {
 	'get-user-by-location': {
 		parameters: {
 			query: {
-				/** @example s4BtzHFWmT28mbb85uPa */
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1174,8 +1463,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1230,12 +1517,13 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
-			path?: never
+			path: {
+				/** @description User Id */
+				userId: string
+			}
 			cookie?: never
 		}
 		requestBody?: never
@@ -1282,8 +1570,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1338,8 +1624,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1389,61 +1673,29 @@ export interface operations {
 	'search-users': {
 		parameters: {
 			query: {
-				/**
-				 * @description Company ID in which the search needs to be performed
-				 * @example 5DP41231LkQsiKESj6rh
-				 */
+				/** @description Company ID in which the search needs to be performed */
 				companyId: string
 				enabled2waySync?: boolean
-				/**
-				 * @description List of User IDs to be filtered in the search
-				 * @example 5DP4iH6HLkQsiKESj6rh,5DP4iH6HLkQsiKESj34h
-				 */
+				/** @description List of User IDs to be filtered in the search */
 				ids?: string
-				/**
-				 * @description No of results to be limited before returning the result
-				 * @example 10
-				 */
+				/** @description No of results to be limited before returning the result */
 				limit?: string
-				/**
-				 * @description Location ID in which the search needs to be performed
-				 * @example 5DP41231LkQsiKESj6rh
-				 */
+				/** @description Location ID in which the search needs to be performed */
 				locationId?: string
-				/**
-				 * @description The search term for the user is matched based on the user full name, email or phone
-				 * @example John
-				 */
+				/** @description The search term for the user is matched based on the user full name, email or phone */
 				query?: string
-				/**
-				 * @description Role of the users to be filtered in the search
-				 * @example admin
-				 */
+				/** @description Role of the users to be filtered in the search */
 				role?: string
-				/**
-				 * @description No of results to be skipped before returning the result
-				 * @example 1
-				 */
+				/** @description No of results to be skipped before returning the result */
 				skip?: string
-				/**
-				 * @description The field on which sort is applied in which the results need to be sorted. Default is based on the first and last name
-				 * @example dateAdded
-				 */
+				/** @description The field on which sort is applied in which the results need to be sorted. Default is based on the first and last name */
 				sort?: string
-				/**
-				 * @description The direction in which the results need to be sorted
-				 * @example asc
-				 */
+				/** @description The direction in which the results need to be sorted */
 				sortDirection?: string
-				/**
-				 * @description Type of the users to be filtered in the search
-				 * @example agency
-				 */
+				/** @description Type of the users to be filtered in the search */
 				type?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1451,6 +1703,60 @@ export interface operations {
 			cookie?: never
 		}
 		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['SearchUserSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'filter-users-by-email': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['FilterByEmailDto']
+			}
+		}
 		responses: {
 			/** @description Successful response */
 			200: {

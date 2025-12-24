@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/calendars/': {
 		parameters: {
 			query?: never
@@ -113,7 +113,10 @@ export type paths = {
 		 */
 		put: operations['update-event-notification']
 		post?: never
-		/** @description Delete notification */
+		/**
+		 * Delete Notification
+		 * @description Delete notification
+		 */
 		delete: operations['delete-event-notification']
 		options?: never
 		head?: never
@@ -238,7 +241,7 @@ export type paths = {
 		get?: never
 		put?: never
 		/**
-		 * Create Appointment
+		 * Create appointment
 		 * @description Create appointment
 		 */
 		post: operations['create-appointment']
@@ -262,7 +265,7 @@ export type paths = {
 		get: operations['get-appointment']
 		/**
 		 * Update Appointment
-		 * @description Update appointment by ID
+		 * @description Update appointment
 		 */
 		put: operations['edit-appointment']
 		post?: never
@@ -454,7 +457,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		AllGroupsSuccessfulResponseDTO: {
 			groups?: components['schemas']['GroupDTO'][]
@@ -491,6 +494,11 @@ export type components = {
 			 * @example 0007BWpSzSwfiuSl0tR2
 			 */
 			contactId: string
+			/**
+			 * @description Appointment Description
+			 * @example Booking a call to discuss the project
+			 */
+			description?: string
 			/**
 			 * @description End Time
 			 * @example 2021-06-23T04:30:00+05:30
@@ -536,11 +544,15 @@ export type components = {
 			 * @description Flag to override location config
 			 *     - **false** - If only `meetingLocationId` is provided
 			 *     - **true** - If only `meetingLocationType` is provided
-			 *
 			 * @example true
 			 */
 			overrideLocationConfig?: boolean
-			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true. */
+			/**
+			 * @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true.
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z
+			 *     EXDATE:20211105T040000Z,20211105T040000Z
+			 */
 			rrule?: string
 			/**
 			 * @description Start Time
@@ -586,6 +598,11 @@ export type components = {
 			 */
 			calendarId?: string
 			/**
+			 * @description Appointment Description
+			 * @example Booking a call to discuss the project
+			 */
+			description?: string
+			/**
 			 * @description End Time
 			 * @example 2021-06-23T04:30:00+05:30
 			 */
@@ -625,11 +642,15 @@ export type components = {
 			 * @description Flag to override location config
 			 *     - **false** - If only `meetingLocationId` is provided
 			 *     - **true** - If only `meetingLocationType` is provided
-			 *
 			 * @example true
 			 */
 			overrideLocationConfig?: boolean
-			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true. */
+			/**
+			 * @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. The rrule only be applied if ignoreFreeSlotValidation is true.
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z
+			 *     EXDATE:20211105T040000Z,20211105T040000Z
+			 */
 			rrule?: string
 			/**
 			 * @description Start Time
@@ -664,6 +685,8 @@ export type components = {
 				| 'showed'
 				| 'noshow'
 				| 'invalid'
+				| 'active'
+				| 'completed'
 			/**
 			 * @description Assigned User Id
 			 * @example 0007BWpSzSwfiuSl0tR2
@@ -705,7 +728,12 @@ export type components = {
 			 * @example custom
 			 */
 			meetingLocationType: string
-			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events */
+			/**
+			 * @description RRULE as per the iCalendar (RFC 5545) specification for recurring events
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z
+			 *     EXDATE:20211105T040000Z,20211105T040000Z
+			 */
 			rrule?: string
 			/**
 			 * @description Start Time
@@ -734,14 +762,14 @@ export type components = {
 			/** @example 400 */
 			statusCode?: number
 		}
-		BlockSlotCreateSchema: {
+		BlockedSlotSuccessfulResponseDto: {
 			/**
 			 * @description Assigned User Id
-			 * @example CVokAlI8fgw4WYWoCtQz
+			 * @example 0007BWpSzSwfiuSl0tR2
 			 */
 			assignedUserId?: string
 			/**
-			 * @description Calendar Id (Block Slot can only be created on simple/event calendars)
+			 * @description Calendar id
 			 * @example CVokAlI8fgw4WYWoCtQz
 			 */
 			calendarId?: string
@@ -749,7 +777,12 @@ export type components = {
 			 * @description End Time
 			 * @example 2021-06-23T04:30:00+05:30
 			 */
-			endTime: string
+			endTime: Record<string, never>
+			/**
+			 * @description Id
+			 * @example 0TkCdp9PfvLeWKYRRvIz
+			 */
+			id: string
 			/**
 			 * @description Location Id
 			 * @example C2QujeCh8ZnC7al2InWR
@@ -759,29 +792,66 @@ export type components = {
 			 * @description Start Time
 			 * @example 2021-06-23T03:30:00+05:30
 			 */
-			startTime: string
+			startTime: Record<string, never>
+			/**
+			 * @description Title
+			 * @example My event
+			 */
+			title: string
+		}
+		BlockSlotCreateRequestDTO: {
+			/**
+			 * @description Either calendarId or assignedUserId can be set, not both.
+			 * @example CVokAlI8fgw4WYWoCtQz
+			 */
+			assignedUserId?: string
+			/**
+			 * @description Either calendarId or assignedUserId can be set, not both.
+			 * @example CVokAlI8fgw4WYWoCtQz
+			 */
+			calendarId: string
+			/**
+			 * @description End Time
+			 * @example 2021-06-23T04:30:00+05:30
+			 */
+			endTime?: string
+			/**
+			 * @description Location Id
+			 * @example C2QujeCh8ZnC7al2InWR
+			 */
+			locationId: string
+			/**
+			 * @description Start Time
+			 * @example 2021-06-23T03:30:00+05:30
+			 */
+			startTime?: string
 			/**
 			 * @description Title
 			 * @example Test Event
 			 */
 			title?: string
 		}
-		BlockSlotEditSchema: {
+		BlockSlotEditRequestDTO: {
 			/**
-			 * @description Assigned User Id
+			 * @description Either calendarId or assignedUserId can be set, not both.
 			 * @example CVokAlI8fgw4WYWoCtQz
 			 */
 			assignedUserId?: string
 			/**
-			 * @description Calendar Id
+			 * @description Either calendarId or assignedUserId can be set, not both.
 			 * @example CVokAlI8fgw4WYWoCtQz
 			 */
-			calendarId?: string
+			calendarId: string
 			/**
 			 * @description End Time
 			 * @example 2021-06-23T04:30:00+05:30
 			 */
 			endTime?: string
+			/**
+			 * @description Location Id
+			 * @example C2QujeCh8ZnC7al2InWR
+			 */
+			locationId: string
 			/**
 			 * @description Start Time
 			 * @example 2021-06-23T03:30:00+05:30
@@ -952,7 +1022,7 @@ export type components = {
 			/** @example test1 */
 			slug?: string
 			stickyContact?: boolean
-			/** @description Team members are required for calendars of type: Round Robin, Collective, Class, Service. */
+			/** @description Team members are required for calendars of type: Round Robin, Collective, Class, Service. Personal calendar must have exactly one team member. */
 			teamMembers?: components['schemas']['TeamMember'][]
 			/** @example test1 */
 			widgetSlug?: string
@@ -1129,7 +1199,7 @@ export type components = {
 			/** @example test1 */
 			slug?: string
 			stickyContact?: boolean
-			/** @description Team members are for calendars of type: Round Robin, Collective, Class, Service. */
+			/** @description Team members are for calendars of type: Round Robin, Collective, Class, Service. Personal calendar must have exactly one team member. */
 			teamMembers?: components['schemas']['TeamMemberResponse'][]
 			/** @example test1 */
 			widgetSlug?: string
@@ -1182,6 +1252,11 @@ export type components = {
 			 */
 			dateUpdated: Record<string, never>
 			/**
+			 * @description Description
+			 * @example Some dummy description
+			 */
+			description?: string
+			/**
 			 * @description End Time
 			 * @example 2023-09-25T16:00:00+05:30
 			 */
@@ -1191,7 +1266,11 @@ export type components = {
 			 * @example 9NkT25Vor1v4aQatFsv2
 			 */
 			groupId: string
-			/** @description Event Id or Instance id for a recurring event */
+			/**
+			 * @description Event Id or Instance id for a recurring event
+			 * @example ocQHyuzHvysMo5N5VsXc
+			 * @example ocQHyuzHvysMo5N5VsXc_1729821600000_1800
+			 */
 			id: string
 			/**
 			 * @description true if the event is recurring otherwise false
@@ -1213,7 +1292,12 @@ export type components = {
 			 * @example Some dummy note
 			 */
 			notes?: string
-			/** @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event. */
+			/**
+			 * @description RRULE as per the iCalendar (RFC 5545) specification for recurring events. DTSTART is not required, instance ids are calculated on the basis of startTime of the event.
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5
+			 * @example RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20210623T043000Z
+			 *     EXDATE:20211105T040000Z,20211105T040000Z
+			 */
 			rrule?: string
 			/**
 			 * @description Start Time
@@ -1259,39 +1343,52 @@ export type components = {
 		CalendarNotificationResponseDTO: {
 			/** @description Notification ID */
 			_id?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "example1@email.com",
 			 *       "example2@email.com"
-			 *     ] */
+			 *     ]
+			 */
 			additionalEmailIds?: string[]
-			/** @example [
+			/**
+			 * @example [
+			 *       "+919876744444",
+			 *       "+919876744445"
+			 *     ]
+			 */
+			additionalPhoneNumbers?: string[]
+			/**
+			 * @example [
+			 *       "+919876744444",
+			 *       "+919876744445"
+			 *     ]
+			 */
+			additionalWhatsappNumbers?: string[]
+			/**
+			 * @example [
 			 *       {
 			 *         "timeOffset": 1,
 			 *         "unit": "hours"
 			 *       }
-			 *     ] */
+			 *     ]
+			 */
 			afterTime?: components['schemas']['SchedulesDTO'][]
 			/**
-			 * @example calendar
-			 * @enum {string}
-			 */
-			altType?: 'calendar'
-			/** @example [
+			 * @example [
 			 *       {
 			 *         "timeOffset": 1,
 			 *         "unit": "hours"
 			 *       }
-			 *     ] */
+			 *     ]
+			 */
 			beforeTime?: components['schemas']['SchedulesDTO'][]
 			/** @example This is a test notification */
 			body?: string
-			/** @example 0as9d8as0d */
-			calendarId?: string
 			/**
 			 * @example email
 			 * @enum {string}
 			 */
-			channel?: 'email' | 'inApp'
+			channel?: 'email' | 'inApp' | 'sms' | 'whatsapp'
 			/** @example false */
 			deleted?: boolean
 			/** @example true */
@@ -1311,11 +1408,18 @@ export type components = {
 			 * @example contact
 			 * @enum {string}
 			 */
-			receiverType?: 'contact' | 'guest' | 'assignedUser' | 'emails'
-			/** @example [
+			receiverType?:
+				| 'contact'
+				| 'guest'
+				| 'assignedUser'
+				| 'emails'
+				| 'phoneNumbers'
+			/**
+			 * @example [
 			 *       "user1",
 			 *       "user2"
-			 *     ] */
+			 *     ]
+			 */
 			selectedUsers?: string[]
 			/** @example Test Notification */
 			subject?: string
@@ -1510,7 +1614,7 @@ export type components = {
 			/** @example test1 */
 			slug?: string
 			stickyContact?: boolean
-			/** @description Team members */
+			/** @description Team members are required for calendars of type: Round Robin, Collective, Class, Service. Personal calendar must have exactly one team member. */
 			teamMembers?: components['schemas']['TeamMember'][]
 			/** @example test1 */
 			widgetSlug?: string
@@ -1522,43 +1626,6 @@ export type components = {
 			 */
 			widgetType: 'default' | 'classic'
 		}
-		CreateBookedSlotSuccessfulResponseDto: {
-			/**
-			 * @description Assigned User Id
-			 * @example 0007BWpSzSwfiuSl0tR2
-			 */
-			assignedUserId?: string
-			/**
-			 * @description Calendar id
-			 * @example CVokAlI8fgw4WYWoCtQz
-			 */
-			calendarId?: string
-			/**
-			 * @description End Time
-			 * @example 2021-06-23T04:30:00+05:30
-			 */
-			endTime: string
-			/**
-			 * @description Id
-			 * @example 0TkCdp9PfvLeWKYRRvIz
-			 */
-			id: string
-			/**
-			 * @description Location Id
-			 * @example C2QujeCh8ZnC7al2InWR
-			 */
-			locationId: string
-			/**
-			 * @description Start Time
-			 * @example 2021-06-23T03:30:00+05:30
-			 */
-			startTime: string
-			/**
-			 * @description Title
-			 * @example My event
-			 */
-			title: string
-		}
 		CreateCalendarNotificationDTO: {
 			/**
 			 * @description Additional email addresses to receive notifications.
@@ -1568,6 +1635,14 @@ export type components = {
 			 *     ]
 			 */
 			additionalEmailIds?: string[]
+			/**
+			 * @description Additional phone numbers to receive notifications.
+			 * @example [
+			 *       "+919876744444",
+			 *       "+919876744445"
+			 *     ]
+			 */
+			additionalPhoneNumbers?: string[]
 			/**
 			 * @description Specifies the time after which the follow-up notification should be sent. This is not required for other notification types.
 			 * @example [
@@ -1594,11 +1669,13 @@ export type components = {
 			 * @description Notification channel
 			 * @enum {string}
 			 */
-			channel: 'email' | 'inApp'
+			channel: 'email' | 'inApp' | 'sms' | 'whatsapp'
 			/** @description from address for email notification */
 			fromAddress?: string
-			/** @description from name for email notification */
+			/** @description from name for email/sms notification */
 			fromName?: string
+			/** @description from number for sms notification */
+			fromNumber?: string
 			/**
 			 * @description Is the notification active
 			 * @default true
@@ -1619,7 +1696,12 @@ export type components = {
 			 * @description notification recipient type
 			 * @enum {string}
 			 */
-			receiverType: 'contact' | 'guest' | 'assignedUser' | 'emails'
+			receiverType:
+				| 'contact'
+				| 'guest'
+				| 'assignedUser'
+				| 'emails'
+				| 'phoneNumbers'
 			/** @description selected user for in-App notification */
 			selectedUsers?: string[]
 			/** @description Subject  for email notification. Not necessary for in-App notification */
@@ -1628,11 +1710,13 @@ export type components = {
 			templateId?: string
 		}
 		CreateCalendarResourceDTO: {
-			/** @description Service calendar IDs to be mapped with the resource.
+			/**
+			 * @description Service calendar IDs to be mapped with the resource.
 			 *
 			 *         One equipment can only be mapped with one service calendar.
 			 *
-			 *     One room can be mapped with multiple service calendars. */
+			 *     One room can be mapped with multiple service calendars.
+			 */
 			calendarIds: string[]
 			/** @description Capacity of the room. */
 			capacity: number
@@ -1685,9 +1769,6 @@ export type components = {
 			/** @example true */
 			hasMore?: boolean
 			notes?: components['schemas']['GetNoteSchema'][]
-		}
-		GetSlotsSuccessfulResponseDto: {
-			_dates_: components['schemas']['SlotsSchema']
 		}
 		GroupCreateDTO: {
 			/** @example group description */
@@ -1761,7 +1842,11 @@ export type components = {
 				| 'physical'
 				| 'booker'
 				| 'ms_teams_conference'
-			/** @description Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind */
+			/**
+			 * @description Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind
+			 * @example +14455550132
+			 * @example http://meet.google.com/your-meeting-location
+			 */
 			location?: string
 		}
 		LocationConfigurationResponse: {
@@ -1779,7 +1864,11 @@ export type components = {
 				| 'physical'
 				| 'booker'
 				| 'ms_teams_conference'
-			/** @description Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind */
+			/**
+			 * @description Address for meeting location. Not applicable on "zoom_conference", "google_conference" and "ms_teams_conference" kind
+			 * @example +14455550132
+			 * @example http://meet.google.com/your-meeting-location
+			 */
 			location?: string
 			/**
 			 * @description Unique ID used to select a specific meeting location
@@ -1844,14 +1933,22 @@ export type components = {
 			unit?: string
 		}
 		SlotsSchema: {
+			/**
+			 * @example [
+			 *       "2024-10-28T10:00:00-05:00",
+			 *       "2024-10-28T11:00:00-05:00"
+			 *     ]
+			 */
 			slots: string[]
 		}
 		TeamMember: {
 			/** @description Marks a user as primary. This property is required in case of collective booking calendars. Only one user can be primary. */
 			isPrimary?: boolean
-			/** @description Meeting location configuration for event calendar.
+			/**
+			 * @description Meeting location configuration for event calendar.
 			 *     - *Multiple locations are allowed only when one team member is selected.*
-			 *     - *For **Class booking** and **Collective** calendars, only one location configuration is allowed for each team member.* */
+			 *     - *For **Class booking** and **Collective** calendars, only one location configuration is allowed for each team member.*
+			 */
 			locationConfigurations?: components['schemas']['LocationConfiguration'][]
 			/**
 			 * @deprecated
@@ -1944,7 +2041,15 @@ export type components = {
 			 */
 			additionalEmailIds?: string[]
 			/**
-			 * @description Specifies the time after which the follow-up notification should be sent.
+			 * @description Additional phone numbers to receive notifications.
+			 * @example [
+			 *       "+919876744444",
+			 *       "+919876744445"
+			 *     ]
+			 */
+			additionalPhoneNumbers?: string[]
+			/**
+			 * @description Specifies the time after which the follow-up notification should be sent. This is not required for other notification types.
 			 * @example [
 			 *       {
 			 *         "timeOffset": 1,
@@ -1954,18 +2059,7 @@ export type components = {
 			 */
 			afterTime?: components['schemas']['SchedulesDTO'][]
 			/**
-			 * @description Specifies the ID of the model associated with the notification. This can be extended to support additional models in the future.
-			 * @example D7JP6b67AgWqTtfGaQcw
-			 */
-			altId?: string
-			/**
-			 * @description Specifies the model associated with the notification. This can be extended to support additional models in the future. For now only Calendars is supported
-			 * @default calendar
-			 * @enum {string}
-			 */
-			altType: 'calendar'
-			/**
-			 * @description Specifies the time before which the reminder notification should be sent.
+			 * @description Specifies the time before which the reminder notification should be sent. This is not required for other notification types.
 			 * @example [
 			 *       {
 			 *         "timeOffset": 1,
@@ -1980,7 +2074,7 @@ export type components = {
 			 * @description Notification channel
 			 * @enum {string}
 			 */
-			channel?: 'email' | 'inApp'
+			channel?: 'email' | 'inApp' | 'sms' | 'whatsapp'
 			/**
 			 * @description Marks the notification as deleted (soft delete)
 			 * @default false
@@ -1988,8 +2082,10 @@ export type components = {
 			deleted: boolean
 			/** @description From address for email notification */
 			fromAddress?: string
-			/** @description From name for email notification */
+			/** @description From name for email/sms notification */
 			fromName?: string
+			/** @description from number for sms notification */
+			fromNumber?: string
 			/**
 			 * @description Is the notification active
 			 * @default true
@@ -2010,18 +2106,27 @@ export type components = {
 			 * @description Notification recipient type
 			 * @enum {string}
 			 */
-			receiverType?: 'contact' | 'guest' | 'assignedUser' | 'emails'
+			receiverType?:
+				| 'contact'
+				| 'guest'
+				| 'assignedUser'
+				| 'emails'
+				| 'phoneNumbers'
+			/** @description selected user for in-App notification */
+			selectedUsers?: string[]
 			/** @description Subject  for email notification. Not necessary for in-App notification */
 			subject?: string
 			/** @description Template ID for email notification */
 			templateId?: string
 		}
 		UpdateCalendarResourceDTO: {
-			/** @description Service calendar IDs to be mapped with the resource.
+			/**
+			 * @description Service calendar IDs to be mapped with the resource.
 			 *
 			 *         One equipment can only be mapped with one service calendar.
 			 *
-			 *     One room can be mapped with multiple service calendars. */
+			 *     One room can be mapped with multiple service calendars.
+			 */
 			calendarIds?: string[]
 			/** @description Capacity of the room. */
 			capacity?: number
@@ -2061,25 +2166,14 @@ export interface operations {
 	'get-calendars': {
 		parameters: {
 			query: {
-				/**
-				 * @description Group Id
-				 * @example BqTwX8QFwXzpegMve9EQ
-				 */
+				/** @description Group Id */
 				groupId?: string
-				/**
-				 * @description Location Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
+				/** @description Location Id */
 				locationId: string
-				/**
-				 * @description Show drafted
-				 * @example false
-				 */
+				/** @description Show drafted */
 				showDrafted?: boolean
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2121,8 +2215,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2168,16 +2260,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Calendar Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Calendar Id */
 				calendarId: string
 			}
 			cookie?: never
@@ -2217,16 +2304,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Calendar Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Calendar Id */
 				calendarId: string
 			}
 			cookie?: never
@@ -2270,16 +2352,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Calendar Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Calendar Id */
 				calendarId: string
 			}
 			cookie?: never
@@ -2318,61 +2395,38 @@ export interface operations {
 	'get-slots': {
 		parameters: {
 			query: {
-				/**
-				 * @description Apply Look Busy
-				 * @example false
-				 */
-				enableLookBusy?: boolean
-				/**
-				 * @description End Date (**⚠️ Important:** Date range cannot be more than 31 days)
-				 * @example 1601490599999
-				 */
+				/** @description End Date (**⚠️ Important:** Date range cannot be more than 31 days) */
 				endDate: number
-				/**
-				 * @description Start Date (**⚠️ Important:** Date range cannot be more than 31 days)
-				 * @example 1548898600000
-				 */
+				/** @description Start Date (**⚠️ Important:** Date range cannot be more than 31 days) */
 				startDate: number
-				/**
-				 * @description The timezone in which the free slots are returned
-				 * @example America/Chihuahua
-				 */
+				/** @description The timezone in which the free slots are returned */
 				timezone?: string
-				/**
-				 * @description The user for whom the free slots are returned
-				 * @example 082goXVW3lIExEQPOnd3
-				 */
+				/** @description The user for whom the free slots are returned */
 				userId?: string
-				/**
-				 * @description The users for whom the free slots are returned
-				 * @example [082goXVW3lIExEQPOnd3]
-				 */
+				/** @description The users for whom the free slots are returned */
 				userIds?: string[]
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Calendar Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Calendar Id */
 				calendarId: string
 			}
 			cookie?: never
 		}
 		requestBody?: never
 		responses: {
-			/** @description Successful response */
+			/** @description Availability map keyed by date (YYYY-MM-DD) */
 			200: {
 				headers: {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['GetSlotsSuccessfulResponseDto']
+					'application/json': {
+						[key: string]: components['schemas']['SlotsSchema']
+					}
 				}
 			}
 			/** @description Bad Request */
@@ -2398,10 +2452,6 @@ export interface operations {
 	'get-event-notification': {
 		parameters: {
 			query?: {
-				/** @description Specifies the ID of the model associated with the notification. This can be extended to support additional models in the future. */
-				altId?: string
-				/** @description Specifies the model associated with the notification. This can be extended to support additional models in the future. For now only Calendars is supported */
-				altType?: 'calendar'
 				deleted?: boolean
 				isActive?: boolean
 				/** @description Number of records to return */
@@ -2410,8 +2460,6 @@ export interface operations {
 				skip?: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2455,8 +2503,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2504,8 +2550,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2550,8 +2594,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2600,8 +2642,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2645,20 +2685,12 @@ export interface operations {
 	'get-appointment-notes': {
 		parameters: {
 			query: {
-				/**
-				 * @description Limit of notes to fetch
-				 * @example 10
-				 */
+				/** @description Limit of notes to fetch */
 				limit: number
-				/**
-				 * @description Offset of notes to fetch
-				 * @example 0
-				 */
+				/** @description Offset of notes to fetch */
 				offset: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2703,8 +2735,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2753,8 +2783,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2803,8 +2831,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2848,37 +2874,20 @@ export interface operations {
 	'get-blocked-slots': {
 		parameters: {
 			query: {
-				/**
-				 * @description Either of calendarId, userId or groupId is required
-				 * @example BqTwX8QFwXzpegMve9EQ
-				 */
+				/** @description Either of calendarId, userId or groupId is required */
 				calendarId?: string
 				/** @description End Time (in millis) */
 				endTime: string
-				/**
-				 * @description Either of groupId, calendarId or userId is required
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Either of groupId, calendarId or userId is required */
 				groupId?: string
-				/**
-				 * @description Location Id
-				 * @example 0007BWpSzSwfiuSl0tR2
-				 */
+				/** @description Location Id */
 				locationId: string
-				/**
-				 * @description Start Time (in millis)
-				 * @example 1680373800000
-				 */
+				/** @description Start Time (in millis) */
 				startTime: string
-				/**
-				 * @description User Id - Owner of an appointment. Either of userId, groupId or calendarId is required
-				 * @example CVokAlI8fgw4WYWoCtQz
-				 */
+				/** @description User Id - Owner of an appointment. Either of userId, groupId or calendarId is required */
 				userId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2919,40 +2928,20 @@ export interface operations {
 	'get-calendar-events': {
 		parameters: {
 			query: {
-				/**
-				 * @description Either of calendarId, userId or groupId is required
-				 * @example BqTwX8QFwXzpegMve9EQ
-				 */
+				/** @description Either of calendarId, userId or groupId is required */
 				calendarId?: string
-				/**
-				 * @description End Time (in millis)
-				 * @example 1680978599999
-				 */
+				/** @description End Time (in millis) */
 				endTime: string
-				/**
-				 * @description Either of groupId, calendarId or userId is required
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Either of groupId, calendarId or userId is required */
 				groupId?: string
-				/**
-				 * @description Location Id
-				 * @example 0007BWpSzSwfiuSl0tR2
-				 */
+				/** @description Location Id */
 				locationId: string
-				/**
-				 * @description Start Time (in millis)
-				 * @example 1680373800000
-				 */
+				/** @description Start Time (in millis) */
 				startTime: string
-				/**
-				 * @description User Id - Owner of an appointment. Either of userId, groupId or calendarId is required
-				 * @example CVokAlI8fgw4WYWoCtQz
-				 */
+				/** @description User Id - Owner of an appointment. Either of userId, groupId or calendarId is required */
 				userId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2994,8 +2983,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3044,8 +3031,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3059,7 +3044,7 @@ export interface operations {
 		}
 		responses: {
 			/** @description Successful response */
-			201: {
+			200: {
 				headers: {
 					[name: string]: unknown
 				}
@@ -3091,8 +3076,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3137,8 +3120,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3187,8 +3168,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3197,7 +3176,7 @@ export interface operations {
 		}
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['BlockSlotCreateSchema']
+				'application/json': components['schemas']['BlockSlotCreateRequestDTO']
 			}
 		}
 		responses: {
@@ -3207,7 +3186,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['CreateBookedSlotSuccessfulResponseDto']
+					'application/json': components['schemas']['BlockedSlotSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -3234,23 +3213,18 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Event Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Event Id or Instance id. For recurring appointments send masterEventId to modify original series. */
 				eventId: string
 			}
 			cookie?: never
 		}
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['BlockSlotEditSchema']
+				'application/json': components['schemas']['BlockSlotEditRequestDTO']
 			}
 		}
 		responses: {
@@ -3260,7 +3234,7 @@ export interface operations {
 					[name: string]: unknown
 				}
 				content: {
-					'application/json': components['schemas']['CreateBookedSlotSuccessfulResponseDto']
+					'application/json': components['schemas']['BlockedSlotSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */
@@ -3286,15 +3260,10 @@ export interface operations {
 	'get-groups': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location Id
-				 * @example ve9EPM428h8vShlRW1KT
-				 */
+				/** @description Location Id */
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3336,8 +3305,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3383,16 +3350,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Group Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Group Id */
 				groupId: string
 			}
 			cookie?: never
@@ -3436,16 +3398,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Group Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Group Id */
 				groupId: string
 			}
 			cookie?: never
@@ -3485,16 +3442,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
 			path: {
-				/**
-				 * @description Group Id
-				 * @example ocQHyuzHvysMo5N5VsXc
-				 */
+				/** @description Group Id */
 				groupId: string
 			}
 			cookie?: never
@@ -3538,8 +3490,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3589,8 +3539,6 @@ export interface operations {
 				skip: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3635,8 +3583,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3685,8 +3631,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3733,8 +3677,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -3785,8 +3727,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}

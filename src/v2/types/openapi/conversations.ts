@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/conversations/': {
 		parameters: {
 			query?: never
@@ -298,7 +298,7 @@ export type paths = {
 		put?: never
 		/**
 		 * Upload file attachments
-		 * @description Post the necessary fields for the API to upload files. The files need to be a buffer with the key "fileAttachment". <br /><br /> The allowed file types are: <br> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li><li>MP3</li><li>WAV</li></ul> <br /><br /> The API will return an object with the URLs
+		 * @description Post the necessary fields for the API to upload files. The files need to be a buffer with the key "fileAttachment". <br /><br /> The allowed file types are: <br/> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li><li>MP3</li><li>WAV</li></ul> <br /><br /> The API will return an object with the URLs
 		 */
 		post: operations['upload-file-attachments']
 		delete?: never
@@ -349,7 +349,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -514,6 +514,7 @@ export type components = {
 				| 'TYPE_INSTAGRAM_COMMENT'
 				| 'TYPE_CUSTOM_CALL'
 				| 'TYPE_INTERNAL_COMMENT'
+				| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
 			/**
 			 * @description Location ID as string
 			 * @example tDtDnQdgm2LXpyiqYvZ6
@@ -607,6 +608,7 @@ export type components = {
 				| 'TYPE_INSTAGRAM_COMMENT'
 				| 'TYPE_CUSTOM_CALL'
 				| 'TYPE_INTERNAL_COMMENT'
+				| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
 			/**
 			 * @description Location Id
 			 * @example ABCHkzuJQ8ZMd4Te84GK
@@ -681,6 +683,14 @@ export type components = {
 			 * @example saas
 			 */
 			type: string
+		}
+		ForbiddenDTO: {
+			/** @example Forbidden */
+			error?: string
+			/** @example You do not have permission to access this resource */
+			message?: string
+			/** @example 403 */
+			statusCode?: number
 		}
 		GetConversationByIdResponse: {
 			/**
@@ -770,6 +780,12 @@ export type components = {
 			id: string
 			/** @example ve9EPM428h8vShlRW1KT */
 			locationId: string
+			/**
+			 * @example Leadconnector Gmail
+			 * @example mailgun
+			 * @example smtp
+			 * @example custom
+			 */
 			provider?: string
 			/** @description In case of reply, email message Id of the reply to email */
 			replyToMessageId?: string
@@ -800,10 +816,20 @@ export type components = {
 			to: string[]
 		}
 		GetMessageResponseDto: {
+			/**
+			 * @description Alternative identifier for the message
+			 * @example msg_123456789
+			 */
+			altId?: string
 			/** @description An array of attachment URLs. Attachments will be empty for Call and Voicemails, type 1 and 10. Please use get call recording API to fetch call recording and voicemails. */
 			attachments?: string[]
 			/** @example Hi there */
 			body?: string
+			/**
+			 * @description Chat Widget Id
+			 * @example 67b0cc8cf14b19d85ace7s35
+			 */
+			chatWidgetId?: string
 			/** @example ve9EPM428h8vShlRW1KT */
 			contactId: string
 			/** @example text/plain */
@@ -864,6 +890,7 @@ export type components = {
 				| 'TYPE_INSTAGRAM_COMMENT'
 				| 'TYPE_CUSTOM_CALL'
 				| 'TYPE_INTERNAL_COMMENT'
+				| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
 			meta?: components['schemas']['MessageMeta']
 			/**
 			 * @description Message source
@@ -892,18 +919,20 @@ export type components = {
 			userId?: string
 		}
 		GetMessagesByConversationResponseDto: {
-			/**
-			 * @description Id of the last message in the messages array
-			 * @example p1mRSHeLDhAms5q0LMr4
-			 */
-			lastMessageId: string
-			/** @description Array of messages */
-			messages: components['schemas']['GetMessageResponseDto'][]
-			/**
-			 * @description Next page value true indicates only 20 message is in the response. Rest of the messages are in the next page. Please use the lastMessageId value in the query to get the next page messages
-			 * @example true
-			 */
-			nextPage: boolean
+			messages: {
+				/**
+				 * @description Id of the last message in the messages array
+				 * @example p1mRSHeLDhAms5q0LMr4
+				 */
+				lastMessageId: string
+				/** @description Array of messages */
+				messages: components['schemas']['GetMessageResponseDto'][]
+				/**
+				 * @description Next page value true indicates only 20 message is in the response. Rest of the messages are in the next page. Please use the lastMessageId value in the query to get the next page messages
+				 * @example true
+				 */
+				nextPage: boolean
+			}
 		}
 		GetMessageTranscriptionResponseDto: {
 			/**
@@ -1271,9 +1300,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -1373,8 +1404,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1420,8 +1449,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1466,8 +1493,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1516,8 +1541,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1581,10 +1604,9 @@ export interface operations {
 					| 'TYPE_ACTIVITY_OPPORTUNITY'
 					| 'TYPE_LIVE_CHAT'
 					| 'TYPE_INTERNAL_COMMENTS'
+					| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1629,8 +1651,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1677,8 +1697,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1701,9 +1719,7 @@ export interface operations {
 					'Content-Type'?: unknown
 					[name: string]: unknown
 				}
-				content: {
-					'application/json': components['schemas']
-				}
+				content?: never
 			}
 			/** @description Bad Request */
 			400: {
@@ -1729,8 +1745,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1776,8 +1790,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1819,8 +1831,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1869,8 +1879,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1915,8 +1923,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -1959,15 +1965,21 @@ export interface operations {
 					'application/json': components['schemas']['UnauthorizedDTO']
 				}
 			}
+			/** @description Forbidden */
+			403: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ForbiddenDTO']
+				}
+			}
 		}
 	}
 	'cancel-scheduled-email-message': {
 		parameters: {
 			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-			}
+			header?: never
 			path: {
 				/** @description Email Message Id */
 				emailMessageId: string
@@ -1990,10 +2002,7 @@ export interface operations {
 	'get-email-by-id': {
 		parameters: {
 			query?: never
-			header: {
-				/** @description Access Token */
-				Authorization: string
-			}
+			header?: never
 			path?: never
 			cookie?: never
 		}
@@ -2014,8 +2023,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2061,8 +2068,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2108,8 +2113,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2173,8 +2176,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}
@@ -2277,6 +2278,7 @@ export interface operations {
 					| 'TYPE_INSTAGRAM_COMMENT'
 					| 'TYPE_CUSTOM_CALL'
 					| 'TYPE_INTERNAL_COMMENT'
+					| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
 				/** @description Limit of conversations - Default is 20 */
 				limit?: number
 				/** @description Location Id */
@@ -2302,12 +2304,10 @@ export interface operations {
 				sortScoreProfile?: string
 				/** @description Search to begin after the specified date - should contain the sort value of the last document */
 				startAfterDate?: Record<string, never>
-				/** @description The status of the conversation to be filtered - all, read, unread, starred  */
+				/** @description The status of the conversation to be filtered - all, read, unread, starred */
 				status?: 'all' | 'read' | 'unread' | 'starred' | 'recents'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-04-15'
 			}

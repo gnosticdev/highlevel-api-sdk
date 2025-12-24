@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/products/': {
 		parameters: {
 			query?: never
@@ -123,6 +123,26 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/products/bulk-update/edit': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Bulk Edit Products and Prices
+		 * @description API to bulk edit products and their associated prices (max 30 entities)
+		 */
+		post: operations['bulkEdit']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/products/collections': {
 		parameters: {
 			query?: never
@@ -158,7 +178,7 @@ export type paths = {
 		 * Get Details about individual product collection
 		 * @description Get Details about individual product collection
 		 */
-		get: operations['get-product-collection_get']
+		get: operations['get-product-collection-id']
 		/**
 		 * Update Product Collection
 		 * @description Update a specific product collection with Id :collectionId
@@ -303,6 +323,26 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/products/store/{storeId}/priority': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Update product display priorities in store
+		 * @description API to set the display priority of products in a store
+		 */
+		post: operations['update-display-priority']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/products/store/{storeId}/stats': {
 		parameters: {
 			query?: never
@@ -325,13 +365,177 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		BadRequestDTO: {
 			/** @example Bad Request */
 			message?: string
 			/** @example 400 */
 			statusCode?: number
+		}
+		BulkEditPriceDto: {
+			/**
+			 * @description Price ID
+			 * @example 64a1b2c3d4e5f67890123456
+			 */
+			_id: string
+			/**
+			 * @description Allow out of stock purchases
+			 * @example false
+			 */
+			allowOutOfStockPurchases?: boolean
+			/**
+			 * @description Price amount
+			 * @example 99.99
+			 */
+			amount?: number
+			/**
+			 * @description Available quantity
+			 * @example 100
+			 */
+			availableQuantity?: number
+			/**
+			 * @description Compare at price
+			 * @example 129.99
+			 */
+			compareAtPrice?: number
+			/**
+			 * @description Price currency
+			 * @example USD
+			 */
+			currency?: string
+			/**
+			 * @description Price name
+			 * @example Standard Plan
+			 */
+			name?: string
+			/** @description Recurring details */
+			recurring?: components['schemas']['RecurringDto']
+			/**
+			 * @description Setup fee
+			 * @example 25
+			 */
+			setupFee?: number
+			/** @description Shipping options */
+			shippingOptions?: components['schemas']['ShippingOptionsDto']
+			/**
+			 * @description SKU
+			 * @example SKU-001
+			 */
+			sku?: string
+			/**
+			 * @description Total billing cycles
+			 * @example 12
+			 */
+			totalCycles?: number
+			/**
+			 * @description Track inventory
+			 * @example true
+			 */
+			trackInventory?: boolean
+			/**
+			 * @description Trial period in days
+			 * @example 7
+			 */
+			trialPeriod?: number
+		}
+		BulkEditProductDto: {
+			/**
+			 * @description Product ID
+			 * @example 64a1b2c3d4e5f67890123456
+			 */
+			_id: string
+			/**
+			 * @description Automatic tax category ID
+			 * @example 64a1b2c3d4e5f67890123460
+			 */
+			automaticTaxCategoryId?: string
+			/**
+			 * @description Product availability in store
+			 * @example true
+			 */
+			availableInStore?: boolean
+			/**
+			 * @description Collection IDs
+			 * @example [
+			 *       "64a1b2c3d4e5f67890123458",
+			 *       "64a1b2c3d4e5f67890123459"
+			 *     ]
+			 */
+			collectionIds?: string[]
+			/**
+			 * @description Product description
+			 * @example A high-quality premium product with excellent features and durability
+			 */
+			description?: string
+			/**
+			 * @description Product image
+			 * @example https://example.com/product-image.jpg
+			 */
+			image?: string
+			/**
+			 * @description Enable product label
+			 * @example true
+			 */
+			isLabelEnabled?: boolean
+			/**
+			 * @description Enable taxes
+			 * @example true
+			 */
+			isTaxesEnabled?: boolean
+			/** @description Product label */
+			label?: Record<string, never>
+			/** @description Product media */
+			medias?: Record<string, never>[]
+			/**
+			 * @description Product name
+			 * @example Premium Product
+			 */
+			name?: string
+			/** @description Array of price variants for the product */
+			prices?: components['schemas']['BulkEditPriceDto'][]
+			/** @description SEO metadata for the product */
+			seo?: components['schemas']['ProductSEODto']
+			/**
+			 * @description Product URL slug
+			 * @example premium-product
+			 */
+			slug?: string
+			/** @description Product taxes */
+			taxes?: Record<string, never>[]
+			/**
+			 * @description Tax inclusive pricing
+			 * @example false
+			 */
+			taxInclusive?: boolean
+		}
+		BulkEditRequestDto: {
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/** @description Array of products to update. Note: The total count includes all prices within each product. */
+			products: components['schemas']['BulkEditProductDto'][]
+		}
+		BulkEditResponseDto: {
+			/**
+			 * @description Success message
+			 * @example Products updated successfully
+			 */
+			message: string
+			/**
+			 * @description Operation status
+			 * @example true
+			 */
+			status: boolean
+			/**
+			 * @description Number of products updated
+			 * @example 5
+			 */
+			updatedCount: number
 		}
 		BulkUpdateDto: {
 			/**
@@ -762,6 +966,12 @@ export type components = {
 			 *     ]
 			 */
 			taxes?: string[]
+			/**
+			 * @description Whether the taxes should be included in the purchase price
+			 * @default false
+			 * @example true
+			 */
+			taxInclusive: boolean
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
 		}
@@ -806,12 +1016,6 @@ export type components = {
 			 */
 			image?: string
 			/**
-			 * @description A boolean representing whether a product label is enabled or not
-			 * @default false
-			 * @example true
-			 */
-			isLabelEnabled: boolean
-			/**
 			 * @description The field indicates whether taxes are enabled for the product or not.
 			 * @default false
 			 * @example true
@@ -824,8 +1028,6 @@ export type components = {
 			 * @example 3SwdhCsvxI8Au3KsPJt6
 			 */
 			locationId: string
-			/** @description An array of medias for the product. */
-			medias?: components['schemas']['ProductMediaDto'][]
 			/**
 			 * @description The name of the product.
 			 * @example Awesome Product
@@ -836,8 +1038,6 @@ export type components = {
 			 * @example PHYSICAL
 			 */
 			productType: string
-			/** @description The SEO information for the product requested */
-			seo?: components['schemas']['ProductSEODto']
 			/**
 			 * @description The slug of the product by which the product will be navigated
 			 * @example washing-machine
@@ -861,11 +1061,6 @@ export type components = {
 			 * @example 2024-01-23T09:57:04.846Z
 			 */
 			updatedAt: string
-			/**
-			 * @description The unique identifier for the user who created the product.
-			 * @example 6YAtzfzpmHAdj0e8GkKp
-			 */
-			userId?: string
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
 		}
@@ -1006,12 +1201,6 @@ export type components = {
 			 */
 			image?: string
 			/**
-			 * @description A boolean representing whether a product label is enabled or not
-			 * @default false
-			 * @example true
-			 */
-			isLabelEnabled: boolean
-			/**
 			 * @description The field indicates whether taxes are enabled for the product or not.
 			 * @default false
 			 * @example true
@@ -1024,8 +1213,6 @@ export type components = {
 			 * @example 3SwdhCsvxI8Au3KsPJt6
 			 */
 			locationId: string
-			/** @description An array of medias for the product. */
-			medias?: components['schemas']['ProductMediaDto'][]
 			/**
 			 * @description The name of the product.
 			 * @example Awesome Product
@@ -1036,8 +1223,6 @@ export type components = {
 			 * @example PHYSICAL
 			 */
 			productType: string
-			/** @description The SEO information for the product requested */
-			seo?: components['schemas']['ProductSEODto']
 			/**
 			 * @description The slug of the product by which the product will be navigated
 			 * @example washing-machine
@@ -1061,11 +1246,6 @@ export type components = {
 			 * @example 2024-01-23T09:57:04.846Z
 			 */
 			updatedAt: string
-			/**
-			 * @description The unique identifier for the user who created the product.
-			 * @example 6YAtzfzpmHAdj0e8GkKp
-			 */
-			userId?: string
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
 		}
@@ -1246,12 +1426,6 @@ export type components = {
 			 */
 			image?: string
 			/**
-			 * @description A boolean representing whether a product label is enabled or not
-			 * @default false
-			 * @example true
-			 */
-			isLabelEnabled: boolean
-			/**
 			 * @description The field indicates whether taxes are enabled for the product or not.
 			 * @default false
 			 * @example true
@@ -1264,8 +1438,6 @@ export type components = {
 			 * @example 3SwdhCsvxI8Au3KsPJt6
 			 */
 			locationId: string
-			/** @description An array of medias for the product. */
-			medias?: components['schemas']['ProductMediaDto'][]
 			/**
 			 * @description The name of the product.
 			 * @example Awesome Product
@@ -1276,8 +1448,6 @@ export type components = {
 			 * @example PHYSICAL
 			 */
 			productType: string
-			/** @description The SEO information for the product requested */
-			seo?: components['schemas']['ProductSEODto']
 			/**
 			 * @description The slug of the product by which the product will be navigated
 			 * @example washing-machine
@@ -1301,11 +1471,6 @@ export type components = {
 			 * @example 2024-01-23T09:57:04.846Z
 			 */
 			updatedAt: string
-			/**
-			 * @description The unique identifier for the user who created the product.
-			 * @example 6YAtzfzpmHAdj0e8GkKp
-			 */
-			userId?: string
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
 		}
@@ -1459,6 +1624,7 @@ export type components = {
 				| 'membership'
 				| 'communities'
 				| 'gokollab'
+				| 'calendar'
 			/**
 			 * @description The source of the price.
 			 * @example stripe
@@ -1566,13 +1732,13 @@ export type components = {
 		}
 		ProductSEODto: {
 			/**
-			 * @description SEO Description for the product which will be displayed in the preview
-			 * @example New iPhone with all new features
+			 * @description SEO description
+			 * @example This is the best product you can buy online with amazing features and great value
 			 */
 			description?: string
 			/**
-			 * @description SEO title of the product which will be displayed in the preview
-			 * @example Apple iPhone 14
+			 * @description SEO title
+			 * @example Best Product - Buy Now
 			 */
 			title?: string
 		}
@@ -1632,12 +1798,25 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
+		}
+		UpdateDisplayPriorityBodyDto: {
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
+			/** @description Array of products with their display priorities */
+			products: unknown[][]
 		}
 		UpdateInventoryDto: {
 			/**
@@ -1961,6 +2140,8 @@ export type components = {
 			 * @example Awesome Product
 			 */
 			name: string
+			/** @description The prices of the product */
+			prices?: string[]
 			/** @enum {string} */
 			productType: 'DIGITAL' | 'PHYSICAL' | 'SERVICE' | 'PHYSICAL/DIGITAL'
 			/** @description SEO data for the product that will be displayed in the preview */
@@ -1982,6 +2163,12 @@ export type components = {
 			 *     ]
 			 */
 			taxes?: string[]
+			/**
+			 * @description Whether the taxes should be included in the purchase price
+			 * @default false
+			 * @example true
+			 */
+			taxInclusive: boolean
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
 		}
@@ -2026,12 +2213,6 @@ export type components = {
 			 */
 			image?: string
 			/**
-			 * @description A boolean representing whether a product label is enabled or not
-			 * @default false
-			 * @example true
-			 */
-			isLabelEnabled: boolean
-			/**
 			 * @description The field indicates whether taxes are enabled for the product or not.
 			 * @default false
 			 * @example true
@@ -2044,8 +2225,6 @@ export type components = {
 			 * @example 3SwdhCsvxI8Au3KsPJt6
 			 */
 			locationId: string
-			/** @description An array of medias for the product. */
-			medias?: components['schemas']['ProductMediaDto'][]
 			/**
 			 * @description The name of the product.
 			 * @example Awesome Product
@@ -2056,8 +2235,6 @@ export type components = {
 			 * @example PHYSICAL
 			 */
 			productType: string
-			/** @description The SEO information for the product requested */
-			seo?: components['schemas']['ProductSEODto']
 			/**
 			 * @description The slug of the product by which the product will be navigated
 			 * @example washing-machine
@@ -2081,11 +2258,6 @@ export type components = {
 			 * @example 2024-01-23T09:57:04.846Z
 			 */
 			updatedAt: string
-			/**
-			 * @description The unique identifier for the user who created the product.
-			 * @example 6YAtzfzpmHAdj0e8GkKp
-			 */
-			userId?: string
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
 		}
@@ -2177,6 +2349,13 @@ export type components = {
 			 * @enum {string}
 			 */
 			action: 'include' | 'exclude'
+			/**
+			 * @description Location Id or Agency Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId: string
+			/** @enum {string} */
+			altType: 'location'
 			/**
 			 * @description Array of product IDs
 			 * @example [
@@ -2271,8 +2450,6 @@ export interface operations {
 				storeId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2323,8 +2500,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2380,10 +2555,10 @@ export interface operations {
 			query: {
 				/** @description location Id */
 				locationId: string
+				/** @description Parameter which will decide whether to show the wishlisting status of products */
+				sendWishlistStatus?: boolean
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2437,8 +2612,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2497,10 +2670,10 @@ export interface operations {
 			query: {
 				/** @description location Id */
 				locationId: string
+				/** @description Parameter which will decide whether to show the wishlisting status of products */
+				sendWishlistStatus?: boolean
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2563,8 +2736,6 @@ export interface operations {
 				offset?: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2618,8 +2789,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2680,8 +2849,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2737,8 +2904,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2801,8 +2966,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2858,8 +3021,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2910,6 +3071,60 @@ export interface operations {
 			}
 		}
 	}
+	bulkEdit: {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['BulkEditRequestDto']
+			}
+		}
+		responses: {
+			/** @description Products and prices updated successfully */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BulkEditResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'get-product-collection': {
 		parameters: {
 			query: {
@@ -2927,8 +3142,6 @@ export interface operations {
 				offset?: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2979,8 +3192,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3031,12 +3242,13 @@ export interface operations {
 			}
 		}
 	}
-	'get-product-collection_get': {
+	'get-product-collection-id': {
 		parameters: {
-			query?: never
+			query: {
+				/** @description Location Id */
+				altId: string
+			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3090,8 +3302,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3154,8 +3364,6 @@ export interface operations {
 				altType: 'location'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3219,8 +3427,6 @@ export interface operations {
 				search?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3271,8 +3477,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3337,7 +3541,7 @@ export interface operations {
 				offset?: number
 				/** @description Comma-separated list of product IDs */
 				productId?: string
-				/** @description Key to filter the ratings  */
+				/** @description Key to filter the ratings */
 				rating?: number
 				/** @description The field upon which the sort should be applied */
 				sortField?: 'createdAt' | 'rating'
@@ -3349,8 +3553,6 @@ export interface operations {
 				storeId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3401,8 +3603,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3466,8 +3666,6 @@ export interface operations {
 				productId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3521,8 +3719,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3583,7 +3779,7 @@ export interface operations {
 				endDate?: string
 				/** @description Comma-separated list of product IDs */
 				productId?: string
-				/** @description Key to filter the ratings  */
+				/** @description Key to filter the ratings */
 				rating?: number
 				/** @description The start date for filtering reviews */
 				startDate?: string
@@ -3591,8 +3787,6 @@ export interface operations {
 				storeId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3643,8 +3837,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3698,6 +3890,52 @@ export interface operations {
 			}
 		}
 	}
+	'update-display-priority': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/** @description Products related to the store */
+				storeId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateDisplayPriorityBodyDto']
+			}
+		}
+		responses: {
+			/** @description Successfully updated display priorities */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
 	'get-product-store-stats': {
 		parameters: {
 			query: {
@@ -3710,8 +3948,6 @@ export interface operations {
 				search?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}

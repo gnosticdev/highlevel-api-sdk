@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/social-media-posting/{locationId}/accounts': {
 		parameters: {
 			query?: never
@@ -760,9 +760,29 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/social-media-posting/statistics': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Get Social Media Statistics
+		 * @description Retrieve analytics data for multiple social media accounts. Provides metrics for the last 7 days with comparison to the previous 7 days. Supports filtering by platforms and specific connected accounts.
+		 */
+		post: operations['get-social-media-statistics']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		AccountsListResponseDTO: {
 			/**
@@ -894,8 +914,8 @@ export type components = {
 			/**
 			 * @description Message and deleted count
 			 * @example {
-			 *       "deletedCount": 10,
-			 *       "message": "Posts deleted successfully"
+			 *       "message": "Posts deleted successfully",
+			 *       "deletedCount": 10
 			 *     }
 			 */
 			results: unknown
@@ -964,7 +984,7 @@ export type components = {
 			 *       "aF3KhyL8JIuBwzK3m7Ly_iVrVJ2uoXNF0wzcBzgl5_12554616564525983496"
 			 *     ]
 			 */
-			accountIds?: string[]
+			accountIds: string[]
 			/**
 			 * @description Category Id
 			 * @example 65f151c99bc2bf3aaf970d72
@@ -979,8 +999,10 @@ export type components = {
 			followUpComment?: string
 			/** @description GMB Post Details */
 			gmbPostDetails?: components['schemas']['GMBPostSchema']
-			/** @description Post Media Data
-			 *      The limitations of media as per the platforms is provided through the reference link in API description */
+			/**
+			 * @description Post Media Data
+			 *      The limitations of media as per the platforms is provided through the reference link in API description
+			 */
 			media?: components['schemas']['PostMediaSchema'][]
 			/** @description Og Tags Meta Data */
 			ogTagsDetails?: components['schemas']['OgTagsSchema']
@@ -1022,7 +1044,7 @@ export type components = {
 			 * @description User ID
 			 * @example sdfdsfdsfEWEsdfsdsW32dd
 			 */
-			userId?: string
+			userId: string
 		}
 		CreatePostSuccessfulResponseDTO: {
 			/**
@@ -1458,10 +1480,12 @@ export type components = {
 			id?: string
 			/** @example false */
 			isExpired?: boolean
-			/** @example {
-			 *       "canDelete": true,
-			 *       "hasGoogleUpdated": true
-			 *     } */
+			/**
+			 * @example {
+			 *       "hasGoogleUpdated": true,
+			 *       "canDelete": true
+			 *     }
+			 */
 			meta?: Record<string, never>
 			/** @example Sample Account */
 			name?: string
@@ -1660,9 +1684,11 @@ export type components = {
 			location?: components['schemas']['GoogleLocationSchema']
 		}
 		GetGroupSchema: {
-			/** @example [
+			/**
+			 * @example [
 			 *       "6494063f4260855c1c5776b5_mhoUgTPkz19vjF5Qu7Av_2774080328752823730"
-			 *     ] */
+			 *     ]
+			 */
 			accountIds: string[]
 			/**
 			 * @description Group Id
@@ -1762,8 +1788,10 @@ export type components = {
 			 * @example ve9EPM428h8vShlRW1KT
 			 */
 			locationId: string
-			/** @description Post Media Data
-			 *      The limitations of media as per the platforms is provided through the reference link in API description */
+			/**
+			 * @description Post Media Data
+			 *      The limitations of media as per the platforms is provided through the reference link in API description
+			 */
 			media?: components['schemas']['PostMediaSchema'][]
 			/** @description Og Tags Meta Data */
 			ogTagsDetails?: components['schemas']['OgTagsSchema']
@@ -2258,8 +2286,10 @@ export type components = {
 			followUpComment?: string
 			/** @description GMB Post Details */
 			gmbPostDetails?: components['schemas']['GMBPostSchema']
-			/** @description Post Media Data
-			 *      The limitations of media as per the platforms is provided through the reference link in API description */
+			/**
+			 * @description Post Media Data
+			 *      The limitations of media as per the platforms is provided through the reference link in API description
+			 */
 			media?: components['schemas']['PostMediaSchema'][]
 			/** @description Og Tags Meta Data */
 			ogTagsDetails?: components['schemas']['OgTagsSchema']
@@ -2487,34 +2517,36 @@ export type components = {
 			deleted?: boolean
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
-			/** @example {
-			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "isVerified": "true",
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name"
-			 *       },
+			/**
+			 * @example {
 			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "protected": true,
+			 *       "page": {
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name",
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
+			 *       },
 			 *       "storeCode": "122",
+			 *       "isVerified": "true",
+			 *       "verified": true,
+			 *       "protected": true,
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
 			 *       "storefrontAddress": {
+			 *         "regionCode": "30021",
+			 *         "languageCode": "E001",
+			 *         "postalCode": "1221",
+			 *         "administrativeArea": "Down Town",
+			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ],
-			 *         "administrativeArea": "Down Town",
-			 *         "languageCode": "E001",
-			 *         "locality": "Louis Street",
-			 *         "postalCode": "1221",
-			 *         "regionCode": "30021"
-			 *       },
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
-			 *       "verified": true
-			 *     } */
+			 *         ]
+			 *       }
+			 *     }
+			 */
 			meta?: Record<string, never>
 			/** @example Account Name */
 			name?: string
@@ -2552,34 +2584,36 @@ export type components = {
 			deleted?: boolean
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
-			/** @example {
-			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "isVerified": "true",
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name"
-			 *       },
+			/**
+			 * @example {
 			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "protected": true,
+			 *       "page": {
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name",
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
+			 *       },
 			 *       "storeCode": "122",
+			 *       "isVerified": "true",
+			 *       "verified": true,
+			 *       "protected": true,
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
 			 *       "storefrontAddress": {
+			 *         "regionCode": "30021",
+			 *         "languageCode": "E001",
+			 *         "postalCode": "1221",
+			 *         "administrativeArea": "Down Town",
+			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ],
-			 *         "administrativeArea": "Down Town",
-			 *         "languageCode": "E001",
-			 *         "locality": "Louis Street",
-			 *         "postalCode": "1221",
-			 *         "regionCode": "30021"
-			 *       },
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
-			 *       "verified": true
-			 *     } */
+			 *         ]
+			 *       }
+			 *     }
+			 */
 			meta?: Record<string, never>
 			/** @example Account Name */
 			name?: string
@@ -2677,34 +2711,36 @@ export type components = {
 			deleted?: boolean
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
-			/** @example {
-			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "isVerified": "true",
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name"
-			 *       },
+			/**
+			 * @example {
 			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "protected": true,
+			 *       "page": {
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name",
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
+			 *       },
 			 *       "storeCode": "122",
+			 *       "isVerified": "true",
+			 *       "verified": true,
+			 *       "protected": true,
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
 			 *       "storefrontAddress": {
+			 *         "regionCode": "30021",
+			 *         "languageCode": "E001",
+			 *         "postalCode": "1221",
+			 *         "administrativeArea": "Down Town",
+			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ],
-			 *         "administrativeArea": "Down Town",
-			 *         "languageCode": "E001",
-			 *         "locality": "Louis Street",
-			 *         "postalCode": "1221",
-			 *         "regionCode": "30021"
-			 *       },
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
-			 *       "verified": true
-			 *     } */
+			 *         ]
+			 *       }
+			 *     }
+			 */
 			meta?: Record<string, never>
 			/** @example Profile Name */
 			name?: string
@@ -2761,34 +2797,36 @@ export type components = {
 			deleted?: boolean
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
-			/** @example {
-			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "isVerified": "true",
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name"
-			 *       },
+			/**
+			 * @example {
 			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "protected": true,
+			 *       "page": {
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name",
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
+			 *       },
 			 *       "storeCode": "122",
+			 *       "isVerified": "true",
+			 *       "verified": true,
+			 *       "protected": true,
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
 			 *       "storefrontAddress": {
+			 *         "regionCode": "30021",
+			 *         "languageCode": "E001",
+			 *         "postalCode": "1221",
+			 *         "administrativeArea": "Down Town",
+			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ],
-			 *         "administrativeArea": "Down Town",
-			 *         "languageCode": "E001",
-			 *         "locality": "Louis Street",
-			 *         "postalCode": "1221",
-			 *         "regionCode": "30021"
-			 *       },
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
-			 *       "verified": true
-			 *     } */
+			 *         ]
+			 *       }
+			 *     }
+			 */
 			meta?: Record<string, never>
 			/** @example Profile Name */
 			name?: string
@@ -2885,34 +2923,36 @@ export type components = {
 			deleted?: boolean
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
-			/** @example {
-			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "isVerified": "true",
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name"
-			 *       },
+			/**
+			 * @example {
 			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "protected": true,
+			 *       "page": {
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name",
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
+			 *       },
 			 *       "storeCode": "122",
+			 *       "isVerified": "true",
+			 *       "verified": true,
+			 *       "protected": true,
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
 			 *       "storefrontAddress": {
+			 *         "regionCode": "30021",
+			 *         "languageCode": "E001",
+			 *         "postalCode": "1221",
+			 *         "administrativeArea": "Down Town",
+			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ],
-			 *         "administrativeArea": "Down Town",
-			 *         "languageCode": "E001",
-			 *         "locality": "Louis Street",
-			 *         "postalCode": "1221",
-			 *         "regionCode": "30021"
-			 *       },
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
-			 *       "verified": true
-			 *     } */
+			 *         ]
+			 *       }
+			 *     }
+			 */
 			meta?: Record<string, never>
 			/** @example Account Name */
 			name?: string
@@ -2972,34 +3012,36 @@ export type components = {
 			deleted?: boolean
 			/** @example u37swmmLbA02zgqKPpxITe2 */
 			locationId?: string
-			/** @example {
-			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "isVerified": "true",
-			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "page": {
-			 *         "avatar": "u37swmmLbA02zgqKPpxITe2",
-			 *         "id": "u37swmmLbA02zgqKPpxITe2",
-			 *         "name": "Account Name"
-			 *       },
+			/**
+			 * @example {
 			 *       "pageId": "u37swmmLbA02zgqKPpxITe2",
-			 *       "protected": true,
+			 *       "page": {
+			 *         "id": "u37swmmLbA02zgqKPpxITe2",
+			 *         "name": "Account Name",
+			 *         "avatar": "u37swmmLbA02zgqKPpxITe2"
+			 *       },
 			 *       "storeCode": "122",
+			 *       "isVerified": "true",
+			 *       "verified": true,
+			 *       "protected": true,
+			 *       "locationId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "accountId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "openId": "u37swmmLbA02zgqKPpxITe2",
+			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
+			 *       "username": "testUser",
 			 *       "storefrontAddress": {
+			 *         "regionCode": "30021",
+			 *         "languageCode": "E001",
+			 *         "postalCode": "1221",
+			 *         "administrativeArea": "Down Town",
+			 *         "locality": "Louis Street",
 			 *         "addressLines": [
 			 *           "207",
 			 *           "county"
-			 *         ],
-			 *         "administrativeArea": "Down Town",
-			 *         "languageCode": "E001",
-			 *         "locality": "Louis Street",
-			 *         "postalCode": "1221",
-			 *         "regionCode": "30021"
-			 *       },
-			 *       "urn": "u37swmmLbA02zgqKPpxITe2",
-			 *       "username": "testUser",
-			 *       "verified": true
-			 *     } */
+			 *         ]
+			 *       }
+			 *     }
+			 */
 			meta?: Record<string, never>
 			/** @example Profile Name */
 			name?: string
@@ -3156,9 +3198,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -3233,8 +3277,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3302,8 +3344,6 @@ export interface operations {
 				userId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3381,8 +3421,6 @@ export interface operations {
 				skip?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3514,8 +3552,6 @@ export interface operations {
 				userId?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3572,8 +3608,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3634,8 +3668,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3704,8 +3736,6 @@ export interface operations {
 				skip?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3764,8 +3794,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3824,8 +3852,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3888,8 +3914,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3950,8 +3974,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4013,8 +4035,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4080,8 +4100,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4143,8 +4161,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4213,8 +4229,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4275,8 +4289,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4353,8 +4365,6 @@ export interface operations {
 				skip?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4411,8 +4421,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4473,8 +4481,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4536,8 +4542,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4603,8 +4607,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4666,8 +4668,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4733,8 +4733,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4796,8 +4794,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4863,8 +4859,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4926,8 +4920,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -4993,8 +4985,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5056,8 +5046,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5119,8 +5107,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5186,8 +5172,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5249,8 +5233,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5337,8 +5319,6 @@ export interface operations {
 				userId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5408,8 +5388,6 @@ export interface operations {
 				userId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5479,8 +5457,6 @@ export interface operations {
 				userId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5550,8 +5526,6 @@ export interface operations {
 				userId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5621,8 +5595,6 @@ export interface operations {
 				userId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5692,8 +5664,6 @@ export interface operations {
 				userId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5763,8 +5733,6 @@ export interface operations {
 				userId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -5799,6 +5767,220 @@ export interface operations {
 				}
 			}
 			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'get-social-media-statistics': {
+		parameters: {
+			query: {
+				/**
+				 * @description Location ID
+				 * @example w37swmmLbA02zgqKPpxITe2
+				 */
+				locationId: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: {
+			content: {
+				'application/json': {
+					/**
+					 * @description Array of social media platforms to filter analytics by. If not provided, all platforms will be included. NOTE: Linkedin (PAGE only) and Tiktok (BUSINESS only) are supported.
+					 * @example [
+					 *       "facebook",
+					 *       "instagram"
+					 *     ]
+					 */
+					platforms?: (
+						| 'facebook'
+						| 'instagram'
+						| 'linkedin'
+						| 'google'
+						| 'pinterest'
+						| 'youtube'
+						| 'tiktok'
+					)[]
+					/**
+					 * @description Array of connected social media account IDs to fetch analytics for. This can be found as 'profileId' in /accounts api.
+					 * @example [
+					 *       "67a5a9aa776c837de4aa5b12"
+					 *     ]
+					 */
+					profileIds: string[]
+				}
+			}
+		}
+		responses: {
+			/** @description Successfully retrieved analytics data */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': {
+						/** @example Analytics Built Successfully */
+						message?: string
+						/** @description Analytics data grouped by metrics and platforms */
+						results?: {
+							/** @description Detailed breakdowns by metric and platform */
+							breakdowns?: {
+								engagement?: {
+									[key: string]: {
+										change?: number
+										comments?: number
+										likes?: number
+										shares?: number
+									}
+								}
+								impressions?: {
+									platforms?: {
+										[key: string]: {
+											change?: number
+											value?: number
+										}
+									}
+									total?: number
+									totalChange?: number
+								}
+								posts?: {
+									platforms?: {
+										[key: string]: {
+											change?: number
+											value?: number
+										}
+									}
+									total?: number
+									totalChange?: number
+								}
+								reach?: {
+									platforms?: {
+										[key: string]: {
+											change?: number
+											value?: number
+										}
+									}
+									total?: number
+									totalChange?: number
+								}
+							}
+							/**
+							 * @description Array of day names for the analytics period
+							 * @example [
+							 *       "Mon",
+							 *       "Tue",
+							 *       "Wed",
+							 *       "Thu",
+							 *       "Fri",
+							 *       "Sat",
+							 *       "Sun"
+							 *     ]
+							 */
+							dayRange?: string[]
+							/** @description Demographic data breakdown */
+							demographics?: {
+								age?: {
+									totals?: {
+										'13-17'?: number
+										'18-24'?: number
+										'25-34'?: number
+										'35-44'?: number
+										'45-54'?: number
+										'55-64'?: number
+										'65+'?: number
+									}
+								}
+								gender?: {
+									totals?: {
+										female?: {
+											percentage?: number
+											total?: number
+										}
+										male?: {
+											percentage?: number
+											total?: number
+										}
+										unknown?: {
+											percentage?: number
+											total?: number
+										}
+									}
+								}
+							}
+							/** @description Platform-wise totals with time series data */
+							platformTotals?: {
+								followers?: {
+									[key: string]: {
+										series?: number[]
+										total?: number
+									}
+								}
+								impressions?: {
+									[key: string]: {
+										series?: number[]
+										total?: number
+									}
+								}
+								likes?: {
+									[key: string]: {
+										series?: number[]
+										total?: number
+									}
+								}
+							}
+							/** @description Post performance metrics over time */
+							postPerformance?: {
+								comments?: number[]
+								impressions?: number[]
+								likes?: number[]
+								posts?: {
+									[key: string]: number[]
+								}
+							}
+							/** @description Aggregated metrics totals */
+							totals?: {
+								comments?: number
+								followers?: number
+								impressions?: number
+								likes?: number
+								posts?: number
+							}
+						}
+						/** @example 42fc8dd8-d55b-475f-944f-9efb90d77564 */
+						traceId?: string
+					}
+				}
+			}
+			/** @description Bad Request - Occurs when more than 100 accounts are requested or invalid parameters are provided */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized - Invalid or missing authentication credentials */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity - Invalid request body format */
 			422: {
 				headers: {
 					[name: string]: unknown

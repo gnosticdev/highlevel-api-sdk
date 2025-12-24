@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/snapshots/': {
 		parameters: {
 			query?: never
@@ -81,7 +81,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -227,8 +227,6 @@ export interface operations {
 				companyId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -272,8 +270,6 @@ export interface operations {
 				companyId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -326,8 +322,6 @@ export interface operations {
 				to: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -373,8 +367,6 @@ export interface operations {
 				companyId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}

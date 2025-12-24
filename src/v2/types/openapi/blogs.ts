@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/blogs/authors': {
 		parameters: {
 			query?: never
@@ -141,7 +141,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		AuthorResponseDTO: {
 			/** @example lMOzIQZne5m6zQ528sT6 */
@@ -330,10 +330,12 @@ export type components = {
 			 * @enum {string}
 			 */
 			status: 'DRAFT' | 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED'
-			/** @example [
+			/**
+			 * @example [
 			 *       "blog",
 			 *       "seo"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 			/** @example Your blog title */
 			title: string
@@ -351,9 +353,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -399,10 +403,12 @@ export type components = {
 			 * @enum {string}
 			 */
 			status: 'DRAFT' | 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED'
-			/** @example [
+			/**
+			 * @example [
 			 *       "blog",
 			 *       "seo"
-			 *     ] */
+			 *     ]
+			 */
 			tags?: string[]
 			/** @example Your blog title */
 			title: string
@@ -442,8 +448,6 @@ export interface operations {
 				offset: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -501,8 +505,6 @@ export interface operations {
 				offset: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -553,8 +555,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -609,8 +609,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -681,8 +679,6 @@ export interface operations {
 				status?: 'PUBLISHED' | 'SCHEDULED' | 'ARCHIVED' | 'DRAFT'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -739,8 +735,6 @@ export interface operations {
 				urlSlug: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -803,8 +797,6 @@ export interface operations {
 				skip: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}

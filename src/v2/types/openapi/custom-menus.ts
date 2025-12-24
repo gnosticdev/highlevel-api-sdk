@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/custom-menus/': {
 		parameters: {
 			query?: never
@@ -53,14 +53,8 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
-		BadRequestDTO: {
-			/** @example Bad Request */
-			message?: string
-			/** @example 400 */
-			statusCode?: number
-		}
 		CreateCustomMenuDTO: {
 			/**
 			 * @description Whether to allow camera access (only for iframe mode)
@@ -259,9 +253,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -344,35 +340,18 @@ export interface operations {
 	'get-custom-menus': {
 		parameters: {
 			query?: {
-				/**
-				 * @description Maximum number of items to return
-				 * @example 10
-				 */
+				/** @description Maximum number of items to return */
 				limit?: number
-				/**
-				 * @description Unique identifier of the location
-				 * @example 5DP4iH6HLkQsiKESj6rh
-				 */
+				/** @description Unique identifier of the location */
 				locationId?: string
-				/**
-				 * @description Search query to filter custom menus by name, supports partial || full names
-				 * @example custom-menu-link-name
-				 */
+				/** @description Search query to filter custom menus by name, supports partial || full names */
 				query?: string
-				/**
-				 * @description Filter to show only agency-level menu links. When omitted, fetches both agency and sub-account menu links. Ignored if locationId is provided
-				 * @example true
-				 */
+				/** @description Filter to show only agency-level menu links. When omitted, fetches both agency and sub-account menu links. Ignored if locationId is provided */
 				showOnCompany?: boolean
-				/**
-				 * @description Number of items to skip for pagination
-				 * @example 0
-				 */
+				/** @description Number of items to skip for pagination */
 				skip?: number
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -428,8 +407,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -489,16 +466,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Unique identifier of the custom menu
-				 * @example 62e589c1-c456-47e1-a9a7-cb8900014311
-				 */
+				/** @description Unique identifier of the custom menu */
 				customMenuId: string
 			}
 			cookie?: never
@@ -552,16 +524,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description ID of the custom menu to update
-				 * @example 62e589c1-c456-47e1-a9a7-cb8900014311
-				 */
+				/** @description ID of the custom menu to update */
 				customMenuId: string
 			}
 			cookie?: never
@@ -626,16 +593,11 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description ID of the custom menu to delete
-				 * @example 62e589c1-c456-47e1-a9a7-cb8900014311
-				 */
+				/** @description ID of the custom menu to delete */
 				customMenuId: string
 			}
 			cookie?: never

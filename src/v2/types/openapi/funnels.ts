@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/funnels/funnel/list': {
 		parameters: {
 			query?: never
@@ -125,7 +125,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		CreateRedirectParams: {
 			/**
@@ -158,17 +158,13 @@ export type components = {
 		FunnelListResponseDTO: {
 			/** @example 24 */
 			count: number
-			/** @example {
+			/**
+			 * @example {
 			 *       "_id": "SkIDfu0S4m3NYQyvWHC6",
 			 *       "dateAdded": "2024-04-29T15:00:05.681Z",
 			 *       "dateUpdated": "2024-04-29T15:00:28.465Z",
 			 *       "deleted": false,
 			 *       "domainId": "",
-			 *       "faviconUrl": "",
-			 *       "globalSectionVersion": 1,
-			 *       "globalSectionsPath": "funnel/SkIDfu0S4m3NYQyvWHC6/global-sections-1",
-			 *       "globalSectionsUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/funnel%2FSkIDfu0S4m3NYQyvWHC6%2Fglobal-sections-1?alt=media&token=9cc5c211-093b-4751-aeba-19282ac92955",
-			 *       "isStoreActive": false,
 			 *       "locationId": "ojQjykmwNIU88vfsfzvH",
 			 *       "name": "Chaitanya Copy",
 			 *       "orderFormVersion": 2,
@@ -187,12 +183,18 @@ export type components = {
 			 *           "url": "/newtestifypath"
 			 *         }
 			 *       ],
-			 *       "trackingCodeBody": "",
-			 *       "trackingCodeHead": "",
 			 *       "type": "funnel",
 			 *       "updatedAt": "2024-04-29T15:00:34.233Z",
+			 *       "faviconUrl": "",
+			 *       "globalSectionVersion": 1,
+			 *       "globalSectionsPath": "funnel/SkIDfu0S4m3NYQyvWHC6/global-sections-1",
+			 *       "globalSectionsUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-staging.appspot.com/o/funnel%2FSkIDfu0S4m3NYQyvWHC6%2Fglobal-sections-1?alt=media&token=9cc5c211-093b-4751-aeba-19282ac92955",
+			 *       "isStoreActive": false,
+			 *       "trackingCodeBody": "",
+			 *       "trackingCodeHead": "",
 			 *       "url": "/chaitanya"
-			 *     } */
+			 *     }
+			 */
 			funnels: Record<string, never>
 			/** @example 03774d31-a57e-4b4f-95c7-315ce61969f1 */
 			traceId: string
@@ -272,9 +274,11 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
@@ -314,10 +318,7 @@ export interface operations {
 				parentId?: string
 				type?: string
 			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-			}
+			header?: never
 			path?: never
 			cookie?: never
 		}
@@ -338,8 +339,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -379,8 +378,6 @@ export interface operations {
 				locationId: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -413,8 +410,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -462,8 +457,6 @@ export interface operations {
 				search?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -499,10 +492,7 @@ export interface operations {
 				name?: string
 				offset: number
 			}
-			header: {
-				/** @description Access Token */
-				Authorization: string
-			}
+			header?: never
 			path?: never
 			cookie?: never
 		}
@@ -526,10 +516,7 @@ export interface operations {
 				locationId: string
 				name?: string
 			}
-			header?: {
-				/** @description Access Token */
-				Authorization?: string
-			}
+			header?: never
 			path?: never
 			cookie?: never
 		}

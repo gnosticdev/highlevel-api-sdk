@@ -1,4 +1,4 @@
-export type paths = {
+export interface paths {
 	'/locations/': {
 		parameters: {
 			query?: never
@@ -33,7 +33,6 @@ export type paths = {
 		 *                           </span>
 		 *                       </div>
 		 *                     </div>
-		 *
 		 */
 		post: operations['create-location']
 		delete?: never
@@ -194,6 +193,54 @@ export type paths = {
 		patch?: never
 		trace?: never
 	}
+	'/locations/{locationId}/recurring-tasks': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Create Recurring Task
+		 * @description Create Recurring Task
+		 */
+		post: operations['create-recurring-task']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/locations/{locationId}/recurring-tasks/{id}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Recurring Task By Id
+		 * @description Get Recurring Task By Id
+		 */
+		get: operations['get-recurring-task-by-id']
+		/**
+		 * Update Recurring Task
+		 * @description Update Recurring Task
+		 */
+		put: operations['update-recurring-task']
+		post?: never
+		/**
+		 * Delete Recurring Task
+		 * @description Delete Recurring Task
+		 */
+		delete: operations['delete-recurring-task']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/locations/{locationId}/tags': {
 		parameters: {
 			query?: never
@@ -348,7 +395,7 @@ export type paths = {
 	}
 }
 export type webhooks = Record<string, never>
-export type components = {
+export interface components {
 	schemas: {
 		BadRequestDTO: {
 			/** @example Bad Request */
@@ -377,11 +424,13 @@ export type components = {
 			website?: string
 		}
 		CreateCustomFieldsDTO: {
-			/** @example [
+			/**
+			 * @example [
 			 *       ".pdf",
 			 *       ".docx",
 			 *       ".jpeg"
-			 *     ] */
+			 *     ]
+			 */
 			acceptedFormat?: string[]
 			/** @example TEXT */
 			dataType: string
@@ -695,11 +744,13 @@ export type components = {
 			 * @example 567654
 			 */
 			postalCode?: string
-			/** @example {
-			 *       "email": "john.doe@mail.com",
+			/**
+			 * @example {
 			 *       "firstName": "John",
-			 *       "lastName": "Doe"
-			 *     } */
+			 *       "lastName": "Doe",
+			 *       "email": "john.doe@mail.com"
+			 *     }
+			 */
 			prospectInfo?: components['schemas']['ProspectInfoDto']
 			/** @description The default settings for location */
 			settings?: components['schemas']['SettingsSchema']
@@ -1073,9 +1124,11 @@ export type components = {
 			name?: string
 			/** @example [] */
 			picklistImageOptions?: string[]
-			/** @example [
+			/**
+			 * @example [
 			 *       "first option"
-			 *     ] */
+			 *     ]
+			 */
 			picklistOptions?: string[]
 			/** @example Pin code */
 			placeholder?: string
@@ -1087,6 +1140,55 @@ export type components = {
 		}
 		CustomFieldSuccessfulResponseDto: {
 			customField?: components['schemas']['CustomFieldSchema']
+		}
+		CustomRRulesOptions: {
+			/**
+			 * @description Max number of task executions
+			 * @example 10
+			 */
+			count?: number
+			/**
+			 * @description Create Task If Over Due
+			 * @example true
+			 */
+			createTaskIfOverDue?: boolean
+			/**
+			 * @description 1, 2, 3, ..., 27, 31
+			 * @example 15
+			 */
+			dayOfMonth?: number
+			/**
+			 * @example MO
+			 * @enum {string}
+			 */
+			dayOfWeek?: 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA' | 'SU'
+			/**
+			 * @description Due after seconds
+			 * @example 23404000
+			 */
+			dueAfterSeconds: number
+			/**
+			 * @description End Date
+			 * @example 2021-09-30T00:00:00.000Z
+			 */
+			endDate?: string
+			/** @example 2 */
+			interval: number
+			/**
+			 * @example monthly
+			 * @enum {string}
+			 */
+			intervalType: 'yearly' | 'monthly' | 'weekly' | 'daily' | 'hourly'
+			/**
+			 * @description 1, 2, ....., 11, 12
+			 * @example 1
+			 */
+			monthOfYear?: number
+			/**
+			 * @description Start Date
+			 * @example 2021-09-30T00:00:00.000Z
+			 */
+			startDate: string
 		}
 		CustomValueDeleteSuccessfulResponseDto: {
 			/** @example true */
@@ -1116,6 +1218,18 @@ export type components = {
 		CustomValuesListSuccessfulResponseDto: {
 			customValues?: components['schemas']['CustomValueSchema'][]
 		}
+		DeleteRecurringTaskResponseDTO: {
+			/**
+			 * @description Recurring Task Id
+			 * @example sx6wyHhbFdRXh302Lunr
+			 */
+			id: string
+			/**
+			 * @description Success
+			 * @example true
+			 */
+			success: boolean
+		}
 		EmailTemplateSchema: {
 			/** @example [] */
 			attachments?: unknown[][]
@@ -1141,10 +1255,10 @@ export type components = {
 			 * @description Meta data of uploaded files
 			 * @example [
 			 *       {
-			 *         "encoding": "7bit",
 			 *         "fieldname": "FileName.csv",
-			 *         "mimetype": "text/csv",
 			 *         "originalname": "FileName.csv",
+			 *         "encoding": "7bit",
+			 *         "mimetype": "text/csv",
 			 *         "size": 2061,
 			 *         "url": "https://highlevel-private-staging.storage.googleapis.com/location/Ar4JQgIyuzRsVuwD9RSK/custom-Field/UpZLmohmKEQYn0ymqplY/56e0d7fc-085c-4a07-9e1d-6d8fdac7e710.csv"
 			 *       }
@@ -1359,6 +1473,156 @@ export type components = {
 			 */
 			lastName: string
 		}
+		RecurringTaskCreateDTO: {
+			/**
+			 * @description Contact Id
+			 * @example [
+			 *       "sx6wyHhbFdRXh302Lunr"
+			 *     ]
+			 */
+			contactIds?: string[]
+			/**
+			 * @description Description of the task
+			 * @example Task Description
+			 */
+			description?: string
+			/**
+			 * @description Create initial task or not
+			 * @example true
+			 */
+			ignoreTaskCreation?: boolean
+			/**
+			 * @description Assigned To
+			 * @example [
+			 *       "sx6wyHhbFdRXh302Lunr"
+			 *     ]
+			 */
+			owners?: string[]
+			/**
+			 * @description Recurring rules
+			 * @example {
+			 *       "intervalType": "hourly",
+			 *       "interval": 1,
+			 *       "startDate": "2025-07-23T10:00:00.000Z",
+			 *       "dueAfterSeconds": 600
+			 *     }
+			 */
+			rruleOptions: components['schemas']['CustomRRulesOptions']
+			/**
+			 * @description Name of the task
+			 * @example Task Name
+			 */
+			title: string
+		}
+		RecurringTaskResponseDTO: {
+			/**
+			 * @description Assigned To
+			 * @example sx6wyHhbFdRXh302Lunr
+			 */
+			assignedTo?: string
+			/**
+			 * @description Contact Id
+			 * @example v5cEPM428h8vShlRW1KT
+			 */
+			contactId?: string
+			/**
+			 * @description Created At
+			 * @example 2021-04-15T10:00:00.000Z
+			 */
+			createdAt: string
+			/**
+			 * @description Deleted
+			 * @example false
+			 */
+			deleted: boolean
+			/**
+			 * @description Description of the task
+			 * @example Task Description
+			 */
+			description: string
+			/**
+			 * @description Recurring Task Id
+			 * @example sx6wyHhbFdRXh302Lunr
+			 */
+			id: string
+			/**
+			 * @description Location Id
+			 * @example sx6wyHhbFdRXh302Lunr
+			 */
+			locationId: string
+			/**
+			 * @description Recurring rules
+			 * @example {
+			 *       "createTaskIfOverDue": false,
+			 *       "interval": 1,
+			 *       "intervalType": "hourly",
+			 *       "startDate": "2024-10-29T12:34:03.000Z",
+			 *       "dueAfterSeconds": 600,
+			 *       "count": 550
+			 *     }
+			 */
+			rruleOptions: components['schemas']['CustomRRulesOptions']
+			/**
+			 * @description Name of the task
+			 * @example Task Name
+			 */
+			title: string
+			/**
+			 * @description Total Occurrence
+			 * @example 10
+			 */
+			totalOccurrence: number
+			/**
+			 * @description Updated At
+			 * @example 2021-04-15T10:00:00.000Z
+			 */
+			updatedAt: string
+		}
+		RecurringTaskSingleResponseDTO: {
+			/** @description Recurring Tasks */
+			recurringTask: components['schemas']['RecurringTaskResponseDTO']
+		}
+		RecurringTaskUpdateDTO: {
+			/**
+			 * @description Contact Id
+			 * @example [
+			 *       "sx6wyHhbFdRXh302Lunr"
+			 *     ]
+			 */
+			contactIds?: string[]
+			/**
+			 * @description Description of the task
+			 * @example Task Description
+			 */
+			description?: string
+			/**
+			 * @description Create initial task or not
+			 * @example true
+			 */
+			ignoreTaskCreation?: boolean
+			/**
+			 * @description Assigned To
+			 * @example [
+			 *       "sx6wyHhbFdRXh302Lunr"
+			 *     ]
+			 */
+			owners?: string[]
+			/**
+			 * @description Recurring rules
+			 * @example {
+			 *       "intervalType": "hourly",
+			 *       "interval": 1,
+			 *       "startDate": "2025-07-23T10:00:00.000Z",
+			 *       "dueAfterSeconds": 600
+			 *     }
+			 */
+			rruleOptions?: components['schemas']['CustomRRulesOptions']
+			/**
+			 * @description Name of the task
+			 * @example Task Name
+			 */
+			title?: string
+		}
 		SearchSuccessfulResponseDto: {
 			locations?: components['schemas']['GetLocationSchema'][]
 		}
@@ -1528,19 +1792,23 @@ export type components = {
 		UnprocessableDTO: {
 			/** @example Unprocessable Entity */
 			error?: string
-			/** @example [
+			/**
+			 * @example [
 			 *       "Unprocessable Entity"
-			 *     ] */
+			 *     ]
+			 */
 			message?: string[]
 			/** @example 422 */
 			statusCode?: number
 		}
 		UpdateCustomFieldsDTO: {
-			/** @example [
+			/**
+			 * @example [
 			 *       ".pdf",
 			 *       ".docx",
 			 *       ".jpeg"
-			 *     ] */
+			 *     ]
+			 */
 			acceptedFormat?: string[]
 			/** @example false */
 			isMultipleFile?: boolean
@@ -1852,11 +2120,13 @@ export type components = {
 			 * @example 567654
 			 */
 			postalCode?: string
-			/** @example {
-			 *       "email": "john.doe@mail.com",
+			/**
+			 * @example {
 			 *       "firstName": "John",
-			 *       "lastName": "Doe"
-			 *     } */
+			 *       "lastName": "Doe",
+			 *       "email": "john.doe@mail.com"
+			 *     }
+			 */
 			prospectInfo?: components['schemas']['ProspectInfoDto']
 			/** @description The default settings for location */
 			settings?: components['schemas']['SettingsSchema']
@@ -1895,8 +2165,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -1942,8 +2210,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2000,8 +2266,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2059,8 +2323,6 @@ export interface operations {
 				deleteTwilioAccount: boolean
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2114,8 +2376,6 @@ export interface operations {
 				model?: 'contact' | 'opportunity' | 'all'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2172,8 +2432,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2234,8 +2492,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2291,8 +2547,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2358,8 +2612,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2421,8 +2673,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2479,8 +2729,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2528,8 +2776,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2590,8 +2836,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2653,8 +2897,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2720,8 +2962,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2779,12 +3019,199 @@ export interface operations {
 			}
 		}
 	}
+	'create-recurring-task': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				locationId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['RecurringTaskCreateDTO']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['RecurringTaskSingleResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'get-recurring-task-by-id': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/** @description Recurring Task Id */
+				id: string
+				/** @description Location Id */
+				locationId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['RecurringTaskSingleResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'update-recurring-task': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/** @description Recurring Task Id */
+				id: string
+				/** @description Location Id */
+				locationId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['RecurringTaskUpdateDTO']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['RecurringTaskSingleResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'delete-recurring-task': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path: {
+				/** @description Recurring Task Id */
+				id: string
+				/** @description Location Id */
+				locationId: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['DeleteRecurringTaskResponseDTO']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
 	'get-location-tags': {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2841,8 +3268,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2903,8 +3328,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -2966,8 +3389,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3033,8 +3454,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3096,8 +3515,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3171,8 +3588,6 @@ export interface operations {
 				type?: 'sms' | 'email' | 'whatsapp'
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3229,8 +3644,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3289,8 +3702,6 @@ export interface operations {
 		parameters: {
 			query?: never
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
@@ -3362,8 +3773,6 @@ export interface operations {
 				skip?: string
 			}
 			header: {
-				/** @description Access Token */
-				Authorization: string
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
