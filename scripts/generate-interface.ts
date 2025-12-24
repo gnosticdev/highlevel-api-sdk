@@ -8,13 +8,19 @@ if (import.meta.main) {
 }
 
 export async function generateClientInterface() {
+	// ignore oauth bc we handle it separately
+	// ignore common-schemas as they are only refereenced by other files
+	const IGNORE_FILES = ['oauth.openapi.json', 'common-schemas.json']
 	const CLIENT_INTERFACE_FILE = path.join(
 		process.cwd(),
 		'src/v2/client/interface.ts',
 	)
 
 	const schemaFiles = (await getV2OpenApiFiles())
-		.filter((file) => !file.endsWith('oauth.openapi.json'))
+		.filter((file) => {
+			const basename = path.basename(file)
+			return !IGNORE_FILES.includes(basename)
+		})
 		.map((file) => {
 			const fileName = path.basename(file).replace('.openapi.json', '')
 			const camelName = toCamelCase(fileName)
@@ -24,7 +30,7 @@ export async function generateClientInterface() {
 
 	const importStatements = schemaFiles
 		.map((file) => {
-			return `import type * as ${file.pascalName} from '../types/openapi/${file.fileName}'`
+			return `import type { paths as ${file.pascalName}Paths } from '../types/openapi/${file.fileName}'`
 		})
 		.join('\n')
 
@@ -32,7 +38,7 @@ export async function generateClientInterface() {
 	 * client interfaces for each of the v2 endpoints.
 	 */
 	const interfaceProperties = schemaFiles.map((file) => {
-		return `${file.camelName}: Client<${file.pascalName}.paths> | ClientWithAuth<${file.pascalName}.paths>`
+		return `${file.camelName}: Client<${file.pascalName}Paths> | ClientWithAuth<${file.pascalName}Paths>`
 	})
 
 	const interfaceContent = `
@@ -61,6 +67,7 @@ export interface HighLevelClientInterface<
 `.trim()
 
 	await Bun.write(CLIENT_INTERFACE_FILE, interfaceContent)
+	await Bun.$`bun biome check ${CLIENT_INTERFACE_FILE} --write --unsafe`
 	console.log(
 		kleur.green(
 			`Successfully generated HighLevelClientInterface in ${CLIENT_INTERFACE_FILE.replace(process.cwd(), '')}`,
