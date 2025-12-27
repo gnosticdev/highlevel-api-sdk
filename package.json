@@ -83,7 +83,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/gnosticdev/highlevel-sdk"
+		"url": "https://github.com/gnosticdev/highlevel-api-sdk"
 	},
 	"scripts": {
 		"build": "bun --bun tsup",
