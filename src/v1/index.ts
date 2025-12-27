@@ -1,7 +1,7 @@
 import type { ClientOptions } from 'openapi-fetch'
 import createClient from 'openapi-fetch'
 import { HighLevelSDKError } from '../lib/errors'
-import type * as V1 from './types/openapi'
+import type * as V1 from './types'
 
 const DEFAULT_V1_BASE_URL = 'https://rest.gohighlevel.com'
 

@@ -60,6 +60,92 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "appointments": [
+						 *         {
+						 *           "id": "EaALh02zfPo8VB3JOnpq",
+						 *           "userId": "GCs5KuzPqTls7vWclkEV",
+						 *           "calendarProviderId": "0nU7uKSrtT2RVM1KknuF",
+						 *           "calendarId": "9qFx5qCKr3jIdBw0DiqB",
+						 *           "contactId": "v1kbP2GBSZq6yzRkh7KT",
+						 *           "calendarServiceId": "CVokAlI8fgw4WYWoCtQz",
+						 *           "isRecurring": false,
+						 *           "status": "booked",
+						 *           "appoinmentStatus": "confirmed",
+						 *           "title": "Calendar Standup",
+						 *           "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *           "startTime": "2020-07-22T16:00:00+05:30",
+						 *           "endTime": "2020-07-22T16:30:00+05:30",
+						 *           "selectedTimezone": "Asia/Calcutta",
+						 *           "contact": {
+						 *             "id": "ocQHyuzHvysMo5N5VsXc",
+						 *             "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *             "email": "JohnDeo@gmail.com",
+						 *             "emailLowerCase": "johndeo@gmail.com",
+						 *             "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *             "timezone": "Asia/Calcutta",
+						 *             "country": "DE",
+						 *             "customField": [
+						 *               {
+						 *                 "id": "MgobCB14YMVKuE4Ka8p1",
+						 *                 "value": "tempor in ut"
+						 *               },
+						 *               {
+						 *                 "id": "MgobCB14YMVKuE4Ka8p1",
+						 *                 "value": "Duis"
+						 *               }
+						 *             ],
+						 *             "tags": [
+						 *               "nulla",
+						 *               "minim est"
+						 *             ],
+						 *             "__moreField__": "id ex nulla"
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "EaALh02zfPo8VB3JOnpq",
+						 *           "userId": "GCs5KuzPqTls7vWclkEV",
+						 *           "calendarProviderId": "0nU7uKSrtT2RVM1KknuF",
+						 *           "calendarId": "9qFx5qCKr3jIdBw0DiqB",
+						 *           "contactId": "v1kbP2GBSZq6yzRkh7KT",
+						 *           "calendarServiceId": "CVokAlI8fgw4WYWoCtQz",
+						 *           "isRecurring": false,
+						 *           "status": "booked",
+						 *           "appoinmentStatus": "confirmed",
+						 *           "title": "Calendar Standup",
+						 *           "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *           "startTime": "2020-07-22T16:00:00+05:30",
+						 *           "endTime": "2020-07-22T16:30:00+05:30",
+						 *           "selectedTimezone": "Asia/Calcutta",
+						 *           "contact": {
+						 *             "id": "ocQHyuzHvysMo5N5VsXc",
+						 *             "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *             "email": "JohnDeo@gmail.com",
+						 *             "emailLowerCase": "johndeo@gmail.com",
+						 *             "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *             "timezone": "Asia/Calcutta",
+						 *             "country": "DE",
+						 *             "customField": [
+						 *               {
+						 *                 "id": "MgobCB14YMVKuE4Ka8p1",
+						 *                 "value": "adipisicing eu"
+						 *               },
+						 *               {
+						 *                 "id": "MgobCB14YMVKuE4Ka8p1",
+						 *                 "value": "nostrud"
+						 *               }
+						 *             ],
+						 *             "tags": [
+						 *               "in voluptate",
+						 *               "id culpa sit ad dolore"
+						 *             ],
+						 *             "__moreField__": "no"
+						 *           }
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__get_200_response']
 					}
 				}
@@ -70,6 +156,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__get_400_response']
 					}
 				}
@@ -80,6 +171,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__get_401_response']
 					}
 				}
@@ -90,6 +186,22 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "startDate": {
+						 *         "message": "The start date field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "endDate": {
+						 *         "message": "The end date field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "userId or calendarProviderId": {
+						 *         "message": "The user id or calendar provider id field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__get_422_response']
 					}
 				}
@@ -125,6 +237,32 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "004B1SpcAvh3s9E3rqk8",
+						 *       "contactId": "0007BWpSzSwfiuSl0tR2",
+						 *       "contact": {
+						 *         "id": "0007BWpSzSwfiuSl0tR2",
+						 *         "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *         "email": "JohnDeo@gmail.com",
+						 *         "emailLowerCase": "johndeo@gmail.com",
+						 *         "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *         "timezone": "Asia/Calcutta",
+						 *         "country": "DE",
+						 *         "customField": [
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "anim esse"
+						 *           },
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "culpa anim nulla Ut"
+						 *           }
+						 *         ],
+						 *         "__moreField__": "sin"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__post_200_response']
 					}
 				}
@@ -135,6 +273,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__post_400_response']
 					}
 				}
@@ -145,6 +288,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__post_401_response']
 					}
 				}
@@ -155,6 +303,26 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "calendarId": {
+						 *         "message": "The calendar id field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "selectedSlot": {
+						 *         "message": "The selected slot field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "selectedTimezone": {
+						 *         "message": "The selected timezone field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "email or phone": {
+						 *         "message": "The email or phone field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments__post_422_response']
 					}
 				}
@@ -202,6 +370,48 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "EaALh02zfPo8VB3JOnpq",
+						 *       "userId": "GCs5KuzPqTls7vWclkEV",
+						 *       "calendarProviderId": "0nU7uKSrtT2RVM1KknuF",
+						 *       "calendarId": "9qFx5qCKr3jIdBw0DiqB",
+						 *       "contactId": "v1kbP2GBSZq6yzRkh7KT",
+						 *       "calendarServiceId": "CVokAlI8fgw4WYWoCtQz",
+						 *       "isRecurring": false,
+						 *       "status": "booked",
+						 *       "appoinmentStatus": "confirmed",
+						 *       "title": "Calendar Standup",
+						 *       "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *       "startTime": "2020-07-22T16:00:00+05:30",
+						 *       "endTime": "2020-07-22T16:30:00+05:30",
+						 *       "selectedTimezone": "Asia/Calcutta",
+						 *       "contact": {
+						 *         "id": "ocQHyuzHvysMo5N5VsXc",
+						 *         "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *         "email": "JohnDeo@gmail.com",
+						 *         "emailLowerCase": "johndeo@gmail.com",
+						 *         "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *         "timezone": "Asia/Calcutta",
+						 *         "country": "DE",
+						 *         "customField": [
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "sit adipisicing"
+						 *           },
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "minim consequa"
+						 *           }
+						 *         ],
+						 *         "tags": [
+						 *           "proident ipsum deserunt",
+						 *           "laborum est"
+						 *         ],
+						 *         "__moreField__": "nisi reprehenderit velit fugiat"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_get_200_response']
 					}
 				}
@@ -212,6 +422,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_get_400_response']
 					}
 				}
@@ -222,6 +437,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_get_401_response']
 					}
 				}
@@ -262,6 +482,32 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "004B1SpcAvh3s9E3rqk8",
+						 *       "contactId": "0007BWpSzSwfiuSl0tR2",
+						 *       "contact": {
+						 *         "id": "0007BWpSzSwfiuSl0tR2",
+						 *         "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *         "email": "JohnDeo@gmail.com",
+						 *         "emailLowerCase": "johndeo@gmail.com",
+						 *         "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *         "timezone": "Asia/Calcutta",
+						 *         "country": "DE",
+						 *         "customField": [
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "ea minim"
+						 *           },
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "qui culpa Ut"
+						 *           }
+						 *         ],
+						 *         "__moreField__": "ipsum"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_200_response']
 					}
 				}
@@ -272,6 +518,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_400_response']
 					}
 				}
@@ -282,6 +533,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_401_response']
 					}
 				}
@@ -292,6 +548,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "selectedSlot": {
+						 *         "message": "The selected slot field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "selectedTimezone": {
+						 *         "message": "The selected timezone field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_put_422_response']
 					}
 				}
@@ -327,6 +595,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -337,6 +606,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_delete_400_response']
 					}
 				}
@@ -347,6 +621,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_delete_401_response']
 					}
 				}
@@ -400,6 +679,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'text/plain': string
 					}
 				}
@@ -410,6 +690,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_status_put_400_response']
 					}
 				}
@@ -420,6 +705,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_status_put_401_response']
 					}
 				}
@@ -430,6 +720,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "status": {
+						 *         "message": "The status field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_{appointmentId}_status_put_422_response']
 					}
 				}
@@ -498,6 +796,16 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "_dates_": {
+						 *         "slots": [
+						 *           "2020-09-04T08:00:00+05:30",
+						 *           "2020-09-04T08:00:00+05:30"
+						 *         ]
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_slots_get_200_response']
 					}
 				}
@@ -508,6 +816,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_slots_get_400_response']
 					}
 				}
@@ -518,6 +831,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_slots_get_401_response']
 					}
 				}
@@ -528,6 +846,22 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "calendarId": {
+						 *         "message": "The calendar id field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "startDate": {
+						 *         "message": "The start date field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "endDate": {
+						 *         "message": "The end date field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_appointments_slots_get_422_response']
 					}
 				}
@@ -577,6 +911,12 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "slug": "sales-services",
+						 *       "isSlugAvailable": true
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_200_response']
 					}
 				}
@@ -587,6 +927,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_400_response']
 					}
 				}
@@ -597,6 +942,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_401_response']
 					}
 				}
@@ -607,6 +957,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "email or phone": {
+						 *         "message": "The email or phone field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_check-slug-availability_{slug}_get_422_response']
 					}
 				}
@@ -656,6 +1014,308 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "services": [
+						 *         {
+						 *           "id": "OW59k4IchTgKjIDy3VMO",
+						 *           "name": "Test Service",
+						 *           "description": "Test Service Desc.",
+						 *           "appointmentTitle": "{{contact.name}}",
+						 *           "meetingLocation": "location",
+						 *           "eventColor": "#FF0000",
+						 *           "teamId": "#FF0000",
+						 *           "linkedCalendars": {
+						 *             "google": {
+						 *               "id": "eiusmod commodo non",
+						 *               "name": "pari"
+						 *             },
+						 *             "clio": {
+						 *               "id": "in labore Lorem ex",
+						 *               "name": "est nostrud"
+						 *             },
+						 *             "drchrono": {
+						 *               "id": "mollit sint",
+						 *               "name": "fugiat dolore non"
+						 *             }
+						 *           },
+						 *           "syncOption": "oneway",
+						 *           "teamMembers": [
+						 *             {
+						 *               "userId": "",
+						 *               "priority": 0,
+						 *               "selected": false,
+						 *               "meetingLocation": "https://zoom.us"
+						 *             },
+						 *             {
+						 *               "userId": "",
+						 *               "priority": 0,
+						 *               "selected": false,
+						 *               "meetingLocation": "https://zoom.us"
+						 *             }
+						 *           ],
+						 *           "availability": {
+						 *             "eventTiming": {
+						 *               "slotDuration": 30,
+						 *               "slotInterval": 30,
+						 *               "slotBuffer": 0
+						 *             },
+						 *             "appointmentInfo": {
+						 *               "perSlot": 1,
+						 *               "perDay": 8
+						 *             },
+						 *             "schedule": {
+						 *               "allowBookingAfter": 1,
+						 *               "allowBookingAfterUnit": "Hours",
+						 *               "allowBookingFor": 8,
+						 *               "allowBookingForUnit": "Hours"
+						 *             },
+						 *             "officeHours": {
+						 *               "monday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "tuesday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "wednesday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "thursday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "friday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ]
+						 *             }
+						 *           },
+						 *           "confirmation": {
+						 *             "form": {
+						 *               "customFormId": "jjusM6EOngDExnbo2DbU",
+						 *               "stickyContact": false
+						 *             },
+						 *             "notificationAndOther": {
+						 *               "alertEmail": "quis aute",
+						 *               "hasAutoConfirm": false,
+						 *               "hasGoogleSendInvitationEmail": false,
+						 *               "hasAllowReschedule": false,
+						 *               "hasAllowCancellation": false,
+						 *               "hasSendEmailToAssignedMember": false,
+						 *               "notes": "",
+						 *               "facebookPixelId": "",
+						 *               "customCode": ""
+						 *             },
+						 *             "formSubmission": {
+						 *               "type": "ThankYouMessage",
+						 *               "content": ""
+						 *             }
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "OW59k4IchTgKjIDy3VMO",
+						 *           "name": "Test Service",
+						 *           "description": "Test Service Desc.",
+						 *           "appointmentTitle": "{{contact.name}}",
+						 *           "meetingLocation": "location",
+						 *           "eventColor": "#FF0000",
+						 *           "teamId": "#FF0000",
+						 *           "linkedCalendars": {
+						 *             "google": {
+						 *               "id": "in esse do non",
+						 *               "name": "laborum non proident veniam"
+						 *             },
+						 *             "clio": {
+						 *               "id": "aliqua aute dolore",
+						 *               "name": "esse"
+						 *             },
+						 *             "drchrono": {
+						 *               "id": "ullamco deserunt in",
+						 *               "name": "incidid"
+						 *             }
+						 *           },
+						 *           "syncOption": "oneway",
+						 *           "teamMembers": [
+						 *             {
+						 *               "userId": "",
+						 *               "priority": 0,
+						 *               "selected": false,
+						 *               "meetingLocation": "https://zoom.us"
+						 *             },
+						 *             {
+						 *               "userId": "",
+						 *               "priority": 0,
+						 *               "selected": false,
+						 *               "meetingLocation": "https://zoom.us"
+						 *             }
+						 *           ],
+						 *           "availability": {
+						 *             "eventTiming": {
+						 *               "slotDuration": 30,
+						 *               "slotInterval": 30,
+						 *               "slotBuffer": 0
+						 *             },
+						 *             "appointmentInfo": {
+						 *               "perSlot": 1,
+						 *               "perDay": 8
+						 *             },
+						 *             "schedule": {
+						 *               "allowBookingAfter": 1,
+						 *               "allowBookingAfterUnit": "Hours",
+						 *               "allowBookingFor": 8,
+						 *               "allowBookingForUnit": "Hours"
+						 *             },
+						 *             "officeHours": {
+						 *               "monday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "tuesday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "wednesday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "thursday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ],
+						 *               "friday": [
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 },
+						 *                 {
+						 *                   "openMinute": 0,
+						 *                   "closeMinute": 0,
+						 *                   "closeHour": 17,
+						 *                   "openHour": 8
+						 *                 }
+						 *               ]
+						 *             }
+						 *           },
+						 *           "confirmation": {
+						 *             "form": {
+						 *               "customFormId": "jjusM6EOngDExnbo2DbU",
+						 *               "stickyContact": false
+						 *             },
+						 *             "notificationAndOther": {
+						 *               "alertEmail": "incididunt Duis",
+						 *               "hasAutoConfirm": false,
+						 *               "hasGoogleSendInvitationEmail": false,
+						 *               "hasAllowReschedule": false,
+						 *               "hasAllowCancellation": false,
+						 *               "hasSendEmailToAssignedMember": false,
+						 *               "notes": "",
+						 *               "facebookPixelId": "",
+						 *               "customCode": ""
+						 *             },
+						 *             "formSubmission": {
+						 *               "type": "ThankYouMessage",
+						 *               "content": ""
+						 *             }
+						 *           }
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_get_200_response']
 					}
 				}
@@ -666,6 +1326,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_get_400_response']
 					}
 				}
@@ -676,6 +1341,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_get_401_response']
 					}
 				}
@@ -727,6 +1397,156 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "OW59k4IchTgKjIDy3VMO",
+						 *       "name": "Test Service",
+						 *       "description": "Test Service Desc.",
+						 *       "appointmentTitle": "{{contact.name}}",
+						 *       "meetingLocation": "location",
+						 *       "eventColor": "#FF0000",
+						 *       "teamId": "#FF0000",
+						 *       "linkedCalendars": {
+						 *         "google": {
+						 *           "id": "adipisicing laboris veniam ",
+						 *           "name": "ipsum fugiat ut"
+						 *         },
+						 *         "clio": {
+						 *           "id": "esse non adip",
+						 *           "name": "tempor Excepteur"
+						 *         },
+						 *         "drchrono": {
+						 *           "id": "magna in sunt veniam",
+						 *           "name": "ut sed adipisicing nisi"
+						 *         }
+						 *       },
+						 *       "syncOption": "oneway",
+						 *       "teamMembers": [
+						 *         {
+						 *           "userId": "",
+						 *           "priority": 0,
+						 *           "selected": false,
+						 *           "meetingLocation": "https://zoom.us"
+						 *         },
+						 *         {
+						 *           "userId": "",
+						 *           "priority": 0,
+						 *           "selected": false,
+						 *           "meetingLocation": "https://zoom.us"
+						 *         }
+						 *       ],
+						 *       "availability": {
+						 *         "eventTiming": {
+						 *           "slotDuration": 30,
+						 *           "slotInterval": 30,
+						 *           "slotBuffer": 0
+						 *         },
+						 *         "appointmentInfo": {
+						 *           "perSlot": 1,
+						 *           "perDay": 8
+						 *         },
+						 *         "schedule": {
+						 *           "allowBookingAfter": 1,
+						 *           "allowBookingAfterUnit": "Hours",
+						 *           "allowBookingFor": 8,
+						 *           "allowBookingForUnit": "Hours"
+						 *         },
+						 *         "officeHours": {
+						 *           "monday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "tuesday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "wednesday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "thursday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "friday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ]
+						 *         }
+						 *       },
+						 *       "confirmation": {
+						 *         "form": {
+						 *           "customFormId": "jjusM6EOngDExnbo2DbU",
+						 *           "stickyContact": false
+						 *         },
+						 *         "notificationAndOther": {
+						 *           "alertEmail": "dolor elit",
+						 *           "hasAutoConfirm": false,
+						 *           "hasGoogleSendInvitationEmail": false,
+						 *           "hasAllowReschedule": false,
+						 *           "hasAllowCancellation": false,
+						 *           "hasSendEmailToAssignedMember": false,
+						 *           "notes": "",
+						 *           "facebookPixelId": "",
+						 *           "customCode": ""
+						 *         },
+						 *         "formSubmission": {
+						 *           "type": "ThankYouMessage",
+						 *           "content": ""
+						 *         }
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services__post_200_response']
 					}
 				}
@@ -737,6 +1557,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services__post_400_response']
 					}
 				}
@@ -747,6 +1572,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services__post_401_response']
 					}
 				}
@@ -757,6 +1587,82 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "teamId": {
+						 *         "message": "The team id field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "description": {
+						 *         "message": "The description field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "eventType": {
+						 *         "message": "The event type field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "teamMembers": {
+						 *         "message": "The team members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "slug": {
+						 *         "message": "The slug field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "appointmentTitle": {
+						 *         "message": "The team members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "eventColor": {
+						 *         "message": "The event color field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "availability.eventTiming.slotDuration": {
+						 *         "message": "The availability.eventTiming.slotDuration members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "availability.eventTiming.slotInterval": {
+						 *         "message": "The availability.eventTiming.slotInterval members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "availability.officeHours": {
+						 *         "message": "The availability.officeHours members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.autoConfirm": {
+						 *         "message": "The confirmation.notificationAndOther.autoConfirm members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.shouldSendAlertEmailsToAssignedMember": {
+						 *         "message": "The confirmation.notificationAndOther.shouldSendAlertEmailsToAssignedMember members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.googleInvitationEmails": {
+						 *         "message": "The confirmation.notificationAndOther.googleInvitationEmails members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.allowReschedule": {
+						 *         "message": "The confirmation.notificationAndOther.allowReschedule members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.allowCancellation": {
+						 *         "message": "The confirmation.notificationAndOther.allowCancellation members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.formSubmission.type": {
+						 *         "message": "The confirmation.formSubmission.type members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.formSubmission.content": {
+						 *         "message": "The confirmation.formSubmission.content members field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services__post_422_response']
 					}
 				}
@@ -811,6 +1717,156 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "OW59k4IchTgKjIDy3VMO",
+						 *       "name": "Test Service",
+						 *       "description": "Test Service Desc.",
+						 *       "appointmentTitle": "{{contact.name}}",
+						 *       "meetingLocation": "location",
+						 *       "eventColor": "#FF0000",
+						 *       "teamId": "#FF0000",
+						 *       "linkedCalendars": {
+						 *         "google": {
+						 *           "id": "adipisicing laboris veniam ",
+						 *           "name": "ipsum fugiat ut"
+						 *         },
+						 *         "clio": {
+						 *           "id": "esse non adip",
+						 *           "name": "tempor Excepteur"
+						 *         },
+						 *         "drchrono": {
+						 *           "id": "magna in sunt veniam",
+						 *           "name": "ut sed adipisicing nisi"
+						 *         }
+						 *       },
+						 *       "syncOption": "oneway",
+						 *       "teamMembers": [
+						 *         {
+						 *           "userId": "",
+						 *           "priority": 0,
+						 *           "selected": false,
+						 *           "meetingLocation": "https://zoom.us"
+						 *         },
+						 *         {
+						 *           "userId": "",
+						 *           "priority": 0,
+						 *           "selected": false,
+						 *           "meetingLocation": "https://zoom.us"
+						 *         }
+						 *       ],
+						 *       "availability": {
+						 *         "eventTiming": {
+						 *           "slotDuration": 30,
+						 *           "slotInterval": 30,
+						 *           "slotBuffer": 0
+						 *         },
+						 *         "appointmentInfo": {
+						 *           "perSlot": 1,
+						 *           "perDay": 8
+						 *         },
+						 *         "schedule": {
+						 *           "allowBookingAfter": 1,
+						 *           "allowBookingAfterUnit": "Hours",
+						 *           "allowBookingFor": 8,
+						 *           "allowBookingForUnit": "Hours"
+						 *         },
+						 *         "officeHours": {
+						 *           "monday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "tuesday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "wednesday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "thursday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ],
+						 *           "friday": [
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             },
+						 *             {
+						 *               "openMinute": 0,
+						 *               "closeMinute": 0,
+						 *               "closeHour": 17,
+						 *               "openHour": 8
+						 *             }
+						 *           ]
+						 *         }
+						 *       },
+						 *       "confirmation": {
+						 *         "form": {
+						 *           "customFormId": "jjusM6EOngDExnbo2DbU",
+						 *           "stickyContact": false
+						 *         },
+						 *         "notificationAndOther": {
+						 *           "alertEmail": "dolor elit",
+						 *           "hasAutoConfirm": false,
+						 *           "hasGoogleSendInvitationEmail": false,
+						 *           "hasAllowReschedule": false,
+						 *           "hasAllowCancellation": false,
+						 *           "hasSendEmailToAssignedMember": false,
+						 *           "notes": "",
+						 *           "facebookPixelId": "",
+						 *           "customCode": ""
+						 *         },
+						 *         "formSubmission": {
+						 *           "type": "ThankYouMessage",
+						 *           "content": ""
+						 *         }
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_200_response']
 					}
 				}
@@ -821,6 +1877,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_400_response']
 					}
 				}
@@ -831,6 +1892,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_401_response']
 					}
 				}
@@ -841,6 +1907,82 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "teamId": {
+						 *         "message": "The team id field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "description": {
+						 *         "message": "The description field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "eventType": {
+						 *         "message": "The event type field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "teamMembers": {
+						 *         "message": "The team members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "slug": {
+						 *         "message": "The slug field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "appointmentTitle": {
+						 *         "message": "The team members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "eventColor": {
+						 *         "message": "The event color field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "availability.eventTiming.slotDuration": {
+						 *         "message": "The availability.eventTiming.slotDuration members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "availability.eventTiming.slotInterval": {
+						 *         "message": "The availability.eventTiming.slotInterval members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "availability.officeHours": {
+						 *         "message": "The availability.officeHours members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.autoConfirm": {
+						 *         "message": "The confirmation.notificationAndOther.autoConfirm members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.shouldSendAlertEmailsToAssignedMember": {
+						 *         "message": "The confirmation.notificationAndOther.shouldSendAlertEmailsToAssignedMember members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.googleInvitationEmails": {
+						 *         "message": "The confirmation.notificationAndOther.googleInvitationEmails members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.allowReschedule": {
+						 *         "message": "The confirmation.notificationAndOther.allowReschedule members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.notificationAndOther.allowCancellation": {
+						 *         "message": "The confirmation.notificationAndOther.allowCancellation members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.formSubmission.type": {
+						 *         "message": "The confirmation.formSubmission.type members field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "confirmation.formSubmission.content": {
+						 *         "message": "The confirmation.formSubmission.content members field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_put_422_response']
 					}
 				}
@@ -876,6 +2018,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'text/plain': string
 					}
 				}
@@ -886,6 +2029,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_delete_400_response']
 					}
 				}
@@ -896,6 +2044,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_delete_401_response']
 					}
 				}
@@ -906,6 +2059,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": {
+						 *         "message": "The contact id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_services_{serviceId}_delete_422_response']
 					}
 				}
@@ -943,6 +2104,60 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "teams": [
+						 *         {
+						 *           "id": "OW59k4IchTgKjIDy3VMO",
+						 *           "name": "Test Team",
+						 *           "members": [
+						 *             {
+						 *               "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *               "name": "Elon Musk",
+						 *               "email": "elon@musk.com"
+						 *             },
+						 *             {
+						 *               "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *               "name": "Elon Musk",
+						 *               "email": "elon@musk.com"
+						 *             }
+						 *           ],
+						 *           "calendarConfig": {
+						 *             "calendarName": "Test Calendar",
+						 *             "description": "Desc.",
+						 *             "slug": "slug",
+						 *             "link": "/widget/appointment/slug",
+						 *             "shouldAssignContactToTeamMember": false,
+						 *             "shouldSkipAssigningContactForExisting": false
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "OW59k4IchTgKjIDy3VMO",
+						 *           "name": "Test Team",
+						 *           "members": [
+						 *             {
+						 *               "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *               "name": "Elon Musk",
+						 *               "email": "elon@musk.com"
+						 *             },
+						 *             {
+						 *               "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *               "name": "Elon Musk",
+						 *               "email": "elon@musk.com"
+						 *             }
+						 *           ],
+						 *           "calendarConfig": {
+						 *             "calendarName": "Test Calendar",
+						 *             "description": "Desc.",
+						 *             "slug": "slug",
+						 *             "link": "/widget/appointment/slug",
+						 *             "shouldAssignContactToTeamMember": false,
+						 *             "shouldSkipAssigningContactForExisting": false
+						 *           }
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_get_200_response']
 					}
 				}
@@ -953,6 +2168,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_get_400_response']
 					}
 				}
@@ -963,6 +2183,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_get_401_response']
 					}
 				}
@@ -1014,6 +2239,32 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "OW59k4IchTgKjIDy3VMO",
+						 *       "name": "Test Team",
+						 *       "members": [
+						 *         {
+						 *           "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *           "name": "Elon Musk",
+						 *           "email": "elon@musk.com"
+						 *         },
+						 *         {
+						 *           "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *           "name": "Elon Musk",
+						 *           "email": "elon@musk.com"
+						 *         }
+						 *       ],
+						 *       "calendarConfig": {
+						 *         "calendarName": "Test Calendar",
+						 *         "description": "Desc.",
+						 *         "slug": "slug",
+						 *         "link": "/widget/appointment/slug",
+						 *         "shouldAssignContactToTeamMember": false,
+						 *         "shouldSkipAssigningContactForExisting": false
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams__post_200_response']
 					}
 				}
@@ -1024,6 +2275,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams__post_400_response']
 					}
 				}
@@ -1034,6 +2290,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams__post_401_response']
 					}
 				}
@@ -1044,6 +2305,30 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "userIds": {
+						 *         "message": "The user ids field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "calendarConfig.calendarName": {
+						 *         "message": "The calendarConfig.calendarName field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "calendarConfig.description": {
+						 *         "message": "The calendarConfig.description field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "calendarConfig.slug": {
+						 *         "message": "The calendarConfig.slug field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams__post_422_response']
 					}
 				}
@@ -1098,6 +2383,32 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "OW59k4IchTgKjIDy3VMO",
+						 *       "name": "Test Team",
+						 *       "members": [
+						 *         {
+						 *           "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *           "name": "Elon Musk",
+						 *           "email": "elon@musk.com"
+						 *         },
+						 *         {
+						 *           "id": "mnUXmpG2MhhHKmjegzBZ",
+						 *           "name": "Elon Musk",
+						 *           "email": "elon@musk.com"
+						 *         }
+						 *       ],
+						 *       "calendarConfig": {
+						 *         "calendarName": "Test Calendar",
+						 *         "description": "Desc.",
+						 *         "slug": "slug",
+						 *         "link": "/widget/appointment/slug",
+						 *         "shouldAssignContactToTeamMember": false,
+						 *         "shouldSkipAssigningContactForExisting": false
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_200_response']
 					}
 				}
@@ -1108,6 +2419,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_400_response']
 					}
 				}
@@ -1118,6 +2434,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_401_response']
 					}
 				}
@@ -1128,6 +2449,30 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "userIds": {
+						 *         "message": "The user ids field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "calendarConfig.calendarName": {
+						 *         "message": "The calendarConfig.calendarName field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "calendarConfig.description": {
+						 *         "message": "The calendarConfig.description field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "calendarConfig.slug": {
+						 *         "message": "The calendarConfig.slug field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_put_422_response']
 					}
 				}
@@ -1163,6 +2508,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'text/plain': string
 					}
 				}
@@ -1173,6 +2519,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_delete_400_response']
 					}
 				}
@@ -1183,6 +2534,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_calendars_teams_{teamId}_delete_401_response']
 					}
 				}
@@ -1229,6 +2585,22 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "campaigns": [
+						 *         {
+						 *           "id": "Y2I9XM7aO1hncuSOlc9L",
+						 *           "name": "Test Campaign",
+						 *           "status": "draft"
+						 *         },
+						 *         {
+						 *           "id": "Y2I9XM7aO1hncuSOlc9L",
+						 *           "name": "Test Campaign",
+						 *           "status": "draft"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_campaigns__get_200_response']
 					}
 				}
@@ -1239,6 +2611,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_campaigns__get_400_response']
 					}
 				}
@@ -1249,6 +2626,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_campaigns__get_401_response']
 					}
 				}
@@ -1313,6 +2695,73 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "contacts": [
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *           "email": "JohnDeo@gmail.com",
+						 *           "emailLowerCase": "johndeo@gmail.com",
+						 *           "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *           "timezone": "Asia/Calcutta",
+						 *           "country": "DE",
+						 *           "source": "xyz form",
+						 *           "dateAdded": "2020-10-29T09:31:30.255Z",
+						 *           "customField": [
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "cillum in ullamco dolor commodo"
+						 *             },
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "tempor"
+						 *             }
+						 *           ],
+						 *           "tags": [
+						 *             "magna ut sint labore lab",
+						 *             "Duis nulla cillum"
+						 *           ],
+						 *           "__moreField__": "ut consequat sit"
+						 *         },
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *           "email": "JohnDeo@gmail.com",
+						 *           "emailLowerCase": "johndeo@gmail.com",
+						 *           "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *           "timezone": "Asia/Calcutta",
+						 *           "country": "DE",
+						 *           "source": "xyz form",
+						 *           "dateAdded": "2020-10-29T09:31:30.255Z",
+						 *           "customField": [
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "Duis Excepteur cupidatat d"
+						 *             },
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "pariatur"
+						 *             }
+						 *           ],
+						 *           "tags": [
+						 *             "veniam amet velit commodo",
+						 *             "ullamco eu sit mollit"
+						 *           ],
+						 *           "__moreField__": "cupidatat sit anim"
+						 *         }
+						 *       ],
+						 *       "meta": {
+						 *         "total": 250,
+						 *         "nextPageUrl": "https://rest.gohighlevel.com/v1/contacts?limit=1&q=j&startAfter=1603870249758&startAfterId=UIaE1WjAwWKdlyD7osQI",
+						 *         "startAfterId": "UIaE1WjAwWKdlyD7osQI",
+						 *         "startAfter": 1603870249758,
+						 *         "currentPage": 2,
+						 *         "nextPage": 3,
+						 *         "prevPage": 1
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts__get_200_response']
 					}
 				}
@@ -1323,6 +2772,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts__get_400_response']
 					}
 				}
@@ -1333,6 +2787,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts__get_401_response']
 					}
 				}
@@ -1368,6 +2827,36 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "contact": {
+						 *         "id": "ocQHyuzHvysMo5N5VsXc",
+						 *         "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *         "email": "JohnDeo@gmail.com",
+						 *         "emailLowerCase": "johndeo@gmail.com",
+						 *         "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *         "timezone": "Asia/Calcutta",
+						 *         "country": "DE",
+						 *         "source": "xyz form",
+						 *         "dateAdded": "2020-10-29T09:31:30.255Z",
+						 *         "customField": [
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "ea laboris consectetur elit sit"
+						 *           },
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "incididunt cupidatat nostrud qu"
+						 *           }
+						 *         ],
+						 *         "tags": [
+						 *           "laboris esse ut irure",
+						 *           "eiusmod exercitation irure ut"
+						 *         ],
+						 *         "__moreField__": "consequat"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts__post_200_response']
 					}
 				}
@@ -1378,6 +2867,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts__post_400_response']
 					}
 				}
@@ -1388,6 +2882,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts__post_401_response']
 					}
 				}
@@ -1398,6 +2897,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "email or phone": {
+						 *         "message": "The email or phone field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts__post_422_response']
 					}
 				}
@@ -1445,6 +2952,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example {} */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_appointments__get_200_response']
 					}
 				}
@@ -1455,6 +2963,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_appointments__get_400_response']
 					}
 				}
@@ -1465,6 +2978,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_appointments__get_401_response']
 					}
 				}
@@ -1525,6 +3043,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -1535,6 +3054,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_post_400_response']
 					}
 				}
@@ -1545,6 +3069,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_post_401_response']
 					}
 				}
@@ -1555,6 +3084,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": {
+						 *         "message": "The tags field is mandatory.",
+						 *         "rules": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_post_422_response']
 					}
 				}
@@ -1594,6 +3131,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -1604,6 +3142,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_delete_400_response']
 					}
 				}
@@ -1614,6 +3157,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_delete_401_response']
 					}
 				}
@@ -1624,6 +3172,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": {
+						 *         "message": "The tags field is mandatory.",
+						 *         "rules": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_{campaignId}_delete_422_response']
 					}
 				}
@@ -1673,6 +3229,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -1683,6 +3240,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_remove-all_delete_400_response']
 					}
 				}
@@ -1693,6 +3255,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_remove-all_delete_401_response']
 					}
 				}
@@ -1703,6 +3270,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": {
+						 *         "message": "The tags field is mandatory.",
+						 *         "rules": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_campaigns_remove-all_delete_422_response']
 					}
 				}
@@ -1749,6 +3324,24 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "notes": [
+						 *         {
+						 *           "id": "Lj371SHlVMyfVlMcKiuk",
+						 *           "body": "Loram ipsum",
+						 *           "createdBy": "Loram ipsum",
+						 *           "createdAt": "2020-10-20T12:52:17.561Z"
+						 *         },
+						 *         {
+						 *           "id": "Lj371SHlVMyfVlMcKiuk",
+						 *           "body": "Loram ipsum",
+						 *           "createdBy": "Loram ipsum",
+						 *           "createdAt": "2020-10-20T12:52:17.561Z"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__get_200_response']
 					}
 				}
@@ -1759,6 +3352,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__get_400_response']
 					}
 				}
@@ -1769,6 +3367,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__get_401_response']
 					}
 				}
@@ -1810,6 +3413,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "Lj371SHlVMyfVlMcKiuk",
+						 *       "body": "Loram ipsum",
+						 *       "createdBy": "Loram ipsum",
+						 *       "createdAt": "2020-10-20T12:52:17.561Z"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_200_response']
 					}
 				}
@@ -1820,6 +3431,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_400_response']
 					}
 				}
@@ -1830,6 +3446,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_401_response']
 					}
 				}
@@ -1840,6 +3461,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "body": {
+						 *         "message": "The body field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes__post_422_response']
 					}
 				}
@@ -1892,6 +3521,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "Lj371SHlVMyfVlMcKiuk",
+						 *       "body": "Loram ipsum",
+						 *       "createdBy": "Loram ipsum",
+						 *       "createdAt": "2020-10-20T12:52:17.561Z"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_get_200_response']
 					}
 				}
@@ -1902,6 +3539,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_get_400_response']
 					}
 				}
@@ -1912,6 +3554,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_get_401_response']
 					}
 				}
@@ -1957,6 +3604,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "Lj371SHlVMyfVlMcKiuk",
+						 *       "body": "Loram ipsum",
+						 *       "createdBy": "Loram ipsum",
+						 *       "createdAt": "2020-10-20T12:52:17.561Z"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_200_response']
 					}
 				}
@@ -1967,6 +3622,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_400_response']
 					}
 				}
@@ -1977,6 +3637,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_401_response']
 					}
 				}
@@ -1987,6 +3652,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "body": {
+						 *         "message": "The body field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_put_422_response']
 					}
 				}
@@ -2027,6 +3700,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -2037,6 +3711,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_delete_400_response']
 					}
 				}
@@ -2047,6 +3726,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_notes_{noteId}_delete_401_response']
 					}
 				}
@@ -2101,6 +3785,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": [
+						 *         "velit exer",
+						 *         "sed ad"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_200_response']
 					}
 				}
@@ -2111,6 +3803,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_400_response']
 					}
 				}
@@ -2121,6 +3818,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_401_response']
 					}
 				}
@@ -2131,6 +3833,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": {
+						 *         "message": "The tags field is mandatory.",
+						 *         "rules": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__post_422_response']
 					}
 				}
@@ -2167,6 +3877,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": [
+						 *         "consequat",
+						 *         "culpa ut"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_200_response']
 					}
 				}
@@ -2177,6 +3895,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_400_response']
 					}
 				}
@@ -2187,6 +3910,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_401_response']
 					}
 				}
@@ -2197,6 +3925,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": {
+						 *         "message": "The tags field is mandatory.",
+						 *         "rules": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tags__delete_422_response']
 					}
 				}
@@ -2243,6 +3979,28 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tasks": [
+						 *         {
+						 *           "id": "Lj371SHlVMyfVlMcKiuk",
+						 *           "title": "Loram ipsum",
+						 *           "description": "Loram ipsum",
+						 *           "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *           "dueDate": "2020-10-25T11:00:00Z",
+						 *           "isCompleted": false
+						 *         },
+						 *         {
+						 *           "id": "Lj371SHlVMyfVlMcKiuk",
+						 *           "title": "Loram ipsum",
+						 *           "description": "Loram ipsum",
+						 *           "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *           "dueDate": "2020-10-25T11:00:00Z",
+						 *           "isCompleted": false
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__get_200_response']
 					}
 				}
@@ -2253,6 +4011,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__get_400_response']
 					}
 				}
@@ -2263,6 +4026,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__get_401_response']
 					}
 				}
@@ -2304,6 +4072,16 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "Lj371SHlVMyfVlMcKiuk",
+						 *       "title": "Loram ipsum",
+						 *       "description": "Loram ipsum",
+						 *       "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *       "dueDate": "2020-10-25T11:00:00Z",
+						 *       "isCompleted": false
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_200_response']
 					}
 				}
@@ -2314,6 +4092,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_400_response']
 					}
 				}
@@ -2324,6 +4107,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_401_response']
 					}
 				}
@@ -2334,6 +4122,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "title": {
+						 *         "message": "The title field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "dueDate": {
+						 *         "message": "The due date field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks__post_422_response']
 					}
 				}
@@ -2386,6 +4186,16 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "Lj371SHlVMyfVlMcKiuk",
+						 *       "title": "Loram ipsum",
+						 *       "description": "Loram ipsum",
+						 *       "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *       "dueDate": "2020-10-25T11:00:00Z",
+						 *       "isCompleted": false
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_get_200_response']
 					}
 				}
@@ -2396,6 +4206,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_get_400_response']
 					}
 				}
@@ -2406,6 +4221,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_get_401_response']
 					}
 				}
@@ -2451,6 +4271,16 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "Lj371SHlVMyfVlMcKiuk",
+						 *       "title": "Loram ipsum",
+						 *       "description": "Loram ipsum",
+						 *       "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *       "dueDate": "2020-10-25T11:00:00Z",
+						 *       "isCompleted": false
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_200_response']
 					}
 				}
@@ -2461,6 +4291,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_400_response']
 					}
 				}
@@ -2471,6 +4306,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_401_response']
 					}
 				}
@@ -2481,6 +4321,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "title": {
+						 *         "message": "The title field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "dueDate": {
+						 *         "message": "The due date field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_put_422_response']
 					}
 				}
@@ -2521,6 +4373,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -2531,6 +4384,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_delete_400_response']
 					}
 				}
@@ -2541,6 +4399,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_delete_401_response']
 					}
 				}
@@ -2599,6 +4462,16 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "Lj371SHlVMyfVlMcKiuk",
+						 *       "title": "Loram ipsum",
+						 *       "description": "Loram ipsum",
+						 *       "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *       "dueDate": "2020-10-25T11:00:00Z",
+						 *       "isCompleted": false
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_200_response']
 					}
 				}
@@ -2609,6 +4482,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_400_response']
 					}
 				}
@@ -2619,6 +4497,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_401_response']
 					}
 				}
@@ -2629,6 +4512,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "title": {
+						 *         "message": "The title field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "dueDate": {
+						 *         "message": "The due date field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_tasks_{taskId}_status_put_422_response']
 					}
 				}
@@ -2690,6 +4585,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -2700,6 +4596,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_workflow_{workflowId}_post_400_response']
 					}
 				}
@@ -2710,6 +4611,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_workflow_{workflowId}_post_401_response']
 					}
 				}
@@ -2720,6 +4626,12 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "contactId": "The contact id is invalid.",
+						 *       "workflowId": "The workflow id is invalid."
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{contactId}_workflow_{workflowId}_post_422_response']
 					}
 				}
@@ -2767,6 +4679,36 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "contact": {
+						 *         "id": "ocQHyuzHvysMo5N5VsXc",
+						 *         "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *         "email": "JohnDeo@gmail.com",
+						 *         "emailLowerCase": "johndeo@gmail.com",
+						 *         "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *         "timezone": "Asia/Calcutta",
+						 *         "country": "DE",
+						 *         "source": "xyz form",
+						 *         "dateAdded": "2020-10-29T09:31:30.255Z",
+						 *         "customField": [
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "ea laboris consectetur elit sit"
+						 *           },
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "incididunt cupidatat nostrud qu"
+						 *           }
+						 *         ],
+						 *         "tags": [
+						 *           "laboris esse ut irure",
+						 *           "eiusmod exercitation irure ut"
+						 *         ],
+						 *         "__moreField__": "consequat"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_get_200_response']
 					}
 				}
@@ -2777,6 +4719,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_get_400_response']
 					}
 				}
@@ -2787,6 +4734,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_get_401_response']
 					}
 				}
@@ -2797,6 +4749,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": {
+						 *         "message": "The contact id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_get_422_response']
 					}
 				}
@@ -2837,6 +4797,36 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "contact": {
+						 *         "id": "ocQHyuzHvysMo5N5VsXc",
+						 *         "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *         "email": "JohnDeo@gmail.com",
+						 *         "emailLowerCase": "johndeo@gmail.com",
+						 *         "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *         "timezone": "Asia/Calcutta",
+						 *         "country": "DE",
+						 *         "source": "xyz form",
+						 *         "dateAdded": "2020-10-29T09:31:30.255Z",
+						 *         "customField": [
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "ea laboris consectetur elit sit"
+						 *           },
+						 *           {
+						 *             "id": "MgobCB14YMVKuE4Ka8p1",
+						 *             "value": "incididunt cupidatat nostrud qu"
+						 *           }
+						 *         ],
+						 *         "tags": [
+						 *           "laboris esse ut irure",
+						 *           "eiusmod exercitation irure ut"
+						 *         ],
+						 *         "__moreField__": "consequat"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_put_200_response']
 					}
 				}
@@ -2847,6 +4837,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_put_400_response']
 					}
 				}
@@ -2857,6 +4852,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_put_401_response']
 					}
 				}
@@ -2867,6 +4867,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": {
+						 *         "message": "The contact id is invalid.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_put_422_response']
 					}
 				}
@@ -2902,6 +4910,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'text/plain': string
 					}
 				}
@@ -2912,6 +4921,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_delete_400_response']
 					}
 				}
@@ -2922,6 +4936,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_delete_401_response']
 					}
 				}
@@ -2932,6 +4951,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": {
+						 *         "message": "The contact id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_{id}_delete_422_response']
 					}
 				}
@@ -2983,6 +5010,64 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "contacts": [
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *           "email": "JohnDeo@gmail.com",
+						 *           "emailLowerCase": "johndeo@gmail.com",
+						 *           "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *           "timezone": "Asia/Calcutta",
+						 *           "country": "DE",
+						 *           "source": "xyz form",
+						 *           "dateAdded": "2020-10-29T09:31:30.255Z",
+						 *           "customField": [
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "quis Excepteur nisi officia"
+						 *             },
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "laborum"
+						 *             }
+						 *           ],
+						 *           "tags": [
+						 *             "et incidi",
+						 *             "nulla eu commodo aliqua"
+						 *           ],
+						 *           "__moreField__": "exercitation nostrud ea"
+						 *         },
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "locationId": "C2QujeCh8ZnC7al2InWR",
+						 *           "email": "JohnDeo@gmail.com",
+						 *           "emailLowerCase": "johndeo@gmail.com",
+						 *           "fingerprint": "91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24",
+						 *           "timezone": "Asia/Calcutta",
+						 *           "country": "DE",
+						 *           "source": "xyz form",
+						 *           "dateAdded": "2020-10-29T09:31:30.255Z",
+						 *           "customField": [
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "consequat tempor sed cillum"
+						 *             },
+						 *             {
+						 *               "id": "MgobCB14YMVKuE4Ka8p1",
+						 *               "value": "occaecat anim"
+						 *             }
+						 *           ],
+						 *           "tags": [
+						 *             "deserunt sed est",
+						 *             "consequat id irure"
+						 *           ],
+						 *           "__moreField__": "qui dolor Lorem"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_lookup_get_200_response']
 					}
 				}
@@ -2993,6 +5078,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_lookup_get_400_response']
 					}
 				}
@@ -3003,6 +5093,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_lookup_get_401_response']
 					}
 				}
@@ -3013,6 +5108,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "email or phone": {
+						 *         "message": "The email or phone field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_contacts_lookup_get_422_response']
 					}
 				}
@@ -3053,6 +5156,36 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "customFields": [
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "name": "Select",
+						 *           "fieldKey": "contact.select",
+						 *           "placeholder": "Placeholder Text",
+						 *           "position": 0,
+						 *           "dateType": "SINGLE_OPTIONS",
+						 *           "picklistOptions": [
+						 *             "first",
+						 *             "first"
+						 *           ]
+						 *         },
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "name": "Select",
+						 *           "fieldKey": "contact.select",
+						 *           "placeholder": "Placeholder Text",
+						 *           "position": 0,
+						 *           "dateType": "SINGLE_OPTIONS",
+						 *           "picklistOptions": [
+						 *             "first",
+						 *             "first"
+						 *           ]
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields__get_200_response']
 					}
 				}
@@ -3063,6 +5196,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields__get_400_response']
 					}
 				}
@@ -3073,6 +5211,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields__get_401_response']
 					}
 				}
@@ -3108,6 +5251,20 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ocQHyuzHvysMo5N5VsXc",
+						 *       "name": "Select",
+						 *       "fieldKey": "contact.select",
+						 *       "placeholder": "Placeholder Text",
+						 *       "position": 0,
+						 *       "dateType": "SINGLE_OPTIONS",
+						 *       "picklistOptions": [
+						 *         "first",
+						 *         "first"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields__post_200_response']
 					}
 				}
@@ -3118,6 +5275,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields__post_400_response']
 					}
 				}
@@ -3128,6 +5290,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields__post_401_response']
 					}
 				}
@@ -3138,6 +5305,22 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "dataType": {
+						 *         "message": "The data type field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "options or acceptedFormat or textBoxListOptions": {
+						 *         "message": "The options or acceptedFormat or textBoxListOptions field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields__post_422_response']
 					}
 				}
@@ -3185,6 +5368,20 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ocQHyuzHvysMo5N5VsXc",
+						 *       "name": "Select",
+						 *       "fieldKey": "contact.select",
+						 *       "placeholder": "Placeholder Text",
+						 *       "position": 0,
+						 *       "dateType": "SINGLE_OPTIONS",
+						 *       "picklistOptions": [
+						 *         "first",
+						 *         "first"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_get_200_response']
 					}
 				}
@@ -3195,6 +5392,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_get_400_response']
 					}
 				}
@@ -3205,6 +5407,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_get_401_response']
 					}
 				}
@@ -3245,6 +5452,20 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ocQHyuzHvysMo5N5VsXc",
+						 *       "name": "Select",
+						 *       "fieldKey": "contact.select",
+						 *       "placeholder": "Placeholder Text",
+						 *       "position": 0,
+						 *       "dateType": "SINGLE_OPTIONS",
+						 *       "picklistOptions": [
+						 *         "first",
+						 *         "first"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_200_response']
 					}
 				}
@@ -3255,6 +5476,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_400_response']
 					}
 				}
@@ -3265,6 +5491,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_401_response']
 					}
 				}
@@ -3275,6 +5506,22 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "dataType": {
+						 *         "message": "The data type field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "options or acceptedFormat or textBoxListOptions": {
+						 *         "message": "The options or acceptedFormat or textBoxListOptions field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_put_422_response']
 					}
 				}
@@ -3310,6 +5557,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -3320,6 +5568,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_delete_400_response']
 					}
 				}
@@ -3330,6 +5583,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_delete_401_response']
 					}
 				}
@@ -3340,6 +5598,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "customFieldId": {
+						 *         "message": "The custom field id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-fields_{customFieldId}_delete_422_response']
 					}
 				}
@@ -3377,6 +5643,24 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "customFields": [
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "name": "Select",
+						 *           "fieldKey": "{{ custom_value.test }}",
+						 *           "value": "test"
+						 *         },
+						 *         {
+						 *           "id": "ocQHyuzHvysMo5N5VsXc",
+						 *           "name": "Select",
+						 *           "fieldKey": "{{ custom_value.test }}",
+						 *           "value": "test"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values__get_200_response']
 					}
 				}
@@ -3387,6 +5671,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values__get_400_response']
 					}
 				}
@@ -3397,6 +5686,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values__get_401_response']
 					}
 				}
@@ -3432,6 +5726,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ocQHyuzHvysMo5N5VsXc",
+						 *       "name": "Select",
+						 *       "fieldKey": "{{ custom_value.test }}",
+						 *       "value": "test"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values__post_200_response']
 					}
 				}
@@ -3442,6 +5744,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values__post_400_response']
 					}
 				}
@@ -3452,6 +5759,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values__post_401_response']
 					}
 				}
@@ -3462,6 +5774,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "value": {
+						 *         "message": "The value field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values__post_422_response']
 					}
 				}
@@ -3509,6 +5833,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ocQHyuzHvysMo5N5VsXc",
+						 *       "name": "Select",
+						 *       "fieldKey": "{{ custom_value.test }}",
+						 *       "value": "test"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_get_200_response']
 					}
 				}
@@ -3519,6 +5851,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_get_400_response']
 					}
 				}
@@ -3529,6 +5866,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_get_401_response']
 					}
 				}
@@ -3569,6 +5911,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ocQHyuzHvysMo5N5VsXc",
+						 *       "name": "Select",
+						 *       "fieldKey": "{{ custom_value.test }}",
+						 *       "value": "test"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_200_response']
 					}
 				}
@@ -3579,6 +5929,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_400_response']
 					}
 				}
@@ -3589,6 +5944,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_401_response']
 					}
 				}
@@ -3599,6 +5959,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "value": {
+						 *         "message": "The value field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_put_422_response']
 					}
 				}
@@ -3634,6 +6006,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -3644,6 +6017,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_delete_400_response']
 					}
 				}
@@ -3654,6 +6032,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_delete_401_response']
 					}
 				}
@@ -3664,6 +6047,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "customValueId": {
+						 *         "message": "The custom field id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_custom-values_{customValueId}_delete_422_response']
 					}
 				}
@@ -3701,6 +6092,20 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "forms": [
+						 *         {
+						 *           "id": "uP9CBUzKKZkP5BtkHeK3",
+						 *           "name": "Form 1"
+						 *         },
+						 *         {
+						 *           "id": "uP9CBUzKKZkP5BtkHeK3",
+						 *           "name": "Form 1"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_forms__get_200_response']
 					}
 				}
@@ -3711,6 +6116,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_forms__get_400_response']
 					}
 				}
@@ -3721,6 +6131,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_forms__get_401_response']
 					}
 				}
@@ -3795,6 +6210,46 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "submissions": [
+						 *         {
+						 *           "id": "be759b9a-c3ec-4b29-ba07-fc3c89c77673",
+						 *           "contactId": "9NkT25Vor1v4aQatFsv2",
+						 *           "__submissions_other_field__": "john@deo.com",
+						 *           "__custom_field_id__": "20",
+						 *           "createdAt": "2020-11-01T18:02:21.000Z",
+						 *           "formId": "jjusM6EOngDExnbo2DbU",
+						 *           "pageDetails": {
+						 *             "url": "https://www.gohighlevel.com/",
+						 *             "source": "Social Media",
+						 *             "referrer": "http://m.facebook.com",
+						 *             "fbclid": "IwAR1JoTTltt3EKJE3O-MrQij_lTeA6BKGTy8M2wKepSzs4oUbTYhL2Lns18w"
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "be759b9a-c3ec-4b29-ba07-fc3c89c77673",
+						 *           "contactId": "9NkT25Vor1v4aQatFsv2",
+						 *           "__submissions_other_field__": "john@deo.com",
+						 *           "__custom_field_id__": "20",
+						 *           "createdAt": "2020-11-01T18:02:21.000Z",
+						 *           "formId": "jjusM6EOngDExnbo2DbU",
+						 *           "pageDetails": {
+						 *             "url": "https://www.gohighlevel.com/",
+						 *             "source": "Social Media",
+						 *             "referrer": "http://m.facebook.com",
+						 *             "fbclid": "IwAR1JoTTltt3EKJE3O-MrQij_lTeA6BKGTy8M2wKepSzs4oUbTYhL2Lns18w"
+						 *           }
+						 *         }
+						 *       ],
+						 *       "meta": {
+						 *         "total": 250,
+						 *         "currentPage": 2,
+						 *         "nextPage": 3,
+						 *         "prevPage": 1
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_forms_submissions_get_200_response']
 					}
 				}
@@ -3805,6 +6260,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_forms_submissions_get_400_response']
 					}
 				}
@@ -3815,6 +6275,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_forms_submissions_get_401_response']
 					}
 				}
@@ -3855,6 +6320,26 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "links": [
+						 *         {
+						 *           "id": "ikMFj5x3rrKOQgu0k8y1",
+						 *           "name": "Trigger Link",
+						 *           "redirectTo": "https://www.google.com/",
+						 *           "fieldKey": "{{trigger_link.ClK3HFY3WH9L5McNwyy1}}",
+						 *           "locationId": "Lx1EI6YIgQYMQi0ytFXv"
+						 *         },
+						 *         {
+						 *           "id": "ikMFj5x3rrKOQgu0k8y1",
+						 *           "name": "Trigger Link",
+						 *           "redirectTo": "https://www.google.com/",
+						 *           "fieldKey": "{{trigger_link.ClK3HFY3WH9L5McNwyy1}}",
+						 *           "locationId": "Lx1EI6YIgQYMQi0ytFXv"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links__get_200_response']
 					}
 				}
@@ -3865,6 +6350,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links__get_400_response']
 					}
 				}
@@ -3875,6 +6365,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links__get_401_response']
 					}
 				}
@@ -3910,6 +6405,15 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ikMFj5x3rrKOQgu0k8y1",
+						 *       "name": "Trigger Link",
+						 *       "redirectTo": "https://www.google.com/",
+						 *       "fieldKey": "{{trigger_link.ClK3HFY3WH9L5McNwyy1}}",
+						 *       "locationId": "Lx1EI6YIgQYMQi0ytFXv"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links__post_200_response']
 					}
 				}
@@ -3920,6 +6424,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links__post_400_response']
 					}
 				}
@@ -3930,6 +6439,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links__post_401_response']
 					}
 				}
@@ -3940,6 +6454,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "redirectTo": {
+						 *         "message": "The redirect to field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links__post_422_response']
 					}
 				}
@@ -3994,6 +6520,15 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "ikMFj5x3rrKOQgu0k8y1",
+						 *       "name": "Trigger Link",
+						 *       "redirectTo": "https://www.google.com/",
+						 *       "fieldKey": "{{trigger_link.ClK3HFY3WH9L5McNwyy1}}",
+						 *       "locationId": "Lx1EI6YIgQYMQi0ytFXv"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links_{linkId}_put_200_response']
 					}
 				}
@@ -4004,6 +6539,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links_{linkId}_put_400_response']
 					}
 				}
@@ -4014,6 +6554,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links_{linkId}_put_401_response']
 					}
 				}
@@ -4024,6 +6569,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "linkId": {
+						 *         "message": "The link id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links_{linkId}_put_422_response']
 					}
 				}
@@ -4059,6 +6612,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -4069,6 +6623,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links_{linkId}_delete_400_response']
 					}
 				}
@@ -4079,6 +6638,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links_{linkId}_delete_401_response']
 					}
 				}
@@ -4089,6 +6653,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "linkId": {
+						 *         "message": "The link id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_links_{linkId}_delete_422_response']
 					}
 				}
@@ -4126,6 +6698,100 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "locations": [
+						 *         {
+						 *           "id": "i2SpAtBVHSVea1sL6oah",
+						 *           "name": "Tesla inc",
+						 *           "address": "3500 Deer Creek Road",
+						 *           "city": "Palo Alto",
+						 *           "country": "US",
+						 *           "state": "CA",
+						 *           "postalCode": "94304",
+						 *           "website": "https://www.tesla.com",
+						 *           "timezone": "US/Central",
+						 *           "firstName": "John",
+						 *           "lastName": "Deo",
+						 *           "email": "john@deo.com",
+						 *           "phone": "+1202-555-0107",
+						 *           "business": {
+						 *             "name": "Tesla inc",
+						 *             "address": "3500 Deer Creek Road",
+						 *             "city": "Palo Alto",
+						 *             "country": "US",
+						 *             "state": "CA",
+						 *             "postalCode": "94304",
+						 *             "website": "https://www.tesla.com",
+						 *             "timezone": "US/Central"
+						 *           },
+						 *           "social": {
+						 *             "facebookUrl": "https://facebook.com/groups/XXX",
+						 *             "googlePlus": "https://groups.google.com/d/XXX",
+						 *             "linkedIn": "https://www.linkedin.com/groups/XXX/profile",
+						 *             "foursquare": "https://foursquare.com/groups/XXX",
+						 *             "twitter": "https://twitter.com/XXX",
+						 *             "yelp": "https://yelp.com/XXX",
+						 *             "instagram": "https://instagram.com/XXX",
+						 *             "youtube": "https://youtube.com/XXX",
+						 *             "pinterest": "https://pinterest.com/XXX",
+						 *             "blogRss": "https://rss.xyz.com",
+						 *             "googlePlaceId": "redfdfdere"
+						 *           },
+						 *           "settings": {
+						 *             "allowDuplicateContact": false,
+						 *             "allowDuplicateOpportunity": false,
+						 *             "allowFacebookNameMerge": false,
+						 *             "disableContactTimezone": false
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "i2SpAtBVHSVea1sL6oah",
+						 *           "name": "Tesla inc",
+						 *           "address": "3500 Deer Creek Road",
+						 *           "city": "Palo Alto",
+						 *           "country": "US",
+						 *           "state": "CA",
+						 *           "postalCode": "94304",
+						 *           "website": "https://www.tesla.com",
+						 *           "timezone": "US/Central",
+						 *           "firstName": "John",
+						 *           "lastName": "Deo",
+						 *           "email": "john@deo.com",
+						 *           "phone": "+1202-555-0107",
+						 *           "business": {
+						 *             "name": "Tesla inc",
+						 *             "address": "3500 Deer Creek Road",
+						 *             "city": "Palo Alto",
+						 *             "country": "US",
+						 *             "state": "CA",
+						 *             "postalCode": "94304",
+						 *             "website": "https://www.tesla.com",
+						 *             "timezone": "US/Central"
+						 *           },
+						 *           "social": {
+						 *             "facebookUrl": "https://facebook.com/groups/XXX",
+						 *             "googlePlus": "https://groups.google.com/d/XXX",
+						 *             "linkedIn": "https://www.linkedin.com/groups/XXX/profile",
+						 *             "foursquare": "https://foursquare.com/groups/XXX",
+						 *             "twitter": "https://twitter.com/XXX",
+						 *             "yelp": "https://yelp.com/XXX",
+						 *             "instagram": "https://instagram.com/XXX",
+						 *             "youtube": "https://youtube.com/XXX",
+						 *             "pinterest": "https://pinterest.com/XXX",
+						 *             "blogRss": "https://rss.xyz.com",
+						 *             "googlePlaceId": "redfdfdere"
+						 *           },
+						 *           "settings": {
+						 *             "allowDuplicateContact": false,
+						 *             "allowDuplicateOpportunity": false,
+						 *             "allowFacebookNameMerge": false,
+						 *             "disableContactTimezone": false
+						 *           }
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations__get_200_response']
 					}
 				}
@@ -4136,6 +6802,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations__get_400_response']
 					}
 				}
@@ -4146,6 +6817,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations__get_401_response']
 					}
 				}
@@ -4181,6 +6857,53 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "i2SpAtBVHSVea1sL6oah",
+						 *       "name": "Tesla inc",
+						 *       "address": "3500 Deer Creek Road",
+						 *       "city": "Palo Alto",
+						 *       "country": "US",
+						 *       "state": "CA",
+						 *       "postalCode": "94304",
+						 *       "website": "https://www.tesla.com",
+						 *       "timezone": "US/Central",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "phone": "+1202-555-0107",
+						 *       "business": {
+						 *         "name": "Tesla inc",
+						 *         "email": "johndeo@gmail.com",
+						 *         "address": "3500 Deer Creek Road",
+						 *         "city": "Palo Alto",
+						 *         "country": "US",
+						 *         "state": "CA",
+						 *         "postalCode": "94304",
+						 *         "website": "https://www.tesla.com",
+						 *         "timezone": "US/Central"
+						 *       },
+						 *       "social": {
+						 *         "facebookUrl": "https://facebook.com/groups/XXX",
+						 *         "googlePlus": "https://groups.google.com/d/XXX",
+						 *         "linkedIn": "https://www.linkedin.com/groups/XXX/profile",
+						 *         "foursquare": "https://foursquare.com/groups/XXX",
+						 *         "twitter": "https://twitter.com/XXX",
+						 *         "yelp": "https://yelp.com/XXX",
+						 *         "instagram": "https://instagram.com/XXX",
+						 *         "youtube": "https://youtube.com/XXX",
+						 *         "pinterest": "https://pinterest.com/XXX",
+						 *         "blogRss": "https://rss.xyz.com",
+						 *         "googlePlaceId": "redfdfdere"
+						 *       },
+						 *       "settings": {
+						 *         "allowDuplicateContact": false,
+						 *         "allowDuplicateOpportunity": false,
+						 *         "allowFacebookNameMerge": false,
+						 *         "disableContactTimezone": false
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations__post_200_response']
 					}
 				}
@@ -4191,6 +6914,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations__post_400_response']
 					}
 				}
@@ -4201,6 +6929,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations__post_401_response']
 					}
 				}
@@ -4211,6 +6944,50 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "firstName": {
+						 *         "message": "The first name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "lastName": {
+						 *         "message": "The last name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "email": {
+						 *         "message": "The email field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "phone": {
+						 *         "message": "The email field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "businessName": {
+						 *         "message": "The business name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "address": {
+						 *         "message": "The address field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "city": {
+						 *         "message": "The city field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "state": {
+						 *         "message": "The state field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "country": {
+						 *         "message": "The country field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "postalCode": {
+						 *         "message": "The postal code field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations__post_422_response']
 					}
 				}
@@ -4258,6 +7035,53 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "i2SpAtBVHSVea1sL6oah",
+						 *       "name": "Tesla inc",
+						 *       "address": "3500 Deer Creek Road",
+						 *       "city": "Palo Alto",
+						 *       "country": "US",
+						 *       "state": "CA",
+						 *       "postalCode": "94304",
+						 *       "website": "https://www.tesla.com",
+						 *       "timezone": "US/Central",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "phone": "+1202-555-0107",
+						 *       "business": {
+						 *         "name": "Tesla inc",
+						 *         "email": "johndeo@gmail.com",
+						 *         "address": "3500 Deer Creek Road",
+						 *         "city": "Palo Alto",
+						 *         "country": "US",
+						 *         "state": "CA",
+						 *         "postalCode": "94304",
+						 *         "website": "https://www.tesla.com",
+						 *         "timezone": "US/Central"
+						 *       },
+						 *       "social": {
+						 *         "facebookUrl": "https://facebook.com/groups/XXX",
+						 *         "googlePlus": "https://groups.google.com/d/XXX",
+						 *         "linkedIn": "https://www.linkedin.com/groups/XXX/profile",
+						 *         "foursquare": "https://foursquare.com/groups/XXX",
+						 *         "twitter": "https://twitter.com/XXX",
+						 *         "yelp": "https://yelp.com/XXX",
+						 *         "instagram": "https://instagram.com/XXX",
+						 *         "youtube": "https://youtube.com/XXX",
+						 *         "pinterest": "https://pinterest.com/XXX",
+						 *         "blogRss": "https://rss.xyz.com",
+						 *         "googlePlaceId": "redfdfdere"
+						 *       },
+						 *       "settings": {
+						 *         "allowDuplicateContact": false,
+						 *         "allowDuplicateOpportunity": false,
+						 *         "allowFacebookNameMerge": false,
+						 *         "disableContactTimezone": false
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_get_200_response']
 					}
 				}
@@ -4268,6 +7092,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_get_400_response']
 					}
 				}
@@ -4278,6 +7107,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_get_401_response']
 					}
 				}
@@ -4318,6 +7152,53 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "i2SpAtBVHSVea1sL6oah",
+						 *       "name": "Tesla inc",
+						 *       "address": "3500 Deer Creek Road",
+						 *       "city": "Palo Alto",
+						 *       "country": "US",
+						 *       "state": "CA",
+						 *       "postalCode": "94304",
+						 *       "website": "https://www.tesla.com",
+						 *       "timezone": "US/Central",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "phone": "+1202-555-0107",
+						 *       "business": {
+						 *         "name": "Tesla inc",
+						 *         "email": "johndeo@gmail.com",
+						 *         "address": "3500 Deer Creek Road",
+						 *         "city": "Palo Alto",
+						 *         "country": "US",
+						 *         "state": "CA",
+						 *         "postalCode": "94304",
+						 *         "website": "https://www.tesla.com",
+						 *         "timezone": "US/Central"
+						 *       },
+						 *       "social": {
+						 *         "facebookUrl": "https://facebook.com/groups/XXX",
+						 *         "googlePlus": "https://groups.google.com/d/XXX",
+						 *         "linkedIn": "https://www.linkedin.com/groups/XXX/profile",
+						 *         "foursquare": "https://foursquare.com/groups/XXX",
+						 *         "twitter": "https://twitter.com/XXX",
+						 *         "yelp": "https://yelp.com/XXX",
+						 *         "instagram": "https://instagram.com/XXX",
+						 *         "youtube": "https://youtube.com/XXX",
+						 *         "pinterest": "https://pinterest.com/XXX",
+						 *         "blogRss": "https://rss.xyz.com",
+						 *         "googlePlaceId": "redfdfdere"
+						 *       },
+						 *       "settings": {
+						 *         "allowDuplicateContact": false,
+						 *         "allowDuplicateOpportunity": false,
+						 *         "allowFacebookNameMerge": false,
+						 *         "disableContactTimezone": false
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_put_200_response']
 					}
 				}
@@ -4328,6 +7209,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_put_400_response']
 					}
 				}
@@ -4338,6 +7224,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_put_401_response']
 					}
 				}
@@ -4348,6 +7239,50 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "firstName": {
+						 *         "message": "The first name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "lastName": {
+						 *         "message": "The last name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "email": {
+						 *         "message": "The email field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "phone": {
+						 *         "message": "The email field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "businessName": {
+						 *         "message": "The business name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "address": {
+						 *         "message": "The address field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "city": {
+						 *         "message": "The city field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "state": {
+						 *         "message": "The state field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "country": {
+						 *         "message": "The country field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "postalCode": {
+						 *         "message": "The postal code field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_put_422_response']
 					}
 				}
@@ -4389,6 +7324,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Success"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_delete_200_response']
 					}
 				}
@@ -4399,6 +7339,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_delete_400_response']
 					}
 				}
@@ -4409,6 +7354,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_delete_401_response']
 					}
 				}
@@ -4419,6 +7369,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "locationId": {
+						 *         "message": "The location id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_delete_422_response']
 					}
 				}
@@ -4477,6 +7435,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Copying the data, we will send a notification once it's completed."
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_200_response']
 					}
 				}
@@ -4487,6 +7450,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_400_response']
 					}
 				}
@@ -4497,6 +7465,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_401_response']
 					}
 				}
@@ -4507,6 +7480,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "locationId": {
+						 *         "message": "The location id is invalid.",
+						 *         "rule": "invalid"
+						 *       },
+						 *       "snapshotId": {
+						 *         "message": "The snapshot id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_{locationId}_load-snapshot_{snapshotId}_put_422_response']
 					}
 				}
@@ -4555,6 +7540,53 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "i2SpAtBVHSVea1sL6oah",
+						 *       "name": "Tesla inc",
+						 *       "address": "3500 Deer Creek Road",
+						 *       "city": "Palo Alto",
+						 *       "country": "US",
+						 *       "state": "CA",
+						 *       "postalCode": "94304",
+						 *       "website": "https://www.tesla.com",
+						 *       "timezone": "US/Central",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "phone": "+1202-555-0107",
+						 *       "business": {
+						 *         "name": "Tesla inc",
+						 *         "email": "johndeo@gmail.com",
+						 *         "address": "3500 Deer Creek Road",
+						 *         "city": "Palo Alto",
+						 *         "country": "US",
+						 *         "state": "CA",
+						 *         "postalCode": "94304",
+						 *         "website": "https://www.tesla.com",
+						 *         "timezone": "US/Central"
+						 *       },
+						 *       "social": {
+						 *         "facebookUrl": "https://facebook.com/groups/XXX",
+						 *         "googlePlus": "https://groups.google.com/d/XXX",
+						 *         "linkedIn": "https://www.linkedin.com/groups/XXX/profile",
+						 *         "foursquare": "https://foursquare.com/groups/XXX",
+						 *         "twitter": "https://twitter.com/XXX",
+						 *         "yelp": "https://yelp.com/XXX",
+						 *         "instagram": "https://instagram.com/XXX",
+						 *         "youtube": "https://youtube.com/XXX",
+						 *         "pinterest": "https://pinterest.com/XXX",
+						 *         "blogRss": "https://rss.xyz.com",
+						 *         "googlePlaceId": "redfdfdere"
+						 *       },
+						 *       "settings": {
+						 *         "allowDuplicateContact": false,
+						 *         "allowDuplicateOpportunity": false,
+						 *         "allowFacebookNameMerge": false,
+						 *         "disableContactTimezone": false
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_lookup_get_200_response']
 					}
 				}
@@ -4565,6 +7597,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_lookup_get_400_response']
 					}
 				}
@@ -4575,6 +7612,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_locations_lookup_get_401_response']
 					}
 				}
@@ -4615,6 +7657,40 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "pipelines": [
+						 *         {
+						 *           "id": "bCkKGpDsyPP4peuKowkG",
+						 *           "name": "First Pipeline",
+						 *           "stages": [
+						 *             {
+						 *               "id": "bCkKGp8b897c8f-b859-49c1-88f2-ed590708a85csyPP4peuKowkG",
+						 *               "name": "First Stage"
+						 *             },
+						 *             {
+						 *               "id": "bCkKGp8b897c8f-b859-49c1-88f2-ed590708a85csyPP4peuKowkG",
+						 *               "name": "First Stage"
+						 *             }
+						 *           ]
+						 *         },
+						 *         {
+						 *           "id": "bCkKGpDsyPP4peuKowkG",
+						 *           "name": "First Pipeline",
+						 *           "stages": [
+						 *             {
+						 *               "id": "bCkKGp8b897c8f-b859-49c1-88f2-ed590708a85csyPP4peuKowkG",
+						 *               "name": "First Stage"
+						 *             },
+						 *             {
+						 *               "id": "bCkKGp8b897c8f-b859-49c1-88f2-ed590708a85csyPP4peuKowkG",
+						 *               "name": "First Stage"
+						 *             }
+						 *           ]
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines__get_200_response']
 					}
 				}
@@ -4625,6 +7701,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines__get_400_response']
 					}
 				}
@@ -4635,6 +7716,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines__get_401_response']
 					}
 				}
@@ -4700,6 +7786,69 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "opportunities": [
+						 *         {
+						 *           "id": "7XExm1wr8gFeZpl6rQny",
+						 *           "name": "First Opp",
+						 *           "monetaryValue": 120,
+						 *           "pipelineId": "bCkKGpDsyPP4peuKowkG",
+						 *           "pipelineStageId": "8b897c8f-b859-49c1-88f2-ed590708a85c",
+						 *           "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *           "status": "open",
+						 *           "source": "form",
+						 *           "lastStatusChangeAt": "2020-10-29T09:39:35.472Z",
+						 *           "createdAt": "2020-10-29T09:31:30.255Z",
+						 *           "updatedAt": "2020-10-29T09:44:02.263Z",
+						 *           "contact": {
+						 *             "id": "byMEV0NQinDhq8ZfiOi2",
+						 *             "name": "John Deo",
+						 *             "companyName": "Tesla Inc",
+						 *             "email": "john@deo.com",
+						 *             "phone": "+1202-555-0107",
+						 *             "tags": [
+						 *               "ipsum sunt",
+						 *               "ipsum mollit deserunt id veniam"
+						 *             ]
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "7XExm1wr8gFeZpl6rQny",
+						 *           "name": "First Opp",
+						 *           "monetaryValue": 120,
+						 *           "pipelineId": "bCkKGpDsyPP4peuKowkG",
+						 *           "pipelineStageId": "8b897c8f-b859-49c1-88f2-ed590708a85c",
+						 *           "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *           "status": "open",
+						 *           "source": "form",
+						 *           "lastStatusChangeAt": "2020-10-29T09:39:35.472Z",
+						 *           "createdAt": "2020-10-29T09:31:30.255Z",
+						 *           "updatedAt": "2020-10-29T09:44:02.263Z",
+						 *           "contact": {
+						 *             "id": "byMEV0NQinDhq8ZfiOi2",
+						 *             "name": "John Deo",
+						 *             "companyName": "Tesla Inc",
+						 *             "email": "john@deo.com",
+						 *             "phone": "+1202-555-0107",
+						 *             "tags": [
+						 *               "laborum officia consequat consectetur",
+						 *               "amet ea pariatur cupidatat"
+						 *             ]
+						 *           }
+						 *         }
+						 *       ],
+						 *       "meta": {
+						 *         "total": 250,
+						 *         "nextPageUrl": "https://rest.gohighlevel.com/v1/pipelines/bCkKGpDsyPP4peuKowkG/opportunities?limit=1&startAfter=1603870249758&startAfterId=UIaE1WjAwWKdlyD7osQI",
+						 *         "startAfterId": "UIaE1WjAwWKdlyD7osQI",
+						 *         "startAfter": 1603870249758,
+						 *         "currentPage": 2,
+						 *         "nextPage": 3,
+						 *         "prevPage": 1
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_get_200_response']
 					}
 				}
@@ -4710,6 +7859,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_get_400_response']
 					}
 				}
@@ -4720,6 +7874,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_get_401_response']
 					}
 				}
@@ -4777,6 +7936,32 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "7XExm1wr8gFeZpl6rQny",
+						 *       "name": "First Opp",
+						 *       "monetaryValue": 120,
+						 *       "pipelineId": "bCkKGpDsyPP4peuKowkG",
+						 *       "pipelineStageId": "8b897c8f-b859-49c1-88f2-ed590708a85c",
+						 *       "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *       "status": "open",
+						 *       "source": "form",
+						 *       "lastStatusChangeAt": "2020-10-29T09:39:35.472Z",
+						 *       "createdAt": "2020-10-29T09:31:30.255Z",
+						 *       "updatedAt": "2020-10-29T09:44:02.263Z",
+						 *       "contact": {
+						 *         "id": "byMEV0NQinDhq8ZfiOi2",
+						 *         "name": "John Deo",
+						 *         "companyName": "Tesla Inc",
+						 *         "email": "john@deo.com",
+						 *         "phone": "+1202-555-0107",
+						 *         "tags": [
+						 *           "occaecat do Lorem",
+						 *           "magna ipsum in"
+						 *         ]
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_200_response']
 					}
 				}
@@ -4787,6 +7972,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_400_response']
 					}
 				}
@@ -4797,6 +7987,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_401_response']
 					}
 				}
@@ -4807,6 +8002,26 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "title": {
+						 *         "message": "The title field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "status": {
+						 *         "message": "The status field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "stageId": {
+						 *         "message": "The stage id field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "contactId or email": {
+						 *         "message": "The contactId or email field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities__post_422_response']
 					}
 				}
@@ -4859,6 +8074,32 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "7XExm1wr8gFeZpl6rQny",
+						 *       "name": "First Opp",
+						 *       "monetaryValue": 120,
+						 *       "pipelineId": "bCkKGpDsyPP4peuKowkG",
+						 *       "pipelineStageId": "8b897c8f-b859-49c1-88f2-ed590708a85c",
+						 *       "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *       "status": "open",
+						 *       "source": "form",
+						 *       "lastStatusChangeAt": "2020-10-29T09:39:35.472Z",
+						 *       "createdAt": "2020-10-29T09:31:30.255Z",
+						 *       "updatedAt": "2020-10-29T09:44:02.263Z",
+						 *       "contact": {
+						 *         "id": "byMEV0NQinDhq8ZfiOi2",
+						 *         "name": "John Deo",
+						 *         "companyName": "Tesla Inc",
+						 *         "email": "john@deo.com",
+						 *         "phone": "+1202-555-0107",
+						 *         "tags": [
+						 *           "occaecat do Lorem",
+						 *           "magna ipsum in"
+						 *         ]
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_200_response']
 					}
 				}
@@ -4869,6 +8110,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_400_response']
 					}
 				}
@@ -4879,6 +8125,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_get_401_response']
 					}
 				}
@@ -4924,6 +8175,32 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "7XExm1wr8gFeZpl6rQny",
+						 *       "name": "First Opp",
+						 *       "monetaryValue": 120,
+						 *       "pipelineId": "bCkKGpDsyPP4peuKowkG",
+						 *       "pipelineStageId": "8b897c8f-b859-49c1-88f2-ed590708a85c",
+						 *       "assignedTo": "hxHGVRb1YJUscrCB8eXK",
+						 *       "status": "open",
+						 *       "source": "form",
+						 *       "lastStatusChangeAt": "2020-10-29T09:39:35.472Z",
+						 *       "createdAt": "2020-10-29T09:31:30.255Z",
+						 *       "updatedAt": "2020-10-29T09:44:02.263Z",
+						 *       "contact": {
+						 *         "id": "byMEV0NQinDhq8ZfiOi2",
+						 *         "name": "John Deo",
+						 *         "companyName": "Tesla Inc",
+						 *         "email": "john@deo.com",
+						 *         "phone": "+1202-555-0107",
+						 *         "tags": [
+						 *           "occaecat do Lorem",
+						 *           "magna ipsum in"
+						 *         ]
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_200_response']
 					}
 				}
@@ -4934,6 +8211,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_400_response']
 					}
 				}
@@ -4944,6 +8226,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_401_response']
 					}
 				}
@@ -4954,6 +8241,26 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "title": {
+						 *         "message": "The title field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "status": {
+						 *         "message": "The status field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "stageId": {
+						 *         "message": "The stage id field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "contactId or email": {
+						 *         "message": "The contactId or email field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_put_422_response']
 					}
 				}
@@ -4994,6 +8301,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -5004,6 +8312,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_delete_400_response']
 					}
 				}
@@ -5014,6 +8327,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_delete_401_response']
 					}
 				}
@@ -5072,6 +8390,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -5082,6 +8401,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_400_response']
 					}
 				}
@@ -5092,6 +8416,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_401_response']
 					}
 				}
@@ -5102,6 +8431,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "status": {
+						 *         "message": "The status field is invalid.",
+						 *         "rule": "invalid"
+						 *       },
+						 *       "stageId": {
+						 *         "message": "The stage id field is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_pipelines_{pipelineId}_opportunities_{opportunityId}_status_put_422_response']
 					}
 				}
@@ -5155,6 +8496,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "locationIds": [
+						 *         "F6V8F8Nxxxxxxxx",
+						 *         "F6V8F8Nxxxxxxxx"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_locations_get_200_response']
 					}
 				}
@@ -5165,6 +8514,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_locations_get_400_response']
 					}
 				}
@@ -5175,6 +8529,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_locations_get_401_response']
 					}
 				}
@@ -5185,6 +8544,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "customerId": {
+						 *         "message": "The customerId field is mandatory.",
+						 *         "rule": "requiredWithout"
+						 *       },
+						 *       "subscriptionId": {
+						 *         "message": "The subscriptionId field is mandatory.",
+						 *         "rule": "requiredWithout"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_locations_get_422_response']
 					}
 				}
@@ -5241,6 +8612,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "locationIds": [
+						 *         "F6V8F8Nxxxxxxxx",
+						 *         "F6V8F8Nxxxxxxxx"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_200_response']
 					}
 				}
@@ -5251,6 +8630,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_400_response']
 					}
 				}
@@ -5261,6 +8645,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_401_response']
 					}
 				}
@@ -5271,6 +8660,18 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "customerId": {
+						 *         "message": "The customerId field is mandatory.",
+						 *         "rule": "requiredWithout"
+						 *       },
+						 *       "subscriptionId": {
+						 *         "message": "The subscriptionId field is mandatory.",
+						 *         "rule": "requiredWithout"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_saas_update-saas-subscription_{locationId}_put_422_response']
 					}
 				}
@@ -5310,6 +8711,22 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "snapshots": [
+						 *         {
+						 *           "id": "1eM2UgkfaECOYyUdCo9P",
+						 *           "name": "Martial Arts Snapshot",
+						 *           "type": "vertical"
+						 *         },
+						 *         {
+						 *           "id": "1eM2UgkfaECOYyUdCo9P",
+						 *           "name": "Martial Arts Snapshot",
+						 *           "type": "vertical"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_snapshots__get_200_response']
 					}
 				}
@@ -5320,6 +8737,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_snapshots__get_400_response']
 					}
 				}
@@ -5330,6 +8752,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_snapshots__get_401_response']
 					}
 				}
@@ -5370,6 +8797,20 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "surveys": [
+						 *         {
+						 *           "id": "8qS1AwSo1k0536WJu9kk",
+						 *           "name": "Survey 1"
+						 *         },
+						 *         {
+						 *           "id": "8qS1AwSo1k0536WJu9kk",
+						 *           "name": "Survey 1"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_surveys__get_200_response']
 					}
 				}
@@ -5380,6 +8821,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_surveys__get_400_response']
 					}
 				}
@@ -5390,6 +8836,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_surveys__get_401_response']
 					}
 				}
@@ -5464,6 +8915,46 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "submissions": [
+						 *         {
+						 *           "id": "be759b9a-c3ec-4b29-ba07-fc3c89c77673",
+						 *           "contactId": "9NkT25Vor1v4aQatFsv2",
+						 *           "__submissions_other_field__": "john@deo.com",
+						 *           "__custom_field_id__": "20",
+						 *           "createdAt": "2020-11-01T18:02:21.000Z",
+						 *           "surveyId": "jjusM6EOngDExnbo2DbU",
+						 *           "pageDetails": {
+						 *             "url": "https://www.gohighlevel.com/",
+						 *             "source": "Social Media",
+						 *             "referrer": "http://m.facebook.com",
+						 *             "fbclid": "IwAR1JoTTltt3EKJE3O-MrQij_lTeA6BKGTy8M2wKepSzs4oUbTYhL2Lns18w"
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "be759b9a-c3ec-4b29-ba07-fc3c89c77673",
+						 *           "contactId": "9NkT25Vor1v4aQatFsv2",
+						 *           "__submissions_other_field__": "john@deo.com",
+						 *           "__custom_field_id__": "20",
+						 *           "createdAt": "2020-11-01T18:02:21.000Z",
+						 *           "surveyId": "jjusM6EOngDExnbo2DbU",
+						 *           "pageDetails": {
+						 *             "url": "https://www.gohighlevel.com/",
+						 *             "source": "Social Media",
+						 *             "referrer": "http://m.facebook.com",
+						 *             "fbclid": "IwAR1JoTTltt3EKJE3O-MrQij_lTeA6BKGTy8M2wKepSzs4oUbTYhL2Lns18w"
+						 *           }
+						 *         }
+						 *       ],
+						 *       "meta": {
+						 *         "total": 250,
+						 *         "currentPage": 2,
+						 *         "nextPage": 3,
+						 *         "prevPage": 1
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_surveys_submissions_get_200_response']
 					}
 				}
@@ -5474,6 +8965,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_surveys_submissions_get_400_response']
 					}
 				}
@@ -5484,6 +8980,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_surveys_submissions_get_401_response']
 					}
 				}
@@ -5524,6 +9025,20 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "tags": [
+						 *         {
+						 *           "id": "kAllGzwHkSVZC11GYKF9",
+						 *           "name": "Hello"
+						 *         },
+						 *         {
+						 *           "id": "kAllGzwHkSVZC11GYKF9",
+						 *           "name": "Hello"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags__get_200_response']
 					}
 				}
@@ -5534,6 +9049,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags__get_400_response']
 					}
 				}
@@ -5544,6 +9064,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags__get_401_response']
 					}
 				}
@@ -5579,6 +9104,12 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "kAllGzwHkSVZC11GYKF9",
+						 *       "name": "Hello"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags__post_200_response']
 					}
 				}
@@ -5589,6 +9120,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags__post_400_response']
 					}
 				}
@@ -5599,6 +9135,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags__post_401_response']
 					}
 				}
@@ -5609,6 +9150,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags__post_422_response']
 					}
 				}
@@ -5656,6 +9205,12 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "kAllGzwHkSVZC11GYKF9",
+						 *       "name": "Hello"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_get_200_response']
 					}
 				}
@@ -5666,6 +9221,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_get_400_response']
 					}
 				}
@@ -5676,6 +9236,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_get_401_response']
 					}
 				}
@@ -5716,6 +9281,12 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "kAllGzwHkSVZC11GYKF9",
+						 *       "name": "Hello"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_put_200_response']
 					}
 				}
@@ -5726,6 +9297,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_put_400_response']
 					}
 				}
@@ -5736,6 +9312,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_put_401_response']
 					}
 				}
@@ -5746,6 +9327,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "name": {
+						 *         "message": "The name field is mandatory.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_put_422_response']
 					}
 				}
@@ -5781,6 +9370,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -5791,6 +9381,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_delete_400_response']
 					}
 				}
@@ -5801,6 +9396,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_delete_401_response']
 					}
 				}
@@ -5811,6 +9411,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "customValueId": {
+						 *         "message": "The custom field id is invalid.",
+						 *         "rule": "invalid"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_tags_{tagId}_delete_422_response']
 					}
 				}
@@ -5848,6 +9456,14 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "timezones": [
+						 *         "UTC",
+						 *         "UTC"
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_timezones__get_200_response']
 					}
 				}
@@ -5858,6 +9474,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_timezones__get_400_response']
 					}
 				}
@@ -5868,6 +9489,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_timezones__get_401_response']
 					}
 				}
@@ -5917,6 +9543,90 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "users": [
+						 *         {
+						 *           "id": "3g3ltlwEJBoXArLowV3e",
+						 *           "firstName": "John",
+						 *           "lastName": "Deo",
+						 *           "email": "john@deo.com",
+						 *           "roles": {
+						 *             "type": "agency",
+						 *             "role": "admin",
+						 *             "locationIds": [
+						 *               "C2QujeCh8ZnC7al2InWR"
+						 *             ]
+						 *           },
+						 *           "permissions": {
+						 *             "campaignsEnabled": true,
+						 *             "campaignsReadOnly": false,
+						 *             "contactsEnabled": true,
+						 *             "workflowsEnabled": true,
+						 *             "triggersEnabled": true,
+						 *             "funnelsEnabled": true,
+						 *             "websitesEnabled": false,
+						 *             "opportunitiesEnabled": true,
+						 *             "dashboardStatsEnabled": true,
+						 *             "bulkRequestsEnabled": true,
+						 *             "appointmentsEnabled": true,
+						 *             "reviewsEnabled": true,
+						 *             "onlineListingsEnabled": true,
+						 *             "phoneCallEnabled": true,
+						 *             "conversationsEnabled": true,
+						 *             "assignedDataOnly": false,
+						 *             "adwordsReportingEnabled": false,
+						 *             "membershipEnabled": false,
+						 *             "facebookAdsReportingEnabled": false,
+						 *             "attributionsReportingEnabled": false,
+						 *             "settingsEnabled": true,
+						 *             "tagsEnabled": true,
+						 *             "leadValueEnabled": true,
+						 *             "marketingEnabled": true
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "3g3ltlwEJBoXArLowV3e",
+						 *           "firstName": "John",
+						 *           "lastName": "Deo",
+						 *           "email": "john@deo.com",
+						 *           "roles": {
+						 *             "type": "agency",
+						 *             "role": "admin",
+						 *             "locationIds": [
+						 *               "C2QujeCh8ZnC7al2InWR"
+						 *             ]
+						 *           },
+						 *           "permissions": {
+						 *             "campaignsEnabled": true,
+						 *             "campaignsReadOnly": false,
+						 *             "contactsEnabled": true,
+						 *             "workflowsEnabled": true,
+						 *             "triggersEnabled": true,
+						 *             "funnelsEnabled": true,
+						 *             "websitesEnabled": false,
+						 *             "opportunitiesEnabled": true,
+						 *             "dashboardStatsEnabled": true,
+						 *             "bulkRequestsEnabled": true,
+						 *             "appointmentsEnabled": true,
+						 *             "reviewsEnabled": true,
+						 *             "onlineListingsEnabled": true,
+						 *             "phoneCallEnabled": true,
+						 *             "conversationsEnabled": true,
+						 *             "assignedDataOnly": false,
+						 *             "adwordsReportingEnabled": false,
+						 *             "membershipEnabled": false,
+						 *             "facebookAdsReportingEnabled": false,
+						 *             "attributionsReportingEnabled": false,
+						 *             "settingsEnabled": true,
+						 *             "tagsEnabled": true,
+						 *             "leadValueEnabled": true,
+						 *             "marketingEnabled": true
+						 *           }
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users__get_200_response']
 					}
 				}
@@ -5927,6 +9637,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users__get_400_response']
 					}
 				}
@@ -5937,6 +9652,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users__get_401_response']
 					}
 				}
@@ -5972,6 +9692,47 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "3g3ltlwEJBoXArLowV3e",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "roles": {
+						 *         "type": "agency",
+						 *         "role": "admin",
+						 *         "locationIds": [
+						 *           "C2QujeCh8ZnC7al2InWR"
+						 *         ]
+						 *       },
+						 *       "permissions": {
+						 *         "campaignsEnabled": true,
+						 *         "campaignsReadOnly": false,
+						 *         "contactsEnabled": true,
+						 *         "workflowsEnabled": true,
+						 *         "triggersEnabled": true,
+						 *         "funnelsEnabled": true,
+						 *         "websitesEnabled": false,
+						 *         "opportunitiesEnabled": true,
+						 *         "dashboardStatsEnabled": true,
+						 *         "bulkRequestsEnabled": true,
+						 *         "appointmentsEnabled": true,
+						 *         "reviewsEnabled": true,
+						 *         "onlineListingsEnabled": true,
+						 *         "phoneCallEnabled": true,
+						 *         "conversationsEnabled": true,
+						 *         "assignedDataOnly": false,
+						 *         "adwordsReportingEnabled": false,
+						 *         "membershipEnabled": false,
+						 *         "facebookAdsReportingEnabled": false,
+						 *         "attributionsReportingEnabled": false,
+						 *         "settingsEnabled": true,
+						 *         "tagsEnabled": true,
+						 *         "leadValueEnabled": true,
+						 *         "marketingEnabled": true
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users__post_200_response']
 					}
 				}
@@ -5982,6 +9743,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users__post_400_response']
 					}
 				}
@@ -5992,6 +9758,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users__post_401_response']
 					}
 				}
@@ -6002,6 +9773,38 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "firstName": {
+						 *         "message": "The first name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "lastName": {
+						 *         "message": "The last name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "email": {
+						 *         "message": "The email field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "type": {
+						 *         "message": "The type is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "role": {
+						 *         "message": "The role is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "locationIds": {
+						 *         "message": "The location ide must be a array.",
+						 *         "rule": "required"
+						 *       },
+						 *       "permissions": {
+						 *         "message": "Ther permissions field every key must contains only true or false.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users__post_422_response']
 					}
 				}
@@ -6049,6 +9852,47 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "3g3ltlwEJBoXArLowV3e",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "roles": {
+						 *         "type": "agency",
+						 *         "role": "admin",
+						 *         "locationIds": [
+						 *           "C2QujeCh8ZnC7al2InWR"
+						 *         ]
+						 *       },
+						 *       "permissions": {
+						 *         "campaignsEnabled": true,
+						 *         "campaignsReadOnly": false,
+						 *         "contactsEnabled": true,
+						 *         "workflowsEnabled": true,
+						 *         "triggersEnabled": true,
+						 *         "funnelsEnabled": true,
+						 *         "websitesEnabled": false,
+						 *         "opportunitiesEnabled": true,
+						 *         "dashboardStatsEnabled": true,
+						 *         "bulkRequestsEnabled": true,
+						 *         "appointmentsEnabled": true,
+						 *         "reviewsEnabled": true,
+						 *         "onlineListingsEnabled": true,
+						 *         "phoneCallEnabled": true,
+						 *         "conversationsEnabled": true,
+						 *         "assignedDataOnly": false,
+						 *         "adwordsReportingEnabled": false,
+						 *         "membershipEnabled": false,
+						 *         "facebookAdsReportingEnabled": false,
+						 *         "attributionsReportingEnabled": false,
+						 *         "settingsEnabled": true,
+						 *         "tagsEnabled": true,
+						 *         "leadValueEnabled": true,
+						 *         "marketingEnabled": true
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_get_200_response']
 					}
 				}
@@ -6059,6 +9903,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_get_400_response']
 					}
 				}
@@ -6069,6 +9918,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_get_401_response']
 					}
 				}
@@ -6109,6 +9963,47 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "3g3ltlwEJBoXArLowV3e",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "roles": {
+						 *         "type": "agency",
+						 *         "role": "admin",
+						 *         "locationIds": [
+						 *           "C2QujeCh8ZnC7al2InWR"
+						 *         ]
+						 *       },
+						 *       "permissions": {
+						 *         "campaignsEnabled": true,
+						 *         "campaignsReadOnly": false,
+						 *         "contactsEnabled": true,
+						 *         "workflowsEnabled": true,
+						 *         "triggersEnabled": true,
+						 *         "funnelsEnabled": true,
+						 *         "websitesEnabled": false,
+						 *         "opportunitiesEnabled": true,
+						 *         "dashboardStatsEnabled": true,
+						 *         "bulkRequestsEnabled": true,
+						 *         "appointmentsEnabled": true,
+						 *         "reviewsEnabled": true,
+						 *         "onlineListingsEnabled": true,
+						 *         "phoneCallEnabled": true,
+						 *         "conversationsEnabled": true,
+						 *         "assignedDataOnly": false,
+						 *         "adwordsReportingEnabled": false,
+						 *         "membershipEnabled": false,
+						 *         "facebookAdsReportingEnabled": false,
+						 *         "attributionsReportingEnabled": false,
+						 *         "settingsEnabled": true,
+						 *         "tagsEnabled": true,
+						 *         "leadValueEnabled": true,
+						 *         "marketingEnabled": true
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_put_200_response']
 					}
 				}
@@ -6119,6 +10014,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_put_400_response']
 					}
 				}
@@ -6129,6 +10029,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_put_401_response']
 					}
 				}
@@ -6139,6 +10044,38 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "firstName": {
+						 *         "message": "The first name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "lastName": {
+						 *         "message": "The last name field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "email": {
+						 *         "message": "The email field is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "type": {
+						 *         "message": "The type is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "role": {
+						 *         "message": "The role is mandatory.",
+						 *         "rule": "required"
+						 *       },
+						 *       "locationIds": {
+						 *         "message": "The location ide must be a array.",
+						 *         "rule": "required"
+						 *       },
+						 *       "permissions": {
+						 *         "message": "Ther permissions field every key must contains only true or false.",
+						 *         "rule": "required"
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_put_422_response']
 					}
 				}
@@ -6147,7 +10084,7 @@ export type paths = {
 		post?: never
 		/**
 		 * /v1/users/:userId
-		 * @description  Delete one of user.<strong>Authorization:</strong> <p>Provide your agency api key (Bearer Token). You can find it on Agency -> Settings -> API keys</p>
+		 * @description Delete one of user.<strong>Authorization:</strong> <p>Provide your agency api key (Bearer Token). You can find it on Agency -> Settings -> API keys</p>
 		 */
 		delete: {
 			parameters: {
@@ -6174,6 +10111,7 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/** @example  */
 						'application/json': Record<string, unknown>
 					}
 				}
@@ -6184,6 +10122,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_delete_400_response']
 					}
 				}
@@ -6194,6 +10137,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_{userId}_delete_401_response']
 					}
 				}
@@ -6231,6 +10179,90 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "users": [
+						 *         {
+						 *           "id": "3g3ltlwEJBoXArLowV3e",
+						 *           "firstName": "John",
+						 *           "lastName": "Deo",
+						 *           "email": "john@deo.com",
+						 *           "roles": {
+						 *             "type": "agency",
+						 *             "role": "admin",
+						 *             "locationIds": [
+						 *               "C2QujeCh8ZnC7al2InWR"
+						 *             ]
+						 *           },
+						 *           "permissions": {
+						 *             "campaignsEnabled": true,
+						 *             "campaignsReadOnly": false,
+						 *             "contactsEnabled": true,
+						 *             "workflowsEnabled": true,
+						 *             "triggersEnabled": true,
+						 *             "funnelsEnabled": true,
+						 *             "websitesEnabled": false,
+						 *             "opportunitiesEnabled": true,
+						 *             "dashboardStatsEnabled": true,
+						 *             "bulkRequestsEnabled": true,
+						 *             "appointmentsEnabled": true,
+						 *             "reviewsEnabled": true,
+						 *             "onlineListingsEnabled": true,
+						 *             "phoneCallEnabled": true,
+						 *             "conversationsEnabled": true,
+						 *             "assignedDataOnly": false,
+						 *             "adwordsReportingEnabled": false,
+						 *             "membershipEnabled": false,
+						 *             "facebookAdsReportingEnabled": false,
+						 *             "attributionsReportingEnabled": false,
+						 *             "settingsEnabled": true,
+						 *             "tagsEnabled": true,
+						 *             "leadValueEnabled": true,
+						 *             "marketingEnabled": true
+						 *           }
+						 *         },
+						 *         {
+						 *           "id": "3g3ltlwEJBoXArLowV3e",
+						 *           "firstName": "John",
+						 *           "lastName": "Deo",
+						 *           "email": "john@deo.com",
+						 *           "roles": {
+						 *             "type": "agency",
+						 *             "role": "admin",
+						 *             "locationIds": [
+						 *               "C2QujeCh8ZnC7al2InWR"
+						 *             ]
+						 *           },
+						 *           "permissions": {
+						 *             "campaignsEnabled": true,
+						 *             "campaignsReadOnly": false,
+						 *             "contactsEnabled": true,
+						 *             "workflowsEnabled": true,
+						 *             "triggersEnabled": true,
+						 *             "funnelsEnabled": true,
+						 *             "websitesEnabled": false,
+						 *             "opportunitiesEnabled": true,
+						 *             "dashboardStatsEnabled": true,
+						 *             "bulkRequestsEnabled": true,
+						 *             "appointmentsEnabled": true,
+						 *             "reviewsEnabled": true,
+						 *             "onlineListingsEnabled": true,
+						 *             "phoneCallEnabled": true,
+						 *             "conversationsEnabled": true,
+						 *             "assignedDataOnly": false,
+						 *             "adwordsReportingEnabled": false,
+						 *             "membershipEnabled": false,
+						 *             "facebookAdsReportingEnabled": false,
+						 *             "attributionsReportingEnabled": false,
+						 *             "settingsEnabled": true,
+						 *             "tagsEnabled": true,
+						 *             "leadValueEnabled": true,
+						 *             "marketingEnabled": true
+						 *           }
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_location_get_200_response']
 					}
 				}
@@ -6241,6 +10273,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_location_get_400_response']
 					}
 				}
@@ -6251,6 +10288,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_location_get_401_response']
 					}
 				}
@@ -6300,6 +10342,47 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "id": "3g3ltlwEJBoXArLowV3e",
+						 *       "firstName": "John",
+						 *       "lastName": "Deo",
+						 *       "email": "john@deo.com",
+						 *       "roles": {
+						 *         "type": "agency",
+						 *         "role": "admin",
+						 *         "locationIds": [
+						 *           "C2QujeCh8ZnC7al2InWR"
+						 *         ]
+						 *       },
+						 *       "permissions": {
+						 *         "campaignsEnabled": true,
+						 *         "campaignsReadOnly": false,
+						 *         "contactsEnabled": true,
+						 *         "workflowsEnabled": true,
+						 *         "triggersEnabled": true,
+						 *         "funnelsEnabled": true,
+						 *         "websitesEnabled": false,
+						 *         "opportunitiesEnabled": true,
+						 *         "dashboardStatsEnabled": true,
+						 *         "bulkRequestsEnabled": true,
+						 *         "appointmentsEnabled": true,
+						 *         "reviewsEnabled": true,
+						 *         "onlineListingsEnabled": true,
+						 *         "phoneCallEnabled": true,
+						 *         "conversationsEnabled": true,
+						 *         "assignedDataOnly": false,
+						 *         "adwordsReportingEnabled": false,
+						 *         "membershipEnabled": false,
+						 *         "facebookAdsReportingEnabled": false,
+						 *         "attributionsReportingEnabled": false,
+						 *         "settingsEnabled": true,
+						 *         "tagsEnabled": true,
+						 *         "leadValueEnabled": true,
+						 *         "marketingEnabled": true
+						 *       }
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_lookup_get_200_response']
 					}
 				}
@@ -6310,6 +10393,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_lookup_get_400_response']
 					}
 				}
@@ -6320,6 +10408,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_users_lookup_get_401_response']
 					}
 				}
@@ -6360,6 +10453,28 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "workflow": [
+						 *         {
+						 *           "id": "78559bb3-b920-461e-b010-7b2a2816d2a9",
+						 *           "name": "First Workflow",
+						 *           "status": "draft",
+						 *           "version": 2,
+						 *           "createdAt": "2021-05-26T11:33:49.000Z",
+						 *           "updatedAt": "2021-05-26T11:33:49.000Z"
+						 *         },
+						 *         {
+						 *           "id": "78559bb3-b920-461e-b010-7b2a2816d2a9",
+						 *           "name": "First Workflow",
+						 *           "status": "draft",
+						 *           "version": 2,
+						 *           "createdAt": "2021-05-26T11:33:49.000Z",
+						 *           "updatedAt": "2021-05-26T11:33:49.000Z"
+						 *         }
+						 *       ]
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_workflows__get_200_response']
 					}
 				}
@@ -6370,6 +10485,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Bad Request"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_workflows__get_400_response']
 					}
 				}
@@ -6380,6 +10500,11 @@ export type paths = {
 						[name: string]: unknown
 					}
 					content: {
+						/**
+						 * @example {
+						 *       "msg": "Unauthorized"
+						 *     }
+						 */
 						'application/json': components['schemas']['_v1_workflows__get_401_response']
 					}
 				}
