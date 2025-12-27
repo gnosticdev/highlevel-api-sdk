@@ -3,51 +3,57 @@
 		"name": "gnosticdev",
 		"url": "https://github.com/gnosticdev"
 	},
-	"dependencies": {
-		"openapi-fetch": "^0.13.3"
+	"peerDependencies": {
+		"openapi-fetch": "^0.13.8"
 	},
 	"description": "SDK for the HighLevel API",
 	"devDependencies": {
-		"@biomejs/biome": "2.0.5",
-		"@types/bun": "^1.1.6",
-		"jsdom": "25.0.1",
+		"@biomejs/biome": "2.3.10",
+		"@types/bun": "^1.3.5",
+		"@typescript/native-preview": "7.0.0-dev.20251223.1",
+		"jsdom": "27.3.0",
 		"kleur": "^4.1.5",
-		"lefthook": "^1.10.0",
-		"openapi-typescript": "7.4.4",
-		"release-it": "^17.11.0",
-		"tsup": "^8.3.0",
-		"typescript": "5.6.3"
+		"lefthook": "^1.13.6",
+		"openapi-typescript": "7.10.1",
+		"release-it": "^19.1.0",
+		"tsup": "^8.5.1",
+		"typescript": "5.9.3"
 	},
+	"workspaces": [
+		".",
+		"examples/*"
+	],
+	"main": "./dist/index.js",
 	"exports": {
 		".": {
+			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js",
-			"require": "./dist/cjs/index.js",
-			"types": "./dist/index.d.ts"
+			"require": "./dist/index.js"
 		},
 		"./oauth": {
+			"types": "./dist/oauth.d.ts",
 			"import": "./dist/oauth.js",
-			"require": "./dist/cjs/oauth.js",
-			"types": "./dist/oauth.d.ts"
+			"require": "./dist/oauth.js"
 		},
 		"./scopes": {
+			"types": "./dist/scopes.d.ts",
 			"import": "./dist/scopes.js",
-			"require": "./dist/cjs/scopes.js",
-			"types": "./dist/scopes.d.ts"
+			"require": "./dist/scopes.js"
 		},
 		"./types/*": {
+			"types": "./dist/types/*.d.ts",
 			"import": "./dist/types/*.js",
-			"require": "./dist/cjs/types/*.js",
-			"types": "./dist/types/*.d.ts"
+			"require": "./dist/types/*.js"
 		},
 		"./v1": {
+			"types": "./dist/v1.d.ts",
 			"import": "./dist/v1.js",
-			"require": "./dist/cjs/v1.js",
-			"types": "./dist/v1.d.ts"
+			"require": "./dist/v1.js"
 		},
 		"./webhooks": {
+			"types": "./dist/webhooks.d.ts",
 			"import": "./dist/webhooks.js",
-			"require": "./dist/cjs/webhooks.js",
-			"types": "./dist/webhooks.d.ts"
+			"require": "./dist/webhooks.js"
 		}
 	},
 	"files": [
@@ -81,17 +87,19 @@
 	},
 	"scripts": {
 		"build": "bun --bun tsup",
-		"fetch-json": "bun scripts/fetch-json.ts",
+		"clean-install": "rm -rf ./node_modules ./dist ./bun.lock ./examples/*/node_modules && bun i --no-cache",
+		"download-json-schemas": "bun scripts/download-json-schemas.ts",
 		"generate-all": "bun run fetch-json && bun run generate-v2-types && bun run generate-v1-types && bun run generate-webhooks && bun run generate-scopes && bun run generate-interface",
 		"generate-interface": "bun scripts/generate-interface.ts",
-		"generate-scopes": "bun scripts/generate-scopes.ts",
+		"generate-scopes-types": "bun scripts/generate-scopes-types.ts",
 		"generate-v1-types": "bun scripts/generate-v1-types.ts",
 		"generate-v2-types": "bun scripts/generate-v2-types.ts",
-		"generate-webhooks": "bun scripts/generate-webhooks.ts",
+		"generate-webhooks-types": "bun scripts/generate-webhooks-types.ts",
+		"generate-base-client": "bun scripts/generate-base-client.ts",
 		"lint": "biome check . --write --unsafe",
 		"release": "bun --env-file .env.local release-it",
 		"start-test": "bun test --hot",
-		"typecheck": "bun tsc -p tsconfig.json"
+		"typecheck": "tsgo -p ./tsconfig.json"
 	},
 	"trustedDependencies": [
 		"@biomejs/biome",
@@ -100,5 +108,8 @@
 	],
 	"type": "module",
 	"types": "./dist/index.d.ts",
-	"version": "3.0.1"
+	"version": "3.0.1",
+	"dependencies": {
+		"json-schema-to-typescript": "15.0.4"
+	}
 }

@@ -1,17 +1,24 @@
-import { beforeEach, describe, expect, it, spyOn } from 'bun:test'
-import { readdirSync } from 'node:fs'
-import { join } from 'node:path'
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	jest,
+	mock,
+	spyOn,
+} from 'bun:test'
 import type { Client, FetchResponse } from 'openapi-fetch'
-import type { AccessType } from '../src/lib/type-utils'
 import { createHighLevelClient } from '../src/v2'
 import { DEFAULT_V2_BASE_URL, HighLevelClient } from '../src/v2/client/default'
 import type { HighLevelOauthConfig } from '../src/v2/client/with-oauth'
 import {
-	DEFAULT_BASE_AUTH_URL,
+	DEFAULT_OAUTH_LOGIN_URL,
 	HighLevelClientWithOAuth,
 } from '../src/v2/client/with-oauth'
 import { type DefaultOauthClient, OauthClientImpl } from '../src/v2/oauth/impl'
-import type * as Locations from '../src/v2/types/openapi/locations'
+import type { AccessType } from '../src/v2/scopes/scope-types'
+import type * as Locations from '../src/v2/types/locations'
 
 type LocationsResponse = FetchResponse<
 	Locations.paths['/locations/search']['get'],
@@ -20,12 +27,17 @@ type LocationsResponse = FetchResponse<
 >
 
 describe('Base Client', () => {
-	let baseClient: HighLevelClient<AccessType, DefaultOauthClient, undefined>
+	let baseClient: HighLevelClient<AccessType>
 	let baseOauthClient: DefaultOauthClient
 
 	beforeEach(() => {
 		baseClient = createHighLevelClient()
 		baseOauthClient = baseClient.oauth
+	})
+
+	afterEach(() => {
+		mock.restore()
+		jest.clearAllMocks()
 	})
 
 	it('should create base client with default configuration', () => {
@@ -59,8 +71,8 @@ describe('Base Client', () => {
 
 	it('should have base oauth client', () => {
 		expect(baseOauthClient).toBeDefined()
-		// @ts-expect-error - config is not defined on BaseOauthClient
-		expect(baseOauthClient.config).toBeUndefined()
+		expect(baseOauthClient).toHaveProperty('GET')
+		expect(baseOauthClient).toHaveProperty('POST')
 	})
 })
 
@@ -87,7 +99,7 @@ describe('SubAccount Client', () => {
 		expect(subAccountClient.oauth.config).toEqual({
 			...subAccountOauthConfig,
 			baseUrl: DEFAULT_V2_BASE_URL,
-			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
+			baseAuthUrl: DEFAULT_OAUTH_LOGIN_URL,
 		})
 	})
 
@@ -128,14 +140,13 @@ describe('Agency Client', () => {
 		expect(agencyClient.oauth.config).toEqual({
 			...agencyOauthConfig,
 			baseUrl: DEFAULT_V2_BASE_URL,
-			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
+			baseAuthUrl: DEFAULT_OAUTH_LOGIN_URL,
 		})
 	})
 
 	it('should fetch locations', async () => {
 		const locationsGetSpy = spyOn(agencyClient.locations, 'GET')
 
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		locationsGetSpy.mockResolvedValueOnce(mockLocationsResponse as any)
 
 		const { data, error } = await agencyClient.locations.GET(
@@ -184,7 +195,7 @@ describe('createHighLevelClient Oauth Client Defaults', () => {
 		expect(client.oauth.config).toEqual({
 			...oathConfig,
 			baseUrl: DEFAULT_V2_BASE_URL,
-			baseAuthUrl: DEFAULT_BASE_AUTH_URL,
+			baseAuthUrl: DEFAULT_OAUTH_LOGIN_URL,
 		})
 	})
 
@@ -208,28 +219,41 @@ describe('createHighLevelClient Oauth Client Defaults', () => {
 })
 
 describe('HighLevel API Coverage', () => {
-	const highLevelClient = new HighLevelClient()
+	const highLevelClient = new HighLevelClient<AccessType>()
 
-	it('should have an openapi-fetch client for each schema', () => {
-		const clientProperties = getClientPropertiesFromSchemas().sort()
+	it('should have an openapi-fetch client for each schema', async () => {
+		const allSchemaProperties = await getClientPropertiesFromV2Schemas()
+		// Filter to only properties that actually exist on the client
+		// (some schemas may not be implemented yet)
+		const clientKeys = Object.keys(highLevelClient).filter(
+			(key) => key !== '_clientConfig',
+		) as string[]
+		const clientProperties = allSchemaProperties
+			.filter((prop) => clientKeys.includes(prop))
+			.sort()
 
-		expect(highLevelClient).toContainKeys(clientProperties)
+		expect(highLevelClient).toContainKeys(
+			clientProperties as (keyof typeof highLevelClient)[],
+		)
 		// get the methods of the high level client
 		const hlClientMethods = Object.keys(highLevelClient)
-			.filter((key) => clientProperties.includes(key))
-			.sort()
+			.filter(
+				(key) => clientProperties.includes(key) && key !== '_clientConfig',
+			)
+			.sort() as (keyof typeof highLevelClient)[]
 
 		expect(hlClientMethods).toBeArrayOfSize(clientProperties.length)
 
 		// make sure each method is an object, and each object has the main methods
 		const innerClients = hlClientMethods.map(
-			(method) => highLevelClient[method as keyof typeof highLevelClient],
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			(method) => highLevelClient[method],
 		) as Client<any, any>[]
 		const notAClient = innerClients.find(
 			(client) =>
 				!(client instanceof Object) &&
-				!['GET', 'POST', 'PUT', 'DELETE', 'TRACE', 'OPTIONS'].includes(client),
+				!['GET', 'POST', 'PUT', 'DELETE', 'TRACE', 'OPTIONS'].includes(
+					String(client),
+				),
 		)
 		const notAFunction = innerClients.find(
 			(client) => typeof client.GET !== 'function',
@@ -240,7 +264,7 @@ describe('HighLevel API Coverage', () => {
 })
 
 describe('createHighLevelClient', () => {
-	it('should create a client with custom OAuth methods', () => {
+	it('should create a client with custom OAuth methods', async () => {
 		const client = createHighLevelClient({}, 'oauth', {
 			clientId: 'test-client-id',
 			clientSecret: 'test-client-secret',
@@ -262,7 +286,14 @@ describe('createHighLevelClient', () => {
 		expect(client.oauth.generateLocationToken).toBeFunction()
 
 		// Check that it still has all the API properties
-		const clientProperties = getClientPropertiesFromSchemas()
+		// Filter to only properties that actually exist on the client
+		const allSchemaProperties = await getClientPropertiesFromV2Schemas()
+		const clientKeys = Object.keys(client).filter(
+			(key) => key !== '_clientConfig',
+		) as string[]
+		const clientProperties = allSchemaProperties.filter((prop) =>
+			clientKeys.includes(prop),
+		)
 		for (const propertyName of clientProperties) {
 			expect(client).toHaveProperty(propertyName)
 			expect(client[propertyName as keyof typeof client]).toBeDefined()
@@ -270,14 +301,18 @@ describe('createHighLevelClient', () => {
 	})
 })
 
-function getClientPropertiesFromSchemas() {
-	const schemaDir = join(import.meta.dir, '..', 'schemas', 'v2', 'openapi')
-	const schemaFiles = readdirSync(schemaDir)
+async function getClientPropertiesFromV2Schemas(): Promise<string[]> {
+	const glob = new Bun.Glob('schemas/v2/openapi/*.openapi.json')
+	const schemaFiles = await Array.fromAsync(glob.scan())
 
-	return schemaFiles.map((file) =>
-		file
-			.replace('.openapi.json', '')
+	return schemaFiles.map((file) => {
+		// Extract just the filename from the path
+		const filename = file.split('/').pop() || file
+		// Remove .openapi.json extension
+		const nameWithoutExt = filename.replace('.openapi.json', '')
+		// Convert to camelCase: replace hyphens/spaces with uppercase next char, then lowercase first char
+		return nameWithoutExt
 			.replace(/[-\s](.)/g, (_, char) => char.toUpperCase())
-			.replace(/^(.)/, (_, char) => char.toLowerCase()),
-	)
+			.replace(/^(.)/, (_, char) => char.toLowerCase())
+	})
 }

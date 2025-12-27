@@ -2,18 +2,28 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
 		"forceConsistentCasingInFileNames": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx",
-		"lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"module": "ESNext",
 		"moduleDetection": "force",
 		"moduleResolution": "Bundler",
 		"noEmit": true,
 		"noUncheckedIndexedAccess": true,
+		"rootDir": "./",
 		"paths": {
-			"@/*": ["src/*"]
+			"*": ["./*"],
+			"@gnosticdev/highlevel-sdk": ["../../src/v2/index.ts"],
+			"@gnosticdev/highlevel-sdk/oauth": ["../../src/v2/oauth/impl.ts"],
+			"@gnosticdev/highlevel-sdk/scopes": [
+				"../../src/v2/scopes/scopes-builder.ts"
+			],
+			"@gnosticdev/highlevel-sdk/webhooks": [
+				"../../src/v2/webhooks/webhooks-client.ts"
+			],
+			"@gnosticdev/highlevel-sdk/types/*": ["../../src/v2/types/*"],
+			"@gnosticdev/highlevel-sdk/v1": ["../../src/v1/index.ts"]
 		},
 		"resolveJsonModule": true,
 		"skipDefaultLibCheck": true,
@@ -22,6 +32,5 @@
 		"strictNullChecks": true,
 		"target": "ESNext",
 		"verbatimModuleSyntax": true
-	},
-	"include": ["src/**/*"]
+	}
 }

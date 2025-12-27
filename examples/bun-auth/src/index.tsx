@@ -4,7 +4,6 @@
 import { Database } from 'bun:sqlite'
 import type { HighLevelOauthConfig } from '@gnosticdev/highlevel-sdk'
 import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
-import type { Serve } from 'bun'
 import { Hono, type MiddlewareHandler } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
@@ -211,4 +210,4 @@ const PORT = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 3000
 export default {
   fetch: app.fetch,
   port: PORT,
-} satisfies Serve
+} satisfies Bun.Serve.Options<never>

@@ -1,49 +1,30 @@
-import { afterEach, beforeEach, describe, expect, it, spyOn } from 'bun:test'
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	type jest,
+	spyOn,
+} from 'bun:test'
 import type { Client } from 'openapi-fetch'
 import { createHighLevelClient } from '../src/v2'
-import type { AuthHeaders } from '../src/v2/client/types'
+import type { AUTH_HEADERS } from '../src/v2/client/types'
 import type { PrivateIntegrationConfig } from '../src/v2/client/with-integration'
 import { HighLevelIntegrationClient } from '../src/v2/client/with-integration'
+import type { paths as LocationsPaths } from '../src/v2/types/locations'
 
-type LocationsClient = Client<{
-	'/locations/{locationId}': {
-		get: {
-			parameters: {
-				path: {
-					locationId: string
-				}
-				header: AuthHeaders & {
-					'Content-Type'?: string
-					'Custom-Header'?: string
-				}
-			}
-			responses: {
-				200: {
-					content: {
-						'application/json': {
-							location: {
-								id: string
-								name: string
-								timezone?: string
-								address?: string
-								city?: string
-								state?: string
-								country?: string
-								postalCode?: string
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}>
+type LocationGet = Pick<
+	LocationsPaths,
+	'/locations/{locationId}'
+>['/locations/{locationId}']['get']
+
+type LocationsClient = Client<LocationGet>['GET']
 
 describe('Integrations Client', () => {
 	const mockIntegrationConfig: PrivateIntegrationConfig<'Sub-Account'> = {
 		privateToken: 'test-private-token',
 		accessType: 'Sub-Account',
-		scopes: ['locations.readonly'],
 	}
 
 	describe('initialization', () => {
@@ -57,7 +38,6 @@ describe('Integrations Client', () => {
 			)
 
 			expect(client.privateToken).toBe('test-private-token')
-			expect(client.scopes).toEqual(['locations.readonly'])
 			expect(client._clientConfig.baseUrl).toBe('https://api.test.com')
 		})
 
@@ -69,17 +49,24 @@ describe('Integrations Client', () => {
 
 	describe('API calls', () => {
 		let client: HighLevelIntegrationClient<'Sub-Account'>
-		let mockSpy: JestMock.Spied<LocationsClient['GET']>
+		let mockSpy: jest.SpiedFunction<LocationsClient>
+		let mockFetch: ReturnType<typeof spyOn>
 
 		beforeEach(() => {
+			mockFetch = spyOn(globalThis, 'fetch')
+			mockFetch.mockResolvedValue(new Response('{}'))
 			client = createHighLevelClient(
 				{
 					baseUrl: 'https://api.test.com',
+					fetch: mockFetch,
 				},
 				'integration',
 				mockIntegrationConfig,
 			)
-			mockSpy = spyOn(client.locations, 'GET')
+			mockSpy = spyOn(
+				client.locations,
+				'GET',
+			) as jest.SpiedFunction<LocationsClient>
 		})
 
 		afterEach(() => {
@@ -113,7 +100,7 @@ describe('Integrations Client', () => {
 					header: {
 						Authorization: `Bearer ${client.privateToken}`,
 						Version: '2021-07-28',
-					} satisfies AuthHeaders,
+					} satisfies AUTH_HEADERS,
 				},
 			})
 			expect(mockSpy).toHaveBeenCalled()
@@ -144,7 +131,7 @@ describe('Integrations Client', () => {
 						header: {
 							Authorization: `Bearer ${client.privateToken}`,
 							Version: '2021-07-28',
-						} satisfies AuthHeaders,
+						} satisfies AUTH_HEADERS,
 					},
 				},
 			)
@@ -171,7 +158,7 @@ describe('Integrations Client', () => {
 						Version: '2021-07-28',
 						'Content-Type': 'application/json',
 						'Custom-Header': 'test',
-					} satisfies AuthHeaders & {
+					} satisfies AUTH_HEADERS & {
 						'Content-Type': string
 						'Custom-Header': string
 					},
@@ -185,6 +172,7 @@ describe('Integrations Client', () => {
 			const firstCall = calls[0]
 			if (!firstCall) throw new Error('Expected at least one call to mockGet')
 			expect(firstCall[1]).toBeDefined()
+			// @ts-expect-error - complex type
 			const headers = firstCall[1]?.params?.header
 
 			expect(headers?.Authorization).toBe(`Bearer ${client.privateToken}`)

@@ -1,1 +1,2 @@
-install = { exact = true, saveTextLockfile = true }
+[install]
+exact = true

@@ -226,7 +226,7 @@ export async function createV1Types() {
 		emptyObjectsUnknown: true,
 	})
 	const data = astToString(openapiTypes)
-	await Bun.write('src/generated/v1/openapi.ts', data)
+	await Bun.write('src/v1/types/index.ts', data)
 	console.log(kleur.green('Successfully created openapi types for v1'))
 }
 

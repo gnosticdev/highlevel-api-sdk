@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"forceConsistentCasingInFileNames": true,
-		"lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"module": "ESNext",
 		"moduleDetection": "force",
 		"moduleResolution": "Bundler",
@@ -14,9 +14,8 @@
 		"strict": true,
 		"strictNullChecks": true,
 		"target": "ESNext",
-		"types": ["bun", "node", "./env.d.ts"],
 		"verbatimModuleSyntax": true
 	},
-	"exclude": ["examples/**/*"],
-	"include": ["src/**/*", "__tests__/**/*", "scripts/**/*"]
+	"include": ["**/*"],
+	"exclude": ["**/node_modules", "dist", "examples"]
 }

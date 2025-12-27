@@ -16,6 +16,7 @@ describe('OauthClient', () => {
 		access_token: 'test-access-token',
 		refresh_token: 'test-refresh-token',
 		expires_in: 3600,
+		isBulkInstallation: false,
 		token_type: 'Bearer',
 		approvedLocations: ['location-1'],
 		companyId: 'company-1',
@@ -27,14 +28,19 @@ describe('OauthClient', () => {
 		userId: 'user-1',
 	}
 
-	it('should initialize with default storage function', () => {
+	it('should initialize with default memory storage function', () => {
 		const client = new OauthClientImpl(mockConfig)
 		expect(client.storeTokenFn).toBeDefined()
+		// Verify it's using the default memory storage (not a custom one)
+		// When no storageFunction is provided, it should use the default memory store
+		expect(client.config.storageFunction).toBeUndefined()
 	})
 
 	it('should use custom storage function when provided', async () => {
+		let storedData: TokenData | undefined
 		const customStorageFn = async (data: TokenData) => {
-			return { ...data, custom: true } as TokenData & { custom: boolean }
+			storedData = data
+			return data
 		}
 
 		const client = new OauthClientImpl({
@@ -42,20 +48,25 @@ describe('OauthClient', () => {
 			storageFunction: customStorageFn,
 		})
 
-		const result = await client.storeTokenData(mockTokenData)
-		expect(result).toHaveProperty('custom', true)
+		await client.storeTokenData(mockTokenData)
+		expect(storedData).toBeDefined()
+		expect(storedData?.access_token).toBe(mockTokenData.access_token)
 	})
 
-	it('should store token data with expiration time', async () => {
+	it('should store token data with expiration time using default memory store', async () => {
 		const client = new OauthClientImpl(mockConfig)
 		const now = Date.now()
-		const result = await client.storeTokenData(mockTokenData)
+		await client.storeTokenData(mockTokenData)
 
-		expect(result).toHaveProperty('expiresAt')
-		expect(result.expiresAt).toBeGreaterThan(now)
-		expect(result.expiresAt).toBeLessThanOrEqual(
-			now + mockTokenData.expires_in * 1000,
-		)
+		// Verify token data is stored in memory
+		expect(client.tokenData).toBeDefined()
+		expect(client.tokenData?.access_token).toBe(mockTokenData.access_token)
+		expect(client.tokenData?.refresh_token).toBe(mockTokenData.refresh_token)
+		expect(client.tokenData?.expiresAt).toBeGreaterThan(now)
+
+		// Verify we can retrieve the access token
+		const accessToken = await client.getAccessToken()
+		expect(accessToken).toBe(mockTokenData.access_token)
 	})
 
 	it('should update token data partially', async () => {
@@ -141,5 +152,50 @@ describe('OauthClient', () => {
 		})
 
 		expect(client.refreshAccessToken()).rejects.toThrow('Refresh token failed')
+	})
+
+	it('should persist token data across multiple storage calls using memory store', async () => {
+		const client = new OauthClientImpl(mockConfig)
+
+		// Store initial token data
+		await client.storeTokenData(mockTokenData)
+		expect(client.tokenData?.access_token).toBe(mockTokenData.access_token)
+
+		// Update token data
+		const updatedTokenData = {
+			...mockTokenData,
+			access_token: 'updated-access-token',
+		}
+		await client.storeTokenData(updatedTokenData)
+
+		// Verify the token data was updated
+		expect(client.tokenData?.access_token).toBe('updated-access-token')
+		expect(client.tokenData?.refresh_token).toBe(mockTokenData.refresh_token)
+	})
+
+	it('should store and retrieve multiple tokens using memory store', async () => {
+		const client1 = new OauthClientImpl(mockConfig)
+		const client2 = new OauthClientImpl({
+			...mockConfig,
+			clientId: 'client-2',
+		})
+
+		const tokenData1 = {
+			...mockTokenData,
+			locationId: 'location-1',
+			access_token: 'token-1',
+		}
+		const tokenData2 = {
+			...mockTokenData,
+			locationId: 'location-2',
+			access_token: 'token-2',
+		}
+
+		await client1.storeTokenData(tokenData1)
+		await client2.storeTokenData(tokenData2)
+
+		// Each client should have its own token data stored in memory
+		expect(client1.tokenData?.access_token).toBe('token-1')
+		expect(client2.tokenData?.access_token).toBe('token-2')
 	})
 })

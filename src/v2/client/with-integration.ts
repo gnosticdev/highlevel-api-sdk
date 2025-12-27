@@ -1,8 +1,8 @@
-import type { AccessType, HighLevelScopes } from '../../lib/type-utils'
 import type { DefaultOauthClient } from '../oauth/impl'
+import type { AccessType, Scopes } from '../scopes/scope-types'
+import { BaseHighLevelClient } from './base'
 import type { HighLevelClientConfig } from './default'
-import { HighLevelClient } from './default'
-import type { AuthHeaders } from './types'
+import type { AUTH_HEADERS } from './types'
 
 export type PrivateIntegrationConfig<T extends AccessType> = {
 	/**
@@ -15,16 +15,6 @@ export type PrivateIntegrationConfig<T extends AccessType> = {
 	 * @see https://help.leadconnectorhq.com/support/solutions/articles/155000002774-private-integrations-everything-you-need-to-know
 	 */
 	privateToken: string
-	/**
-	 * The scopes for the integration.
-	 *
-	 * @example
-	 * ```ts
-	 * // use all available scopes
-	 * const scopes = new ScopesBuilder().all().join(' ')
-	 * ```
-	 */
-	scopes?: HighLevelScopes<T>
 }
 
 /**
@@ -45,7 +35,7 @@ export type PrivateIntegrationConfig<T extends AccessType> = {
  */
 export class HighLevelIntegrationClient<
 	T extends AccessType,
-> extends HighLevelClient<T, DefaultOauthClient, AuthHeaders> {
+> extends BaseHighLevelClient<T, DefaultOauthClient> {
 	/**
 	 * The private token for the integration
 	 *
@@ -62,7 +52,7 @@ export class HighLevelIntegrationClient<
 	 * const scopes = new ScopesBuilder().all().build()
 	 * ```
 	 */
-	scopes?: HighLevelScopes<T>
+	scopes?: Scopes<T>[]
 
 	constructor(
 		/**
@@ -78,12 +68,11 @@ export class HighLevelIntegrationClient<
 		 */
 		clientConfig?: HighLevelClientConfig,
 	) {
-		const authHeaders: AuthHeaders = {
+		const authHeaders: AUTH_HEADERS = {
 			Authorization: `Bearer ${integrationConfig.privateToken}`,
 			Version: '2021-07-28',
 		}
 		super(clientConfig, authHeaders)
 		this.privateToken = integrationConfig.privateToken
-		this.scopes = integrationConfig.scopes ?? []
 	}
 }

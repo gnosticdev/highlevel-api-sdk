@@ -2,9 +2,8 @@
 	"compilerOptions": {
 		"module": "ES2022",
 		"moduleResolution": "Bundler",
-		"noEmit": true,
+		"noEmit": false,
 		"outDir": "./dist",
-		"preserveSymlinks": true,
 		"rootDir": "./src"
 	},
 	"exclude": ["./src/lib"],

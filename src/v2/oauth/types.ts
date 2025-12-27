@@ -1,5 +1,4 @@
-import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
-import type * as Oauth from '../types/openapi/oauth'
+import type * as Oauth from '../types/oauth'
 
 type AccessTokenRequest =
 	Oauth.operations['get-access-token']['requestBody']['content']['application/x-www-form-urlencoded'] & {
@@ -80,7 +79,7 @@ export type TokenData = AccessTokenResponse & {
 /**
  * If providing your own auth provider, you can implement this interface and pass it into the `createHighLevelClient` function.
  */
-export interface OAuthClientInterface<T extends AccessType> {
+export interface OAuthClientInterface {
 	/**
 	 * The time (in seconds) when the access token expires. Default expiry is 24 hours from the time it was generated.
 	 */
@@ -101,7 +100,7 @@ export interface OAuthClientInterface<T extends AccessType> {
 	/**
 	 * The scopes needed for your app. These must be added to your app in the marketplace.
 	 */
-	readonly scopes: ScopeLiterals<T> | (string & {})
+	readonly scopes: string
 
 	/**
 	 * Gets the current access token, or generates a new one if needed.

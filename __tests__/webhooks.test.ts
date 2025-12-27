@@ -1,6 +1,10 @@
-import { describe, expect, it, spyOn } from 'bun:test'
-import type { ContactCreate } from '../src/v2/types/custom/webhooks'
-import { createWebhooksClient, WebhooksClient } from '../src/v2/webhooks'
+import { describe, expect, it, jest, spyOn } from 'bun:test'
+import type { ContactCreate } from '../src/v2/webhooks/types/ContactCreate'
+import type { WebhookEventMap } from '../src/v2/webhooks/types/WebhookEventMap'
+import {
+	createWebhooksClient,
+	WebhooksClient,
+} from '../src/v2/webhooks/webhooks-client'
 
 describe('WebhooksClient', () => {
 	// Sample webhook payload based on ContactCreate type
@@ -23,12 +27,12 @@ describe('WebhooksClient', () => {
 		const client = createWebhooksClient()
 
 		// Create a properly typed handler function
-		const handler = async (payload: ContactCreate) => {
+		const handler = async (payload: WebhookEventMap['ContactCreate']) => {
 			expect(payload).toEqual(mockContactPayload)
 		}
 
 		// Create a spy with the correct type
-		const handlerSpy = spyOn({ handler }, 'handler')
+		const handlerSpy = jest.fn(handler)
 
 		// Register handler for ContactCreate event
 		client.on('ContactCreate', handlerSpy)
@@ -110,7 +114,7 @@ describe('WebhooksClient', () => {
 
 	it('should maintain type safety with type helper', () => {
 		const client = createWebhooksClient()
-		const contactType = client.type<'ContactCreate'>()
+		const contactType = client.$typeOf<'ContactCreate'>()
 
 		// This is just for type checking, the actual value is empty
 		expect(contactType).toEqual({})

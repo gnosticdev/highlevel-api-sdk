@@ -1,9 +1,12 @@
 import createClient, { type Client } from 'openapi-fetch'
-import type { AccessType, ScopeLiterals } from '../../lib/type-utils'
 import { DEFAULT_V2_BASE_URL } from '../client/default'
 import type { HighLevelOauthConfig } from '../client/with-oauth'
-import { DEFAULT_BASE_AUTH_URL } from '../client/with-oauth'
-import type * as Oauth from '../types/openapi/oauth'
+import {
+	DEFAULT_OAUTH_LOGIN_URL,
+	defaultMemoryStorageFunction,
+} from '../client/with-oauth'
+import type { AccessType } from '../scopes/scope-types'
+import type * as Oauth from '../types/oauth'
 
 import type {
 	AuthUrlParams,
@@ -31,7 +34,7 @@ export type DefaultOauthClient = Client<Oauth.paths>
  * @see https://highlevel.stoplight.io/docs/integrations/
  */
 export class OauthClientImpl<T extends AccessType>
-	implements OAuthClientInterface<T>
+	implements OAuthClientInterface
 {
 	private _accessToken: string | undefined
 	private _refreshToken: string | undefined
@@ -50,8 +53,8 @@ export class OauthClientImpl<T extends AccessType>
 	_client: DefaultOauthClient
 
 	// avoid conflict with the `expiresAt` getter
-	private _expiresAt: number | undefined
-	readonly scopes: ScopeLiterals<T> | (string & {})
+	expiresAt: number | undefined
+	readonly scopes: string
 	readonly config: HighLevelOauthConfig<T>
 	private readonly baseUrl: string
 	private readonly baseOauthUrl: string
@@ -69,13 +72,11 @@ export class OauthClientImpl<T extends AccessType>
 
 		// Set Defaults
 		this.baseUrl = config.baseUrl ?? DEFAULT_V2_BASE_URL
-		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL
-		this.scopes = Array.isArray(config.scopes)
-			? config.scopes.join(' ')
-			: config.scopes
+		this.baseOauthUrl = config.baseAuthUrl ?? DEFAULT_OAUTH_LOGIN_URL
+		this.scopes = config.scopes.join(' ')
 		if (this.scopes.length === 0) {
 			console.warn(
-				'No scopes provided! Pass the scopes set in your app to the scopes param',
+				'No scopes provided! Your app will not be able to access any data.',
 			)
 		}
 		this.userType =
@@ -83,25 +84,22 @@ export class OauthClientImpl<T extends AccessType>
 				? ('Location' as const)
 				: ('Company' as const)
 
-		this.storeTokenFn =
-			config.storageFunction ??
-			(() => {
-				if (!this.tokenData) {
-					throw new Error('No token data to store')
+		// Use the provided storage function or default to memory storage
+		// The storage function signature expects Promise<TokenData>, but we convert it to Promise<void>
+		// to match the storeTokenFn type
+		this.storeTokenFn = config.storageFunction
+			? async (tokenData: TokenData) => {
+					await config.storageFunction!(tokenData)
+					return tokenData
 				}
-				return Promise.resolve(this.tokenData)
-			})
+			: async (tokenData: TokenData) => {
+					await defaultMemoryStorageFunction(tokenData)
+					return tokenData
+				}
 
 		this._client = createClient<Oauth.paths>({
 			baseUrl: this.baseUrl,
 		})
-	}
-
-	/**
-	 * The time (in seconds) when the access token expires.
-	 */
-	get expiresAt(): number | undefined {
-		return this._expiresAt
 	}
 
 	/**
@@ -137,7 +135,7 @@ export class OauthClientImpl<T extends AccessType>
 	}
 
 	/**
-	 * Stores everything from the Token response including the accessToken, refreshToken, locationID, and adds the expiresAt time (in ms).
+	 * Stores the token data using the `storageFunction` including the accessToken, refreshToken, locationID, and adds the expiresAt time (in ms).
 	 * **NOTE**: You can add a `storageFunction` to the config to store the token data in your database or cache.
 	 * @param tokenData - the token response from the server
 	 * @returns the token data with the `expiresAt` time added
@@ -176,8 +174,8 @@ export class OauthClientImpl<T extends AccessType>
 		if (authCode) {
 			const tokenResponse = await this.exchangeToken(authCode)
 			if (!tokenResponse) throw new Error('Error in token exchange')
-			const storedToken = await this.storeTokenData(tokenResponse)
-			return storedToken.access_token
+			await this.storeTokenData(tokenResponse)
+			return tokenResponse.access_token
 		}
 
 		if (!this._refreshToken) {
@@ -185,8 +183,8 @@ export class OauthClientImpl<T extends AccessType>
 		}
 
 		const tokenResponse = await this.refreshAccessToken()
-		const storedToken = await this.storeTokenData(tokenResponse as TokenData)
-		return storedToken.access_token
+		await this.storeTokenData(tokenResponse as TokenData)
+		return tokenResponse.access_token
 	}
 
 	/**

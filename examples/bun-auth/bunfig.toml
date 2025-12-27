@@ -1,3 +1,0 @@
-install.saveTextLockfile = true
-install.production       = true
-install.cache            = { disable = true }

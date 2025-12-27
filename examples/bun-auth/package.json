@@ -1,18 +1,18 @@
 {
+	"name": "@gnosticdev/highlevel-sdk-bun-auth",
+	"version": "0.0.1",
+	"private": true,
+	"license": "MIT",
+	"scripts": {
+		"clean-install": "rm -rf node_modules",
+		"debug-auth": "bun --inspect-brk run src/index.tsx",
+		"dev": "bun --hot src/index.tsx"
+	},
 	"dependencies": {
-		"@gnosticdev/highlevel-sdk": "link:../../../../dist/",
+		"@gnosticdev/highlevel-sdk": "*",
 		"hono": "^4.8.2"
 	},
 	"devDependencies": {
 		"@types/bun": "^1.2.17"
-	},
-	"license": "MIT",
-	"name": "@gnosticdev/highlevel-sdk-bun-auth",
-	"private": false,
-	"scripts": {
-		"clean-install": "rm -rf node_modules && bun install",
-		"debug-auth": "bun --inspect-brk run src/index.tsx",
-		"dev": "bun --hot src/index.tsx"
-	},
-	"version": "0.0.1"
+	}
 }

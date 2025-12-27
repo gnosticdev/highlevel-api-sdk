@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, mock } from 'bun:test'
 import { createHighLevelClient } from '../src/v2'
-import type * as Locations from '../src/v2/types/openapi/locations'
+import type * as Locations from '../src/v2/types/locations'
 
 type MockLocationsResponse =
 	Locations.paths['/locations/{locationId}']['get']['responses']['200']['content']['application/json']

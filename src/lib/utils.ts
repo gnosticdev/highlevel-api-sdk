@@ -71,3 +71,5 @@ export function toCamelCase(str: string): string {
 			match.charAt(match.length - 1).toUpperCase(),
 		)
 }
+
+export type Prettify<T> = { [K in keyof T]: T[K] } & {}

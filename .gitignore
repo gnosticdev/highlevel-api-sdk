@@ -26,3 +26,4 @@ bun.lockb
 *.sqlite
 .env.sh
 .devcontainer
+temp-schema-types

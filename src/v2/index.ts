@@ -1,5 +1,4 @@
 import { HighLevelSDKError } from '../lib/errors'
-import type { AccessType } from '../lib/type-utils'
 import type { HighLevelClientConfig } from './client/default'
 import { HighLevelClient } from './client/default'
 import {
@@ -8,17 +7,17 @@ import {
 } from './client/with-integration'
 import type { HighLevelOauthConfig } from './client/with-oauth'
 import { HighLevelClientWithOAuth } from './client/with-oauth'
-import type { DefaultOauthClient } from './oauth/impl'
+import type { AccessType } from './scopes/scope-types'
 
 export type { HighLevelClientConfig } from './client/default'
 // Export client classes and types for direct import
 export { HighLevelClient } from './client/default'
 export type { HighLevelClientInterface } from './client/interface'
 export type {
-	AuthHeaders,
+	AUTH_HEADERS,
 	ClientWithAuth,
 } from './client/types'
-export { createClientWithAuth } from './client/types'
+
 export type { PrivateIntegrationConfig } from './client/with-integration'
 export { HighLevelIntegrationClient } from './client/with-integration'
 export type { HighLevelOauthConfig } from './client/with-oauth'
@@ -37,17 +36,17 @@ export { HighLevelClientWithOAuth } from './client/with-oauth'
 
 type AuthConfig<
 	T extends AccessType,
-	TType extends 'oauth' | 'integration',
-> = TType extends 'oauth'
+	TAuthType extends 'oauth' | 'integration',
+> = TAuthType extends 'oauth'
 	? HighLevelOauthConfig<T>
 	: PrivateIntegrationConfig<T>
 
 type AuthClient<
 	T extends AccessType,
-	TType extends 'oauth' | 'integration' = never,
-> = TType extends never
-	? HighLevelClient<T, DefaultOauthClient, undefined>
-	: TType extends 'oauth'
+	TAuthType extends 'oauth' | 'integration' = never,
+> = TAuthType extends never
+	? HighLevelClient<T>
+	: TAuthType extends 'oauth'
 		? HighLevelClientWithOAuth<T>
 		: HighLevelIntegrationClient<T>
 
@@ -76,11 +75,9 @@ type AuthClient<
  * })
  * ```
  */
-export function createHighLevelClient<T extends AccessType>(): HighLevelClient<
-	T,
-	DefaultOauthClient,
-	undefined
->
+export function createHighLevelClient<
+	T extends AccessType,
+>(): HighLevelClient<T>
 /**
  * Creates a default HighLevel client with typed endpoints.
  *
@@ -92,7 +89,7 @@ export function createHighLevelClient<T extends AccessType>(): HighLevelClient<
  */
 export function createHighLevelClient<T extends AccessType>(
 	clientConfig?: HighLevelClientConfig,
-): HighLevelClient<T, DefaultOauthClient, undefined>
+): HighLevelClient<T>
 
 /**
  * Creates a HighLevel client with support for OAuth.
@@ -137,12 +134,12 @@ export function createHighLevelClient<T extends AccessType>(
  */
 export function createHighLevelClient<
 	T extends AccessType,
-	TType extends 'oauth' | 'integration' = 'oauth',
+	TAuthType extends 'oauth' | 'integration' = 'oauth',
 >(
 	clientConfig?: HighLevelClientConfig,
-	authType?: TType,
-	authConfig?: AuthConfig<T, TType>,
-): AuthClient<T, TType>
+	authType?: TAuthType,
+	authConfig?: AuthConfig<T, TAuthType>,
+): AuthClient<T, TAuthType>
 /**
  * Creates a HighLevel client with support for Private Integration.
  *
@@ -157,16 +154,16 @@ export function createHighLevelClient<
  */
 export function createHighLevelClient<
 	T extends AccessType,
-	TType extends 'oauth' | 'integration' = 'integration',
+	TAuthType extends 'oauth' | 'integration' = 'integration',
 >(
 	clientConfig?: HighLevelClientConfig,
-	authType?: TType,
-	authConfig?: AuthConfig<T, TType>,
-): AuthClient<T, TType>
+	authType?: TAuthType,
+	authConfig?: AuthConfig<T, TAuthType>,
+): AuthClient<T, TAuthType>
 
 export function createHighLevelClient<
 	T extends AccessType,
-	TType extends 'oauth' | 'integration',
+	TAuthType extends 'oauth' | 'integration',
 >(
 	/**
 	 * The `openapi-fetch` client configuration for the HighLevel API client.
@@ -179,28 +176,33 @@ export function createHighLevelClient<
 	 * The type of authentication to use. If undefined, the basic client is returned with typed endpoints but without built-in authentication.
 	 * @default undefined
 	 */
-	authType?: TType,
+	authType?: TAuthType,
 	/**
 	 * The authentication configuration for either OAuth or Private Integration.
 	 */
-	authConfig?: AuthConfig<T, TType>,
-): AuthClient<T, TType> {
+	authConfig?: AuthConfig<T, TAuthType>,
+): AuthClient<T, TAuthType> {
 	if (!authType || !authConfig) {
-		return new HighLevelClient<T, DefaultOauthClient, undefined>(
-			clientConfig,
-		) as AuthClient<T, TType>
+		return new HighLevelClient(clientConfig) as AuthClient<T, TAuthType>
 	}
-	if (authType === 'oauth' && 'clientId' in authConfig) {
+	if (
+		authType === 'oauth' &&
+		'clientId' in authConfig &&
+		'clientSecret' in authConfig &&
+		'redirectUri' in authConfig &&
+		'accessType' in authConfig &&
+		'scopes' in authConfig
+	) {
 		return new HighLevelClientWithOAuth<T>(
 			authConfig,
 			clientConfig,
-		) as AuthClient<T, TType>
+		) as AuthClient<T, TAuthType>
 	}
 	if (authType === 'integration' && 'privateToken' in authConfig) {
 		return new HighLevelIntegrationClient<T>(
 			authConfig,
 			clientConfig,
-		) as AuthClient<T, TType>
+		) as AuthClient<T, TAuthType>
 	}
 
 	throw new HighLevelSDKError('INVALID_AUTH_TYPE')

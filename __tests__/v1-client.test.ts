@@ -10,7 +10,7 @@ import {
 } from 'bun:test'
 import type { FetchResponse } from 'openapi-fetch'
 import { createHighLevelV1Client } from '../src/v1'
-import type * as V1 from '../src/v1/types/openapi'
+import type * as V1 from '../src/v1/types'
 
 describe('V1 Client', () => {
 	const mockApiKey = 'test-api-key'

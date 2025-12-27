@@ -1,28 +1,31 @@
 import path from 'node:path'
 import kleur from 'kleur'
 import { toCamelCase } from '../src/lib/utils'
-import { getV2OpenApiFiles } from './generate-v2-types'
 
 if (import.meta.main) {
-	await generateClientInterface()
+	const glob = new Bun.Glob('src/v2/types/*.ts')
+	const typeFiles = await Array.fromAsync(
+		glob.scan({ absolute: true, onlyFiles: true }),
+	)
+	await generateClientInterface(typeFiles)
 }
 
-export async function generateClientInterface() {
+export async function generateClientInterface(typeFiles: string[]) {
 	// ignore oauth bc we handle it separately
 	// ignore common-schemas as they are only refereenced by other files
-	const IGNORE_FILES = ['oauth.openapi.json', 'common-schemas.json']
+	const IGNORE_FILES = ['oauth.ts', 'common-schemas.ts']
 	const CLIENT_INTERFACE_FILE = path.join(
 		process.cwd(),
 		'src/v2/client/interface.ts',
 	)
 
-	const schemaFiles = (await getV2OpenApiFiles())
+	const schemaFiles = typeFiles
 		.filter((file) => {
 			const basename = path.basename(file)
 			return !IGNORE_FILES.includes(basename)
 		})
 		.map((file) => {
-			const fileName = path.basename(file).replace('.openapi.json', '')
+			const fileName = path.basename(file, '.ts')
 			const camelName = toCamelCase(fileName)
 			const pascalName = camelName.charAt(0).toUpperCase() + camelName.slice(1)
 			return { pascalName, camelName, fileName }
@@ -30,7 +33,7 @@ export async function generateClientInterface() {
 
 	const importStatements = schemaFiles
 		.map((file) => {
-			return `import type { paths as ${file.pascalName}Paths } from '../types/openapi/${file.fileName}'`
+			return `import type { paths as ${file.pascalName}Paths } from '../types/${file.fileName}'`
 		})
 		.join('\n')
 
@@ -52,7 +55,7 @@ import type { AccessType } from '../../lib/type-utils'
 import type { ClientWithAuth } from './types'
 import type { HighLevelClientConfig } from './default'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
-
+import type { AnyOauthClient, AnyClient } from './client-type-helpers'
 
 
 export interface HighLevelClientInterface<

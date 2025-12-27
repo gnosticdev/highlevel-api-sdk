@@ -3,12 +3,17 @@
 [![npm version](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk.svg)](https://badge.fury.io/js/%40gnosticdev%2Fhighlevel-sdk)
 [![npm downloads](https://img.shields.io/npm/dm/@gnosticdev/highlevel-sdk.svg)](https://www.npmjs.com/package/@gnosticdev/highlevel-sdk)
 
-Typescript SDK for working with HighLevel API endpoints. Every endpoint for both v1 and v2 of the API has a fully typed client SDK, and the types are generated from HighLevel's OpenAPI v3 documentation so will always be compatible and up to date.
+TypeScript SDK for working with HighLevel API v1 and v2 endpoints. Works with any server-side JS runtime including Node.js, Bun, Cloudflare Workers, etc.
+
+## Why Use This SDK?
+
+The HighLevel API is constantly evolving, with updated endpoints being added regularly. This package downloads the latest OpenAPI schemas from the [HighLevel API Docs](https://githhub.com/GoHighLevel/highlevel-api-docs) on a schedule, then uses the [openapi-typescript](https://openapi-ts.dev/introduction) library to generate the types for each endpoint.
+
+This means that when a new endpoint is added, this package will automatically have support for it. Also, each endpoint has full type safety, and the types are generated from HighLevel's OpenAPI v3 documentation so will always be compatible and up to date.
 
 ## Features
 
 - **NEW** Support for [Private Integrations](https://help.gohighlevel.com/support/solutions/articles/155000003054-private-integrations-everything-you-need-to-know)
-- API Endpoints generated from HighLevel's OpenAPI v3 documentation, using [openapi-typescript](https://openapi-ts.dev/introduction)
 - Fully typed client SDK (using native `fetch`) built with [openapi-fetch](https://openapi-ts.dev/openapi-fetch/)
 - OAuth2 helpers for working with HighLevel's OAuth2 implementation
 - Scopes builder for easily adding the appropriate scopes to your app
@@ -42,9 +47,7 @@ The HighLevel client uses the v2 API by default (see below for v1 client). It ca
   const client = createHighLevelClient()
 
   // or pass in the client config
-  const client = createHighLevelClient({
-    baseUrl: 'https://api.custom-url.com',
-  })
+  const client = createHighLevelClient()
   ```
 
 - **Client with OAuth**: Requires OAuth configuration.
@@ -216,6 +219,10 @@ Available webhook types include:
 - And more...
 
 The webhooks client provides full type safety and validation for all webhook payloads defined in the HighLevel API.
+
+#### Webhook Signature Verification
+
+For webhook signature verification and payload decryption, see the [Webhook Payload Decryption documentation](./docs/decrypt-payload.md). Note that signature verification code uses Node.js's `crypto` module and is not included in the SDK to maintain compatibility with all runtimes (Cloudflare Workers, Bun, etc.).
 
 ### Endpoint Types
 

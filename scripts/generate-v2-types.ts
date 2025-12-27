@@ -6,25 +6,25 @@ import type { OpenAPI3 } from 'openapi-typescript'
 import openapiTS, { astToString } from 'openapi-typescript'
 import { generateClientInterface } from './generate-interface'
 
-const V2_TYPES_DIR = 'src/v2/types/openapi'
-let TEMP_DIR!: string
+const V2_TYPES_DIR = 'src/v2/types'
+const TEMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'v2-types'), {
+	encoding: 'utf8',
+})
 
 /**
  * This script uses the json schemas to generate the typescript types. To keep the schemas up to date, run `bun run generate-v2-json` first.
  */
 if (import.meta.main) {
-	TEMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'v2-types'), {
-		encoding: 'utf8',
-	})
-	await createV2Types()
-	await generateClientInterface()
+	await fs.promises.mkdir(V2_TYPES_DIR, { recursive: true }).catch(() => {})
+	const typeFiles = await createV2Types()
+	await generateClientInterface(typeFiles)
 	await fs.promises.rm(TEMP_DIR, { recursive: true, force: true })
 }
 
 /**
  * Generate types from openapi schemas. Outputs a file for each openapi schema.
  */
-export async function createV2Types() {
+export async function createV2Types(): Promise<string[]> {
 	const IGNORE_FILES = ['common-schemas.json']
 	await fs.promises.mkdir(TEMP_DIR, { recursive: true }).catch(() => {
 		console.warn(kleur.yellow(`Temp directory already exists: ${TEMP_DIR}`))
@@ -61,14 +61,16 @@ export async function createV2Types() {
 		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ ${V2_TYPES_DIR}/`
 		console.log(kleur.green('Successfully moved all files to final directory'))
 
-		await Bun.$`bun biome check . --write --unsafe`
+		await Bun.$`bun run biome check ${V2_TYPES_DIR} --write --unsafe`
 		console.log(kleur.green('Successfully linted all types'))
+
+		return generatedTsFiles
 	} catch (error) {
 		console.error(kleur.red('Error generating types:'), error)
 		process.exit(1)
 	} finally {
 		// Clean up temp directory
-		await Bun.$`rm -rf ${TEMP_DIR}`
+		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
 	}
 }
 
@@ -82,13 +84,12 @@ export async function createV2Types() {
  */
 export async function getV2OpenApiFiles(): Promise<string[]> {
 	// get all json files with openapi in the path somewhere
-	const glob = new Bun.Glob('schemas/v2/{openapi,common}/*.json')
+	const glob = new Bun.Glob('schemas/v2/{api-endpoints,common}/**/*.json')
 	const files = await Array.fromAsync(
 		glob.scan({ absolute: true, onlyFiles: true }),
 	)
-	console.log('files', files)
 	if (files.length === 0) {
-		throw new Error('No files found in schemas')
+		throw new Error('No files found in schemas/v2/api-endpoints')
 	}
 	return files
 }

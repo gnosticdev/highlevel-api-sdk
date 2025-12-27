@@ -1,11 +1,76 @@
-import type { AccessType, HighLevelScopes } from '../../lib/type-utils'
 import { OauthClientImpl } from '../oauth/impl'
 import type { TokenData } from '../oauth/types'
+import type { AccessType, Scopes } from '../scopes/scope-types'
+import { BaseHighLevelClient } from './base'
 import type { HighLevelClientConfig } from './default'
-import { DEFAULT_V2_BASE_URL, HighLevelClient } from './default'
+import { DEFAULT_V2_BASE_URL } from './default'
 
-export const DEFAULT_BASE_AUTH_URL =
+export const DEFAULT_OAUTH_LOGIN_URL =
 	'https://marketplace.leadconnectorhq.com/oauth/chooselocation'
+
+/**
+ * In-memory storage for token data.
+ * This is a simple Map-based storage that persists token data in memory.
+ * Useful for testing and development, but not recommended for production.
+ */
+class MemoryTokenStore {
+	private store = new Map<string, TokenData>()
+
+	/**
+	 * Store token data in memory.
+	 * @param tokenData - The token data to store
+	 * @returns The stored token data
+	 */
+	async set(tokenData: TokenData): Promise<TokenData> {
+		// Use locationId or companyId as the key, fallback to a default key
+		const key = tokenData.locationId ?? tokenData.companyId ?? 'default'
+		this.store.set(key, tokenData)
+		return tokenData
+	}
+
+	/**
+	 * Retrieve token data from memory.
+	 * @param key - The key to retrieve (locationId, companyId, or 'default')
+	 * @returns The stored token data or undefined
+	 */
+	get(key: string): TokenData | undefined {
+		return this.store.get(key)
+	}
+
+	/**
+	 * Clear all stored token data.
+	 */
+	clear(): void {
+		this.store.clear()
+	}
+
+	/**
+	 * Get all stored token data.
+	 * @returns Array of all stored token data
+	 */
+	getAll(): TokenData[] {
+		return Array.from(this.store.values())
+	}
+}
+
+/**
+ * Default memory store instance.
+ * This is used as the default storage when no custom storage function is provided.
+ */
+const defaultMemoryStore = new MemoryTokenStore()
+
+/**
+ * Default memory storage function for token data.
+ * Stores token data in memory using the default memory store.
+ *
+ * @param tokenData - The token data to store
+ * @returns The stored token data
+ */
+export async function defaultMemoryStorageFunction(
+	tokenData: TokenData,
+): Promise<TokenData> {
+	return defaultMemoryStore.set(tokenData)
+}
 
 /**
  * HighLevelClient with built in OAuth methods.
@@ -15,7 +80,7 @@ export const DEFAULT_BASE_AUTH_URL =
  * @see {@link createHighLevelClient}
  * @example
  * ```ts
- * const client = createAuth('oauth', {
+ * const client = createHighLevelClient({}, 'oauth', {
  *   clientId: 'your-client-id',
  *   clientSecret: 'your-client-secret',
  *   redirectUri: 'http://localhost:3000/callback',
@@ -27,7 +92,7 @@ export const DEFAULT_BASE_AUTH_URL =
  */
 export class HighLevelClientWithOAuth<
 	T extends AccessType,
-> extends HighLevelClient<T, OauthClientImpl<T>, undefined> {
+> extends BaseHighLevelClient<T, OauthClientImpl<T>> {
 	oauth: OauthClientImpl<T>
 
 	constructor(
@@ -37,13 +102,12 @@ export class HighLevelClientWithOAuth<
 		super(clientConfig)
 		const baseUrl =
 			clientConfig?.baseUrl ?? oauthConfig.baseUrl ?? DEFAULT_V2_BASE_URL
-		const _oauthConfig: HighLevelOauthConfig<T> = {
+		const mergedOauthConfig: HighLevelOauthConfig<T> = {
 			...oauthConfig,
 			baseUrl: baseUrl,
-			baseAuthUrl: oauthConfig?.baseAuthUrl ?? DEFAULT_BASE_AUTH_URL,
-			scopes: oauthConfig.scopes ?? [],
+			baseAuthUrl: oauthConfig?.baseAuthUrl ?? DEFAULT_OAUTH_LOGIN_URL,
 		}
-		this.oauth = new OauthClientImpl(_oauthConfig)
+		this.oauth = new OauthClientImpl(mergedOauthConfig)
 	}
 }
 
@@ -61,7 +125,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 *
 	 * **Important:** Your client_id and client_secret must have been created after your scopes were added to your app.
 	 * @default process.env.HIGHLEVEL_CLIENT_ID
-	 * @see https://marketplace.gohighlevel.com/apps
+	 * @see {@link https://marketplace.gohighlevel.com/apps}
 	 */
 	clientId: string
 	/**
@@ -69,7 +133,7 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 *
 	 * **Important:** Your client_id and client_secret must have been created after your scopes were added to your app.
 	 * @default process.env.HIGHLEVEL_CLIENT_SECRET
-	 * @see https://marketplace.gohighlevel.com/apps
+	 * @see {@link https://marketplace.gohighlevel.com/apps}
 	 */
 	clientSecret: string
 	/**
@@ -85,12 +149,12 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	 */
 	redirectUri: string
 	/**
-	 * Scopes needed for your app. These must be added to your app in the marketplace.
+	 * Scopes needed to get the authorization code. These must be added to your app in the marketplace.
 	 *
 	 * Available scopes will change depending on your app type.
-	 * @see https://marketplace.gohighlevel.com/apps
+	 * @see {@link https://marketplace.gohighlevel.com/apps}
 	 */
-	scopes: HighLevelScopes<T>
+	scopes: (Scopes<T> | (string & {}))[]
 	/**
 	 * base url used by the Oauth client to build the redirect uri. no need to change unless you are proxying requests.
 	 * @default `https://marketplace.leadconnectorhq.com/oauth/chooselocation`
@@ -105,7 +169,6 @@ export type HighLevelOauthConfig<T extends AccessType> = {
 	authCode?: string
 	/**
 	 * Store the token data in your database or cache
-	 * @default `(tokenData) => Promise.resolve(tokenData)`
 	 */
 	storageFunction?: (tokenData: TokenData) => Promise<TokenData>
 }
