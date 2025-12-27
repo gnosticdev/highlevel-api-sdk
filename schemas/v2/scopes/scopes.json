@@ -1,0 +1,487 @@
+{
+  "$id": "highlevel/scopes.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HighLevel API Scopes",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["Sub-Account", "Agency"],
+  "properties": {
+    "Sub-Account": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["readonly", "write"],
+      "properties": {
+        "readonly": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "blogs/author": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "blogs/category": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "blogs/check-slug": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "blogs/list": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "blogs/posts": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "businesses": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars/events": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars/groups": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars/resources": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "campaigns": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "contacts": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "conversations": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "conversations/message": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "emails/builder": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "emails/schedule": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "forms": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "funnels/funnel": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "funnels/page": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "funnels/pagecount": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "funnels/redirect": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "invoices": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "invoices/schedule": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "invoices/template": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "links": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/customFields": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/customValues": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/tags": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/tasks": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/templates": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "medias": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "objects/record": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "objects/schema": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "opportunities": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "payments/integration": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "payments/orders": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "payments/subscriptions": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "payments/transactions": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "products": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "products/prices": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/account": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/category": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/csv": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/oauth": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/post": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/tag": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "surveys": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "users": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "workflows": {
+              "$ref": "#/$defs/ScopeInfo"
+            }
+          },
+          "required": [
+            "blogs/author",
+            "blogs/category",
+            "blogs/check-slug",
+            "blogs/list",
+            "blogs/posts",
+            "businesses",
+            "calendars",
+            "calendars/events",
+            "calendars/groups",
+            "calendars/resources",
+            "campaigns",
+            "contacts",
+            "conversations",
+            "conversations/message",
+            "emails/builder",
+            "emails/schedule",
+            "forms",
+            "funnels/funnel",
+            "funnels/page",
+            "funnels/pagecount",
+            "funnels/redirect",
+            "invoices",
+            "invoices/schedule",
+            "invoices/template",
+            "links",
+            "locations",
+            "locations/customFields",
+            "locations/customValues",
+            "locations/tags",
+            "locations/tasks",
+            "locations/templates",
+            "medias",
+            "objects/record",
+            "objects/schema",
+            "opportunities",
+            "payments/integration",
+            "payments/orders",
+            "payments/subscriptions",
+            "payments/transactions",
+            "products",
+            "products/prices",
+            "socialplanner/account",
+            "socialplanner/category",
+            "socialplanner/csv",
+            "socialplanner/oauth",
+            "socialplanner/post",
+            "socialplanner/tag",
+            "surveys",
+            "users",
+            "workflows"
+          ]
+        },
+        "write": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "blogs/post": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "blogs/post-update": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "businesses": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars/events": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars/groups": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "calendars/resources": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "contacts": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "conversations": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "conversations/livechat": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "conversations/message": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "courses": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "emails/builder": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "funnels/redirect": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "invoices": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "invoices/schedule": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "invoices/template": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "links": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/customFields": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/customValues": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations/tags": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "medias": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "objects/record": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "opportunities": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "payments/integration": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "payments/orders": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "products": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "products/prices": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "saas/company": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "saas/location": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/account": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/csv": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/oauth": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "socialplanner/post": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "users": {
+              "$ref": "#/$defs/ScopeInfo"
+            }
+          },
+          "required": [
+            "blogs/post",
+            "blogs/post-update",
+            "businesses",
+            "calendars",
+            "calendars/events",
+            "calendars/groups",
+            "calendars/resources",
+            "contacts",
+            "conversations",
+            "conversations/livechat",
+            "conversations/message",
+            "courses",
+            "emails/builder",
+            "funnels/redirect",
+            "invoices",
+            "invoices/schedule",
+            "invoices/template",
+            "links",
+            "locations/customFields",
+            "locations/customValues",
+            "locations/tags",
+            "medias",
+            "objects/record",
+            "opportunities",
+            "payments/integration",
+            "payments/orders",
+            "products",
+            "products/prices",
+            "saas/company",
+            "saas/location",
+            "socialplanner/account",
+            "socialplanner/csv",
+            "socialplanner/oauth",
+            "socialplanner/post",
+            "users"
+          ]
+        }
+      }
+    },
+    "Agency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["readonly", "write"],
+      "properties": {
+        "readonly": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "emails/schedule": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "locations": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "oauth": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "snapshots": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "users": {
+              "$ref": "#/$defs/ScopeInfo"
+            }
+          },
+          "required": ["emails/schedule", "locations", "oauth", "snapshots", "users"]
+        },
+        "write": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "locations": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "oauth": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "saas/company": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "saas/location": {
+              "$ref": "#/$defs/ScopeInfo"
+            },
+            "users": {
+              "$ref": "#/$defs/ScopeInfo"
+            }
+          },
+          "required": ["locations", "oauth", "saas/company", "saas/location", "users"]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "HttpMethod": {
+      "type": "string",
+      "enum": ["DELETE", "GET", "PATCH", "POST", "PUT"]
+    },
+    "WebhookEventName": {
+      "type": "string",
+      "enum": [
+        "CampaignStatusUpdate",
+        "ContactCreate",
+        "ContactDelete",
+        "ContactDndUpdate",
+        "ContactTagUpdate",
+        "ConversationProviderOutboundMessage",
+        "ConversationUnreadWebhook",
+        "InboundMessage",
+        "LocationCreate",
+        "LocationUpdate",
+        "NoteCreate",
+        "NoteDelete",
+        "OpportunityCreate",
+        "OpportunityDelete",
+        "OpportunityMonetaryValueUpdate",
+        "OpportunityStageUpdate",
+        "TaskCreate",
+        "TaskDelete",
+        "Webhook Events"
+      ]
+    },
+    "EndpointRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "path"],
+      "properties": {
+        "method": {
+          "$ref": "#/$defs/HttpMethod"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "ScopeInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["endpoints", "webhookEvents"],
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EndpointRef"
+          }
+        },
+        "webhookEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WebhookEventName"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/webhooks/ObjectSchemaCreate.json",
+  "title": "ObjectSchemaCreate",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "labels": {
+      "type": "object",
+      "properties": {
+        "singular": {
+          "type": "string"
+        },
+        "plural": {
+          "type": "string"
+        }
+      },
+      "required": ["singular", "plural"],
+      "additionalProperties": false
+    },
+    "description": {
+      "type": "string"
+    },
+    "searchableProperties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "primaryDisplayProperty": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "createdBy": {
+      "type": "object"
+    },
+    "updatedBy": {
+      "type": "object"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "objectType": {
+      "type": "string",
+      "enum": ["USER_DEFINED"],
+      "default": "USER_DEFINED"
+    }
+  },
+  "required": ["labels", "primaryDisplayProperty", "key", "locationId", "objectType"],
+  "additionalProperties": true
+}

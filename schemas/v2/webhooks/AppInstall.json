@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "appId": {
+      "type": "string"
+    },
+    "companyId": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "planId": {
+      "type": "string"
+    },
+    "trial": {
+      "type": "object",
+      "properties": {
+        "onTrial": {
+          "type": "boolean"
+        },
+        "trialDuration": {
+          "type": "number"
+        },
+        "trialStartDate": {
+          "type": "Date"
+        }
+      }
+    },
+    "isWhitelabelCompany": {
+      "type": "boolean"
+    },
+    "whitelabelDetails": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "logoUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "companyName": {
+      "type": "string"
+    }
+  }
+}

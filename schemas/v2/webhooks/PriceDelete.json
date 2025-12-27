@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string"
+    },
+    "membershipOffers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "variantOptionIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "product": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "recurring": {
+      "type": "object",
+      "properties": {
+        "interval": {
+          "type": "string"
+        },
+        "intervalCount": {
+          "type": "number"
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    },
+    "compareAtPrice": {
+      "type": "number"
+    },
+    "trackInventory": {
+      "type": "null"
+    },
+    "availableQuantity": {
+      "type": "number"
+    },
+    "allowOutOfStockPurchases": {
+      "type": "boolean"
+    }
+  }
+}

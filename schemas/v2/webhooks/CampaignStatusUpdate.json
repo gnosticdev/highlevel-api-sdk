@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "contactId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "templateId": {
+      "type": "string"
+    },
+    "replied": {
+      "type": "string"
+    },
+    "dateAdded": {
+      "type": "string"
+    }
+  }
+}

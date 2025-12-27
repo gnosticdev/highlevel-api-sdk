@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "appointment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "calendarId": {
+          "type": "string"
+        },
+        "contactId": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "appointmentStatus": {
+          "type": "string"
+        },
+        "assignedUserId": {
+          "type": "string"
+        },
+        "users": {
+          "type": "array"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
+        },
+        "dateAdded": {
+          "type": "string"
+        },
+        "dateUpdated": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

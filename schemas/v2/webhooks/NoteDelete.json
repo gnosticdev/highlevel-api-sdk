@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "contactId": {
+      "type": "string"
+    },
+    "dateAdded": {
+      "type": "string"
+    }
+  }
+}

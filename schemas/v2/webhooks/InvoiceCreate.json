@@ -1,0 +1,193 @@
+{
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "liveMode": {
+      "type": "boolean"
+    },
+    "amountPaid": {
+      "type": "number"
+    },
+    "altId": {
+      "type": "string"
+    },
+    "altType": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "businessDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phoneNo": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "logoUrl": {
+          "type": "string"
+        },
+        "customValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "invoiceNumber": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "contactDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "phoneNo": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "customFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "countryCode": {
+              "type": "string"
+            },
+            "addressLine1": {
+              "type": "string"
+            },
+            "addressLine2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "postalCode": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalEmails": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "companyName": {
+          "type": "string"
+        }
+      }
+    },
+    "issueDate": {
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "string"
+    },
+    "discount": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        }
+      }
+    },
+    "invoiceItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "taxes": {
+            "type": "array"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "productId": {
+            "type": "string"
+          },
+          "priceId": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "qty": {
+            "type": "number"
+          },
+          "amount": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "total": {
+      "type": "number"
+    },
+    "title": {
+      "type": "string"
+    },
+    "amountDue": {
+      "type": "number"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    },
+    "totalSummary": {
+      "type": "object",
+      "properties": {
+        "subTotal": {
+          "type": "number"
+        },
+        "discount": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

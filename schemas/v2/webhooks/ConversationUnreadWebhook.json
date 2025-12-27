@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "contactId": {
+      "type": "string"
+    },
+    "unreadCount": {
+      "type": "number"
+    },
+    "inbox": {
+      "type": "boolean"
+    },
+    "starred": {
+      "type": "boolean"
+    },
+    "deleted": {
+      "type": "boolean"
+    }
+  }
+}

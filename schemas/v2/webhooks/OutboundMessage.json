@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array"
+    },
+    "body": {
+      "type": "string"
+    },
+    "contactId": {
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string"
+    },
+    "conversationId": {
+      "type": "string"
+    },
+    "dateAdded": {
+      "type": "string"
+    },
+    "direction": {
+      "type": "string"
+    },
+    "messageType": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "messageId": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "conversationProviderId": {
+      "type": "string"
+    },
+    "callDuration": {
+      "type": "number"
+    },
+    "callStatus": {
+      "type": "string"
+    }
+  }
+}

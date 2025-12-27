@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "contactId": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "messageId": {
+      "type": "string"
+    },
+    "emailMessageId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "Email/SMS"
+    },
+    "attachments": {
+      "type": "array"
+    },
+    "message": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "emailTo": {
+      "type": "string"
+    },
+    "emailFrom": {
+      "type": "string"
+    },
+    "html": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "address1": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "dateAdded": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "string"
+    },
+    "dnd": {
+      "type": "boolean"
+    },
+    "email": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "postalCode": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array"
+    },
+    "website": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array"
+    },
+    "assignedTo": {
+      "type": "string"
+    },
+    "customFields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": ["string", "number", "array", "object"]
+          }
+        }
+      }
+    }
+  }
+}

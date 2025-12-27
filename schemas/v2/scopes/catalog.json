@@ -1,0 +1,144 @@
+{
+  "$id": "highlevel/scope-endpoints.catalog.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HighLevel Scope Endpoints Catalog",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/ScopeEndpoint"
+  },
+  "$defs": {
+    "PermissionLevel": {
+      "type": "string",
+      "enum": ["readonly", "write"]
+    },
+    "AccessType": {
+      "type": "string",
+      "enum": ["Sub-Account", "Agency"]
+    },
+    "HttpMethod": {
+      "type": "string",
+      "enum": ["DELETE", "GET", "PATCH", "POST", "PUT"]
+    },
+    "ScopeName": {
+      "type": "string",
+      "enum": [
+        "blogs/author",
+        "blogs/category",
+        "blogs/check-slug",
+        "blogs/list",
+        "blogs/post",
+        "blogs/post-update",
+        "blogs/posts",
+        "businesses",
+        "calendars",
+        "calendars/events",
+        "calendars/groups",
+        "calendars/resources",
+        "campaigns",
+        "contacts",
+        "conversations",
+        "conversations/livechat",
+        "conversations/message",
+        "courses",
+        "emails/builder",
+        "emails/schedule",
+        "forms",
+        "funnels/funnel",
+        "funnels/page",
+        "funnels/pagecount",
+        "funnels/redirect",
+        "invoices",
+        "invoices/schedule",
+        "invoices/template",
+        "links",
+        "locations",
+        "locations/customFields",
+        "locations/customValues",
+        "locations/tags",
+        "locations/tasks",
+        "locations/templates",
+        "medias",
+        "oauth",
+        "objects/record",
+        "objects/schema",
+        "opportunities",
+        "payments/integration",
+        "payments/orders",
+        "payments/subscriptions",
+        "payments/transactions",
+        "products",
+        "products/prices",
+        "saas/company",
+        "saas/location",
+        "snapshots",
+        "socialplanner/account",
+        "socialplanner/category",
+        "socialplanner/csv",
+        "socialplanner/oauth",
+        "socialplanner/post",
+        "socialplanner/tag",
+        "surveys",
+        "users",
+        "workflows"
+      ]
+    },
+    "WebhookEventName": {
+      "type": "string",
+      "enum": [
+        "CampaignStatusUpdate",
+        "ContactCreate",
+        "ContactDelete",
+        "ContactDndUpdate",
+        "ContactTagUpdate",
+        "ConversationProviderOutboundMessage",
+        "ConversationUnreadWebhook",
+        "InboundMessage",
+        "LocationCreate",
+        "LocationUpdate",
+        "NoteCreate",
+        "NoteDelete",
+        "OpportunityCreate",
+        "OpportunityDelete",
+        "OpportunityMonetaryValueUpdate",
+        "OpportunityStageUpdate",
+        "TaskCreate",
+        "TaskDelete",
+        "Webhook Events"
+      ]
+    },
+    "ScopeEndpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "permissionLevel", "accessType", "webhookEvents", "method", "endpoint"],
+      "properties": {
+        "scope": {
+          "$ref": "#/$defs/ScopeName"
+        },
+        "permissionLevel": {
+          "$ref": "#/$defs/PermissionLevel"
+        },
+        "accessType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AccessType"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "webhookEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WebhookEventName"
+          },
+          "uniqueItems": true
+        },
+        "method": {
+          "$ref": "#/$defs/HttpMethod"
+        },
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

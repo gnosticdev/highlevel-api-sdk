@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/webhooks/UserCreate.json",
+  "title": "UserCreate",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "type": {
+      "const": "UserCreate"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "companyId": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "extension": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "adwordsReportingEnabled": {
+          "type": "boolean"
+        },
+        "affiliateManagerEnabled": {
+          "type": "boolean"
+        },
+        "agentReportingEnabled": {
+          "type": "boolean"
+        },
+        "appointmentsEnabled": {
+          "type": "boolean"
+        },
+        "assignedDataOnly": {
+          "type": "boolean"
+        },
+        "attributionsReportingEnabled": {
+          "type": "boolean"
+        },
+        "bloggingEnabled": {
+          "type": "boolean"
+        },
+        "botService": {
+          "type": "boolean"
+        },
+        "bulkRequestsEnabled": {
+          "type": "boolean"
+        },
+        "campaignsEnabled": {
+          "type": "boolean"
+        },
+        "campaignsReadOnly": {
+          "type": "boolean"
+        },
+        "cancelSubscriptionEnabled": {
+          "type": "boolean"
+        },
+        "communitiesEnabled": {
+          "type": "boolean"
+        },
+        "contactsEnabled": {
+          "type": "boolean"
+        },
+        "contentAiEnabled": {
+          "type": "boolean"
+        },
+        "conversationsEnabled": {
+          "type": "boolean"
+        },
+        "dashboardStatsEnabled": {
+          "type": "boolean"
+        },
+        "facebookAdsReportingEnabled": {
+          "type": "boolean"
+        },
+        "funnelsEnabled": {
+          "type": "boolean"
+        },
+        "invoiceEnabled": {
+          "type": "boolean"
+        },
+        "leadValueEnabled": {
+          "type": "boolean"
+        },
+        "marketingEnabled": {
+          "type": "boolean"
+        },
+        "membershipEnabled": {
+          "type": "boolean"
+        },
+        "onlineListingsEnabled": {
+          "type": "boolean"
+        },
+        "opportunitiesEnabled": {
+          "type": "boolean"
+        },
+        "paymentsEnabled": {
+          "type": "boolean"
+        },
+        "phoneCallEnabled": {
+          "type": "boolean"
+        },
+        "recordPaymentEnabled": {
+          "type": "boolean"
+        },
+        "refundsEnabled": {
+          "type": "boolean"
+        },
+        "reviewsEnabled": {
+          "type": "boolean"
+        },
+        "settingsEnabled": {
+          "type": "boolean"
+        },
+        "socialPlanner": {
+          "type": "boolean"
+        },
+        "tagsEnabled": {
+          "type": "boolean"
+        },
+        "triggersEnabled": {
+          "type": "boolean"
+        },
+        "websitesEnabled": {
+          "type": "boolean"
+        },
+        "workflowsEnabled": {
+          "type": "boolean"
+        },
+        "workflowsReadOnly": {
+          "type": "boolean"
+        }
+      }
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["type", "id", "firstName", "lastName", "email", "role", "permissions", "scopes"],
+  "anyOf": [
+    {
+      "title": "Sub-account user payload",
+      "required": ["locationId"],
+      "not": {
+        "required": ["companyId"]
+      }
+    },
+    {
+      "title": "Agency user payload",
+      "required": ["companyId", "locations"],
+      "not": {
+        "required": ["locationId"]
+      }
+    }
+  ]
+}

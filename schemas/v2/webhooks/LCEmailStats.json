@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LCEmailStats",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "companyId": {
+      "type": "string"
+    },
+    "webhookPayload": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "integer"
+        },
+        "flags": {
+          "type": "object",
+          "properties": {
+            "is-authenticated": {
+              "type": "boolean"
+            },
+            "is-routed": {
+              "type": "boolean"
+            },
+            "is-big": {
+              "type": "boolean"
+            },
+            "is-system-test": {
+              "type": "boolean"
+            },
+            "is-test-mode": {
+              "type": "boolean"
+            }
+          }
+        },
+        "message": {
+          "type": "object",
+          "properties": {
+            "attachments": {
+              "type": "array"
+            },
+            "headers": {
+              "type": "object",
+              "properties": {
+                "message-id": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                }
+              }
+            },
+            "size": {
+              "type": "integer"
+            }
+          }
+        },
+        "log-level": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        },
+        "recipient-domain": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array"
+        },
+        "recipient-provider": {
+          "type": "string"
+        },
+        "campaigns": {
+          "type": "array"
+        },
+        "delivery-status": {
+          "type": "object",
+          "properties": {
+            "attempt-no": {
+              "type": "integer"
+            },
+            "code": {
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "session-seconds": {
+              "type": "number"
+            },
+            "enhanced-code": {
+              "type": "string"
+            },
+            "mx-host": {
+              "type": "string"
+            },
+            "utf8": {
+              "type": "boolean"
+            },
+            "i-first-delivery-attempt-seconds": {
+              "type": "number"
+            }
+          }
+        },
+        "envelope": {
+          "type": "object",
+          "properties": {
+            "sender": {
+              "type": "string"
+            },
+            "targets": {
+              "type": "string"
+            },
+            "transport": {
+              "type": "string"
+            },
+            "sending-ip": {
+              "type": "string"
+            },
+            "i-ip-pool-id": {
+              "type": "string"
+            },
+            "i-ip-pool-name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

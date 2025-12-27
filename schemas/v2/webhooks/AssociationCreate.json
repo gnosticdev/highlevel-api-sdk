@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "associationType": {
+      "type": "string"
+    },
+    "firstObjectKey": {
+      "type": "string"
+    },
+    "firstObjectLabel": {
+      "type": "string"
+    },
+    "secondObjectKey": {
+      "type": "string"
+    },
+    "secondObjectLabel": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    }
+  }
+}
