@@ -20,6 +20,18 @@ import { type DefaultOauthClient, OauthClientImpl } from '../src/v2/oauth/impl'
 import type { AccessType } from '../src/v2/scopes/scope-types'
 import type * as Locations from '../src/v2/types/locations'
 
+const client = createHighLevelClient()
+client.customMenus.GET('/custom-menus/', {
+	params: {
+		header: {
+			Version: '2021-07-28',
+		},
+		query: {
+			limit: 10,
+		},
+	},
+})
+
 type LocationsResponse = FetchResponse<
 	Locations.paths['/locations/search']['get'],
 	Locations.components['schemas']['SearchSuccessfulResponseDto'],

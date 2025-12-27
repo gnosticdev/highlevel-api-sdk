@@ -1,3 +1,4 @@
+import createClient from 'openapi-fetch'
 import { HighLevelSDKError } from '../lib/errors'
 import type { HighLevelClientConfig } from './client/default'
 import { HighLevelClient } from './client/default'
@@ -9,6 +10,7 @@ import type { HighLevelOauthConfig } from './client/with-oauth'
 import { HighLevelClientWithOAuth } from './client/with-oauth'
 import type { AccessType } from './scopes/scope-types'
 
+export { createClient }
 export type { HighLevelClientConfig } from './client/default'
 // Export client classes and types for direct import
 export { HighLevelClient } from './client/default'

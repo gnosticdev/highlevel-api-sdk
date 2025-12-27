@@ -89,7 +89,7 @@
 		"build": "bun --bun tsup",
 		"clean-install": "rm -rf ./node_modules ./dist ./bun.lock ./examples/*/node_modules && bun i --no-cache",
 		"download-json-schemas": "bun scripts/download-json-schemas.ts",
-		"generate-all": "bun run fetch-json && bun run generate-v2-types && bun run generate-v1-types && bun run generate-webhooks && bun run generate-scopes && bun run generate-interface",
+		"generate-all": "bun run download-json-schemas && bun run generate-v2-types && bun run generate-v1-types && bun run generate-webhooks-types && bun run generate-scopes-types && bun run generate-interface",
 		"generate-interface": "bun scripts/generate-interface.ts",
 		"generate-scopes-types": "bun scripts/generate-scopes-types.ts",
 		"generate-v1-types": "bun scripts/generate-v1-types.ts",

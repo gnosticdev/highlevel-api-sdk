@@ -244,6 +244,61 @@ const customValues: LocationCustomValues = [{
 }]
 ```
 
+### Creating a Custom Client
+
+You can create a custom client using the `createClient` function from `openapi-fetch` with specific endpoint types from this package. This is useful when you only need a subset of the API endpoints or want to create a more focused client.
+
+```ts
+import { createClient } from "@gnosticdev/highlevel-sdk"
+import type * as CustomMenus from "@gnosticdev/highlevel-sdk/types/custom-menus"
+
+// Create a client with only custom menu endpoints
+type CustomMenuPaths = CustomMenus.paths
+
+const client = createClient<CustomMenuPaths>({
+    headers: {
+        Authorization: 'Bearer 12345',
+        Version: '2021-07-28'
+    }
+})
+
+// Use the client with full type safety
+const { data, error } = await client.GET('/custom-menus/', {
+    params: {
+        query: {
+            locationId: '1234567890'
+        }
+    }
+})
+
+if (error) {
+    console.error('Error:', error)
+    return
+}
+
+console.log(data)
+```
+
+You can also combine multiple endpoint types to create a client with a custom set of endpoints:
+
+```ts
+import { createClient } from "@gnosticdev/highlevel-sdk"
+import type * as CustomMenus from "@gnosticdev/highlevel-sdk/types/custom-menus"
+import type * as Contacts from "@gnosticdev/highlevel-sdk/types/contacts"
+
+// Combine multiple endpoint types
+type CustomMenuPaths = CustomMenus.paths & Contacts.paths
+
+const client = createClient<CustomMenuPaths>({
+    headers: {
+        Authorization: 'Bearer 12345',
+        Version: '2021-07-28'
+    }
+})
+```
+
+**Note:** The `createClient` function is exported from this package and is the same `openapi-fetch` client. Headers passed in the config will be used as default headers for all requests, but you can override them per-request in the `params.header` option.
+
 ### Module Exports
 
 The SDK provides several module exports for better organization and tree-shaking:
