@@ -1,4 +1,4 @@
-import createClient, { type Client } from 'openapi-fetch/src/index.js'
+import createClient, { type Client } from 'openapi-fetch'
 import { HighLevelSDKError } from '../../lib/errors'
 import type { HighLevelClientConfig } from './default'
 import type { AUTH_HEADERS, ClientWithAuth } from './types'

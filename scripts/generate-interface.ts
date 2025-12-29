@@ -51,7 +51,7 @@ export async function generateClientInterface(typeFiles: string[]) {
 ${importStatements}
 
 import type { Client } from 'openapi-fetch'
-import type { AccessType } from '../../lib/type-utils'
+import type { AccessType } from '../scopes/scope-types'
 import type { ClientWithAuth } from './types'
 import type { HighLevelClientConfig } from './default'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'

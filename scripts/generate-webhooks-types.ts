@@ -4,13 +4,14 @@ import { schemaPathsV2 } from './constants'
 
 if (import.meta.main) {
 	await generateWebhooksTypes()
+	await Bun.$`bun run biome check ${schemaPathsV2.webhooksTypesDir} --write --unsafe`
 }
 
 /**
  * Generate types for each webhook schema in `schemas/v2/webhooks` directory.
  * These are JSON Schemas, not OpenAPI, so have to use the `json-schema-to-typescript` package to generate the types.
  */
-async function generateWebhooksTypes() {
+export async function generateWebhooksTypes() {
 	const glob = new Bun.Glob(`${schemaPathsV2.webhooksJsonDir}/*.json`)
 
 	const webhookJsonFiles = await Array.fromAsync(
@@ -41,8 +42,6 @@ async function generateWebhooksTypes() {
 	)
 
 	await generateWebhookEventMap()
-
-	await Bun.$`bun biome check ${schemaPathsV2.webhooksTypesDir} --write --unsafe`
 
 	console.log('✨ Generated webhook types and modules')
 }

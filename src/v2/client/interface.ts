@@ -51,41 +51,41 @@ export interface HighLevelClientInterface<
 	 */
 	_clientConfig: HighLevelClientConfig
 	oauth: TOAuth
-	blogs: Client<BlogsPaths> | ClientWithAuth<BlogsPaths>
-	calendars: Client<CalendarsPaths> | ClientWithAuth<CalendarsPaths>
-	conversations: Client<ConversationsPaths> | ClientWithAuth<ConversationsPaths>
-	locations: Client<LocationsPaths> | ClientWithAuth<LocationsPaths>
-	voiceAi: Client<VoiceAiPaths> | ClientWithAuth<VoiceAiPaths>
-	customFields: Client<CustomFieldsPaths> | ClientWithAuth<CustomFieldsPaths>
-	proposals: Client<ProposalsPaths> | ClientWithAuth<ProposalsPaths>
-	emailIsv: Client<EmailIsvPaths> | ClientWithAuth<EmailIsvPaths>
 	objects: Client<ObjectsPaths> | ClientWithAuth<ObjectsPaths>
-	companies: Client<CompaniesPaths> | ClientWithAuth<CompaniesPaths>
-	courses: Client<CoursesPaths> | ClientWithAuth<CoursesPaths>
 	invoices: Client<InvoicesPaths> | ClientWithAuth<InvoicesPaths>
-	workflows: Client<WorkflowsPaths> | ClientWithAuth<WorkflowsPaths>
-	marketplace: Client<MarketplacePaths> | ClientWithAuth<MarketplacePaths>
-	saasApi: Client<SaasApiPaths> | ClientWithAuth<SaasApiPaths>
-	customMenus: Client<CustomMenusPaths> | ClientWithAuth<CustomMenusPaths>
-	forms: Client<FormsPaths> | ClientWithAuth<FormsPaths>
-	opportunities: Client<OpportunitiesPaths> | ClientWithAuth<OpportunitiesPaths>
-	medias: Client<MediasPaths> | ClientWithAuth<MediasPaths>
-	campaigns: Client<CampaignsPaths> | ClientWithAuth<CampaignsPaths>
-	businesses: Client<BusinessesPaths> | ClientWithAuth<BusinessesPaths>
-	products: Client<ProductsPaths> | ClientWithAuth<ProductsPaths>
-	links: Client<LinksPaths> | ClientWithAuth<LinksPaths>
-	associations: Client<AssociationsPaths> | ClientWithAuth<AssociationsPaths>
-	surveys: Client<SurveysPaths> | ClientWithAuth<SurveysPaths>
-	emails: Client<EmailsPaths> | ClientWithAuth<EmailsPaths>
-	funnels: Client<FunnelsPaths> | ClientWithAuth<FunnelsPaths>
-	agencies: Client<AgenciesPaths> | ClientWithAuth<AgenciesPaths>
-	users: Client<UsersPaths> | ClientWithAuth<UsersPaths>
-	phoneSystem: Client<PhoneSystemPaths> | ClientWithAuth<PhoneSystemPaths>
 	socialMediaPosting:
 		| Client<SocialMediaPostingPaths>
 		| ClientWithAuth<SocialMediaPostingPaths>
+	customMenus: Client<CustomMenusPaths> | ClientWithAuth<CustomMenusPaths>
+	customFields: Client<CustomFieldsPaths> | ClientWithAuth<CustomFieldsPaths>
+	opportunities: Client<OpportunitiesPaths> | ClientWithAuth<OpportunitiesPaths>
+	campaigns: Client<CampaignsPaths> | ClientWithAuth<CampaignsPaths>
+	businesses: Client<BusinessesPaths> | ClientWithAuth<BusinessesPaths>
+	marketplace: Client<MarketplacePaths> | ClientWithAuth<MarketplacePaths>
+	conversations: Client<ConversationsPaths> | ClientWithAuth<ConversationsPaths>
+	voiceAi: Client<VoiceAiPaths> | ClientWithAuth<VoiceAiPaths>
+	products: Client<ProductsPaths> | ClientWithAuth<ProductsPaths>
+	courses: Client<CoursesPaths> | ClientWithAuth<CoursesPaths>
+	surveys: Client<SurveysPaths> | ClientWithAuth<SurveysPaths>
+	emails: Client<EmailsPaths> | ClientWithAuth<EmailsPaths>
 	payments: Client<PaymentsPaths> | ClientWithAuth<PaymentsPaths>
-	contacts: Client<ContactsPaths> | ClientWithAuth<ContactsPaths>
+	emailIsv: Client<EmailIsvPaths> | ClientWithAuth<EmailIsvPaths>
+	phoneSystem: Client<PhoneSystemPaths> | ClientWithAuth<PhoneSystemPaths>
+	workflows: Client<WorkflowsPaths> | ClientWithAuth<WorkflowsPaths>
 	snapshots: Client<SnapshotsPaths> | ClientWithAuth<SnapshotsPaths>
+	saasApi: Client<SaasApiPaths> | ClientWithAuth<SaasApiPaths>
+	associations: Client<AssociationsPaths> | ClientWithAuth<AssociationsPaths>
+	users: Client<UsersPaths> | ClientWithAuth<UsersPaths>
+	funnels: Client<FunnelsPaths> | ClientWithAuth<FunnelsPaths>
+	locations: Client<LocationsPaths> | ClientWithAuth<LocationsPaths>
+	links: Client<LinksPaths> | ClientWithAuth<LinksPaths>
+	blogs: Client<BlogsPaths> | ClientWithAuth<BlogsPaths>
+	companies: Client<CompaniesPaths> | ClientWithAuth<CompaniesPaths>
+	contacts: Client<ContactsPaths> | ClientWithAuth<ContactsPaths>
 	store: Client<StorePaths> | ClientWithAuth<StorePaths>
+	agencies: Client<AgenciesPaths> | ClientWithAuth<AgenciesPaths>
+	forms: Client<FormsPaths> | ClientWithAuth<FormsPaths>
+	proposals: Client<ProposalsPaths> | ClientWithAuth<ProposalsPaths>
+	calendars: Client<CalendarsPaths> | ClientWithAuth<CalendarsPaths>
+	medias: Client<MediasPaths> | ClientWithAuth<MediasPaths>
 }

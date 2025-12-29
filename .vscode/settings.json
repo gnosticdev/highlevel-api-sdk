@@ -11,5 +11,6 @@
 	"typescript.experimental.useTsgo": true,
 	"typescript.preferences.importModuleSpecifier": "relative",
 
-	"json.schemaDownload.enable": true
+	"json.schemaDownload.enable": true,
+	"sqltools.useNodeRuntime": true
 }

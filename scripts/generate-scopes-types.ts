@@ -6,7 +6,7 @@ if (import.meta.main) {
 	await generateScopesTypes()
 }
 
-async function generateScopesTypes() {
+export async function generateScopesTypes() {
 	// there are 2 scopes json files, but we are only concerned with the main scopes.json file here
 	const scopesJsonPath = path.join(schemaPathsV2.scopesJsonDir, 'scopes.json')
 	const scopesJson = await Bun.file(scopesJsonPath).json()

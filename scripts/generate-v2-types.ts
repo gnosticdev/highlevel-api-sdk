@@ -16,7 +16,7 @@ const TEMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'v2-types'), {
  */
 if (import.meta.main) {
 	await fs.promises.mkdir(V2_TYPES_DIR, { recursive: true }).catch(() => {})
-	const typeFiles = await createV2Types()
+	const typeFiles = await generateV2Types()
 	await generateClientInterface(typeFiles)
 	await fs.promises.rm(TEMP_DIR, { recursive: true, force: true })
 }
@@ -24,7 +24,7 @@ if (import.meta.main) {
 /**
  * Generate types from openapi schemas. Outputs a file for each openapi schema.
  */
-export async function createV2Types(): Promise<string[]> {
+export async function generateV2Types(): Promise<string[]> {
 	const IGNORE_FILES = ['common-schemas.json']
 	await fs.promises.mkdir(TEMP_DIR, { recursive: true }).catch(() => {
 		console.warn(kleur.yellow(`Temp directory already exists: ${TEMP_DIR}`))
