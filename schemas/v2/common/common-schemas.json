@@ -45,7 +45,9 @@
             "example": 422
           },
           "message": {
-            "example": ["Unprocessable Entity"],
+            "example": [
+              "Unprocessable Entity"
+            ],
             "type": "array",
             "items": {
               "type": "string"

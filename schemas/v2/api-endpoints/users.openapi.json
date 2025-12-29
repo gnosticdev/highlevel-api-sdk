@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -170,13 +172,19 @@
             }
           }
         },
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "security": [
           {
-            "Agency-Access": ["users.readonly"]
+            "Agency-Access": [
+              "users.readonly"
+            ]
           },
           {
-            "Location-Access": ["users.readonly"]
+            "Location-Access": [
+              "users.readonly"
+            ]
           }
         ]
       }
@@ -194,7 +202,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -250,13 +260,19 @@
             }
           }
         },
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "security": [
           {
-            "Agency-Access": ["users.readonly"]
+            "Agency-Access": [
+              "users.readonly"
+            ]
           },
           {
-            "Location-Access": ["users.readonly"]
+            "Location-Access": [
+              "users.readonly"
+            ]
           }
         ]
       }
@@ -274,7 +290,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -330,13 +348,19 @@
             }
           }
         },
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
-            "Agency-Access": ["users.readonly"]
+            "Agency-Access": [
+              "users.readonly"
+            ]
           },
           {
-            "Location-Access": ["users.readonly"]
+            "Location-Access": [
+              "users.readonly"
+            ]
           }
         ]
       },
@@ -352,7 +376,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -408,13 +434,19 @@
             }
           }
         },
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
-            "Agency-Access": ["users.write"]
+            "Agency-Access": [
+              "users.write"
+            ]
           },
           {
-            "Location-Access": ["users.write"]
+            "Location-Access": [
+              "users.write"
+            ]
           }
         ]
       },
@@ -430,7 +462,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -476,13 +510,19 @@
             }
           }
         },
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
-            "Agency-Access": ["users.write"]
+            "Agency-Access": [
+              "users.write"
+            ]
           },
           {
-            "Location-Access": ["users.write"]
+            "Location-Access": [
+              "users.write"
+            ]
           }
         ]
       }
@@ -500,7 +540,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -545,10 +587,14 @@
             }
           }
         },
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
-            "Location-Access": ["users.readonly"]
+            "Location-Access": [
+              "users.readonly"
+            ]
           }
         ]
       },
@@ -564,7 +610,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -620,13 +668,19 @@
             }
           }
         },
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
-            "Agency-Access": ["users.write"]
+            "Agency-Access": [
+              "users.write"
+            ]
           },
           {
-            "Location-Access": ["users.write"]
+            "Location-Access": [
+              "users.write"
+            ]
           }
         ]
       }
@@ -904,7 +958,9 @@
             "example": "admin"
           },
           "locationIds": {
-            "example": ["ve9EPM428h8vShlRW1KT"],
+            "example": [
+              "ve9EPM428h8vShlRW1KT"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1140,7 +1196,10 @@
             "description": "Company ID to filter users"
           },
           "emails": {
-            "example": ["user1@example.com", "user2@example.com"],
+            "example": [
+              "user1@example.com",
+              "user2@example.com"
+            ],
             "description": "Array of email addresses to filter users",
             "type": "array",
             "items": {
@@ -1171,7 +1230,10 @@
             "description": "Projection fields to return. Use \"all\" for all fields, or specify comma-separated field names. Default returns only id and email"
           }
         },
-        "required": ["companyId", "emails"]
+        "required": [
+          "companyId",
+          "emails"
+        ]
       },
       "LocationSuccessfulResponseDto": {
         "type": "object",
@@ -1416,7 +1478,9 @@
             "example": "admin"
           },
           "locationIds": {
-            "example": ["C2QujeCh8ZnC7al2InWR"],
+            "example": [
+              "C2QujeCh8ZnC7al2InWR"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1427,7 +1491,10 @@
           },
           "scopes": {
             "type": "array",
-            "example": ["contacts.write", "campaigns.readonly"],
+            "example": [
+              "contacts.write",
+              "campaigns.readonly"
+            ],
             "description": "Scopes allowed for users. Only scopes that have been passed will be enabled. Note:- If passed empty all the scopes will be get disabled",
             "items": {
               "type": "string",
@@ -1582,7 +1649,10 @@
           },
           "scopesAssignedToOnly": {
             "type": "array",
-            "example": ["contacts.write", "campaigns.readonly"],
+            "example": [
+              "contacts.write",
+              "campaigns.readonly"
+            ],
             "description": "Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled",
             "items": {
               "type": "string",
@@ -1740,7 +1810,16 @@
             "example": "https://img.png"
           }
         },
-        "required": ["companyId", "firstName", "lastName", "email", "password", "type", "role", "locationIds"]
+        "required": [
+          "companyId",
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "type",
+          "role",
+          "locationIds"
+        ]
       },
       "UpdateUserDto": {
         "type": "object",
@@ -1786,7 +1865,9 @@
             "example": "UAXssdawIWAWD"
           },
           "locationIds": {
-            "example": ["C2QujeCh8ZnC7al2InWR"],
+            "example": [
+              "C2QujeCh8ZnC7al2InWR"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1797,7 +1878,10 @@
           },
           "scopes": {
             "type": "array",
-            "example": ["contacts.write", "campaigns.readonly"],
+            "example": [
+              "contacts.write",
+              "campaigns.readonly"
+            ],
             "description": "Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the scopes will be get disabled",
             "items": {
               "type": "string",
@@ -1952,7 +2036,10 @@
           },
           "scopesAssignedToOnly": {
             "type": "array",
-            "example": ["contacts.write", "campaigns.readonly"],
+            "example": [
+              "contacts.write",
+              "campaigns.readonly"
+            ],
             "description": "Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled",
             "items": {
               "type": "string",
@@ -2128,6 +2215,9 @@
   },
   "x-tagGroups": {
     "name": "Users",
-    "tags": ["Users", "Search"]
+    "tags": [
+      "Users",
+      "Search"
+    ]
   }
 }

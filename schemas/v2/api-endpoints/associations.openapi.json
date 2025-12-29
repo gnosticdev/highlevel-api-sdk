@@ -18,7 +18,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -74,10 +76,14 @@
             }
           }
         },
-        "tags": ["Relations"],
+        "tags": [
+          "Relations"
+        ],
         "security": [
           {
-            "bearer": ["associations/relation.write"]
+            "bearer": [
+              "associations/relation.write"
+            ]
           }
         ]
       }
@@ -95,7 +101,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -189,10 +197,14 @@
             }
           }
         },
-        "tags": ["Relations"],
+        "tags": [
+          "Relations"
+        ],
         "security": [
           {
-            "bearer": ["associations/relation.readonly"]
+            "bearer": [
+              "associations/relation.readonly"
+            ]
           }
         ]
       }
@@ -210,7 +222,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -274,10 +288,14 @@
             }
           }
         },
-        "tags": ["Relations"],
+        "tags": [
+          "Relations"
+        ],
         "security": [
           {
-            "bearer": ["associations/relation.write"]
+            "bearer": [
+              "associations/relation.write"
+            ]
           }
         ]
       }
@@ -295,7 +313,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -357,10 +377,14 @@
             }
           }
         },
-        "tags": ["Associations"],
+        "tags": [
+          "Associations"
+        ],
         "security": [
           {
-            "bearer": ["associations.readonly"]
+            "bearer": [
+              "associations.readonly"
+            ]
           }
         ]
       }
@@ -382,7 +406,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -446,10 +472,14 @@
             }
           }
         },
-        "tags": ["Associations"],
+        "tags": [
+          "Associations"
+        ],
         "security": [
           {
-            "bearer": ["associations.readonly"]
+            "bearer": [
+              "associations.readonly"
+            ]
           }
         ]
       }
@@ -471,7 +501,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -535,10 +567,14 @@
             }
           }
         },
-        "tags": ["Associations"],
+        "tags": [
+          "Associations"
+        ],
         "security": [
           {
-            "bearer": ["associations.write"]
+            "bearer": [
+              "associations.write"
+            ]
           }
         ]
       },
@@ -554,7 +590,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -608,10 +646,14 @@
             }
           }
         },
-        "tags": ["Associations"],
+        "tags": [
+          "Associations"
+        ],
         "security": [
           {
-            "bearer": ["associations.write"]
+            "bearer": [
+              "associations.write"
+            ]
           }
         ]
       },
@@ -627,7 +669,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -681,10 +725,14 @@
             }
           }
         },
-        "tags": ["Associations"],
+        "tags": [
+          "Associations"
+        ],
         "security": [
           {
-            "bearer": ["associations.readonly"]
+            "bearer": [
+              "associations.readonly"
+            ]
           }
         ]
       }
@@ -706,7 +754,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -762,10 +812,14 @@
             }
           }
         },
-        "tags": ["Associations"],
+        "tags": [
+          "Associations"
+        ],
         "security": [
           {
-            "bearer": ["associations.write"]
+            "bearer": [
+              "associations.write"
+            ]
           }
         ]
       },
@@ -781,7 +835,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -854,10 +910,14 @@
             }
           }
         },
-        "tags": ["Associations"],
+        "tags": [
+          "Associations"
+        ],
         "security": [
           {
-            "bearer": ["associations.readonly"]
+            "bearer": [
+              "associations.readonly"
+            ]
           }
         ]
       }
@@ -944,7 +1004,12 @@
             "description": "Second Record's Id.For instance, if you have an association between a contact and a custom object, and you specify the custom object as the second entity while creating the association, then your secondRecordId would be the customObject record Id"
           }
         },
-        "required": ["locationId", "associationId", "firstRecordId", "secondRecordId"]
+        "required": [
+          "locationId",
+          "associationId",
+          "firstRecordId",
+          "secondRecordId"
+        ]
       },
       "GetPostSuccessfulResponseDto": {
         "type": "object",
@@ -1032,7 +1097,14 @@
             "description": "Second Objects Key"
           }
         },
-        "required": ["locationId", "key", "firstObjectLabel", "firstObjectKey", "secondObjectLabel", "secondObjectKey"]
+        "required": [
+          "locationId",
+          "key",
+          "firstObjectLabel",
+          "firstObjectKey",
+          "secondObjectLabel",
+          "secondObjectKey"
+        ]
       },
       "UpdateAssociationReqDto": {
         "type": "object",
@@ -1046,7 +1118,10 @@
             "example": "tutor"
           }
         },
-        "required": ["firstObjectLabel", "secondObjectLabel"]
+        "required": [
+          "firstObjectLabel",
+          "secondObjectLabel"
+        ]
       },
       "DeleteAssociationsResponseDTO": {
         "type": "object",
@@ -1066,12 +1141,19 @@
             "example": "Association deleted successfully"
           }
         },
-        "required": ["deleted", "id", "message"]
+        "required": [
+          "deleted",
+          "id",
+          "message"
+        ]
       }
     }
   },
   "x-tagGroups": {
     "name": "Associations",
-    "tags": ["Associations", "Relations"]
+    "tags": [
+      "Associations",
+      "Relations"
+    ]
   }
 }

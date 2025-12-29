@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -58,10 +60,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.readonly"]
+            "bearer": [
+              "locations/customFields.readonly"
+            ]
           }
         ]
       },
@@ -77,7 +83,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -131,10 +139,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.write"]
+            "bearer": [
+              "locations/customFields.write"
+            ]
           }
         ]
       },
@@ -150,7 +162,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -194,10 +208,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.write"]
+            "bearer": [
+              "locations/customFields.write"
+            ]
           }
         ]
       }
@@ -215,7 +233,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -270,10 +290,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.readonly"]
+            "bearer": [
+              "locations/customFields.readonly"
+            ]
           }
         ]
       }
@@ -291,7 +315,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -337,10 +363,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.write"]
+            "bearer": [
+              "locations/customFields.write"
+            ]
           }
         ]
       }
@@ -358,7 +388,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -412,10 +444,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.write"]
+            "bearer": [
+              "locations/customFields.write"
+            ]
           }
         ]
       },
@@ -431,7 +467,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -485,10 +523,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.write"]
+            "bearer": [
+              "locations/customFields.write"
+            ]
           }
         ]
       }
@@ -506,7 +548,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -552,10 +596,14 @@
             }
           }
         },
-        "tags": ["Custom Fields V2"],
+        "tags": [
+          "Custom Fields V2"
+        ],
         "security": [
           {
-            "bearer": ["locations/customFields.write"]
+            "bearer": [
+              "locations/customFields.write"
+            ]
           }
         ]
       }
@@ -634,7 +682,10 @@
             "description": "URL associated with the option (Optional, valid only for RADIO type)"
           }
         },
-        "required": ["key", "label"]
+        "required": [
+          "key",
+          "label"
+        ]
       },
       "ICustomField": {
         "type": "object",
@@ -670,7 +721,19 @@
           },
           "acceptedFormats": {
             "type": "string",
-            "enum": [".pdf", ".docx", ".doc", ".jpg", ".jpeg", ".png", ".gif", ".csv", ".xlsx", ".xls", "all"],
+            "enum": [
+              ".pdf",
+              ".docx",
+              ".doc",
+              ".jpg",
+              ".jpeg",
+              ".png",
+              ".gif",
+              ".csv",
+              ".xlsx",
+              ".xls",
+              "all"
+            ],
             "description": "Allowed file formats for uploads. Options include: .pdf, .docx, .doc, .jpg, .jpeg, .png, .gif, .csv, .xlsx, .xls, all"
           },
           "id": {
@@ -804,7 +867,19 @@
           },
           "acceptedFormats": {
             "type": "string",
-            "enum": [".pdf", ".docx", ".doc", ".jpg", ".jpeg", ".png", ".gif", ".csv", ".xlsx", ".xls", "all"],
+            "enum": [
+              ".pdf",
+              ".docx",
+              ".doc",
+              ".jpg",
+              ".jpeg",
+              ".png",
+              ".gif",
+              ".csv",
+              ".xlsx",
+              ".xls",
+              "all"
+            ],
             "description": "Allowed file formats for uploads. Options include: .pdf, .docx, .doc, .jpg, .jpeg, .png, .gif, .csv, .xlsx, .xls, all"
           },
           "dataType": {
@@ -851,7 +926,14 @@
             "description": "ID of the parent folder"
           }
         },
-        "required": ["locationId", "showInForms", "dataType", "fieldKey", "objectKey", "parentId"]
+        "required": [
+          "locationId",
+          "showInForms",
+          "dataType",
+          "fieldKey",
+          "objectKey",
+          "parentId"
+        ]
       },
       "CreateFolder": {
         "type": "object",
@@ -872,7 +954,11 @@
             "example": "ve9EPM428h8vShlRW1KT"
           }
         },
-        "required": ["objectKey", "name", "locationId"]
+        "required": [
+          "objectKey",
+          "name",
+          "locationId"
+        ]
       },
       "ICustomFieldFolder": {
         "type": "object",
@@ -897,7 +983,12 @@
             "example": "Name"
           }
         },
-        "required": ["id", "objectKey", "locationId", "name"]
+        "required": [
+          "id",
+          "objectKey",
+          "locationId",
+          "name"
+        ]
       },
       "UpdateFolder": {
         "type": "object",
@@ -913,7 +1004,10 @@
             "example": "ve9EPM428h8vShlRW1KT"
           }
         },
-        "required": ["name", "locationId"]
+        "required": [
+          "name",
+          "locationId"
+        ]
       },
       "CustomFolderDeleteResponseDto": {
         "type": "object",
@@ -931,7 +1025,11 @@
             "example": "custom_object.pet.name"
           }
         },
-        "required": ["succeded", "id", "key"]
+        "required": [
+          "succeded",
+          "id",
+          "key"
+        ]
       },
       "UpdateCustomFieldsDTO": {
         "type": "object",
@@ -967,7 +1065,19 @@
           },
           "acceptedFormats": {
             "type": "string",
-            "enum": [".pdf", ".docx", ".doc", ".jpg", ".jpeg", ".png", ".gif", ".csv", ".xlsx", ".xls", "all"],
+            "enum": [
+              ".pdf",
+              ".docx",
+              ".doc",
+              ".jpg",
+              ".jpeg",
+              ".png",
+              ".gif",
+              ".csv",
+              ".xlsx",
+              ".xls",
+              "all"
+            ],
             "description": "Allowed file formats for uploads. Options include: .pdf, .docx, .doc, .jpg, .jpeg, .png, .gif, .csv, .xlsx, .xls, all"
           },
           "maxFileLimit": {
@@ -976,12 +1086,18 @@
             "example": 2
           }
         },
-        "required": ["locationId", "showInForms"]
+        "required": [
+          "locationId",
+          "showInForms"
+        ]
       }
     }
   },
   "x-tagGroups": {
     "name": "CUSTOM_FIELDS",
-    "tags": ["CUSTOM_FIELDS", "Custom Fields V2"]
+    "tags": [
+      "CUSTOM_FIELDS",
+      "Custom Fields V2"
+    ]
   }
 }

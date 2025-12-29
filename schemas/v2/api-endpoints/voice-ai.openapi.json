@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           }
         ],
@@ -70,10 +72,14 @@
             }
           }
         },
-        "tags": ["Agents"],
+        "tags": [
+          "Agents"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agents.write"]
+            "bearer": [
+              "voice-ai-agents.write"
+            ]
           }
         ]
       },
@@ -89,7 +95,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -179,10 +187,14 @@
             }
           }
         },
-        "tags": ["Agents"],
+        "tags": [
+          "Agents"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agents.readonly"]
+            "bearer": [
+              "voice-ai-agents.readonly"
+            ]
           }
         ]
       }
@@ -200,7 +212,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -276,10 +290,14 @@
             }
           }
         },
-        "tags": ["Agents"],
+        "tags": [
+          "Agents"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agents.write"]
+            "bearer": [
+              "voice-ai-agents.write"
+            ]
           }
         ]
       },
@@ -295,7 +313,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -361,10 +381,14 @@
             }
           }
         },
-        "tags": ["Agents"],
+        "tags": [
+          "Agents"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agents.readonly"]
+            "bearer": [
+              "voice-ai-agents.readonly"
+            ]
           }
         ]
       },
@@ -380,7 +404,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -439,10 +465,14 @@
             }
           }
         },
-        "tags": ["Agents"],
+        "tags": [
+          "Agents"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agents.write"]
+            "bearer": [
+              "voice-ai-agents.write"
+            ]
           }
         ]
       }
@@ -460,7 +490,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -498,7 +530,10 @@
             "in": "query",
             "description": "Call type filter.",
             "schema": {
-              "enum": ["LIVE", "TRIAL"],
+              "enum": [
+                "LIVE",
+                "TRIAL"
+              ],
               "type": "string"
             }
           },
@@ -548,7 +583,10 @@
             "in": "query",
             "description": "Field to sort by. Defaults to newest if omitted.",
             "schema": {
-              "enum": ["duration", "createdAt"],
+              "enum": [
+                "duration",
+                "createdAt"
+              ],
               "type": "string"
             }
           },
@@ -558,7 +596,10 @@
             "in": "query",
             "description": "Sort direction. Applies only when sortBy is provided.",
             "schema": {
-              "enum": ["ascend", "descend"],
+              "enum": [
+                "ascend",
+                "descend"
+              ],
               "type": "string"
             }
           },
@@ -615,10 +656,14 @@
             }
           }
         },
-        "tags": ["Dashboard"],
+        "tags": [
+          "Dashboard"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-dashboard.readonly"]
+            "bearer": [
+              "voice-ai-dashboard.readonly"
+            ]
           }
         ]
       }
@@ -636,7 +681,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -692,10 +739,14 @@
             }
           }
         },
-        "tags": ["Dashboard"],
+        "tags": [
+          "Dashboard"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-dashboard.readonly"]
+            "bearer": [
+              "voice-ai-dashboard.readonly"
+            ]
           }
         ]
       }
@@ -713,7 +764,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           }
         ],
@@ -769,10 +822,14 @@
             }
           }
         },
-        "tags": ["Actions"],
+        "tags": [
+          "Actions"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agent-goals.write"]
+            "bearer": [
+              "voice-ai-agent-goals.write"
+            ]
           }
         ]
       }
@@ -790,7 +847,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -855,10 +914,14 @@
             }
           }
         },
-        "tags": ["Actions"],
+        "tags": [
+          "Actions"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agent-goals.write"]
+            "bearer": [
+              "voice-ai-agent-goals.write"
+            ]
           }
         ]
       },
@@ -874,7 +937,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -939,10 +1004,14 @@
             }
           }
         },
-        "tags": ["Actions"],
+        "tags": [
+          "Actions"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agent-goals.readonly"]
+            "bearer": [
+              "voice-ai-agent-goals.readonly"
+            ]
           }
         ]
       },
@@ -958,7 +1027,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1025,10 +1096,14 @@
             }
           }
         },
-        "tags": ["Actions"],
+        "tags": [
+          "Actions"
+        ],
         "security": [
           {
-            "bearer": ["voice-ai-agent-goals.write"]
+            "bearer": [
+              "voice-ai-agent-goals.write"
+            ]
           }
         ]
       }
@@ -1110,12 +1185,25 @@
       "VoiceAILanguage": {
         "type": "string",
         "description": "Language code for the agent's speech and understanding. Default: \"en-US\"",
-        "enum": ["en-US", "pt-BR", "es", "fr", "de", "it", "nl-NL", "multi"]
+        "enum": [
+          "en-US",
+          "pt-BR",
+          "es",
+          "fr",
+          "de",
+          "it",
+          "nl-NL",
+          "multi"
+        ]
       },
       "PatienceLevel": {
         "type": "string",
         "description": "Tolerance level for caller response delays. Default: \"high\"",
-        "enum": ["low", "medium", "high"]
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ]
       },
       "SendPostCallNotificationDTO": {
         "type": "object",
@@ -1137,7 +1225,9 @@
           },
           "specificUsers": {
             "description": "Array of specific user IDs to receive post-call notifications. Default: []",
-            "example": ["user_507f1f77bcf86cd799439011"],
+            "example": [
+              "user_507f1f77bcf86cd799439011"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1145,14 +1235,22 @@
           },
           "customEmails": {
             "description": "Array of custom email addresses to receive post-call notifications. Default: []",
-            "example": ["manager@company.com"],
+            "example": [
+              "manager@company.com"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["admins", "allUsers", "contactAssignedUser", "specificUsers", "customEmails"]
+        "required": [
+          "admins",
+          "allUsers",
+          "contactAssignedUser",
+          "specificUsers",
+          "customEmails"
+        ]
       },
       "IntervalDTO": {
         "type": "object",
@@ -1186,14 +1284,27 @@
             "maximum": 59
           }
         },
-        "required": ["startHour", "endHour", "startMinute", "endMinute"]
+        "required": [
+          "startHour",
+          "endHour",
+          "startMinute",
+          "endMinute"
+        ]
       },
       "AgentWorkingHoursDTO": {
         "type": "object",
         "properties": {
           "dayOfTheWeek": {
             "type": "number",
-            "enum": [1, 2, 3, 4, 5, 6, 7],
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
             "description": "Day of the week for this working hours configuration (Monday=1 to Sunday=7)",
             "example": 1
           },
@@ -1213,7 +1324,10 @@
             }
           }
         },
-        "required": ["dayOfTheWeek", "intervals"]
+        "required": [
+          "dayOfTheWeek",
+          "intervals"
+        ]
       },
       "TranslationDTO": {
         "type": "object",
@@ -1229,7 +1343,9 @@
             "example": "es"
           }
         },
-        "required": ["enabled"]
+        "required": [
+          "enabled"
+        ]
       },
       "AgentCreationRequestDTO": {
         "type": "object",
@@ -1308,7 +1424,10 @@
           },
           "callEndWorkflowIds": {
             "description": "Array of workflow IDs to trigger automatically when calls end. Default: []",
-            "example": ["wf_507f1f77bcf86cd799439011", "wf_507f1f77bcf86cd799439012"],
+            "example": [
+              "wf_507f1f77bcf86cd799439011",
+              "wf_507f1f77bcf86cd799439012"
+            ],
             "maxItems": 10,
             "type": "array",
             "items": {
@@ -1611,7 +1730,10 @@
           },
           "callEndWorkflowIds": {
             "description": "Array of workflow IDs to trigger automatically when calls end. Default: []",
-            "example": ["wf_507f1f77bcf86cd799439011", "wf_507f1f77bcf86cd799439012"],
+            "example": [
+              "wf_507f1f77bcf86cd799439011",
+              "wf_507f1f77bcf86cd799439012"
+            ],
             "maxItems": 10,
             "type": "array",
             "items": {
@@ -1845,7 +1967,12 @@
             ]
           }
         },
-        "required": ["id", "actionType", "name", "actionParameters"]
+        "required": [
+          "id",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
       },
       "GetAgentResponseDTO": {
         "type": "object",
@@ -2030,7 +2157,12 @@
             }
           }
         },
-        "required": ["total", "page", "pageSize", "agents"]
+        "required": [
+          "total",
+          "page",
+          "pageSize",
+          "agents"
+        ]
       },
       "CallTransferActionParameters": {
         "type": "object",
@@ -2043,7 +2175,9 @@
           "transferToType": {
             "type": "string",
             "description": "Type of transfer destination (currently only \"number\" is supported)",
-            "enum": ["number"],
+            "enum": [
+              "number"
+            ],
             "example": "number"
           },
           "transferToValue": {
@@ -2062,7 +2196,11 @@
             "example": true
           }
         },
-        "required": ["triggerPrompt", "transferToType", "transferToValue"]
+        "required": [
+          "triggerPrompt",
+          "transferToType",
+          "transferToValue"
+        ]
       },
       "DataExtractionActionParameters": {
         "type": "object",
@@ -2079,7 +2217,10 @@
           },
           "examples": {
             "description": "Example values to help Agent understand the expected format. At least one example is required, maximum 5 examples allowed.",
-            "example": ["+1234567890", "+9876543210"],
+            "example": [
+              "+1234567890",
+              "+9876543210"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2092,7 +2233,11 @@
             "default": false
           }
         },
-        "required": ["contactFieldId", "description", "examples"]
+        "required": [
+          "contactFieldId",
+          "description",
+          "examples"
+        ]
       },
       "InCallDataExtractionActionParameters": {
         "type": "object",
@@ -2109,7 +2254,10 @@
           },
           "examples": {
             "description": "Example values to help Agent understand the expected format. At least one example is required, maximum 5 examples allowed.",
-            "example": ["+1234567890", "+9876543210"],
+            "example": [
+              "+1234567890",
+              "+9876543210"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2122,7 +2270,11 @@
             "default": false
           }
         },
-        "required": ["contactFieldId", "description", "examples"]
+        "required": [
+          "contactFieldId",
+          "description",
+          "examples"
+        ]
       },
       "WorkflowTriggerParameters": {
         "type": "object",
@@ -2143,7 +2295,11 @@
             "example": "507f1f77bcf86cd799439011"
           }
         },
-        "required": ["triggerPrompt", "triggerMessage", "workflowId"]
+        "required": [
+          "triggerPrompt",
+          "triggerMessage",
+          "workflowId"
+        ]
       },
       "SMSParameters": {
         "type": "object",
@@ -2164,7 +2320,11 @@
             "example": "Your appointment is confirmed for tomorrow at 2 PM"
           }
         },
-        "required": ["triggerPrompt", "triggerMessage", "messageBody"]
+        "required": [
+          "triggerPrompt",
+          "triggerMessage",
+          "messageBody"
+        ]
       },
       "AppointmentBookingActionParameters": {
         "type": "object",
@@ -2190,7 +2350,12 @@
             "example": 1
           }
         },
-        "required": ["calendarId", "daysOfOfferingDates", "slotsPerDay", "hoursBetweenSlots"]
+        "required": [
+          "calendarId",
+          "daysOfOfferingDates",
+          "slotsPerDay",
+          "hoursBetweenSlots"
+        ]
       },
       "CustomActionHeaderDTO": {
         "type": "object",
@@ -2206,7 +2371,10 @@
             "example": "1234567890"
           }
         },
-        "required": ["key", "value"]
+        "required": [
+          "key",
+          "value"
+        ]
       },
       "CustomActionParameterDTO": {
         "type": "object",
@@ -2232,7 +2400,9 @@
             "example": "ORD-12345"
           }
         },
-        "required": ["name"]
+        "required": [
+          "name"
+        ]
       },
       "CustomActionApiDetailsDTO": {
         "type": "object",
@@ -2246,7 +2416,10 @@
             "type": "string",
             "description": "HTTP method",
             "example": "GET",
-            "enum": ["POST", "GET"]
+            "enum": [
+              "POST",
+              "GET"
+            ]
           },
           "authenticationRequired": {
             "type": "boolean",
@@ -2273,7 +2446,10 @@
             }
           }
         },
-        "required": ["url", "method"]
+        "required": [
+          "url",
+          "method"
+        ]
       },
       "CustomActionParameters": {
         "type": "object",
@@ -2298,14 +2474,20 @@
           },
           "selectedPaths": {
             "description": "Selected response paths to extract from API response. Required: at least 1 value if the method is GET. Should be empty if the method is POST.",
-            "example": ["data.orderId", "status"],
+            "example": [
+              "data.orderId",
+              "status"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["triggerPrompt", "apiDetails"]
+        "required": [
+          "triggerPrompt",
+          "apiDetails"
+        ]
       },
       "KnowledgeBaseParameters": {
         "type": "object",
@@ -2333,7 +2515,10 @@
             }
           }
         },
-        "required": ["triggerMessage", "knowledgeBaseId"]
+        "required": [
+          "triggerMessage",
+          "knowledgeBaseId"
+        ]
       },
       "CallActionSchema": {
         "type": "object",
@@ -2418,7 +2603,10 @@
                 "value": {
                   "contactFieldId": "507f1f77bcf86cd799439011",
                   "description": "Customer's email address",
-                  "examples": ["john@example.com", "jane@company.com"],
+                  "examples": [
+                    "john@example.com",
+                    "jane@company.com"
+                  ],
                   "overwriteExistingValue": false
                 }
               },
@@ -2458,7 +2646,10 @@
                       }
                     ]
                   },
-                  "responsePathsToExtract": ["data.orderId", "status"]
+                  "responsePathsToExtract": [
+                    "data.orderId",
+                    "status"
+                  ]
                 }
               },
               "knowledgeBase": {
@@ -2492,7 +2683,10 @@
             "example": "2024-01-15T10:31:45.000Z"
           }
         },
-        "required": ["actionType", "actionName"]
+        "required": [
+          "actionType",
+          "actionName"
+        ]
       },
       "ExtractedDataSchema": {
         "type": "object",
@@ -2578,7 +2772,10 @@
                 "actionParameters": {
                   "contactFieldId": "507f1f77bcf86cd799439018",
                   "description": "Customer's phone number",
-                  "examples": ["+1234567890", "+9876543210"],
+                  "examples": [
+                    "+1234567890",
+                    "+9876543210"
+                  ],
                   "overwriteExistingValue": false
                 },
                 "executedAt": "2024-01-15T10:34:15.000Z"
@@ -2636,7 +2833,10 @@
                       }
                     ]
                   },
-                  "responsePathsToExtract": ["data.orderId", "status"]
+                  "responsePathsToExtract": [
+                    "data.orderId",
+                    "status"
+                  ]
                 },
                 "executedAt": "2024-01-15T10:37:20.000Z"
               },
@@ -2648,7 +2848,10 @@
                 "actionParameters": {
                   "contactFieldId": "507f1f77bcf86cd799439025",
                   "description": "Customer's email address",
-                  "examples": ["john@example.com", "jane@company.com"],
+                  "examples": [
+                    "john@example.com",
+                    "jane@company.com"
+                  ],
                   "overwriteExistingValue": true
                 },
                 "executedAt": "2024-01-15T10:31:45.000Z"
@@ -2761,7 +2964,12 @@
             }
           }
         },
-        "required": ["total", "page", "pageSize", "callLogs"]
+        "required": [
+          "total",
+          "page",
+          "pageSize",
+          "callLogs"
+        ]
       },
       "CreateSingleActionDTO": {
         "type": "object",
@@ -2835,7 +3043,10 @@
                 "value": {
                   "contactFieldId": "507f1f77bcf86cd799439011",
                   "description": "Caller's phone number",
-                  "examples": ["+1234567890", "+9876543210"],
+                  "examples": [
+                    "+1234567890",
+                    "+9876543210"
+                  ],
                   "overwriteExistingValue": false
                 }
               },
@@ -2889,13 +3100,22 @@
                       }
                     ]
                   },
-                  "responsePathsToExtract": ["data.orderId", "status"]
+                  "responsePathsToExtract": [
+                    "data.orderId",
+                    "status"
+                  ]
                 }
               }
             }
           }
         },
-        "required": ["agentId", "locationId", "actionType", "name", "actionParameters"]
+        "required": [
+          "agentId",
+          "locationId",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
       },
       "CreateActionResponseDTO": {
         "type": "object",
@@ -2964,7 +3184,10 @@
                 "value": {
                   "contactFieldId": "507f1f77bcf86cd799439011",
                   "description": "Caller's phone number",
-                  "examples": ["+1234567890", "+9876543210"],
+                  "examples": [
+                    "+1234567890",
+                    "+9876543210"
+                  ],
                   "overwriteExistingValue": false
                 }
               },
@@ -2979,7 +3202,12 @@
             }
           }
         },
-        "required": ["id", "actionType", "name", "actionParameters"]
+        "required": [
+          "id",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
       },
       "UpdateSingleActionDTO": {
         "type": "object",
@@ -3053,7 +3281,10 @@
                 "value": {
                   "contactFieldId": "507f1f77bcf86cd799439011",
                   "description": "Caller's phone number",
-                  "examples": ["+1234567890", "+9876543210"],
+                  "examples": [
+                    "+1234567890",
+                    "+9876543210"
+                  ],
                   "overwriteExistingValue": false
                 }
               },
@@ -3107,13 +3338,22 @@
                       }
                     ]
                   },
-                  "responsePathsToExtract": ["data.orderId", "status"]
+                  "responsePathsToExtract": [
+                    "data.orderId",
+                    "status"
+                  ]
                 }
               }
             }
           }
         },
-        "required": ["agentId", "locationId", "actionType", "name", "actionParameters"]
+        "required": [
+          "agentId",
+          "locationId",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
       },
       "UpdateActionResponseDTO": {
         "type": "object",
@@ -3182,7 +3422,10 @@
                 "value": {
                   "contactFieldId": "507f1f77bcf86cd799439011",
                   "description": "Caller's phone number",
-                  "examples": ["+1234567890", "+9876543210"],
+                  "examples": [
+                    "+1234567890",
+                    "+9876543210"
+                  ],
                   "overwriteExistingValue": false
                 }
               },
@@ -3197,7 +3440,12 @@
             }
           }
         },
-        "required": ["id", "actionType", "name", "actionParameters"]
+        "required": [
+          "id",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
       },
       "GetActionResponseDTO": {
         "type": "object",
@@ -3266,7 +3514,10 @@
                 "value": {
                   "contactFieldId": "507f1f77bcf86cd799439011",
                   "description": "Caller's phone number",
-                  "examples": ["+1234567890", "+9876543210"],
+                  "examples": [
+                    "+1234567890",
+                    "+9876543210"
+                  ],
                   "overwriteExistingValue": false
                 }
               },
@@ -3281,12 +3532,22 @@
             }
           }
         },
-        "required": ["id", "actionType", "name", "actionParameters"]
+        "required": [
+          "id",
+          "actionType",
+          "name",
+          "actionParameters"
+        ]
       }
     }
   },
   "x-tagGroups": {
     "name": "Voice AI",
-    "tags": ["Voice-AI", "Dashboard", "Agents", "Actions"]
+    "tags": [
+      "Voice-AI",
+      "Dashboard",
+      "Agents",
+      "Actions"
+    ]
   }
 }

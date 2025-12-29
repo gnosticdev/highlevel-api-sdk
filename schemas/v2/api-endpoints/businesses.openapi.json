@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -79,10 +81,14 @@
             }
           }
         },
-        "tags": ["Businesses"],
+        "tags": [
+          "Businesses"
+        ],
         "security": [
           {
-            "bearer": ["businesses.write"]
+            "bearer": [
+              "businesses.write"
+            ]
           }
         ]
       },
@@ -98,7 +104,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -153,10 +161,14 @@
             }
           }
         },
-        "tags": ["Businesses"],
+        "tags": [
+          "Businesses"
+        ],
         "security": [
           {
-            "bearer": ["businesses.write"]
+            "bearer": [
+              "businesses.write"
+            ]
           }
         ]
       },
@@ -172,7 +184,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -227,10 +241,14 @@
             }
           }
         },
-        "tags": ["Businesses"],
+        "tags": [
+          "Businesses"
+        ],
         "security": [
           {
-            "bearer": ["businesses.readonly"]
+            "bearer": [
+              "businesses.readonly"
+            ]
           }
         ]
       }
@@ -248,7 +266,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -293,10 +313,14 @@
             }
           }
         },
-        "tags": ["Businesses"],
+        "tags": [
+          "Businesses"
+        ],
         "security": [
           {
-            "bearer": ["businesses.readonly"]
+            "bearer": [
+              "businesses.readonly"
+            ]
           }
         ]
       },
@@ -312,7 +336,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -368,10 +394,14 @@
             }
           }
         },
-        "tags": ["Businesses"],
+        "tags": [
+          "Businesses"
+        ],
         "security": [
           {
-            "bearer": ["businesses.write"]
+            "bearer": [
+              "businesses.write"
+            ]
           }
         ]
       }
@@ -517,7 +547,11 @@
             "description": "Last updation time"
           }
         },
-        "required": ["id", "name", "locationId"]
+        "required": [
+          "id",
+          "name",
+          "locationId"
+        ]
       },
       "GetBusinessByLocationResponseDto": {
         "type": "object",
@@ -530,7 +564,9 @@
             }
           }
         },
-        "required": ["businesses"]
+        "required": [
+          "businesses"
+        ]
       },
       "CreateBusinessDto": {
         "type": "object",
@@ -580,7 +616,10 @@
             "example": "business description"
           }
         },
-        "required": ["name", "locationId"]
+        "required": [
+          "name",
+          "locationId"
+        ]
       },
       "UpdateBusinessResponseDto": {
         "type": "object",
@@ -599,7 +638,10 @@
             ]
           }
         },
-        "required": ["success", "buiseness"]
+        "required": [
+          "success",
+          "buiseness"
+        ]
       },
       "UpdateBusinessDto": {
         "type": "object",
@@ -655,7 +697,9 @@
             "example": true
           }
         },
-        "required": ["success"]
+        "required": [
+          "success"
+        ]
       },
       "GetBusinessByIdResponseDto": {
         "type": "object",
@@ -669,12 +713,16 @@
             ]
           }
         },
-        "required": ["business"]
+        "required": [
+          "business"
+        ]
       }
     }
   },
   "x-tagGroups": {
     "name": "Business",
-    "tags": ["Businesses"]
+    "tags": [
+      "Businesses"
+    ]
   }
 }

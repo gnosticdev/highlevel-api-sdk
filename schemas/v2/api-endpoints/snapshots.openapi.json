@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -60,7 +62,9 @@
             }
           }
         },
-        "tags": ["Snapshots"],
+        "tags": [
+          "Snapshots"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -89,7 +93,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -135,7 +141,9 @@
             }
           }
         },
-        "tags": ["Snapshots"],
+        "tags": [
+          "Snapshots"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -211,7 +219,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -247,7 +257,9 @@
             }
           }
         },
-        "tags": ["Snapshots"],
+        "tags": [
+          "Snapshots"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -295,7 +307,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -331,7 +345,9 @@
             }
           }
         },
-        "tags": ["Snapshots"],
+        "tags": [
+          "Snapshots"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -428,7 +444,12 @@
             "type": "string",
             "example": "permanent_link",
             "description": "Type of share link to generate",
-            "enum": ["link", "permanent_link", "agency_link", "location_link"]
+            "enum": [
+              "link",
+              "permanent_link",
+              "agency_link",
+              "location_link"
+            ]
           },
           "relationship_number": {
             "type": "string",
@@ -441,7 +462,10 @@
             "description": "Comma separated Sub-Account ids to create sub-account restricted share link"
           }
         },
-        "required": ["snapshot_id", "share_type"]
+        "required": [
+          "snapshot_id",
+          "share_type"
+        ]
       },
       "CreateSnapshotShareLinkSuccessfulResponseDTO": {
         "type": "object",
@@ -543,6 +567,8 @@
   },
   "x-tagGroups": {
     "name": "Snapshots",
-    "tags": ["Snapshots"]
+    "tags": [
+      "Snapshots"
+    ]
   }
 }

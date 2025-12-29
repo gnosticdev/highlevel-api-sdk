@@ -18,7 +18,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -43,10 +45,14 @@
             "description": "Unauthorized"
           }
         },
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       }
@@ -64,7 +70,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -123,10 +131,14 @@
             }
           }
         },
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       }
@@ -144,7 +156,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -190,10 +204,14 @@
             }
           }
         },
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       },
@@ -209,7 +227,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -275,10 +295,14 @@
             }
           }
         },
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -296,7 +320,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -352,10 +378,14 @@
             }
           }
         },
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       },
@@ -371,7 +401,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -447,10 +479,14 @@
             }
           }
         },
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -466,7 +502,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -522,10 +560,14 @@
             }
           }
         },
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -543,7 +585,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -619,10 +663,14 @@
             }
           }
         },
-        "tags": ["Tasks"],
+        "tags": [
+          "Tasks"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -640,7 +688,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -696,10 +746,14 @@
             }
           }
         },
-        "tags": ["Appointments"],
+        "tags": [
+          "Appointments"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       }
@@ -717,7 +771,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -783,10 +839,14 @@
             }
           }
         },
-        "tags": ["Tags"],
+        "tags": [
+          "Tags"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -802,7 +862,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -868,10 +930,14 @@
             }
           }
         },
-        "tags": ["Tags"],
+        "tags": [
+          "Tags"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -889,7 +955,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -935,10 +1003,14 @@
             }
           }
         },
-        "tags": ["Notes"],
+        "tags": [
+          "Notes"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       },
@@ -954,7 +1026,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1020,10 +1094,14 @@
             }
           }
         },
-        "tags": ["Notes"],
+        "tags": [
+          "Notes"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -1041,7 +1119,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1107,10 +1187,14 @@
             }
           }
         },
-        "tags": ["Notes"],
+        "tags": [
+          "Notes"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       },
@@ -1126,7 +1210,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1202,10 +1288,14 @@
             }
           }
         },
-        "tags": ["Notes"],
+        "tags": [
+          "Notes"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -1221,7 +1311,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1287,10 +1379,14 @@
             }
           }
         },
-        "tags": ["Notes"],
+        "tags": [
+          "Notes"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -1308,7 +1404,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1319,7 +1417,10 @@
             "example": "add",
             "schema": {
               "type": "string",
-              "enum": ["add", "remove"]
+              "enum": [
+                "add",
+                "remove"
+              ]
             }
           }
         ],
@@ -1365,7 +1466,9 @@
             }
           }
         },
-        "tags": ["Bulk"]
+        "tags": [
+          "Bulk"
+        ]
       }
     },
     "/contacts/bulk/business": {
@@ -1381,7 +1484,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -1417,7 +1522,9 @@
             }
           }
         },
-        "tags": ["Bulk"]
+        "tags": [
+          "Bulk"
+        ]
       }
     },
     "/contacts/{contactId}": {
@@ -1433,7 +1540,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1489,10 +1598,14 @@
             }
           }
         },
-        "tags": ["Contacts"],
+        "tags": [
+          "Contacts"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       },
@@ -1508,7 +1621,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1574,10 +1689,14 @@
             }
           }
         },
-        "tags": ["Contacts"],
+        "tags": [
+          "Contacts"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -1593,7 +1712,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1649,10 +1770,14 @@
             }
           }
         },
-        "tags": ["Contacts"],
+        "tags": [
+          "Contacts"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -1670,7 +1795,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -1726,10 +1853,14 @@
             }
           }
         },
-        "tags": ["Contacts"],
+        "tags": [
+          "Contacts"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -1747,7 +1878,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1839,10 +1972,14 @@
             }
           }
         },
-        "tags": ["Contacts"],
+        "tags": [
+          "Contacts"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       }
@@ -1860,7 +1997,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -1926,10 +2065,14 @@
             }
           }
         },
-        "tags": ["Followers"],
+        "tags": [
+          "Followers"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -1945,7 +2088,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -2011,10 +2156,14 @@
             }
           }
         },
-        "tags": ["Followers"],
+        "tags": [
+          "Followers"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -2032,7 +2181,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -2108,10 +2259,14 @@
             }
           }
         },
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -2127,7 +2282,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -2193,10 +2350,14 @@
             }
           }
         },
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -2214,7 +2375,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -2270,10 +2433,14 @@
             }
           }
         },
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -2291,7 +2458,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -2367,10 +2536,14 @@
             }
           }
         },
-        "tags": ["Workflow"],
+        "tags": [
+          "Workflow"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -2386,7 +2559,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -2462,10 +2637,14 @@
             }
           }
         },
-        "tags": ["Workflow"],
+        "tags": [
+          "Workflow"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       }
@@ -2483,7 +2662,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -2539,10 +2720,14 @@
             }
           }
         },
-        "tags": ["Contacts"],
+        "tags": [
+          "Contacts"
+        ],
         "security": [
           {
-            "bearer": ["contacts.write"]
+            "bearer": [
+              "contacts.write"
+            ]
           }
         ]
       },
@@ -2559,7 +2744,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -2656,10 +2843,14 @@
             }
           }
         },
-        "tags": ["Contacts"],
+        "tags": [
+          "Contacts"
+        ],
         "security": [
           {
-            "bearer": ["contacts.readonly"]
+            "bearer": [
+              "contacts.readonly"
+            ]
           }
         ]
       }
@@ -2784,7 +2975,11 @@
         "properties": {
           "status": {
             "type": "string",
-            "enum": ["active", "inactive", "permanent"]
+            "enum": [
+              "active",
+              "inactive",
+              "permanent"
+            ]
           },
           "message": {
             "type": "string"
@@ -2793,7 +2988,9 @@
             "type": "string"
           }
         },
-        "required": ["status"]
+        "required": [
+          "status"
+        ]
       },
       "DndSettingsSchema": {
         "type": "object",
@@ -2842,7 +3039,13 @@
             "example": "open"
           }
         },
-        "required": ["id", "pipeline_id", "pipeline_stage_id", "monetary_value", "status"]
+        "required": [
+          "id",
+          "pipeline_id",
+          "pipeline_stage_id",
+          "monetary_value",
+          "status"
+        ]
       },
       "Contact": {
         "type": "object",
@@ -2894,7 +3097,10 @@
             }
           },
           "tags": {
-            "example": ["tag-1", "tag-2"],
+            "example": [
+              "tag-1",
+              "tag-2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2905,7 +3111,10 @@
             "example": "2024-06-06T18:54:57.221Z"
           },
           "additionalEmails": {
-            "example": ["john@example.com", "jane@example.com"],
+            "example": [
+              "john@example.com",
+              "jane@example.com"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2920,7 +3129,10 @@
             "example": "XYZ Corp"
           },
           "additionalPhones": {
-            "example": ["123456789", "987654321"],
+            "example": [
+              "123456789",
+              "987654321"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2963,7 +3175,10 @@
             "example": "182goXVW3lIExEQPOnd3"
           },
           "followers": {
-            "example": ["682goXVW3lIExEQPOnd3", "582goXVW3lIExEQPOnd3"],
+            "example": [
+              "682goXVW3lIExEQPOnd3",
+              "582goXVW3lIExEQPOnd3"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2991,7 +3206,10 @@
             "example": "282goXVW3lIExEQPOnd3"
           },
           "searchAfter": {
-            "example": [1234, "102goXVW3lIExEQPOnd3"],
+            "example": [
+              1234,
+              "102goXVW3lIExEQPOnd3"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3013,7 +3231,10 @@
             "example": 120
           }
         },
-        "required": ["contacts", "total"]
+        "required": [
+          "contacts",
+          "total"
+        ]
       },
       "TaskSchema": {
         "type": "object",
@@ -3091,7 +3312,11 @@
             "example": "hxHGVRb1YJUscrCB8eXK"
           }
         },
-        "required": ["title", "dueDate", "completed"]
+        "required": [
+          "title",
+          "dueDate",
+          "completed"
+        ]
       },
       "UpdateTaskBody": {
         "type": "object",
@@ -3126,7 +3351,9 @@
             "example": true
           }
         },
-        "required": ["completed"]
+        "required": [
+          "completed"
+        ]
       },
       "DeleteTaskSuccessfulResponseDto": {
         "type": "object",
@@ -3193,7 +3420,10 @@
             "example": "booked"
           },
           "users": {
-            "example": ["YlWd2wuCAZQzh2cH1fVZ", "YlWd2wuCAZQzh2cH1fVZ"],
+            "example": [
+              "YlWd2wuCAZQzh2cH1fVZ",
+              "YlWd2wuCAZQzh2cH1fVZ"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3208,7 +3438,10 @@
             "example": "2021-07-16 11:30:00"
           },
           "assignedResources": {
-            "example": ["YlWd2wuCAZQzh2cH1fVZ", "YlWd2wuCAZQzh2cH1fVZ"],
+            "example": [
+              "YlWd2wuCAZQzh2cH1fVZ",
+              "YlWd2wuCAZQzh2cH1fVZ"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3231,20 +3464,28 @@
         "type": "object",
         "properties": {
           "tags": {
-            "example": ["minim", "velit magna"],
+            "example": [
+              "minim",
+              "velit magna"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["tags"]
+        "required": [
+          "tags"
+        ]
       },
       "CreateAddTagSuccessfulResponseDto": {
         "type": "object",
         "properties": {
           "tags": {
-            "example": ["minim", "velit magna"],
+            "example": [
+              "minim",
+              "velit magna"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3256,7 +3497,10 @@
         "type": "object",
         "properties": {
           "tags": {
-            "example": ["minim", "velit magna"],
+            "example": [
+              "minim",
+              "velit magna"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3312,7 +3556,9 @@
             "example": "lorem ipsum"
           }
         },
-        "required": ["body"]
+        "required": [
+          "body"
+        ]
       },
       "GetCreateUpdateNoteSuccessfulResponseDto": {
         "type": "object",
@@ -3336,7 +3582,12 @@
         "properties": {
           "contacts": {
             "description": "list of contact ids to be processed",
-            "example": ["qFSqySFkVvNzOSqgGqFi", "abcdef", "qFSqySFkVvNzOSqgGqFi", "3ualbhnV7j3n3a9r2moD"],
+            "example": [
+              "qFSqySFkVvNzOSqgGqFi",
+              "abcdef",
+              "qFSqySFkVvNzOSqgGqFi",
+              "3ualbhnV7j3n3a9r2moD"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3344,7 +3595,10 @@
           },
           "tags": {
             "description": "list of tags to be added or removed",
-            "example": ["tag-1", "tag-2"],
+            "example": [
+              "tag-1",
+              "tag-2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3361,7 +3615,11 @@
             "example": "false"
           }
         },
-        "required": ["contacts", "tags", "locationId"]
+        "required": [
+          "contacts",
+          "tags",
+          "locationId"
+        ]
       },
       "UpdateTagsResponseDTO": {
         "type": "object",
@@ -3383,7 +3641,10 @@
                 "contactId": "qFSqySFkVvNzOSqgGqFi",
                 "message": "Tags updated",
                 "type": "success",
-                "oldTags": ["tag-1", "tag-2"],
+                "oldTags": [
+                  "tag-1",
+                  "tag-2"
+                ],
                 "tagsAdded": [],
                 "tagsRemoved": []
               },
@@ -3409,7 +3670,11 @@
             }
           }
         },
-        "required": ["succeded", "errorCount", "responses"]
+        "required": [
+          "succeded",
+          "errorCount",
+          "responses"
+        ]
       },
       "ContactsBusinessUpdate": {
         "type": "object",
@@ -3419,7 +3684,10 @@
             "example": "PX8m5VwxEbcpFlzYEPVG"
           },
           "ids": {
-            "example": ["IDqvFHGColiyK6jiatuz", "pOC0uJ97VYOKH2m3fkMD"],
+            "example": [
+              "IDqvFHGColiyK6jiatuz",
+              "pOC0uJ97VYOKH2m3fkMD"
+            ],
             "type": "array",
             "items": {
               "type": "string",
@@ -3432,7 +3700,11 @@
             "nullable": true
           }
         },
-        "required": ["locationId", "ids", "businessId"]
+        "required": [
+          "locationId",
+          "ids",
+          "businessId"
+        ]
       },
       "ContactsBulkUpateResponse": {
         "type": "object",
@@ -3442,14 +3714,19 @@
             "example": true
           },
           "ids": {
-            "example": ["pOC0uJ97VYOKH2m3fkMD"],
+            "example": [
+              "pOC0uJ97VYOKH2m3fkMD"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["success", "ids"]
+        "required": [
+          "success",
+          "ids"
+        ]
       },
       "AttributionSource": {
         "type": "object",
@@ -3535,7 +3812,9 @@
             "nullable": true
           }
         },
-        "required": ["url"]
+        "required": [
+          "url"
+        ]
       },
       "GetContectByIdSchema": {
         "type": "object",
@@ -3624,7 +3903,10 @@
             "example": "https://www.tesla.com"
           },
           "tags": {
-            "example": ["nisi sint commodo amet", "consequat"],
+            "example": [
+              "nisi sint commodo amet",
+              "consequat"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -3711,14 +3993,19 @@
             "example": "my_custom_field"
           },
           "field_value": {
-            "example": ["test", "test2"],
+            "example": [
+              "test",
+              "test2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "customFieldsInputObjectSchema": {
         "type": "object",
@@ -3736,7 +4023,9 @@
             "example": {}
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "customFieldsInputStringSchema": {
         "type": "object",
@@ -3773,7 +4062,9 @@
             "example": "My Text"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "LargeTextField": {
         "type": "object",
@@ -3791,7 +4082,9 @@
             "example": "My Text"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "SingleSelectField": {
         "type": "object",
@@ -3809,7 +4102,9 @@
             "example": "My Selected Option"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "RadioField": {
         "type": "object",
@@ -3827,7 +4122,9 @@
             "example": "My Selected Option"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "NumericField": {
         "type": "object",
@@ -3845,7 +4142,9 @@
             "example": 100
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "MonetoryField": {
         "type": "object",
@@ -3863,7 +4162,9 @@
             "example": 100.5
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "CheckboxField": {
         "type": "object",
@@ -3877,14 +4178,19 @@
             "example": "my_custom_field"
           },
           "field_value": {
-            "example": ["test", "test2"],
+            "example": [
+              "test",
+              "test2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "MultiSelectField": {
         "type": "object",
@@ -3898,14 +4204,19 @@
             "example": "my_custom_field"
           },
           "field_value": {
-            "example": ["test", "test2"],
+            "example": [
+              "test",
+              "test2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "FileField": {
         "type": "object",
@@ -3936,20 +4247,27 @@
             }
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "InboundDndSettingSchema": {
         "type": "object",
         "properties": {
           "status": {
             "type": "string",
-            "enum": ["active", "inactive"]
+            "enum": [
+              "active",
+              "inactive"
+            ]
           },
           "message": {
             "type": "string"
           }
         },
-        "required": ["status"]
+        "required": [
+          "status"
+        ]
       },
       "InboundDndSettingsSchema": {
         "type": "object",
@@ -4035,7 +4353,10 @@
             "$ref": "#/components/schemas/InboundDndSettingsSchema"
           },
           "tags": {
-            "example": ["nisi sint commodo amet", "consequat"],
+            "example": [
+              "nisi sint commodo amet",
+              "consequat"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -4094,7 +4415,9 @@
             "description": "User's Id"
           }
         },
-        "required": ["locationId"]
+        "required": [
+          "locationId"
+        ]
       },
       "CreateContactSchema": {
         "type": "object",
@@ -4116,7 +4439,10 @@
             "example": false
           },
           "tags": {
-            "example": ["nisi sint commodo amet", "consequat"],
+            "example": [
+              "nisi sint commodo amet",
+              "consequat"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -4332,7 +4658,10 @@
             "$ref": "#/components/schemas/InboundDndSettingsSchema"
           },
           "tags": {
-            "example": ["nisi sint commodo amet", "consequat"],
+            "example": [
+              "nisi sint commodo amet",
+              "consequat"
+            ],
             "description": "This field will overwrite all current tags associated with the contact. To update a tags, it is recommended to use the Add Tag or Remove Tag API instead.",
             "type": "array",
             "items": {
@@ -4478,7 +4807,10 @@
             "$ref": "#/components/schemas/InboundDndSettingsSchema"
           },
           "tags": {
-            "example": ["nisi sint commodo amet", "consequat"],
+            "example": [
+              "nisi sint commodo amet",
+              "consequat"
+            ],
             "description": "This field will overwrite all current tags associated with the contact. To update a tags, it is recommended to use the Add Tag or Remove Tag API instead.",
             "type": "array",
             "items": {
@@ -4538,7 +4870,9 @@
             "description": "User's Id"
           }
         },
-        "required": ["locationId"]
+        "required": [
+          "locationId"
+        ]
       },
       "UpsertContactsSuccessfulResponseDto": {
         "type": "object",
@@ -4602,7 +4936,10 @@
             }
           },
           "tags": {
-            "example": ["nisi sint commodo amet", "consequat"],
+            "example": [
+              "nisi sint commodo amet",
+              "consequat"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -4680,27 +5017,38 @@
         "type": "object",
         "properties": {
           "followers": {
-            "example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302Lunr"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "sx6wyHhbFdRXh302Lunr"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["followers"]
+        "required": [
+          "followers"
+        ]
       },
       "CreateAddFollowersSuccessfulResponseDto": {
         "type": "object",
         "properties": {
           "followers": {
-            "example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302LLss"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "sx6wyHhbFdRXh302LLss"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           },
           "followersAdded": {
-            "example": ["Mx6wyHhbFdRXh302Luer", "Ka6wyHhbFdRXh302LLsAm"],
+            "example": [
+              "Mx6wyHhbFdRXh302Luer",
+              "Ka6wyHhbFdRXh302LLsAm"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -4712,14 +5060,20 @@
         "type": "object",
         "properties": {
           "followers": {
-            "example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302LLss"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "sx6wyHhbFdRXh302LLss"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           },
           "followersRemoved": {
-            "example": ["Mx6wyHhbFdRXh302Luer", "Ka6wyHhbFdRXh302LLsAm"],
+            "example": [
+              "Mx6wyHhbFdRXh302Luer",
+              "Ka6wyHhbFdRXh302LLsAm"
+            ],
             "type": "array",
             "items": {
               "type": "string"

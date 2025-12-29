@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -71,7 +73,13 @@
             "required": false,
             "in": "query",
             "schema": {
-              "enum": ["open", "won", "lost", "abandoned", "all"],
+              "enum": [
+                "open",
+                "won",
+                "lost",
+                "abandoned",
+                "all"
+              ],
               "type": "string"
             }
           },
@@ -253,10 +261,14 @@
             }
           }
         },
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.readonly"]
+            "bearer": [
+              "opportunities.readonly"
+            ]
           }
         ]
       }
@@ -274,7 +286,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -319,10 +333,14 @@
             }
           }
         },
-        "tags": ["Pipelines"],
+        "tags": [
+          "Pipelines"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.readonly"]
+            "bearer": [
+              "opportunities.readonly"
+            ]
           }
         ]
       }
@@ -340,7 +358,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -396,10 +416,14 @@
             }
           }
         },
-        "tags": ["Opportunities"],
+        "tags": [
+          "Opportunities"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.readonly"]
+            "bearer": [
+              "opportunities.readonly"
+            ]
           }
         ]
       },
@@ -415,7 +439,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -471,10 +497,14 @@
             }
           }
         },
-        "tags": ["Opportunities"],
+        "tags": [
+          "Opportunities"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.write"]
+            "bearer": [
+              "opportunities.write"
+            ]
           }
         ]
       },
@@ -490,7 +520,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -556,10 +588,14 @@
             }
           }
         },
-        "tags": ["Opportunities"],
+        "tags": [
+          "Opportunities"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.write"]
+            "bearer": [
+              "opportunities.write"
+            ]
           }
         ]
       }
@@ -577,7 +613,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -643,10 +681,14 @@
             }
           }
         },
-        "tags": ["Opportunities"],
+        "tags": [
+          "Opportunities"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.write"]
+            "bearer": [
+              "opportunities.write"
+            ]
           }
         ]
       }
@@ -664,7 +706,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -720,10 +764,14 @@
             }
           }
         },
-        "tags": ["Opportunities"],
+        "tags": [
+          "Opportunities"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.write"]
+            "bearer": [
+              "opportunities.write"
+            ]
           }
         ]
       }
@@ -741,7 +789,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -807,10 +857,14 @@
             }
           }
         },
-        "tags": ["Followers"],
+        "tags": [
+          "Followers"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.write"]
+            "bearer": [
+              "opportunities.write"
+            ]
           }
         ]
       },
@@ -826,7 +880,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -892,10 +948,14 @@
             }
           }
         },
-        "tags": ["Followers"],
+        "tags": [
+          "Followers"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.write"]
+            "bearer": [
+              "opportunities.write"
+            ]
           }
         ]
       }
@@ -913,7 +973,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -969,10 +1031,14 @@
             }
           }
         },
-        "tags": ["Opportunities"],
+        "tags": [
+          "Opportunities"
+        ],
         "security": [
           {
-            "bearer": ["opportunities.write"]
+            "bearer": [
+              "opportunities.write"
+            ]
           }
         ]
       }
@@ -1113,7 +1179,10 @@
             ]
           }
         },
-        "required": ["id", "fieldValue"]
+        "required": [
+          "id",
+          "fieldValue"
+        ]
       },
       "SearchOpportunitiesResponseSchema": {
         "type": "object",
@@ -1331,10 +1400,18 @@
         "properties": {
           "status": {
             "type": "string",
-            "enum": ["open", "won", "lost", "abandoned", "all"]
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
           }
         },
-        "required": ["status"]
+        "required": [
+          "status"
+        ]
       },
       "customFieldsInputArraySchema": {
         "type": "object",
@@ -1348,14 +1425,19 @@
             "example": "my_custom_field"
           },
           "field_value": {
-            "example": ["test", "test2"],
+            "example": [
+              "test",
+              "test2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "customFieldsInputObjectSchema": {
         "type": "object",
@@ -1373,7 +1455,9 @@
             "example": {}
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "customFieldsInputStringSchema": {
         "type": "object",
@@ -1416,7 +1500,13 @@
           },
           "status": {
             "type": "string",
-            "enum": ["open", "won", "lost", "abandoned", "all"]
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
           },
           "contactId": {
             "type": "string",
@@ -1448,7 +1538,13 @@
             }
           }
         },
-        "required": ["pipelineId", "locationId", "name", "status", "contactId"]
+        "required": [
+          "pipelineId",
+          "locationId",
+          "name",
+          "status",
+          "contactId"
+        ]
       },
       "UpdateOpportunityDto": {
         "type": "object",
@@ -1468,7 +1564,13 @@
           },
           "status": {
             "type": "string",
-            "enum": ["open", "won", "lost", "abandoned", "all"]
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
           },
           "monetaryValue": {
             "type": "number",
@@ -1522,7 +1624,13 @@
           },
           "status": {
             "type": "string",
-            "enum": ["open", "won", "lost", "abandoned", "all"]
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "abandoned",
+              "all"
+            ]
           },
           "pipelineStageId": {
             "type": "string",
@@ -1537,7 +1645,11 @@
             "example": "082goXVW3lIExEQPOnd3"
           }
         },
-        "required": ["pipelineId", "locationId", "contactId"]
+        "required": [
+          "pipelineId",
+          "locationId",
+          "contactId"
+        ]
       },
       "UpsertOpportunitySuccessfulResponseDto": {
         "type": "object",
@@ -1551,33 +1663,47 @@
             "example": true
           }
         },
-        "required": ["opportunity", "new"]
+        "required": [
+          "opportunity",
+          "new"
+        ]
       },
       "FollowersDTO": {
         "type": "object",
         "properties": {
           "followers": {
-            "example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302Lunr"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "sx6wyHhbFdRXh302Lunr"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["followers"]
+        "required": [
+          "followers"
+        ]
       },
       "CreateAddFollowersSuccessfulResponseDto": {
         "type": "object",
         "properties": {
           "followers": {
-            "example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302LLss"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "sx6wyHhbFdRXh302LLss"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           },
           "followersAdded": {
-            "example": ["Mx6wyHhbFdRXh302Luer", "Ka6wyHhbFdRXh302LLsAm"],
+            "example": [
+              "Mx6wyHhbFdRXh302Luer",
+              "Ka6wyHhbFdRXh302LLsAm"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1589,14 +1715,20 @@
         "type": "object",
         "properties": {
           "followers": {
-            "example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302LLss"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "sx6wyHhbFdRXh302LLss"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           },
           "followersRemoved": {
-            "example": ["Mx6wyHhbFdRXh302Luer", "Ka6wyHhbFdRXh302LLsAm"],
+            "example": [
+              "Mx6wyHhbFdRXh302Luer",
+              "Ka6wyHhbFdRXh302LLsAm"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1608,6 +1740,13 @@
   },
   "x-tagGroups": {
     "name": "Opportunities",
-    "tags": ["Opportunities", "Search", "Pipelines", "Export", "Pipiline Search", "Followers"]
+    "tags": [
+      "Opportunities",
+      "Search",
+      "Pipelines",
+      "Export",
+      "Pipiline Search",
+      "Followers"
+    ]
   }
 }

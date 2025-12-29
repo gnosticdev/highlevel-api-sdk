@@ -9,15 +9,27 @@
   "$defs": {
     "PermissionLevel": {
       "type": "string",
-      "enum": ["readonly", "write"]
+      "enum": [
+        "readonly",
+        "write"
+      ]
     },
     "AccessType": {
       "type": "string",
-      "enum": ["Sub-Account", "Agency"]
+      "enum": [
+        "Sub-Account",
+        "Agency"
+      ]
     },
     "HttpMethod": {
       "type": "string",
-      "enum": ["DELETE", "GET", "PATCH", "POST", "PUT"]
+      "enum": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "POST",
+        "PUT"
+      ]
     },
     "ScopeName": {
       "type": "string",
@@ -109,7 +121,14 @@
     "ScopeEndpoint": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["scope", "permissionLevel", "accessType", "webhookEvents", "method", "endpoint"],
+      "required": [
+        "scope",
+        "permissionLevel",
+        "accessType",
+        "webhookEvents",
+        "method",
+        "endpoint"
+      ],
       "properties": {
         "scope": {
           "$ref": "#/$defs/ScopeName"

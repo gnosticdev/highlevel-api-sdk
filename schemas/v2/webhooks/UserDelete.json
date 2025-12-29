@@ -166,20 +166,38 @@
       }
     }
   },
-  "required": ["type", "id", "firstName", "lastName", "email", "role", "permissions", "scopes"],
+  "required": [
+    "type",
+    "id",
+    "firstName",
+    "lastName",
+    "email",
+    "role",
+    "permissions",
+    "scopes"
+  ],
   "anyOf": [
     {
       "title": "Sub-account user payload",
-      "required": ["locationId"],
+      "required": [
+        "locationId"
+      ],
       "not": {
-        "required": ["companyId"]
+        "required": [
+          "companyId"
+        ]
       }
     },
     {
       "title": "Agency user payload",
-      "required": ["companyId", "locations"],
+      "required": [
+        "companyId",
+        "locations"
+      ],
       "not": {
-        "required": ["locationId"]
+        "required": [
+          "locationId"
+        ]
       }
     }
   ]

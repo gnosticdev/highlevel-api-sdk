@@ -18,7 +18,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -94,10 +96,14 @@
             }
           }
         },
-        "tags": ["Object Schema"],
+        "tags": [
+          "Object Schema"
+        ],
         "security": [
           {
-            "bearer": ["objects/schema.readonly"]
+            "bearer": [
+              "objects/schema.readonly"
+            ]
           }
         ]
       },
@@ -117,7 +123,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -183,10 +191,14 @@
             }
           }
         },
-        "tags": ["Object Schema"],
+        "tags": [
+          "Object Schema"
+        ],
         "security": [
           {
-            "bearer": ["objects/schema.write"]
+            "bearer": [
+              "objects/schema.write"
+            ]
           }
         ]
       }
@@ -204,7 +216,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -260,7 +274,9 @@
             }
           }
         },
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "security": [
           {
             "bearer": []
@@ -283,7 +299,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -357,7 +375,9 @@
             }
           }
         },
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "security": [
           {
             "bearer": []
@@ -376,7 +396,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -432,7 +454,9 @@
             }
           }
         },
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "security": [
           {
             "bearer": []
@@ -457,7 +481,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -513,10 +539,14 @@
             }
           }
         },
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "security": [
           {
-            "bearer": ["objects/record.write"]
+            "bearer": [
+              "objects/record.write"
+            ]
           }
         ]
       }
@@ -534,7 +564,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -590,10 +622,14 @@
             }
           }
         },
-        "tags": ["Search Object Records"],
+        "tags": [
+          "Search Object Records"
+        ],
         "security": [
           {
-            "bearer": ["objects/record.readonly"]
+            "bearer": [
+              "objects/record.readonly"
+            ]
           }
         ]
       }
@@ -615,7 +651,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -671,10 +709,14 @@
             }
           }
         },
-        "tags": ["Object Schema"],
+        "tags": [
+          "Object Schema"
+        ],
         "security": [
           {
-            "bearer": ["objects/schema.readonly"]
+            "bearer": [
+              "objects/schema.readonly"
+            ]
           }
         ]
       },
@@ -694,7 +736,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -750,10 +794,14 @@
             }
           }
         },
-        "tags": ["Object Schema"],
+        "tags": [
+          "Object Schema"
+        ],
         "security": [
           {
-            "Agency-Access": ["objects/schema.write"]
+            "Agency-Access": [
+              "objects/schema.write"
+            ]
           }
         ]
       }
@@ -874,7 +922,10 @@
             "description": "Plural name of the custom object"
           }
         },
-        "required": ["singular", "plural"]
+        "required": [
+          "singular",
+          "plural"
+        ]
       },
       "ICustomObjectSchema": {
         "type": "object",
@@ -964,7 +1015,10 @@
             "description": "URL associated with the option (Optional, valid only for RADIO type)"
           }
         },
-        "required": ["key", "label"]
+        "required": [
+          "key",
+          "label"
+        ]
       },
       "ICustomField": {
         "type": "object",
@@ -1000,7 +1054,19 @@
           },
           "acceptedFormats": {
             "type": "string",
-            "enum": [".pdf", ".docx", ".doc", ".jpg", ".jpeg", ".png", ".gif", ".csv", ".xlsx", ".xls", "all"],
+            "enum": [
+              ".pdf",
+              ".docx",
+              ".doc",
+              ".jpg",
+              ".jpeg",
+              ".png",
+              ".gif",
+              ".csv",
+              ".xlsx",
+              ".xls",
+              "all"
+            ],
             "description": "Allowed file formats for uploads. Options include: .pdf, .docx, .doc, .jpg, .jpeg, .png, .gif, .csv, .xlsx, .xls, all"
           },
           "id": {
@@ -1091,7 +1157,9 @@
             }
           }
         },
-        "required": ["cache"]
+        "required": [
+          "cache"
+        ]
       },
       "CustomObjectListResponseDTO": {
         "type": "object",
@@ -1123,7 +1191,11 @@
             "description": "Primary property data Type (it can either be TEXT or NUMERICAL type)"
           }
         },
-        "required": ["key", "name", "dataType"]
+        "required": [
+          "key",
+          "name",
+          "dataType"
+        ]
       },
       "CreateCustomObjectSchemaDTO": {
         "type": "object",
@@ -1164,7 +1236,12 @@
             ]
           }
         },
-        "required": ["labels", "key", "locationId", "primaryDisplayPropertyDetails"]
+        "required": [
+          "labels",
+          "key",
+          "locationId",
+          "primaryDisplayPropertyDetails"
+        ]
       },
       "CustomObjectResponseDTO": {
         "type": "object",
@@ -1217,14 +1294,21 @@
           },
           "searchableProperties": {
             "description": "Searchable Fields: Provide the field key of your object that you want to search on, using the format (custom_object.<object_name>.<field_key>).",
-            "example": ["custom_objects.mad.mad", "custom_objects.mad.record_1", "custom_objects.mad.nn"],
+            "example": [
+              "custom_objects.mad.mad",
+              "custom_objects.mad.record_1",
+              "custom_objects.mad.nn"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["locationId", "searchableProperties"]
+        "required": [
+          "locationId",
+          "searchableProperties"
+        ]
       },
       "IRecordSchema": {
         "type": "object",
@@ -1236,7 +1320,9 @@
           },
           "owner": {
             "description": "Owner (User's id). Limited to 1 for now. Only Supported with custom objects",
-            "example": ["sx6wyHhbFdRXh302Lunr"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1244,7 +1330,10 @@
           },
           "followers": {
             "description": "Follower (User's ids). Limited to 10 for now",
-            "example": ["sx6wyHhbFdRXh302Lunr", "v5cEPM428h8vShlRW1KT"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "v5cEPM428h8vShlRW1KT"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1261,7 +1350,10 @@
                 "value": 100
               },
               "type_of_ticket": "doubt",
-              "section_of_app": ["contacts", "smartlist"],
+              "section_of_app": [
+                "contacts",
+                "smartlist"
+              ],
               "recieved_on": "2024-07-11",
               "my_files": [
                 {
@@ -1284,7 +1376,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "owner", "followers", "properties", "dateAdded", "dateUpdated"]
+        "required": [
+          "id",
+          "owner",
+          "followers",
+          "properties",
+          "dateAdded",
+          "dateUpdated"
+        ]
       },
       "RecordByIdResponseDTO": {
         "type": "object",
@@ -1341,14 +1440,23 @@
             "description": "Pass this query parameter to search using your searchable properties. For example, if you have a custom object called “Pets” and have configured “name” as a searchable property, you can pass name:Buddy to search for pets with the name “Buddy.”"
           },
           "searchAfter": {
-            "example": ["sx6wyHhbFdRXh302Lunr", "sx6wyHhbFdRXh302Lunr"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "sx6wyHhbFdRXh302Lunr"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["locationId", "page", "pageLimit", "query", "searchAfter"]
+        "required": [
+          "locationId",
+          "page",
+          "pageLimit",
+          "query",
+          "searchAfter"
+        ]
       },
       "CreatedByResponseDTO": {
         "type": "object",
@@ -1374,7 +1482,12 @@
             "example": "26653146-ec82-435d-8a99-84ecdb7fde13"
           }
         },
-        "required": ["channel", "createdAt", "source", "sourceId"]
+        "required": [
+          "channel",
+          "createdAt",
+          "source",
+          "sourceId"
+        ]
       },
       "RecordResponseDTO": {
         "type": "object",
@@ -1386,7 +1499,9 @@
           },
           "owner": {
             "description": "Owner (User's id). Limited to 1 for now . Only supported for custom objects for now",
-            "example": ["sx6wyHhbFdRXh302Lunr"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1394,7 +1509,10 @@
           },
           "followers": {
             "description": "Follower (User's ids). Limited to 10 and supported for custom objects for now",
-            "example": ["sx6wyHhbFdRXh302Lunr", "v5cEPM428h8vShlRW1KT"],
+            "example": [
+              "sx6wyHhbFdRXh302Lunr",
+              "v5cEPM428h8vShlRW1KT"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1411,7 +1529,10 @@
                 "value": 100
               },
               "type_of_ticket": "doubt",
-              "section_of_app": ["contacts", "smartlist"],
+              "section_of_app": [
+                "contacts",
+                "smartlist"
+              ],
               "recieved_on": "2024-07-11",
               "my_files": [
                 {
@@ -1465,7 +1586,10 @@
             ]
           },
           "searchAfter": {
-            "example": [1738683828372, "67a235b49b289431bcf657f8"],
+            "example": [
+              1738683828372,
+              "67a235b49b289431bcf657f8"
+            ],
             "type": "array",
             "items": {
               "type": "number"
@@ -1503,7 +1627,9 @@
             "example": 20
           }
         },
-        "required": ["total"]
+        "required": [
+          "total"
+        ]
       }
     }
   },

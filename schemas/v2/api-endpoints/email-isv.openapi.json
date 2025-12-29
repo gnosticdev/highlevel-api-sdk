@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -87,7 +89,9 @@
             }
           }
         },
-        "tags": ["Email Verification"],
+        "tags": [
+          "Email Verification"
+        ],
         "security": [
           {
             "Location-Access": []
@@ -160,7 +164,9 @@
             "description": "Email address"
           }
         },
-        "required": ["verified"]
+        "required": [
+          "verified"
+        ]
       },
       "LeadConnectorRecomandationDto": {
         "type": "object",
@@ -176,7 +182,9 @@
         "type": "object",
         "properties": {
           "reason": {
-            "example": ["mailbox_does_not_exist"],
+            "example": [
+              "mailbox_does_not_exist"
+            ],
             "description": "Reason for email verification failure",
             "type": "array",
             "items": {
@@ -186,13 +194,24 @@
           "result": {
             "type": "string",
             "example": "undeliverable",
-            "enum": ["deliverable", "undeliverable", "do_not_send", "unknown", "catch_all"],
+            "enum": [
+              "deliverable",
+              "undeliverable",
+              "do_not_send",
+              "unknown",
+              "catch_all"
+            ],
             "description": "Email verification result"
           },
           "risk": {
             "type": "string",
             "example": "low",
-            "enum": ["high", "low", "medium", "unknown"],
+            "enum": [
+              "high",
+              "low",
+              "medium",
+              "unknown"
+            ],
             "description": "Risk level of email sending to bounce"
           },
           "address": {
@@ -212,7 +231,12 @@
             ]
           }
         },
-        "required": ["result", "risk", "address", "leadconnectorRecomendation"]
+        "required": [
+          "result",
+          "risk",
+          "address",
+          "leadconnectorRecomendation"
+        ]
       },
       "VerificationBodyDto": {
         "type": "object",
@@ -220,7 +244,10 @@
           "type": {
             "type": "string",
             "example": "email",
-            "enum": ["email", "contact"],
+            "enum": [
+              "email",
+              "contact"
+            ],
             "description": "Email Verification type"
           },
           "verify": {
@@ -229,12 +256,17 @@
             "description": "Email Verification recepient (email address / contactId)"
           }
         },
-        "required": ["type", "verify"]
+        "required": [
+          "type",
+          "verify"
+        ]
       }
     }
   },
   "x-tagGroups": {
     "name": "LC Email",
-    "tags": ["Email Verification"]
+    "tags": [
+      "Email Verification"
+    ]
   }
 }

@@ -17,7 +17,10 @@
           "type": "string"
         }
       },
-      "required": ["singular", "plural"],
+      "required": [
+        "singular",
+        "plural"
+      ],
       "additionalProperties": false
     },
     "description": {
@@ -58,10 +61,18 @@
     },
     "objectType": {
       "type": "string",
-      "enum": ["USER_DEFINED"],
+      "enum": [
+        "USER_DEFINED"
+      ],
       "default": "USER_DEFINED"
     }
   },
-  "required": ["labels", "primaryDisplayProperty", "key", "locationId", "objectType"],
+  "required": [
+    "labels",
+    "primaryDisplayProperty",
+    "key",
+    "locationId",
+    "objectType"
+  ],
   "additionalProperties": true
 }

@@ -15,7 +15,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -104,7 +106,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -126,7 +130,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -202,7 +208,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -224,7 +232,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -300,7 +310,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -322,7 +334,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -398,7 +412,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -420,7 +436,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -496,7 +514,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -518,7 +538,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -594,7 +616,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -626,7 +650,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -695,7 +721,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -727,7 +755,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -803,7 +833,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -835,7 +867,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -911,7 +945,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -943,7 +979,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1019,7 +1057,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1051,7 +1091,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1127,7 +1169,9 @@
             }
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1158,7 +1202,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1191,7 +1237,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1222,7 +1270,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1249,7 +1299,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1280,7 +1332,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1307,7 +1361,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1338,7 +1394,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1365,7 +1423,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1396,7 +1456,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1423,7 +1485,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1454,7 +1518,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1481,7 +1547,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1512,7 +1580,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1529,7 +1599,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1560,7 +1632,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1585,7 +1659,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1616,7 +1692,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1643,7 +1721,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1674,7 +1754,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1699,7 +1781,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1730,7 +1814,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-04-15"]
+              "enum": [
+                "2021-04-15"
+              ]
             }
           },
           {
@@ -1755,7 +1841,9 @@
             "description": ""
           }
         },
-        "tags": ["Saas"],
+        "tags": [
+          "Saas"
+        ],
         "security": [
           {
             "Agency-Access": []
@@ -1854,7 +1942,12 @@
           },
           "message": {
             "type": "string",
-            "example": ["Contact not found", "User not found", "Group not found", "Channel not found"],
+            "example": [
+              "Contact not found",
+              "User not found",
+              "Group not found",
+              "Channel not found"
+            ],
             "description": "Error message"
           }
         }
@@ -1893,21 +1986,30 @@
             "example": "companyId1"
           }
         },
-        "required": ["subscriptionId", "customerId", "companyId"]
+        "required": [
+          "subscriptionId",
+          "customerId",
+          "companyId"
+        ]
       },
       "BulkDisableSaasDto": {
         "type": "object",
         "properties": {
           "locationIds": {
             "description": "Location IDs",
-            "example": ["locationId1", "locationId2"],
+            "example": [
+              "locationId1",
+              "locationId2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["locationIds"]
+        "required": [
+          "locationIds"
+        ]
       },
       "BulkDisableSaasResponseDto": {
         "type": "object",
@@ -1920,7 +2022,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "EnableSaasDto": {
         "type": "object",
@@ -1979,7 +2083,10 @@
             "example": "price_1QDPY5FpU9DlKp7RQ8BXfywx"
           }
         },
-        "required": ["companyId", "isSaaSV2"]
+        "required": [
+          "companyId",
+          "isSaaSV2"
+        ]
       },
       "EnableSaasResponseDto": {
         "type": "object",
@@ -1994,7 +2101,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "PauseLocationDto": {
         "type": "object",
@@ -2010,7 +2119,10 @@
             "example": "companyId1"
           }
         },
-        "required": ["paused", "companyId"]
+        "required": [
+          "paused",
+          "companyId"
+        ]
       },
       "UpdateRebillingDto": {
         "type": "object",
@@ -2041,7 +2153,10 @@
           },
           "locationIds": {
             "description": "Array of location IDs to update rebilling for",
-            "example": ["zzyG7A4x6bRJl5SlhQhH", "Vygq7VgXCDfg3xnl8TBR"],
+            "example": [
+              "zzyG7A4x6bRJl5SlhQhH",
+              "Vygq7VgXCDfg3xnl8TBR"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2069,7 +2184,11 @@
             }
           }
         },
-        "required": ["product", "locationIds", "config"]
+        "required": [
+          "product",
+          "locationIds",
+          "config"
+        ]
       },
       "UpdateRebillingResponseDto": {
         "type": "object",
@@ -2080,7 +2199,9 @@
             "example": true
           }
         },
-        "required": ["success"]
+        "required": [
+          "success"
+        ]
       },
       "AgencyPlanResponseDto": {
         "type": "object",
@@ -2102,7 +2223,12 @@
           },
           "saasProducts": {
             "description": "Array of SaaS products included in the plan",
-            "example": ["2-way-text-messaging", "gmb-messaging", "web-chat", "reputation-management"],
+            "example": [
+              "2-way-text-messaging",
+              "gmb-messaging",
+              "web-chat",
+              "reputation-management"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2110,7 +2236,11 @@
           },
           "addOns": {
             "description": "Array of add-ons included in the plan",
-            "example": ["CONVERSATIONS_AI", "CP_BRANDED_APP_49", "WORDPRESS_V1"],
+            "example": [
+              "CONVERSATIONS_AI",
+              "CP_BRANDED_APP_49",
+              "WORDPRESS_V1"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2150,7 +2280,10 @@
                 "billingInterval": {
                   "description": "Billing interval for the plan",
                   "type": "string",
-                  "enum": ["month", "year"],
+                  "enum": [
+                    "month",
+                    "year"
+                  ],
                   "example": "month"
                 },
                 "active": {
@@ -2279,7 +2412,11 @@
             "example": "active"
           }
         },
-        "required": ["locationId", "isSaaSV2", "companyId"]
+        "required": [
+          "locationId",
+          "isSaaSV2",
+          "companyId"
+        ]
       },
       "BulkEnableSaasActionPayloadDto": {
         "type": "object",
@@ -2305,14 +2442,19 @@
             "example": "r06mdj4OrrERzYDvsOdh"
           }
         },
-        "required": ["saasPlanId"]
+        "required": [
+          "saasPlanId"
+        ]
       },
       "BulkEnableSaasRequestDto": {
         "type": "object",
         "properties": {
           "locationIds": {
             "description": "Array of location IDs to enable SaaS for",
-            "example": ["locationId1", "locationId2"],
+            "example": [
+              "locationId1",
+              "locationId2"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2332,7 +2474,11 @@
             ]
           }
         },
-        "required": ["locationIds", "isSaaSV2", "actionPayload"]
+        "required": [
+          "locationIds",
+          "isSaaSV2",
+          "actionPayload"
+        ]
       },
       "BulkEnableSaasResponseDto": {
         "type": "object",
@@ -2353,7 +2499,10 @@
             "example": "https://example.com/bulk-enable-saas"
           }
         },
-        "required": ["success", "message"]
+        "required": [
+          "success",
+          "message"
+        ]
       },
       "SaasLocationDto": {
         "type": "object",
@@ -2414,7 +2563,12 @@
             }
           }
         },
-        "required": ["locationId", "companyId", "saasMode", "subscriptionId"]
+        "required": [
+          "locationId",
+          "companyId",
+          "saasMode",
+          "subscriptionId"
+        ]
       },
       "GetSaasLocationsResponseDto": {
         "type": "object",
@@ -2462,7 +2616,10 @@
             }
           }
         },
-        "required": ["locations", "pagination"]
+        "required": [
+          "locations",
+          "pagination"
+        ]
       },
       "SaasPlanResponseDto": {
         "type": "object",
@@ -2489,7 +2646,11 @@
           },
           "saasProducts": {
             "description": "Array of SaaS products included in the plan",
-            "example": ["2-way-text-messaging", "gmb-messaging", "web-chat"],
+            "example": [
+              "2-way-text-messaging",
+              "gmb-messaging",
+              "web-chat"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2497,7 +2658,13 @@
           },
           "addOns": {
             "description": "Array of add-ons included in the plan",
-            "example": ["YEXT_V2", "WHATSAPP_V1", "WORDPRESS_V1", "AI_EMPLOYEE", "Ad_Publishing_Connect_Your_BM"],
+            "example": [
+              "YEXT_V2",
+              "WHATSAPP_V1",
+              "WORDPRESS_V1",
+              "AI_EMPLOYEE",
+              "Ad_Publishing_Connect_Your_BM"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2540,7 +2707,10 @@
                 },
                 "billingInterval": {
                   "type": "string",
-                  "enum": ["month", "year"],
+                  "enum": [
+                    "month",
+                    "year"
+                  ],
                   "example": "month"
                 },
                 "active": {
@@ -2618,6 +2788,8 @@
   },
   "x-tagGroups": {
     "name": "Saas",
-    "tags": ["Saas"]
+    "tags": [
+      "Saas"
+    ]
   }
 }

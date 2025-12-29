@@ -59,7 +59,9 @@
             }
           }
         },
-        "tags": ["OAuth 2.0"]
+        "tags": [
+          "OAuth 2.0"
+        ]
       }
     },
     "/oauth/locationToken": {
@@ -75,7 +77,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -131,10 +135,14 @@
             }
           }
         },
-        "tags": ["OAuth 2.0"],
+        "tags": [
+          "OAuth 2.0"
+        ],
         "security": [
           {
-            "Agency-Access-Only": ["oauth.write"]
+            "Agency-Access-Only": [
+              "oauth.write"
+            ]
           }
         ]
       }
@@ -244,7 +252,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -290,10 +300,14 @@
             }
           }
         },
-        "tags": ["OAuth 2.0"],
+        "tags": [
+          "OAuth 2.0"
+        ],
         "security": [
           {
-            "Agency-Access": ["oauth.readonly"]
+            "Agency-Access": [
+              "oauth.readonly"
+            ]
           }
         ]
       }
@@ -364,7 +378,11 @@
           },
           "grant_type": {
             "type": "string",
-            "enum": ["authorization_code", "refresh_token", "client_credentials"]
+            "enum": [
+              "authorization_code",
+              "refresh_token",
+              "client_credentials"
+            ]
           },
           "code": {
             "type": "string"
@@ -376,7 +394,10 @@
             "type": "string",
             "description": "The type of token to be requested",
             "example": "Location",
-            "enum": ["Company", "Location"]
+            "enum": [
+              "Company",
+              "Location"
+            ]
           },
           "redirect_uri": {
             "type": "string",
@@ -384,7 +405,11 @@
             "example": "https://myapp.com/oauth/callback/gohighlevel"
           }
         },
-        "required": ["client_id", "client_secret", "grant_type"]
+        "required": [
+          "client_id",
+          "client_secret",
+          "grant_type"
+        ]
       },
       "GetAccessCodeSuccessfulResponseDto": {
         "type": "object",
@@ -425,7 +450,9 @@
           },
           "approvedLocations": {
             "description": "Approved locations to generate location access token",
-            "example": ["l1C08ntBrFjLS0elLIYU"],
+            "example": [
+              "l1C08ntBrFjLS0elLIYU"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -446,7 +473,9 @@
             "example": "Bearer"
           }
         },
-        "required": ["userId"]
+        "required": [
+          "userId"
+        ]
       },
       "GetLocationAccessCodeBodyDto": {
         "type": "object",
@@ -460,7 +489,10 @@
             "description": "The location ID for which you want to obtain accessToken"
           }
         },
-        "required": ["companyId", "locationId"]
+        "required": [
+          "companyId",
+          "locationId"
+        ]
       },
       "GetLocationAccessTokenSuccessfulResponseDto": {
         "type": "object",
@@ -500,7 +532,9 @@
             "example": "l1C08ntBrFjLS0elLIYU"
           }
         },
-        "required": ["userId"]
+        "required": [
+          "userId"
+        ]
       },
       "InstalledLocationSchema": {
         "type": "object",
@@ -526,7 +560,11 @@
             "description": "Check if the requested app is installed for following location"
           }
         },
-        "required": ["_id", "name", "address"]
+        "required": [
+          "_id",
+          "name",
+          "address"
+        ]
       },
       "GetInstalledLocationsSuccessfulResponseDto": {
         "type": "object",
@@ -553,6 +591,8 @@
   },
   "x-tagGroups": {
     "name": "OAuth 2.0",
-    "tags": ["OAuth 2.0"]
+    "tags": [
+      "OAuth 2.0"
+    ]
   }
 }

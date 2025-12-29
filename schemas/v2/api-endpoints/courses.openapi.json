@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -88,11 +90,18 @@
     "schemas": {
       "visibility": {
         "type": "string",
-        "enum": ["published", "draft"]
+        "enum": [
+          "published",
+          "draft"
+        ]
       },
       "contentType": {
         "type": "string",
-        "enum": ["video", "assignment", "quiz"]
+        "enum": [
+          "video",
+          "assignment",
+          "quiz"
+        ]
       },
       "type": {
         "type": "string",
@@ -165,7 +174,11 @@
             "type": "string"
           }
         },
-        "required": ["title", "type", "url"]
+        "required": [
+          "title",
+          "type",
+          "url"
+        ]
       },
       "PostInterface": {
         "type": "object",
@@ -195,7 +208,12 @@
             }
           }
         },
-        "required": ["title", "visibility", "contentType", "description"]
+        "required": [
+          "title",
+          "visibility",
+          "contentType",
+          "description"
+        ]
       },
       "SubCategoryInterface": {
         "type": "object",
@@ -216,7 +234,10 @@
             }
           }
         },
-        "required": ["title", "visibility"]
+        "required": [
+          "title",
+          "visibility"
+        ]
       },
       "CategoryInterface": {
         "type": "object",
@@ -243,7 +264,10 @@
             }
           }
         },
-        "required": ["title", "visibility"]
+        "required": [
+          "title",
+          "visibility"
+        ]
       },
       "InstructorDetails": {
         "type": "object",
@@ -255,7 +279,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "description"]
+        "required": [
+          "name",
+          "description"
+        ]
       },
       "ProductInterface": {
         "type": "object",
@@ -279,7 +306,11 @@
             "$ref": "#/components/schemas/InstructorDetails"
           }
         },
-        "required": ["title", "description", "categories"]
+        "required": [
+          "title",
+          "description",
+          "categories"
+        ]
       },
       "PublicExporterPayload": {
         "type": "object",
@@ -297,12 +328,17 @@
             }
           }
         },
-        "required": ["locationId", "products"]
+        "required": [
+          "locationId",
+          "products"
+        ]
       }
     }
   },
   "x-tagGroups": {
     "name": "Courses",
-    "tags": ["Courses"]
+    "tags": [
+      "Courses"
+    ]
   }
 }

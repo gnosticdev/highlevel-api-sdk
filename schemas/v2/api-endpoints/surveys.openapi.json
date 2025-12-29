@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -131,10 +133,14 @@
             }
           }
         },
-        "tags": ["Surveys"],
+        "tags": [
+          "Surveys"
+        ],
         "security": [
           {
-            "bearer": ["surveys.readonly"]
+            "bearer": [
+              "surveys.readonly"
+            ]
           }
         ]
       }
@@ -152,7 +158,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -226,10 +234,14 @@
             }
           }
         },
-        "tags": ["Surveys"],
+        "tags": [
+          "Surveys"
+        ],
         "security": [
           {
-            "bearer": ["surveys.readonly"]
+            "bearer": [
+              "surveys.readonly"
+            ]
           }
         ]
       }
@@ -330,7 +342,10 @@
         "type": "object",
         "properties": {
           "ids": {
-            "example": ["session1", "session2"],
+            "example": [
+              "session1",
+              "session2"
+            ],
             "nullable": true,
             "type": "array",
             "items": {
@@ -434,7 +449,13 @@
             "$ref": "#/components/schemas/EventDataSchema"
           },
           "fieldsOriSequance": {
-            "example": ["full_name", "first_name", "last_name", "phone", "email"],
+            "example": [
+              "full_name",
+              "first_name",
+              "last_name",
+              "phone",
+              "email"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -515,6 +536,8 @@
   },
   "x-tagGroups": {
     "name": "Surveys",
-    "tags": ["Surveys"]
+    "tags": [
+      "Surveys"
+    ]
   }
 }
