@@ -31,9 +31,15 @@ type SchemaList = {
 // It also ensures that the operationIds are unique.
 // ---------------------------------
 
-const TEMP_DIR = fs.mkdtempSync(path.join(tmpdir(), 'schemas-json-'))
-
 if (import.meta.main) {
+	await downloadJsonSchemas()
+
+	// format and lint to ensure any changes are to the content only
+	await Bun.$`bun run biome check schemas/v2 --write --unsafe`
+}
+
+export async function downloadJsonSchemas() {
+	const TEMP_DIR = fs.mkdtempSync(path.join(tmpdir(), 'schemas-json-'))
 	const API_URL = process.env.DOCS_API_URL
 	const USERNAME = process.env.DOCS_USERNAME
 	const PASSWORD = process.env.DOCS_PASSWORD
@@ -66,7 +72,6 @@ if (import.meta.main) {
 		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ schemas/v2`
 		console.log(kleur.green('All schemas downloaded and moved successfully'))
 
-		await Bun.$`bun biome check --write --unsafe schemas/v2`
 		console.log(kleur.green('All schemas linted successfully'))
 	} catch (error) {
 		console.error('Error downloading schemas', error)

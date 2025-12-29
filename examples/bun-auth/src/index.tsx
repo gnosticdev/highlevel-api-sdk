@@ -71,6 +71,21 @@ const accessTokenMiddleware: MiddlewareHandler = async (c, next) => {
   }
 }
 
+const _refreshTokenMiddleware: MiddlewareHandler = async (c, next) => {
+  if (c.req.path.startsWith('/auth')) {
+    await next()
+  } else {
+    console.log(kleur.yellow('------ refreshing token -----'))
+    console.log(kleur.blue(`${c.req.url}`))
+  }
+  const accessToken = await client.oauth.getAccessToken()
+  if (!accessToken) {
+    console.log(kleur.red('No access token found! -> redirecting to /auth'))
+    return c.redirect('/auth')
+  }
+  c.set('accessToken', accessToken)
+  await next()
+}
 // Global Middleware
 app.use('*', cors(), prettyJSON(), logger(), accessTokenMiddleware)
 app.onError((err, c) => {

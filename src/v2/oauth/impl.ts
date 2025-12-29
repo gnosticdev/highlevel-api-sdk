@@ -50,7 +50,7 @@ export class OauthClientImpl<T extends AccessType>
 	 *
 	 * Most likely do not need to use this unless special use case.
 	 */
-	_client: DefaultOauthClient
+	_oauthClient: DefaultOauthClient
 
 	// avoid conflict with the `expiresAt` getter
 	expiresAt: number | undefined
@@ -97,7 +97,7 @@ export class OauthClientImpl<T extends AccessType>
 					return tokenData
 				}
 
-		this._client = createClient<Oauth.paths>({
+		this._oauthClient = createClient<Oauth.paths>({
 			baseUrl: this.baseUrl,
 		})
 	}
@@ -252,7 +252,7 @@ export class OauthClientImpl<T extends AccessType>
 	 * @private
 	 */
 	async #fetchAccessToken(tokenParams: TokenParams) {
-		return this._client.POST('/oauth/token', {
+		return this._oauthClient.POST('/oauth/token', {
 			body: tokenParams,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -270,7 +270,7 @@ export class OauthClientImpl<T extends AccessType>
 	 * @param locationId - The locationId is the locationId of the location you want to get a token for
 	 */
 	async generateLocationToken({ companyId, locationId }: LocationTokenParams) {
-		const { data, error, response } = await this._client.POST(
+		const { data, error, response } = await this._oauthClient.POST(
 			'/oauth/locationToken',
 			{
 				body: {
@@ -307,7 +307,7 @@ export class OauthClientImpl<T extends AccessType>
 	 * @param companyId - the companyId of your agency
 	 */
 	async getInstalledLocations(query: SearchInstalledLocationParams['query']) {
-		const { data, error } = await this._client.GET(
+		const { data, error } = await this._oauthClient.GET(
 			'/oauth/installedLocations',
 			{
 				params: {
