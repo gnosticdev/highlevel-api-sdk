@@ -11,4 +11,5 @@ if (import.meta.main) {
 	await generateScopesTypes()
 	const typeFiles = await generateV2Types()
 	await generateClientInterface(typeFiles)
+	await Bun.$`bun run biome check src/v2/types --write --unsafe`
 }
