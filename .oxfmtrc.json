@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "useTabs": true,
+  "tabWidth": 4,
+  "printWidth": 80,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed",
+  "trailingComma": "all",
+  "semi": false,
+  "arrowParens": "always",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "ignorePatterns": ["**/schemas/v1/postman.json", ".vscode/**"],
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "options": {
+        "printWidth": 120,
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": ["**/*.json"],
+      "options": {
+        "printWidth": 80,
+        "useTabs": false,
+        "tabWidth": 2
+      }
+    }
+  ]
+}

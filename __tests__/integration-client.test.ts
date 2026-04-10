@@ -170,7 +170,8 @@ describe('Integrations Client', () => {
 			expect(calls.length).toBeGreaterThan(0)
 
 			const firstCall = calls[0]
-			if (!firstCall) throw new Error('Expected at least one call to mockGet')
+			if (!firstCall)
+				throw new Error('Expected at least one call to mockGet')
 			expect(firstCall[1]).toBeDefined()
 			// @ts-expect-error - complex type
 			const headers = firstCall[1]?.params?.header

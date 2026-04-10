@@ -1,12 +1,12 @@
 pre-commit:
-  parallel: true
-  commands:
-    lint:
-      glob: '**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css,astro}'
-      run: bun biome check {staged_files} --write --unsafe --no-errors-on-unmatched --files-ignore-unknown=true && git update-index --again
-      stage_fixed: true
+    parallel: true
+    commands:
+        lint:
+            glob: '**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css,astro}'
+            run: bun oxlint {staged_files} --fix && bun oxfmt {staged_files} && git update-index --again
+            stage_fixed: true
 
 pre-push:
-  commands:
-    build:
-      run: bun run typecheck {staged_files}
+    commands:
+        build:
+            run: bun run typecheck {staged_files}

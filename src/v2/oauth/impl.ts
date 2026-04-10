@@ -33,9 +33,9 @@ export type DefaultOauthClient = Client<Oauth.paths>
  * You can extend this class to implement your own methods.
  * @see https://highlevel.stoplight.io/docs/integrations/
  */
-export class OauthClientImpl<T extends AccessType>
-	implements OAuthClientInterface
-{
+export class OauthClientImpl<
+	T extends AccessType,
+> implements OAuthClientInterface {
 	private _accessToken: string | undefined
 	private _refreshToken: string | undefined
 	/**
@@ -269,7 +269,10 @@ export class OauthClientImpl<T extends AccessType>
 	 * @param companyId - your agency id
 	 * @param locationId - The locationId is the locationId of the location you want to get a token for
 	 */
-	async generateLocationToken({ companyId, locationId }: LocationTokenParams) {
+	async generateLocationToken({
+		companyId,
+		locationId,
+	}: LocationTokenParams) {
 		const { data, error, response } = await this._oauthClient.POST(
 			'/oauth/locationToken',
 			{

@@ -1,113 +1,124 @@
 {
-	"name": "@gnosticdev/highlevel-sdk",
-	"version": "4.0.1",
-	"author": {
-		"name": "gnosticdev",
-		"url": "https://github.com/gnosticdev"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/gnosticdev/highlevel-api-sdk"
-	},
-	"main": "./dist/index.js",
-	"devDependencies": {
-		"@biomejs/biome": "2.3.10",
-		"@types/bun": "1.3.12",
-		"@typescript/native-preview": "7.0.0-dev.20260410.1",
-		"json-schema-to-typescript": "15.0.4",
-		"kleur": "^4.1.5",
-		"lefthook": "^1.13.6",
-		"openapi-typescript": "7.10.1",
-		"release-it": "^19.1.0",
-		"tsup": "^8.5.1",
-		"typescript": "6.0.2"
-	},
-	"peerDependencies": {
-		"openapi-fetch": "^0.13.8"
-	},
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js",
-			"require": "./dist/index.js"
-		},
-		"./oauth": {
-			"types": "./dist/oauth.d.ts",
-			"import": "./dist/oauth.js",
-			"require": "./dist/oauth.js"
-		},
-		"./scopes": {
-			"types": "./dist/scopes.d.ts",
-			"import": "./dist/scopes.js",
-			"require": "./dist/scopes.js"
-		},
-		"./types/*": {
-			"types": "./dist/types/*.d.ts",
-			"import": "./dist/types/*.js",
-			"require": "./dist/types/*.js"
-		},
-		"./v1": {
-			"types": "./dist/v1.d.ts",
-			"import": "./dist/v1.js",
-			"require": "./dist/v1.js"
-		},
-		"./webhooks": {
-			"types": "./dist/webhooks.d.ts",
-			"import": "./dist/webhooks.js",
-			"require": "./dist/webhooks.js"
-		}
-	},
-	"description": "SDK for the HighLevel API",
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE"
-	],
-	"homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
-	"keywords": [
-		"highlevel",
-		"highlevel api",
-		"highlevel sdk",
-		"gohighlevel",
-		"api",
-		"sdk",
-		"typescript",
-		"javascript",
-		"crm",
-		"marketing"
-	],
-	"license": "MIT",
-	"packageManager": "bun@1.1.42",
-	"private": false,
-	"publishConfig": {
-		"access": "public"
-	},
-	"scripts": {
-		"build": "bun --bun tsup",
-		"clean-install": "rm -rf ./node_modules ./dist ./bun.lock ./examples/*/node_modules && bun i --no-cache",
-		"biome": "biome",
-		"download-json-schemas": "bun scripts/download-json-schemas.ts",
-		"generate-all": "bun scripts/generate-all.ts",
-		"generate-interface": "bun scripts/generate-interface.ts",
-		"generate-scopes-types": "bun scripts/generate-scopes-types.ts",
-		"generate-v1-types": "bun scripts/generate-v1-types.ts",
-		"generate-v2-types": "bun scripts/generate-v2-types.ts",
-		"generate-webhooks-types": "bun scripts/generate-webhooks-types.ts",
-		"generate-base-client": "bun scripts/generate-base-client.ts",
-		"lint": "biome check . --write --unsafe",
-		"release": "bun --env-file .env.local release-it",
-		"start-test": "bun test --hot",
-		"typecheck": "tsgo -p ./tsconfig.json"
-	},
-	"trustedDependencies": [
-		"@biomejs/biome",
-		"esbuild",
-		"lefthook"
-	],
-	"type": "module",
-	"types": "./dist/index.d.ts",
-	"workspaces": [
-		".",
-		"examples/*"
-	]
+  "name": "@gnosticdev/highlevel-sdk",
+  "version": "4.0.1",
+  "private": false,
+  "description": "SDK for the HighLevel API",
+  "keywords": [
+    "api",
+    "crm",
+    "gohighlevel",
+    "highlevel",
+    "highlevel api",
+    "highlevel sdk",
+    "javascript",
+    "marketing",
+    "sdk",
+    "typescript"
+  ],
+  "homepage": "https://github.com/gnosticdev/highlevel-api-sdk",
+  "license": "MIT",
+  "author": {
+    "name": "gnosticdev",
+    "url": "https://github.com/gnosticdev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gnosticdev/highlevel-api-sdk"
+  },
+  "workspaces": [
+    ".",
+    "examples/*"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./oauth": "./dist/oauth.js",
+    "./scopes": "./dist/scopes.js",
+    "./types/agencies": "./dist/types/agencies.js",
+    "./types/associations": "./dist/types/associations.js",
+    "./types/blogs": "./dist/types/blogs.js",
+    "./types/businesses": "./dist/types/businesses.js",
+    "./types/calendars": "./dist/types/calendars.js",
+    "./types/campaigns": "./dist/types/campaigns.js",
+    "./types/common-schemas": "./dist/types/common-schemas.js",
+    "./types/companies": "./dist/types/companies.js",
+    "./types/contacts": "./dist/types/contacts.js",
+    "./types/conversations": "./dist/types/conversations.js",
+    "./types/courses": "./dist/types/courses.js",
+    "./types/custom-fields": "./dist/types/custom-fields.js",
+    "./types/custom-menus": "./dist/types/custom-menus.js",
+    "./types/email-isv": "./dist/types/email-isv.js",
+    "./types/emails": "./dist/types/emails.js",
+    "./types/forms": "./dist/types/forms.js",
+    "./types/funnels": "./dist/types/funnels.js",
+    "./types/invoices": "./dist/types/invoices.js",
+    "./types/links": "./dist/types/links.js",
+    "./types/locations": "./dist/types/locations.js",
+    "./types/marketplace": "./dist/types/marketplace.js",
+    "./types/medias": "./dist/types/medias.js",
+    "./types/oauth": "./dist/types/oauth.js",
+    "./types/objects": "./dist/types/objects.js",
+    "./types/opportunities": "./dist/types/opportunities.js",
+    "./types/payments": "./dist/types/payments.js",
+    "./types/phone-system": "./dist/types/phone-system.js",
+    "./types/products": "./dist/types/products.js",
+    "./types/proposals": "./dist/types/proposals.js",
+    "./types/saas-api": "./dist/types/saas-api.js",
+    "./types/snapshots": "./dist/types/snapshots.js",
+    "./types/social-media-posting": "./dist/types/social-media-posting.js",
+    "./types/store": "./dist/types/store.js",
+    "./types/surveys": "./dist/types/surveys.js",
+    "./types/users": "./dist/types/users.js",
+    "./types/voice-ai": "./dist/types/voice-ai.js",
+    "./types/workflows": "./dist/types/workflows.js",
+    "./v1": "./dist/v1.js",
+    "./webhooks": "./dist/webhooks.js",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "bun --bun tsdown",
+    "clean-install": "rm -rf ./node_modules ./dist ./bun.lock ./examples/*/node_modules && bun i --no-cache",
+    "download-json-schemas": "bun scripts/download-json-schemas.ts",
+    "generate-all": "bun scripts/generate-all.ts",
+    "generate-interface": "bun scripts/generate-interface.ts",
+    "generate-scopes-types": "bun scripts/generate-scopes-types.ts",
+    "generate-v1-types": "bun scripts/generate-v1-types.ts",
+    "generate-v2-types": "bun scripts/generate-v2-types.ts",
+    "generate-webhooks-types": "bun scripts/generate-webhooks-types.ts",
+    "generate-base-client": "bun scripts/generate-base-client.ts",
+    "lint": "bun oxlint . --fix && bun oxfmt .",
+    "release": "bun --env-file .env.local release-it",
+    "start-test": "bun test --hot",
+    "typecheck": "tsgo -p ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.12",
+    "@typescript/native-preview": "7.0.0-dev.20260410.1",
+    "json-schema-to-typescript": "15.0.4",
+    "kleur": "^4.1.5",
+    "lefthook": "^1.13.6",
+    "openapi-typescript": "7.10.1",
+    "oxfmt": "0.44.0",
+    "oxlint": "1.59.0",
+    "release-it": "^19.1.0",
+    "tsdown": "^0.21.7",
+    "typescript": "6.0.2"
+  },
+  "peerDependencies": {
+    "openapi-fetch": "^0.13.8"
+  },
+  "packageManager": "bun@1.1.42",
+  "trustedDependencies": [
+    "esbuild",
+    "lefthook"
+  ]
 }

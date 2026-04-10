@@ -99,7 +99,11 @@ describe('SubAccount Client', () => {
 	}
 
 	beforeEach(() => {
-		subAccountClient = createHighLevelClient({}, 'oauth', subAccountOauthConfig)
+		subAccountClient = createHighLevelClient(
+			{},
+			'oauth',
+			subAccountOauthConfig,
+		)
 	})
 
 	it('should create a sub-account HighLevelClient instance with OAuthClient', () => {
@@ -250,7 +254,8 @@ describe('HighLevel API Coverage', () => {
 		// get the methods of the high level client
 		const hlClientMethods = Object.keys(highLevelClient)
 			.filter(
-				(key) => clientProperties.includes(key) && key !== '_clientConfig',
+				(key) =>
+					clientProperties.includes(key) && key !== '_clientConfig',
 			)
 			.sort() as (keyof typeof highLevelClient)[]
 

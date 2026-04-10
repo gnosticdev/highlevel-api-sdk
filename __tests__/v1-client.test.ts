@@ -120,7 +120,10 @@ describe('V1 Client', () => {
 						source: 'xyz form',
 						fingerprint: '91f4f0e0-e2dd-11ea-9b16-53b2d72e8a24',
 						timezone: 'Asia/Calcutta',
-						tags: ['laboris esse ut irure', 'eiusmod exercitation irure ut'],
+						tags: [
+							'laboris esse ut irure',
+							'eiusmod exercitation irure ut',
+						],
 						customField: [
 							{
 								id: 'MgobCB14YMVKuE4Ka8p1',

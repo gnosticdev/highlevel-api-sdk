@@ -105,7 +105,11 @@ export interface components {
 			 * @example permanent_link
 			 * @enum {string}
 			 */
-			share_type: 'link' | 'permanent_link' | 'agency_link' | 'location_link'
+			share_type:
+				| 'link'
+				| 'permanent_link'
+				| 'agency_link'
+				| 'location_link'
 			/**
 			 * @description id for snapshot to be shared
 			 * @example 1eM2UgkfaECOYyUdCo9Pa

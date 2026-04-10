@@ -82,11 +82,17 @@ function addComponentSchemas(openapiJson: OpenAPI3) {
 		if (typeof path === 'number') continue
 
 		for (const method of objectKeys(openapiJson.paths[path]!)) {
-			const operation = openapiJson.paths[path]![method] as OperationObject
+			const operation = openapiJson.paths[path]![
+				method
+			] as OperationObject
 
 			// Handle request body examples
-			if (operation.requestBody && !isReferenceObject(operation.requestBody)) {
-				const jsonContent = operation.requestBody.content?.['application/json']
+			if (
+				operation.requestBody &&
+				!isReferenceObject(operation.requestBody)
+			) {
+				const jsonContent =
+					operation.requestBody.content?.['application/json']
 				if (
 					jsonContent &&
 					isMediaTypeObject(jsonContent) &&
@@ -112,7 +118,8 @@ function addComponentSchemas(openapiJson: OpenAPI3) {
 						continue
 					}
 					if (response?.content?.['application/json']?.example) {
-						const example = response.content['application/json'].example
+						const example =
+							response.content['application/json'].example
 						if (typeof path === 'number') {
 							continue
 						}
@@ -132,7 +139,10 @@ function addComponentSchemas(openapiJson: OpenAPI3) {
 }
 
 async function createOpenapiJsonFile() {
-	const POSTMAN_JSON_FILE = path.join(process.cwd(), 'schemas/v1/postman.json')
+	const POSTMAN_JSON_FILE = path.join(
+		process.cwd(),
+		'schemas/v1/postman.json',
+	)
 	// convert postman json to openapi json using postman-to-openapi
 	// const openapiYaml = Bun.pathToFileURL('schemas/v1/openapi.yaml')
 	// create temp json options file
@@ -204,7 +214,9 @@ export async function createV1Types() {
 			// Add proper schema for responses
 			const jsonContent = response.content['application/json']
 			if (jsonContent.example && !jsonContent.schema) {
-				jsonContent.schema = addExampleAsResponseSchema(jsonContent.example)
+				jsonContent.schema = addExampleAsResponseSchema(
+					jsonContent.example,
+				)
 			}
 		}
 	}

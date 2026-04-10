@@ -9,7 +9,10 @@ describe('OauthClient', () => {
 		clientSecret: 'test-client-secret',
 		redirectUri: 'http://localhost:3000/callback',
 		accessType: 'Sub-Account',
-		scopes: ['conversations/message.readonly', 'conversations/message.write'],
+		scopes: [
+			'conversations/message.readonly',
+			'conversations/message.write',
+		],
 	}
 
 	const mockTokenData: TokenData = {
@@ -61,7 +64,9 @@ describe('OauthClient', () => {
 		// Verify token data is stored in memory
 		expect(client.tokenData).toBeDefined()
 		expect(client.tokenData?.access_token).toBe(mockTokenData.access_token)
-		expect(client.tokenData?.refresh_token).toBe(mockTokenData.refresh_token)
+		expect(client.tokenData?.refresh_token).toBe(
+			mockTokenData.refresh_token,
+		)
 		expect(client.tokenData?.expiresAt).toBeGreaterThan(now)
 
 		// Verify we can retrieve the access token
@@ -79,7 +84,9 @@ describe('OauthClient', () => {
 
 		client.updateTokenData(updatedData)
 		expect(client.tokenData?.access_token).toBe('new-access-token')
-		expect(client.tokenData?.refresh_token).toBe(mockTokenData.refresh_token)
+		expect(client.tokenData?.refresh_token).toBe(
+			mockTokenData.refresh_token,
+		)
 	})
 
 	it('should generate correct authorization URL', () => {
@@ -92,7 +99,9 @@ describe('OauthClient', () => {
 
 		expect(params.get('client_id')).toBe(mockConfig.clientId)
 		expect(params.get('redirect_uri')).toBe(mockConfig.redirectUri)
-		expect(params.get('scope')).toBe((mockConfig.scopes as string[]).join(' '))
+		expect(params.get('scope')).toBe(
+			(mockConfig.scopes as string[]).join(' '),
+		)
 		expect(params.get('response_type')).toBe('code')
 	})
 
@@ -151,7 +160,9 @@ describe('OauthClient', () => {
 			return Promise.reject(new Error('Refresh token failed'))
 		})
 
-		expect(client.refreshAccessToken()).rejects.toThrow('Refresh token failed')
+		expect(client.refreshAccessToken()).rejects.toThrow(
+			'Refresh token failed',
+		)
 	})
 
 	it('should persist token data across multiple storage calls using memory store', async () => {
@@ -170,7 +181,9 @@ describe('OauthClient', () => {
 
 		// Verify the token data was updated
 		expect(client.tokenData?.access_token).toBe('updated-access-token')
-		expect(client.tokenData?.refresh_token).toBe(mockTokenData.refresh_token)
+		expect(client.tokenData?.refresh_token).toBe(
+			mockTokenData.refresh_token,
+		)
 	})
 
 	it('should store and retrieve multiple tokens using memory store', async () => {

@@ -75,7 +75,10 @@ export interface components {
 			client_secret: string
 			code?: string
 			/** @enum {string} */
-			grant_type: 'authorization_code' | 'refresh_token' | 'client_credentials'
+			grant_type:
+				| 'authorization_code'
+				| 'refresh_token'
+				| 'client_credentials'
 			/**
 			 * @description The redirect URI for your application
 			 * @example https://myapp.com/oauth/callback/gohighlevel

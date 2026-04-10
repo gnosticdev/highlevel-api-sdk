@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { defineConfig } from 'tsup'
+import { defineConfig } from 'tsdown'
 
 const apiEndpointTypes: Record<`types/${string}`, string> = Array.from(
 	new Bun.Glob('*.ts').scanSync({ cwd: 'src/v2/types' }),
@@ -18,11 +18,12 @@ export default defineConfig((_override) => ({
 		webhooks: 'src/v2/webhooks/webhooks-client.ts',
 		...apiEndpointTypes,
 	},
+	exports: true,
 	format: ['esm'],
 	target: 'es2022',
 	splitting: false,
 	dts: true,
-	outExtension: (_c) => ({ js: '.js', dts: '.d.ts' }),
+	outExtensions: (_ctx) => ({ js: '.js', dts: '.d.ts' }),
 	keepNames: true,
 	clean: true,
 	tsconfig: './tsconfig.build.json',

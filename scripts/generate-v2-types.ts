@@ -1,10 +1,11 @@
+import kleur from 'kleur'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import kleur from 'kleur'
 import type { OpenAPI3 } from 'openapi-typescript'
 import openapiTS, { astToString } from 'openapi-typescript'
 import { generateClientInterface } from './generate-interface'
+import { formatAndLint } from './script-utils'
 
 const V2_TYPES_DIR = 'src/v2/types'
 const TEMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'v2-types'), {
@@ -19,6 +20,13 @@ if (import.meta.main) {
 	const typeFiles = await generateV2Types()
 	await generateClientInterface(typeFiles)
 	await fs.promises.rm(TEMP_DIR, { recursive: true, force: true })
+
+	await formatAndLint(V2_TYPES_DIR)
+	console.log(
+		kleur.green(
+			'Successfully generated and linted/formatted all v2 types.',
+		),
+	)
 }
 
 /**
@@ -44,7 +52,9 @@ export async function generateV2Types(): Promise<string[]> {
 			if (IGNORE_FILES.includes(basename)) {
 				continue
 			}
-			const newFileName = basename.replace('.json', '').replace('.openapi', '')
+			const newFileName = basename
+				.replace('.json', '')
+				.replace('.openapi', '')
 			console.log(
 				kleur.bgBlue(kleur.black(`Creating types for ${newFileName}`)),
 			)
@@ -59,10 +69,9 @@ export async function generateV2Types(): Promise<string[]> {
 
 		// use rsync with checksum so we only move the files that have changed
 		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ ${V2_TYPES_DIR}/`
-		console.log(kleur.green('Successfully moved all files to final directory'))
-
-		await Bun.$`bun run biome check ${V2_TYPES_DIR} --write --unsafe`
-		console.log(kleur.green('Successfully linted all types'))
+		console.log(
+			kleur.green('Successfully moved all files to final directory'),
+		)
 
 		return generatedTsFiles
 	} catch (error) {
@@ -152,7 +161,10 @@ async function resolveExternalRefs(
 					if (visited.has(refKey)) {
 						// Still replace with local reference if we've already inlined it
 						if (jsonPath.startsWith('/components/schemas/')) {
-							const schemaName = jsonPath.replace('/components/schemas/', '')
+							const schemaName = jsonPath.replace(
+								'/components/schemas/',
+								'',
+							)
 							;(obj as { $ref: string }).$ref =
 								`#/components/schemas/${schemaName}`
 						}
@@ -178,7 +190,10 @@ async function resolveExternalRefs(
 
 						// Extract the referenced schema using the JSON path
 						if (jsonPath.startsWith('/components/schemas/')) {
-							const schemaName = jsonPath.replace('/components/schemas/', '')
+							const schemaName = jsonPath.replace(
+								'/components/schemas/',
+								'',
+							)
 							const referencedSchema =
 								externalSchema.components?.schemas?.[schemaName]
 
@@ -254,7 +269,10 @@ async function createOpenApiTypesFile(schemaFileUrl: URL) {
 			alphabetize: true,
 			exportType: false,
 		}).catch((error) => {
-			console.error(kleur.red('Error creating openapi types file:'), error)
+			console.error(
+				kleur.red('Error creating openapi types file:'),
+				error,
+			)
 			process.exit(1)
 		})
 

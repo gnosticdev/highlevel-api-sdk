@@ -61,7 +61,9 @@ export interface components {
 		EventDataSchema: {
 			/** @example example-ad-source */
 			adSource?: string
-			contactSessionIds?: components['schemas']['ContactSessionIds'] | null
+			contactSessionIds?:
+				| components['schemas']['ContactSessionIds']
+				| null
 			/** @example example.com */
 			domain?: string
 			/** @example fb.1.123456789.987654321 */

@@ -1,22 +1,22 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"forceConsistentCasingInFileNames": true,
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
-		"module": "ESNext",
-		"moduleDetection": "force",
-		"moduleResolution": "Bundler",
-		"noEmit": true,
-		"noUncheckedIndexedAccess": true,
-		"resolveJsonModule": true,
-		"skipDefaultLibCheck": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"strictNullChecks": true,
-		"types": ["bun"],
-		"target": "ESNext",
-		"verbatimModuleSyntax": true
-	},
-	"include": ["**/*.ts"],
-	"exclude": ["node_modules", "dist", "examples"]
+  "compilerOptions": {
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "types": ["bun"],
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "examples"]
 }

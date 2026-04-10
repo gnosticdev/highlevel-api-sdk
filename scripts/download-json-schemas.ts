@@ -8,6 +8,7 @@ import type {
 	PathItemObject,
 	ReferenceObject,
 } from 'openapi-typescript'
+import { formatAndLint } from './script-utils'
 
 /**
  * The response from the Docs API for the /schemas/index.json file.
@@ -35,7 +36,7 @@ if (import.meta.main) {
 	await downloadJsonSchemas()
 
 	// format and lint to ensure any changes are to the content only
-	await Bun.$`bun run biome check schemas/v2 --write --unsafe`
+	await formatAndLint('schemas/v2')
 }
 
 export async function downloadJsonSchemas() {
@@ -53,24 +54,33 @@ export async function downloadJsonSchemas() {
 		// Fetch list of schemas
 		const listResult = await fetchSchemaList(API_URL)
 		console.log(
-			console.log(kleur.green(`Found ${listResult.totalSchemas} schemas`)),
+			console.log(
+				kleur.green(`Found ${listResult.totalSchemas} schemas`),
+			),
 		)
 
 		await Promise.all(
 			listResult.schemas.map(async (schema) => {
 				const downloadUrl = new URL(schema.downloadUrl, API_URL)
 				console.log(
-					kleur.yellow(`Downloading ${schema.name} from ${downloadUrl.href}`),
+					kleur.yellow(
+						`Downloading ${schema.name} from ${downloadUrl.href}`,
+					),
 				)
 
-				await downloadSchema(downloadUrl.href, path.join(TEMP_DIR, schema.name))
+				await downloadSchema(
+					downloadUrl.href,
+					path.join(TEMP_DIR, schema.name),
+				)
 			}),
 		)
 
 		// If we've reached this point, all downloads were successful
 		// move the files from the temp dir to the final dir using rsync with checksum so we only move the files that have changed
 		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ schemas/v2`
-		console.log(kleur.green('All schemas downloaded and moved successfully'))
+		console.log(
+			kleur.green('All schemas downloaded and moved successfully'),
+		)
 
 		console.log(kleur.green('All schemas linted successfully'))
 	} catch (error) {

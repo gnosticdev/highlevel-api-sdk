@@ -1,9 +1,11 @@
 import path from 'node:path'
 import kleur from 'kleur'
 import { toCamelCase, toPascalCase } from '../src/lib/utils'
+import { formatAndLint } from './script-utils'
 
 if (import.meta.main) {
 	await generateBaseClient()
+	await formatAndLint('src/v2/client/base.ts')
 }
 
 /**
@@ -68,7 +70,7 @@ export async function generateBaseClient() {
 
 import type { Client } from 'openapi-fetch'
 import createClient from 'openapi-fetch'
-import type { AccessType } from '../../lib/type-utils'
+import type { AccessType } from '../scopes/scope-types'
 import type { HighLevelClientInterface } from '..'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
 ${importStatements}
@@ -126,5 +128,4 @@ export class BaseHighLevelClient<
 			`Successfully generated BaseHighLevelClient in ${BASE_CLIENT_FILE.replace(process.cwd(), '')}`,
 		),
 	)
-	await Bun.$`bun biome check ${BASE_CLIENT_FILE} --write --unsafe`
 }

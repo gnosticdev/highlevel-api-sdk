@@ -57,7 +57,9 @@ describe('WebhooksClient', () => {
 
 		await expect(
 			client.handle('ContactCreate', mockContactPayload),
-		).rejects.toThrow('No handler registered for webhook event: ContactCreate')
+		).rejects.toThrow(
+			'No handler registered for webhook event: ContactCreate',
+		)
 	})
 
 	it('should throw error for invalid payload', async () => {

@@ -1,6 +1,7 @@
-import path from 'node:path'
 import kleur from 'kleur'
+import path from 'node:path'
 import { toCamelCase } from '../src/lib/utils'
+import { formatAndLint } from './script-utils'
 
 if (import.meta.main) {
 	const glob = new Bun.Glob('src/v2/types/*.ts')
@@ -8,6 +9,12 @@ if (import.meta.main) {
 		glob.scan({ absolute: true, onlyFiles: true }),
 	)
 	await generateClientInterface(typeFiles)
+	await formatAndLint('src/v2/client/interface.ts')
+	console.log(
+		kleur.green(
+			'Successfully generated and linted/formatted the client interface.',
+		),
+	)
 }
 
 export async function generateClientInterface(typeFiles: string[]) {
@@ -27,7 +34,8 @@ export async function generateClientInterface(typeFiles: string[]) {
 		.map((file) => {
 			const fileName = path.basename(file, '.ts')
 			const camelName = toCamelCase(fileName)
-			const pascalName = camelName.charAt(0).toUpperCase() + camelName.slice(1)
+			const pascalName =
+				camelName.charAt(0).toUpperCase() + camelName.slice(1)
 			return { pascalName, camelName, fileName }
 		})
 
@@ -72,10 +80,4 @@ export interface HighLevelClientInterface<
 `.trim()
 
 	await Bun.write(CLIENT_INTERFACE_FILE, interfaceContent)
-	await Bun.$`bun biome check ${CLIENT_INTERFACE_FILE} --write --unsafe`
-	console.log(
-		kleur.green(
-			`Successfully generated HighLevelClientInterface in ${CLIENT_INTERFACE_FILE.replace(process.cwd(), '')}`,
-		),
-	)
 }

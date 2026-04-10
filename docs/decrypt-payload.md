@@ -35,21 +35,21 @@ T1hhTiaCeIY/OwwwNUY2yvcCAwEAAQ==
  * @returns true if the signature is valid, false otherwise
  */
 export function verifyGhlWebhookSignature(opts: {
- rawBody: string | Buffer
- signatureB64: string
+	rawBody: string | Buffer
+	signatureB64: string
 }): boolean {
- const verifier = crypto.createVerify('SHA256')
- if (typeof opts.rawBody === 'string') {
-  verifier.update(opts.rawBody)
- } else {
-  verifier.update(new Uint8Array(opts.rawBody.buffer))
- }
- verifier.end()
- return verifier.verify(
-  GHL_WEBHOOK_PUBLIC_KEY_PEM,
-  opts.signatureB64,
-  'base64',
- )
+	const verifier = crypto.createVerify('SHA256')
+	if (typeof opts.rawBody === 'string') {
+		verifier.update(opts.rawBody)
+	} else {
+		verifier.update(new Uint8Array(opts.rawBody.buffer))
+	}
+	verifier.end()
+	return verifier.verify(
+		GHL_WEBHOOK_PUBLIC_KEY_PEM,
+		opts.signatureB64,
+		'base64',
+	)
 }
 
 /**
@@ -59,9 +59,9 @@ export function verifyGhlWebhookSignature(opts: {
  * @returns Parsed webhook object with a type property
  */
 export function parseWebhook(
- rawBody: string,
+	rawBody: string,
 ): { type: string } & Record<string, unknown> {
- return JSON.parse(rawBody)
+	return JSON.parse(rawBody)
 }
 
 /**
@@ -73,49 +73,58 @@ export function parseWebhook(
  * @throws Error if the webhook type doesn't match
  */
 export function asTypedWebhook<T extends keyof WebhookEventMap>(
- obj: unknown,
- type: T,
+	obj: unknown,
+	type: T,
 ): WebhookEventMap[T] {
- // TS-only cast; if you want runtime safety, wrap with zod/io-ts later.
- const w = obj as WebhookEventMap[T]
- if (!w || w.type !== type) throw new Error('Webhook type mismatch')
- return w
+	// TS-only cast; if you want runtime safety, wrap with zod/io-ts later.
+	const w = obj as WebhookEventMap[T]
+	if (!w || w.type !== type) throw new Error('Webhook type mismatch')
+	return w
 }
 ```
 
 ## Usage Example
 
 ```typescript
-import { verifyGhlWebhookSignature, parseWebhook, asTypedWebhook } from './webhook-utils'
+import {
+	verifyGhlWebhookSignature,
+	parseWebhook,
+	asTypedWebhook,
+} from './webhook-utils'
 import type { WebhookEventMap } from '@gnosticdev/highlevel-sdk/webhooks'
 
 // In your webhook handler (e.g., Express, Hono, etc.)
 app.post('/webhooks/highlevel', async (req, res) => {
-  const signature = req.headers['x-ghl-signature'] as string
-  const rawBody = req.body // Make sure to use raw body, not parsed JSON
+	const signature = req.headers['x-ghl-signature'] as string
+	const rawBody = req.body // Make sure to use raw body, not parsed JSON
 
-  // Verify the signature
-  if (!verifyGhlWebhookSignature({
-    rawBody: rawBody,
-    signatureB64: signature
-  })) {
-    return res.status(401).json({ error: 'Invalid signature' })
-  }
+	// Verify the signature
+	if (
+		!verifyGhlWebhookSignature({
+			rawBody: rawBody,
+			signatureB64: signature,
+		})
+	) {
+		return res.status(401).json({ error: 'Invalid signature' })
+	}
 
-  // Parse and type the webhook
-  const parsed = parseWebhook(rawBody)
-  const typedWebhook = asTypedWebhook(parsed, parsed.type as keyof WebhookEventMap)
+	// Parse and type the webhook
+	const parsed = parseWebhook(rawBody)
+	const typedWebhook = asTypedWebhook(
+		parsed,
+		parsed.type as keyof WebhookEventMap,
+	)
 
-  // Handle the webhook based on type
-  switch (typedWebhook.type) {
-    case 'ContactCreate':
-      // typedWebhook is now fully typed as ContactCreate
-      console.log('New contact:', typedWebhook.contact)
-      break
-    // ... other webhook types
-  }
+	// Handle the webhook based on type
+	switch (typedWebhook.type) {
+		case 'ContactCreate':
+			// typedWebhook is now fully typed as ContactCreate
+			console.log('New contact:', typedWebhook.contact)
+			break
+		// ... other webhook types
+	}
 
-  res.status(200).end()
+	res.status(200).end()
 })
 ```
 
@@ -123,7 +132,7 @@ app.post('/webhooks/highlevel', async (req, res) => {
 
 - **Raw Body Required**: Make sure your webhook handler uses the raw request body (not parsed JSON) for signature verification. Most frameworks have middleware to access raw bodies.
 - **Runtime Compatibility**: This code uses Node.js `crypto` module. For other runtimes:
-  - **Bun**: Should work with minimal modifications
-  - **Cloudflare Workers**: Use Web Crypto API instead
-  - **Deno**: Use Deno's crypto API
+    - **Bun**: Should work with minimal modifications
+    - **Cloudflare Workers**: Use Web Crypto API instead
+    - **Deno**: Use Deno's crypto API
 - **Type Safety**: The `asTypedWebhook` function provides TypeScript type safety but minimal runtime validation. Consider using a validation library like Zod for production use.

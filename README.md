@@ -43,78 +43,78 @@ The HighLevel client uses the v2 API by default (see below for v1 client). It ca
 
 - **Basic Client**: Without built-in authentication.
 
-  ```ts
-  const client = createHighLevelClient()
+    ```ts
+    const client = createHighLevelClient()
 
-  // or pass in the client config
-  const client = createHighLevelClient()
-  ```
+    // or pass in the client config
+    const client = createHighLevelClient()
+    ```
 
 - **Client with OAuth**: Requires OAuth configuration.
 
-  ```ts
-  // The first argument is always the client config, so pass an empty object if you don't need it
-  const client = createHighLevelClient({}, 'oauth', {
-      clientId: 'your-client-id',
-      clientSecret: 'your-client-secret',
-      redirectUri: 'http://localhost:3000/callback',
-      accessType: 'Sub-Account',
-      scopes: ['contacts.readonly']
-  })
-  ```
+    ```ts
+    // The first argument is always the client config, so pass an empty object if you don't need it
+    const client = createHighLevelClient({}, 'oauth', {
+    	clientId: 'your-client-id',
+    	clientSecret: 'your-client-secret',
+    	redirectUri: 'http://localhost:3000/callback',
+    	accessType: 'Sub-Account',
+    	scopes: ['contacts.readonly'],
+    })
+    ```
 
 - **Client with Private Integration**: Requires private integration configuration.
 
-  ```ts
-  const client = createHighLevelClient({}, 'integration', {
-      privateToken: process.env.HIGHLEVEL_PRIVATE_TOKEN!,
-      accessType: 'Agency',
-      scopes: ['saas/company.write', 'saas/company.read']
-  })
-  ```
+    ```ts
+    const client = createHighLevelClient({}, 'integration', {
+    	privateToken: process.env.HIGHLEVEL_PRIVATE_TOKEN!,
+    	accessType: 'Agency',
+    	scopes: ['saas/company.write', 'saas/company.read'],
+    })
+    ```
 
 ### Error Handling
 
 The SDK uses `openapi-fetch` under the hood, which returns both `data` and `error` properties for type-safe error handling.
 
 ```ts
-import { createHighLevelClient } from "@gnosticdev/highlevel-sdk"
+import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 
 // Create client with OAuth2 support
 const client = createHighLevelClient({}, 'oauth', {
-    clientId: process.env.HIGHLEVEL_CLIENT_ID!,
-    clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET!,
-    redirectUri: 'http://localhost:3000/oauth/callback',
-    accessType: 'Sub-Account',
-    scopes: ['contacts.readonly'],
-    // Optional: store tokens in your database
-    storageFunction: async (tokenData) => {
-        await db.saveTokenResponse({
-            access_token: tokenData.access_token,
-            expiresAt: tokenData.expiresAt,
-            refresh_token: tokenData.refresh_token,
-            locationId: tokenData.locationId,
-            userId: tokenData.userId,
-        })
-        return tokenData
-    }
+	clientId: process.env.HIGHLEVEL_CLIENT_ID!,
+	clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET!,
+	redirectUri: 'http://localhost:3000/oauth/callback',
+	accessType: 'Sub-Account',
+	scopes: ['contacts.readonly'],
+	// Optional: store tokens in your database
+	storageFunction: async (tokenData) => {
+		await db.saveTokenResponse({
+			access_token: tokenData.access_token,
+			expiresAt: tokenData.expiresAt,
+			refresh_token: tokenData.refresh_token,
+			locationId: tokenData.locationId,
+			userId: tokenData.userId,
+		})
+		return tokenData
+	},
 })
 
 // Example: Get contacts with error handling
 const { data, error } = await client.contacts.GET('/contacts/', {
-    params: {
-        query: {
-            locationId: '1234567890',
-            query: 'John Doe',
-            limit: 10,
-        },
-    },
+	params: {
+		query: {
+			locationId: '1234567890',
+			query: 'John Doe',
+			limit: 10,
+		},
+	},
 })
 
 if (error) {
-    console.error('Error fetching contacts:', error.message)
-    // Handle error appropriately
-    return
+	console.error('Error fetching contacts:', error.message)
+	// Handle error appropriately
+	return
 }
 
 // Type-safe response data
@@ -141,24 +141,24 @@ const accessToken = await client.oauth.getAccessToken()
 The v1 client requires an API key and automatically adds the authorization header to all requests.
 
 ```ts
-import { createHighLevelV1Client } from "@gnosticdev/highlevel-sdk"
+import { createHighLevelV1Client } from '@gnosticdev/highlevel-sdk'
 
 const v1Client = createHighLevelV1Client({
-    apiKey: process.env.HIGHLEVEL_API_KEY!
+	apiKey: process.env.HIGHLEVEL_API_KEY!,
 })
 
 const { data, error } = await v1Client.GET('/v1/contacts', {
-    params: {
-        query: {
-            locationId: '1234567890',
-        }
-        // No need to add Authorization header - it's added automatically
-    }
+	params: {
+		query: {
+			locationId: '1234567890',
+		},
+		// No need to add Authorization header - it's added automatically
+	},
 })
 
 if (error) {
-    console.error('Error fetching contacts:', error)
-    return
+	console.error('Error fetching contacts:', error)
+	return
 }
 
 console.log(data.contacts)
@@ -168,7 +168,7 @@ console.log(data.contacts)
 
 The SDK includes a typed client for handling HighLevel webhooks. This provides type safety and validation for incoming webhook payloads:
 
-```ts
+````ts
 import { createWebhooksClient } from "@gnosticdev/highlevel-sdk/webhooks"
 
 const webhooks = createWebhooksClient()
@@ -242,38 +242,38 @@ const customValues: LocationCustomValues = [{
     name: 'Lead Source',
     value: 'Google',
 }]
-```
+````
 
 ### Creating a Custom Client
 
 You can create a custom client using the `createClient` function from `openapi-fetch` with specific endpoint types from this package. This is useful when you only need a subset of the API endpoints or want to create a more focused client.
 
 ```ts
-import { createClient } from "@gnosticdev/highlevel-sdk"
-import type * as CustomMenus from "@gnosticdev/highlevel-sdk/types/custom-menus"
+import { createClient } from '@gnosticdev/highlevel-sdk'
+import type * as CustomMenus from '@gnosticdev/highlevel-sdk/types/custom-menus'
 
 // Create a client with only custom menu endpoints
 type CustomMenuPaths = CustomMenus.paths
 
 const client = createClient<CustomMenuPaths>({
-    headers: {
-        Authorization: 'Bearer 12345',
-        Version: '2021-07-28'
-    }
+	headers: {
+		Authorization: 'Bearer 12345',
+		Version: '2021-07-28',
+	},
 })
 
 // Use the client with full type safety
 const { data, error } = await client.GET('/custom-menus/', {
-    params: {
-        query: {
-            locationId: '1234567890'
-        }
-    }
+	params: {
+		query: {
+			locationId: '1234567890',
+		},
+	},
 })
 
 if (error) {
-    console.error('Error:', error)
-    return
+	console.error('Error:', error)
+	return
 }
 
 console.log(data)
@@ -282,18 +282,18 @@ console.log(data)
 You can also combine multiple endpoint types to create a client with a custom set of endpoints:
 
 ```ts
-import { createClient } from "@gnosticdev/highlevel-sdk"
-import type * as CustomMenus from "@gnosticdev/highlevel-sdk/types/custom-menus"
-import type * as Contacts from "@gnosticdev/highlevel-sdk/types/contacts"
+import { createClient } from '@gnosticdev/highlevel-sdk'
+import type * as CustomMenus from '@gnosticdev/highlevel-sdk/types/custom-menus'
+import type * as Contacts from '@gnosticdev/highlevel-sdk/types/contacts'
 
 // Combine multiple endpoint types
 type CustomMenuPaths = CustomMenus.paths & Contacts.paths
 
 const client = createClient<CustomMenuPaths>({
-    headers: {
-        Authorization: 'Bearer 12345',
-        Version: '2021-07-28'
-    }
+	headers: {
+		Authorization: 'Bearer 12345',
+		Version: '2021-07-28',
+	},
 })
 ```
 
@@ -305,22 +305,22 @@ The SDK provides several module exports for better organization and tree-shaking
 
 ```ts
 // Main client
-import { createHighLevelClient } from "@gnosticdev/highlevel-sdk"
+import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 
 // OAuth specific functionality
-import { OAuthClient } from "@gnosticdev/highlevel-sdk/oauth"
+import { OAuthClient } from '@gnosticdev/highlevel-sdk/oauth'
 
 // Scopes builder
-import { ScopesBuilder } from "@gnosticdev/highlevel-sdk/scopes"
+import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
 
 // V1 API client
-import { createHighLevelV1Client } from "@gnosticdev/highlevel-sdk/v1"
+import { createHighLevelV1Client } from '@gnosticdev/highlevel-sdk/v1'
 
 // Webhooks client
-import { createWebhooksClient } from "@gnosticdev/highlevel-sdk/webhooks"
+import { createWebhooksClient } from '@gnosticdev/highlevel-sdk/webhooks'
 
 // Types
-import type * as Locations from "@gnosticdev/highlevel-sdk/types/locations"
+import type * as Locations from '@gnosticdev/highlevel-sdk/types/locations'
 ```
 
 ## Scopes
@@ -333,8 +333,8 @@ import type * as Locations from "@gnosticdev/highlevel-sdk/types/locations"
      * Press cmd + J on keyboard
      */
     $$('.n-tag__content')
-        .map((scope) => scope.textContent.trim())
-        .toSorted()
+    	.map((scope) => scope.textContent.trim())
+    	.toSorted()
     ```
 
 2. Copy the resulting array
@@ -342,14 +342,14 @@ import type * as Locations from "@gnosticdev/highlevel-sdk/types/locations"
 
     ```ts
     const client = createHighLevelClient({}, 'oauth', {
-        clientId: 'your-client-id',
-        clientSecret: 'your-client-secret',
-        redirectUri: 'http://localhost:3000/callback',
-        scopes: [
-            'locations.write',
-            'contacts.readonly',
-            // ... your scopes here
-        ]
+    	clientId: 'your-client-id',
+    	clientSecret: 'your-client-secret',
+    	redirectUri: 'http://localhost:3000/callback',
+    	scopes: [
+    		'locations.write',
+    		'contacts.readonly',
+    		// ... your scopes here
+    	],
     })
     ```
 

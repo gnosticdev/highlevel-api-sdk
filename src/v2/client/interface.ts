@@ -51,17 +51,23 @@ export interface HighLevelClientInterface<
 	 */
 	_clientConfig: HighLevelClientConfig
 	oauth: TOAuth
-	opportunities: Client<OpportunitiesPaths> | ClientWithAuth<OpportunitiesPaths>
-	calendars: Client<CalendarsPaths> | ClientWithAuth<CalendarsPaths>
-	conversations: Client<ConversationsPaths> | ClientWithAuth<ConversationsPaths>
-	saasApi: Client<SaasApiPaths> | ClientWithAuth<SaasApiPaths>
-	forms: Client<FormsPaths> | ClientWithAuth<FormsPaths>
-	links: Client<LinksPaths> | ClientWithAuth<LinksPaths>
-	campaigns: Client<CampaignsPaths> | ClientWithAuth<CampaignsPaths>
-	blogs: Client<BlogsPaths> | ClientWithAuth<BlogsPaths>
-	snapshots: Client<SnapshotsPaths> | ClientWithAuth<SnapshotsPaths>
+	objects: Client<ObjectsPaths> | ClientWithAuth<ObjectsPaths>
+	invoices: Client<InvoicesPaths> | ClientWithAuth<InvoicesPaths>
+	socialMediaPosting:
+		| Client<SocialMediaPostingPaths>
+		| ClientWithAuth<SocialMediaPostingPaths>
+	customMenus: Client<CustomMenusPaths> | ClientWithAuth<CustomMenusPaths>
 	customFields: Client<CustomFieldsPaths> | ClientWithAuth<CustomFieldsPaths>
-	companies: Client<CompaniesPaths> | ClientWithAuth<CompaniesPaths>
+	opportunities:
+		| Client<OpportunitiesPaths>
+		| ClientWithAuth<OpportunitiesPaths>
+	campaigns: Client<CampaignsPaths> | ClientWithAuth<CampaignsPaths>
+	businesses: Client<BusinessesPaths> | ClientWithAuth<BusinessesPaths>
+	marketplace: Client<MarketplacePaths> | ClientWithAuth<MarketplacePaths>
+	conversations:
+		| Client<ConversationsPaths>
+		| ClientWithAuth<ConversationsPaths>
+	voiceAi: Client<VoiceAiPaths> | ClientWithAuth<VoiceAiPaths>
 	products: Client<ProductsPaths> | ClientWithAuth<ProductsPaths>
 	payments: Client<PaymentsPaths> | ClientWithAuth<PaymentsPaths>
 	workflows: Client<WorkflowsPaths> | ClientWithAuth<WorkflowsPaths>

@@ -44,8 +44,9 @@ type OptionalAuthParamsClient<T> =
 			}>
 		: never
 
-export interface ClientWithAuth<TPaths extends {}>
-	extends OptionalAuthParamsClient<Client<TPaths>> {}
+export interface ClientWithAuth<
+	TPaths extends {},
+> extends OptionalAuthParamsClient<Client<TPaths>> {}
 
 /**
  * Authentication headers for the HighLevel v2 API.

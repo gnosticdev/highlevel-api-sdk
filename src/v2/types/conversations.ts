@@ -1246,7 +1246,14 @@ export interface components {
 			 * @example Email
 			 * @enum {string}
 			 */
-			type: 'SMS' | 'Email' | 'WhatsApp' | 'IG' | 'FB' | 'Custom' | 'Live_Chat'
+			type:
+				| 'SMS'
+				| 'Email'
+				| 'WhatsApp'
+				| 'IG'
+				| 'FB'
+				| 'Custom'
+				| 'Live_Chat'
 		}
 		SendMessageResponseDto: {
 			/**

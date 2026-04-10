@@ -15,10 +15,7 @@ export type { HighLevelClientConfig } from './client/default'
 // Export client classes and types for direct import
 export { HighLevelClient } from './client/default'
 export type { HighLevelClientInterface } from './client/interface'
-export type {
-	AUTH_HEADERS,
-	ClientWithAuth,
-} from './client/types'
+export type { AUTH_HEADERS, ClientWithAuth } from './client/types'
 
 export type { PrivateIntegrationConfig } from './client/with-integration'
 export { HighLevelIntegrationClient } from './client/with-integration'
