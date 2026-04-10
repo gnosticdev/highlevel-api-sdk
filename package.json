@@ -1,6 +1,6 @@
 {
   "name": "@gnosticdev/highlevel-sdk",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "private": false,
   "description": "SDK for the HighLevel API",
   "keywords": [
