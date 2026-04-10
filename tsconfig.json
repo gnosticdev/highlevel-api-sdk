@@ -13,9 +13,10 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"strictNullChecks": true,
+		"types": ["bun"],
 		"target": "ESNext",
 		"verbatimModuleSyntax": true
 	},
-	"include": ["**/*"],
+	"include": ["**/*.ts"],
 	"exclude": ["node_modules", "dist", "examples"]
 }

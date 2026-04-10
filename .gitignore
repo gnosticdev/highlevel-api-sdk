@@ -1,5 +1,5 @@
 # Dependency directories
-**/*node_modules
+node_modules
 
 # SQLite databases
 **/*.sqlite
@@ -18,7 +18,7 @@ dist
 .vscode/tasks.json
 
 .env
-
+.env.local
 # Bun
 bun.lockb
 
@@ -27,3 +27,4 @@ bun.lockb
 .env.sh
 .devcontainer
 temp-schema-types
+.claude

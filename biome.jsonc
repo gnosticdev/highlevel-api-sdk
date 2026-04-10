@@ -8,7 +8,7 @@
 	},
 
 	"files": {
-		"includes": ["**", "!**/schemas/v1/postman.json"]
+		"includes": ["**", "!**/schemas/v1/postman.json", "!.vscode/**"]
 	},
 	"formatter": {
 		"enabled": true,

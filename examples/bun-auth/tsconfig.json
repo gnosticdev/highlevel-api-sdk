@@ -12,6 +12,7 @@
 		"noEmit": true,
 		"noUncheckedIndexedAccess": true,
 		"rootDir": "./",
+		"types": ["bun"],
 		"paths": {
 			"*": ["./*"],
 			"@gnosticdev/highlevel-sdk": ["../../src/v2/index.ts"],

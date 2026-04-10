@@ -1,5 +1,4 @@
 {
-	"typescript.tsdk": "node_modules/typescript/lib",
 	"json.schemas": [
 		{
 			"fileMatch": ["schemas/**/*openapi.json"],
@@ -7,10 +6,7 @@
 		}
 	],
 	"bun.test.enable": true,
-	"typescript.native-preview.tsdk": "node_modules/.bin/tsgo",
-	"typescript.experimental.useTsgo": true,
 	"typescript.preferences.importModuleSpecifier": "relative",
-
 	"json.schemaDownload.enable": true,
-	"sqltools.useNodeRuntime": true
+	"typescript.tsdk": "node_modules/typescript/lib"
 }
