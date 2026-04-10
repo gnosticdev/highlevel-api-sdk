@@ -30,8 +30,6 @@ export async function generateScopesTypes() {
 		combinedOutput,
 	)
 
-	await Bun.$`bun run oxlint ${schemaPathsV2.scopesTypesDir} --write && bun run oxfmt ${schemaPathsV2.scopesTypesDir} --write`
-
 	console.log('generated scopes')
 }
 

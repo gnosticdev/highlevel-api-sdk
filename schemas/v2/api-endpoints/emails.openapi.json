@@ -153,9 +153,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -223,14 +221,10 @@
         },
         "security": [
           {
-            "Location-Access": [
-              "emails/schedule.readonly"
-            ]
+            "Location-Access": ["emails/schedule.readonly"]
           }
         ],
-        "tags": [
-          "Campaigns"
-        ]
+        "tags": ["Campaigns"]
       }
     },
     "/emails/builder": {
@@ -246,9 +240,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -309,14 +301,10 @@
         },
         "security": [
           {
-            "Location-Access": [
-              "emails/builder.write"
-            ]
+            "Location-Access": ["emails/builder.write"]
           }
         ],
-        "tags": [
-          "Templates"
-        ]
+        "tags": ["Templates"]
       },
       "get": {
         "operationId": "fetch-template",
@@ -383,10 +371,7 @@
             "in": "query",
             "schema": {
               "default": "2",
-              "enum": [
-                "1",
-                "2"
-              ],
+              "enum": ["1", "2"],
               "type": "string"
             }
           },
@@ -433,9 +418,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -486,14 +469,10 @@
         },
         "security": [
           {
-            "Location-Access": [
-              "emails/builder.readonly"
-            ]
+            "Location-Access": ["emails/builder.readonly"]
           }
         ],
-        "tags": [
-          "Templates"
-        ]
+        "tags": ["Templates"]
       }
     },
     "/emails/builder/{locationId}/{templateId}": {
@@ -527,9 +506,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -583,9 +560,7 @@
             "Location-Access": []
           }
         ],
-        "tags": [
-          "Templates"
-        ]
+        "tags": ["Templates"]
       }
     },
     "/emails/builder/data": {
@@ -601,9 +576,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -664,14 +637,10 @@
         },
         "security": [
           {
-            "Location-Access": [
-              "emails/builder.write"
-            ]
+            "Location-Access": ["emails/builder.write"]
           }
         ],
-        "tags": [
-          "Templates"
-        ]
+        "tags": ["Templates"]
       }
     }
   },
@@ -884,11 +853,7 @@
             "description": "Trace Id"
           }
         },
-        "required": [
-          "schedules",
-          "total",
-          "traceId"
-        ]
+        "required": ["schedules", "total", "traceId"]
       },
       "InvalidLocationDTO": {
         "type": "object",
@@ -933,13 +898,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "html",
-              "folder",
-              "import",
-              "builder",
-              "blank"
-            ]
+            "enum": ["html", "folder", "import", "builder", "blank"]
           },
           "updatedBy": {
             "type": "string",
@@ -947,10 +906,7 @@
           },
           "builderVersion": {
             "type": "string",
-            "enum": [
-              "1",
-              "2"
-            ],
+            "enum": ["1", "2"],
             "default": "2"
           },
           "name": {
@@ -967,11 +923,7 @@
           },
           "importProvider": {
             "type": "string",
-            "enum": [
-              "mailchimp",
-              "active_campaign",
-              "kajabi"
-            ]
+            "enum": ["mailchimp", "active_campaign", "kajabi"]
           },
           "importURL": {
             "type": "string",
@@ -986,11 +938,7 @@
             "example": false
           }
         },
-        "required": [
-          "locationId",
-          "type",
-          "importProvider"
-        ]
+        "required": ["locationId", "type", "importProvider"]
       },
       "CreateBuilderSuccesfulResponseDto": {
         "type": "object",
@@ -1006,10 +954,7 @@
             "description": "trace id"
           }
         },
-        "required": [
-          "redirect",
-          "traceId"
-        ]
+        "required": ["redirect", "traceId"]
       },
       "FetchBuilderSuccesfulResponseDto": {
         "type": "object",
@@ -1096,11 +1041,7 @@
             "$ref": "#/components/schemas/TemplateSettings"
           }
         },
-        "required": [
-          "elements",
-          "attrs",
-          "templateSettings"
-        ]
+        "required": ["elements", "attrs", "templateSettings"]
       },
       "SaveBuilderDataDto": {
         "type": "object",
@@ -1131,10 +1072,7 @@
           },
           "editorType": {
             "type": "string",
-            "enum": [
-              "html",
-              "builder"
-            ]
+            "enum": ["html", "builder"]
           },
           "previewText": {
             "type": "string",
@@ -1183,11 +1121,6 @@
   },
   "x-tagGroups": {
     "name": "Email",
-    "tags": [
-      "Emails",
-      "Campaigns",
-      "Templates",
-      "Triggers"
-    ]
+    "tags": ["Emails", "Campaigns", "Templates", "Triggers"]
   }
 }

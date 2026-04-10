@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -72,14 +70,10 @@
             }
           }
         },
-        "tags": [
-          "Integrations"
-        ],
+        "tags": ["Integrations"],
         "security": [
           {
-            "Location-Access": [
-              "payments/integration.write"
-            ]
+            "Location-Access": ["payments/integration.write"]
           }
         ]
       },
@@ -95,9 +89,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -117,9 +109,7 @@
             "description": "Alt Type",
             "example": "location",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -188,14 +178,10 @@
             }
           }
         },
-        "tags": [
-          "Integrations"
-        ],
+        "tags": ["Integrations"],
         "security": [
           {
-            "Location-Access": [
-              "payments/integration.readonly"
-            ]
+            "Location-Access": ["payments/integration.readonly"]
           }
         ]
       }
@@ -213,9 +199,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -383,14 +367,10 @@
             }
           }
         },
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "security": [
           {
-            "Location-Access": [
-              "payments/orders.readonly"
-            ]
+            "Location-Access": ["payments/orders.readonly"]
           }
         ]
       }
@@ -408,9 +388,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -486,14 +464,10 @@
             }
           }
         },
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "security": [
           {
-            "Location-Access": [
-              "payments/orders.readonly"
-            ]
+            "Location-Access": ["payments/orders.readonly"]
           }
         ]
       }
@@ -511,9 +485,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -579,14 +551,10 @@
             }
           }
         },
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "security": [
           {
-            "Location-Access": [
-              "payments/orders.collectPayment"
-            ]
+            "Location-Access": ["payments/orders.collectPayment"]
           }
         ]
       }
@@ -604,9 +572,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -655,9 +621,7 @@
             }
           }
         },
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "security": [
           {
             "Location-Access": []
@@ -678,9 +642,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -746,14 +708,10 @@
             }
           }
         },
-        "tags": [
-          "Order fulfillments"
-        ],
+        "tags": ["Order fulfillments"],
         "security": [
           {
-            "Location-Access": [
-              "payments/orders.write"
-            ]
+            "Location-Access": ["payments/orders.write"]
           }
         ]
       },
@@ -769,9 +727,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -789,9 +745,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -848,14 +802,10 @@
             }
           }
         },
-        "tags": [
-          "Order fulfillments"
-        ],
+        "tags": ["Order fulfillments"],
         "security": [
           {
-            "Location-Access": [
-              "payments/orders.readonly"
-            ]
+            "Location-Access": ["payments/orders.readonly"]
           }
         ]
       }
@@ -873,9 +823,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -893,9 +841,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -945,9 +891,7 @@
             }
           }
         },
-        "tags": [
-          "Order Notes"
-        ],
+        "tags": ["Order Notes"],
         "security": [
           {
             "Location-Access": []
@@ -968,9 +912,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1158,14 +1100,10 @@
             }
           }
         },
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "security": [
           {
-            "Location-Access": [
-              "payments/transactions.readonly"
-            ]
+            "Location-Access": ["payments/transactions.readonly"]
           }
         ]
       }
@@ -1183,9 +1121,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1271,14 +1207,10 @@
             }
           }
         },
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "security": [
           {
-            "Location-Access": [
-              "payments/transactions.readonly"
-            ]
+            "Location-Access": ["payments/transactions.readonly"]
           }
         ]
       }
@@ -1296,9 +1228,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1318,9 +1248,7 @@
             "example": "location",
             "description": "AltType is the type of identifier.",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -1469,14 +1397,10 @@
             }
           }
         },
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "security": [
           {
-            "Location-Access": [
-              "payments/subscriptions.readonly"
-            ]
+            "Location-Access": ["payments/subscriptions.readonly"]
           }
         ]
       }
@@ -1494,9 +1418,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1526,9 +1448,7 @@
             "example": "location",
             "description": "AltType is the type of identifier.",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1575,14 +1495,10 @@
             }
           }
         },
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "security": [
           {
-            "Location-Access": [
-              "payments/subscriptions.readonly"
-            ]
+            "Location-Access": ["payments/subscriptions.readonly"]
           }
         ]
       }
@@ -1600,9 +1516,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1622,9 +1536,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -1657,11 +1569,7 @@
             "description": "Filter coupons by status",
             "schema": {
               "example": "active",
-              "enum": [
-                "scheduled",
-                "active",
-                "expired"
-              ],
+              "enum": ["scheduled", "active", "expired"],
               "type": "string"
             }
           },
@@ -1698,14 +1606,10 @@
             }
           }
         },
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "security": [
           {
-            "Location-Access": [
-              "payments/coupons.readonly"
-            ]
+            "Location-Access": ["payments/coupons.readonly"]
           }
         ]
       }
@@ -1723,9 +1627,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -1761,14 +1663,10 @@
             }
           }
         },
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "security": [
           {
-            "Location-Access": [
-              "payments/coupons.write"
-            ]
+            "Location-Access": ["payments/coupons.write"]
           }
         ]
       },
@@ -1784,9 +1682,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -1822,14 +1718,10 @@
             }
           }
         },
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "security": [
           {
-            "Location-Access": [
-              "payments/coupons.write"
-            ]
+            "Location-Access": ["payments/coupons.write"]
           }
         ]
       },
@@ -1845,9 +1737,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -1883,14 +1773,10 @@
             }
           }
         },
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "security": [
           {
-            "Location-Access": [
-              "payments/coupons.write"
-            ]
+            "Location-Access": ["payments/coupons.write"]
           }
         ]
       },
@@ -1906,9 +1792,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1928,9 +1812,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -1977,14 +1859,10 @@
             }
           }
         },
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "security": [
           {
-            "Location-Access": [
-              "payments/coupons.readonly"
-            ]
+            "Location-Access": ["payments/coupons.readonly"]
           }
         ]
       }
@@ -2002,9 +1880,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2070,14 +1946,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Provider"
-        ],
+        "tags": ["Custom Provider"],
         "security": [
           {
-            "Location-Access": [
-              "payments/custom-provider.write"
-            ]
+            "Location-Access": ["payments/custom-provider.write"]
           }
         ]
       },
@@ -2093,9 +1965,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2151,14 +2021,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Provider"
-        ],
+        "tags": ["Custom Provider"],
         "security": [
           {
-            "Location-Access": [
-              "payments/custom-provider.write"
-            ]
+            "Location-Access": ["payments/custom-provider.write"]
           }
         ]
       }
@@ -2176,9 +2042,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2234,14 +2098,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Provider"
-        ],
+        "tags": ["Custom Provider"],
         "security": [
           {
-            "Location-Access": [
-              "payments/custom-provider.readonly"
-            ]
+            "Location-Access": ["payments/custom-provider.readonly"]
           }
         ]
       },
@@ -2257,9 +2117,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2325,14 +2183,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Provider"
-        ],
+        "tags": ["Custom Provider"],
         "security": [
           {
-            "Location-Access": [
-              "payments/custom-provider.write"
-            ]
+            "Location-Access": ["payments/custom-provider.write"]
           }
         ]
       }
@@ -2350,9 +2204,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2418,14 +2270,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Provider"
-        ],
+        "tags": ["Custom Provider"],
         "security": [
           {
-            "Location-Access": [
-              "payments/custom-provider.write"
-            ]
+            "Location-Access": ["payments/custom-provider.write"]
           }
         ]
       }
@@ -2443,9 +2291,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -2501,14 +2347,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Provider"
-        ],
+        "tags": ["Custom Provider"],
         "security": [
           {
-            "Location-Access": [
-              "payments/custom-provider.write"
-            ]
+            "Location-Access": ["payments/custom-provider.write"]
           }
         ]
       }
@@ -2622,9 +2464,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "uniqueName": {
@@ -2640,10 +2480,7 @@
           "provider": {
             "type": "string",
             "description": "The type of payment provider associated with the integration provider.",
-            "enum": [
-              "authorize-net",
-              "nmi"
-            ],
+            "enum": ["authorize-net", "nmi"],
             "example": {
               "AUTHORIZE_NET": "authorize-net",
               "NMI": "nmi"
@@ -2820,9 +2657,7 @@
             ]
           }
         },
-        "required": [
-          "providers"
-        ]
+        "required": ["providers"]
       },
       "OrderResponseSchema": {
         "type": "object",
@@ -2975,10 +2810,7 @@
             "description": "total orders count"
           }
         },
-        "required": [
-          "data",
-          "totalCount"
-        ]
+        "required": ["data", "totalCount"]
       },
       "AmountSummary": {
         "type": "object",
@@ -2994,9 +2826,7 @@
             "description": "Discount value on order."
           }
         },
-        "required": [
-          "subtotal"
-        ]
+        "required": ["subtotal"]
       },
       "OrderSource": {
         "type": "object",
@@ -3055,10 +2885,7 @@
             "type": "object"
           }
         },
-        "required": [
-          "type",
-          "id"
-        ]
+        "required": ["type", "id"]
       },
       "GetOrderResponseSchema": {
         "type": "object",
@@ -3206,11 +3033,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "visa",
-              "mastercard",
-              "other"
-            ],
+            "enum": ["visa", "mastercard", "other"],
             "example": "mastercard"
           },
           "last4": {
@@ -3219,10 +3042,7 @@
             "example": "1234"
           }
         },
-        "required": [
-          "type",
-          "last4"
-        ]
+        "required": ["type", "last4"]
       },
       "ChequeDto": {
         "type": "object",
@@ -3233,9 +3053,7 @@
             "example": "129-129-129-912"
           }
         },
-        "required": [
-          "number"
-        ]
+        "required": ["number"]
       },
       "PostRecordOrderPaymentBody": {
         "type": "object",
@@ -3248,21 +3066,13 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "mode": {
             "type": "string",
             "description": "manual payment method",
-            "enum": [
-              "cash",
-              "card",
-              "cheque",
-              "bank_transfer",
-              "other"
-            ],
+            "enum": ["cash", "card", "cheque", "bank_transfer", "other"],
             "example": "card"
           },
           "card": {
@@ -3300,11 +3110,7 @@
             "description": "Indicates if the order is intended to be a partial payment."
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "mode"
-        ]
+        "required": ["altId", "altType", "mode"]
       },
       "PostRecordOrderPaymentResponse": {
         "type": "object",
@@ -3315,9 +3121,7 @@
             "example": true
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "FulfillmentTracking": {
         "type": "object",
@@ -3353,10 +3157,7 @@
             "example": 1
           }
         },
-        "required": [
-          "priceId",
-          "qty"
-        ]
+        "required": ["priceId", "qty"]
       },
       "CreateFulfillmentDto": {
         "type": "object",
@@ -3368,9 +3169,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "trackings": {
             "description": "Fulfillment tracking information",
@@ -3392,13 +3191,7 @@
             "example": true
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "trackings",
-          "items",
-          "notifyCustomer"
-        ]
+        "required": ["altId", "altType", "trackings", "items", "notifyCustomer"]
       },
       "ProductVariantOptionDto": {
         "type": "object",
@@ -3414,10 +3207,7 @@
             "example": "XL"
           }
         },
-        "required": [
-          "id",
-          "name"
-        ]
+        "required": ["id", "name"]
       },
       "ProductVariantDto": {
         "type": "object",
@@ -3440,11 +3230,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "name",
-          "options"
-        ]
+        "required": ["id", "name", "options"]
       },
       "ProductMediaDto": {
         "type": "object",
@@ -3468,10 +3254,7 @@
             "type": "string",
             "description": "The type of the media file (e.g., image, video will be supporting soon).",
             "example": "image",
-            "enum": [
-              "image",
-              "video"
-            ]
+            "enum": ["image", "video"]
           },
           "isFeatured": {
             "type": "boolean",
@@ -3487,11 +3270,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "url",
-          "type"
-        ]
+        "required": ["id", "url", "type"]
       },
       "ProductLabelDto": {
         "type": "object",
@@ -3512,9 +3291,7 @@
             "example": "2024-06-30T05:43:39.000Z"
           }
         },
-        "required": [
-          "title"
-        ]
+        "required": ["title"]
       },
       "ProductSEODto": {
         "type": "object",
@@ -3607,10 +3384,7 @@
           },
           "collectionIds": {
             "description": "An array of category Ids for the product",
-            "example": [
-              "65d71377c326ea78e1c47df5",
-              "65d71377c326ea78e1c47d34"
-            ],
+            "example": ["65d71377c326ea78e1c47df5", "65d71377c326ea78e1c47d34"],
             "type": "array",
             "items": {
               "type": "string"
@@ -3624,9 +3398,7 @@
           },
           "taxes": {
             "description": "An array of ids of Taxes attached to the Product. If the expand query includes tax, the taxes will be of type `ProductTaxDto`. Please refer to the `ProductTaxDto` for additional details.",
-            "example": [
-              "654492a4e6bef380114de15a"
-            ],
+            "example": ["654492a4e6bef380114de15a"],
             "type": "array",
             "items": {
               "type": "string"
@@ -3693,11 +3465,7 @@
             "example": "655b33aa2209e60b6adb87a7"
           }
         },
-        "required": [
-          "label",
-          "value",
-          "_id"
-        ]
+        "required": ["label", "value", "_id"]
       },
       "RecurringDto": {
         "type": "object",
@@ -3706,12 +3474,7 @@
             "type": "string",
             "description": "The interval at which the recurring event occurs.",
             "example": "day",
-            "enum": [
-              "day",
-              "month",
-              "week",
-              "year"
-            ]
+            "enum": ["day", "month", "week", "year"]
           },
           "intervalCount": {
             "type": "number",
@@ -3719,10 +3482,7 @@
             "example": 1
           }
         },
-        "required": [
-          "interval",
-          "intervalCount"
-        ]
+        "required": ["interval", "intervalCount"]
       },
       "DefaultPriceResponseDto": {
         "type": "object",
@@ -3741,10 +3501,7 @@
           },
           "variantOptionIds": {
             "description": "An array of variant option IDs associated with the price.",
-            "example": [
-              "h4z7u0im2q8",
-              "h3nst2ltsnn"
-            ],
+            "example": ["h4z7u0im2q8", "h3nst2ltsnn"],
             "type": "array",
             "items": {
               "type": "string"
@@ -3774,10 +3531,7 @@
             "type": "string",
             "description": "The type of the price (e.g., one_time).",
             "example": "one_time",
-            "enum": [
-              "one_time",
-              "recurring"
-            ]
+            "enum": ["one_time", "recurring"]
           },
           "currency": {
             "type": "string",
@@ -3830,13 +3584,7 @@
             "example": true
           }
         },
-        "required": [
-          "_id",
-          "name",
-          "type",
-          "currency",
-          "amount"
-        ]
+        "required": ["_id", "name", "type", "currency", "amount"]
       },
       "FulfilledItem": {
         "type": "object",
@@ -3873,13 +3621,7 @@
             "example": 1
           }
         },
-        "required": [
-          "_id",
-          "name",
-          "product",
-          "price",
-          "qty"
-        ]
+        "required": ["_id", "name", "product", "price", "qty"]
       },
       "FulfillmentSchema": {
         "type": "object",
@@ -3891,9 +3633,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "trackings": {
             "description": "Fulfillment tracking information",
@@ -3952,10 +3692,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "ListFulfillmentResponseDto": {
         "type": "object",
@@ -3973,10 +3710,7 @@
             }
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "TxnResponseSchema": {
         "type": "object",
@@ -4156,10 +3890,7 @@
             "description": "total transactions count"
           }
         },
-        "required": [
-          "data",
-          "totalCount"
-        ]
+        "required": ["data", "totalCount"]
       },
       "GetTxnResponseSchema": {
         "type": "object",
@@ -4316,13 +4047,7 @@
             "description": "ID of the contact that was merged from."
           }
         },
-        "required": [
-          "_id",
-          "altType",
-          "altId",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["_id", "altType", "altId", "createdAt", "updatedAt"]
       },
       "SubscriptionResponseSchema": {
         "type": "object",
@@ -4341,9 +4066,7 @@
             "type": "string",
             "example": "location",
             "description": "AltType is the type of identifier.",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "contactId": {
             "type": "string",
@@ -4473,10 +4196,7 @@
             "description": "total subscriptions count"
           }
         },
-        "required": [
-          "data",
-          "totalCount"
-        ]
+        "required": ["data", "totalCount"]
       },
       "CustomRRuleOptionsDto": {
         "type": "object",
@@ -4525,15 +4245,7 @@
           },
           "dayOfWeek": {
             "type": "string",
-            "enum": [
-              "mo",
-              "tu",
-              "we",
-              "th",
-              "fr",
-              "sa",
-              "su"
-            ],
+            "enum": ["mo", "tu", "we", "th", "fr", "sa", "su"],
             "example": "mo"
           },
           "numOfWeek": {
@@ -4570,11 +4282,7 @@
             "example": 5
           }
         },
-        "required": [
-          "intervalType",
-          "interval",
-          "startDate"
-        ]
+        "required": ["intervalType", "interval", "startDate"]
       },
       "ScheduleOptionsDto": {
         "type": "object",
@@ -4737,13 +4445,7 @@
             "example": "302d2cf4-1ba0-4bf5-bc3b-f8fa76fda58a"
           }
         },
-        "required": [
-          "_id",
-          "altType",
-          "altId",
-          "createdAt",
-          "updatedAt"
-        ]
+        "required": ["_id", "altType", "altId", "createdAt", "updatedAt"]
       },
       "ApplyToFuturePaymentsConfigDto": {
         "type": "object",
@@ -4752,10 +4454,7 @@
             "type": "string",
             "description": "Type of future payments configuration",
             "example": "fixed",
-            "enum": [
-              "forever",
-              "fixed"
-            ]
+            "enum": ["forever", "fixed"]
           },
           "duration": {
             "type": "number",
@@ -4768,9 +4467,7 @@
             "example": "months"
           }
         },
-        "required": [
-          "type"
-        ]
+        "required": ["type"]
       },
       "CouponDto": {
         "type": "object",
@@ -4814,10 +4511,7 @@
             "type": "string",
             "description": "Type of discount (percentage or amount)",
             "example": "percentage",
-            "enum": [
-              "percentage",
-              "amount"
-            ]
+            "enum": ["percentage", "amount"]
           },
           "discountValue": {
             "type": "number",
@@ -4828,11 +4522,7 @@
             "type": "string",
             "description": "Current status of the coupon",
             "example": "scheduled",
-            "enum": [
-              "scheduled",
-              "active",
-              "expired"
-            ]
+            "enum": ["scheduled", "active", "expired"]
           },
           "startDate": {
             "type": "string",
@@ -4912,11 +4602,7 @@
             "example": "c667b18d-8f5e-44cf-a914"
           }
         },
-        "required": [
-          "data",
-          "totalCount",
-          "traceId"
-        ]
+        "required": ["data", "totalCount", "traceId"]
       },
       "ApplyToFuturePaymentsConfig": {
         "type": "object",
@@ -4925,10 +4611,7 @@
             "type": "string",
             "description": "Type of the config",
             "example": "forever | fixed",
-            "enum": [
-              "forever",
-              "fixed"
-            ]
+            "enum": ["forever", "fixed"]
           },
           "duration": {
             "type": "number",
@@ -4939,16 +4622,10 @@
             "type": "string",
             "description": "Type of the duration",
             "example": "months",
-            "enum": [
-              "months"
-            ]
+            "enum": ["months"]
           }
         },
-        "required": [
-          "type",
-          "duration",
-          "durationType"
-        ]
+        "required": ["type", "duration", "durationType"]
       },
       "CreateCouponParams": {
         "type": "object",
@@ -4961,9 +4638,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "name": {
@@ -4979,10 +4654,7 @@
           "discountType": {
             "type": "string",
             "description": "Discount Type",
-            "enum": [
-              "percentage",
-              "amount"
-            ],
+            "enum": ["percentage", "amount"],
             "example": "amount"
           },
           "discountValue": {
@@ -5007,9 +4679,7 @@
           },
           "productIds": {
             "description": "Product Ids",
-            "example": [
-              "6241712be68f7a98102ba272"
-            ],
+            "example": ["6241712be68f7a98102ba272"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5101,10 +4771,7 @@
             "type": "string",
             "description": "Type of discount (percentage or amount)",
             "example": "percentage",
-            "enum": [
-              "percentage",
-              "amount"
-            ]
+            "enum": ["percentage", "amount"]
           },
           "discountValue": {
             "type": "number",
@@ -5115,11 +4782,7 @@
             "type": "string",
             "description": "Current status of the coupon",
             "example": "scheduled",
-            "enum": [
-              "scheduled",
-              "active",
-              "expired"
-            ]
+            "enum": ["scheduled", "active", "expired"]
           },
           "startDate": {
             "type": "string",
@@ -5195,9 +4858,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "name": {
@@ -5213,10 +4874,7 @@
           "discountType": {
             "type": "string",
             "description": "Discount Type",
-            "enum": [
-              "percentage",
-              "amount"
-            ],
+            "enum": ["percentage", "amount"],
             "example": "amount"
           },
           "discountValue": {
@@ -5241,9 +4899,7 @@
           },
           "productIds": {
             "description": "Product Ids",
-            "example": [
-              "6241712be68f7a98102ba272"
-            ],
+            "example": ["6241712be68f7a98102ba272"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5310,9 +4966,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "id": {
@@ -5321,11 +4975,7 @@
             "example": "6241712be68f7a98102ba272"
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "id"
-        ]
+        "required": ["altId", "altType", "id"]
       },
       "DeleteCouponResponseDto": {
         "type": "object",
@@ -5341,10 +4991,7 @@
             "example": "c667b18d-8f5e-44cf-a914"
           }
         },
-        "required": [
-          "success",
-          "traceId"
-        ]
+        "required": ["success", "traceId"]
       },
       "CreateCustomProvidersDto": {
         "type": "object",
@@ -5483,9 +5130,7 @@
             "example": "true"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "GetCustomProvidersResponseSchema": {
         "type": "object",
@@ -5586,10 +5231,7 @@
             "example": "rzp_test_zPRoVMLOa0XXXX"
           }
         },
-        "required": [
-          "apiKey",
-          "publishableKey"
-        ]
+        "required": ["apiKey", "publishableKey"]
       },
       "ConnectCustomProvidersConfigDto": {
         "type": "object",
@@ -5611,10 +5253,7 @@
             ]
           }
         },
-        "required": [
-          "live",
-          "test"
-        ]
+        "required": ["live", "test"]
       },
       "ConnectCustomProvidersResponseSchema": {
         "type": "object",
@@ -5710,9 +5349,7 @@
             "example": "true"
           }
         },
-        "required": [
-          "liveMode"
-        ]
+        "required": ["liveMode"]
       },
       "DisconnectCustomProvidersResponseSchema": {
         "type": "object",
@@ -5723,9 +5360,7 @@
             "example": "true"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "UpdateCustomProviderCapabilitiesDto": {
         "type": "object",
@@ -5746,9 +5381,7 @@
             "example": "Yjnwuduw83e8x30sm0"
           }
         },
-        "required": [
-          "supportsSubscriptionSchedules"
-        ]
+        "required": ["supportsSubscriptionSchedules"]
       },
       "UpdateCustomProviderCapabilitiesResponseSchema": {
         "type": "object",
@@ -5759,9 +5392,7 @@
             "example": "true"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       }
     }
   },

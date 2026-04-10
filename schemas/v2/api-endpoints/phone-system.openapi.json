@@ -24,9 +24,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -124,14 +122,10 @@
         },
         "security": [
           {
-            "Location-Access": [
-              "numberpools.read"
-            ]
+            "Location-Access": ["numberpools.read"]
           }
         ],
-        "tags": [
-          "Number Pools"
-        ]
+        "tags": ["Number Pools"]
       }
     },
     "/phone-system/numbers/location/{locationId}": {
@@ -203,9 +197,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -246,11 +238,7 @@
                       "type": "string",
                       "description": "Current status of the account",
                       "example": "active",
-                      "enum": [
-                        "active",
-                        "suspended",
-                        "closed"
-                      ]
+                      "enum": ["active", "suspended", "closed"]
                     }
                   },
                   "required": [
@@ -280,10 +268,7 @@
                           "type": "local",
                           "isDefaultNumber": true,
                           "linkedUser": "user_123456789",
-                          "linkedRingAllUsers": [
-                            "user_123",
-                            "user_456"
-                          ],
+                          "linkedRingAllUsers": ["user_123", "user_456"],
                           "inboundCallService": {
                             "type": "voice_ai",
                             "value": "68e381b296a83800a27cd1"
@@ -310,10 +295,7 @@
                           "type": "toll-free",
                           "isDefaultNumber": false,
                           "linkedUser": null,
-                          "linkedRingAllUsers": [
-                            "user_789",
-                            "user_101"
-                          ],
+                          "linkedRingAllUsers": ["user_789", "user_101"],
                           "inboundCallService": null,
                           "forwardingNumber": null,
                           "isGroupConversationEnabled": false,
@@ -419,14 +401,10 @@
         },
         "security": [
           {
-            "Location-Access": [
-              "phonenumbers.read"
-            ]
+            "Location-Access": ["phonenumbers.read"]
           }
         ],
-        "tags": [
-          "Phone Numbers"
-        ]
+        "tags": ["Phone Numbers"]
       }
     }
   },
@@ -541,12 +519,7 @@
             "type": "string",
             "description": "Type of phone number (local, toll-free, mobile, etc.)",
             "example": "local",
-            "enum": [
-              "local",
-              "toll-free",
-              "mobile",
-              "national"
-            ]
+            "enum": ["local", "toll-free", "mobile", "national"]
           },
           "isDefaultNumber": {
             "type": "boolean",
@@ -565,10 +538,7 @@
             "items": {
               "type": "string"
             },
-            "example": [
-              "user_123",
-              "user_456"
-            ]
+            "example": ["user_123", "user_456"]
           },
           "inboundCallService": {
             "type": "object",
@@ -579,11 +549,7 @@
                 "type": "string",
                 "description": "Type of inbound call service",
                 "example": "voice_ai",
-                "enum": [
-                  "voice_ai",
-                  "ivr",
-                  "forward"
-                ]
+                "enum": ["voice_ai", "ivr", "forward"]
               },
               "value": {
                 "type": "string",
@@ -631,11 +597,7 @@
             "type": "string",
             "description": "Source or origin of the phone number",
             "example": "twilio",
-            "enum": [
-              "twilio",
-              "hosted",
-              "ported"
-            ]
+            "enum": ["twilio", "hosted", "ported"]
           }
         },
         "required": [
@@ -734,9 +696,6 @@
   },
   "x-tagGroups": {
     "name": "Phone System",
-    "tags": [
-      "Phone Numbers",
-      "Number Pools"
-    ]
+    "tags": ["Phone Numbers", "Number Pools"]
   }
 }

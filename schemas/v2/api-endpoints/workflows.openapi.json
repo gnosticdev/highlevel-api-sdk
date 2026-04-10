@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -71,14 +69,10 @@
             }
           }
         },
-        "tags": [
-          "Workflows"
-        ],
+        "tags": ["Workflows"],
         "security": [
           {
-            "bearer": [
-              "workflows.readonly"
-            ]
+            "bearer": ["workflows.readonly"]
           }
         ]
       }
@@ -185,8 +179,6 @@
   },
   "x-tagGroups": {
     "name": "Workflows",
-    "tags": [
-      "Workflows"
-    ]
+    "tags": ["Workflows"]
   }
 }

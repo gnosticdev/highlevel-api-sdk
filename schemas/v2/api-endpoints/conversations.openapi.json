@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -86,10 +84,7 @@
             "description": "Sort paramater - asc or desc",
             "schema": {
               "example": "asc",
-              "enum": [
-                "asc",
-                "desc"
-              ],
+              "enum": ["asc", "desc"],
               "type": "string"
             }
           },
@@ -186,10 +181,7 @@
             "description": "Action of the last outbound message in the conversation as string.",
             "schema": {
               "example": "manual",
-              "enum": [
-                "automated",
-                "manual"
-              ],
+              "enum": ["automated", "manual"],
               "type": "string"
             }
           },
@@ -200,10 +192,7 @@
             "description": "Direction of the last message in the conversation as string.",
             "schema": {
               "example": "inbound",
-              "enum": [
-                "inbound",
-                "outbound"
-              ],
+              "enum": ["inbound", "outbound"],
               "type": "string"
             }
           },
@@ -214,13 +203,7 @@
             "description": "The status of the conversation to be filtered - all, read, unread, starred ",
             "schema": {
               "example": "all",
-              "enum": [
-                "all",
-                "read",
-                "unread",
-                "starred",
-                "recents"
-              ],
+              "enum": ["all", "read", "unread", "starred", "recents"],
               "type": "string"
             }
           },
@@ -312,14 +295,10 @@
             }
           }
         },
-        "tags": [
-          "Search"
-        ],
+        "tags": ["Search"],
         "security": [
           {
-            "bearer": [
-              "conversations.readonly"
-            ]
+            "bearer": ["conversations.readonly"]
           }
         ]
       }
@@ -337,9 +316,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -385,14 +362,10 @@
             }
           }
         },
-        "tags": [
-          "Conversations"
-        ],
+        "tags": ["Conversations"],
         "security": [
           {
-            "bearer": [
-              "conversations.readonly"
-            ]
+            "bearer": ["conversations.readonly"]
           }
         ]
       },
@@ -408,9 +381,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -466,14 +437,10 @@
             }
           }
         },
-        "tags": [
-          "Conversations"
-        ],
+        "tags": ["Conversations"],
         "security": [
           {
-            "bearer": [
-              "conversations.write"
-            ]
+            "bearer": ["conversations.write"]
           }
         ]
       },
@@ -489,9 +456,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -537,14 +502,10 @@
             }
           }
         },
-        "tags": [
-          "Conversations"
-        ],
+        "tags": ["Conversations"],
         "security": [
           {
-            "bearer": [
-              "conversations.write"
-            ]
+            "bearer": ["conversations.write"]
           }
         ]
       }
@@ -567,9 +528,7 @@
             }
           }
         },
-        "tags": [
-          "Email"
-        ]
+        "tags": ["Email"]
       }
     },
     "/conversations/messages/email/{emailMessageId}/schedule": {
@@ -601,9 +560,7 @@
             }
           }
         },
-        "tags": [
-          "Email"
-        ]
+        "tags": ["Email"]
       }
     },
     "/conversations/messages/{id}": {
@@ -619,9 +576,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -657,14 +612,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.readonly"
-            ]
+            "bearer": ["conversations/message.readonly"]
           }
         ]
       }
@@ -682,9 +633,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -777,14 +726,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.readonly"
-            ]
+            "bearer": ["conversations/message.readonly"]
           }
         ]
       }
@@ -802,9 +747,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -850,14 +793,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.write"
-            ]
+            "bearer": ["conversations/message.write"]
           }
         ]
       }
@@ -875,9 +814,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -923,14 +860,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.write"
-            ]
+            "bearer": ["conversations/message.write"]
           }
         ]
       }
@@ -948,9 +881,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -996,14 +927,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.write"
-            ]
+            "bearer": ["conversations/message.write"]
           }
         ]
       }
@@ -1021,9 +948,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1069,14 +994,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.write"
-            ]
+            "bearer": ["conversations/message.write"]
           }
         ]
       }
@@ -1094,9 +1015,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -1162,14 +1081,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.write"
-            ]
+            "bearer": ["conversations/message.write"]
           }
         ]
       }
@@ -1187,9 +1102,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1255,14 +1168,10 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
-            "bearer": [
-              "conversations/message.write"
-            ]
+            "bearer": ["conversations/message.write"]
           }
         ]
       }
@@ -1280,9 +1189,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1339,9 +1246,7 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
             "bearer": []
@@ -1365,9 +1270,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1423,9 +1326,7 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
             "bearer": []
@@ -1449,9 +1350,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1508,9 +1407,7 @@
             }
           }
         },
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "security": [
           {
             "bearer": []
@@ -1534,9 +1431,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -1592,14 +1487,10 @@
             }
           }
         },
-        "tags": [
-          "Providers"
-        ],
+        "tags": ["Providers"],
         "security": [
           {
-            "Location-Access": [
-              "conversations/livechat.write"
-            ]
+            "Location-Access": ["conversations/livechat.write"]
           }
         ]
       }
@@ -1617,9 +1508,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -1665,14 +1554,10 @@
             }
           }
         },
-        "tags": [
-          "Conversations"
-        ],
+        "tags": ["Conversations"],
         "security": [
           {
-            "bearer": [
-              "conversations.write"
-            ]
+            "bearer": ["conversations.write"]
           }
         ]
       }
@@ -1809,10 +1694,7 @@
         "properties": {
           "startAfterDate": {
             "description": "Search to begin after the specified date - should contain the sort value of the last document",
-            "example": [
-              1600854,
-              1600851
-            ],
+            "example": [1600854, 1600851],
             "type": "array",
             "items": {
               "type": "string"
@@ -1954,10 +1836,7 @@
             "example": 100
           }
         },
-        "required": [
-          "conversations",
-          "total"
-        ]
+        "required": ["conversations", "total"]
       },
       "CreateConversationDto": {
         "type": "object",
@@ -1973,10 +1852,7 @@
             "example": "tDtDnQdgm2LXpyiqYvZ6"
           }
         },
-        "required": [
-          "locationId",
-          "contactId"
-        ]
+        "required": ["locationId", "contactId"]
       },
       "ConversationCreateResponseDto": {
         "type": "object",
@@ -2049,10 +1925,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "conversation"
-        ]
+        "required": ["success", "conversation"]
       },
       "GetConversationByIdResponse": {
         "type": "object",
@@ -2134,9 +2007,7 @@
             "type": "object"
           }
         },
-        "required": [
-          "locationId"
-        ]
+        "required": ["locationId"]
       },
       "ConversationDto": {
         "type": "object",
@@ -2240,11 +2111,7 @@
             "example": false
           }
         },
-        "required": [
-          "locationId",
-          "contactId",
-          "deleted"
-        ]
+        "required": ["locationId", "contactId", "deleted"]
       },
       "GetConversationSuccessfulResponse": {
         "type": "object",
@@ -2263,10 +2130,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "conversation"
-        ]
+        "required": ["success", "conversation"]
       },
       "DeleteConversationSuccessfulResponse": {
         "type": "object",
@@ -2277,9 +2141,7 @@
             "example": true
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "GetEmailMessageResponseDto": {
         "type": "object",
@@ -2324,10 +2186,7 @@
           },
           "direction": {
             "type": "string",
-            "enum": [
-              "inbound",
-              "outbound"
-            ]
+            "enum": ["inbound", "outbound"]
           },
           "status": {
             "type": "string",
@@ -2356,12 +2215,7 @@
           },
           "provider": {
             "type": "string",
-            "examples": [
-              "Leadconnector Gmail",
-              "mailgun",
-              "smtp",
-              "custom"
-            ]
+            "examples": ["Leadconnector Gmail", "mailgun", "smtp", "custom"]
           },
           "from": {
             "type": "string",
@@ -2394,13 +2248,7 @@
           },
           "source": {
             "type": "string",
-            "enum": [
-              "workflow",
-              "bulk_actions",
-              "campaign",
-              "api",
-              "app"
-            ],
+            "enum": ["workflow", "bulk_actions", "campaign", "api", "app"],
             "description": "Email source"
           },
           "conversationProviderId": {
@@ -2437,10 +2285,7 @@
             "example": "Failed cancel the scheduled message"
           }
         },
-        "required": [
-          "status",
-          "message"
-        ]
+        "required": ["status", "message"]
       },
       "MessageMeta": {
         "type": "object",
@@ -2560,10 +2405,7 @@
           },
           "direction": {
             "type": "string",
-            "enum": [
-              "inbound",
-              "outbound"
-            ]
+            "enum": ["inbound", "outbound"]
           },
           "status": {
             "type": "string",
@@ -2597,13 +2439,7 @@
           },
           "source": {
             "type": "string",
-            "enum": [
-              "workflow",
-              "bulk_actions",
-              "campaign",
-              "api",
-              "app"
-            ],
+            "enum": ["workflow", "bulk_actions", "campaign", "api", "app"],
             "description": "Message source"
           },
           "userId": {
@@ -2658,16 +2494,10 @@
                 }
               }
             },
-            "required": [
-              "lastMessageId",
-              "nextPage",
-              "messages"
-            ]
+            "required": ["lastMessageId", "nextPage", "messages"]
           }
         },
-        "required": [
-          "messages"
-        ]
+        "required": ["messages"]
       },
       "SendMessageBodyDto": {
         "type": "object",
@@ -2714,10 +2544,7 @@
           },
           "emailCc": {
             "description": "Array of CC email addresses",
-            "example": [
-              "cc1@company.com",
-              "cc2@company.com"
-            ],
+            "example": ["cc1@company.com", "cc2@company.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -2725,10 +2552,7 @@
           },
           "emailBcc": {
             "description": "Array of BCC email addresses",
-            "example": [
-              "bcc1@company.com",
-              "bcc2@company.com"
-            ],
+            "example": ["bcc1@company.com", "bcc2@company.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -2781,10 +2605,7 @@
           },
           "emailReplyMode": {
             "type": "string",
-            "enum": [
-              "reply",
-              "reply_all"
-            ],
+            "enum": ["reply", "reply_all"],
             "description": "Mode for email replies",
             "example": "reply_all"
           },
@@ -2799,10 +2620,7 @@
             "example": "+1439499299"
           }
         },
-        "required": [
-          "type",
-          "contactId"
-        ]
+        "required": ["type", "contactId"]
       },
       "SendMessageResponseDto": {
         "type": "object",
@@ -2835,10 +2653,7 @@
             "example": "Message queued successfully."
           }
         },
-        "required": [
-          "conversationId",
-          "messageId"
-        ]
+        "required": ["conversationId", "messageId"]
       },
       "CallDataDTO": {
         "type": "object",
@@ -2930,10 +2745,7 @@
           },
           "emailCc": {
             "description": "List of email address to CC",
-            "example": [
-              "john1@doe.com",
-              "john2@doe.com"
-            ],
+            "example": ["john1@doe.com", "john2@doe.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -2941,10 +2753,7 @@
           },
           "emailBcc": {
             "description": "List of email address to BCC",
-            "example": [
-              "john1@doe.com",
-              "john2@doe.com"
-            ],
+            "example": ["john1@doe.com", "john2@doe.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -2963,10 +2772,7 @@
             "type": "object",
             "description": "Message direction, if required can be set manually, default is outbound",
             "default": "outbound",
-            "example": [
-              "outbound",
-              "inbound"
-            ]
+            "example": ["outbound", "inbound"]
           },
           "date": {
             "format": "date-time",
@@ -2982,11 +2788,7 @@
             ]
           }
         },
-        "required": [
-          "type",
-          "conversationId",
-          "conversationProviderId"
-        ]
+        "required": ["type", "conversationId", "conversationProviderId"]
       },
       "ProcessMessageResponseDto": {
         "type": "object",
@@ -3018,12 +2820,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "success",
-          "conversationId",
-          "messageId",
-          "message"
-        ]
+        "required": ["success", "conversationId", "messageId", "message"]
       },
       "ProcessOutboundMessageBodyDto": {
         "type": "object",
@@ -3032,9 +2829,7 @@
             "type": "string",
             "description": "Message Type",
             "example": "Call",
-            "enum": [
-              "Call"
-            ]
+            "enum": ["Call"]
           },
           "attachments": {
             "description": "Array of attachments",
@@ -3072,11 +2867,7 @@
             ]
           }
         },
-        "required": [
-          "type",
-          "conversationId",
-          "conversationProviderId"
-        ]
+        "required": ["type", "conversationId", "conversationProviderId"]
       },
       "UploadFilesDto": {
         "type": "object",
@@ -3096,11 +2887,7 @@
             }
           }
         },
-        "required": [
-          "conversationId",
-          "locationId",
-          "attachmentUrls"
-        ]
+        "required": ["conversationId", "locationId", "attachmentUrls"]
       },
       "UploadFilesResponseDto": {
         "type": "object",
@@ -3109,9 +2896,7 @@
             "type": "object"
           }
         },
-        "required": [
-          "uploadedFiles"
-        ]
+        "required": ["uploadedFiles"]
       },
       "UploadFilesErrorResponseDto": {
         "type": "object",
@@ -3120,11 +2905,7 @@
             "type": "number",
             "description": "HTTP Status code of the request",
             "example": 413,
-            "enum": [
-              400,
-              413,
-              415
-            ]
+            "enum": [400, 413, 415]
           },
           "message": {
             "type": "string",
@@ -3132,10 +2913,7 @@
             "example": "Failed to upload the files"
           }
         },
-        "required": [
-          "status",
-          "message"
-        ]
+        "required": ["status", "message"]
       },
       "ErrorDto": {
         "type": "object",
@@ -3156,11 +2934,7 @@
             "example": "There was an error from the provider"
           }
         },
-        "required": [
-          "code",
-          "type",
-          "message"
-        ]
+        "required": ["code", "type", "message"]
       },
       "UpdateMessageStatusDto": {
         "type": "object",
@@ -3169,12 +2943,7 @@
             "type": "string",
             "description": "Message status",
             "example": "read",
-            "enum": [
-              "delivered",
-              "failed",
-              "pending",
-              "read"
-            ]
+            "enum": ["delivered", "failed", "pending", "read"]
           },
           "error": {
             "description": "Error object from the conversation provider",
@@ -3197,9 +2966,7 @@
             }
           }
         },
-        "required": [
-          "status"
-        ]
+        "required": ["status"]
       },
       "GetMessageTranscriptionResponseDto": {
         "type": "object",
@@ -3268,12 +3035,7 @@
             "example": "ve9EPM428h8vShlRW1KT"
           }
         },
-        "required": [
-          "locationId",
-          "isTyping",
-          "visitorId",
-          "conversationId"
-        ]
+        "required": ["locationId", "isTyping", "visitorId", "conversationId"]
       },
       "CreateLiveChatMessageFeedbackResponse": {
         "type": "object",
@@ -3282,20 +3044,12 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       }
     }
   },
   "x-tagGroups": {
     "name": "Conversations",
-    "tags": [
-      "Conversations",
-      "Search",
-      "Email",
-      "Messages",
-      "Providers"
-    ]
+    "tags": ["Conversations", "Search", "Email", "Messages", "Providers"]
   }
 }

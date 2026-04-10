@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -68,14 +66,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Menu Links"
-        ],
+        "tags": ["Custom Menu Links"],
         "security": [
           {
-            "Agency-Access": [
-              "custom-menu-link.readonly"
-            ]
+            "Agency-Access": ["custom-menu-link.readonly"]
           }
         ]
       },
@@ -91,9 +85,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -148,14 +140,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Menu Links"
-        ],
+        "tags": ["Custom Menu Links"],
         "security": [
           {
-            "Agency-Access": [
-              "custom-menu-link.write"
-            ]
+            "Agency-Access": ["custom-menu-link.write"]
           }
         ]
       },
@@ -171,9 +159,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -238,14 +224,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Menu Links"
-        ],
+        "tags": ["Custom Menu Links"],
         "security": [
           {
-            "Agency-Access": [
-              "custom-menu-link.write"
-            ]
+            "Agency-Access": ["custom-menu-link.write"]
           }
         ]
       }
@@ -263,9 +245,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -361,14 +341,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Menu Links"
-        ],
+        "tags": ["Custom Menu Links"],
         "security": [
           {
-            "Agency-Access": [
-              "custom-menu-link.readonly"
-            ]
+            "Agency-Access": ["custom-menu-link.readonly"]
           }
         ]
       },
@@ -384,9 +360,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -438,14 +412,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Menu Links"
-        ],
+        "tags": ["Custom Menu Links"],
         "security": [
           {
-            "Agency-Access": [
-              "custom-menu-link.write"
-            ]
+            "Agency-Access": ["custom-menu-link.write"]
           }
         ]
       }
@@ -519,11 +489,7 @@
           "fontFamily": {
             "type": "string",
             "description": "Font family of the icon",
-            "enum": [
-              "fab",
-              "fas",
-              "far"
-            ]
+            "enum": ["fab", "fas", "far"]
           }
         }
       },
@@ -575,10 +541,7 @@
           },
           "locations": {
             "description": "List of sub-account IDs where the menu should be shown. This list is applicable only when showOnLocation is true and showToAllLocations is false",
-            "example": [
-              "gfWreTIHL8pDbggBb7af",
-              "67WreTIHL8pDbggBb7ty"
-            ],
+            "example": ["gfWreTIHL8pDbggBb7af", "67WreTIHL8pDbggBb7ty"],
             "type": "array",
             "items": {
               "type": "string"
@@ -587,20 +550,12 @@
           "openMode": {
             "type": "string",
             "description": "Mode for opening the menu link",
-            "enum": [
-              "iframe",
-              "new_tab",
-              "current_tab"
-            ]
+            "enum": ["iframe", "new_tab", "current_tab"]
           },
           "userRole": {
             "type": "string",
             "description": "Which user-roles should the menu be accessible to?",
-            "enum": [
-              "all",
-              "admin",
-              "user"
-            ]
+            "enum": ["all", "admin", "user"]
           },
           "allowCamera": {
             "type": "boolean",
@@ -681,17 +636,10 @@
           "fontFamily": {
             "type": "string",
             "description": "Font family of the icon",
-            "enum": [
-              "fab",
-              "fas",
-              "far"
-            ]
+            "enum": ["fab", "fas", "far"]
           }
         },
-        "required": [
-          "name",
-          "fontFamily"
-        ]
+        "required": ["name", "fontFamily"]
       },
       "CreateCustomMenuDTO": {
         "type": "object",
@@ -735,18 +683,11 @@
           "openMode": {
             "type": "string",
             "description": "Mode for opening the menu link",
-            "enum": [
-              "iframe",
-              "new_tab",
-              "current_tab"
-            ]
+            "enum": ["iframe", "new_tab", "current_tab"]
           },
           "locations": {
             "description": "List of sub-account IDs where the menu should be shown. This list is applicable only when showOnLocation is true and showToAllLocations is false",
-            "example": [
-              "gfWreTIHL8pDbggBb7af",
-              "67WreTIHL8pDbggBb7ty"
-            ],
+            "example": ["gfWreTIHL8pDbggBb7af", "67WreTIHL8pDbggBb7ty"],
             "type": "array",
             "items": {
               "type": "string"
@@ -755,11 +696,7 @@
           "userRole": {
             "type": "string",
             "description": "Which user-roles should the menu be accessible to?",
-            "enum": [
-              "all",
-              "admin",
-              "user"
-            ]
+            "enum": ["all", "admin", "user"]
           },
           "allowCamera": {
             "type": "boolean",
@@ -826,18 +763,11 @@
           "openMode": {
             "type": "string",
             "description": "Mode for opening the menu link",
-            "enum": [
-              "iframe",
-              "new_tab",
-              "current_tab"
-            ]
+            "enum": ["iframe", "new_tab", "current_tab"]
           },
           "locations": {
             "description": "List of sub-account IDs where the menu should be shown. This list is applicable only when showOnLocation is true and showToAllLocations is false",
-            "example": [
-              "gfWreTIHL8pDbggBb7af",
-              "67WreTIHL8pDbggBb7ty"
-            ],
+            "example": ["gfWreTIHL8pDbggBb7af", "67WreTIHL8pDbggBb7ty"],
             "type": "array",
             "items": {
               "type": "string"
@@ -846,11 +776,7 @@
           "userRole": {
             "type": "string",
             "description": "Which user-roles should the menu be accessible to?",
-            "enum": [
-              "all",
-              "admin",
-              "user"
-            ]
+            "enum": ["all", "admin", "user"]
           },
           "allowCamera": {
             "type": "boolean",
@@ -885,9 +811,6 @@
   },
   "x-tagGroups": {
     "name": "Custom menus",
-    "tags": [
-      "custom-menus",
-      "Custom Menu Links"
-    ]
+    "tags": ["custom-menus", "Custom Menu Links"]
   }
 }

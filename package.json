@@ -1,6 +1,6 @@
 {
   "name": "@gnosticdev/highlevel-sdk",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "private": false,
   "description": "SDK for the HighLevel API",
   "keywords": [
@@ -95,7 +95,7 @@
     "generate-v2-types": "bun scripts/generate-v2-types.ts",
     "generate-webhooks-types": "bun scripts/generate-webhooks-types.ts",
     "generate-base-client": "bun scripts/generate-base-client.ts",
-    "lint": "bun oxlint . --fix && bun oxfmt .",
+    "lint": "bun oxlint --fix && bun oxfmt .",
     "release": "bun --env-file .env.local release-it",
     "start-test": "bun test --hot",
     "typecheck": "tsgo -p ./tsconfig.json"

@@ -24,9 +24,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -81,9 +79,7 @@
             }
           }
         },
-        "tags": [
-          "Trigger Links"
-        ],
+        "tags": ["Trigger Links"],
         "security": [
           {
             "bearer": []
@@ -104,9 +100,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -171,14 +165,10 @@
             }
           }
         },
-        "tags": [
-          "Trigger Links"
-        ],
+        "tags": ["Trigger Links"],
         "security": [
           {
-            "bearer": [
-              "links.write"
-            ]
+            "bearer": ["links.write"]
           }
         ]
       },
@@ -194,9 +184,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -251,14 +239,10 @@
             }
           }
         },
-        "tags": [
-          "Trigger Links"
-        ],
+        "tags": ["Trigger Links"],
         "security": [
           {
-            "bearer": [
-              "links.write"
-            ]
+            "bearer": ["links.write"]
           }
         ]
       }
@@ -286,9 +270,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -366,9 +348,7 @@
             }
           }
         },
-        "tags": [
-          "Trigger Links Search"
-        ],
+        "tags": ["Trigger Links Search"],
         "security": [
           {
             "bearer": []
@@ -389,9 +369,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -436,14 +414,10 @@
             }
           }
         },
-        "tags": [
-          "Trigger Links"
-        ],
+        "tags": ["Trigger Links"],
         "security": [
           {
-            "bearer": [
-              "links.readonly"
-            ]
+            "bearer": ["links.readonly"]
           }
         ]
       },
@@ -459,9 +433,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -517,14 +489,10 @@
             }
           }
         },
-        "tags": [
-          "Trigger Links"
-        ],
+        "tags": ["Trigger Links"],
         "security": [
           {
-            "bearer": [
-              "links.write"
-            ]
+            "bearer": ["links.write"]
           }
         ]
       }
@@ -643,11 +611,7 @@
             "example": "https://www.google.com/"
           }
         },
-        "required": [
-          "locationId",
-          "name",
-          "redirectTo"
-        ]
+        "required": ["locationId", "name", "redirectTo"]
       },
       "GetLinkSuccessfulResponseDto": {
         "type": "object",
@@ -669,10 +633,7 @@
             "example": "https://www.google.com/"
           }
         },
-        "required": [
-          "name",
-          "redirectTo"
-        ]
+        "required": ["name", "redirectTo"]
       },
       "DeleteLinksSuccessfulResponseDto": {
         "type": "object",

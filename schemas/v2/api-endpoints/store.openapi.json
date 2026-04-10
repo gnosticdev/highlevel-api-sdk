@@ -70,9 +70,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone"
-        ],
+        "tags": ["Shipping Zone"],
         "security": [
           {
             "Location-Access": []
@@ -109,9 +107,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -190,9 +186,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone"
-        ],
+        "tags": ["Shipping Zone"],
         "security": [
           {
             "Location-Access": []
@@ -241,9 +235,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -300,9 +292,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone"
-        ],
+        "tags": ["Shipping Zone"],
         "security": [
           {
             "Location-Access": []
@@ -387,9 +377,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone"
-        ],
+        "tags": ["Shipping Zone"],
         "security": [
           {
             "Location-Access": []
@@ -436,9 +424,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -485,9 +471,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone"
-        ],
+        "tags": ["Shipping Zone"],
         "security": [
           {
             "Location-Access": []
@@ -564,9 +548,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone"
-        ]
+        "tags": ["Shipping Zone"]
       }
     },
     "/store/shipping-zone/{shippingZoneId}/shipping-rate": {
@@ -648,9 +630,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone Rates"
-        ],
+        "tags": ["Shipping Zone Rates"],
         "security": [
           {
             "Location-Access": []
@@ -697,9 +677,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -768,9 +746,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone Rates"
-        ],
+        "tags": ["Shipping Zone Rates"],
         "security": [
           {
             "Location-Access": []
@@ -829,9 +805,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -878,9 +852,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone Rates"
-        ],
+        "tags": ["Shipping Zone Rates"],
         "security": [
           {
             "Location-Access": []
@@ -975,9 +947,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone Rates"
-        ],
+        "tags": ["Shipping Zone Rates"],
         "security": [
           {
             "Location-Access": []
@@ -1034,9 +1004,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1083,9 +1051,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Zone Rates"
-        ],
+        "tags": ["Shipping Zone Rates"],
         "security": [
           {
             "Location-Access": []
@@ -1162,9 +1128,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Carrier"
-        ],
+        "tags": ["Shipping Carrier"],
         "security": [
           {
             "Location-Access": []
@@ -1201,9 +1165,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1250,9 +1212,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Carrier"
-        ],
+        "tags": ["Shipping Carrier"],
         "security": [
           {
             "Location-Access": []
@@ -1301,9 +1261,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1350,9 +1308,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Carrier"
-        ],
+        "tags": ["Shipping Carrier"],
         "security": [
           {
             "Location-Access": []
@@ -1437,9 +1393,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Carrier"
-        ],
+        "tags": ["Shipping Carrier"],
         "security": [
           {
             "Location-Access": []
@@ -1486,9 +1440,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1535,9 +1487,7 @@
             }
           }
         },
-        "tags": [
-          "Shipping Carrier"
-        ],
+        "tags": ["Shipping Carrier"],
         "security": [
           {
             "Location-Access": []
@@ -1614,9 +1564,7 @@
             }
           }
         },
-        "tags": [
-          "Store Setting"
-        ],
+        "tags": ["Store Setting"],
         "security": [
           {
             "Location-Access": []
@@ -1653,9 +1601,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1702,9 +1648,7 @@
             }
           }
         },
-        "tags": [
-          "Store Setting"
-        ],
+        "tags": ["Store Setting"],
         "security": [
           {
             "Location-Access": []
@@ -2540,9 +2484,7 @@
             "example": "VA"
           }
         },
-        "required": [
-          "code"
-        ]
+        "required": ["code"]
       },
       "ShippingZoneCountryDto": {
         "type": "object",
@@ -2811,9 +2753,7 @@
             }
           }
         },
-        "required": [
-          "code"
-        ]
+        "required": ["code"]
       },
       "CreateShippingZoneDto": {
         "type": "object",
@@ -2825,9 +2765,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -2842,12 +2780,7 @@
             }
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "name",
-          "countries"
-        ]
+        "required": ["altId", "altType", "name", "countries"]
       },
       "ShippingCarrierServiceDto": {
         "type": "object",
@@ -2863,10 +2796,7 @@
             "example": "PriorityMailExpressInternational"
           }
         },
-        "required": [
-          "name",
-          "value"
-        ]
+        "required": ["name", "value"]
       },
       "ShippingRateSchema": {
         "type": "object",
@@ -2878,9 +2808,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -2905,11 +2833,7 @@
           "conditionType": {
             "type": "string",
             "description": "Type of condition to provide the conditional pricing",
-            "enum": [
-              "none",
-              "price",
-              "weight"
-            ],
+            "enum": ["none", "price", "weight"],
             "example": "price"
           },
           "minCondition": {
@@ -2991,9 +2915,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -3062,10 +2984,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "ListShippingZoneResponseDto": {
         "type": "object",
@@ -3083,10 +3002,7 @@
             }
           }
         },
-        "required": [
-          "total",
-          "data"
-        ]
+        "required": ["total", "data"]
       },
       "GetShippingZoneResponseDto": {
         "type": "object",
@@ -3110,10 +3026,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "UpdateShippingZoneDto": {
         "type": "object",
@@ -3125,9 +3038,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -3165,10 +3076,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "DeleteShippingZoneResponseDto": {
         "type": "object",
@@ -3184,9 +3092,7 @@
             "example": "Successfully created"
           }
         },
-        "required": [
-          "status"
-        ]
+        "required": ["status"]
       },
       "ContactAddress": {
         "type": "object",
@@ -4259,9 +4165,7 @@
             "example": "abu@example.com"
           }
         },
-        "required": [
-          "country"
-        ]
+        "required": ["country"]
       },
       "OrderSource": {
         "type": "object",
@@ -4313,9 +4217,7 @@
             "example": "store"
           }
         },
-        "required": [
-          "type"
-        ]
+        "required": ["type"]
       },
       "ProductItem": {
         "type": "object",
@@ -4329,10 +4231,7 @@
             "description": "No of quantities"
           }
         },
-        "required": [
-          "id",
-          "qty"
-        ]
+        "required": ["id", "qty"]
       },
       "GetAvailableShippingRates": {
         "type": "object",
@@ -4344,9 +4243,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "country": {
             "type": "string",
@@ -5000,10 +4897,7 @@
             }
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "CreateShippingRateDto": {
         "type": "object",
@@ -5015,9 +4909,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5042,11 +4934,7 @@
           "conditionType": {
             "type": "string",
             "description": "Type of condition to provide the conditional pricing",
-            "enum": [
-              "none",
-              "price",
-              "weight"
-            ],
+            "enum": ["none", "price", "weight"],
             "example": "price"
           },
           "minCondition": {
@@ -5116,10 +5004,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "ListShippingRateResponseDto": {
         "type": "object",
@@ -5137,10 +5022,7 @@
             }
           }
         },
-        "required": [
-          "total",
-          "data"
-        ]
+        "required": ["total", "data"]
       },
       "GetShippingRateResponseDto": {
         "type": "object",
@@ -5164,10 +5046,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "UpdateShippingRateDto": {
         "type": "object",
@@ -5179,9 +5058,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5206,11 +5083,7 @@
           "conditionType": {
             "type": "string",
             "description": "Type of condition to provide the conditional pricing",
-            "enum": [
-              "none",
-              "price",
-              "weight"
-            ],
+            "enum": ["none", "price", "weight"],
             "example": "price"
           },
           "minCondition": {
@@ -5269,10 +5142,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "DeleteShippingRateResponseDto": {
         "type": "object",
@@ -5288,9 +5158,7 @@
             "example": "Successfully created"
           }
         },
-        "required": [
-          "status"
-        ]
+        "required": ["status"]
       },
       "CreateShippingCarrierDto": {
         "type": "object",
@@ -5302,9 +5170,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5329,12 +5195,7 @@
             "example": true
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "name",
-          "callbackUrl"
-        ]
+        "required": ["altId", "altType", "name", "callbackUrl"]
       },
       "ShippingCarrierSchema": {
         "type": "object",
@@ -5346,9 +5207,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5426,10 +5285,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "ListShippingCarrierResponseDto": {
         "type": "object",
@@ -5452,10 +5308,7 @@
             }
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "GetShippingCarrierResponseDto": {
         "type": "object",
@@ -5479,10 +5332,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "UpdateShippingCarrierDto": {
         "type": "object",
@@ -5494,9 +5344,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5544,10 +5392,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "DeleteShippingCarrierResponseDto": {
         "type": "object",
@@ -5563,9 +5408,7 @@
             "example": "Successfully created"
           }
         },
-        "required": [
-          "status"
-        ]
+        "required": ["status"]
       },
       "StoreShippingOriginDto": {
         "type": "object",
@@ -6640,13 +6483,7 @@
             "example": "john@deo.com"
           }
         },
-        "required": [
-          "name",
-          "country",
-          "city",
-          "street1",
-          "zip"
-        ]
+        "required": ["name", "country", "city", "street1", "zip"]
       },
       "StoreOrderNotificationDto": {
         "type": "object",
@@ -6720,9 +6557,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "shippingOrigin": {
             "description": "Shipping origin address",
@@ -6749,11 +6584,7 @@
             ]
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "shippingOrigin"
-        ]
+        "required": ["altId", "altType", "shippingOrigin"]
       },
       "StoreSettingSchema": {
         "type": "object",
@@ -6765,9 +6596,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "shippingOrigin": {
             "description": "Shipping origin address",
@@ -6840,10 +6669,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       },
       "GetStoreSettingResponseDto": {
         "type": "object",
@@ -6867,10 +6693,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "data"
-        ]
+        "required": ["status", "data"]
       }
     }
   }

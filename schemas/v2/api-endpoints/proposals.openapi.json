@@ -34,13 +34,7 @@
             "description": "Document status, pass as comma separated values",
             "schema": {
               "example": "draft",
-              "enum": [
-                "draft",
-                "sent",
-                "viewed",
-                "completed",
-                "accepted"
-              ],
+              "enum": ["draft", "sent", "viewed", "completed", "accepted"],
               "type": "string"
             }
           },
@@ -51,11 +45,7 @@
             "description": "Payment status, pass as comma separated values",
             "schema": {
               "example": "paid",
-              "enum": [
-                "waiting_for_payment",
-                "paid",
-                "no_payment"
-              ],
+              "enum": ["waiting_for_payment", "paid", "no_payment"],
               "type": "string"
             }
           },
@@ -116,9 +106,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -152,9 +140,7 @@
             "Agency-Access": []
           }
         ],
-        "tags": [
-          "Documents"
-        ]
+        "tags": ["Documents"]
       }
     },
     "/proposals/document/send": {
@@ -180,9 +166,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -226,9 +210,7 @@
             "Agency-Access": []
           }
         ],
-        "tags": [
-          "Documents"
-        ]
+        "tags": ["Documents"]
       }
     },
     "/proposals/templates": {
@@ -344,9 +326,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -380,9 +360,7 @@
             "Agency-Access": []
           }
         ],
-        "tags": [
-          "Templates"
-        ]
+        "tags": ["Templates"]
       }
     },
     "/proposals/templates/send": {
@@ -408,9 +386,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -454,9 +430,7 @@
             "Agency-Access": []
           }
         ],
-        "tags": [
-          "Templates"
-        ]
+        "tags": ["Templates"]
       }
     }
   },
@@ -524,10 +498,7 @@
       "EntityReference": {
         "type": "string",
         "description": "Entity type",
-        "enum": [
-          "contacts",
-          "users"
-        ]
+        "enum": ["contacts", "users"]
       },
       "ELEMENTS_LOOKUP": {
         "type": "string",
@@ -618,18 +589,11 @@
           "type": {
             "type": "string",
             "example": "percentage",
-            "enum": [
-              "percentage",
-              "custom_amount"
-            ],
+            "enum": ["percentage", "custom_amount"],
             "description": "Type of discount"
           }
         },
-        "required": [
-          "id",
-          "value",
-          "type"
-        ]
+        "required": ["id", "value", "type"]
       },
       "GrandTotalDto": {
         "type": "object",
@@ -657,12 +621,7 @@
             }
           }
         },
-        "required": [
-          "amount",
-          "currency",
-          "discountPercentage",
-          "discounts"
-        ]
+        "required": ["amount", "currency", "discountPercentage", "discounts"]
       },
       "RecipientItem": {
         "type": "object",
@@ -704,10 +663,7 @@
           },
           "role": {
             "type": "string",
-            "enum": [
-              "user",
-              "signer"
-            ],
+            "enum": ["user", "signer"],
             "description": "Recipient role",
             "example": "signer"
           },
@@ -801,20 +757,13 @@
           },
           "entityName": {
             "type": "string",
-            "enum": [
-              "contacts",
-              "users"
-            ],
+            "enum": ["contacts", "users"],
             "description": "Entity name that the recipient belongs to",
             "example": "contacts"
           },
           "recipientCategory": {
             "type": "string",
-            "enum": [
-              "recipient",
-              "cc",
-              "bcc"
-            ],
+            "enum": ["recipient", "cc", "bcc"],
             "description": "Recipient category (recipient, cc, or bcc)",
             "example": "recipient"
           },
@@ -914,13 +863,7 @@
             "example": "draft",
             "items": {
               "type": "string",
-              "enum": [
-                "draft",
-                "sent",
-                "viewed",
-                "completed",
-                "accepted"
-              ]
+              "enum": ["draft", "sent", "viewed", "completed", "accepted"]
             }
           },
           "paymentStatus": {
@@ -929,11 +872,7 @@
             "example": "paid",
             "items": {
               "type": "string",
-              "enum": [
-                "waiting_for_payment",
-                "paid",
-                "no_payment"
-              ]
+              "enum": ["waiting_for_payment", "paid", "no_payment"]
             }
           },
           "recipients": {
@@ -1022,10 +961,7 @@
             "example": "https://example.com"
           }
         },
-        "required": [
-          "documents",
-          "total"
-        ]
+        "required": ["documents", "total"]
       },
       "BadRequestDTO": {
         "type": "object",
@@ -1093,10 +1029,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "templateId",
-          "subject"
-        ]
+        "required": ["templateId", "subject"]
       },
       "NotificationSenderSettingDto": {
         "type": "object",
@@ -1108,10 +1041,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "fromEmail",
-          "fromName"
-        ]
+        "required": ["fromEmail", "fromName"]
       },
       "NotificationSettingsDto": {
         "type": "object",
@@ -1123,10 +1053,7 @@
             "$ref": "#/components/schemas/NotificationSenderSettingDto"
           }
         },
-        "required": [
-          "receive",
-          "sender"
-        ]
+        "required": ["receive", "sender"]
       },
       "SendDocumentDto": {
         "type": "object",
@@ -1148,10 +1075,7 @@
           },
           "medium": {
             "type": "string",
-            "enum": [
-              "link",
-              "email"
-            ],
+            "enum": ["link", "email"],
             "description": "Medium to be used for sending the document",
             "example": "email"
           },
@@ -1195,11 +1119,7 @@
             "example": "1234567890"
           }
         },
-        "required": [
-          "locationId",
-          "documentId",
-          "sentBy"
-        ]
+        "required": ["locationId", "documentId", "sentBy"]
       },
       "SendDocumentResponseDto": {
         "type": "object",
@@ -1217,10 +1137,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "links"
-        ]
+        "required": ["success", "links"]
       },
       "TemplateListResponseDTO": {
         "type": "object",
@@ -1254,11 +1171,7 @@
             "type": "string",
             "example": "proposal",
             "description": "Template type",
-            "enum": [
-              "proposal",
-              "estimate",
-              "contentLibrary"
-            ]
+            "enum": ["proposal", "estimate", "contentLibrary"]
           },
           "updatedBy": {
             "type": "string",
@@ -1331,10 +1244,7 @@
             "description": "Trace ID for request tracking"
           }
         },
-        "required": [
-          "data",
-          "total"
-        ]
+        "required": ["data", "total"]
       },
       "SendDocumentFromPublicApiBodyDto": {
         "type": "object",
@@ -1370,12 +1280,7 @@
             "example": "hTlkh7t8gujsahgg93"
           }
         },
-        "required": [
-          "templateId",
-          "userId",
-          "locationId",
-          "contactId"
-        ]
+        "required": ["templateId", "userId", "locationId", "contactId"]
       },
       "SendTemplateResponseDto": {
         "type": "object",
@@ -1393,10 +1298,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "links"
-        ]
+        "required": ["success", "links"]
       },
       "UnauthorizedDTO": {
         "type": "object",

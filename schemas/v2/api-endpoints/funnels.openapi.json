@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -52,14 +50,10 @@
             }
           }
         },
-        "tags": [
-          "Redirect"
-        ],
+        "tags": ["Redirect"],
         "security": [
           {
-            "Location-Access": [
-              "funnels/redirect.write"
-            ]
+            "Location-Access": ["funnels/redirect.write"]
           }
         ]
       }
@@ -77,9 +71,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -123,14 +115,10 @@
             }
           }
         },
-        "tags": [
-          "Redirect"
-        ],
+        "tags": ["Redirect"],
         "security": [
           {
-            "Location-Access": [
-              "funnels/redirect.write"
-            ]
+            "Location-Access": ["funnels/redirect.write"]
           }
         ]
       },
@@ -146,9 +134,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -184,14 +170,10 @@
             "description": "Unprocessable Entity - The provided data is invalid or incomplete"
           }
         },
-        "tags": [
-          "Redirect"
-        ],
+        "tags": ["Redirect"],
         "security": [
           {
-            "Location-Access": [
-              "funnels/redirect.write"
-            ]
+            "Location-Access": ["funnels/redirect.write"]
           }
         ]
       }
@@ -209,9 +191,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -266,14 +246,10 @@
             "description": "Unprocessable Entity - The provided data is invalid or incomplete"
           }
         },
-        "tags": [
-          "Redirect"
-        ],
+        "tags": ["Redirect"],
         "security": [
           {
-            "Location-Access": [
-              "funnels/redirect.readonly"
-            ]
+            "Location-Access": ["funnels/redirect.readonly"]
           }
         ]
       }
@@ -353,9 +329,7 @@
             }
           }
         },
-        "tags": [
-          "Funnel"
-        ],
+        "tags": ["Funnel"],
         "security": [
           {
             "Location-Access": []
@@ -422,9 +396,7 @@
             }
           }
         },
-        "tags": [
-          "Funnel"
-        ],
+        "tags": ["Funnel"],
         "security": [
           {
             "Location-Access": []
@@ -475,9 +447,7 @@
             }
           }
         },
-        "tags": [
-          "Funnel"
-        ],
+        "tags": ["Funnel"],
         "security": [
           {
             "Location-Access": []
@@ -569,21 +539,10 @@
           "action": {
             "type": "string",
             "example": "URL",
-            "enum": [
-              "funnel",
-              "website",
-              "url",
-              "all"
-            ]
+            "enum": ["funnel", "website", "url", "all"]
           }
         },
-        "required": [
-          "locationId",
-          "domain",
-          "path",
-          "target",
-          "action"
-        ]
+        "required": ["locationId", "domain", "path", "target", "action"]
       },
       "RedirectResponseDTO": {
         "type": "object",
@@ -652,9 +611,7 @@
             ]
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "UpdateRedirectParams": {
         "type": "object",
@@ -666,23 +623,14 @@
           "action": {
             "type": "string",
             "example": "URL",
-            "enum": [
-              "funnel",
-              "website",
-              "url",
-              "all"
-            ]
+            "enum": ["funnel", "website", "url", "all"]
           },
           "locationId": {
             "type": "string",
             "example": "6p2RxpgtMKQwO3E6IUaT"
           }
         },
-        "required": [
-          "target",
-          "action",
-          "locationId"
-        ]
+        "required": ["target", "action", "locationId"]
       },
       "RedirectListResponseDTO": {
         "type": "object",
@@ -696,9 +644,7 @@
             "description": "Object containing the count of redirects and an array of redirect data"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "DeleteRedirectResponseDTO": {
         "type": "object",
@@ -711,9 +657,7 @@
             "description": "Status of the delete operation"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "UpdateRedirectResponseDTO": {
         "type": "object",
@@ -727,9 +671,7 @@
             ]
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "FunnelPageResponseDTO": {
         "type": "object",
@@ -781,9 +723,7 @@
             "example": 20
           }
         },
-        "required": [
-          "count"
-        ]
+        "required": ["count"]
       },
       "FunnelListResponseDTO": {
         "type": "object",
@@ -805,9 +745,7 @@
                   "id": "f5d178c0-8bbb-4cd4-927c-691c68a62c59",
                   "name": "Step 1",
                   "originId": "80b2f227-5bc8-4ca5-980d-817745ea4e8b",
-                  "pages": [
-                    "2IhBmBcQRx9JXV1JZsRt"
-                  ],
+                  "pages": ["2IhBmBcQRx9JXV1JZsRt"],
                   "products": [],
                   "sequence": 1,
                   "type": "optin_funnel_page",
@@ -835,22 +773,12 @@
             "example": "03774d31-a57e-4b4f-95c7-315ce61969f1"
           }
         },
-        "required": [
-          "funnels",
-          "count",
-          "traceId"
-        ]
+        "required": ["funnels", "count", "traceId"]
       }
     }
   },
   "x-tagGroups": {
     "name": "Funnels",
-    "tags": [
-      "Funnel",
-      "Products",
-      "Prices",
-      "Integrations",
-      "Redirect"
-    ]
+    "tags": ["Funnel", "Products", "Prices", "Integrations", "Redirect"]
   }
 }

@@ -21,8 +21,8 @@
     "before:init": ["bun run lint", "bun test", "bun run build"]
   },
   "npm": {
+    "publish": true,
     "access": "public",
-    "allowSameVersion": true,
-    "publish": true
+    "publishArgs": ["--registry", "https://registry.npmjs.org"]
   }
 }

@@ -68,14 +68,10 @@
             }
           }
         },
-        "tags": [
-          "Wallet Charges"
-        ],
+        "tags": ["Wallet Charges"],
         "security": [
           {
-            "Location-Access-Only": [
-              "charges.write"
-            ]
+            "Location-Access-Only": ["charges.write"]
           }
         ]
       },
@@ -243,14 +239,10 @@
             }
           }
         },
-        "tags": [
-          "Wallet Charges"
-        ],
+        "tags": ["Wallet Charges"],
         "security": [
           {
-            "Location-Access-Only": [
-              "charges.readonly"
-            ]
+            "Location-Access-Only": ["charges.readonly"]
           }
         ]
       }
@@ -319,14 +311,10 @@
             }
           }
         },
-        "tags": [
-          "Wallet Charges"
-        ],
+        "tags": ["Wallet Charges"],
         "security": [
           {
-            "Location-Access-Only": [
-              "charges.write"
-            ]
+            "Location-Access-Only": ["charges.write"]
           }
         ]
       },
@@ -447,14 +435,10 @@
             }
           }
         },
-        "tags": [
-          "Wallet Charges"
-        ],
+        "tags": ["Wallet Charges"],
         "security": [
           {
-            "Location-Access-Only": [
-              "charges.readonly"
-            ]
+            "Location-Access-Only": ["charges.readonly"]
           }
         ]
       }
@@ -493,14 +477,10 @@
             }
           }
         },
-        "tags": [
-          "Wallet Charges"
-        ],
+        "tags": ["Wallet Charges"],
         "security": [
           {
-            "Location-Access-Only": [
-              "charges.readonly"
-            ]
+            "Location-Access-Only": ["charges.readonly"]
           }
         ]
       }
@@ -528,9 +508,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -594,9 +572,7 @@
             "Agency-Access": []
           }
         ],
-        "tags": [
-          "App Management"
-        ]
+        "tags": ["App Management"]
       },
       "get": {
         "operationId": "get-installer-details",
@@ -631,9 +607,7 @@
             "description": "Forbidden. The client does not have necessary permissions to access installer details."
           }
         },
-        "tags": [
-          "App Management"
-        ]
+        "tags": ["App Management"]
       }
     }
   },
@@ -790,9 +764,7 @@
             "example": true
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "WhitelabelDetailsDTO": {
         "type": "object",
@@ -808,10 +780,7 @@
             "example": "https://example.com/logo.png"
           }
         },
-        "required": [
-          "domain",
-          "logoUrl"
-        ]
+        "required": ["domain", "logoUrl"]
       },
       "InstallerDetailsDTO": {
         "type": "object",
@@ -890,18 +859,12 @@
             ]
           }
         },
-        "required": [
-          "installationDetails"
-        ]
+        "required": ["installationDetails"]
       }
     }
   },
   "x-tagGroups": {
     "name": "Developer marketplace",
-    "tags": [
-      "Marketplace",
-      "App Management",
-      "Wallet Charges"
-    ]
+    "tags": ["Marketplace", "App Management", "Wallet Charges"]
   }
 }

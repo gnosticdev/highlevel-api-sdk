@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -71,14 +69,10 @@
             }
           }
         },
-        "tags": [
-          "Companies"
-        ],
+        "tags": ["Companies"],
         "security": [
           {
-            "Agency-Access": [
-              "companies.readonly"
-            ]
+            "Agency-Access": ["companies.readonly"]
           }
         ]
       }
@@ -219,9 +213,7 @@
             "example": true
           }
         },
-        "required": [
-          "pending"
-        ]
+        "required": ["pending"]
       },
       "GetCompanyByIdSchema": {
         "type": "object",
@@ -461,8 +453,6 @@
   },
   "x-tagGroups": {
     "name": "Companies",
-    "tags": [
-      "Companies"
-    ]
+    "tags": ["Companies"]
   }
 }

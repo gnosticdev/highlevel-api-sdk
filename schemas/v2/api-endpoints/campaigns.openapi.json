@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -80,14 +78,10 @@
             }
           }
         },
-        "tags": [
-          "Campaigns"
-        ],
+        "tags": ["Campaigns"],
         "security": [
           {
-            "bearer": [
-              "campaigns.readonly"
-            ]
+            "bearer": ["campaigns.readonly"]
           }
         ]
       }
@@ -182,8 +176,6 @@
   },
   "x-tagGroups": {
     "name": "Campaigns",
-    "tags": [
-      "Campaigns"
-    ]
+    "tags": ["Campaigns"]
   }
 }

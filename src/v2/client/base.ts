@@ -3,9 +3,9 @@
 
 import type { Client } from 'openapi-fetch'
 import createClient from 'openapi-fetch'
+import type { AccessType } from '../scopes/scope-types'
 import type { HighLevelClientInterface } from '..'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
-import type { AccessType } from '../scopes/scope-types'
 import type { paths as AgenciesPaths } from '../types/agencies'
 import type { paths as AssociationsPaths } from '../types/associations'
 import type { paths as BlogsPaths } from '../types/blogs'
@@ -27,8 +27,6 @@ import type { paths as LinksPaths } from '../types/links'
 import type { paths as LocationsPaths } from '../types/locations'
 import type { paths as MarketplacePaths } from '../types/marketplace'
 import type { paths as MediasPaths } from '../types/medias'
-// type imports
-import type { paths as OauthPaths } from '../types/oauth'
 import type { paths as ObjectsPaths } from '../types/objects'
 import type { paths as OpportunitiesPaths } from '../types/opportunities'
 import type { paths as PaymentsPaths } from '../types/payments'
@@ -43,10 +41,12 @@ import type { paths as SurveysPaths } from '../types/surveys'
 import type { paths as UsersPaths } from '../types/users'
 import type { paths as VoiceAiPaths } from '../types/voice-ai'
 import type { paths as WorkflowsPaths } from '../types/workflows'
-import { createClientMaybeAuth } from './client-type-helpers'
 import type { HighLevelClientConfig } from './default'
 import { DEFAULT_V2_BASE_URL } from './default'
+import { createClientMaybeAuth } from './client-type-helpers'
 import type { AUTH_HEADERS } from './types'
+
+import type { paths as OauthPaths } from '../types/oauth'
 
 /**
  * Base implementation for HighLevel API client.
@@ -55,8 +55,7 @@ import type { AUTH_HEADERS } from './types'
 export class BaseHighLevelClient<
 	T extends AccessType,
 	TOAuth extends DefaultOauthClient | OauthClientImpl<T>,
-> implements HighLevelClientInterface<T, TOAuth>
-{
+> implements HighLevelClientInterface<T, TOAuth> {
 	/**
 	 * Exposed config object for convenience.
 	 */
@@ -135,10 +134,10 @@ export class BaseHighLevelClient<
 		/**
 		 * blogs client implementation.
 		 */
-		this.blogs = createClientMaybeAuth<BlogsPaths, AUTH_HEADERS | undefined>(
-			authHeaders,
-			this._clientConfig,
-		) as Client<BlogsPaths>
+		this.blogs = createClientMaybeAuth<
+			BlogsPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<BlogsPaths>
 		/**
 		 * businesses client implementation.
 		 */
@@ -212,17 +211,17 @@ export class BaseHighLevelClient<
 		/**
 		 * emails client implementation.
 		 */
-		this.emails = createClientMaybeAuth<EmailsPaths, AUTH_HEADERS | undefined>(
-			authHeaders,
-			this._clientConfig,
-		) as Client<EmailsPaths>
+		this.emails = createClientMaybeAuth<
+			EmailsPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<EmailsPaths>
 		/**
 		 * forms client implementation.
 		 */
-		this.forms = createClientMaybeAuth<FormsPaths, AUTH_HEADERS | undefined>(
-			authHeaders,
-			this._clientConfig,
-		) as Client<FormsPaths>
+		this.forms = createClientMaybeAuth<
+			FormsPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<FormsPaths>
 		/**
 		 * funnels client implementation.
 		 */
@@ -240,10 +239,10 @@ export class BaseHighLevelClient<
 		/**
 		 * links client implementation.
 		 */
-		this.links = createClientMaybeAuth<LinksPaths, AUTH_HEADERS | undefined>(
-			authHeaders,
-			this._clientConfig,
-		) as Client<LinksPaths>
+		this.links = createClientMaybeAuth<
+			LinksPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<LinksPaths>
 		/**
 		 * locations client implementation.
 		 */
@@ -261,10 +260,10 @@ export class BaseHighLevelClient<
 		/**
 		 * medias client implementation.
 		 */
-		this.medias = createClientMaybeAuth<MediasPaths, AUTH_HEADERS | undefined>(
-			authHeaders,
-			this._clientConfig,
-		) as Client<MediasPaths>
+		this.medias = createClientMaybeAuth<
+			MediasPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<MediasPaths>
 		/**
 		 * objects client implementation.
 		 */
@@ -331,10 +330,10 @@ export class BaseHighLevelClient<
 		/**
 		 * store client implementation.
 		 */
-		this.store = createClientMaybeAuth<StorePaths, AUTH_HEADERS | undefined>(
-			authHeaders,
-			this._clientConfig,
-		) as Client<StorePaths>
+		this.store = createClientMaybeAuth<
+			StorePaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<StorePaths>
 		/**
 		 * surveys client implementation.
 		 */
@@ -345,10 +344,10 @@ export class BaseHighLevelClient<
 		/**
 		 * users client implementation.
 		 */
-		this.users = createClientMaybeAuth<UsersPaths, AUTH_HEADERS | undefined>(
-			authHeaders,
-			this._clientConfig,
-		) as Client<UsersPaths>
+		this.users = createClientMaybeAuth<
+			UsersPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<UsersPaths>
 		/**
 		 * voiceAi client implementation.
 		 */

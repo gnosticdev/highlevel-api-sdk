@@ -1,5 +1,5 @@
-import path from 'node:path'
 import kleur from 'kleur'
+import path from 'node:path'
 import { toCamelCase, toPascalCase } from '../src/lib/utils'
 import { formatAndLint } from './script-utils'
 
@@ -78,7 +78,7 @@ import type { HighLevelClientConfig } from './default'
 import { DEFAULT_V2_BASE_URL } from './default'
 import { createClientMaybeAuth } from './client-type-helpers'
 import type { AUTH_HEADERS } from './types'
-// type imports
+
 import type { paths as OauthPaths } from '../types/oauth'
 
 /**

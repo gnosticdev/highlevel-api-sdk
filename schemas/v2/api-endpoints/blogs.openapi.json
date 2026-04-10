@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -88,14 +86,10 @@
             }
           }
         },
-        "tags": [
-          "Blogs"
-        ],
+        "tags": ["Blogs"],
         "security": [
           {
-            "Location-Access": [
-              "blogs/check-slug.readonly"
-            ]
+            "Location-Access": ["blogs/check-slug.readonly"]
           }
         ]
       }
@@ -113,9 +107,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -171,14 +163,10 @@
             }
           }
         },
-        "tags": [
-          "Blogs"
-        ],
+        "tags": ["Blogs"],
         "security": [
           {
-            "Location-Access": [
-              "blogs/post-update.write"
-            ]
+            "Location-Access": ["blogs/post-update.write"]
           }
         ]
       }
@@ -196,9 +184,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -254,14 +240,10 @@
             }
           }
         },
-        "tags": [
-          "Blogs"
-        ],
+        "tags": ["Blogs"],
         "security": [
           {
-            "Location-Access": [
-              "blogs/post.write"
-            ]
+            "Location-Access": ["blogs/post.write"]
           }
         ]
       }
@@ -279,9 +261,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -357,14 +337,10 @@
             }
           }
         },
-        "tags": [
-          "Blogs"
-        ],
+        "tags": ["Blogs"],
         "security": [
           {
-            "Location-Access": [
-              "blogs/author.readonly"
-            ]
+            "Location-Access": ["blogs/author.readonly"]
           }
         ]
       }
@@ -382,9 +358,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -457,14 +431,10 @@
             }
           }
         },
-        "tags": [
-          "Blogs"
-        ],
+        "tags": ["Blogs"],
         "security": [
           {
-            "Location-Access": [
-              "blogs/category.readonly"
-            ]
+            "Location-Access": ["blogs/category.readonly"]
           }
         ]
       }
@@ -482,9 +452,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -539,12 +507,7 @@
             "example": "PUBLISHED",
             "in": "query",
             "schema": {
-              "enum": [
-                "PUBLISHED",
-                "SCHEDULED",
-                "ARCHIVED",
-                "DRAFT"
-              ],
+              "enum": ["PUBLISHED", "SCHEDULED", "ARCHIVED", "DRAFT"],
               "type": "string"
             }
           }
@@ -591,14 +554,10 @@
             }
           }
         },
-        "tags": [
-          "Blogs"
-        ],
+        "tags": ["Blogs"],
         "security": [
           {
-            "Location-Access": [
-              "blogs/posts.readonly"
-            ]
+            "Location-Access": ["blogs/posts.readonly"]
           }
         ]
       }
@@ -616,9 +575,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -701,14 +658,10 @@
             }
           }
         },
-        "tags": [
-          "Blogs"
-        ],
+        "tags": ["Blogs"],
         "security": [
           {
-            "Location-Access": [
-              "blogs/list.readonly"
-            ]
+            "Location-Access": ["blogs/list.readonly"]
           }
         ]
       }
@@ -767,9 +720,7 @@
             "description": "Indicates whether the url slug exists or not"
           }
         },
-        "required": [
-          "exists"
-        ]
+        "required": ["exists"]
       },
       "UpdateBlogPostParams": {
         "type": "object",
@@ -805,12 +756,7 @@
             "schema": {
               "type": "string"
             },
-            "enum": [
-              "DRAFT",
-              "PUBLISHED",
-              "SCHEDULED",
-              "ARCHIVED"
-            ]
+            "enum": ["DRAFT", "PUBLISHED", "SCHEDULED", "ARCHIVED"]
           },
           "imageAltText": {
             "example": "Alt text for your blog image",
@@ -828,10 +774,7 @@
             "description": "This needs to be array of category ids, which you can get from the category get api call."
           },
           "tags": {
-            "example": [
-              "blog",
-              "seo"
-            ],
+            "example": ["blog", "seo"],
             "type": "array",
             "items": {
               "type": "string"
@@ -880,9 +823,7 @@
             "$ref": "#/components/schemas/BlogPostResponseDTO"
           }
         },
-        "required": [
-          "updatedBlogPost"
-        ]
+        "required": ["updatedBlogPost"]
       },
       "CreateBlogPostParams": {
         "type": "object",
@@ -918,12 +859,7 @@
             "schema": {
               "type": "string"
             },
-            "enum": [
-              "DRAFT",
-              "PUBLISHED",
-              "SCHEDULED",
-              "ARCHIVED"
-            ]
+            "enum": ["DRAFT", "PUBLISHED", "SCHEDULED", "ARCHIVED"]
           },
           "imageAltText": {
             "example": "Alt text for your blog image",
@@ -941,10 +877,7 @@
             "description": "This needs to be array of category ids, which you can get from the category get api call."
           },
           "tags": {
-            "example": [
-              "blog",
-              "seo"
-            ],
+            "example": ["blog", "seo"],
             "type": "array",
             "items": {
               "type": "string"
@@ -993,9 +926,7 @@
             "$ref": "#/components/schemas/BlogPostResponseDTO"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "AuthorsResponseDTO": {
         "type": "object",
@@ -1008,9 +939,7 @@
             }
           }
         },
-        "required": [
-          "authors"
-        ]
+        "required": ["authors"]
       },
       "AuthorResponseDTO": {
         "type": "object",
@@ -1036,13 +965,7 @@
             "example": "https://tryghl.blog/post/technology"
           }
         },
-        "required": [
-          "_id",
-          "name",
-          "locationId",
-          "updatedAt",
-          "canonicalLink"
-        ]
+        "required": ["_id", "name", "locationId", "updatedAt", "canonicalLink"]
       },
       "CategoriesResponseDTO": {
         "type": "object",
@@ -1055,9 +978,7 @@
             }
           }
         },
-        "required": [
-          "categories"
-        ]
+        "required": ["categories"]
       },
       "CategoryResponseDTO": {
         "type": "object",
@@ -1107,9 +1028,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "BlogResponseDTO": {
         "type": "object",
@@ -1125,10 +1044,7 @@
             "description": "Name of the blog"
           }
         },
-        "required": [
-          "_id",
-          "name"
-        ]
+        "required": ["_id", "name"]
       },
       "BlogPostGetResponseWrapperDTO": {
         "type": "object",
@@ -1141,18 +1057,13 @@
             }
           }
         },
-        "required": [
-          "blogs"
-        ]
+        "required": ["blogs"]
       },
       "BlogPostResponseDTO": {
         "type": "object",
         "properties": {
           "categories": {
-            "example": [
-              "659ecabc4a37969a2b7cc370",
-              "6683abde331c041f32c07aee"
-            ],
+            "example": ["659ecabc4a37969a2b7cc370", "6683abde331c041f32c07aee"],
             "description": "Array of category IDs associated with the blog post",
             "type": "array",
             "items": {
@@ -1160,10 +1071,7 @@
             }
           },
           "tags": {
-            "example": [
-              "Apple",
-              "Banana"
-            ],
+            "example": ["Apple", "Banana"],
             "description": "Array of tags associated with the blog post",
             "type": "array",
             "items": {
@@ -1249,8 +1157,6 @@
   },
   "x-tagGroups": {
     "name": "Blogs",
-    "tags": [
-      "Blogs"
-    ]
+    "tags": ["Blogs"]
   }
 }

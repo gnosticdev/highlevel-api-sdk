@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -62,14 +60,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Groups"
-        ],
+        "tags": ["Calendar Groups"],
         "security": [
           {
-            "bearer": [
-              "calendars/groups.readonly"
-            ]
+            "bearer": ["calendars/groups.readonly"]
           }
         ]
       },
@@ -85,9 +79,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -133,14 +125,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Groups"
-        ],
+        "tags": ["Calendar Groups"],
         "security": [
           {
-            "bearer": [
-              "calendars/groups.write"
-            ]
+            "bearer": ["calendars/groups.write"]
           }
         ]
       }
@@ -158,9 +146,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -206,14 +192,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Groups"
-        ],
+        "tags": ["Calendar Groups"],
         "security": [
           {
-            "bearer": [
-              "calendars/groups.write"
-            ]
+            "bearer": ["calendars/groups.write"]
           }
         ]
       }
@@ -231,9 +213,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -279,14 +259,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Groups"
-        ],
+        "tags": ["Calendar Groups"],
         "security": [
           {
-            "bearer": [
-              "calendars/groups.write"
-            ]
+            "bearer": ["calendars/groups.write"]
           }
         ]
       },
@@ -302,9 +278,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -360,14 +334,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Groups"
-        ],
+        "tags": ["Calendar Groups"],
         "security": [
           {
-            "bearer": [
-              "calendars/groups.write"
-            ]
+            "bearer": ["calendars/groups.write"]
           }
         ]
       }
@@ -385,9 +355,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -443,14 +411,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Groups"
-        ],
+        "tags": ["Calendar Groups"],
         "security": [
           {
-            "bearer": [
-              "calendars/groups.write"
-            ]
+            "bearer": ["calendars/groups.write"]
           }
         ]
       }
@@ -468,9 +432,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -516,14 +478,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -541,9 +499,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -608,14 +564,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       },
@@ -631,9 +583,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -688,14 +638,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.readonly"
-            ]
+            "bearer": ["calendars/events.readonly"]
           }
         ]
       }
@@ -713,9 +659,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -811,14 +755,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.readonly"
-            ]
+            "bearer": ["calendars/events.readonly"]
           }
         ]
       }
@@ -836,9 +776,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -934,14 +872,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.readonly"
-            ]
+            "bearer": ["calendars/events.readonly"]
           }
         ]
       }
@@ -959,9 +893,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -1007,14 +939,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -1032,9 +960,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1099,14 +1025,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -1124,9 +1046,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1241,14 +1161,10 @@
             }
           }
         },
-        "tags": [
-          "Calendars"
-        ],
+        "tags": ["Calendars"],
         "security": [
           {
-            "bearer": [
-              "calendars.readonly"
-            ]
+            "bearer": ["calendars.readonly"]
           }
         ]
       }
@@ -1266,9 +1182,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1324,14 +1238,10 @@
             }
           }
         },
-        "tags": [
-          "Calendars"
-        ],
+        "tags": ["Calendars"],
         "security": [
           {
-            "bearer": [
-              "calendars.write"
-            ]
+            "bearer": ["calendars.write"]
           }
         ]
       },
@@ -1347,9 +1257,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1395,14 +1303,10 @@
             }
           }
         },
-        "tags": [
-          "Calendars"
-        ],
+        "tags": ["Calendars"],
         "security": [
           {
-            "bearer": [
-              "calendars.readonly"
-            ]
+            "bearer": ["calendars.readonly"]
           }
         ]
       },
@@ -1418,9 +1322,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1466,14 +1368,10 @@
             }
           }
         },
-        "tags": [
-          "Calendars"
-        ],
+        "tags": ["Calendars"],
         "security": [
           {
-            "bearer": [
-              "calendars.write"
-            ]
+            "bearer": ["calendars.write"]
           }
         ]
       }
@@ -1491,9 +1389,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1558,14 +1454,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Events"
-        ],
+        "tags": ["Calendar Events"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -1583,9 +1475,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1652,14 +1542,10 @@
             }
           }
         },
-        "tags": [
-          "Appointment Notes"
-        ],
+        "tags": ["Appointment Notes"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.readonly"
-            ]
+            "bearer": ["calendars/events.readonly"]
           }
         ]
       },
@@ -1675,9 +1561,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1732,14 +1616,10 @@
             }
           }
         },
-        "tags": [
-          "Appointment Notes"
-        ],
+        "tags": ["Appointment Notes"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -1757,9 +1637,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1814,14 +1692,10 @@
             }
           }
         },
-        "tags": [
-          "Appointment Notes"
-        ],
+        "tags": ["Appointment Notes"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       },
@@ -1837,9 +1711,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1884,14 +1756,10 @@
             }
           }
         },
-        "tags": [
-          "Appointment Notes"
-        ],
+        "tags": ["Appointment Notes"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -1909,9 +1777,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -1920,10 +1786,7 @@
             "in": "path",
             "description": "Calendar Resource Type",
             "schema": {
-              "enum": [
-                "equipments",
-                "rooms"
-              ],
+              "enum": ["equipments", "rooms"],
               "type": "string"
             }
           },
@@ -1969,14 +1832,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Resources: Rooms & Equipments"
-        ],
+        "tags": ["Calendar Resources: Rooms & Equipments"],
         "security": [
           {
-            "Location-Access": [
-              "calendars/resources.readonly"
-            ]
+            "Location-Access": ["calendars/resources.readonly"]
           }
         ]
       },
@@ -1992,9 +1851,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2003,10 +1860,7 @@
             "in": "path",
             "description": "Calendar Resource Type",
             "schema": {
-              "enum": [
-                "equipments",
-                "rooms"
-              ],
+              "enum": ["equipments", "rooms"],
               "type": "string"
             }
           },
@@ -2062,14 +1916,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Resources: Rooms & Equipments"
-        ],
+        "tags": ["Calendar Resources: Rooms & Equipments"],
         "security": [
           {
-            "Location-Access": [
-              "calendars/resources.write"
-            ]
+            "Location-Access": ["calendars/resources.write"]
           }
         ]
       },
@@ -2085,9 +1935,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2096,10 +1944,7 @@
             "in": "path",
             "description": "Calendar Resource Type",
             "schema": {
-              "enum": [
-                "equipments",
-                "rooms"
-              ],
+              "enum": ["equipments", "rooms"],
               "type": "string"
             }
           },
@@ -2145,14 +1990,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Resources: Rooms & Equipments"
-        ],
+        "tags": ["Calendar Resources: Rooms & Equipments"],
         "security": [
           {
-            "Location-Access": [
-              "calendars/resources.write"
-            ]
+            "Location-Access": ["calendars/resources.write"]
           }
         ]
       }
@@ -2170,9 +2011,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2181,10 +2020,7 @@
             "in": "path",
             "description": "Calendar Resource Type",
             "schema": {
-              "enum": [
-                "equipments",
-                "rooms"
-              ],
+              "enum": ["equipments", "rooms"],
               "type": "string"
             }
           },
@@ -2248,14 +2084,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Resources: Rooms & Equipments"
-        ],
+        "tags": ["Calendar Resources: Rooms & Equipments"],
         "security": [
           {
-            "Location-Access": [
-              "calendars/resources.readonly"
-            ]
+            "Location-Access": ["calendars/resources.readonly"]
           }
         ]
       },
@@ -2271,9 +2103,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2282,10 +2112,7 @@
             "in": "path",
             "description": "Calendar Resource Type",
             "schema": {
-              "enum": [
-                "equipments",
-                "rooms"
-              ],
+              "enum": ["equipments", "rooms"],
               "type": "string"
             }
           }
@@ -2332,14 +2159,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Resources: Rooms & Equipments"
-        ],
+        "tags": ["Calendar Resources: Rooms & Equipments"],
         "security": [
           {
-            "Location-Access": [
-              "calendars/resources.write"
-            ]
+            "Location-Access": ["calendars/resources.write"]
           }
         ]
       }
@@ -2357,9 +2180,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2442,14 +2263,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Notifications"
-        ],
+        "tags": ["Calendar Notifications"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.readonly"
-            ]
+            "bearer": ["calendars/events.readonly"]
           }
         ]
       },
@@ -2465,9 +2282,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2527,14 +2342,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Notifications"
-        ],
+        "tags": ["Calendar Notifications"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -2552,9 +2363,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2606,14 +2415,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Notifications"
-        ],
+        "tags": ["Calendar Notifications"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.readonly"
-            ]
+            "bearer": ["calendars/events.readonly"]
           }
         ]
       },
@@ -2629,9 +2434,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2693,14 +2496,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Notifications"
-        ],
+        "tags": ["Calendar Notifications"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       },
@@ -2716,9 +2515,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2770,14 +2567,10 @@
             }
           }
         },
-        "tags": [
-          "Calendar Notifications"
-        ],
+        "tags": ["Calendar Notifications"],
         "security": [
           {
-            "bearer": [
-              "calendars/events.write"
-            ]
+            "bearer": ["calendars/events.write"]
           }
         ]
       }
@@ -2795,9 +2588,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           },
           {
@@ -2864,14 +2655,10 @@
             }
           }
         },
-        "tags": [
-          "Calendars"
-        ],
+        "tags": ["Calendars"],
         "security": [
           {
-            "bearer": [
-              "calendars.readonly"
-            ]
+            "bearer": ["calendars.readonly"]
           }
         ]
       },
@@ -2887,9 +2674,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-04-15"
-              ]
+              "enum": ["2021-04-15"]
             }
           }
         ],
@@ -2935,14 +2720,10 @@
             }
           }
         },
-        "tags": [
-          "Calendars"
-        ],
+        "tags": ["Calendars"],
         "security": [
           {
-            "bearer": [
-              "calendars.write"
-            ]
+            "bearer": ["calendars.write"]
           }
         ]
       }
@@ -3057,12 +2838,7 @@
             "example": "ocQHyuzHvysMo5N5VsXc"
           }
         },
-        "required": [
-          "locationId",
-          "name",
-          "description",
-          "slug"
-        ]
+        "required": ["locationId", "name", "description", "slug"]
       },
       "AllGroupsSuccessfulResponseDTO": {
         "type": "object",
@@ -3089,10 +2865,7 @@
             "example": "calendar-1"
           }
         },
-        "required": [
-          "locationId",
-          "slug"
-        ]
+        "required": ["locationId", "slug"]
       },
       "ValidateGroupSlugSuccessResponseDTO": {
         "type": "object",
@@ -3101,9 +2874,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "available"
-        ]
+        "required": ["available"]
       },
       "GroupCreateDTO": {
         "type": "object",
@@ -3129,12 +2900,7 @@
             "example": true
           }
         },
-        "required": [
-          "locationId",
-          "name",
-          "description",
-          "slug"
-        ]
+        "required": ["locationId", "name", "description", "slug"]
       },
       "GroupCreateSuccessfulResponseDTO": {
         "type": "object",
@@ -3163,9 +2929,7 @@
             "example": true
           }
         },
-        "required": [
-          "isActive"
-        ]
+        "required": ["isActive"]
       },
       "GroupUpdateDTO": {
         "type": "object",
@@ -3183,11 +2947,7 @@
             "example": "15-mins"
           }
         },
-        "required": [
-          "name",
-          "description",
-          "slug"
-        ]
+        "required": ["name", "description", "slug"]
       },
       "AppointmentCreateSchema": {
         "type": "object",
@@ -3298,12 +3058,7 @@
             "example": "2021-06-23T04:30:00+05:30"
           }
         },
-        "required": [
-          "calendarId",
-          "locationId",
-          "contactId",
-          "startTime"
-        ]
+        "required": ["calendarId", "locationId", "contactId", "startTime"]
       },
       "AppointmentSchemaResponse": {
         "type": "object",
@@ -3387,12 +3142,7 @@
             "example": "0TkCdp9PfvLeWKYRRvIz"
           }
         },
-        "required": [
-          "calendarId",
-          "locationId",
-          "contactId",
-          "id"
-        ]
+        "required": ["calendarId", "locationId", "contactId", "id"]
       },
       "AppointmentEditSchema": {
         "type": "object",
@@ -3506,9 +3256,7 @@
             "description": "The source of the appointment"
           }
         },
-        "required": [
-          "source"
-        ]
+        "required": ["source"]
       },
       "CalendarEventDTO": {
         "type": "object",
@@ -3563,10 +3311,7 @@
           },
           "users": {
             "description": "Users - the secondary owners of an appointment.",
-            "example": [
-              "YlWd2wuCAZQzh2cH1fVZ",
-              "9NkT25Vor1v4aQatFsv2"
-            ],
+            "example": ["YlWd2wuCAZQzh2cH1fVZ", "9NkT25Vor1v4aQatFsv2"],
             "type": "array",
             "items": {
               "type": "string"
@@ -3697,10 +3442,7 @@
             "example": "2021-06-23T04:30:00+05:30"
           }
         },
-        "required": [
-          "calendarId",
-          "locationId"
-        ]
+        "required": ["calendarId", "locationId"]
       },
       "BlockedSlotSuccessfulResponseDto": {
         "type": "object",
@@ -3741,13 +3483,7 @@
             "example": "0007BWpSzSwfiuSl0tR2"
           }
         },
-        "required": [
-          "id",
-          "locationId",
-          "title",
-          "startTime",
-          "endTime"
-        ]
+        "required": ["id", "locationId", "title", "startTime", "endTime"]
       },
       "BlockSlotEditRequestDTO": {
         "type": "object",
@@ -3783,10 +3519,7 @@
             "example": "2021-06-23T04:30:00+05:30"
           }
         },
-        "required": [
-          "calendarId",
-          "locationId"
-        ]
+        "required": ["calendarId", "locationId"]
       },
       "SlotsSchema": {
         "type": "object",
@@ -3802,9 +3535,7 @@
             }
           }
         },
-        "required": [
-          "slots"
-        ]
+        "required": ["slots"]
       },
       "CalendarNotification": {
         "type": "object",
@@ -3813,9 +3544,7 @@
             "type": "string",
             "description": "Calendar Notification",
             "example": "email",
-            "enum": [
-              "email"
-            ],
+            "enum": ["email"],
             "default": "email"
           },
           "shouldSendToContact": {
@@ -3871,9 +3600,7 @@
             ]
           }
         },
-        "required": [
-          "kind"
-        ]
+        "required": ["kind"]
       },
       "TeamMember": {
         "type": "object",
@@ -3885,11 +3612,7 @@
           "priority": {
             "type": "number",
             "default": 0.5,
-            "enum": [
-              0,
-              0.5,
-              1
-            ]
+            "enum": [0, 0.5, 1]
           },
           "meetingLocationType": {
             "type": "string",
@@ -3926,9 +3649,7 @@
             }
           }
         },
-        "required": [
-          "userId"
-        ]
+        "required": ["userId"]
       },
       "Hour": {
         "type": "object",
@@ -3954,12 +3675,7 @@
             "maximum": 60
           }
         },
-        "required": [
-          "openHour",
-          "openMinute",
-          "closeHour",
-          "closeMinute"
-        ]
+        "required": ["openHour", "openMinute", "closeHour", "closeMinute"]
       },
       "OpenHour": {
         "type": "object",
@@ -3979,21 +3695,14 @@
             }
           }
         },
-        "required": [
-          "daysOfTheWeek",
-          "hours"
-        ]
+        "required": ["daysOfTheWeek", "hours"]
       },
       "Recurring": {
         "type": "object",
         "properties": {
           "freq": {
             "type": "string",
-            "enum": [
-              "DAILY",
-              "WEEKLY",
-              "MONTHLY"
-            ]
+            "enum": ["DAILY", "WEEKLY", "MONTHLY"]
           },
           "count": {
             "type": "number",
@@ -4003,19 +3712,12 @@
           "bookingOption": {
             "type": "string",
             "description": "This setting contols what to do incase a recurring slot is unavailable",
-            "enum": [
-              "skip",
-              "continue",
-              "book_next"
-            ]
+            "enum": ["skip", "continue", "book_next"]
           },
           "bookingOverlapDefaultStatus": {
             "type": "string",
             "description": "This setting contols what to do incase a recurring slot is unavailable",
-            "enum": [
-              "confirmed",
-              "new"
-            ]
+            "enum": ["confirmed", "new"]
           }
         }
       },
@@ -4038,10 +3740,7 @@
             "default": false
           }
         },
-        "required": [
-          "date",
-          "hours"
-        ]
+        "required": ["date", "hours"]
       },
       "LookBusyConfiguration": {
         "type": "object",
@@ -4057,10 +3756,7 @@
             "description": "Percentage of slots that will be hidden"
           }
         },
-        "required": [
-          "enabled",
-          "LookBusyPercentage"
-        ]
+        "required": ["enabled", "LookBusyPercentage"]
       },
       "CalendarCreateDTO": {
         "type": "object",
@@ -4133,10 +3829,7 @@
             "type": "string",
             "description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout.",
             "example": "classic",
-            "enum": [
-              "default",
-              "classic"
-            ],
+            "enum": ["default", "classic"],
             "default": "classic"
           },
           "eventTitle": {
@@ -4168,10 +3861,7 @@
           "slotDurationUnit": {
             "type": "string",
             "description": "Unit for slot duration.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "slotInterval": {
             "type": "number",
@@ -4181,10 +3871,7 @@
           "slotIntervalUnit": {
             "type": "string",
             "description": "Unit for slot interval.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "slotBuffer": {
             "type": "number",
@@ -4193,10 +3880,7 @@
           "slotBufferUnit": {
             "type": "string",
             "description": "Unit for slot buffer.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "preBuffer": {
             "type": "number",
@@ -4205,10 +3889,7 @@
           "preBufferUnit": {
             "type": "string",
             "description": "Unit for pre-buffer.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "appoinmentPerSlot": {
             "type": "number",
@@ -4226,12 +3907,7 @@
           "allowBookingAfterUnit": {
             "type": "string",
             "description": "Unit for minimum scheduling notice",
-            "enum": [
-              "hours",
-              "days",
-              "weeks",
-              "months"
-            ],
+            "enum": ["hours", "days", "weeks", "months"],
             "example": "days"
           },
           "allowBookingFor": {
@@ -4241,11 +3917,7 @@
           "allowBookingForUnit": {
             "type": "string",
             "description": "Unit for controlling the duration for which booking would be allowed for",
-            "enum": [
-              "days",
-              "weeks",
-              "months"
-            ],
+            "enum": ["days", "weeks", "months"],
             "example": "days"
           },
           "openHours": {
@@ -4309,10 +3981,7 @@
           "formSubmitType": {
             "type": "string",
             "default": "ThankYouMessage",
-            "enum": [
-              "RedirectURL",
-              "ThankYouMessage"
-            ]
+            "enum": ["RedirectURL", "ThankYouMessage"]
           },
           "formSubmitRedirectURL": {
             "type": "string"
@@ -4323,10 +3992,7 @@
           "availabilityType": {
             "type": "number",
             "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both custom availabilities and open hours will be considered.",
-            "enum": [
-              0,
-              1
-            ]
+            "enum": [0, 1]
           },
           "availabilities": {
             "description": "This is only to set the custom availability. For standard availability, use the openHours property",
@@ -4337,10 +4003,7 @@
           },
           "guestType": {
             "type": "string",
-            "enum": [
-              "count_only",
-              "collect_detail"
-            ]
+            "enum": ["count_only", "collect_detail"]
           },
           "consentLabel": {
             "type": "string"
@@ -4358,10 +4021,7 @@
             ]
           }
         },
-        "required": [
-          "locationId",
-          "name"
-        ]
+        "required": ["locationId", "name"]
       },
       "LocationConfigurationResponse": {
         "type": "object",
@@ -4395,9 +4055,7 @@
             "example": "my_conference_id"
           }
         },
-        "required": [
-          "kind"
-        ]
+        "required": ["kind"]
       },
       "TeamMemberResponse": {
         "type": "object",
@@ -4409,11 +4067,7 @@
           "priority": {
             "type": "number",
             "default": 0.5,
-            "enum": [
-              0,
-              0.5,
-              1
-            ]
+            "enum": [0, 0.5, 1]
           },
           "meetingLocationType": {
             "type": "string",
@@ -4450,9 +4104,7 @@
             }
           }
         },
-        "required": [
-          "userId"
-        ]
+        "required": ["userId"]
       },
       "CalendarDTO": {
         "type": "object",
@@ -4525,10 +4177,7 @@
             "type": "string",
             "description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout.",
             "example": "classic",
-            "enum": [
-              "default",
-              "classic"
-            ],
+            "enum": ["default", "classic"],
             "default": "classic"
           },
           "eventTitle": {
@@ -4560,10 +4209,7 @@
           "slotDurationUnit": {
             "type": "string",
             "description": "Unit for slot duration.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "slotInterval": {
             "type": "number",
@@ -4573,10 +4219,7 @@
           "slotIntervalUnit": {
             "type": "string",
             "description": "Unit for slot interval.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "slotBuffer": {
             "type": "number",
@@ -4585,10 +4228,7 @@
           "slotBufferUnit": {
             "type": "string",
             "description": "Unit for slot buffer.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "preBuffer": {
             "type": "number",
@@ -4597,10 +4237,7 @@
           "preBufferUnit": {
             "type": "string",
             "description": "Unit for pre-buffer.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "appoinmentPerSlot": {
             "type": "number",
@@ -4618,12 +4255,7 @@
           "allowBookingAfterUnit": {
             "type": "string",
             "description": "Unit for minimum scheduling notice",
-            "enum": [
-              "hours",
-              "days",
-              "weeks",
-              "months"
-            ],
+            "enum": ["hours", "days", "weeks", "months"],
             "example": "days"
           },
           "allowBookingFor": {
@@ -4633,11 +4265,7 @@
           "allowBookingForUnit": {
             "type": "string",
             "description": "Unit for controlling the duration for which booking would be allowed for",
-            "enum": [
-              "days",
-              "weeks",
-              "months"
-            ],
+            "enum": ["days", "weeks", "months"],
             "example": "days"
           },
           "openHours": {
@@ -4701,10 +4329,7 @@
           "formSubmitType": {
             "type": "string",
             "default": "ThankYouMessage",
-            "enum": [
-              "RedirectURL",
-              "ThankYouMessage"
-            ]
+            "enum": ["RedirectURL", "ThankYouMessage"]
           },
           "formSubmitRedirectURL": {
             "type": "string"
@@ -4715,10 +4340,7 @@
           "availabilityType": {
             "type": "number",
             "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both custom availabilities and open hours will be considered.",
-            "enum": [
-              0,
-              1
-            ]
+            "enum": [0, 1]
           },
           "availabilities": {
             "description": "This is only to set the custom availability. For standard availability, use the openHours property",
@@ -4729,10 +4351,7 @@
           },
           "guestType": {
             "type": "string",
-            "enum": [
-              "count_only",
-              "collect_detail"
-            ]
+            "enum": ["count_only", "collect_detail"]
           },
           "consentLabel": {
             "type": "string"
@@ -4754,11 +4373,7 @@
             "example": "0TkCdp9PfvLeWKYRRvIz"
           }
         },
-        "required": [
-          "locationId",
-          "name",
-          "id"
-        ]
+        "required": ["locationId", "name", "id"]
       },
       "CalendarsGetSuccessfulResponseDTO": {
         "type": "object",
@@ -4778,9 +4393,7 @@
             "$ref": "#/components/schemas/CalendarDTO"
           }
         },
-        "required": [
-          "calendar"
-        ]
+        "required": ["calendar"]
       },
       "UpdateAvailability": {
         "type": "object",
@@ -4805,10 +4418,7 @@
             "description": "The ID of the custom availability object. It is required while updating or deleting the existing custom date availability"
           }
         },
-        "required": [
-          "date",
-          "hours"
-        ]
+        "required": ["date", "hours"]
       },
       "CalendarUpdateDTO": {
         "type": "object",
@@ -4860,10 +4470,7 @@
             "type": "string",
             "description": "Calendar widget type. Choose \"default\" for \"neo\" and \"classic\" for \"classic\" layout.",
             "example": "classic",
-            "enum": [
-              "default",
-              "classic"
-            ],
+            "enum": ["default", "classic"],
             "default": "classic"
           },
           "eventTitle": {
@@ -4894,18 +4501,12 @@
           "slotDurationUnit": {
             "type": "string",
             "description": "Unit for slot duration.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "preBufferUnit": {
             "type": "string",
             "description": "Unit for pre-buffer.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "slotInterval": {
             "type": "number",
@@ -4915,10 +4516,7 @@
           "slotIntervalUnit": {
             "type": "string",
             "description": "Unit for slot interval.",
-            "enum": [
-              "mins",
-              "hours"
-            ]
+            "enum": ["mins", "hours"]
           },
           "slotBuffer": {
             "type": "number",
@@ -4942,12 +4540,7 @@
           "allowBookingAfterUnit": {
             "type": "string",
             "description": "Unit for minimum scheduling notice",
-            "enum": [
-              "hours",
-              "days",
-              "weeks",
-              "months"
-            ],
+            "enum": ["hours", "days", "weeks", "months"],
             "example": "days"
           },
           "allowBookingFor": {
@@ -4957,11 +4550,7 @@
           "allowBookingForUnit": {
             "type": "string",
             "description": "Unit for controlling the duration for which booking would be allowed for",
-            "enum": [
-              "days",
-              "weeks",
-              "months"
-            ],
+            "enum": ["days", "weeks", "months"],
             "example": "days"
           },
           "openHours": {
@@ -5020,10 +4609,7 @@
           "formSubmitType": {
             "type": "string",
             "default": "ThankYouMessage",
-            "enum": [
-              "RedirectURL",
-              "ThankYouMessage"
-            ]
+            "enum": ["RedirectURL", "ThankYouMessage"]
           },
           "formSubmitRedirectURL": {
             "type": "string"
@@ -5034,10 +4620,7 @@
           "availabilityType": {
             "type": "number",
             "description": "Determines which availability type to consider:\n- **1**: Only custom availabilities will be used.\n- **0**: Only open hours will be used.\n- **null**: Both the custom availabilities and open hours will be considered.",
-            "enum": [
-              0,
-              1
-            ]
+            "enum": [0, 1]
           },
           "availabilities": {
             "description": "This is only to set the custom availability. For standard availability, use the openHours property",
@@ -5048,10 +4631,7 @@
           },
           "guestType": {
             "type": "string",
-            "enum": [
-              "count_only",
-              "collect_detail"
-            ]
+            "enum": ["count_only", "collect_detail"]
           },
           "consentLabel": {
             "type": "string"
@@ -5081,9 +4661,7 @@
             "example": "true"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "GetCalendarEventSuccessfulResponseDTO": {
         "type": "object",
@@ -5176,9 +4754,7 @@
             "maxLength": 5000
           }
         },
-        "required": [
-          "body"
-        ]
+        "required": ["body"]
       },
       "GetCreateUpdateNoteSuccessfulResponseDto": {
         "type": "object",
@@ -5211,10 +4787,7 @@
           },
           "resourceType": {
             "type": "string",
-            "enum": [
-              "equipments",
-              "rooms"
-            ]
+            "enum": ["equipments", "rooms"]
           },
           "isActive": {
             "type": "boolean",
@@ -5240,10 +4813,7 @@
           },
           "calendarIds": {
             "description": "Calendar IDs",
-            "example": [
-              "Jsj0xnlDDjw0SuvX1J13",
-              "oCM5feFC86FAAbcO7lJK"
-            ],
+            "example": ["Jsj0xnlDDjw0SuvX1J13", "oCM5feFC86FAAbcO7lJK"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5309,10 +4879,7 @@
           },
           "resourceType": {
             "type": "string",
-            "enum": [
-              "equipments",
-              "rooms"
-            ]
+            "enum": ["equipments", "rooms"]
           },
           "isActive": {
             "type": "boolean",
@@ -5337,12 +4904,7 @@
             "example": 85
           }
         },
-        "required": [
-          "locationId",
-          "name",
-          "resourceType",
-          "isActive"
-        ]
+        "required": ["locationId", "name", "resourceType", "isActive"]
       },
       "ResourceDeleteResponseDTO": {
         "type": "object",
@@ -5427,20 +4989,14 @@
             ]
           },
           "additionalEmailIds": {
-            "example": [
-              "example1@email.com",
-              "example2@email.com"
-            ],
+            "example": ["example1@email.com", "example2@email.com"],
             "type": "array",
             "items": {
               "type": "string"
             }
           },
           "additionalPhoneNumbers": {
-            "example": [
-              "+919876744444",
-              "+919876744445"
-            ],
+            "example": ["+919876744444", "+919876744445"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5449,12 +5005,7 @@
           "channel": {
             "type": "string",
             "example": "email",
-            "enum": [
-              "email",
-              "inApp",
-              "sms",
-              "whatsapp"
-            ]
+            "enum": ["email", "inApp", "sms", "whatsapp"]
           },
           "notificationType": {
             "type": "string",
@@ -5473,10 +5024,7 @@
             "example": true
           },
           "additionalWhatsappNumbers": {
-            "example": [
-              "+919876744444",
-              "+919876744445"
-            ],
+            "example": ["+919876744444", "+919876744445"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5519,10 +5067,7 @@
             }
           },
           "selectedUsers": {
-            "example": [
-              "user1",
-              "user2"
-            ],
+            "example": ["user1", "user2"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5551,12 +5096,7 @@
           "channel": {
             "type": "string",
             "description": "Notification channel",
-            "enum": [
-              "email",
-              "inApp",
-              "sms",
-              "whatsapp"
-            ]
+            "enum": ["email", "inApp", "sms", "whatsapp"]
           },
           "notificationType": {
             "type": "string",
@@ -5615,10 +5155,7 @@
           },
           "additionalEmailIds": {
             "description": "Additional email addresses to receive notifications.",
-            "example": [
-              "example1@email.com",
-              "example2@email.com"
-            ],
+            "example": ["example1@email.com", "example2@email.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5626,10 +5163,7 @@
           },
           "additionalPhoneNumbers": {
             "description": "Additional phone numbers to receive notifications.",
-            "example": [
-              "+919876744444",
-              "+919876744445"
-            ],
+            "example": ["+919876744444", "+919876744445"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5655,11 +5189,7 @@
             "description": "from number for sms notification"
           }
         },
-        "required": [
-          "receiverType",
-          "channel",
-          "notificationType"
-        ]
+        "required": ["receiverType", "channel", "notificationType"]
       },
       "UpdateCalendarNotificationsDTO": {
         "type": "object",
@@ -5677,10 +5207,7 @@
           },
           "additionalEmailIds": {
             "description": "Additional email addresses to receive notifications.",
-            "example": [
-              "example1@email.com",
-              "example2@email.com"
-            ],
+            "example": ["example1@email.com", "example2@email.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5688,10 +5215,7 @@
           },
           "additionalPhoneNumbers": {
             "description": "Additional phone numbers to receive notifications.",
-            "example": [
-              "+919876744444",
-              "+919876744445"
-            ],
+            "example": ["+919876744444", "+919876744445"],
             "type": "array",
             "items": {
               "type": "string"
@@ -5707,12 +5231,7 @@
           "channel": {
             "type": "string",
             "description": "Notification channel",
-            "enum": [
-              "email",
-              "inApp",
-              "sms",
-              "whatsapp"
-            ]
+            "enum": ["email", "inApp", "sms", "whatsapp"]
           },
           "notificationType": {
             "type": "string",
@@ -5796,9 +5315,7 @@
             "description": "Result of delete/update operation"
           }
         },
-        "required": [
-          "message"
-        ]
+        "required": ["message"]
       }
     }
   },

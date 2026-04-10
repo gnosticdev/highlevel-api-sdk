@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -133,14 +131,10 @@
             }
           }
         },
-        "tags": [
-          "Forms"
-        ],
+        "tags": ["Forms"],
         "security": [
           {
-            "bearer": [
-              "forms.readonly"
-            ]
+            "bearer": ["forms.readonly"]
           }
         ]
       }
@@ -158,9 +152,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -215,19 +207,13 @@
             }
           }
         },
-        "tags": [
-          "Forms"
-        ],
+        "tags": ["Forms"],
         "security": [
           {
-            "bearer": [
-              "forms.write"
-            ]
+            "bearer": ["forms.write"]
           },
           {
-            "Location-Access": [
-              "forms.write"
-            ]
+            "Location-Access": ["forms.write"]
           }
         ]
       }
@@ -245,9 +231,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -321,14 +305,10 @@
             }
           }
         },
-        "tags": [
-          "Forms"
-        ],
+        "tags": ["Forms"],
         "security": [
           {
-            "bearer": [
-              "forms.readonly"
-            ]
+            "bearer": ["forms.readonly"]
           }
         ]
       }
@@ -396,10 +376,7 @@
         "type": "object",
         "properties": {
           "ids": {
-            "example": [
-              "session1",
-              "session2"
-            ],
+            "example": ["session1", "session2"],
             "nullable": true,
             "type": "array",
             "items": {
@@ -623,8 +600,6 @@
   },
   "x-tagGroups": {
     "name": "Forms",
-    "tags": [
-      "Forms"
-    ]
+    "tags": ["Forms"]
   }
 }

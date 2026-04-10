@@ -442,11 +442,7 @@
             "example": "john.doe@mail.com"
           }
         },
-        "required": [
-          "firstName",
-          "lastName",
-          "email"
-        ]
+        "required": ["firstName", "lastName", "email"]
       },
       "TwilioSchema": {
         "type": "object",
@@ -462,10 +458,7 @@
             "example": "77_XXXXXXXXXXX"
           }
         },
-        "required": [
-          "sid",
-          "authToken"
-        ]
+        "required": ["sid", "authToken"]
       },
       "MailgunSchema": {
         "type": "object",
@@ -481,10 +474,7 @@
             "example": "replies.yourdomain.com"
           }
         },
-        "required": [
-          "apiKey",
-          "domain"
-        ]
+        "required": ["apiKey", "domain"]
       },
       "CreateLocationDto": {
         "type": "object",
@@ -838,10 +828,7 @@
             "example": "XXXXXXXXXXX"
           }
         },
-        "required": [
-          "name",
-          "companyId"
-        ]
+        "required": ["name", "companyId"]
       },
       "CreateLocationSuccessfulResponseDto": {
         "type": "object",
@@ -1192,9 +1179,7 @@
             "default": false
           }
         },
-        "required": [
-          "id"
-        ]
+        "required": ["id"]
       },
       "UpdateLocationDto": {
         "type": "object",
@@ -1551,9 +1536,7 @@
             ]
           }
         },
-        "required": [
-          "companyId"
-        ]
+        "required": ["companyId"]
       },
       "LocationDeletedSuccessfulResponseDto": {
         "type": "object",
@@ -1569,10 +1552,7 @@
             "example": "Deleted location with id: ve9EPM428h8vShlRW1KT"
           }
         },
-        "required": [
-          "success",
-          "message"
-        ]
+        "required": ["success", "message"]
       },
       "LocationTagsSchema": {
         "type": "object",
@@ -1619,9 +1599,7 @@
             "example": "Tag"
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "LocationTagDeleteSuccessfulResponseDto": {
         "type": "object",
@@ -1637,10 +1615,7 @@
         "properties": {
           "contactId": {
             "description": "Contact Ids",
-            "example": [
-              "dSMo5jnqkJyh8YeGXM7k",
-              "j5WESpmRj816VtyUuWwh"
-            ],
+            "example": ["dSMo5jnqkJyh8YeGXM7k", "j5WESpmRj816VtyUuWwh"],
             "type": "array",
             "items": {
               "type": "string"
@@ -1653,9 +1628,7 @@
           },
           "assignedTo": {
             "description": "Assigned User Ids",
-            "example": [
-              "0004Mtfsd11SBU1mBPgd"
-            ],
+            "example": ["0004Mtfsd11SBU1mBPgd"],
             "type": "array",
             "items": {
               "type": "string"
@@ -1724,9 +1697,7 @@
             "example": 0
           },
           "picklistOptions": {
-            "example": [
-              "first option"
-            ],
+            "example": ["first option"],
             "type": "array",
             "items": {
               "type": "string"
@@ -1759,10 +1730,7 @@
             "type": "string",
             "description": "Model of the custom field",
             "example": "opportunity",
-            "enum": [
-              "contact",
-              "opportunity"
-            ]
+            "enum": ["contact", "opportunity"]
           }
         }
       },
@@ -1814,11 +1782,7 @@
             "example": "Placeholder Text"
           },
           "acceptedFormat": {
-            "example": [
-              ".pdf",
-              ".docx",
-              ".jpeg"
-            ],
+            "example": [".pdf", ".docx", ".jpeg"],
             "type": "array",
             "items": {
               "type": "string"
@@ -1854,16 +1818,10 @@
             "type": "string",
             "description": "Model of the custom field you want to create",
             "example": "opportunity",
-            "enum": [
-              "contact",
-              "opportunity"
-            ]
+            "enum": ["contact", "opportunity"]
           }
         },
-        "required": [
-          "name",
-          "dataType"
-        ]
+        "required": ["name", "dataType"]
       },
       "UpdateCustomFieldsDTO": {
         "type": "object",
@@ -1877,11 +1835,7 @@
             "example": "Placeholder Text"
           },
           "acceptedFormat": {
-            "example": [
-              ".pdf",
-              ".docx",
-              ".jpeg"
-            ],
+            "example": [".pdf", ".docx", ".jpeg"],
             "type": "array",
             "items": {
               "type": "string"
@@ -1917,15 +1871,10 @@
             "type": "string",
             "description": "Model of the custom field you want to update",
             "example": "opportunity",
-            "enum": [
-              "contact",
-              "opportunity"
-            ]
+            "enum": ["contact", "opportunity"]
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "CustomFieldDeleteSuccessfulResponseDto": {
         "type": "object",
@@ -2036,10 +1985,7 @@
             "example": "Value"
           }
         },
-        "required": [
-          "name",
-          "value"
-        ]
+        "required": ["name", "value"]
       },
       "CustomValueDeleteSuccessfulResponseDto": {
         "type": "object",
@@ -2176,13 +2122,7 @@
         "properties": {
           "intervalType": {
             "type": "string",
-            "enum": [
-              "yearly",
-              "monthly",
-              "weekly",
-              "daily",
-              "hourly"
-            ],
+            "enum": ["yearly", "monthly", "weekly", "daily", "hourly"],
             "example": "monthly"
           },
           "interval": {
@@ -2206,15 +2146,7 @@
           },
           "dayOfWeek": {
             "type": "string",
-            "enum": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA",
-              "SU"
-            ],
+            "enum": ["MO", "TU", "WE", "TH", "FR", "SA", "SU"],
             "example": "MO"
           },
           "monthOfYear": {
@@ -2238,12 +2170,7 @@
             "description": "Due after seconds"
           }
         },
-        "required": [
-          "intervalType",
-          "interval",
-          "startDate",
-          "dueAfterSeconds"
-        ]
+        "required": ["intervalType", "interval", "startDate", "dueAfterSeconds"]
       },
       "RecurringTaskResponseDTO": {
         "type": "object",
@@ -2339,9 +2266,7 @@
             ]
           }
         },
-        "required": [
-          "recurringTask"
-        ]
+        "required": ["recurringTask"]
       },
       "RecurringTaskCreateDTO": {
         "type": "object",
@@ -2357,9 +2282,7 @@
             "description": "Description of the task"
           },
           "contactIds": {
-            "example": [
-              "sx6wyHhbFdRXh302Lunr"
-            ],
+            "example": ["sx6wyHhbFdRXh302Lunr"],
             "description": "Contact Id",
             "type": "array",
             "items": {
@@ -2367,9 +2290,7 @@
             }
           },
           "owners": {
-            "example": [
-              "sx6wyHhbFdRXh302Lunr"
-            ],
+            "example": ["sx6wyHhbFdRXh302Lunr"],
             "description": "Assigned To",
             "type": "array",
             "items": {
@@ -2396,10 +2317,7 @@
             "description": "Create initial task or not"
           }
         },
-        "required": [
-          "title",
-          "rruleOptions"
-        ]
+        "required": ["title", "rruleOptions"]
       },
       "RecurringTaskUpdateDTO": {
         "type": "object",
@@ -2415,9 +2333,7 @@
             "description": "Description of the task"
           },
           "contactIds": {
-            "example": [
-              "sx6wyHhbFdRXh302Lunr"
-            ],
+            "example": ["sx6wyHhbFdRXh302Lunr"],
             "description": "Contact Id",
             "type": "array",
             "items": {
@@ -2425,9 +2341,7 @@
             }
           },
           "owners": {
-            "example": [
-              "sx6wyHhbFdRXh302Lunr"
-            ],
+            "example": ["sx6wyHhbFdRXh302Lunr"],
             "description": "Assigned To",
             "type": "array",
             "items": {
@@ -2469,10 +2383,7 @@
             "description": "Success"
           }
         },
-        "required": [
-          "id",
-          "success"
-        ]
+        "required": ["id", "success"]
       }
     }
   },
@@ -2490,9 +2401,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2590,19 +2499,13 @@
             }
           }
         },
-        "tags": [
-          "Search"
-        ],
+        "tags": ["Search"],
         "security": [
           {
-            "Agency-Access": [
-              "locations.readonly"
-            ]
+            "Agency-Access": ["locations.readonly"]
           },
           {
-            "Location-Access": [
-              "locations.readonly"
-            ]
+            "Location-Access": ["locations.readonly"]
           }
         ]
       }
@@ -2620,9 +2523,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2678,19 +2579,13 @@
             }
           }
         },
-        "tags": [
-          "Sub-Account (Formerly Location)"
-        ],
+        "tags": ["Sub-Account (Formerly Location)"],
         "security": [
           {
-            "Location-Access": [
-              "locations.readonly"
-            ]
+            "Location-Access": ["locations.readonly"]
           },
           {
-            "Agency-Access": [
-              "locations.readonly"
-            ]
+            "Agency-Access": ["locations.readonly"]
           }
         ]
       },
@@ -2706,9 +2601,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2764,14 +2657,10 @@
             }
           }
         },
-        "tags": [
-          "Sub-Account (Formerly Location)"
-        ],
+        "tags": ["Sub-Account (Formerly Location)"],
         "security": [
           {
-            "Agency-Access": [
-              "locations.write"
-            ]
+            "Agency-Access": ["locations.write"]
           }
         ]
       },
@@ -2787,9 +2676,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2845,14 +2732,10 @@
             }
           }
         },
-        "tags": [
-          "Sub-Account (Formerly Location)"
-        ],
+        "tags": ["Sub-Account (Formerly Location)"],
         "security": [
           {
-            "Agency-Access": [
-              "locations.internal-access-only"
-            ]
+            "Agency-Access": ["locations.internal-access-only"]
           }
         ]
       }
@@ -2870,9 +2753,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2928,14 +2809,10 @@
             }
           }
         },
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "security": [
           {
-            "bearer": [
-              "locations/tags.readonly"
-            ]
+            "bearer": ["locations/tags.readonly"]
           }
         ]
       },
@@ -2951,9 +2828,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3019,14 +2894,10 @@
             }
           }
         },
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "security": [
           {
-            "bearer": [
-              "locations/tags.write"
-            ]
+            "bearer": ["locations/tags.write"]
           }
         ]
       }
@@ -3044,9 +2915,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3112,9 +2981,7 @@
             }
           }
         },
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "security": [
           {
             "bearer": []
@@ -3133,9 +3000,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3211,9 +3076,7 @@
             }
           }
         },
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "security": [
           {
             "bearer": []
@@ -3232,9 +3095,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3300,9 +3161,7 @@
             }
           }
         },
-        "tags": [
-          "Tags"
-        ],
+        "tags": ["Tags"],
         "security": [
           {
             "bearer": []
@@ -3323,9 +3182,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3391,14 +3248,10 @@
             }
           }
         },
-        "tags": [
-          "Tasks Search"
-        ],
+        "tags": ["Tasks Search"],
         "security": [
           {
-            "bearer": [
-              "locations/tasks.readonly"
-            ]
+            "bearer": ["locations/tasks.readonly"]
           }
         ]
       }
@@ -3416,9 +3269,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3474,9 +3325,7 @@
             }
           }
         },
-        "tags": [
-          "Recurring Tasks"
-        ],
+        "tags": ["Recurring Tasks"],
         "security": [
           {
             "bearer": []
@@ -3495,9 +3344,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3563,9 +3410,7 @@
             }
           }
         },
-        "tags": [
-          "Recurring Tasks"
-        ],
+        "tags": ["Recurring Tasks"],
         "security": [
           {
             "bearer": []
@@ -3584,9 +3429,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3642,9 +3485,7 @@
             }
           }
         },
-        "tags": [
-          "Recurring Tasks"
-        ],
+        "tags": ["Recurring Tasks"],
         "security": [
           {
             "bearer": []
@@ -3665,9 +3506,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3721,9 +3560,7 @@
             }
           }
         },
-        "tags": [
-          "Recurring Tasks"
-        ],
+        "tags": ["Recurring Tasks"],
         "security": [
           {
             "bearer": []
@@ -3744,9 +3581,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3766,11 +3601,7 @@
             "description": "Model of the custom field you want to retrieve",
             "example": "opportunity",
             "schema": {
-              "enum": [
-                "contact",
-                "opportunity",
-                "all"
-              ],
+              "enum": ["contact", "opportunity", "all"],
               "type": "string"
             }
           }
@@ -3817,14 +3648,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Field"
-        ],
+        "tags": ["Custom Field"],
         "security": [
           {
-            "bearer": [
-              "locations/customFields.readonly"
-            ]
+            "bearer": ["locations/customFields.readonly"]
           }
         ]
       },
@@ -3840,9 +3667,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3908,14 +3733,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Field"
-        ],
+        "tags": ["Custom Field"],
         "security": [
           {
-            "bearer": [
-              "locations/customFields.write"
-            ]
+            "bearer": ["locations/customFields.write"]
           }
         ]
       }
@@ -3933,9 +3754,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4010,9 +3829,7 @@
             }
           }
         },
-        "tags": [
-          "Custom Field"
-        ],
+        "tags": ["Custom Field"],
         "security": [
           {
             "bearer": []
@@ -4031,9 +3848,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4109,9 +3924,7 @@
             }
           }
         },
-        "tags": [
-          "Custom Field"
-        ],
+        "tags": ["Custom Field"],
         "security": [
           {
             "bearer": []
@@ -4130,9 +3943,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4198,9 +4009,7 @@
             }
           }
         },
-        "tags": [
-          "Custom Field"
-        ],
+        "tags": ["Custom Field"],
         "security": [
           {
             "bearer": []
@@ -4221,9 +4030,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4287,14 +4094,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Field"
-        ],
+        "tags": ["Custom Field"],
         "security": [
           {
-            "bearer": [
-              "locations/customFields.write"
-            ]
+            "bearer": ["locations/customFields.write"]
           }
         ]
       }
@@ -4312,9 +4115,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4360,14 +4161,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Value"
-        ],
+        "tags": ["Custom Value"],
         "security": [
           {
-            "bearer": [
-              "locations/customValues.readonly"
-            ]
+            "bearer": ["locations/customValues.readonly"]
           }
         ]
       },
@@ -4383,9 +4180,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4451,14 +4246,10 @@
             }
           }
         },
-        "tags": [
-          "Custom Value"
-        ],
+        "tags": ["Custom Value"],
         "security": [
           {
-            "bearer": [
-              "locations/customValues.write"
-            ]
+            "bearer": ["locations/customValues.write"]
           }
         ]
       }
@@ -4476,9 +4267,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4544,9 +4333,7 @@
             }
           }
         },
-        "tags": [
-          "Custom Value"
-        ],
+        "tags": ["Custom Value"],
         "security": [
           {
             "bearer": []
@@ -4565,9 +4352,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4643,9 +4428,7 @@
             }
           }
         },
-        "tags": [
-          "Custom Value"
-        ],
+        "tags": ["Custom Value"],
         "security": [
           {
             "bearer": []
@@ -4664,9 +4447,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4732,9 +4513,7 @@
             }
           }
         },
-        "tags": [
-          "Custom Value"
-        ],
+        "tags": ["Custom Value"],
         "security": [
           {
             "bearer": []
@@ -4755,9 +4534,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -4796,19 +4573,13 @@
             }
           }
         },
-        "tags": [
-          "Timezone"
-        ],
+        "tags": ["Timezone"],
         "security": [
           {
-            "bearer": [
-              "locations.readonly"
-            ]
+            "bearer": ["locations.readonly"]
           },
           {
-            "Location-Access": [
-              "locations.readonly"
-            ]
+            "Location-Access": ["locations.readonly"]
           }
         ]
       }
@@ -4826,9 +4597,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4866,11 +4635,7 @@
             "required": false,
             "in": "query",
             "schema": {
-              "enum": [
-                "sms",
-                "email",
-                "whatsapp"
-              ],
+              "enum": ["sms", "email", "whatsapp"],
               "type": "string"
             }
           },
@@ -4937,14 +4702,10 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
-            "bearer": [
-              "locations/templates.readonly"
-            ]
+            "bearer": ["locations/templates.readonly"]
           }
         ]
       }
@@ -4962,9 +4723,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -5023,9 +4782,7 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
             "bearer": []
@@ -5046,9 +4803,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -5094,14 +4849,10 @@
             }
           }
         },
-        "tags": [
-          "Sub-Account (Formerly Location)"
-        ],
+        "tags": ["Sub-Account (Formerly Location)"],
         "security": [
           {
-            "Agency-Access": [
-              "locations.write"
-            ]
+            "Agency-Access": ["locations.write"]
           }
         ]
       }

@@ -14,9 +14,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -72,19 +70,13 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/template.write"
-            ]
+            "Location-Access": ["invoices/template.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/template.write"
-            ]
+            "Agency-Access": ["invoices/template.write"]
           }
         ]
       },
@@ -100,9 +92,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -122,9 +112,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -174,11 +162,7 @@
             "description": "payment mode",
             "schema": {
               "example": "live",
-              "enum": [
-                "default",
-                "live",
-                "test"
-              ],
+              "enum": ["default", "live", "test"],
               "type": "string"
             }
           },
@@ -245,19 +229,13 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/template.readonly"
-            ]
+            "Location-Access": ["invoices/template.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/template.readonly"
-            ]
+            "Agency-Access": ["invoices/template.readonly"]
           }
         ]
       }
@@ -275,9 +253,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -307,9 +283,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -356,19 +330,13 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/template.readonly"
-            ]
+            "Location-Access": ["invoices/template.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/template.readonly"
-            ]
+            "Agency-Access": ["invoices/template.readonly"]
           }
         ]
       },
@@ -384,9 +352,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -452,19 +418,13 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/template.write"
-            ]
+            "Location-Access": ["invoices/template.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/template.write"
-            ]
+            "Agency-Access": ["invoices/template.write"]
           }
         ]
       },
@@ -480,9 +440,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -512,9 +470,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -561,19 +517,13 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/template.write"
-            ]
+            "Location-Access": ["invoices/template.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/template.write"
-            ]
+            "Agency-Access": ["invoices/template.write"]
           }
         ]
       }
@@ -591,9 +541,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -659,9 +607,7 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
             "Location-Access": []
@@ -685,9 +631,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -753,9 +697,7 @@
             }
           }
         },
-        "tags": [
-          "Template"
-        ],
+        "tags": ["Template"],
         "security": [
           {
             "Location-Access": []
@@ -779,9 +721,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -837,19 +777,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.write"
-            ]
+            "Location-Access": ["invoices/schedule.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.write"
-            ]
+            "Agency-Access": ["invoices/schedule.write"]
           }
         ]
       },
@@ -865,9 +799,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -887,9 +819,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -939,11 +869,7 @@
             "description": "payment mode",
             "schema": {
               "example": "live",
-              "enum": [
-                "default",
-                "live",
-                "test"
-              ],
+              "enum": ["default", "live", "test"],
               "type": "string"
             }
           },
@@ -1010,19 +936,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.readonly"
-            ]
+            "Location-Access": ["invoices/schedule.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.readonly"
-            ]
+            "Agency-Access": ["invoices/schedule.readonly"]
           }
         ]
       }
@@ -1040,9 +960,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1072,9 +990,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1121,19 +1037,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.readonly"
-            ]
+            "Location-Access": ["invoices/schedule.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.readonly"
-            ]
+            "Agency-Access": ["invoices/schedule.readonly"]
           }
         ]
       },
@@ -1149,9 +1059,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1217,19 +1125,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.write"
-            ]
+            "Location-Access": ["invoices/schedule.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.write"
-            ]
+            "Agency-Access": ["invoices/schedule.write"]
           }
         ]
       },
@@ -1245,9 +1147,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1277,9 +1177,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1326,19 +1224,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.write"
-            ]
+            "Location-Access": ["invoices/schedule.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.write"
-            ]
+            "Agency-Access": ["invoices/schedule.write"]
           }
         ]
       }
@@ -1356,9 +1248,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1414,19 +1304,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.write"
-            ]
+            "Location-Access": ["invoices/schedule.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.write"
-            ]
+            "Agency-Access": ["invoices/schedule.write"]
           }
         ]
       }
@@ -1444,9 +1328,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1512,19 +1394,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.write"
-            ]
+            "Location-Access": ["invoices/schedule.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.write"
-            ]
+            "Agency-Access": ["invoices/schedule.write"]
           }
         ]
       }
@@ -1542,9 +1418,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1610,19 +1484,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.write"
-            ]
+            "Location-Access": ["invoices/schedule.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.write"
-            ]
+            "Agency-Access": ["invoices/schedule.write"]
           }
         ]
       }
@@ -1640,9 +1508,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1708,19 +1574,13 @@
             }
           }
         },
-        "tags": [
-          "Schedule"
-        ],
+        "tags": ["Schedule"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/schedule.write"
-            ]
+            "Location-Access": ["invoices/schedule.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/schedule.write"
-            ]
+            "Agency-Access": ["invoices/schedule.write"]
           }
         ]
       }
@@ -1738,9 +1598,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -1796,14 +1654,10 @@
             }
           }
         },
-        "tags": [
-          "Text2Pay"
-        ],
+        "tags": ["Text2Pay"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.write"
-            ]
+            "Location-Access": ["invoices.write"]
           }
         ]
       }
@@ -1821,9 +1675,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1840,9 +1692,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -1889,19 +1739,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.readonly"
-            ]
+            "Location-Access": ["invoices.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices.readonly"
-            ]
+            "Agency-Access": ["invoices.readonly"]
           }
         ]
       }
@@ -1919,9 +1763,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -1951,9 +1793,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -2000,19 +1840,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.readonly"
-            ]
+            "Location-Access": ["invoices.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices.readonly"
-            ]
+            "Agency-Access": ["invoices.readonly"]
           }
         ]
       },
@@ -2028,9 +1862,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2096,19 +1928,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.write"
-            ]
+            "Location-Access": ["invoices.write"]
           },
           {
-            "Agency-Access": [
-              "invoices.write"
-            ]
+            "Agency-Access": ["invoices.write"]
           }
         ]
       },
@@ -2124,9 +1950,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2156,9 +1980,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -2216,19 +2038,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.write"
-            ]
+            "Location-Access": ["invoices.write"]
           },
           {
-            "Agency-Access": [
-              "invoices.write"
-            ]
+            "Agency-Access": ["invoices.write"]
           }
         ]
       }
@@ -2246,9 +2062,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2314,9 +2128,7 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
             "Location-Access": []
@@ -2340,9 +2152,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2425,19 +2235,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.write"
-            ]
+            "Location-Access": ["invoices.write"]
           },
           {
-            "Agency-Access": [
-              "invoices.write"
-            ]
+            "Agency-Access": ["invoices.write"]
           }
         ]
       }
@@ -2455,9 +2259,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2523,19 +2325,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.write"
-            ]
+            "Location-Access": ["invoices.write"]
           },
           {
-            "Agency-Access": [
-              "invoices.write"
-            ]
+            "Agency-Access": ["invoices.write"]
           }
         ]
       }
@@ -2553,9 +2349,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2621,19 +2415,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.write"
-            ]
+            "Location-Access": ["invoices.write"]
           },
           {
-            "Agency-Access": [
-              "invoices.write"
-            ]
+            "Agency-Access": ["invoices.write"]
           }
         ]
       }
@@ -2651,9 +2439,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -2692,9 +2478,7 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
             "Location-Access": []
@@ -2718,9 +2502,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -2776,19 +2558,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       }
@@ -2806,9 +2582,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2874,19 +2648,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       },
@@ -2902,9 +2670,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -2970,19 +2736,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       }
@@ -3000,9 +2760,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3020,9 +2778,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           }
@@ -3069,19 +2825,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Location-Access": ["invoices/estimate.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Agency-Access": ["invoices/estimate.readonly"]
           }
         ]
       }
@@ -3099,9 +2849,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3167,19 +2915,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       }
@@ -3197,9 +2939,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3265,19 +3005,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       }
@@ -3295,9 +3029,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3315,9 +3047,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -3443,19 +3173,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Location-Access": ["invoices/estimate.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Agency-Access": ["invoices/estimate.readonly"]
           }
         ]
       }
@@ -3473,9 +3197,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -3514,9 +3236,7 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
             "Location-Access": []
@@ -3540,9 +3260,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3560,9 +3278,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -3639,19 +3355,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Location-Access": ["invoices/estimate.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Agency-Access": ["invoices/estimate.readonly"]
           }
         ]
       },
@@ -3667,9 +3377,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -3725,19 +3433,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       }
@@ -3755,9 +3457,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3823,19 +3523,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       },
@@ -3851,9 +3545,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3919,19 +3611,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.write"
-            ]
+            "Location-Access": ["invoices/estimate.write"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.write"
-            ]
+            "Agency-Access": ["invoices/estimate.write"]
           }
         ]
       }
@@ -3949,9 +3635,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -3969,9 +3653,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -4028,19 +3710,13 @@
             }
           }
         },
-        "tags": [
-          "Estimate"
-        ],
+        "tags": ["Estimate"],
         "security": [
           {
-            "Location-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Location-Access": ["invoices/estimate.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices/estimate.readonly"
-            ]
+            "Agency-Access": ["invoices/estimate.readonly"]
           }
         ]
       }
@@ -4058,9 +3734,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           }
         ],
@@ -4116,19 +3790,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.write"
-            ]
+            "Location-Access": ["invoices.write"]
           },
           {
-            "Agency-Access": [
-              "invoices.write"
-            ]
+            "Agency-Access": ["invoices.write"]
           }
         ]
       },
@@ -4144,9 +3812,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "2021-07-28"
-              ]
+              "enum": ["2021-07-28"]
             }
           },
           {
@@ -4166,9 +3832,7 @@
             "description": "Alt Type",
             "schema": {
               "example": "location",
-              "enum": [
-                "location"
-              ],
+              "enum": ["location"],
               "type": "string"
             }
           },
@@ -4218,11 +3882,7 @@
             "description": "payment mode",
             "schema": {
               "example": "live",
-              "enum": [
-                "default",
-                "live",
-                "test"
-              ],
+              "enum": ["default", "live", "test"],
               "type": "string"
             }
           },
@@ -4263,9 +3923,7 @@
             "description": "The field on which sorting should be applied",
             "schema": {
               "example": "issueDate",
-              "enum": [
-                "issueDate"
-              ],
+              "enum": ["issueDate"],
               "type": "string"
             }
           },
@@ -4276,10 +3934,7 @@
             "description": "The order of sort which should be applied for the sortField",
             "schema": {
               "example": "descend",
-              "enum": [
-                "ascend",
-                "descend"
-              ],
+              "enum": ["ascend", "descend"],
               "type": "string"
             }
           }
@@ -4326,19 +3981,13 @@
             }
           }
         },
-        "tags": [
-          "Invoice"
-        ],
+        "tags": ["Invoice"],
         "security": [
           {
-            "Location-Access": [
-              "invoices.readonly"
-            ]
+            "Location-Access": ["invoices.readonly"]
           },
           {
-            "Agency-Access": [
-              "invoices.readonly"
-            ]
+            "Agency-Access": ["invoices.readonly"]
           }
         ]
       }
@@ -4503,9 +4152,7 @@
           },
           "calculation": {
             "type": "string",
-            "enum": [
-              "exclusive"
-            ]
+            "enum": ["exclusive"]
           },
           "description": {
             "type": "string"
@@ -4514,11 +4161,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "_id",
-          "name",
-          "rate"
-        ]
+        "required": ["_id", "name", "rate"]
       },
       "InvoiceItemDto": {
         "type": "object",
@@ -4578,10 +4221,7 @@
             "type": "string",
             "description": "Price type of the item",
             "example": "one_time",
-            "enum": [
-              "one_time",
-              "recurring"
-            ]
+            "enum": ["one_time", "recurring"]
           },
           "taxInclusive": {
             "type": "boolean",
@@ -4590,12 +4230,7 @@
             "default": false
           }
         },
-        "required": [
-          "name",
-          "currency",
-          "amount",
-          "qty"
-        ]
+        "required": ["name", "currency", "amount", "qty"]
       },
       "DiscountDto": {
         "type": "object",
@@ -4609,10 +4244,7 @@
           "type": {
             "type": "string",
             "description": "Discount type",
-            "enum": [
-              "percentage",
-              "fixed"
-            ],
+            "enum": ["percentage", "fixed"],
             "example": "percentage",
             "default": "percentage"
           },
@@ -4625,20 +4257,14 @@
             }
           }
         },
-        "required": [
-          "type"
-        ]
+        "required": ["type"]
       },
       "TipsConfigurationDto": {
         "type": "object",
         "properties": {
           "tipsPercentage": {
             "description": "Percentage of tips allowed",
-            "example": [
-              5,
-              10,
-              15
-            ],
+            "example": [5, 10, 15],
             "type": "array",
             "items": {
               "type": "string"
@@ -4650,10 +4276,7 @@
             "example": true
           }
         },
-        "required": [
-          "tipsPercentage",
-          "tipsEnabled"
-        ]
+        "required": ["tipsPercentage", "tipsEnabled"]
       },
       "LateFeesFrequencyDto": {
         "type": "object",
@@ -4667,19 +4290,10 @@
             "type": "string",
             "description": "Late fees interval",
             "example": "day",
-            "enum": [
-              "minute",
-              "hour",
-              "day",
-              "week",
-              "month",
-              "one_time"
-            ]
+            "enum": ["minute", "hour", "day", "week", "month", "one_time"]
           }
         },
-        "required": [
-          "interval"
-        ]
+        "required": ["interval"]
       },
       "LateFeesGraceDto": {
         "type": "object",
@@ -4693,15 +4307,10 @@
             "type": "string",
             "description": "Late fees grace interval",
             "example": "day",
-            "enum": [
-              "day"
-            ]
+            "enum": ["day"]
           }
         },
-        "required": [
-          "intervalCount",
-          "interval"
-        ]
+        "required": ["intervalCount", "interval"]
       },
       "LateFeesMaxFeesDto": {
         "type": "object",
@@ -4709,9 +4318,7 @@
           "type": {
             "type": "string",
             "example": "fixed",
-            "enum": [
-              "fixed"
-            ]
+            "enum": ["fixed"]
           },
           "value": {
             "type": "number",
@@ -4719,10 +4326,7 @@
             "description": "10"
           }
         },
-        "required": [
-          "type",
-          "value"
-        ]
+        "required": ["type", "value"]
       },
       "LateFeesConfigurationDto": {
         "type": "object",
@@ -4741,10 +4345,7 @@
             "type": "string",
             "description": "Late Fees Type",
             "example": "fixed",
-            "enum": [
-              "fixed",
-              "percentage"
-            ]
+            "enum": ["fixed", "percentage"]
           },
           "frequency": {
             "description": "Late Fees Frequency",
@@ -4771,12 +4372,7 @@
             ]
           }
         },
-        "required": [
-          "enable",
-          "value",
-          "type",
-          "frequency"
-        ]
+        "required": ["enable", "value", "type", "frequency"]
       },
       "StripePaymentMethodDto": {
         "type": "object",
@@ -4787,9 +4383,7 @@
             "example": false
           }
         },
-        "required": [
-          "enableBankDebitOnly"
-        ]
+        "required": ["enableBankDebitOnly"]
       },
       "PaymentMethodDto": {
         "type": "object",
@@ -4803,9 +4397,7 @@
             ]
           }
         },
-        "required": [
-          "stripe"
-        ]
+        "required": ["stripe"]
       },
       "ProcessingFeePaidChargeDto": {
         "type": "object",
@@ -4831,12 +4423,7 @@
             "example": "673d01d7d547648a8dab6211"
           }
         },
-        "required": [
-          "name",
-          "charge",
-          "amount",
-          "_id"
-        ]
+        "required": ["name", "charge", "amount", "_id"]
       },
       "ProcessingFeeDto": {
         "type": "object",
@@ -4861,9 +4448,7 @@
             }
           }
         },
-        "required": [
-          "charges"
-        ]
+        "required": ["charges"]
       },
       "CreateInvoiceTemplateDto": {
         "type": "object",
@@ -4876,9 +4461,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "internal": {
@@ -4986,9 +4569,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5100,9 +4681,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5214,10 +4793,7 @@
             "example": 100
           }
         },
-        "required": [
-          "data",
-          "totalCount"
-        ]
+        "required": ["data", "totalCount"]
       },
       "UpdateInvoiceTemplateDto": {
         "type": "object",
@@ -5230,9 +4806,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "internal": {
@@ -5299,9 +4873,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -5409,9 +4981,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "lateFeesConfiguration": {
@@ -5423,11 +4993,7 @@
             ]
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "lateFeesConfiguration"
-        ]
+        "required": ["altId", "altType", "lateFeesConfiguration"]
       },
       "UpdatePaymentMethodsConfigurationDto": {
         "type": "object",
@@ -5440,9 +5006,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "paymentMethods": {
@@ -5454,10 +5018,7 @@
             ]
           }
         },
-        "required": [
-          "altId",
-          "altType"
-        ]
+        "required": ["altId", "altType"]
       },
       "DeleteInvoiceTemplateResponseDto": {
         "type": "object",
@@ -5468,9 +5029,7 @@
             "example": true
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "AdditionalEmailsDto": {
         "type": "object",
@@ -5480,9 +5039,7 @@
             "example": "alex@example.com"
           }
         },
-        "required": [
-          "email"
-        ]
+        "required": ["email"]
       },
       "ContactDetailsDto": {
         "type": "object",
@@ -5530,12 +5087,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "name",
-          "phoneNo",
-          "email"
-        ]
+        "required": ["id", "name", "phoneNo", "email"]
       },
       "CustomRRuleOptionsDto": {
         "type": "object",
@@ -5584,15 +5136,7 @@
           },
           "dayOfWeek": {
             "type": "string",
-            "enum": [
-              "mo",
-              "tu",
-              "we",
-              "th",
-              "fr",
-              "sa",
-              "su"
-            ],
+            "enum": ["mo", "tu", "we", "th", "fr", "sa", "su"],
             "example": "mo"
           },
           "numOfWeek": {
@@ -5639,11 +5183,7 @@
             "example": "by"
           }
         },
-        "required": [
-          "intervalType",
-          "interval",
-          "startDate"
-        ]
+        "required": ["intervalType", "interval", "startDate"]
       },
       "ScheduleOptionsDto": {
         "type": "object",
@@ -5684,13 +5224,7 @@
             "example": 10000
           }
         },
-        "required": [
-          "id",
-          "name",
-          "url",
-          "type",
-          "size"
-        ]
+        "required": ["id", "name", "url", "type", "size"]
       },
       "CreateInvoiceScheduleDto": {
         "type": "object",
@@ -5703,9 +5237,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "name": {
@@ -5842,9 +5374,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -6015,9 +5545,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -6184,9 +5712,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -6343,10 +5869,7 @@
             "example": 100
           }
         },
-        "required": [
-          "schedules",
-          "total"
-        ]
+        "required": ["schedules", "total"]
       },
       "UpdateInvoiceScheduleDto": {
         "type": "object",
@@ -6359,9 +5882,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "name": {
@@ -6451,9 +5972,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -6604,9 +6123,7 @@
             "example": true
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "UpdateAndScheduleInvoiceScheduleResponseDto": {
         "type": "object",
@@ -6633,9 +6150,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -6787,10 +6302,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "brand",
-          "last4"
-        ]
+        "required": ["brand", "last4"]
       },
       "USBankAccountDto": {
         "type": "object",
@@ -6802,10 +6314,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "bank_name",
-          "last4"
-        ]
+        "required": ["bank_name", "last4"]
       },
       "SepaDirectDebitDTO": {
         "type": "object",
@@ -6820,11 +6329,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "bank_code",
-          "last4",
-          "branch_code"
-        ]
+        "required": ["bank_code", "last4", "branch_code"]
       },
       "BacsDirectDebitDTO": {
         "type": "object",
@@ -6836,10 +6341,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "sort_code",
-          "last4"
-        ]
+        "required": ["sort_code", "last4"]
       },
       "BecsDirectDebitDTO": {
         "type": "object",
@@ -6851,10 +6353,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "bsb_number",
-          "last4"
-        ]
+        "required": ["bsb_number", "last4"]
       },
       "AutoPaymentDetailsDto": {
         "type": "object",
@@ -6890,9 +6389,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "enable"
-        ]
+        "required": ["enable"]
       },
       "ScheduleInvoiceScheduleDto": {
         "type": "object",
@@ -6905,9 +6402,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "liveMode": {
@@ -6922,11 +6417,7 @@
             ]
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "liveMode"
-        ]
+        "required": ["altId", "altType", "liveMode"]
       },
       "ScheduleInvoiceScheduleResponseDto": {
         "type": "object",
@@ -6953,9 +6444,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -7108,9 +6597,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "id": {
@@ -7125,12 +6612,7 @@
             ]
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "id",
-          "autoPayment"
-        ]
+        "required": ["altId", "altType", "id", "autoPayment"]
       },
       "AutoPaymentInvoiceScheduleResponseDto": {
         "type": "object",
@@ -7157,9 +6639,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -7312,16 +6792,11 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           }
         },
-        "required": [
-          "altId",
-          "altType"
-        ]
+        "required": ["altId", "altType"]
       },
       "CancelInvoiceScheduleResponseDto": {
         "type": "object",
@@ -7348,9 +6823,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -7497,9 +6970,7 @@
         "properties": {
           "email": {
             "description": "Email Address",
-            "example": [
-              "alex@example.com"
-            ],
+            "example": ["alex@example.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -7507,9 +6978,7 @@
           },
           "emailCc": {
             "description": "cc to be kept in any sent out emails",
-            "example": [
-              "alex@example.com"
-            ],
+            "example": ["alex@example.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -7517,9 +6986,7 @@
           },
           "emailBcc": {
             "description": "bcc to be kept in any sent out emails",
-            "example": [
-              "alex@example.com"
-            ],
+            "example": ["alex@example.com"],
             "type": "array",
             "items": {
               "type": "string"
@@ -7527,18 +6994,14 @@
           },
           "phoneNo": {
             "description": "Contact Phone Number",
-            "example": [
-              "+1-214-559-6993"
-            ],
+            "example": ["+1-214-559-6993"],
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "required": [
-          "email"
-        ]
+        "required": ["email"]
       },
       "PaymentScheduleDto": {
         "type": "object",
@@ -7546,10 +7009,7 @@
           "type": {
             "type": "string",
             "description": "Payment schedule type",
-            "enum": [
-              "fixed",
-              "percentage"
-            ],
+            "enum": ["fixed", "percentage"],
             "example": "percentage"
           },
           "schedules": {
@@ -7560,10 +7020,7 @@
             }
           }
         },
-        "required": [
-          "type",
-          "schedules"
-        ]
+        "required": ["type", "schedules"]
       },
       "Text2PayDto": {
         "type": "object",
@@ -7576,9 +7033,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "name": {
@@ -7707,10 +7162,7 @@
             "type": "string",
             "description": "create invoice in draft mode or send mode",
             "example": "draft",
-            "enum": [
-              "draft",
-              "send"
-            ]
+            "enum": ["draft", "send"]
           },
           "userId": {
             "type": "string",
@@ -7748,10 +7200,7 @@
             "description": "preview url of generated invoice"
           }
         },
-        "required": [
-          "invoice",
-          "invoiceUrl"
-        ]
+        "required": ["invoice", "invoiceUrl"]
       },
       "GenerateInvoiceNumberResponseDto": {
         "type": "object",
@@ -7774,9 +7223,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "name": {
@@ -7955,9 +7402,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -8122,11 +7567,7 @@
             "example": 0
           }
         },
-        "required": [
-          "subTotal",
-          "discount",
-          "tax"
-        ]
+        "required": ["subTotal", "discount", "tax"]
       },
       "ReminderExecutionDetailsList": {
         "type": "object",
@@ -8169,10 +7610,7 @@
             "type": "string",
             "description": "Time condition for the reminder",
             "example": "before",
-            "enum": [
-              "before",
-              "after"
-            ]
+            "enum": ["before", "after"]
           },
           "intervalType": {
             "type": "string",
@@ -8197,10 +7635,7 @@
             "type": "string",
             "description": "Condition for sending the reminder",
             "example": "invoice_sent",
-            "enum": [
-              "invoice_sent",
-              "invoice_overdue"
-            ]
+            "enum": ["invoice_sent", "invoice_overdue"]
           },
           "reminderNumber": {
             "type": "number",
@@ -8253,10 +7688,7 @@
             }
           }
         },
-        "required": [
-          "defaultEmailTemplateId",
-          "reminders"
-        ]
+        "required": ["defaultEmailTemplateId", "reminders"]
       },
       "RemindersConfigurationDto": {
         "type": "object",
@@ -8278,10 +7710,7 @@
             ]
           }
         },
-        "required": [
-          "reminderExecutionDetailsList",
-          "reminderSettings"
-        ]
+        "required": ["reminderExecutionDetailsList", "reminderSettings"]
       },
       "GetInvoiceResponseDto": {
         "type": "object",
@@ -8321,9 +7750,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -8496,10 +7923,7 @@
             "example": 100
           }
         },
-        "required": [
-          "invoices",
-          "total"
-        ]
+        "required": ["invoices", "total"]
       },
       "UpdateInvoiceDto": {
         "type": "object",
@@ -8512,9 +7936,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "name": {
@@ -8699,9 +8121,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -8885,9 +8305,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -9044,16 +8462,11 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           }
         },
-        "required": [
-          "altId",
-          "altType"
-        ]
+        "required": ["altId", "altType"]
       },
       "VoidInvoiceResponseDto": {
         "type": "object",
@@ -9093,9 +8506,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -9267,9 +8678,7 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "userId": {
@@ -9279,12 +8688,7 @@
           },
           "action": {
             "type": "string",
-            "enum": [
-              "sms_and_email",
-              "send_manually",
-              "email",
-              "sms"
-            ]
+            "enum": ["sms_and_email", "send_manually", "email", "sms"]
           },
           "liveMode": {
             "type": "boolean"
@@ -9306,13 +8710,7 @@
             ]
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "userId",
-          "action",
-          "liveMode"
-        ]
+        "required": ["altId", "altType", "userId", "action", "liveMode"]
       },
       "SendInvoicesResponseDto": {
         "type": "object",
@@ -9327,11 +8725,7 @@
             "type": "object"
           }
         },
-        "required": [
-          "invoice",
-          "smsData",
-          "emailData"
-        ]
+        "required": ["invoice", "smsData", "emailData"]
       },
       "ChequeDto": {
         "type": "object",
@@ -9342,9 +8736,7 @@
             "example": "129-129-129-912"
           }
         },
-        "required": [
-          "number"
-        ]
+        "required": ["number"]
       },
       "RecordPaymentDto": {
         "type": "object",
@@ -9357,21 +8749,13 @@
           "altType": {
             "type": "string",
             "description": "Alt Type",
-            "enum": [
-              "location"
-            ],
+            "enum": ["location"],
             "example": "location"
           },
           "mode": {
             "type": "string",
             "description": "manual payment method",
-            "enum": [
-              "cash",
-              "card",
-              "cheque",
-              "bank_transfer",
-              "other"
-            ],
+            "enum": ["cash", "card", "cheque", "bank_transfer", "other"],
             "example": "card"
           },
           "card": {
@@ -9395,9 +8779,7 @@
           },
           "paymentScheduleIds": {
             "description": "Payment Schedule Ids to be recorded against the invoice.",
-            "example": [
-              "6578278e879ad2646715ba9c"
-            ],
+            "example": ["6578278e879ad2646715ba9c"],
             "type": "array",
             "items": {
               "type": "string"
@@ -9409,14 +8791,7 @@
             "example": "2025-03-19T05:03:00.000Z"
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "mode",
-          "card",
-          "cheque",
-          "notes"
-        ]
+        "required": ["altId", "altType", "mode", "card", "cheque", "notes"]
       },
       "RecordPaymentResponseDto": {
         "type": "object",
@@ -9430,10 +8805,7 @@
             "$ref": "#/components/schemas/DefaultInvoiceResponseDto"
           }
         },
-        "required": [
-          "success",
-          "invoice"
-        ]
+        "required": ["success", "invoice"]
       },
       "PatchInvoiceStatsLastViewedDto": {
         "type": "object",
@@ -9444,9 +8816,7 @@
             "example": "6578278e879ad2646715ba9c"
           }
         },
-        "required": [
-          "invoiceId"
-        ]
+        "required": ["invoiceId"]
       },
       "SendEstimateDto": {
         "type": "object",
@@ -9458,18 +8828,11 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "action": {
             "type": "string",
-            "enum": [
-              "sms_and_email",
-              "send_manually",
-              "email",
-              "sms"
-            ]
+            "enum": ["sms_and_email", "send_manually", "email", "sms"]
           },
           "liveMode": {
             "type": "boolean",
@@ -9495,13 +8858,7 @@
             "example": "Estimate"
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "action",
-          "liveMode",
-          "userId"
-        ]
+        "required": ["altId", "altType", "action", "liveMode", "userId"]
       },
       "FrequencySettingsDto": {
         "type": "object",
@@ -9520,10 +8877,7 @@
             ]
           }
         },
-        "required": [
-          "enabled",
-          "schedule"
-        ]
+        "required": ["enabled", "schedule"]
       },
       "AutoInvoicingDto": {
         "type": "object",
@@ -9539,9 +8893,7 @@
             "example": true
           }
         },
-        "required": [
-          "enabled"
-        ]
+        "required": ["enabled"]
       },
       "PaymentScheduleDateConfigDto": {
         "type": "object",
@@ -9550,25 +8902,16 @@
             "type": "string",
             "description": "Deposit date type",
             "example": "estimate_accepted",
-            "enum": [
-              "estimate_accepted",
-              "custom"
-            ]
+            "enum": ["estimate_accepted", "custom"]
           },
           "scheduleDateType": {
             "type": "string",
             "description": "Payment Schedule Date Type",
             "example": "regular_interval",
-            "enum": [
-              "regular_interval",
-              "custom"
-            ]
+            "enum": ["regular_interval", "custom"]
           }
         },
-        "required": [
-          "depositDateType",
-          "scheduleDateType"
-        ]
+        "required": ["depositDateType", "scheduleDateType"]
       },
       "PaymentScheduleConfigDto": {
         "type": "object",
@@ -9577,10 +8920,7 @@
             "type": "string",
             "description": "Payment Schedule Type",
             "example": "fixed",
-            "enum": [
-              "fixed",
-              "percentage"
-            ]
+            "enum": ["fixed", "percentage"]
           },
           "dateConfig": {
             "description": "Due date type configuration",
@@ -9598,11 +8938,7 @@
             "type": "array"
           }
         },
-        "required": [
-          "type",
-          "dateConfig",
-          "schedules"
-        ]
+        "required": ["type", "dateConfig", "schedules"]
       },
       "CreateEstimatesDto": {
         "type": "object",
@@ -9614,9 +8950,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -9802,9 +9136,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "_id": {
             "type": "string",
@@ -10035,12 +9367,8 @@
           "sentTo": {
             "description": "Recipient details for the estimate",
             "example": {
-              "email": [
-                "test@example.com"
-              ],
-              "phoneNo": [
-                "+1 99444444444"
-              ]
+              "email": ["test@example.com"],
+              "phoneNo": ["+1 99444444444"]
             },
             "allOf": [
               {
@@ -10171,9 +9499,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -10357,10 +9683,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "estimateNumber",
-          "traceId"
-        ]
+        "required": ["estimateNumber", "traceId"]
       },
       "AltDto": {
         "type": "object",
@@ -10372,15 +9695,10 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           }
         },
-        "required": [
-          "altId",
-          "altType"
-        ]
+        "required": ["altId", "altType"]
       },
       "CreateInvoiceFromEstimateDto": {
         "type": "object",
@@ -10392,9 +9710,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "markAsInvoiced": {
             "type": "boolean",
@@ -10405,17 +9721,10 @@
             "type": "string",
             "description": "Version of the update request",
             "example": "v2",
-            "enum": [
-              "v1",
-              "v2"
-            ]
+            "enum": ["v1", "v2"]
           }
         },
-        "required": [
-          "altId",
-          "altType",
-          "markAsInvoiced"
-        ]
+        "required": ["altId", "altType", "markAsInvoiced"]
       },
       "CreateInvoiceFromEstimateResponseDTO": {
         "type": "object",
@@ -10437,10 +9746,7 @@
             ]
           }
         },
-        "required": [
-          "estimate",
-          "invoice"
-        ]
+        "required": ["estimate", "invoice"]
       },
       "ListEstimatesResponseDTO": {
         "type": "object",
@@ -10461,11 +9767,7 @@
             "description": "Unique identifier for tracing the request"
           }
         },
-        "required": [
-          "estimates",
-          "total",
-          "traceId"
-        ]
+        "required": ["estimates", "total", "traceId"]
       },
       "EstimateIdParam": {
         "type": "object",
@@ -10476,9 +9778,7 @@
             "example": "5f9d6d8b1b2d2c001f2d9e4b"
           }
         },
-        "required": [
-          "estimateId"
-        ]
+        "required": ["estimateId"]
       },
       "ListEstimateTemplateResponseDTO": {
         "type": "object",
@@ -10499,11 +9799,7 @@
             "description": "Unique identifier for tracing the request"
           }
         },
-        "required": [
-          "data",
-          "totalCount",
-          "traceId"
-        ]
+        "required": ["data", "totalCount", "traceId"]
       },
       "EstimateTemplatesDto": {
         "type": "object",
@@ -10515,9 +9811,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "name": {
             "type": "string",
@@ -10621,9 +9915,7 @@
           },
           "altType": {
             "type": "string",
-            "enum": [
-              "location"
-            ]
+            "enum": ["location"]
           },
           "_id": {
             "type": "string",
@@ -10810,12 +10102,6 @@
   },
   "x-tagGroups": {
     "name": "Invoice",
-    "tags": [
-      "Invoice",
-      "Template",
-      "Schedule",
-      "Text2Pay",
-      "Estimate"
-    ]
+    "tags": ["Invoice", "Template", "Schedule", "Text2Pay", "Estimate"]
   }
 }

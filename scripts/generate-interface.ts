@@ -63,7 +63,6 @@ import type { AccessType } from '../scopes/scope-types'
 import type { ClientWithAuth } from './types'
 import type { HighLevelClientConfig } from './default'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
-import type { AnyOauthClient, AnyClient } from './client-type-helpers'
 
 
 export interface HighLevelClientInterface<

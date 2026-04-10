@@ -15,5 +15,5 @@ if (import.meta.main) {
 	await generateClientInterface(typeFiles)
 	await generateBaseClient()
 
-	await formatAndLint('src/v2/types')
+	await formatAndLint('src')
 }

@@ -119,14 +119,14 @@ export interface EndpointRef {
 	path: string
 }
 
-export enum HttpMethod {
+export const enum HttpMethod {
 	DELETE = 'DELETE',
 	GET = 'GET',
 	PATCH = 'PATCH',
 	POST = 'POST',
 	PUT = 'PUT',
 }
-export enum WebhookEventName {
+export const enum WebhookEventName {
 	CampaignStatusUpdate = 'CampaignStatusUpdate',
 	ContactCreate = 'ContactCreate',
 	ContactDelete = 'ContactDelete',

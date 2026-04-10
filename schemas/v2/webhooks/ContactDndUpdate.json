@@ -165,12 +165,7 @@
             "type": "string"
           },
           "value": {
-            "type": [
-              "string",
-              "number",
-              "array",
-              "object"
-            ]
+            "type": ["string", "number", "array", "object"]
           }
         }
       }
