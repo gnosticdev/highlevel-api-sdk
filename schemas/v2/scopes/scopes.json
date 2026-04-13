@@ -4,12 +4,18 @@
   "title": "HighLevel API Scopes",
   "type": "object",
   "additionalProperties": false,
-  "required": ["Sub-Account", "Agency"],
+  "required": [
+    "Sub-Account",
+    "Agency"
+  ],
   "properties": {
     "Sub-Account": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["readonly", "write"],
+      "required": [
+        "readonly",
+        "write"
+      ],
       "properties": {
         "readonly": {
           "type": "object",
@@ -372,7 +378,10 @@
     "Agency": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["readonly", "write"],
+      "required": [
+        "readonly",
+        "write"
+      ],
       "properties": {
         "readonly": {
           "type": "object",
@@ -436,7 +445,13 @@
   "$defs": {
     "HttpMethod": {
       "type": "string",
-      "enum": ["DELETE", "GET", "PATCH", "POST", "PUT"]
+      "enum": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "POST",
+        "PUT"
+      ]
     },
     "WebhookEventName": {
       "type": "string",
@@ -465,7 +480,10 @@
     "EndpointRef": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["method", "path"],
+      "required": [
+        "method",
+        "path"
+      ],
       "properties": {
         "method": {
           "$ref": "#/$defs/HttpMethod"
@@ -478,7 +496,10 @@
     "ScopeInfo": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["endpoints", "webhookEvents"],
+      "required": [
+        "endpoints",
+        "webhookEvents"
+      ],
       "properties": {
         "endpoints": {
           "type": "array",

@@ -9,15 +9,27 @@
   "$defs": {
     "PermissionLevel": {
       "type": "string",
-      "enum": ["readonly", "write"]
+      "enum": [
+        "readonly",
+        "write"
+      ]
     },
     "AccessType": {
       "type": "string",
-      "enum": ["Sub-Account", "Agency"]
+      "enum": [
+        "Sub-Account",
+        "Agency"
+      ]
     },
     "HttpMethod": {
       "type": "string",
-      "enum": ["DELETE", "GET", "PATCH", "POST", "PUT"]
+      "enum": [
+        "DELETE",
+        "GET",
+        "PATCH",
+        "POST",
+        "PUT"
+      ]
     },
     "ScopeName": {
       "type": "string",

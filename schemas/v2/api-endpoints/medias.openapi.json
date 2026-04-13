@@ -14,7 +14,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -85,7 +87,9 @@
             "example": "location",
             "schema": {
               "type": "string",
-              "enum": ["location"]
+              "enum": [
+                "location"
+              ]
             }
           },
           {
@@ -130,10 +134,14 @@
         },
         "security": [
           {
-            "Location-Access": ["medias.readonly"]
+            "Location-Access": [
+              "medias.readonly"
+            ]
           }
         ],
-        "tags": ["Medias"]
+        "tags": [
+          "Medias"
+        ]
       }
     },
     "/medias/upload-file": {
@@ -149,7 +157,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -195,10 +205,14 @@
         },
         "security": [
           {
-            "Location-Access": ["medias.write"]
+            "Location-Access": [
+              "medias.write"
+            ]
           }
         ],
-        "tags": ["Medias"]
+        "tags": [
+          "Medias"
+        ]
       }
     },
     "/medias/{id}": {
@@ -214,7 +228,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -233,7 +249,9 @@
             "example": "location",
             "schema": {
               "type": "string",
-              "enum": ["location"]
+              "enum": [
+                "location"
+              ]
             }
           },
           {
@@ -253,10 +271,14 @@
         },
         "security": [
           {
-            "Location-Access": ["medias.write"]
+            "Location-Access": [
+              "medias.write"
+            ]
           }
         ],
-        "tags": ["Medias"]
+        "tags": [
+          "Medias"
+        ]
       },
       "post": {
         "operationId": "update-media-object",
@@ -270,7 +292,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           },
           {
@@ -314,7 +338,9 @@
             "Location-Access": []
           }
         ],
-        "tags": ["Medias"]
+        "tags": [
+          "Medias"
+        ]
       }
     },
     "/medias/folder": {
@@ -330,7 +356,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -361,7 +389,9 @@
             "Location-Access": []
           }
         ],
-        "tags": ["Medias"]
+        "tags": [
+          "Medias"
+        ]
       }
     },
     "/medias/update-files": {
@@ -377,7 +407,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -413,7 +445,9 @@
             "Location-Access": []
           }
         ],
-        "tags": ["Medias"]
+        "tags": [
+          "Medias"
+        ]
       }
     },
     "/medias/delete-files": {
@@ -429,7 +463,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["2021-07-28"]
+              "enum": [
+                "2021-07-28"
+              ]
             }
           }
         ],
@@ -465,7 +501,9 @@
             "Location-Access": []
           }
         ],
-        "tags": ["Medias"]
+        "tags": [
+          "Medias"
+        ]
       }
     }
   },
@@ -541,7 +579,9 @@
             }
           }
         },
-        "required": ["files"]
+        "required": [
+          "files"
+        ]
       },
       "UploadFileResponseDTO": {
         "type": "object",
@@ -557,7 +597,10 @@
             "example": "https://storage.googleapis.com/bucket-name/path/to/file.pdf"
           }
         },
-        "required": ["fileId", "url"]
+        "required": [
+          "fileId",
+          "url"
+        ]
       },
       "FolderDTO": {
         "type": "object",
@@ -570,7 +613,9 @@
           "altType": {
             "type": "string",
             "description": "Type of entity that owns the folder",
-            "enum": ["location"],
+            "enum": [
+              "location"
+            ],
             "example": "location"
           },
           "name": {
@@ -643,7 +688,12 @@
             "example": "user-uuid-123"
           }
         },
-        "required": ["altId", "altType", "name", "type"]
+        "required": [
+          "altId",
+          "altType",
+          "name",
+          "type"
+        ]
       },
       "CreateFolderParams": {
         "type": "object",
@@ -656,7 +706,9 @@
           "altType": {
             "type": "string",
             "description": "Type of entity (location only)",
-            "enum": ["location"],
+            "enum": [
+              "location"
+            ],
             "example": "location"
           },
           "name": {
@@ -670,7 +722,11 @@
             "example": "64af50c42d567a3b4f5989e0"
           }
         },
-        "required": ["altId", "altType", "name"]
+        "required": [
+          "altId",
+          "altType",
+          "name"
+        ]
       },
       "UpdateObject": {
         "type": "object",
@@ -683,7 +739,9 @@
           "altType": {
             "type": "string",
             "description": "Type of entity that owns the file or folder",
-            "enum": ["location"],
+            "enum": [
+              "location"
+            ],
             "example": "location"
           },
           "altId": {
@@ -692,7 +750,11 @@
             "example": "sx6wyHhbFdRXh302LLNR"
           }
         },
-        "required": ["name", "altType", "altId"]
+        "required": [
+          "name",
+          "altType",
+          "altId"
+        ]
       },
       "UpdateMediaObjects": {
         "type": "object",
@@ -705,7 +767,9 @@
           "altType": {
             "type": "string",
             "description": "Type of entity that owns the files",
-            "enum": ["location"],
+            "enum": [
+              "location"
+            ],
             "example": "location"
           },
           "filesToBeUpdated": {
@@ -722,7 +786,11 @@
             ]
           }
         },
-        "required": ["altId", "altType", "filesToBeUpdated"]
+        "required": [
+          "altId",
+          "altType",
+          "filesToBeUpdated"
+        ]
       },
       "DeleteMediaObjectItem": {
         "type": "object",
@@ -733,7 +801,9 @@
             "example": "686f630df0d3166d68fbcec2"
           }
         },
-        "required": ["_id"]
+        "required": [
+          "_id"
+        ]
       },
       "UpdateMediaObject": {
         "type": "object",
@@ -749,7 +819,9 @@
             "example": "Updated File Name.pdf"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "DeleteMediaObjectsBodyParams": {
         "type": "object",
@@ -769,7 +841,9 @@
           "altType": {
             "type": "string",
             "description": "Type of entity that owns the files",
-            "enum": ["location"],
+            "enum": [
+              "location"
+            ],
             "example": "location"
           },
           "altId": {
@@ -780,11 +854,19 @@
           "status": {
             "type": "string",
             "description": "Status to set for the files (deleted or trashed)",
-            "enum": ["deleted", "trashed"],
+            "enum": [
+              "deleted",
+              "trashed"
+            ],
             "example": "deleted"
           }
         },
-        "required": ["filesToBeDeleted", "altType", "altId", "status"]
+        "required": [
+          "filesToBeDeleted",
+          "altType",
+          "altId",
+          "status"
+        ]
       },
       "MoveOrDeleteObjectParams": {
         "type": "object",
@@ -799,12 +881,18 @@
             "type": "string"
           }
         },
-        "required": ["altType", "altId", "_id"]
+        "required": [
+          "altType",
+          "altId",
+          "_id"
+        ]
       }
     }
   },
   "x-tagGroups": {
     "name": "Media Library",
-    "tags": ["Medias"]
+    "tags": [
+      "Medias"
+    ]
   }
 }
