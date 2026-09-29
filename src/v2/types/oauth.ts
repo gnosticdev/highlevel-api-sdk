@@ -96,6 +96,11 @@ export interface components {
 			/** @example ab12dc0ae1234a7898f9ff06d4f69gh */
 			access_token?: string
 			/**
+			 * @description Boolean indicating if user approved all locations during bulk installation (only for company tokens)
+			 * @example true
+			 */
+			approveAllLocations?: boolean
+			/**
 			 * @description Approved locations to generate location access token
 			 * @example [
 			 *       "l1C08ntBrFjLS0elLIYU"
@@ -109,6 +114,11 @@ export interface components {
 			companyId?: string
 			/** @example 86399 */
 			expires_in?: number
+			/**
+			 * @description Boolean to control if user wants app to be automatically installed to future locations (only for company tokens)
+			 * @example true
+			 */
+			installToFutureLocations?: boolean
 			/** @example Bearer */
 			isBulkInstallation?: boolean
 			/**
@@ -161,6 +171,11 @@ export interface components {
 			 */
 			access_token?: string
 			/**
+			 * @description App ID of the installed application
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			appId?: string
+			/**
 			 * @description Time in seconds remaining for token to expire
 			 * @example 86399
 			 */
@@ -187,6 +202,11 @@ export interface components {
 			 * @example l1C08ntBrFjLS0elLIYU
 			 */
 			userId: string
+			/**
+			 * @description Version ID of the installed app version
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			versionId?: string
 		}
 		InstalledLocationSchema: {
 			/**
@@ -200,6 +220,12 @@ export interface components {
 			 */
 			address: string
 			/**
+			 * Format: date-time
+			 * @description Timestamp when the app was installed on this location
+			 * @example 2024-01-15T10:30:00.000Z
+			 */
+			installedAt?: string
+			/**
 			 * @description Check if the requested app is installed for following location
 			 * @example true
 			 */
@@ -209,6 +235,11 @@ export interface components {
 			 * @example John Deo
 			 */
 			name: string
+			/**
+			 * @description Version ID of the installed app version for this location
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			versionId?: string
 		}
 		UnauthorizedDTO: {
 			/** @example Unauthorized */
@@ -250,6 +281,8 @@ export interface operations {
 				isInstalled?: boolean
 				/** @description Parameter to limit the number installed locations */
 				limit?: string
+				/** @description locationId */
+				locationId?: string
 				/** @description Filters out locations which are installed for specified app in trial mode */
 				onTrial?: boolean
 				/** @description Filters out location which are installed for specified app under the specified planId */

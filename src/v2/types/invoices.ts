@@ -495,6 +495,26 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/invoices/settings': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Invoice Settings
+		 * @description Get the invoice settings for the given location
+		 */
+		get: operations['get-invoice-settings']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/invoices/stats/last-visited-at': {
 		parameters: {
 			query?: never
@@ -635,6 +655,262 @@ export interface components {
 			/** @example alex@example.com */
 			email: string
 		}
+		Address: {
+			addressLine1?: string
+			addressLine2?: string
+			city?: string
+			/** @enum {string} */
+			countryCode?:
+				| 'AF'
+				| 'AX'
+				| 'AL'
+				| 'DZ'
+				| 'AS'
+				| 'AD'
+				| 'AO'
+				| 'AI'
+				| 'AQ'
+				| 'AG'
+				| 'AR'
+				| 'AM'
+				| 'AW'
+				| 'AU'
+				| 'AT'
+				| 'AZ'
+				| 'BS'
+				| 'BH'
+				| 'BD'
+				| 'BB'
+				| 'BY'
+				| 'BE'
+				| 'BZ'
+				| 'BJ'
+				| 'BM'
+				| 'BT'
+				| 'BO'
+				| 'BA'
+				| 'BW'
+				| 'BV'
+				| 'BR'
+				| 'IO'
+				| 'BN'
+				| 'BG'
+				| 'BF'
+				| 'BI'
+				| 'KH'
+				| 'CM'
+				| 'CA'
+				| 'CV'
+				| 'KY'
+				| 'CF'
+				| 'TD'
+				| 'CL'
+				| 'CN'
+				| 'CX'
+				| 'CC'
+				| 'CO'
+				| 'KM'
+				| 'CG'
+				| 'CD'
+				| 'CK'
+				| 'CR'
+				| 'CI'
+				| 'HR'
+				| 'CU'
+				| 'CY'
+				| 'CZ'
+				| 'DK'
+				| 'DJ'
+				| 'DM'
+				| 'DO'
+				| 'EC'
+				| 'EG'
+				| 'SV'
+				| 'GQ'
+				| 'ER'
+				| 'EE'
+				| 'ET'
+				| 'FK'
+				| 'FO'
+				| 'FJ'
+				| 'FI'
+				| 'FR'
+				| 'GF'
+				| 'PF'
+				| 'TF'
+				| 'GA'
+				| 'GM'
+				| 'GE'
+				| 'DE'
+				| 'GH'
+				| 'GI'
+				| 'GR'
+				| 'GL'
+				| 'GD'
+				| 'GP'
+				| 'GU'
+				| 'GT'
+				| 'GG'
+				| 'GN'
+				| 'GW'
+				| 'GY'
+				| 'HT'
+				| 'HM'
+				| 'VA'
+				| 'HN'
+				| 'HK'
+				| 'HU'
+				| 'IS'
+				| 'IN'
+				| 'ID'
+				| 'IR'
+				| 'IQ'
+				| 'IE'
+				| 'IM'
+				| 'IL'
+				| 'IT'
+				| 'JM'
+				| 'JP'
+				| 'JE'
+				| 'JO'
+				| 'KZ'
+				| 'KE'
+				| 'KI'
+				| 'KP'
+				| 'KR'
+				| 'XK'
+				| 'KW'
+				| 'KG'
+				| 'LA'
+				| 'LV'
+				| 'LB'
+				| 'LS'
+				| 'LR'
+				| 'LY'
+				| 'LI'
+				| 'LT'
+				| 'LU'
+				| 'MO'
+				| 'MK'
+				| 'MG'
+				| 'MW'
+				| 'MY'
+				| 'MV'
+				| 'ML'
+				| 'MT'
+				| 'MH'
+				| 'MQ'
+				| 'MR'
+				| 'MU'
+				| 'YT'
+				| 'MX'
+				| 'FM'
+				| 'MD'
+				| 'MC'
+				| 'MN'
+				| 'ME'
+				| 'MS'
+				| 'MA'
+				| 'MZ'
+				| 'MM'
+				| 'NA'
+				| 'NR'
+				| 'NP'
+				| 'NL'
+				| 'AN'
+				| 'NC'
+				| 'NZ'
+				| 'NI'
+				| 'NE'
+				| 'NG'
+				| 'NU'
+				| 'NF'
+				| 'MP'
+				| 'NO'
+				| 'OM'
+				| 'PK'
+				| 'PW'
+				| 'PS'
+				| 'PA'
+				| 'PG'
+				| 'PY'
+				| 'PE'
+				| 'PH'
+				| 'PN'
+				| 'PL'
+				| 'PT'
+				| 'PR'
+				| 'QA'
+				| 'RE'
+				| 'RO'
+				| 'RU'
+				| 'RW'
+				| 'SH'
+				| 'KN'
+				| 'LC'
+				| 'MF'
+				| 'PM'
+				| 'VC'
+				| 'WS'
+				| 'SM'
+				| 'ST'
+				| 'SA'
+				| 'SN'
+				| 'RS'
+				| 'SC'
+				| 'SL'
+				| 'SG'
+				| 'SX'
+				| 'SK'
+				| 'SI'
+				| 'SB'
+				| 'SO'
+				| 'ZA'
+				| 'GS'
+				| 'ES'
+				| 'LK'
+				| 'SD'
+				| 'SR'
+				| 'SJ'
+				| 'SZ'
+				| 'SE'
+				| 'CH'
+				| 'SY'
+				| 'TW'
+				| 'TJ'
+				| 'TZ'
+				| 'TH'
+				| 'TL'
+				| 'TG'
+				| 'TK'
+				| 'TO'
+				| 'TT'
+				| 'TN'
+				| 'TR'
+				| 'TM'
+				| 'TC'
+				| 'TV'
+				| 'UG'
+				| 'GB'
+				| 'UA'
+				| 'AE'
+				| 'US'
+				| 'UM'
+				| 'UY'
+				| 'UZ'
+				| 'VU'
+				| 'VE'
+				| 'VN'
+				| 'VG'
+				| 'VI'
+				| 'WF'
+				| 'EH'
+				| 'YE'
+				| 'ZM'
+				| 'ZW'
+			postalCode?: string
+			state?: string
+		}
 		AddressDto: {
 			/**
 			 * @description Address Line 1
@@ -721,6 +997,7 @@ export interface components {
 			customerId?: string
 			enable: boolean
 			paymentMethodId?: string
+			provider?: Record<string, never>
 			sepaDirectDebit?: components['schemas']['SepaDirectDebitDTO']
 			type?: string
 			usBankAccount?: components['schemas']['USBankAccountDto']
@@ -1141,7 +1418,7 @@ export interface components {
 			 */
 			issueDate?: string
 			/** @description An array of items for the estimate. */
-			items: components['schemas']['InvoiceItemDto'][]
+			items: components['schemas']['EstimateLineItemDto'][]
 			/**
 			 * @description livemode for estimate
 			 * @default true
@@ -1737,6 +2014,52 @@ export interface components {
 			 */
 			updatedAt: string
 		}
+		CustomNotificationDto: {
+			customerAutoPaymentAmountChanged: components['schemas']['CustomNotificationItemDto']
+			customerAutoPaymentFailure: components['schemas']['CustomNotificationItemDto']
+			customerAutoPaymentInfo: components['schemas']['CustomNotificationItemDto']
+			customerAutoPaymentSuccess: components['schemas']['CustomNotificationItemDto']
+			customerPaymentFailure: components['schemas']['CustomNotificationItemDto']
+			customerPaymentSuccess: components['schemas']['CustomNotificationItemDto']
+			customerSendEstimate: components['schemas']['CustomNotificationItemDto']
+			customerSendInvoice: components['schemas']['CustomNotificationItemDto']
+			teamAutoPaymentFailure: components['schemas']['CustomNotificationItemDto']
+			teamAutoPaymentSkip: components['schemas']['CustomNotificationItemDto']
+			teamAutoPaymentSuccess: components['schemas']['CustomNotificationItemDto']
+			teamEstimateAccepted: components['schemas']['CustomNotificationItemDto']
+			teamEstimateDeclined: components['schemas']['CustomNotificationItemDto']
+			teamPaymentFailure: components['schemas']['CustomNotificationItemDto']
+			teamPaymentSuccess: components['schemas']['CustomNotificationItemDto']
+			teamRecurringSendInvoiceFailed: components['schemas']['CustomNotificationItemDto']
+		}
+		CustomNotificationItemDto: {
+			/**
+			 * @description Default email TemplateId to be used for sending via email
+			 * @example dhwjqi2899012990w2u
+			 */
+			defaultEmailTemplateId?: string
+			/**
+			 * @description Subject of email which is sent out
+			 * @example Thank you for purchasing
+			 */
+			emailSubject?: string
+			/** @description Template to be used for sending email */
+			emailTemplate: string
+			/** @description Flag indicating if the notification is enabled or not */
+			enabled: boolean
+			/**
+			 * @description Email address to be used for sending email
+			 * @example alex@example.com
+			 */
+			fromEmail?: string
+			/**
+			 * @description Name to be used while sending email
+			 * @example Alex
+			 */
+			fromName?: string
+			/** @description Template to be used for sending sms */
+			smsTemplate: string
+		}
 		CustomRRuleOptionsDto: {
 			/**
 			 * @description Max number of task executions
@@ -2169,6 +2492,72 @@ export interface components {
 			 * @example 5f9d6d8b1b2d2c001f2d9e4b
 			 */
 			estimateId: string
+		}
+		EstimateLineItemDto: {
+			/**
+			 * @description Product amount
+			 * @example 999
+			 */
+			amount: number
+			/**
+			 * @description Attachments for the line item
+			 * @example [
+			 *       "https://example.com/file1.jpg",
+			 *       "https://example.com/file2.png"
+			 *     ]
+			 */
+			attachments?: string[]
+			/**
+			 * @description Tax category id for calculating automatic tax
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			automaticTaxCategoryId?: string
+			/**
+			 * @description Currency
+			 * @example USD
+			 */
+			currency: string
+			/**
+			 * @description Invoice descriptions
+			 * @example ABC Corp.
+			 */
+			description?: string
+			/** @description Setupfee item, only created when 1st invoice of recurring schedule is generated */
+			isSetupFeeItem?: boolean
+			/**
+			 * @description Invoice Item Name
+			 * @example ABC Product
+			 */
+			name: string
+			/**
+			 * @description Price Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			priceId?: string
+			/**
+			 * @description Product Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			productId?: string
+			/**
+			 * @description Product Quantity
+			 * @example 1
+			 */
+			qty: number
+			/** @description Tax */
+			taxes?: components['schemas']['ItemTaxDto'][]
+			/**
+			 * @description true if item amount is tax inclusive
+			 * @default false
+			 * @example true
+			 */
+			taxInclusive: boolean
+			/**
+			 * @description Price type of the item
+			 * @example one_time
+			 * @enum {string}
+			 */
+			type?: 'one_time' | 'recurring'
 		}
 		EstimateResponseDto: {
 			/**
@@ -2860,6 +3249,88 @@ export interface components {
 			 */
 			updatedAt: string
 		}
+		GetInvoiceSettingsResponseDto: {
+			/**
+			 * @description Sub-Account Id
+			 * @example 6578278e879ad2646715ba9c
+			 */
+			altId?: string
+			/**
+			 * @description Alt Type
+			 * @example location
+			 * @enum {string}
+			 */
+			altType?: 'location'
+			/** @description Business details */
+			businessDetails?: components['schemas']['InvoiceSettingsBusinessDetailsDto']
+			/**
+			 * @description Custom fields array
+			 * @example [
+			 *       "6578278e879ad2646715baxc",
+			 *       "6901e9fb77ac4d701ba0b996"
+			 *     ]
+			 */
+			customFields?: string[]
+			/** @description Custom notification settings */
+			customNotification?: components['schemas']['CustomNotificationDto']
+			/**
+			 * @description Number of days after which invoice is due
+			 * @example 30
+			 */
+			dueAfterXDays?: number
+			/**
+			 * @description Prefix for estimate numbers
+			 * @example EST-
+			 */
+			estimateNumberPrefix?: string
+			/**
+			 * @description Number of days after which estimate expires
+			 * @example 30
+			 */
+			estimatesExpireAfterXDays?: number
+			/**
+			 * @description Terms and conditions for estimates
+			 * @example This estimate is valid for 30 days.
+			 */
+			estimatesTermsNote?: string
+			/**
+			 * @description Title for estimates
+			 * @example ESTIMATE
+			 */
+			estimatesTitle?: string
+			/**
+			 * @description Prefix for invoice numbers
+			 * @example INV-
+			 */
+			invoiceNumberPrefix?: string
+			/** @description Late fees configuration */
+			lateFeesConfiguration?: components['schemas']['LateFeesConfigurationDto']
+			/**
+			 * @description Minimum percentage for partial payment
+			 * @example 25
+			 */
+			minimumPercentagePartialPayment?: number
+			/** @description Payment methods configuration */
+			paymentMethods?: components['schemas']['PaymentMethodDto']
+			/** @description Product settings */
+			productSettings?: components['schemas']['InvoiceProductSettingsDto']
+			/** @description Reminder settings */
+			reminderSettings?: components['schemas']['ReminderSettingsDto']
+			/** @description Sender configuration */
+			senderConfiguration?: components['schemas']['InvoiceSettingsSenderConfigurationDto']
+			/**
+			 * @description Terms and conditions for invoices
+			 * @example Payment is due within 30 days.
+			 */
+			termsNote?: string
+			/** @description Tips configuration */
+			tipsConfiguration?: components['schemas']['TipsConfigurationDto']
+			/**
+			 * @description Title for invoices
+			 * @example INVOICE
+			 */
+			title?: string
+		}
 		GetScheduleResponseDto: {
 			/**
 			 * @description Schedule Id
@@ -3123,14 +3594,34 @@ export interface components {
 			 */
 			type?: 'one_time' | 'recurring'
 		}
+		InvoiceProductSettingsDto: {
+			/**
+			 * @description Flag indicating if the product description is optional or not
+			 * @example true
+			 */
+			descriptionOptional?: boolean
+			/**
+			 * @description Flag indicating if the product description import is enabled or not
+			 * @example true
+			 */
+			enableImportProductDescription?: boolean
+		}
+		InvoiceSettingsBusinessDetailsDto: {
+			address?: components['schemas']['Address']
+			customValues?: string[]
+			logoUrl?: string
+			name: string
+			phoneNo?: string
+			website?: string
+		}
 		InvoiceSettingsSenderConfigurationDto: {
 			/**
-			 * @description Email id to be used while sending out invoices
+			 * @description Email id to be used while sending email notification
 			 * @example alex@example.com
 			 */
 			fromEmail?: string
 			/**
-			 * @description Sender name to be used while sending invoice
+			 * @description Sender name to be used while sending email notification
 			 * @example Alex
 			 */
 			fromName?: string
@@ -3179,7 +3670,7 @@ export interface components {
 			 * @description Late fees interval count
 			 * @example 10
 			 */
-			intervalCount?: number
+			intervalCount: number
 		}
 		LateFeesGraceDto: {
 			/**
@@ -3201,8 +3692,8 @@ export interface components {
 			 */
 			type: 'fixed'
 			/**
-			 * @description 10
-			 * @example Max late fees to pay
+			 * @description Max late fees to pay
+			 * @example 10
 			 */
 			value: number
 		}
@@ -4061,7 +4552,7 @@ export interface components {
 			 */
 			issueDate?: string
 			/** @description An array of items for the estimate. */
-			items: components['schemas']['InvoiceItemDto'][]
+			items: components['schemas']['EstimateLineItemDto'][]
 			/**
 			 * @description livemode for estimate
 			 * @default true
@@ -6637,6 +7128,60 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['UpdateAndScheduleInvoiceScheduleResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'get-invoice-settings': {
+		parameters: {
+			query: {
+				/** @description Location Id or Agency Id */
+				altId: string
+				altType: 'location'
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetInvoiceSettingsResponseDto']
 				}
 			}
 			/** @description Bad Request */

@@ -145,7 +145,6 @@ export const enum WebhookEventName {
 	OpportunityStageUpdate = 'OpportunityStageUpdate',
 	TaskCreate = 'TaskCreate',
 	TaskDelete = 'TaskDelete',
-	'Webhook Events' = 'Webhook Events',
 }
 
 /**

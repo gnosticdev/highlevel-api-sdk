@@ -15,7 +15,7 @@ export interface paths {
 		post: operations['update-media-object']
 		/**
 		 * Delete File or Folder
-		 * @description Deletes specific file or folder from the media library
+		 * @description Deletes specific file or folder from the media storage
 		 */
 		delete: operations['delete-media-content']
 		options?: never
@@ -52,7 +52,7 @@ export interface paths {
 		}
 		/**
 		 * Get List of Files/ Folders
-		 * @description Fetches list of files and folders from the media library
+		 * @description Fetches list of files and folders from the media storage
 		 */
 		get: operations['fetch-media-content']
 		put?: never
@@ -74,7 +74,7 @@ export interface paths {
 		put?: never
 		/**
 		 * Create Folder
-		 * @description Creates a new folder in the media library
+		 * @description Creates a new folder in the media storage
 		 */
 		post: operations['create-media-folder']
 		delete?: never
@@ -113,7 +113,7 @@ export interface paths {
 		get?: never
 		put?: never
 		/**
-		 * Upload File into Media Library
+		 * Upload File into Media Storage
 		 * @description If hosted is set to true then fileUrl is required. Else file is required. If adding a file, maximum allowed is 25 MB
 		 */
 		post: operations['upload-media-content']

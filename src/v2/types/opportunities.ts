@@ -63,7 +63,7 @@ export interface paths {
 		post: operations['add-followers-opportunity']
 		/**
 		 * Remove Followers
-		 * @description Remove Followers
+		 * @description Allows removal of one or all followers from an opportunity.
 		 */
 		delete: operations['remove-followers-opportunity']
 		options?: never
@@ -84,6 +84,26 @@ export interface paths {
 		 * @description Update Opportunity Status
 		 */
 		put: operations['update-opportunity-status']
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/opportunities/lost-reason': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get lost reason
+		 * @description Get lost reason
+		 */
+		get: operations['get-lost-reason']
+		put?: never
 		post?: never
 		delete?: never
 		options?: never
@@ -124,7 +144,11 @@ export interface paths {
 		 */
 		get: operations['search-opportunity']
 		put?: never
-		post?: never
+		/**
+		 * Search Opportunities
+		 * @description Search Opportunities based on combinations of advanced filters. Documentation Link - https://doc.clickup.com/8631005/d/h/87cpx-424216/7bf11bc9b94f80f
+		 */
+		post: operations['search-opportunities-advanced']
 		delete?: never
 		options?: never
 		head?: never
@@ -155,6 +179,12 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
 	schemas: {
+		AdditionalDetailsDTO: {
+			calendarEvents: boolean
+			notes: boolean
+			tasks: boolean
+			unReadConversations: boolean
+		}
 		BadRequestDTO: {
 			/** @example Bad Request */
 			message?: string
@@ -284,7 +314,58 @@ export interface components {
 		GetPostOpportunitySuccessfulResponseDto: {
 			opportunity?: components['schemas']['SearchOpportunitiesResponseSchema']
 		}
+		LostReasonResponseSchema: {
+			/**
+			 * Format: date-time
+			 * @description created at
+			 * @example 2023-06-19T12:04:22.488Z
+			 */
+			createdAt?: string
+			/**
+			 * @description lost reason id
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			id?: string
+			/**
+			 * @description location id
+			 * @example location_id
+			 */
+			locationId?: string
+			/**
+			 * @description lost reason name
+			 * @example lost reason
+			 */
+			name?: string
+			/**
+			 * Format: date-time
+			 * @description updated at
+			 * @example 2023-06-19T12:04:22.488Z
+			 */
+			updatedAt?: string
+		}
+		LostReasonsResponseSchema: {
+			lostReasons?: components['schemas']['LostReasonResponseSchema'][]
+			/** @example 100 */
+			total?: number
+		}
+		OpportunitySearchBodyDTO: {
+			additionalDetails: components['schemas']['AdditionalDetailsDTO']
+			limit: number
+			/**
+			 * @description Location Id
+			 * @example i2SpAtBVHSVea1sL6oah
+			 */
+			locationId: string
+			page: number
+			query: string
+			searchAfter: string[]
+		}
 		PipelinesResponseSchema: {
+			/**
+			 * @description How pipeline/stage colors are rendered
+			 * @enum {string}
+			 */
+			colorRenderMode?: 'dot' | 'bg-tint' | 'none'
 			/** @example aWdODOBVOlH1RUFKWQke */
 			id?: string
 			/** @example dsjddjkndadqaja */
@@ -296,6 +377,12 @@ export interface components {
 			/** @example true */
 			showInPieChart?: boolean
 			stages?: unknown[][]
+		}
+		PostSearchSuccessfulResponseDto: {
+			aggregations?: Record<string, never>
+			opportunities?: components['schemas']['SearchOpportunitiesResponseSchema'][]
+			/** @example 100 */
+			total: number
 		}
 		SearchMetaResponseSchema: {
 			/** @example 2 */
@@ -329,13 +416,14 @@ export interface components {
 		SearchOpportunitiesResponseSchema: {
 			/** @example zT46WSCPbudrq4zhWMk6 */
 			assignedTo?: string
-			calendarEvents?: string[]
+			calendarEvents?: unknown[][]
 			contact?: components['schemas']['SearchOpportunitiesContactResponseSchema']
 			/** @example zT46WSCPbudrq4zhWMk6 */
 			contactId?: string
 			/** @example 2021-08-03T04:55:17.355Z */
 			createdAt?: string
 			customFields?: components['schemas']['CustomFieldResponseSchema'][]
+			externalObjectId?: string
 			followers?: unknown[][]
 			/** @example yWQobCRIhRguQtD2llvk */
 			id?: string
@@ -349,11 +437,13 @@ export interface components {
 			lastStatusChangeAt?: string
 			/** @example zT46WSCPbudrq4zhW */
 			locationId?: string
+			/** @example zT46WSCPbudrq4zhWMk6 */
+			lostReasonId?: string
 			/** @example 500 */
 			monetaryValue?: number
 			/** @example testing */
 			name?: string
-			notes?: string[]
+			notes?: unknown[][]
 			/** @example VDm7RPYC2GLUvdpKmBfC */
 			pipelineId?: string
 			/** @example e93ba61a-53b3-45e7-985a-c7732dbcdb69 */
@@ -362,7 +452,7 @@ export interface components {
 			source?: string
 			/** @example open */
 			status?: string
-			tasks?: string[]
+			tasks?: unknown[][]
 			/** @example 2021-08-03T04:55:17.355Z */
 			updatedAt?: string
 		}
@@ -415,6 +505,11 @@ export interface components {
 			status?: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
 		}
 		UpdateStatusDto: {
+			/**
+			 * @description lost reason Id
+			 * @example CLu7BaljjqrEjBGKTNNe
+			 */
+			lostReasonId?: string
 			/** @enum {string} */
 			status: 'open' | 'won' | 'lost' | 'abandoned' | 'all'
 		}
@@ -425,14 +520,35 @@ export interface components {
 			 * @description contactId
 			 * @example LiKJ2vnRg5ETM8Z19K7
 			 */
-			contactId: string
+			followers: string[]
+			/**
+			 * @description followers action type
+			 * @example add
+			 * @enum {string}
+			 */
+			followersActionType: 'add' | 'remove'
+			/**
+			 * @description opportunityId
+			 * @example yWQobCRIhRguQtD2llvk
+			 */
+			id?: string
+			/**
+			 * @description isRemoveAllFollowers
+			 * @example true
+			 */
+			isRemoveAllFollowers: boolean
 			/**
 			 * @description locationId
 			 * @example CLu7BaljjqrEjBGKTNNe
 			 */
 			locationId: string
+			/**
+			 * @description lost reason Id
+			 * @example CLu7BaljjqrEjBGKTNNe
+			 */
+			lostReasonId?: string
 			/** @example 220 */
-			monetaryValue?: number
+			monetaryValue?: Record<string, never>
 			/**
 			 * @description name
 			 * @example opportunity name
@@ -525,10 +641,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Opportunity Id
-				 * @example yWQobCRIhRguQtD2llvk
-				 */
+				/** @description Opportunity Id */
 				id: string
 			}
 			cookie?: never
@@ -581,10 +694,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Opportunity Id
-				 * @example yWQobCRIhRguQtD2llvk
-				 */
+				/** @description Opportunity Id */
 				id: string
 			}
 			cookie?: never
@@ -641,10 +751,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Opportunity Id
-				 * @example yWQobCRIhRguQtD2llvk
-				 */
+				/** @description Opportunity Id */
 				id: string
 			}
 			cookie?: never
@@ -697,10 +804,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Opportunity Id
-				 * @example sx6wyHhbFdRXh302Lunr
-				 */
+				/** @description Opportunity Id */
 				id: string
 			}
 			cookie?: never
@@ -751,16 +855,15 @@ export interface operations {
 	}
 	'remove-followers-opportunity': {
 		parameters: {
-			query?: never
+			query?: {
+				isRemoveAllFollowers?: boolean
+			}
 			header: {
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Opportunity Id
-				 * @example sx6wyHhbFdRXh302Lunr
-				 */
+				/** @description Opportunity Id */
 				id: string
 			}
 			cookie?: never
@@ -771,7 +874,7 @@ export interface operations {
 			}
 		}
 		responses: {
-			/** @description Successful response */
+			/** @description Followers successfully removed. */
 			200: {
 				headers: {
 					[name: string]: unknown
@@ -817,10 +920,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description Opportunity Id
-				 * @example yWQobCRIhRguQtD2llvk
-				 */
+				/** @description Opportunity Id */
 				id: string
 			}
 			cookie?: never
@@ -869,10 +969,73 @@ export interface operations {
 			}
 		}
 	}
+	'get-lost-reason': {
+		parameters: {
+			query: {
+				/** @description deleted */
+				deleted?: boolean
+				/** @description get count */
+				getCount?: boolean
+				/** @description limit */
+				limit?: number
+				locationId: string
+				/** @description lost reason name */
+				name?: string
+				/** @description search query */
+				query?: string
+				/** @description skip */
+				skip?: number
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['LostReasonsResponseSchema']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
 	'get-pipelines': {
 		parameters: {
 			query: {
-				/** @example ve9EPM428h8vShlRW1KT */
 				locationId: string
 			}
 			header: {
@@ -928,15 +1091,9 @@ export interface operations {
 				endDate?: string
 				/** @description get Calender event in contact */
 				getCalendarEvents?: boolean
-				/**
-				 * @description get Notes in contact
-				 * @example false
-				 */
+				/** @description get Notes in contact */
 				getNotes?: boolean
-				/**
-				 * @description get Tasks in contact
-				 * @example false
-				 */
+				/** @description get Tasks in contact */
 				getTasks?: boolean
 				/** @description Opportunity Id */
 				id?: string
@@ -973,6 +1130,60 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['SearchSuccessfulResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Unprocessable Entity */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	'search-opportunities-advanced': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-07-28'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['OpportunitySearchBodyDTO']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['PostSearchSuccessfulResponseDto']
 				}
 			}
 			/** @description Bad Request */

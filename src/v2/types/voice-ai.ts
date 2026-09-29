@@ -153,6 +153,7 @@ export interface components {
 				| components['schemas']['SMSParameters']
 				| components['schemas']['AppointmentBookingActionParameters']
 				| components['schemas']['CustomActionParameters']
+				| components['schemas']['KnowledgeBaseParameters']
 			/**
 			 * @description Type of action
 			 * @example CALL_TRANSFER
@@ -166,6 +167,7 @@ export interface components {
 				| 'SMS'
 				| 'APPOINTMENT_BOOKING'
 				| 'CUSTOM_ACTION'
+				| 'KNOWLEDGE_BASE'
 			/**
 			 * @description Unique identifier for this action
 			 * @example 507f1f77bcf86cd799439011
@@ -219,7 +221,7 @@ export interface components {
 			 * @description Unique identifier for the location where this agent will operate
 			 * @example LOC123456789ABCDEF
 			 */
-			locationId?: string
+			locationId: string
 			/**
 			 * @description Maximum call duration in seconds, between 180-900 (3-15 minutes). Default: 300 seconds (5 minutes)
 			 * @example 600
@@ -344,11 +346,7 @@ export interface components {
 				| 'SMS'
 				| 'APPOINTMENT_BOOKING'
 				| 'CUSTOM_ACTION'
-			/**
-			 * @description Action description
-			 * @example When caller asks for booking confirmation
-			 */
-			description?: string
+				| 'KNOWLEDGE_BASE'
 			/**
 			 * Format: date-time
 			 * @description When the action was executed
@@ -385,38 +383,37 @@ export interface components {
 			 */
 			duration: number
 			/**
-			 * @description Actions performed during the call
+			 * @description Actions performed during the call. Note: The APPOINTMENT_BOOKING action will only be visible in executedCallActions from Sep 9th 2025.
 			 * @example [
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439015",
 			 *         "actionType": "CALL_TRANSFER",
 			 *         "actionName": "Transfer to Manager",
-			 *         "description": "Transfers call to a manager when customer requests escalation",
 			 *         "actionParameters": {
 			 *           "transferToType": "number",
 			 *           "transferToValue": "+12345678901",
 			 *           "triggerMessage": "Let me transfer you to a manager right away",
 			 *           "hearWhisperMessage": true
 			 *         },
-			 *         "executedAt": "2024-01-15T10:32:00.000Z"
+			 *         "executedAt": "2024-01-15T10:32:00.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:31:45.000Z"
 			 *       },
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439016",
 			 *         "actionType": "SMS",
 			 *         "actionName": "Send Confirmation SMS",
-			 *         "description": "Sends SMS confirmation to customer",
 			 *         "actionParameters": {
 			 *           "triggerPrompt": "When caller asks for booking confirmation",
 			 *           "triggerMessage": "I'll send you a confirmation text",
 			 *           "messageBody": "Your appointment is confirmed for tomorrow at 2 PM"
 			 *         },
-			 *         "executedAt": "2024-01-15T10:33:30.000Z"
+			 *         "executedAt": "2024-01-15T10:33:30.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:33:15.000Z"
 			 *       },
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439017",
 			 *         "actionType": "DATA_EXTRACTION",
 			 *         "actionName": "Extract Phone Number",
-			 *         "description": "Extracts customer phone number for contact record",
 			 *         "actionParameters": {
 			 *           "contactFieldId": "507f1f77bcf86cd799439018",
 			 *           "description": "Customer's phone number",
@@ -426,38 +423,38 @@ export interface components {
 			 *           ],
 			 *           "overwriteExistingValue": false
 			 *         },
-			 *         "executedAt": "2024-01-15T10:34:15.000Z"
+			 *         "executedAt": "2024-01-15T10:34:15.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:34:00.000Z"
 			 *       },
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439019",
 			 *         "actionType": "WORKFLOW_TRIGGER",
 			 *         "actionName": "Start Follow-up Workflow",
-			 *         "description": "Triggers follow-up workflow for lead nurturing",
 			 *         "actionParameters": {
 			 *           "triggerPrompt": "When caller requests a quote",
 			 *           "triggerMessage": "Let me start that process for you",
 			 *           "workflowId": "507f1f77bcf86cd799439020"
 			 *         },
-			 *         "executedAt": "2024-01-15T10:35:00.000Z"
+			 *         "executedAt": "2024-01-15T10:35:00.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:34:45.000Z"
 			 *       },
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439021",
 			 *         "actionType": "APPOINTMENT_BOOKING",
 			 *         "actionName": "Book Consultation",
-			 *         "description": "Books consultation appointment with sales team",
 			 *         "actionParameters": {
 			 *           "calendarId": "507f1f77bcf86cd799439022",
 			 *           "daysOfOfferingDates": 3,
 			 *           "slotsPerDay": 3,
 			 *           "hoursBetweenSlots": 1
 			 *         },
-			 *         "executedAt": "2024-01-15T10:36:45.000Z"
+			 *         "executedAt": "2024-01-15T10:36:45.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:36:30.000Z"
 			 *       },
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439023",
 			 *         "actionType": "CUSTOM_ACTION",
 			 *         "actionName": "Check Order Status",
-			 *         "description": "Checks order status via external API",
 			 *         "actionParameters": {
 			 *           "triggerPrompt": "When caller provides order number",
 			 *           "triggerMessage": "Let me check that order status",
@@ -486,13 +483,13 @@ export interface components {
 			 *             "status"
 			 *           ]
 			 *         },
-			 *         "executedAt": "2024-01-15T10:37:20.000Z"
+			 *         "executedAt": "2024-01-15T10:37:20.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:37:05.000Z"
 			 *       },
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439024",
 			 *         "actionType": "IN_CALL_DATA_EXTRACTION",
 			 *         "actionName": "Extract Email During Call",
-			 *         "description": "Extracts customer email during the call",
 			 *         "actionParameters": {
 			 *           "contactFieldId": "507f1f77bcf86cd799439025",
 			 *           "description": "Customer's email address",
@@ -502,13 +499,13 @@ export interface components {
 			 *           ],
 			 *           "overwriteExistingValue": true
 			 *         },
-			 *         "executedAt": "2024-01-15T10:31:45.000Z"
+			 *         "executedAt": "2024-01-15T10:31:45.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:31:30.000Z"
 			 *       },
 			 *       {
 			 *         "actionId": "507f1f77bcf86cd799439026",
 			 *         "actionType": "KNOWLEDGE_BASE",
 			 *         "actionName": "Query Product Info",
-			 *         "description": "Queries knowledge base for product information",
 			 *         "actionParameters": {
 			 *           "triggerPrompt": "When caller asks about pricing",
 			 *           "triggerMessage": "Let me look that up for you",
@@ -522,7 +519,8 @@ export interface components {
 			 *             }
 			 *           ]
 			 *         },
-			 *         "executedAt": "2024-01-15T10:38:10.000Z"
+			 *         "executedAt": "2024-01-15T10:38:10.000Z",
+			 *         "triggerReceivedAt": "2024-01-15T10:37:55.000Z"
 			 *       }
 			 *     ]
 			 */
@@ -625,7 +623,7 @@ export interface components {
 			 * @description Message to tell the caller before transferring
 			 * @example Let me transfer you to a manager right away
 			 */
-			triggerMessage?: string
+			triggerMessage: string
 			/**
 			 * @description When to trigger this action during the call
 			 * @example When the caller asks to speak to a manager
@@ -642,6 +640,7 @@ export interface components {
 				| components['schemas']['SMSParameters']
 				| components['schemas']['AppointmentBookingActionParameters']
 				| components['schemas']['CustomActionParameters']
+				| components['schemas']['KnowledgeBaseParameters']
 			/**
 			 * @description Type of action
 			 * @example CALL_TRANSFER
@@ -655,6 +654,7 @@ export interface components {
 				| 'SMS'
 				| 'APPOINTMENT_BOOKING'
 				| 'CUSTOM_ACTION'
+				| 'KNOWLEDGE_BASE'
 			/**
 			 * @description Unique identifier for the created action
 			 * @example 507f1f77bcf86cd799439011
@@ -772,6 +772,7 @@ export interface components {
 				| components['schemas']['SMSParameters']
 				| components['schemas']['AppointmentBookingActionParameters']
 				| components['schemas']['CustomActionParameters']
+				| components['schemas']['KnowledgeBaseParameters']
 			/**
 			 * @description Type of action
 			 * @example CALL_TRANSFER
@@ -785,6 +786,7 @@ export interface components {
 				| 'SMS'
 				| 'APPOINTMENT_BOOKING'
 				| 'CUSTOM_ACTION'
+				| 'KNOWLEDGE_BASE'
 			/**
 			 * @description Agent ID to attach the action to
 			 * @example 507f1f77bcf86cd799439011
@@ -877,7 +879,7 @@ export interface components {
 			 * @description Message to tell the caller
 			 * @example Let me check that order status
 			 */
-			triggerMessage?: string
+			triggerMessage: string
 			/**
 			 * @description When to call the custom API
 			 * @example When caller provides order number
@@ -921,6 +923,7 @@ export interface components {
 				| components['schemas']['SMSParameters']
 				| components['schemas']['AppointmentBookingActionParameters']
 				| components['schemas']['CustomActionParameters']
+				| components['schemas']['KnowledgeBaseParameters']
 			/**
 			 * @description Type of action
 			 * @example CALL_TRANSFER
@@ -934,6 +937,7 @@ export interface components {
 				| 'SMS'
 				| 'APPOINTMENT_BOOKING'
 				| 'CUSTOM_ACTION'
+				| 'KNOWLEDGE_BASE'
 			/**
 			 * @description Unique identifier for the action
 			 * @example 507f1f77bcf86cd799439011
@@ -1130,18 +1134,11 @@ export interface components {
 			 * @example 507f1f77bcf86cd799439011
 			 */
 			knowledgeBaseId: string
-			/** @description Additional parameters for the knowledge base query */
-			parameters?: components['schemas']['CustomActionParameterDTO'][]
-			/**
-			 * @description Message to tell the caller
-			 * @example Let me look that up for you
-			 */
-			triggerMessage: string
 			/**
 			 * @description When to query the knowledge base
 			 * @example When caller asks about pricing
 			 */
-			triggerPrompt?: string
+			triggerPrompt: string
 		}
 		PatchAgentDTO: {
 			/**
@@ -1453,6 +1450,7 @@ export interface components {
 				| components['schemas']['SMSParameters']
 				| components['schemas']['AppointmentBookingActionParameters']
 				| components['schemas']['CustomActionParameters']
+				| components['schemas']['KnowledgeBaseParameters']
 			/**
 			 * @description Type of action
 			 * @example CALL_TRANSFER
@@ -1466,6 +1464,7 @@ export interface components {
 				| 'SMS'
 				| 'APPOINTMENT_BOOKING'
 				| 'CUSTOM_ACTION'
+				| 'KNOWLEDGE_BASE'
 			/**
 			 * @description Unique identifier for the created action
 			 * @example 507f1f77bcf86cd799439011
@@ -1487,6 +1486,7 @@ export interface components {
 				| components['schemas']['SMSParameters']
 				| components['schemas']['AppointmentBookingActionParameters']
 				| components['schemas']['CustomActionParameters']
+				| components['schemas']['KnowledgeBaseParameters']
 			/**
 			 * @description Type of action
 			 * @example CALL_TRANSFER
@@ -1500,6 +1500,7 @@ export interface components {
 				| 'SMS'
 				| 'APPOINTMENT_BOOKING'
 				| 'CUSTOM_ACTION'
+				| 'KNOWLEDGE_BASE'
 			/**
 			 * @description Agent ID to attach the action to
 			 * @example 507f1f77bcf86cd799439011

@@ -3,6 +3,7 @@
 
 import type { paths as ObjectsPaths } from '../types/objects'
 import type { paths as PaymentsPaths } from '../types/payments'
+import type { paths as AffiliateManagerPaths } from '../types/affiliate-manager'
 import type { paths as StorePaths } from '../types/store'
 import type { paths as FunnelsPaths } from '../types/funnels'
 import type { paths as AgenciesPaths } from '../types/agencies'
@@ -16,6 +17,7 @@ import type { paths as BlogsPaths } from '../types/blogs'
 import type { paths as AssociationsPaths } from '../types/associations'
 import type { paths as CampaignsPaths } from '../types/campaigns'
 import type { paths as CustomFieldsPaths } from '../types/custom-fields'
+import type { paths as BrandBoardsPaths } from '../types/brand-boards'
 import type { paths as OpportunitiesPaths } from '../types/opportunities'
 import type { paths as MediasPaths } from '../types/medias'
 import type { paths as ProposalsPaths } from '../types/proposals'
@@ -24,6 +26,9 @@ import type { paths as EmailsPaths } from '../types/emails'
 import type { paths as InvoicesPaths } from '../types/invoices'
 import type { paths as LocationsPaths } from '../types/locations'
 import type { paths as UsersPaths } from '../types/users'
+import type { paths as ConversationAiPaths } from '../types/conversation-ai'
+import type { paths as AdManagerPaths } from '../types/ad-manager'
+import type { paths as AgentStudioPaths } from '../types/agent-studio'
 import type { paths as CustomMenusPaths } from '../types/custom-menus'
 import type { paths as SocialMediaPostingPaths } from '../types/social-media-posting'
 import type { paths as CompaniesPaths } from '../types/companies'
@@ -36,6 +41,7 @@ import type { paths as MarketplacePaths } from '../types/marketplace'
 import type { paths as SaasApiPaths } from '../types/saas-api'
 import type { paths as CalendarsPaths } from '../types/calendars'
 import type { paths as WorkflowsPaths } from '../types/workflows'
+import type { paths as KnowledgeBasePaths } from '../types/knowledge-base'
 
 import type { Client } from 'openapi-fetch'
 import type { AccessType } from '../scopes/scope-types'
@@ -54,6 +60,9 @@ export interface HighLevelClientInterface<
 	oauth: TOAuth
 	objects: Client<ObjectsPaths> | ClientWithAuth<ObjectsPaths>
 	payments: Client<PaymentsPaths> | ClientWithAuth<PaymentsPaths>
+	affiliateManager:
+		| Client<AffiliateManagerPaths>
+		| ClientWithAuth<AffiliateManagerPaths>
 	store: Client<StorePaths> | ClientWithAuth<StorePaths>
 	funnels: Client<FunnelsPaths> | ClientWithAuth<FunnelsPaths>
 	agencies: Client<AgenciesPaths> | ClientWithAuth<AgenciesPaths>
@@ -67,6 +76,7 @@ export interface HighLevelClientInterface<
 	associations: Client<AssociationsPaths> | ClientWithAuth<AssociationsPaths>
 	campaigns: Client<CampaignsPaths> | ClientWithAuth<CampaignsPaths>
 	customFields: Client<CustomFieldsPaths> | ClientWithAuth<CustomFieldsPaths>
+	brandBoards: Client<BrandBoardsPaths> | ClientWithAuth<BrandBoardsPaths>
 	opportunities:
 		| Client<OpportunitiesPaths>
 		| ClientWithAuth<OpportunitiesPaths>
@@ -77,6 +87,11 @@ export interface HighLevelClientInterface<
 	invoices: Client<InvoicesPaths> | ClientWithAuth<InvoicesPaths>
 	locations: Client<LocationsPaths> | ClientWithAuth<LocationsPaths>
 	users: Client<UsersPaths> | ClientWithAuth<UsersPaths>
+	conversationAi:
+		| Client<ConversationAiPaths>
+		| ClientWithAuth<ConversationAiPaths>
+	adManager: Client<AdManagerPaths> | ClientWithAuth<AdManagerPaths>
+	agentStudio: Client<AgentStudioPaths> | ClientWithAuth<AgentStudioPaths>
 	customMenus: Client<CustomMenusPaths> | ClientWithAuth<CustomMenusPaths>
 	socialMediaPosting:
 		| Client<SocialMediaPostingPaths>
@@ -93,4 +108,7 @@ export interface HighLevelClientInterface<
 	saasApi: Client<SaasApiPaths> | ClientWithAuth<SaasApiPaths>
 	calendars: Client<CalendarsPaths> | ClientWithAuth<CalendarsPaths>
 	workflows: Client<WorkflowsPaths> | ClientWithAuth<WorkflowsPaths>
+	knowledgeBase:
+		| Client<KnowledgeBasePaths>
+		| ClientWithAuth<KnowledgeBasePaths>
 }

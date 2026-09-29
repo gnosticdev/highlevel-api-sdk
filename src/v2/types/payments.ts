@@ -267,26 +267,6 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
-	'/payments/orders/migrate-order-ps': {
-		parameters: {
-			query?: never
-			header?: never
-			path?: never
-			cookie?: never
-		}
-		get?: never
-		put?: never
-		/**
-		 * migration Endpoint for Order Payment Status
-		 * @description Process to migrate all the older orders and based on the statuses introduce the payment statuses as well
-		 */
-		post: operations['post-migrate-order-payment-status']
-		delete?: never
-		options?: never
-		head?: never
-		patch?: never
-		trace?: never
-	}
 	'/payments/subscriptions': {
 		parameters: {
 			query?: never
@@ -1224,12 +1204,6 @@ export interface components {
 			 */
 			image?: string
 			/**
-			 * @description A boolean representing whether a product label is enabled or not
-			 * @default false
-			 * @example true
-			 */
-			isLabelEnabled: boolean
-			/**
 			 * @description The field indicates whether taxes are enabled for the product or not.
 			 * @default false
 			 * @example true
@@ -1242,8 +1216,6 @@ export interface components {
 			 * @example 3SwdhCsvxI8Au3KsPJt6
 			 */
 			locationId: string
-			/** @description An array of medias for the product. */
-			medias?: components['schemas']['ProductMediaDto'][]
 			/**
 			 * @description The name of the product.
 			 * @example Awesome Product
@@ -1254,8 +1226,6 @@ export interface components {
 			 * @example PHYSICAL
 			 */
 			productType: string
-			/** @description The SEO information for the product requested */
-			seo?: components['schemas']['ProductSEODto']
 			/**
 			 * @description The slug of the product by which the product will be navigated
 			 * @example washing-machine
@@ -1279,11 +1249,6 @@ export interface components {
 			 * @example 2024-01-23T09:57:04.846Z
 			 */
 			updatedAt: string
-			/**
-			 * @description The unique identifier for the user who created the product.
-			 * @example 6YAtzfzpmHAdj0e8GkKp
-			 */
-			userId?: string
 			/** @description An array of variants for the product. */
 			variants?: components['schemas']['ProductVariantDto'][]
 		}
@@ -1538,6 +1503,11 @@ export interface components {
 			 */
 			createdAt: string
 			/**
+			 * @description User ID who created the order.
+			 * @example user123
+			 */
+			createdBy?: string
+			/**
 			 * @description Currency in which order was created.
 			 * @example USD
 			 */
@@ -1662,6 +1632,11 @@ export interface components {
 			 * @example 2023-11-20T10:23:36.515Z
 			 */
 			createdAt: string
+			/**
+			 * @description User ID who created the subscription.
+			 * @example user123
+			 */
+			createdBy?: string
 			/**
 			 * @description Currency in which subscription was made.
 			 * @example USD
@@ -1796,6 +1771,11 @@ export interface components {
 			 * @example 2023-11-20T10:23:36.515Z
 			 */
 			createdAt: string
+			/**
+			 * @description User ID who created the transaction.
+			 * @example user123
+			 */
+			createdBy?: string
 			/**
 			 * @description Currency in which transaction was made.
 			 * @example USD
@@ -2057,6 +2037,11 @@ export interface components {
 			 */
 			createdAt: string
 			/**
+			 * @description User ID who created the order.
+			 * @example user123
+			 */
+			createdBy?: string
+			/**
 			 * @description Currency in which order was created.
 			 * @example USD
 			 */
@@ -2237,51 +2222,6 @@ export interface components {
 			 */
 			title: string
 		}
-		ProductMediaDto: {
-			/**
-			 * @description The unique identifier for the media.
-			 * @example fzrgusiuu0m
-			 */
-			id: string
-			/**
-			 * @description Indicates whether the media is featured.
-			 * @example true
-			 */
-			isFeatured?: boolean
-			/**
-			 * @description Mongo ObjectIds of the prices for which the media is assigned
-			 * @example 6578278e879ad2646715ba9c
-			 */
-			priceIds?: unknown[][]
-			/**
-			 * @description The title of the media file.
-			 * @example 1dd7dcd0-e71d-4cf7-a06b-6d47723d6a29.png
-			 */
-			title?: string
-			/**
-			 * @description The type of the media file (e.g., image, video will be supporting soon).
-			 * @example image
-			 * @enum {string}
-			 */
-			type: 'image' | 'video'
-			/**
-			 * @description The URL where the media file is stored.
-			 * @example https://storage.googleapis.com/ghl-test/3SwdhCsvxI8Au3KsPJt6/media/sample.png
-			 */
-			url: string
-		}
-		ProductSEODto: {
-			/**
-			 * @description SEO Description for the product which will be displayed in the preview
-			 * @example New iPhone with all new features
-			 */
-			description?: string
-			/**
-			 * @description SEO title of the product which will be displayed in the preview
-			 * @example Apple iPhone 14
-			 */
-			title?: string
-		}
 		ProductVariantDto: {
 			/**
 			 * @description A unique identifier for the variant.
@@ -2368,6 +2308,11 @@ export interface components {
 			 * @example 2023-11-20T10:23:36.515Z
 			 */
 			createdAt: string
+			/**
+			 * @description User ID who created the subscription.
+			 * @example user123
+			 */
+			createdBy?: string
 			/**
 			 * @description Currency in which subscription occurred.
 			 * @example USD
@@ -2502,6 +2447,11 @@ export interface components {
 			 * @example 2023-11-20T10:23:36.515Z
 			 */
 			createdAt: string
+			/**
+			 * @description User ID who created the transaction.
+			 * @example user123
+			 */
+			createdBy?: string
 			/**
 			 * @description Currency in which transaction occurred.
 			 * @example USD
@@ -2989,10 +2939,7 @@ export interface operations {
 	'fetch-config': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location id
-				 * @example Lk3nlfk4lxlelVEwcW
-				 */
+				/** @description Location id */
 				locationId: string
 			}
 			header: {
@@ -3045,10 +2992,7 @@ export interface operations {
 	'create-config': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location id
-				 * @example Lk3nlfk4lxlelVEwcW
-				 */
+				/** @description Location id */
 				locationId: string
 			}
 			header: {
@@ -3105,10 +3049,7 @@ export interface operations {
 	'disconnect-config': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location id
-				 * @example Lk3nlfk4lxlelVEwcW
-				 */
+				/** @description Location id */
 				locationId: string
 			}
 			header: {
@@ -3165,10 +3106,7 @@ export interface operations {
 	'create-integration': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location id
-				 * @example Lk3nlfk4lxlelVEwcW
-				 */
+				/** @description Location id */
 				locationId: string
 			}
 			header: {
@@ -3225,10 +3163,7 @@ export interface operations {
 	'delete-integration': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location id
-				 * @example Lk3nlfk4lxlelVEwcW
-				 */
+				/** @description Location id */
 				locationId: string
 			}
 			header: {
@@ -3281,25 +3216,13 @@ export interface operations {
 	'list-integration-providers': {
 		parameters: {
 			query: {
-				/**
-				 * @description location Id / company Id based on altType
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description location Id / company Id based on altType */
 				altId: string
-				/**
-				 * @description Alt Type
-				 * @example location
-				 */
+				/** @description Alt Type */
 				altType: 'location'
-				/**
-				 * @description The maximum number of items to be included in a single page of results
-				 * @example 20
-				 */
+				/** @description The maximum number of items to be included in a single page of results */
 				limit?: number
-				/**
-				 * @description The starting index of the page, indicating the position from which the results should be retrieved.
-				 * @example 0
-				 */
+				/** @description The starting index of the page, indicating the position from which the results should be retrieved. */
 				offset?: number
 			}
 			header: {
@@ -3406,65 +3329,35 @@ export interface operations {
 	'list-orders': {
 		parameters: {
 			query: {
-				/**
-				 * @description AltId is the unique identifier e.g: location id.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description AltId is the unique identifier e.g: location id. */
 				altId: string
-				/**
-				 * @description AltType is the type of identifier.
-				 * @example location
-				 */
-				altType: string
-				/**
-				 * @description Contact id for filtering of orders.
-				 * @example XPLSw2SVagl12LMDeTmQ
-				 */
+				/** @description Contact id for filtering of orders. */
 				contactId?: string
-				/**
-				 * @description Closing interval of orders.
-				 * @example 2024-02-13
-				 */
+				/** @description Closing interval of orders. */
 				endAt?: string
-				/**
-				 * @description Funnel product ids separated by comma.
-				 * @example 61dd0c7dc077f712a5f787ff,61d6afc9d39ac5e35965c017
-				 */
+				/** @description Funnel product ids separated by comma. */
 				funnelProductIds?: string
-				/**
-				 * @description The maximum number of items to be included in a single page of results
-				 * @example 20
-				 */
+				/** @description The maximum number of items to be included in a single page of results */
 				limit?: number
-				/**
-				 * @description LocationId is the id of the sub-account.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description LocationId is the id of the sub-account. */
 				locationId?: string
-				/**
-				 * @description The starting index of the page, indicating the position from which the results should be retrieved.
-				 * @example 0
-				 */
+				/** @description The starting index of the page, indicating the position from which the results should be retrieved. */
 				offset?: number
-				/**
-				 * @description Mode of payment.
-				 * @example live
-				 */
+				/** @description Mode of payment. */
 				paymentMode?: string
-				/**
-				 * @description The name of the order for searching.
-				 * @example Awesome order
-				 */
+				/** @description Payment Status of the Order */
+				paymentStatus?:
+					| 'paid'
+					| 'unpaid'
+					| 'refunded'
+					| 'partially_paid'
+				/** @description The name of the order for searching. */
 				search?: string
-				/**
-				 * @description Starting interval of orders.
-				 * @example 2024-02-01
-				 */
+				/** @description Source id */
+				sourceId?: string
+				/** @description Starting interval of orders. */
 				startAt?: string
-				/**
-				 * @description Order status.
-				 * @example completed
-				 */
+				/** @description Order status. */
 				status?: string
 			}
 			header: {
@@ -3517,15 +3410,9 @@ export interface operations {
 	'get-order-by-id': {
 		parameters: {
 			query: {
-				/**
-				 * @description AltId is the unique identifier e.g: location id.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description AltId is the unique identifier e.g: location id. */
 				altId: string
-				/**
-				 * @description LocationId is the id of the sub-account.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description LocationId is the id of the sub-account. */
 				locationId?: string
 			}
 			header: {
@@ -3533,10 +3420,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description ID of the order that needs to be returned
-				 * @example 653f5e0cde5a1314e62a837c
-				 */
+				/** @description ID of the order that needs to be returned */
 				orderId: string
 			}
 			cookie?: never
@@ -3584,10 +3468,7 @@ export interface operations {
 	'list-order-fulfillment': {
 		parameters: {
 			query: {
-				/**
-				 * @description Location Id or Agency Id
-				 * @example 6578278e879ad2646715ba9c
-				 */
+				/** @description Location Id or Agency Id */
 				altId: string
 				altType: 'location'
 			}
@@ -3596,10 +3477,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description ID of the order that needs to be returned
-				 * @example 653f5e0cde5a1314e62a837c
-				 */
+				/** @description ID of the order that needs to be returned */
 				orderId: string
 			}
 			cookie?: never
@@ -3652,10 +3530,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description ID of the order that needs to be returned
-				 * @example 653f5e0cde5a1314e62a837c
-				 */
+				/** @description ID of the order that needs to be returned */
 				orderId: string
 			}
 			cookie?: never
@@ -3767,7 +3642,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/** @description MongoDB Order ID */
+				/** @description Order ID */
 				orderId: string
 			}
 			cookie?: never
@@ -3816,111 +3691,34 @@ export interface operations {
 			}
 		}
 	}
-	'post-migrate-order-payment-status': {
+	'list-subscriptions': {
 		parameters: {
 			query: {
 				/** @description AltId is the unique identifier e.g: location id. */
 				altId: string
-				/** @description LocationId is the id of the sub-account. */
-				locationId?: string
-			}
-			header: {
-				/** @description API Version */
-				Version: '2021-07-28'
-			}
-			path?: never
-			cookie?: never
-		}
-		requestBody?: never
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown
-				}
-				content?: never
-			}
-			/** @description Bad Request */
-			400: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['BadRequestDTO']
-				}
-			}
-			/** @description Unauthorized */
-			401: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['UnauthorizedDTO']
-				}
-			}
-		}
-	}
-	'list-subscriptions': {
-		parameters: {
-			query: {
-				/**
-				 * @description AltId is the unique identifier e.g: location id.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
-				altId: string
-				/**
-				 * @description AltType is the type of identifier.
-				 * @example location
-				 */
+				/** @description AltType is the type of identifier. */
 				altType: 'location'
-				/**
-				 * @description Contact ID for the subscription
-				 * @example AmuzcoPBpgKeccNsFlib
-				 */
+				/** @description Contact ID for the subscription */
 				contactId?: string
-				/**
-				 * @description Closing interval of subscriptions.
-				 * @example 2024-02-13
-				 */
+				/** @description Closing interval of subscriptions. */
 				endAt?: string
-				/**
-				 * @description Entity id for filtering of subscriptions.
-				 * @example 61dd0fe9c077f73e67f78803
-				 */
+				/** @description Entity id for filtering of subscriptions. */
 				entityId?: string
-				/**
-				 * @description Source of the subscriptions.
-				 * @example funnel
-				 */
+				/** @description Source of the subscriptions. */
 				entitySourceType?: string
-				/**
-				 * @description Subscription id for filtering of subscriptions.
-				 * @example 64bf78af39118e4011926cba
-				 */
+				/** @description Get the total payments collected for the subscription. */
+				getPaymentsCollectedCount?: boolean
+				/** @description Subscription id for filtering of subscriptions. */
 				id?: string
-				/**
-				 * @description The maximum number of items to be included in a single page of results
-				 * @example 20
-				 */
+				/** @description The maximum number of items to be included in a single page of results */
 				limit?: number
-				/**
-				 * @description The starting index of the page, indicating the position from which the results should be retrieved.
-				 * @example 0
-				 */
+				/** @description The starting index of the page, indicating the position from which the results should be retrieved. */
 				offset?: number
-				/**
-				 * @description Mode of payment.
-				 * @example live
-				 */
+				/** @description Mode of payment. */
 				paymentMode?: string
-				/**
-				 * @description The name of the subscription for searching.
-				 * @example Awesome subscription
-				 */
+				/** @description The name of the subscription for searching. */
 				search?: string
-				/**
-				 * @description Starting interval of subscriptions.
-				 * @example 2024-02-01
-				 */
+				/** @description Starting interval of subscriptions. */
 				startAt?: string
 			}
 			header: {
@@ -3973,15 +3771,9 @@ export interface operations {
 	'get-subscription-by-id': {
 		parameters: {
 			query: {
-				/**
-				 * @description AltId is the unique identifier e.g: location id.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description AltId is the unique identifier e.g: location id. */
 				altId: string
-				/**
-				 * @description AltType is the type of identifier.
-				 * @example location
-				 */
+				/** @description AltType is the type of identifier. */
 				altType: 'location'
 			}
 			header: {
@@ -3989,10 +3781,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description ID of the subscription that needs to be returned
-				 * @example 6322e9c9e39fc14ab3ed7042
-				 */
+				/** @description ID of the subscription that needs to be returned */
 				subscriptionId: string
 			}
 			cookie?: never
@@ -4040,75 +3829,33 @@ export interface operations {
 	'list-transactions': {
 		parameters: {
 			query: {
-				/**
-				 * @description AltId is the unique identifier e.g: location id.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description AltId is the unique identifier e.g: location id. */
 				altId: string
-				/**
-				 * @description AltType is the type of identifier.
-				 * @example location
-				 */
+				/** @description AltType is the type of identifier. */
 				altType: string
-				/**
-				 * @description Contact id for filtering of transactions.
-				 * @example XPLSw2SVagl12LMDeTmQ
-				 */
+				/** @description Contact id for filtering of transactions. */
 				contactId?: string
-				/**
-				 * @description Closing interval of transactions.
-				 * @example 2024-02-13
-				 */
+				/** @description Closing interval of transactions. */
 				endAt?: string
-				/**
-				 * @description Entity id for filtering of transactions.
-				 * @example 61dd0fe9c077f73e67f78803
-				 */
+				/** @description Entity id for filtering of transactions. */
 				entityId?: string
-				/**
-				 * @description Source sub-type of the transactions.
-				 * @example two_step_order_form
-				 */
+				/** @description Source sub-type of the transactions. */
 				entitySourceSubType?: string
-				/**
-				 * @description Source of the transactions.
-				 * @example funnel
-				 */
+				/** @description Source of the transactions. */
 				entitySourceType?: string
-				/**
-				 * @description The maximum number of items to be included in a single page of results
-				 * @example 20
-				 */
+				/** @description The maximum number of items to be included in a single page of results */
 				limit?: number
-				/**
-				 * @description LocationId is the id of the sub-account.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description LocationId is the id of the sub-account. */
 				locationId?: string
-				/**
-				 * @description The starting index of the page, indicating the position from which the results should be retrieved.
-				 * @example 0
-				 */
+				/** @description The starting index of the page, indicating the position from which the results should be retrieved. */
 				offset?: number
-				/**
-				 * @description Mode of payment.
-				 * @example live
-				 */
+				/** @description Mode of payment. */
 				paymentMode?: string
-				/**
-				 * @description The name of the transaction for searching.
-				 * @example Awesome transaction
-				 */
+				/** @description The name of the transaction for searching. */
 				search?: string
-				/**
-				 * @description Starting interval of transactions.
-				 * @example 2024-02-01
-				 */
+				/** @description Starting interval of transactions. */
 				startAt?: string
-				/**
-				 * @description Subscription id for filtering of transactions.
-				 * @example sub_1KGcXDCScnf89tZoVkoEMCEL
-				 */
+				/** @description Subscription id for filtering of transactions. */
 				subscriptionId?: string
 			}
 			header: {
@@ -4161,20 +3908,11 @@ export interface operations {
 	'get-transaction-by-id': {
 		parameters: {
 			query: {
-				/**
-				 * @description AltId is the unique identifier e.g: location id.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description AltId is the unique identifier e.g: location id. */
 				altId: string
-				/**
-				 * @description AltType is the type of identifier.
-				 * @example location
-				 */
+				/** @description AltType is the type of identifier. */
 				altType: string
-				/**
-				 * @description LocationId is the id of the sub-account.
-				 * @example 3SwdhCu3svxI8AKsPJt6
-				 */
+				/** @description LocationId is the id of the sub-account. */
 				locationId?: string
 			}
 			header: {
@@ -4182,10 +3920,7 @@ export interface operations {
 				Version: '2021-07-28'
 			}
 			path: {
-				/**
-				 * @description ID of the transaction that needs to be returned
-				 * @example 61dd0feac077f72010f78804
-				 */
+				/** @description ID of the transaction that needs to be returned */
 				transactionId: string
 			}
 			cookie?: never

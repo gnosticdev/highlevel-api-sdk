@@ -147,6 +147,26 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/conversations/messages/{messageId}/attachments': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		/**
+		 * Add message attachments
+		 * @description Set attachments on an existing message (replaces existing). Maximum 5 URLs. Supported for TYPE_CUSTOM_CALL (34) and TYPE_CALL (1) with subType EXTERNAL_CALL.
+		 */
+		put: operations['add-message-attachments']
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/conversations/messages/{messageId}/locations/{locationId}/recording': {
 		parameters: {
 			query?: never
@@ -247,6 +267,26 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/conversations/messages/export': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Export messages by location ID
+		 * @description Export messages for a specific location with cursor-based pagination support. Response includes messageType (string), source, and subType fields. The channel parameter is optional - if not provided, all non-email message types will be returned including activity messages (opportunity updates, appointments, etc.).
+		 */
+		get: operations['export-messages-by-location']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/conversations/messages/inbound': {
 		parameters: {
 			query?: never
@@ -287,6 +327,26 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/conversations/messages/review-reply': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Send a review reply to Google My Business
+		 * @description Post a reply to a customer review on Google My Business
+		 */
+		post: operations['send-review-reply']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 	'/conversations/messages/upload': {
 		parameters: {
 			query?: never
@@ -301,6 +361,130 @@ export interface paths {
 		 * @description Post the necessary fields for the API to upload files. The files need to be a buffer with the key "fileAttachment". <br /><br /> The allowed file types are: <br/> <ul><li>JPG</li><li>JPEG</li><li>PNG</li><li>MP4</li><li>MPEG</li><li>ZIP</li><li>RAR</li><li>PDF</li><li>DOC</li><li>DOCX</li><li>TXT</li><li>MP3</li><li>WAV</li></ul> <br /><br /> The API will return an object with the URLs
 		 */
 		post: operations['upload-file-attachments']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/conversations/messages/upload/complete': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Complete file upload
+		 * @description Validates the uploaded file in GCS and returns the public URL. Call this endpoint after successfully uploading the file to the signed URL.
+		 */
+		post: operations['complete-file-upload']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/conversations/messages/upload/initiate': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Initiate file upload to GCS
+		 * @description Generates a signed URL for direct file upload to Google Cloud Storage. Returns a signed URL valid for 15 minutes. Upload file via PUT request, then call /complete to finalize.
+		 */
+		post: operations['initiate-file-upload']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/conversations/preferences/custom-subtypes': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get All Custom Subtypes
+		 * @description Get all custom subtypes for a location
+		 */
+		get: operations['get-all-custom-subtypes']
+		put?: never
+		/**
+		 * Create Custom Subtype
+		 * @description Create a new custom subtype for a location. Requires agency or account admin role.
+		 */
+		post: operations['create-custom-subtype']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/conversations/preferences/custom-subtypes/{id}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		/**
+		 * Update Custom Subtype
+		 * @description Update or archive a custom subtype. Requires agency or account admin role.
+		 */
+		put: operations['update-custom-subtype']
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/conversations/preferences/unsubscriptions/status': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get Contact Unsubscription Status
+		 * @description Get all subscription statuses for a contact (all emails or specific email)
+		 */
+		get: operations['get-contact-unsubscription-status']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/conversations/preferences/unsubscriptions/user-change': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * User Subscription Change
+		 * @description Process subscription change initiated by a user (admin/agent). Supports individual custom subscription changes and resub all functionality. Legal forms are automatically created for user-initiated resubscribe actions on custom subscriptions.
+		 */
+		post: operations['user-subscription-change']
 		delete?: never
 		options?: never
 		head?: never
@@ -351,6 +535,15 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
 	schemas: {
+		AddMessageAttachmentsDto: {
+			/**
+			 * @description Array of attachment URLs to set on the message (replaces existing). Maximum 5 URLs.
+			 * @example [
+			 *       "https://provider.com/recordings/call-123.mp3"
+			 *     ]
+			 */
+			attachments: string[]
+		}
 		BadRequestDTO: {
 			/** @example Bad Request */
 			message?: string
@@ -394,6 +587,50 @@ export interface components {
 			 * @example 404
 			 */
 			status: number
+		}
+		CompleteFileUploadDto: {
+			/**
+			 * @description Conversation ID
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			conversationId: string
+			/**
+			 * @description Original filename (for response mapping)
+			 * @example video.mp4
+			 */
+			filename: string
+			/**
+			 * @description File path from request response
+			 * @example location/loc123/conversations/conv456/uuid.mp4
+			 */
+			filePath: string
+			/**
+			 * @description Location ID
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			locationId: string
+			/**
+			 * @description Upload ID from request response
+			 * @example a1b2c3d4-e5f6-7890-abcd-ef1234567890
+			 */
+			uploadId: string
+		}
+		CompleteFileUploadResponseDto: {
+			/**
+			 * @description File metadata
+			 * @example {
+			 *       "size": 52428800,
+			 *       "contentType": "video/mp4"
+			 *     }
+			 */
+			metadata: Record<string, never>
+			/**
+			 * @description Map of filename to public URL
+			 * @example {
+			 *       "video.mp4": "https://your-domain.com/conversations-assets/location/.../video.mp4"
+			 *     }
+			 */
+			uploadedFiles: Record<string, never>
 		}
 		ConversationCreateResponseDto: {
 			/**
@@ -481,6 +718,7 @@ export interface components {
 			lastMessageType?:
 				| 'TYPE_CALL'
 				| 'TYPE_SMS'
+				| 'TYPE_RCS'
 				| 'TYPE_EMAIL'
 				| 'TYPE_SMS_REVIEW_REQUEST'
 				| 'TYPE_WEBCHAT'
@@ -515,6 +753,11 @@ export interface components {
 				| 'TYPE_CUSTOM_CALL'
 				| 'TYPE_INTERNAL_COMMENT'
 				| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
+				| 'TYPE_TIKTOK'
+				| 'TYPE_TIKTOK_COMMENT'
+				| 'TYPE_ACTIVITY_WHATSAPP'
+				| 'TYPE_FORM_SUBMISSION'
+				| 'TYPE_SMS_REACTION'
 			/**
 			 * @description Location ID as string
 			 * @example tDtDnQdgm2LXpyiqYvZ6
@@ -575,6 +818,7 @@ export interface components {
 			lastMessageType:
 				| 'TYPE_CALL'
 				| 'TYPE_SMS'
+				| 'TYPE_RCS'
 				| 'TYPE_EMAIL'
 				| 'TYPE_SMS_REVIEW_REQUEST'
 				| 'TYPE_WEBCHAT'
@@ -609,6 +853,11 @@ export interface components {
 				| 'TYPE_CUSTOM_CALL'
 				| 'TYPE_INTERNAL_COMMENT'
 				| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
+				| 'TYPE_TIKTOK'
+				| 'TYPE_TIKTOK_COMMENT'
+				| 'TYPE_ACTIVITY_WHATSAPP'
+				| 'TYPE_FORM_SUBMISSION'
+				| 'TYPE_SMS_REACTION'
 			/**
 			 * @description Location Id
 			 * @example ABCHkzuJQ8ZMd4Te84GK
@@ -657,6 +906,29 @@ export interface components {
 			 */
 			success: boolean
 		}
+		CreateCustomSubtypeDto: {
+			/**
+			 * @description Communication channel
+			 * @example email
+			 * @enum {string}
+			 */
+			channel: 'email' | 'sms'
+			/**
+			 * @description Description of the custom subtype (max 100 characters)
+			 * @example Weekly newsletter subscription preferences
+			 */
+			description?: string
+			/**
+			 * @description Language code
+			 * @example en
+			 */
+			language: string
+			/**
+			 * @description Name of the custom subtype (max 100 characters)
+			 * @example Newsletter Subscription
+			 */
+			name: string
+		}
 		CreateLiveChatMessageFeedbackResponse: {
 			success: boolean
 		}
@@ -684,13 +956,108 @@ export interface components {
 			 */
 			type: string
 		}
-		ForbiddenDTO: {
-			/** @example Forbidden */
-			error?: string
-			/** @example You do not have permission to access this resource */
-			message?: string
-			/** @example 403 */
-			statusCode?: number
+		ExportMessagesResponseDto: {
+			/** @description Array of messages */
+			messages: components['schemas']['GetMessageResponseDto'][]
+			/**
+			 * @description Cursor for fetching next page. Null if no more results.
+			 * @example eyJwaXRJZCI6ImFiYy0xMjMiLCJsYXN0U29ydCI6WzE2NDY4NjQ0MDBdLCJsYXN0SWQiOiIxMjMifQ==
+			 */
+			nextCursor?: string
+			/**
+			 * @description Total number of messages matching the query
+			 * @example 1234
+			 */
+			total: number
+		}
+		ForwardConfigDto: {
+			/**
+			 * @description Email Message ID of the specific email being forwarded (source) - Required for single email forward, ignored for thread forward
+			 * @example rnGyqh2F6uBrIkfhFo9A
+			 */
+			emailMessageId?: string
+			/**
+			 * @description Specify if forwarding the whole thread or just a single email
+			 * @example false
+			 */
+			forwardWholeThread?: boolean
+			/**
+			 * @description Specify if this is a forwarded email
+			 * @example true
+			 */
+			isForwarded: boolean
+			/**
+			 * @description Message ID of the email thread being forwarded (source) - REQUIRED for forwarding
+			 * @example t22c6DQcTDf3MjRhwf77
+			 */
+			messageId?: string
+			/**
+			 * @description Contact ID of recipient when forwarding (destination)
+			 * @example DEF56h2F6uBrIkfXYacd
+			 */
+			recipientContactId?: string
+			/**
+			 * @description Conversation ID of recipient when forwarding (destination)
+			 * @example GHI78h2F6uBrIkfXYefg
+			 */
+			recipientConversationId?: string
+			/**
+			 * @description Contact ID where the forwarded email originated from (source) - Auto-populated if not provided
+			 * @example ABC12h2F6uBrIkfXYazb
+			 */
+			sourceContactId?: string
+			/**
+			 * @description Conversation ID where the forwarded email originated from (source) - Auto-populated if not provided
+			 * @example XYZ12h2F6uBrIkfXYacd
+			 */
+			sourceConversationId?: string
+			/**
+			 * @description Email address to forward to (destination)
+			 * @example forward@example.com
+			 */
+			toEmail?: string
+		}
+		ForwardResponseDto: {
+			/**
+			 * @description Email Message ID of the forwarded email (source)
+			 * @example rnGyqh2F6uBrIkfhFo9A
+			 */
+			emailMessageId?: string
+			/**
+			 * @description Email address the message was forwarded to (destination)
+			 * @example recipient@example.com
+			 */
+			forwardToEmail?: string
+			/**
+			 * @description Whether the entire thread was forwarded
+			 * @example false
+			 */
+			forwardWholeThread?: boolean
+			/**
+			 * @description Message ID of the forwarded message (source)
+			 * @example t22c6DQcTDf3MjRhwf77
+			 */
+			messageId?: string
+			/**
+			 * @description Contact ID of the recipient of the forwarded email (destination)
+			 * @example DEF56h2F6uBrIkfXYacd
+			 */
+			recipientContactId?: string
+			/**
+			 * @description Conversation ID of the recipient of the forwarded email (destination)
+			 * @example GHI78h2F6uBrIkfXYefg
+			 */
+			recipientConversationId?: string
+			/**
+			 * @description Contact ID where the forwarded email originated from (source)
+			 * @example ABC12h2F6uBrIkfXYazb
+			 */
+			sourceContactId?: string
+			/**
+			 * @description Conversation ID where the forwarded email originated from (source)
+			 * @example XYZ12h2F6uBrIkfXYacd
+			 */
+			sourceConversationId?: string
 		}
 		GetConversationByIdResponse: {
 			/**
@@ -816,11 +1183,6 @@ export interface components {
 			to: string[]
 		}
 		GetMessageResponseDto: {
-			/**
-			 * @description Alternative identifier for the message
-			 * @example msg_123456789
-			 */
-			altId?: string
 			/** @description An array of attachment URLs. Attachments will be empty for Call and Voicemails, type 1 and 10. Please use get call recording API to fetch call recording and voicemails. */
 			attachments?: string[]
 			/** @example Hi there */
@@ -857,6 +1219,7 @@ export interface components {
 			messageType:
 				| 'TYPE_CALL'
 				| 'TYPE_SMS'
+				| 'TYPE_RCS'
 				| 'TYPE_EMAIL'
 				| 'TYPE_SMS_REVIEW_REQUEST'
 				| 'TYPE_WEBCHAT'
@@ -891,6 +1254,11 @@ export interface components {
 				| 'TYPE_CUSTOM_CALL'
 				| 'TYPE_INTERNAL_COMMENT'
 				| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
+				| 'TYPE_TIKTOK'
+				| 'TYPE_TIKTOK_COMMENT'
+				| 'TYPE_ACTIVITY_WHATSAPP'
+				| 'TYPE_FORM_SUBMISSION'
+				| 'TYPE_SMS_REACTION'
 			meta?: components['schemas']['MessageMeta']
 			/**
 			 * @description Message source
@@ -910,6 +1278,7 @@ export interface components {
 				| 'undelivered'
 				| 'clicked'
 				| 'opt_out'
+				| 'queued'
 			/** @example 1 */
 			type: number
 			/**
@@ -919,20 +1288,18 @@ export interface components {
 			userId?: string
 		}
 		GetMessagesByConversationResponseDto: {
-			messages: {
-				/**
-				 * @description Id of the last message in the messages array
-				 * @example p1mRSHeLDhAms5q0LMr4
-				 */
-				lastMessageId: string
-				/** @description Array of messages */
-				messages: components['schemas']['GetMessageResponseDto'][]
-				/**
-				 * @description Next page value true indicates only 20 message is in the response. Rest of the messages are in the next page. Please use the lastMessageId value in the query to get the next page messages
-				 * @example true
-				 */
-				nextPage: boolean
-			}
+			/**
+			 * @description Id of the last message in the messages array
+			 * @example p1mRSHeLDhAms5q0LMr4
+			 */
+			lastMessageId: string
+			/** @description Array of messages */
+			messages: components['schemas']['GetMessageResponseDto'][]
+			/**
+			 * @description Next page value true indicates only 20 message is in the response. Rest of the messages are in the next page. Please use the lastMessageId value in the query to get the next page messages
+			 * @example true
+			 */
+			nextPage: boolean
 		}
 		GetMessageTranscriptionResponseDto: {
 			/**
@@ -965,6 +1332,65 @@ export interface components {
 			 * @example This call may be recorded for quality assurance purposes.
 			 */
 			transcript: string
+		}
+		InitiateFileUploadDto: {
+			/**
+			 * @description Channel type for size limits (WHATSAPP for 100MB limit, others for 5MB)
+			 * @example WHATSAPP
+			 */
+			channel: string
+			/**
+			 * @description MIME type of the file
+			 * @example video/mp4
+			 */
+			contentType: string
+			/**
+			 * @description Conversation ID
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			conversationId: string
+			/**
+			 * @description Original filename with extension
+			 * @example video.mp4
+			 */
+			filename: string
+			/**
+			 * @description File size in bytes (optional, for pre-validation)
+			 * @example 52428800
+			 */
+			fileSize?: number
+			/**
+			 * @description Location ID
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			locationId: string
+		}
+		InitiateFileUploadResponseDto: {
+			/**
+			 * @description URL expiration timestamp (Unix milliseconds)
+			 * @example 1701619200000
+			 */
+			expiresAt: number
+			/**
+			 * @description File path in GCS bucket (needed for confirmation endpoint)
+			 * @example location/loc123/conversations/conv456/uuid.mp4
+			 */
+			filePath: string
+			/**
+			 * @description Maximum allowed file size in bytes
+			 * @example 104857600
+			 */
+			maxFileSize: number
+			/**
+			 * @description Unique upload ID for tracking and completing the upload
+			 * @example a1b2c3d4-e5f6-7890-abcd-ef1234567890
+			 */
+			uploadId: string
+			/**
+			 * @description Signed URL for direct upload to GCS. Use PUT request with file content.
+			 * @example https://storage.googleapis.com/bucket/path?X-Goog-Algorithm=...
+			 */
+			uploadUrl: string
 		}
 		MessageMeta: {
 			/**
@@ -1009,6 +1435,11 @@ export interface components {
 			attachments?: string[]
 			/** @description Phone call dialer and receiver information */
 			call?: components['schemas']['CallDataDTO']
+			/**
+			 * @description Contact Id
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			contactId: string
 			/**
 			 * @description Conversation Id
 			 * @example ve9EPM428h8vShlRW1KT
@@ -1071,6 +1502,7 @@ export interface components {
 			 */
 			type:
 				| 'SMS'
+				| 'RCS'
 				| 'Email'
 				| 'WhatsApp'
 				| 'GMB'
@@ -1080,6 +1512,12 @@ export interface components {
 				| 'WebChat'
 				| 'Live_Chat'
 				| 'Call'
+				| 'IVR_Call'
+				| 'Campaign_Call'
+				| 'Campaign_VoiceMail'
+				| 'TIKTOK'
+				| 'ALL_IN_ONE_CHAT'
+				| 'FORM_SUBMISSION'
 		}
 		ProcessMessageResponseDto: {
 			contactId?: string
@@ -1165,6 +1603,11 @@ export interface components {
 			 */
 			conversationProviderId?: string
 			/**
+			 * @description Custom subtype ID for email unsubscription preferences. Only applies to email messages.
+			 * @example 507f1f77bcf86cd799439011
+			 */
+			customSubtypeId?: string
+			/**
 			 * @description Array of BCC email addresses
 			 * @example [
 			 *       "bcc1@company.com",
@@ -1197,6 +1640,18 @@ export interface components {
 			 */
 			emailTo?: string
 			/**
+			 * @description Forwarding configuration for emails
+			 * @example {
+			 *       "isForwarded": true,
+			 *       "forwardWholeThread": false,
+			 *       "messageId": "t22c6DQcTDf3MjRhwf77",
+			 *       "emailMessageId": "rnGyqh2F6uBrIkfhFo9A",
+			 *       "toEmail": "forward@example.com",
+			 *       "recipientContactId": "DEF56h2F6uBrIkfXYacd"
+			 *     }
+			 */
+			forward?: components['schemas']['ForwardConfigDto']
+			/**
 			 * @description Phone number used as the sender number for outbound messages
 			 * @example +1499499299
 			 */
@@ -1212,6 +1667,12 @@ export interface components {
 			 */
 			message?: string
 			/**
+			 * @description Optimization period in hours (24h, 48h, or 72h)
+			 * @example 24h
+			 * @enum {string}
+			 */
+			optimizationPeriod?: '24h' | '48h' | '72h'
+			/**
 			 * @description ID of message being replied to
 			 * @example msg123
 			 */
@@ -1222,10 +1683,21 @@ export interface components {
 			 */
 			scheduledTimestamp?: number
 			/**
+			 * @description Message status
+			 * @example delivered
+			 * @enum {string}
+			 */
+			status: 'delivered' | 'failed' | 'pending' | 'read'
+			/**
 			 * @description Subject line for email messages
 			 * @example Important Update
 			 */
 			subject?: string
+			/**
+			 * @description Type of message being sent
+			 * @example Email
+			 */
+			subType: Record<string, never>
 			/**
 			 * @description ID of message template
 			 * @example template123
@@ -1248,12 +1720,19 @@ export interface components {
 			 */
 			type:
 				| 'SMS'
+				| 'RCS'
 				| 'Email'
 				| 'WhatsApp'
 				| 'IG'
 				| 'FB'
 				| 'Custom'
 				| 'Live_Chat'
+				| 'TIKTOK'
+			/**
+			 * @description Whether the scheduled email uses native AI for the email scheduling
+			 * @example false
+			 */
+			usesNativeSchedulingAi?: boolean
 		}
 		SendMessageResponseDto: {
 			/**
@@ -1267,6 +1746,17 @@ export interface components {
 			 */
 			emailMessageId?: string
 			/**
+			 * @description Optional metadata for forwarded email
+			 * @example {
+			 *       "forwardWholeThread": false,
+			 *       "messageId": "t22c6DQcTDf3MjRhwf77",
+			 *       "emailMessageId": "rnGyqh2F6uBrIkfhFo9A",
+			 *       "forwardToEmail": "recipient@example.com",
+			 *       "recipientContactId": "DEF56h2F6uBrIkfXYacd"
+			 *     }
+			 */
+			forwardData?: components['schemas']['ForwardResponseDto']
+			/**
 			 * @description This is the main Message ID
 			 * @example t22c6DQcTDf3MjRhwf77
 			 */
@@ -1278,6 +1768,29 @@ export interface components {
 			 * @example Message queued successfully.
 			 */
 			msg?: string
+			/**
+			 * @description Message status
+			 * @example delivered
+			 * @enum {string}
+			 */
+			status: 'delivered' | 'failed' | 'pending' | 'read'
+		}
+		SendReviewReplyDto: {
+			/**
+			 * @description Conversation ID (must have reviewId)
+			 * @example conv123
+			 */
+			conversationId: string
+			/**
+			 * @description Location ID
+			 * @example loc123
+			 */
+			locationId: string
+			/**
+			 * @description Review reply message text
+			 * @example Thank you for your review!
+			 */
+			message: string
 		}
 		StartAfterArrayNumberSchema: {
 			/**
@@ -1295,6 +1808,31 @@ export interface components {
 			 * @example 1600854
 			 */
 			startAfterDate?: number
+		}
+		SubscriptionActionDto: {
+			/**
+			 * @description Custom subscription type ID (required for custom types)
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			subtype_id?: string
+			/**
+			 * @description Subscription type name (required for default types: "One on One")
+			 * @example One on One
+			 * @enum {string}
+			 */
+			subtype_name?: 'One on One'
+			/**
+			 * @description Subscription status
+			 * @example unsubscribed
+			 * @enum {string}
+			 */
+			subtype_status: 'subscribed' | 'unsubscribed'
+			/**
+			 * @description Type of subscription action
+			 * @example custom
+			 * @enum {string}
+			 */
+			type: 'default' | 'custom' | 'resub_all'
 		}
 		UnauthorizedDTO: {
 			/** @example Unauthorized */
@@ -1334,6 +1872,28 @@ export interface components {
 			 */
 			unreadCount?: number
 		}
+		UpdateCustomSubtypeDto: {
+			/**
+			 * @description Whether the custom subtype is archived
+			 * @example false
+			 */
+			archived?: boolean
+			/**
+			 * @description Description of the custom subtype (max 100 characters)
+			 * @example Updated weekly newsletter subscription preferences
+			 */
+			description?: string
+			/**
+			 * @description Name of the custom subtype (max 100 characters)
+			 * @example Newsletter Subscription
+			 */
+			name?: string
+			/**
+			 * @description Resubscription legal form ID (optional when archiving)
+			 * @example form_123456
+			 */
+			resubscription_legal_form_id?: string
+		}
 		UpdateMessageStatusDto: {
 			/**
 			 * @description Email message Id
@@ -1354,10 +1914,25 @@ export interface components {
 		UploadFilesDto: {
 			attachmentUrls: string[]
 			/**
+			 * @description Twilio chat service SID for group SMS uploads
+			 * @example ISxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+			 */
+			chatServiceSid?: string
+			/**
+			 * @description Contact Id
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			contactId: string
+			/**
 			 * @description Conversation Id
 			 * @example ve9EPM428h8vShlRW1KT
 			 */
 			conversationId: string
+			/**
+			 * @description Flag to indicate group SMS upload flow. When true, only 1 file upload is allowed per request.
+			 * @example true
+			 */
+			isGroupSms?: string
 			locationId: string
 		}
 		UploadFilesErrorResponseDto: {
@@ -1374,7 +1949,43 @@ export interface components {
 			status: 400 | 413 | 415
 		}
 		UploadFilesResponseDto: {
+			/**
+			 * @description Twilio media SIDs for group SMS (when isGroupSms=true)
+			 * @example [
+			 *       "MExxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+			 *     ]
+			 */
+			twilioMediaSids?: string[]
 			uploadedFiles: Record<string, never>
+		}
+		UserSubscriptionChangeDto: {
+			/**
+			 * @description Contact Id
+			 * @example OP7z4LCyPACyH5fcEIZa
+			 */
+			contactId: string
+			/**
+			 * @description Email address
+			 * @example user@example.com
+			 */
+			email: string
+			/**
+			 * @description Legal description/details
+			 * @example Customer called support on 2024-01-15 requesting to be removed from newsletter
+			 */
+			legal_description?: string
+			/**
+			 * @description Legal reason for the change (required only for resubscribe and resub_all actions)
+			 * @example User requested resubscribe via customer service
+			 */
+			legal_reason?: string
+			/**
+			 * @description Location Id
+			 * @example ve9EPM428h8vShlRW1KT
+			 */
+			locationId: string
+			/** @description Subscription action details */
+			subscription_action: components['schemas']['SubscriptionActionDto']
 		}
 		UserTypingBody: {
 			/**
@@ -1599,6 +2210,7 @@ export interface operations {
 				type?:
 					| 'TYPE_CALL'
 					| 'TYPE_SMS'
+					| 'TYPE_RCS'
 					| 'TYPE_EMAIL'
 					| 'TYPE_FACEBOOK'
 					| 'TYPE_GMB'
@@ -1612,6 +2224,9 @@ export interface operations {
 					| 'TYPE_LIVE_CHAT'
 					| 'TYPE_INTERNAL_COMMENTS'
 					| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
+					| 'TYPE_TIKTOK'
+					| 'TYPE_ACTIVITY_WHATSAPP'
+					| 'TYPE_FORM_SUBMISSION'
 			}
 			header: {
 				/** @description API Version */
@@ -1834,6 +2449,66 @@ export interface operations {
 			}
 		}
 	}
+	'add-message-attachments': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Message Id */
+				messageId: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['AddMessageAttachmentsDto']
+			}
+		}
+		responses: {
+			/** @description Successfully set message attachments */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Message type does not support attachment updates */
+			403: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Message not found */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
 	'get-message-recording': {
 		parameters: {
 			query?: never
@@ -1972,15 +2647,6 @@ export interface operations {
 					'application/json': components['schemas']['UnauthorizedDTO']
 				}
 			}
-			/** @description Forbidden */
-			403: {
-				headers: {
-					[name: string]: unknown
-				}
-				content: {
-					'application/json': components['schemas']['ForbiddenDTO']
-				}
-			}
 		}
 	}
 	'cancel-scheduled-email-message': {
@@ -2022,6 +2688,74 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['GetEmailMessageResponseDto']
+				}
+			}
+		}
+	}
+	'export-messages-by-location': {
+		parameters: {
+			query: {
+				/** @description Filter by message channel. If not provided, all non-email message types will be returned including activity messages (opportunity updates, appointments, etc.) */
+				channel?:
+					| 'Call'
+					| 'SMS'
+					| 'Email'
+					| 'WhatsApp'
+					| 'Instagram'
+					| 'Facebook'
+				/** @description Filter messages by contact ID */
+				contactId?: string
+				/** @description Filter messages by conversation ID */
+				conversationId?: string
+				/** @description Cursor for pagination. Pass the nextCursor from previous response to get next page. */
+				cursor?: string
+				/** @description End date to filter messages by */
+				endDate?: string
+				/** @description Number of messages to return per page */
+				limit?: number
+				/** @description Location ID to filter messages by */
+				locationId: string
+				/** @description Field to sort by */
+				sortBy?: 'createdAt' | 'updatedAt'
+				/** @description Sort order */
+				sortOrder?: 'asc' | 'desc'
+				/** @description Start date to filter messages by */
+				startDate?: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description List of messages for the location with pagination details. */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ExportMessagesResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
 				}
 			}
 		}
@@ -2116,6 +2850,51 @@ export interface operations {
 			}
 		}
 	}
+	'send-review-reply': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['SendReviewReplyDto']
+			}
+		}
+		responses: {
+			/** @description Review reply sent successfully */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['SendMessageResponseDto']
+				}
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
 	'upload-file-attachments': {
 		parameters: {
 			query?: never
@@ -2175,6 +2954,341 @@ export interface operations {
 				}
 				content: {
 					'application/json': components['schemas']['UploadFilesErrorResponseDto']
+				}
+			}
+		}
+	}
+	'complete-file-upload': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CompleteFileUploadDto']
+			}
+		}
+		responses: {
+			/** @description Upload completed successfully */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CompleteFileUploadResponseDto']
+				}
+			}
+			/** @description Bad Request - Invalid parameters */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description File not found in storage - upload may have failed or URL expired */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
+	'initiate-file-upload': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['InitiateFileUploadDto']
+			}
+		}
+		responses: {
+			/** @description Signed URL generated successfully */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['InitiateFileUploadResponseDto']
+				}
+			}
+			/** @description Bad Request - Invalid parameters */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description File size exceeds maximum allowed limit */
+			413: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
+	'get-all-custom-subtypes': {
+		parameters: {
+			query: {
+				/** @description Location Id */
+				locationId: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'create-custom-subtype': {
+		parameters: {
+			query: {
+				/** @description Location Id */
+				locationId: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CreateCustomSubtypeDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'update-custom-subtype': {
+		parameters: {
+			query: {
+				/** @description Location Id */
+				locationId: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Custom Subtype Id */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateCustomSubtypeDto']
+			}
+		}
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'get-contact-unsubscription-status': {
+		parameters: {
+			query: {
+				/** @description Contact Id */
+				contactId: string
+				/** @description Email address (optional - if not provided, gets all emails for contact) */
+				email?: string
+				/** @description Location Id */
+				locationId: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	'user-subscription-change': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UserSubscriptionChangeDto']
+			}
+		}
+		responses: {
+			/** @description Successful response */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
 				}
 			}
 		}
@@ -2240,6 +3354,8 @@ export interface operations {
 				assignedTo?: string
 				/** @description Contact Id */
 				contactId?: string
+				/** @description End date filter for dateAdded field (Unix timestamp in milliseconds) */
+				endDate?: number
 				/** @description User IDs of followers to filter conversations by. Multiple IDs can be provided as comma-separated values. */
 				followers?: string
 				/** @description Id of the conversation */
@@ -2252,6 +3368,7 @@ export interface operations {
 				lastMessageType?:
 					| 'TYPE_CALL'
 					| 'TYPE_SMS'
+					| 'TYPE_RCS'
 					| 'TYPE_EMAIL'
 					| 'TYPE_SMS_REVIEW_REQUEST'
 					| 'TYPE_WEBCHAT'
@@ -2286,6 +3403,11 @@ export interface operations {
 					| 'TYPE_CUSTOM_CALL'
 					| 'TYPE_INTERNAL_COMMENT'
 					| 'TYPE_ACTIVITY_EMPLOYEE_ACTION_LOG'
+					| 'TYPE_TIKTOK'
+					| 'TYPE_TIKTOK_COMMENT'
+					| 'TYPE_ACTIVITY_WHATSAPP'
+					| 'TYPE_FORM_SUBMISSION'
+					| 'TYPE_SMS_REACTION'
 				/** @description Limit of conversations - Default is 20 */
 				limit?: number
 				/** @description Location Id */
@@ -2307,10 +3429,14 @@ export interface operations {
 					| 'last_manual_message_date'
 					| 'last_message_date'
 					| 'score_profile'
+					| 'overdue_at'
+					| 'due_at'
 				/** @description Id of score profile on which sortBy.ScoreProfile should sort on */
 				sortScoreProfile?: string
 				/** @description Search to begin after the specified date - should contain the sort value of the last document */
 				startAfterDate?: Record<string, never>
+				/** @description Start date filter for dateAdded field (Unix timestamp in milliseconds) */
+				startDate?: number
 				/** @description The status of the conversation to be filtered - all, read, unread, starred */
 				status?: 'all' | 'read' | 'unread' | 'starred' | 'recents'
 			}

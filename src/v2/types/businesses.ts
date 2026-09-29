@@ -219,8 +219,9 @@ export interface operations {
 	'get-businesses-by-location': {
 		parameters: {
 			query: {
-				/** @example 5DP4iH6HLkQsiKESj6rh */
+				limit?: string
 				locationId: string
+				skip?: string
 			}
 			header: {
 				/** @description API Version */

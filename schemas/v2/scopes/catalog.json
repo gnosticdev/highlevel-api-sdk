@@ -114,8 +114,7 @@
         "OpportunityMonetaryValueUpdate",
         "OpportunityStageUpdate",
         "TaskCreate",
-        "TaskDelete",
-        "Webhook Events"
+        "TaskDelete"
       ]
     },
     "ScopeEndpoint": {

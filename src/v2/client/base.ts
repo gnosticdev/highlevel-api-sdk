@@ -6,14 +6,19 @@ import createClient from 'openapi-fetch'
 import type { AccessType } from '../scopes/scope-types'
 import type { HighLevelClientInterface } from '..'
 import type { DefaultOauthClient, OauthClientImpl } from '../oauth/impl'
+import type { paths as AdManagerPaths } from '../types/ad-manager'
+import type { paths as AffiliateManagerPaths } from '../types/affiliate-manager'
 import type { paths as AgenciesPaths } from '../types/agencies'
+import type { paths as AgentStudioPaths } from '../types/agent-studio'
 import type { paths as AssociationsPaths } from '../types/associations'
 import type { paths as BlogsPaths } from '../types/blogs'
+import type { paths as BrandBoardsPaths } from '../types/brand-boards'
 import type { paths as BusinessesPaths } from '../types/businesses'
 import type { paths as CalendarsPaths } from '../types/calendars'
 import type { paths as CampaignsPaths } from '../types/campaigns'
 import type { paths as CompaniesPaths } from '../types/companies'
 import type { paths as ContactsPaths } from '../types/contacts'
+import type { paths as ConversationAiPaths } from '../types/conversation-ai'
 import type { paths as ConversationsPaths } from '../types/conversations'
 import type { paths as CoursesPaths } from '../types/courses'
 import type { paths as CustomFieldsPaths } from '../types/custom-fields'
@@ -23,6 +28,7 @@ import type { paths as EmailsPaths } from '../types/emails'
 import type { paths as FormsPaths } from '../types/forms'
 import type { paths as FunnelsPaths } from '../types/funnels'
 import type { paths as InvoicesPaths } from '../types/invoices'
+import type { paths as KnowledgeBasePaths } from '../types/knowledge-base'
 import type { paths as LinksPaths } from '../types/links'
 import type { paths as LocationsPaths } from '../types/locations'
 import type { paths as MarketplacePaths } from '../types/marketplace'
@@ -62,14 +68,19 @@ export class BaseHighLevelClient<
 	_clientConfig: HighLevelClientConfig
 	oauth: TOAuth
 
+	adManager: Client<AdManagerPaths>
+	affiliateManager: Client<AffiliateManagerPaths>
 	agencies: Client<AgenciesPaths>
+	agentStudio: Client<AgentStudioPaths>
 	associations: Client<AssociationsPaths>
 	blogs: Client<BlogsPaths>
+	brandBoards: Client<BrandBoardsPaths>
 	businesses: Client<BusinessesPaths>
 	calendars: Client<CalendarsPaths>
 	campaigns: Client<CampaignsPaths>
 	companies: Client<CompaniesPaths>
 	contacts: Client<ContactsPaths>
+	conversationAi: Client<ConversationAiPaths>
 	conversations: Client<ConversationsPaths>
 	courses: Client<CoursesPaths>
 	customFields: Client<CustomFieldsPaths>
@@ -79,6 +90,7 @@ export class BaseHighLevelClient<
 	forms: Client<FormsPaths>
 	funnels: Client<FunnelsPaths>
 	invoices: Client<InvoicesPaths>
+	knowledgeBase: Client<KnowledgeBasePaths>
 	links: Client<LinksPaths>
 	locations: Client<LocationsPaths>
 	marketplace: Client<MarketplacePaths>
@@ -118,12 +130,33 @@ export class BaseHighLevelClient<
 
 		// generate methods
 		/**
+		 * adManager client implementation.
+		 */
+		this.adManager = createClientMaybeAuth<
+			AdManagerPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<AdManagerPaths>
+		/**
+		 * affiliateManager client implementation.
+		 */
+		this.affiliateManager = createClientMaybeAuth<
+			AffiliateManagerPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<AffiliateManagerPaths>
+		/**
 		 * agencies client implementation.
 		 */
 		this.agencies = createClientMaybeAuth<
 			AgenciesPaths,
 			AUTH_HEADERS | undefined
 		>(authHeaders, this._clientConfig) as Client<AgenciesPaths>
+		/**
+		 * agentStudio client implementation.
+		 */
+		this.agentStudio = createClientMaybeAuth<
+			AgentStudioPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<AgentStudioPaths>
 		/**
 		 * associations client implementation.
 		 */
@@ -138,6 +171,13 @@ export class BaseHighLevelClient<
 			BlogsPaths,
 			AUTH_HEADERS | undefined
 		>(authHeaders, this._clientConfig) as Client<BlogsPaths>
+		/**
+		 * brandBoards client implementation.
+		 */
+		this.brandBoards = createClientMaybeAuth<
+			BrandBoardsPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<BrandBoardsPaths>
 		/**
 		 * businesses client implementation.
 		 */
@@ -173,6 +213,13 @@ export class BaseHighLevelClient<
 			ContactsPaths,
 			AUTH_HEADERS | undefined
 		>(authHeaders, this._clientConfig) as Client<ContactsPaths>
+		/**
+		 * conversationAi client implementation.
+		 */
+		this.conversationAi = createClientMaybeAuth<
+			ConversationAiPaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<ConversationAiPaths>
 		/**
 		 * conversations client implementation.
 		 */
@@ -236,6 +283,13 @@ export class BaseHighLevelClient<
 			InvoicesPaths,
 			AUTH_HEADERS | undefined
 		>(authHeaders, this._clientConfig) as Client<InvoicesPaths>
+		/**
+		 * knowledgeBase client implementation.
+		 */
+		this.knowledgeBase = createClientMaybeAuth<
+			KnowledgeBasePaths,
+			AUTH_HEADERS | undefined
+		>(authHeaders, this._clientConfig) as Client<KnowledgeBasePaths>
 		/**
 		 * links client implementation.
 		 */

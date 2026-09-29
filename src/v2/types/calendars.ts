@@ -455,6 +455,98 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/calendars/schedules': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		/**
+		 * Create user availability schedule
+		 * @description Create new schedule with specified rules, timezone, location, user and calendar associations.
+		 */
+		post: operations['createSchedule']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/calendars/schedules/{id}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get user availability schedule
+		 * @description Retrieve a specific schedule by its unique identifier. Returns detailed information including rules, timezone, and associated calendars/users.
+		 */
+		get: operations['getScheduleById']
+		/**
+		 * Update user availability schedule
+		 * @description Modify an existing schedule by updating its rules, timezone, and name All fields are optional - only provided fields will be updated.
+		 */
+		put: operations['updateSchedule']
+		post?: never
+		/**
+		 * Delete user availability schedule
+		 * @description Permanently remove a schedule and all its associated rules. This action cannot be undone.
+		 */
+		delete: operations['deleteSchedule']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/calendars/schedules/{id}/associations/{calendarId}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		/**
+		 * Apply user availability schedule to a calendar
+		 * @description Associates a calendar with the given schedule by adding the calendarId to a schedule
+		 */
+		put: operations['add-calendar-to-schedule']
+		post?: never
+		/**
+		 * Remove user availability schedule from a calendar
+		 * @description Removes the association between a team calendar and the given schedule by removing the calendarId from the schedule
+		 */
+		delete: operations['remove-calendar-from-schedule']
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/calendars/schedules/search': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * List user availability schedule
+		 * @description Retrieve user availability schedules based on various filters including location, calendar, and user. Supports pagination.
+		 */
+		get: operations['getAllSchedules']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -1414,6 +1506,7 @@ export interface components {
 				| 'assignedUser'
 				| 'emails'
 				| 'phoneNumbers'
+				| 'business'
 			/**
 			 * @example [
 			 *       "user1",
@@ -1702,7 +1795,15 @@ export interface components {
 				| 'assignedUser'
 				| 'emails'
 				| 'phoneNumbers'
-			/** @description selected user for in-App notification */
+				| 'business'
+			/**
+			 * @description Selected users for in-App and business email notifications. Supports user IDs and special keyword "sub_account_admin"
+			 * @example [
+			 *       "userId1",
+			 *       "userId2",
+			 *       "sub_account_admin"
+			 *     ]
+			 */
 			selectedUsers?: string[]
 			/** @description Subject  for email notification. Not necessary for in-App notification */
 			subject?: string
@@ -1734,6 +1835,52 @@ export interface components {
 			/** @description The ID of the user who created or updated the appointment */
 			userId?: string
 		}
+		CreateScheduleDTO: {
+			/**
+			 * @description Calendar IDs associated with the schedule
+			 * @example [
+			 *       "WvVX9LpvlBO6K506xLbp",
+			 *       "XyZ8MnQrStUvWxYzAbCdEf"
+			 *     ]
+			 */
+			calendarIds?: string[]
+			/**
+			 * @description Location ID where this schedule applies
+			 * @example IkqiJlXJ7o9h61tCHHod
+			 */
+			locationId: string
+			/**
+			 * @description Human-readable name for the schedule
+			 * @example Business Hours Schedule
+			 */
+			name: string
+			/**
+			 * @description Schedule rules defining when the schedule is active
+			 * @example [
+			 *       {
+			 *         "type": "wday",
+			 *         "day": "monday",
+			 *         "intervals": [
+			 *           {
+			 *             "from": "09:00",
+			 *             "to": "17:00"
+			 *           }
+			 *         ]
+			 *       }
+			 *     ]
+			 */
+			rules?: components['schemas']['ScheduleRuleDTO'][]
+			/**
+			 * @description Timezone for the schedule (IANA timezone identifier)
+			 * @example America/New_York
+			 */
+			timezone: string
+			/**
+			 * @description User ID associated with the schedule
+			 * @example IkqiJlXJ7o9h61tCHHod
+			 */
+			userId: string
+		}
 		DeleteAppointmentSchema: Record<string, never>
 		DeleteEventSuccessfulResponseDto: {
 			/** @example true */
@@ -1742,6 +1889,10 @@ export interface components {
 		DeleteNoteSuccessfulResponseDto: {
 			/** @example true */
 			success?: boolean
+		}
+		GetAllSchedulesResponseDTO: {
+			/** @description Array of schedules */
+			schedules: components['schemas']['ScheduleObjectResponseDTO'][]
 		}
 		GetCalendarEventsSuccessfulResponseDTO: {
 			events?: components['schemas']['CalendarEventDTO'][]
@@ -1928,6 +2079,104 @@ export interface components {
 			 */
 			success?: boolean
 		}
+		ScheduleIntervalDTO: {
+			/**
+			 * @description Start time in HH:MM format (24-hour format)
+			 * @example 09:00
+			 */
+			from: string
+			/**
+			 * @description End time in HH:MM format (24-hour format)
+			 * @example 17:00
+			 */
+			to: string
+		}
+		ScheduleObjectResponseDTO: {
+			/** @description Calendar IDs associated with the schedule */
+			calendarIds?: string[]
+			/**
+			 * @description ISO date string when the schedule was created
+			 * @example 2023-01-15T10:30:00.000Z
+			 */
+			dateAdded: string
+			/**
+			 * @description ISO date string when the schedule was last updated
+			 * @example 2023-01-20T14:45:00.000Z
+			 */
+			dateUpdated: string
+			/**
+			 * @description Whether the schedule has been deleted
+			 * @example false
+			 */
+			deleted: boolean
+			/**
+			 * @description Unique identifier for the schedule
+			 * @example IkqiJlXJ7o9h61tCHHod
+			 */
+			id: string
+			/**
+			 * @description Location ID where this schedule applies
+			 * @example IkqiJlXJ7o9h61tCHHod
+			 */
+			locationId: string
+			/**
+			 * @description Human-readable name for the schedule
+			 * @example Business Hours Schedule
+			 */
+			name: string
+			/** @description Schedule rules defining when the schedule is active */
+			rules: components['schemas']['ScheduleRuleDTO'][]
+			/**
+			 * @description Timezone for the schedule (IANA timezone identifier)
+			 * @example America/New_York
+			 */
+			timezone: string
+			/**
+			 * @description User ID associated with the schedule
+			 * @example IkqiJlXJ7o9h61tCHHod
+			 */
+			userId: string
+		}
+		ScheduleResponseDTO: {
+			/** @description Schedule */
+			schedule: components['schemas']['ScheduleObjectResponseDTO']
+		}
+		ScheduleRuleDTO: {
+			/**
+			 * @description Specific date in YYYY-MM-DD format (only for date-type rules)
+			 * @example 2023-04-15
+			 */
+			date?: string
+			/**
+			 * @description Day of week (only for weekday-type rules)
+			 * @example monday
+			 * @enum {string}
+			 */
+			day?:
+				| 'sunday'
+				| 'monday'
+				| 'tuesday'
+				| 'wednesday'
+				| 'thursday'
+				| 'friday'
+				| 'saturday'
+			/**
+			 * @description Time intervals for the rule (e.g., 9 AM to 5 PM)
+			 * @example [
+			 *       {
+			 *         "from": "09:00",
+			 *         "to": "17:00"
+			 *       }
+			 *     ]
+			 */
+			intervals: components['schemas']['ScheduleIntervalDTO'][]
+			/**
+			 * @description Type of schedule rule - weekday (recurring) or date (specific date)
+			 * @example wday
+			 * @enum {string}
+			 */
+			type: 'wday' | 'date'
+		}
 		SchedulesDTO: {
 			timeOffset?: number
 			unit?: string
@@ -2017,6 +2266,18 @@ export interface components {
 			/** @example Invalid token: access token is invalid */
 			message?: string
 			/** @example 401 */
+			statusCode?: number
+		}
+		UnprocessableDTO: {
+			/** @example Unprocessable Entity */
+			error?: string
+			/**
+			 * @example [
+			 *       "Unprocessable Entity"
+			 *     ]
+			 */
+			message?: string[]
+			/** @example 422 */
 			statusCode?: number
 		}
 		UpdateAvailability: {
@@ -2112,7 +2373,15 @@ export interface components {
 				| 'assignedUser'
 				| 'emails'
 				| 'phoneNumbers'
-			/** @description selected user for in-App notification */
+				| 'business'
+			/**
+			 * @description Selected users for in-App and business email notifications. Supports user IDs and special keyword "sub_account_admin"
+			 * @example [
+			 *       "userId1",
+			 *       "userId2",
+			 *       "sub_account_admin"
+			 *     ]
+			 */
 			selectedUsers?: string[]
 			/** @description Subject  for email notification. Not necessary for in-App notification */
 			subject?: string
@@ -2138,6 +2407,34 @@ export interface components {
 			outOfService?: number
 			/** @description Quantity of the equipment. */
 			quantity?: number
+		}
+		UpdateScheduleDTO: {
+			/**
+			 * @description Human-readable name for the schedule
+			 * @example Updated Business Hours
+			 */
+			name?: string
+			/**
+			 * @description Updated schedule rules defining when the schedule is active
+			 * @example [
+			 *       {
+			 *         "type": "wday",
+			 *         "day": "monday",
+			 *         "intervals": [
+			 *           {
+			 *             "from": "08:00",
+			 *             "to": "18:00"
+			 *           }
+			 *         ]
+			 *       }
+			 *     ]
+			 */
+			rules?: components['schemas']['ScheduleRuleDTO'][]
+			/**
+			 * @description Updated timezone for the schedule (IANA timezone identifier)
+			 * @example America/Los_Angeles
+			 */
+			timezone?: string
 		}
 		ValidateGroupSlugPostBody: {
 			/**
@@ -3759,6 +4056,400 @@ export interface operations {
 				}
 			}
 			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+		}
+	}
+	createSchedule: {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['CreateScheduleDTO']
+			}
+		}
+		responses: {
+			/** @description Schedule created successfully */
+			201: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ScheduleResponseDTO']
+				}
+			}
+			/** @description Invalid request parameters */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description User not authenticated */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Validation errors in schedule rules or conflicting data */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	getScheduleById: {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Unique identifier of the schedule */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Schedule found and retrieved successfully */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ScheduleResponseDTO']
+				}
+			}
+			/** @description Invalid request parameters */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description User not authenticated */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Schedule with the specified ID was not found */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
+	updateSchedule: {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Unique identifier of the schedule to update */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['UpdateScheduleDTO']
+			}
+		}
+		responses: {
+			/** @description Schedule updated successfully */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ScheduleResponseDTO']
+				}
+			}
+			/** @description Invalid request parameters */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description User not authenticated */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Schedule with the specified ID was not found */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+			/** @description Validation errors in schedule rules or conflicting data */
+			422: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnprocessableDTO']
+				}
+			}
+		}
+	}
+	deleteSchedule: {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Unique identifier of the schedule to delete */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Schedule deleted successfully */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': {
+						/**
+						 * @description Whether the deletion was successful
+						 * @example true
+						 */
+						success?: boolean
+					}
+				}
+			}
+			/** @description Invalid request parameters */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description User not authenticated */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Schedule with the specified ID was not found */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
+	'add-calendar-to-schedule': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Unique identifier of the team calendar to add to the schedule */
+				calendarId: string
+				/** @description Unique identifier of the schedule */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Calendar successfully added to schedule */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': {
+						/** @example true */
+						success?: boolean
+					}
+				}
+			}
+			/** @description Schedule and calendar must belong to the same location */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description User not authenticated */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Schedule or calendar not found */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+		}
+	}
+	'remove-calendar-from-schedule': {
+		parameters: {
+			query?: never
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path: {
+				/** @description Unique identifier of the calendar to remove from the schedule */
+				calendarId: string
+				/** @description Unique identifier of the schedule */
+				id: string
+			}
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Calendar successfully removed from schedule */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': {
+						/** @example true */
+						success?: boolean
+					}
+				}
+			}
+			/** @description Schedule and calendar must belong to the same location */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description User not authenticated */
+			401: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['UnauthorizedDTO']
+				}
+			}
+			/** @description Schedule or calendar not found */
+			404: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+		}
+	}
+	getAllSchedules: {
+		parameters: {
+			query: {
+				/** @description Calendar ID for filtering schedules by specific calendar */
+				calendarId?: string
+				/** @description Maximum number of items to return (max 500) */
+				limit?: number
+				/** @description Location ID to filter schedules by */
+				locationId: string
+				/** @description Number of items to skip for pagination */
+				skip?: number
+				/** @description User ID to filter schedules by specific user */
+				userId: string
+			}
+			header: {
+				/** @description API Version */
+				Version: '2021-04-15'
+			}
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			/** @description Schedules retrieved successfully */
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['GetAllSchedulesResponseDTO']
+				}
+			}
+			/** @description Invalid request parameters */
+			400: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BadRequestDTO']
+				}
+			}
+			/** @description User not authenticated */
 			401: {
 				headers: {
 					[name: string]: unknown

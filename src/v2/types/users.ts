@@ -8,7 +8,8 @@ export interface paths {
 		}
 		/**
 		 * Get User by Location
-		 * @description Get User by Location
+		 * @deprecated
+		 * @description Deprecated. Use `GET /users/search` instead. Pass `locationId` as a query parameter to filter results by location, along with the required `companyId` and other search filters as needed.
 		 */
 		get: operations['get-user-by-location']
 		put?: never
@@ -121,6 +122,25 @@ export interface components {
 			permissions?: components['schemas']['PermissionsDto']
 			/** @example +18832327657 */
 			phone?: string
+			/**
+			 * @description Platform language preference for the user
+			 * @example en_US
+			 * @enum {string}
+			 */
+			platformLanguage?:
+				| 'en_US'
+				| 'es'
+				| 'fr_CA'
+				| 'fr_FR'
+				| 'nl'
+				| 'de'
+				| 'pt_PT'
+				| 'pt_BR'
+				| 'it'
+				| 'sv'
+				| 'da'
+				| 'fi'
+				| 'no'
 			/** @example https://img.png */
 			profilePhoto?: string
 			/** @example admin */
@@ -162,11 +182,37 @@ export interface components {
 				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
+				| 'reporting/stats.export'
 				| 'payments.write'
-				| 'payments/refunds.write'
 				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
+				| 'payments/orders.readonly'
+				| 'payments/orders.export'
+				| 'payments/orders.import'
+				| 'payments/orders.collectPayment'
+				| 'payments/subscriptions.readonly'
+				| 'payments/subscriptions.write'
+				| 'payments/subscriptions.update'
+				| 'payments/subscriptions.export'
+				| 'payments/subscriptions.pauseResumeCancel'
+				| 'payments/subscriptions.sharePaymentMethod'
+				| 'payments/transactions.readonly'
+				| 'payments/transactions.export'
+				| 'payments/transactions.import'
+				| 'payments/transactions.refund'
+				| 'payments/transactions.viewReceipts'
+				| 'payments/taxesSettings.readonly'
+				| 'payments/settings.readonly'
+				| 'payments/taxesSettings.updateInclusiveExclusive'
+				| 'payments/taxesSettings.manageRates'
+				| 'payments/taxesSettings.configureAutomatic'
+				| 'products.readonly'
+				| 'products.write'
+				| 'products.delete'
+				| 'products.duplicate'
+				| 'products.bulkActions'
+				| 'payments/settings.write'
+				| 'payments/settings.configureReceipt'
+				| 'payments/settings.configureSubscription'
 				| 'invoices.write'
 				| 'invoices.readonly'
 				| 'invoices/schedule.readonly'
@@ -176,6 +222,7 @@ export interface components {
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
 				| 'reputation/reviewsAIAgents.write'
+				| 'reputation/gbp.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -250,6 +297,9 @@ export interface components {
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
 				| 'loginas.write'
+				| 'users-sso-login-management.write'
+				| 'users-sso-login-management.readonly'
+				| 'sso-config.write'
 				| 'snapshots/api.readonly'
 				| 'snapshots/api.create'
 				| 'snapshots/api.edit'
@@ -267,17 +317,31 @@ export interface components {
 				| 'internaltools.billing-common.readonly'
 				| 'internaltools.billing-common.write'
 				| 'voice-ai-agents.write'
+				| 'voice-ai-agents.readonly'
+				| 'voice-ai-common.readonly'
+				| 'voice-ai-common.write'
 				| 'voice-ai-agent-goals.readonly'
 				| 'voice-ai-agent-goals.write'
 				| 'voice-ai-dashboard.readonly'
 				| 'agency/launchpad.write'
 				| 'agency/launchpad.readonly'
-				| 'launchpad.write'
-				| 'launchpad.readonly'
+				| 'launchpad/location.write'
+				| 'launchpad/location.readonly'
 				| 'text-ai-agents.write'
 				| 'text-ai-agent-goals.readonly'
 				| 'text-ai-agent-goals.write'
 				| 'text-ai-agent-training.write'
+				| 'text-ai-agents-dashboard.readonly'
+				| 'locations.create'
+				| 'locations.delete'
+				| 'locations.export.list'
+				| 'locations.features-limits.manage'
+				| 'locations.pause-resume'
+				| 'locations.agency-subaccounts.manage'
+				| 'locations.billing.manage'
+				| 'locations.details.manage'
+				| 'audit-logs.readonly'
+				| 'audit-logs.export'
 			)[]
 			/**
 			 * @description Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled
@@ -316,11 +380,37 @@ export interface components {
 				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
+				| 'reporting/stats.export'
 				| 'payments.write'
-				| 'payments/refunds.write'
 				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
+				| 'payments/orders.readonly'
+				| 'payments/orders.export'
+				| 'payments/orders.import'
+				| 'payments/orders.collectPayment'
+				| 'payments/subscriptions.readonly'
+				| 'payments/subscriptions.write'
+				| 'payments/subscriptions.update'
+				| 'payments/subscriptions.export'
+				| 'payments/subscriptions.pauseResumeCancel'
+				| 'payments/subscriptions.sharePaymentMethod'
+				| 'payments/transactions.readonly'
+				| 'payments/transactions.export'
+				| 'payments/transactions.import'
+				| 'payments/transactions.refund'
+				| 'payments/transactions.viewReceipts'
+				| 'payments/taxesSettings.readonly'
+				| 'payments/settings.readonly'
+				| 'payments/taxesSettings.updateInclusiveExclusive'
+				| 'payments/taxesSettings.manageRates'
+				| 'payments/taxesSettings.configureAutomatic'
+				| 'products.readonly'
+				| 'products.write'
+				| 'products.delete'
+				| 'products.duplicate'
+				| 'products.bulkActions'
+				| 'payments/settings.write'
+				| 'payments/settings.configureReceipt'
+				| 'payments/settings.configureSubscription'
 				| 'invoices.write'
 				| 'invoices.readonly'
 				| 'invoices/schedule.readonly'
@@ -330,6 +420,7 @@ export interface components {
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
 				| 'reputation/reviewsAIAgents.write'
+				| 'reputation/gbp.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -404,6 +495,9 @@ export interface components {
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
 				| 'loginas.write'
+				| 'users-sso-login-management.write'
+				| 'users-sso-login-management.readonly'
+				| 'sso-config.write'
 				| 'snapshots/api.readonly'
 				| 'snapshots/api.create'
 				| 'snapshots/api.edit'
@@ -421,18 +515,42 @@ export interface components {
 				| 'internaltools.billing-common.readonly'
 				| 'internaltools.billing-common.write'
 				| 'voice-ai-agents.write'
+				| 'voice-ai-agents.readonly'
+				| 'voice-ai-common.readonly'
+				| 'voice-ai-common.write'
 				| 'voice-ai-agent-goals.readonly'
 				| 'voice-ai-agent-goals.write'
 				| 'voice-ai-dashboard.readonly'
 				| 'agency/launchpad.write'
 				| 'agency/launchpad.readonly'
-				| 'launchpad.write'
-				| 'launchpad.readonly'
+				| 'launchpad/location.write'
+				| 'launchpad/location.readonly'
 				| 'text-ai-agents.write'
 				| 'text-ai-agent-goals.readonly'
 				| 'text-ai-agent-goals.write'
 				| 'text-ai-agent-training.write'
+				| 'text-ai-agents-dashboard.readonly'
+				| 'locations.create'
+				| 'locations.delete'
+				| 'locations.export.list'
+				| 'locations.features-limits.manage'
+				| 'locations.pause-resume'
+				| 'locations.agency-subaccounts.manage'
+				| 'locations.billing.manage'
+				| 'locations.details.manage'
+				| 'audit-logs.readonly'
+				| 'audit-logs.export'
 			)[]
+			/**
+			 * @description Per-location inbound Twilio number in E.164 format, keyed by location id (Call and Voicemail Inbound Number for direct Twilio, not LC Phone). Replacement semantics: if you send twilioPhone in the request body, the stored map is replaced entirely with this object (not merged). Any location id omitted from the object is removed from the saved map. Omit the twilioPhone property entirely to leave existing numbers unchanged. Send an empty object {} to clear all per-location numbers. To clear a single location only, set that location id to an empty string "".
+			 * @example {
+			 *       "C2QujeCh8ZnC7al2InWR": "+18832327657",
+			 *       "M2QrtfVt8ZnC7cv2InDL": "+18832327657"
+			 *     }
+			 */
+			twilioPhone?: {
+				[key: string]: string
+			}
 			/** @example account */
 			type: string
 		}
@@ -455,13 +573,10 @@ export interface components {
 			 */
 			deleted: boolean
 			/**
-			 * @description Array of email addresses to filter users
-			 * @example [
-			 *       "user1@example.com",
-			 *       "user2@example.com"
-			 *     ]
+			 * @description Comma-separated list of email addresses to filter users
+			 * @example user1@example.com,user2@example.com
 			 */
-			emails: string[]
+			emails: string
 			/**
 			 * @description No of results to be limited before returning the result
 			 * @default 25
@@ -726,11 +841,6 @@ export interface components {
 			 * @example john@deo.com
 			 */
 			email?: string
-			/**
-			 * @description OTP to change the email ID of the user
-			 * @example 191344
-			 */
-			emailChangeOTP?: string
 			/** @example John */
 			firstName?: string
 			/** @example Deo */
@@ -746,6 +856,25 @@ export interface components {
 			permissions?: components['schemas']['PermissionsDto']
 			/** @example +18832327657 */
 			phone?: string
+			/**
+			 * @description Platform language preference for the user
+			 * @example en_US
+			 * @enum {string}
+			 */
+			platformLanguage?:
+				| 'en_US'
+				| 'es'
+				| 'fr_CA'
+				| 'fr_FR'
+				| 'nl'
+				| 'de'
+				| 'pt_PT'
+				| 'pt_BR'
+				| 'it'
+				| 'sv'
+				| 'da'
+				| 'fi'
+				| 'no'
 			/** @example https://img.png */
 			profilePhoto?: string
 			/** @example admin */
@@ -787,11 +916,37 @@ export interface components {
 				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
+				| 'reporting/stats.export'
 				| 'payments.write'
-				| 'payments/refunds.write'
 				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
+				| 'payments/orders.readonly'
+				| 'payments/orders.export'
+				| 'payments/orders.import'
+				| 'payments/orders.collectPayment'
+				| 'payments/subscriptions.readonly'
+				| 'payments/subscriptions.write'
+				| 'payments/subscriptions.update'
+				| 'payments/subscriptions.export'
+				| 'payments/subscriptions.pauseResumeCancel'
+				| 'payments/subscriptions.sharePaymentMethod'
+				| 'payments/transactions.readonly'
+				| 'payments/transactions.export'
+				| 'payments/transactions.import'
+				| 'payments/transactions.refund'
+				| 'payments/transactions.viewReceipts'
+				| 'payments/taxesSettings.readonly'
+				| 'payments/settings.readonly'
+				| 'payments/taxesSettings.updateInclusiveExclusive'
+				| 'payments/taxesSettings.manageRates'
+				| 'payments/taxesSettings.configureAutomatic'
+				| 'products.readonly'
+				| 'products.write'
+				| 'products.delete'
+				| 'products.duplicate'
+				| 'products.bulkActions'
+				| 'payments/settings.write'
+				| 'payments/settings.configureReceipt'
+				| 'payments/settings.configureSubscription'
 				| 'invoices.write'
 				| 'invoices.readonly'
 				| 'invoices/schedule.readonly'
@@ -801,6 +956,7 @@ export interface components {
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
 				| 'reputation/reviewsAIAgents.write'
+				| 'reputation/gbp.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -875,6 +1031,9 @@ export interface components {
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
 				| 'loginas.write'
+				| 'users-sso-login-management.write'
+				| 'users-sso-login-management.readonly'
+				| 'sso-config.write'
 				| 'snapshots/api.readonly'
 				| 'snapshots/api.create'
 				| 'snapshots/api.edit'
@@ -892,17 +1051,31 @@ export interface components {
 				| 'internaltools.billing-common.readonly'
 				| 'internaltools.billing-common.write'
 				| 'voice-ai-agents.write'
+				| 'voice-ai-agents.readonly'
+				| 'voice-ai-common.readonly'
+				| 'voice-ai-common.write'
 				| 'voice-ai-agent-goals.readonly'
 				| 'voice-ai-agent-goals.write'
 				| 'voice-ai-dashboard.readonly'
 				| 'agency/launchpad.write'
 				| 'agency/launchpad.readonly'
-				| 'launchpad.write'
-				| 'launchpad.readonly'
+				| 'launchpad/location.write'
+				| 'launchpad/location.readonly'
 				| 'text-ai-agents.write'
 				| 'text-ai-agent-goals.readonly'
 				| 'text-ai-agent-goals.write'
 				| 'text-ai-agent-training.write'
+				| 'text-ai-agents-dashboard.readonly'
+				| 'locations.create'
+				| 'locations.delete'
+				| 'locations.export.list'
+				| 'locations.features-limits.manage'
+				| 'locations.pause-resume'
+				| 'locations.agency-subaccounts.manage'
+				| 'locations.billing.manage'
+				| 'locations.details.manage'
+				| 'audit-logs.readonly'
+				| 'audit-logs.export'
 			)[]
 			/**
 			 * @description Assigned Scopes allowed for users. Only scopes that have been passed will be enabled. If passed empty all the assigned scopes will be get disabled
@@ -941,11 +1114,37 @@ export interface components {
 				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
+				| 'reporting/stats.export'
 				| 'payments.write'
-				| 'payments/refunds.write'
 				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
+				| 'payments/orders.readonly'
+				| 'payments/orders.export'
+				| 'payments/orders.import'
+				| 'payments/orders.collectPayment'
+				| 'payments/subscriptions.readonly'
+				| 'payments/subscriptions.write'
+				| 'payments/subscriptions.update'
+				| 'payments/subscriptions.export'
+				| 'payments/subscriptions.pauseResumeCancel'
+				| 'payments/subscriptions.sharePaymentMethod'
+				| 'payments/transactions.readonly'
+				| 'payments/transactions.export'
+				| 'payments/transactions.import'
+				| 'payments/transactions.refund'
+				| 'payments/transactions.viewReceipts'
+				| 'payments/taxesSettings.readonly'
+				| 'payments/settings.readonly'
+				| 'payments/taxesSettings.updateInclusiveExclusive'
+				| 'payments/taxesSettings.manageRates'
+				| 'payments/taxesSettings.configureAutomatic'
+				| 'products.readonly'
+				| 'products.write'
+				| 'products.delete'
+				| 'products.duplicate'
+				| 'products.bulkActions'
+				| 'payments/settings.write'
+				| 'payments/settings.configureReceipt'
+				| 'payments/settings.configureSubscription'
 				| 'invoices.write'
 				| 'invoices.readonly'
 				| 'invoices/schedule.readonly'
@@ -955,6 +1154,7 @@ export interface components {
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
 				| 'reputation/reviewsAIAgents.write'
+				| 'reputation/gbp.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -1029,6 +1229,9 @@ export interface components {
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
 				| 'loginas.write'
+				| 'users-sso-login-management.write'
+				| 'users-sso-login-management.readonly'
+				| 'sso-config.write'
 				| 'snapshots/api.readonly'
 				| 'snapshots/api.create'
 				| 'snapshots/api.edit'
@@ -1046,18 +1249,42 @@ export interface components {
 				| 'internaltools.billing-common.readonly'
 				| 'internaltools.billing-common.write'
 				| 'voice-ai-agents.write'
+				| 'voice-ai-agents.readonly'
+				| 'voice-ai-common.readonly'
+				| 'voice-ai-common.write'
 				| 'voice-ai-agent-goals.readonly'
 				| 'voice-ai-agent-goals.write'
 				| 'voice-ai-dashboard.readonly'
 				| 'agency/launchpad.write'
 				| 'agency/launchpad.readonly'
-				| 'launchpad.write'
-				| 'launchpad.readonly'
+				| 'launchpad/location.write'
+				| 'launchpad/location.readonly'
 				| 'text-ai-agents.write'
 				| 'text-ai-agent-goals.readonly'
 				| 'text-ai-agent-goals.write'
 				| 'text-ai-agent-training.write'
+				| 'text-ai-agents-dashboard.readonly'
+				| 'locations.create'
+				| 'locations.delete'
+				| 'locations.export.list'
+				| 'locations.features-limits.manage'
+				| 'locations.pause-resume'
+				| 'locations.agency-subaccounts.manage'
+				| 'locations.billing.manage'
+				| 'locations.details.manage'
+				| 'audit-logs.readonly'
+				| 'audit-logs.export'
 			)[]
+			/**
+			 * @description Per-location inbound Twilio number in E.164 format, keyed by location id (Call and Voicemail Inbound Number for direct Twilio, not LC Phone). Replacement semantics: if you send twilioPhone in the request body, the stored map is replaced entirely with this object (not merged). Any location id omitted from the object is removed from the saved map. Omit the twilioPhone property entirely to leave existing numbers unchanged. Send an empty object {} to clear all per-location numbers. To clear a single location only, set that location id to an empty string "".
+			 * @example {
+			 *       "C2QujeCh8ZnC7al2InWR": "+18832327657",
+			 *       "M2QrtfVt8ZnC7cv2InDL": "+18832327657"
+			 *     }
+			 */
+			twilioPhone?: {
+				[key: string]: string
+			}
 			/** @example account */
 			type?: string
 		}
@@ -1086,6 +1313,25 @@ export interface components {
 			permissions?: components['schemas']['PermissionsDto']
 			/** @example +1 808-868-8888 */
 			phone?: string
+			/**
+			 * @description Platform language preference for the user
+			 * @example en_US
+			 * @enum {string}
+			 */
+			platformLanguage?:
+				| 'en_US'
+				| 'es'
+				| 'fr_CA'
+				| 'fr_FR'
+				| 'nl'
+				| 'de'
+				| 'pt_PT'
+				| 'pt_BR'
+				| 'it'
+				| 'sv'
+				| 'da'
+				| 'fi'
+				| 'no'
 			roles?: components['schemas']['RoleSchema']
 			/** @enum {string} */
 			scopes?:
@@ -1118,11 +1364,37 @@ export interface components {
 				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
+				| 'reporting/stats.export'
 				| 'payments.write'
-				| 'payments/refunds.write'
 				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
+				| 'payments/orders.readonly'
+				| 'payments/orders.export'
+				| 'payments/orders.import'
+				| 'payments/orders.collectPayment'
+				| 'payments/subscriptions.readonly'
+				| 'payments/subscriptions.write'
+				| 'payments/subscriptions.update'
+				| 'payments/subscriptions.export'
+				| 'payments/subscriptions.pauseResumeCancel'
+				| 'payments/subscriptions.sharePaymentMethod'
+				| 'payments/transactions.readonly'
+				| 'payments/transactions.export'
+				| 'payments/transactions.import'
+				| 'payments/transactions.refund'
+				| 'payments/transactions.viewReceipts'
+				| 'payments/taxesSettings.readonly'
+				| 'payments/settings.readonly'
+				| 'payments/taxesSettings.updateInclusiveExclusive'
+				| 'payments/taxesSettings.manageRates'
+				| 'payments/taxesSettings.configureAutomatic'
+				| 'products.readonly'
+				| 'products.write'
+				| 'products.delete'
+				| 'products.duplicate'
+				| 'products.bulkActions'
+				| 'payments/settings.write'
+				| 'payments/settings.configureReceipt'
+				| 'payments/settings.configureSubscription'
 				| 'invoices.write'
 				| 'invoices.readonly'
 				| 'invoices/schedule.readonly'
@@ -1132,6 +1404,7 @@ export interface components {
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
 				| 'reputation/reviewsAIAgents.write'
+				| 'reputation/gbp.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -1206,6 +1479,9 @@ export interface components {
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
 				| 'loginas.write'
+				| 'users-sso-login-management.write'
+				| 'users-sso-login-management.readonly'
+				| 'sso-config.write'
 				| 'snapshots/api.readonly'
 				| 'snapshots/api.create'
 				| 'snapshots/api.edit'
@@ -1223,17 +1499,31 @@ export interface components {
 				| 'internaltools.billing-common.readonly'
 				| 'internaltools.billing-common.write'
 				| 'voice-ai-agents.write'
+				| 'voice-ai-agents.readonly'
+				| 'voice-ai-common.readonly'
+				| 'voice-ai-common.write'
 				| 'voice-ai-agent-goals.readonly'
 				| 'voice-ai-agent-goals.write'
 				| 'voice-ai-dashboard.readonly'
 				| 'agency/launchpad.write'
 				| 'agency/launchpad.readonly'
-				| 'launchpad.write'
-				| 'launchpad.readonly'
+				| 'launchpad/location.write'
+				| 'launchpad/location.readonly'
 				| 'text-ai-agents.write'
 				| 'text-ai-agent-goals.readonly'
 				| 'text-ai-agent-goals.write'
 				| 'text-ai-agent-training.write'
+				| 'text-ai-agents-dashboard.readonly'
+				| 'locations.create'
+				| 'locations.delete'
+				| 'locations.export.list'
+				| 'locations.features-limits.manage'
+				| 'locations.pause-resume'
+				| 'locations.agency-subaccounts.manage'
+				| 'locations.billing.manage'
+				| 'locations.details.manage'
+				| 'audit-logs.readonly'
+				| 'audit-logs.export'
 		}
 		UserSuccessfulResponseDto: {
 			/** @example john@deo.com */
@@ -1258,6 +1548,25 @@ export interface components {
 			permissions?: components['schemas']['PermissionsDto']
 			/** @example +1 808-868-8888 */
 			phone?: string
+			/**
+			 * @description Platform language preference for the user
+			 * @example en_US
+			 * @enum {string}
+			 */
+			platformLanguage?:
+				| 'en_US'
+				| 'es'
+				| 'fr_CA'
+				| 'fr_FR'
+				| 'nl'
+				| 'de'
+				| 'pt_PT'
+				| 'pt_BR'
+				| 'it'
+				| 'sv'
+				| 'da'
+				| 'fi'
+				| 'no'
 			roles?: components['schemas']['RoleSchema']
 			/** @enum {string} */
 			scopes?:
@@ -1290,11 +1599,37 @@ export interface components {
 				| 'reporting/reports.readonly'
 				| 'reporting/agent.readonly'
 				| 'reporting/reports.write'
+				| 'reporting/stats.export'
 				| 'payments.write'
-				| 'payments/refunds.write'
 				| 'payments/records.write'
-				| 'payments/exports.write'
-				| 'payments/subscriptionsCancel.write'
+				| 'payments/orders.readonly'
+				| 'payments/orders.export'
+				| 'payments/orders.import'
+				| 'payments/orders.collectPayment'
+				| 'payments/subscriptions.readonly'
+				| 'payments/subscriptions.write'
+				| 'payments/subscriptions.update'
+				| 'payments/subscriptions.export'
+				| 'payments/subscriptions.pauseResumeCancel'
+				| 'payments/subscriptions.sharePaymentMethod'
+				| 'payments/transactions.readonly'
+				| 'payments/transactions.export'
+				| 'payments/transactions.import'
+				| 'payments/transactions.refund'
+				| 'payments/transactions.viewReceipts'
+				| 'payments/taxesSettings.readonly'
+				| 'payments/settings.readonly'
+				| 'payments/taxesSettings.updateInclusiveExclusive'
+				| 'payments/taxesSettings.manageRates'
+				| 'payments/taxesSettings.configureAutomatic'
+				| 'products.readonly'
+				| 'products.write'
+				| 'products.delete'
+				| 'products.duplicate'
+				| 'products.bulkActions'
+				| 'payments/settings.write'
+				| 'payments/settings.configureReceipt'
+				| 'payments/settings.configureSubscription'
 				| 'invoices.write'
 				| 'invoices.readonly'
 				| 'invoices/schedule.readonly'
@@ -1304,6 +1639,7 @@ export interface components {
 				| 'reputation/review.write'
 				| 'reputation/listing.write'
 				| 'reputation/reviewsAIAgents.write'
+				| 'reputation/gbp.write'
 				| 'conversations.write'
 				| 'conversations.readonly'
 				| 'conversations/message.readonly'
@@ -1378,6 +1714,9 @@ export interface components {
 				| 'users/team-management.write'
 				| 'users/team-management.readonly'
 				| 'loginas.write'
+				| 'users-sso-login-management.write'
+				| 'users-sso-login-management.readonly'
+				| 'sso-config.write'
 				| 'snapshots/api.readonly'
 				| 'snapshots/api.create'
 				| 'snapshots/api.edit'
@@ -1395,17 +1734,31 @@ export interface components {
 				| 'internaltools.billing-common.readonly'
 				| 'internaltools.billing-common.write'
 				| 'voice-ai-agents.write'
+				| 'voice-ai-agents.readonly'
+				| 'voice-ai-common.readonly'
+				| 'voice-ai-common.write'
 				| 'voice-ai-agent-goals.readonly'
 				| 'voice-ai-agent-goals.write'
 				| 'voice-ai-dashboard.readonly'
 				| 'agency/launchpad.write'
 				| 'agency/launchpad.readonly'
-				| 'launchpad.write'
-				| 'launchpad.readonly'
+				| 'launchpad/location.write'
+				| 'launchpad/location.readonly'
 				| 'text-ai-agents.write'
 				| 'text-ai-agent-goals.readonly'
 				| 'text-ai-agent-goals.write'
 				| 'text-ai-agent-training.write'
+				| 'text-ai-agents-dashboard.readonly'
+				| 'locations.create'
+				| 'locations.delete'
+				| 'locations.export.list'
+				| 'locations.features-limits.manage'
+				| 'locations.pause-resume'
+				| 'locations.agency-subaccounts.manage'
+				| 'locations.billing.manage'
+				| 'locations.details.manage'
+				| 'audit-logs.readonly'
+				| 'audit-logs.export'
 		}
 	}
 	responses: never

@@ -11,7 +11,7 @@ export interface paths {
 		 * @deprecated
 		 * @description Get Contacts
 		 *
-		 *      **Note:** This API endpoint is deprecated. Please use the [Search Contacts](https://highlevel.stoplight.io/docs/integrations/dbe4f3a00a106-search-contacts) endpoint instead.
+		 *      **Note:** This API endpoint is deprecated. Please use the [Search Contacts](https://marketplace.gohighlevel.com/docs/ghl/contacts/search-contacts-advanced) endpoint instead.
 		 */
 		get: operations['get-contacts']
 		put?: never
@@ -487,108 +487,6 @@ export interface components {
 			/** @example my_custom_field */
 			key?: string
 		}
-		Contact: {
-			/**
-			 * @example [
-			 *       "john@example.com",
-			 *       "jane@example.com"
-			 *     ]
-			 */
-			additionalEmails?: string[]
-			/**
-			 * @example [
-			 *       "123456789",
-			 *       "987654321"
-			 *     ]
-			 */
-			additionalPhones?: string[]
-			/** @example 123 Main Street */
-			address?: string
-			/** @example 182goXVW3lIExEQPOnd3 */
-			assignedTo?: string
-			/** @example 282goXVW3lIExEQPOnd3 */
-			businessId?: string
-			/** @example Acme Corporation */
-			businessName?: string
-			/** @example New York */
-			city?: string
-			/** @example XYZ Corp */
-			companyName?: string
-			/** @example United States */
-			country?: string
-			customFields?: components['schemas']['CustomFieldSchema'][]
-			/** @example 2024-06-06T18:54:57.221Z */
-			dateAdded?: string
-			/** @example 1990-01-01 */
-			dateOfBirth?: string
-			/** @example 2024-06-06T18:54:57.221Z */
-			dateUpdated?: string
-			/** @example false */
-			dnd?: boolean
-			dndSettings?: components['schemas']['DndSettingsSchema']
-			/** @example john@example.com */
-			email?: string
-			/** @example john */
-			firstName?: string
-			/** @example john */
-			firstNameLowerCase?: string
-			/**
-			 * @example [
-			 *       "682goXVW3lIExEQPOnd3",
-			 *       "582goXVW3lIExEQPOnd3"
-			 *     ]
-			 */
-			followers?: string[]
-			/** @example 102goXVW3lIExEQPOnd3 */
-			id?: string
-			/** @example doe */
-			lastName?: string
-			/** @example doe */
-			lastNameLowerCase?: string
-			/** @example 502goXVW3lIExEQPOnd3 */
-			locationId?: string
-			opportunities?: components['schemas']['ContactOpportunity'][]
-			/** @example +123456789 */
-			phone?: string
-			/** @example Mobile */
-			phoneLabel?: string
-			/** @example 12345 */
-			postalCode?: string
-			/**
-			 * @example [
-			 *       1234,
-			 *       "102goXVW3lIExEQPOnd3"
-			 *     ]
-			 */
-			searchAfter?: string[]
-			/** @example Website */
-			source?: string
-			/** @example California */
-			state?: string
-			/**
-			 * @example [
-			 *       "tag-1",
-			 *       "tag-2"
-			 *     ]
-			 */
-			tags?: string[]
-			/** @example lead */
-			type?: string
-			/** @example true */
-			validEmail?: boolean
-		}
-		ContactOpportunity: {
-			/** @example 1a2b3c4d5e6f7g8h9i0j */
-			id: string
-			/** @example 10000 */
-			monetary_value: number
-			/** @example pipeline123 */
-			pipeline_id: string
-			/** @example stage456 */
-			pipeline_stage_id: string
-			/** @example open */
-			status: string
-		}
 		ContactsBulkUpateResponse: {
 			/**
 			 * @example [
@@ -719,6 +617,11 @@ export interface components {
 				| components['schemas']['MultiSelectField']
 				| components['schemas']['FileField']
 			)[]
+			/**
+			 * @description The birth date of the contact. Supported formats: YYYY/MM/DD, MM/DD/YYYY, YYYY-MM-DD, MM-DD-YYYY, YYYY.MM.DD, MM.DD.YYYY, YYYY_MM_DD, MM_DD_YYYY
+			 * @example 1990-09-25
+			 */
+			dateOfBirth?: Record<string, never> | null
 			/** @example true */
 			dnd?: boolean
 			dndSettings?: components['schemas']['DndSettingsSchema']
@@ -780,7 +683,7 @@ export interface components {
 			customFields?: components['schemas']['CustomFieldSchema'][]
 			/** @example 2021-08-31T09:59:41.937Z */
 			dateAdded?: string
-			/** @example 1990-09-25T00:00:00.000Z */
+			/** @example Date format will be  YYYY-MM-DDTHH:mm:ss.sssZ and  Example 1990-09-25T00:00:00.000Z */
 			dateOfBirth?: string
 			/** @example 2021-08-31T09:59:41.937Z */
 			dateUpdated?: string
@@ -1000,7 +903,7 @@ export interface components {
 			customFields?: components['schemas']['CustomFieldSchema'][]
 			/** @example 2021-07-02T05:18:26.704Z */
 			dateAdded?: string
-			/** @example 1990-09-25T00:00:00.000Z */
+			/** @example Date format YYYY-MM-DD */
 			dateOfBirth?: string
 			/** @example 2021-07-02T05:18:26.704Z */
 			dateUpdated?: string
@@ -1048,7 +951,7 @@ export interface components {
 			 *     ]
 			 */
 			tags?: string[]
-			/** @example  */
+			/** @example Asia/Calcutta */
 			timezone?: string
 			/** @example read */
 			type?: string
@@ -1115,12 +1018,18 @@ export interface components {
 		GetNoteSchema: {
 			/** @example lorem ipsum */
 			body?: string
+			/** @example #FFAA00 */
+			color?: string
 			/** @example TUcmRxWrjqzJS8EjkxNK */
 			contactId?: string
 			/** @example 2021-07-08T12:02:11.285Z */
 			dateAdded?: string
 			/** @example HGPcayliwcdoUFzvbTok */
 			id?: string
+			/** @example false */
+			pinned?: boolean
+			/** @example Follow-up summary */
+			title?: string
 			/** @example TUcmRxWrjqzJS8EjkxNK */
 			userId?: string
 		}
@@ -1167,6 +1076,12 @@ export interface components {
 		NotesDTO: {
 			/** @example lorem ipsum */
 			body: string
+			/** @example #FFAA00 */
+			color?: string
+			/** @example false */
+			pinned?: boolean
+			/** @example Follow-up summary */
+			title?: string
 			/** @example GCs5KuzPqTls7vWclkEV */
 			userId?: string
 		}
@@ -1187,11 +1102,6 @@ export interface components {
 			key?: string
 		}
 		SearchBodyV2DTO: Record<string, never>
-		SearchContactSuccessResponseDto: {
-			contacts: components['schemas']['Contact'][]
-			/** @example 120 */
-			total: number
-		}
 		SingleSelectField: {
 			/** @example My Selected Option */
 			field_value?: string
@@ -1282,6 +1192,11 @@ export interface components {
 				| components['schemas']['MultiSelectField']
 				| components['schemas']['FileField']
 			)[]
+			/**
+			 * @description The birth date of the contact. Supported formats: YYYY/MM/DD, MM/DD/YYYY, YYYY-MM-DD, MM-DD-YYYY, YYYY.MM.DD, MM.DD.YYYY, YYYY_MM_DD, MM_DD_YYYY
+			 * @example 1990-09-25
+			 */
+			dateOfBirth?: Record<string, never> | null
 			/** @example true */
 			dnd?: boolean
 			dndSettings?: components['schemas']['DndSettingsSchema']
@@ -1319,6 +1234,18 @@ export interface components {
 			contact?: components['schemas']['GetContectByIdSchema']
 			/** @example true */
 			succeded?: boolean
+		}
+		UpdateNoteDTO: {
+			/** @example lorem ipsum */
+			body?: string
+			/** @example #FFAA00 */
+			color?: string
+			/** @example false */
+			pinned?: boolean
+			/** @example Follow-up summary */
+			title?: string
+			/** @example GCs5KuzPqTls7vWclkEV */
+			userId?: string
 		}
 		UpdateTagsDTO: {
 			/**
@@ -1424,6 +1351,12 @@ export interface components {
 			companyName?: string | null
 			/** @example US */
 			country?: string
+			/**
+			 * @description Controls whether to create a new contact or update an existing duplicate. **Scenario 1:** If this value is `true` and the location allows duplicate contacts, a new contact will be created immediately without checking for duplicates. **Scenario 2:** If this value is `true` but the location does not allow duplicate contacts, this field is ignored and the normal upsert behavior applies: the API will search for an existing duplicate contact, update it if found, or create a new contact if not found. **Scenario 3:** If this value is `false` or not provided, the normal upsert behavior applies regardless of the location's duplicate contact setting.
+			 * @default false
+			 * @example false
+			 */
+			createNewIfDuplicateAllowed: boolean
 			customFields?: (
 				| components['schemas']['TextField']
 				| components['schemas']['LargeTextField']
@@ -1435,6 +1368,11 @@ export interface components {
 				| components['schemas']['MultiSelectField']
 				| components['schemas']['FileField']
 			)[]
+			/**
+			 * @description The birth date of the contact. Supported formats: YYYY/MM/DD, MM/DD/YYYY, YYYY-MM-DD, MM-DD-YYYY, YYYY.MM.DD, MM.DD.YYYY, YYYY_MM_DD, MM_DD_YYYY
+			 * @example 1990-09-25
+			 */
+			dateOfBirth?: Record<string, never> | null
 			/** @example true */
 			dnd?: boolean
 			dndSettings?: components['schemas']['DndSettingsSchema']
@@ -2272,7 +2210,7 @@ export interface operations {
 		}
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['NotesDTO']
+				'application/json': components['schemas']['UpdateNoteDTO']
 			}
 		}
 		responses: {
@@ -2955,13 +2893,7 @@ export interface operations {
 				/** @description API Version */
 				Version: '2021-07-28'
 			}
-			path: {
-				/**
-				 * @description Tags operation type
-				 * @example add
-				 */
-				type: 'add' | 'remove'
-			}
+			path?: never
 			cookie?: never
 		}
 		requestBody: {
