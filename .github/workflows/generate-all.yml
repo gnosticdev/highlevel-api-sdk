@@ -11,6 +11,7 @@ concurrency:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   generate:
@@ -34,9 +35,10 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@gnosticdev'
           package-manager-cache: false
+
+      - name: Set up npm CLI for trusted publishing
+        run: npm install --global 'npm@^11.5.1'
 
       - name: Generate types from HighLevel
         run: bun run generate-all
@@ -90,10 +92,5 @@ jobs:
         if: steps.pending-release.outputs.has_pending_release == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::error::Add the NPM_TOKEN repository secret. It must have publish access to @gnosticdev/highlevel-sdk."
-            exit 1
-          fi
           bunx release-it --ci --increment=minor --hooks.before:init= --no-git.requireCleanWorkingDir
