@@ -1,146 +1,254 @@
-import fs from 'node:fs'
-import { tmpdir } from 'node:os'
-import * as path from 'node:path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import kleur from 'kleur'
+import { jsonrepair } from 'jsonrepair'
 import type {
 	Method,
 	OperationObject,
 	PathItemObject,
 	ReferenceObject,
 } from 'openapi-typescript'
+import type { OpenAPI3 } from 'openapi-typescript'
+import { updateScopeSchemas } from './scope-schemas'
 import { formatAndLint } from './script-utils'
 
-/**
- * The response from the Docs API for the /schemas/index.json file.
- */
-type ListSchemaItem = {
-	name: string
+const HIGHLEVEL_REPOSITORY = 'GoHighLevel/highlevel-api-docs'
+const WEBHOOK_PATCHES_DIR = path.join(
+	process.cwd(),
+	'scripts/patched-schemas/webhooks',
+)
+
+type GitHubTreeItem = {
 	path: string
-	size: number
-	lastModified: string
-	downloadUrl: string
+	type: string
 }
 
-type SchemaList = {
-	lastUpdated: string
-	totalSchemas: number
-	schemas: ListSchemaItem[]
+type GitHubCommit = {
+	sha: string
 }
 
-// ---------------------------------
-// This script fetches the OpenAPI schemas from storage and saves them to the schemas/v2 directory.
-// It also ensures that the operationIds are unique.
-// ---------------------------------
+type GitHubTree = {
+	tree: GitHubTreeItem[]
+	truncated?: boolean
+}
+
+type StagedFile = {
+	path: string
+	content: unknown
+}
 
 if (import.meta.main) {
 	await downloadJsonSchemas()
-
-	// format and lint to ensure any changes are to the content only
 	await formatAndLint('schemas/v2')
 }
 
-export async function downloadJsonSchemas() {
-	const TEMP_DIR = fs.mkdtempSync(path.join(tmpdir(), 'schemas-json-'))
-	const API_URL = process.env.DOCS_API_URL
-	const USERNAME = process.env.DOCS_USERNAME
-	const PASSWORD = process.env.DOCS_PASSWORD
-
-	if (!API_URL || !USERNAME || !PASSWORD) {
-		throw new Error(
-			'DOCS_API_URL, DOCS_USERNAME, and DOCS_PASSWORD must be set',
-		)
-	}
-	try {
-		// Fetch list of schemas
-		const listResult = await fetchSchemaList(API_URL)
-		console.log(
-			console.log(
-				kleur.green(`Found ${listResult.totalSchemas} schemas`),
-			),
-		)
-
-		await Promise.all(
-			listResult.schemas.map(async (schema) => {
-				const downloadUrl = new URL(schema.downloadUrl, API_URL)
-				console.log(
-					kleur.yellow(
-						`Downloading ${schema.name} from ${downloadUrl.href}`,
-					),
-				)
-
-				await downloadSchema(
-					downloadUrl.href,
-					path.join(TEMP_DIR, schema.name),
-				)
-			}),
-		)
-
-		// If we've reached this point, all downloads were successful
-		// move the files from the temp dir to the final dir using rsync with checksum so we only move the files that have changed
-		await Bun.$`rsync -av --checksum ${TEMP_DIR}/ schemas/v2`
-		console.log(
-			kleur.green('All schemas downloaded and moved successfully'),
-		)
-
-		console.log(kleur.green('All schemas linted successfully'))
-	} catch (error) {
-		console.error('Error downloading schemas', error)
-	} finally {
-		fs.rmSync(TEMP_DIR, { recursive: true, force: true })
-	}
-}
-
-/**
- * Fetch the list of schemas from the API, and splits them based on if they are an OpenAPI schema or not (other files).
- */
-async function fetchSchemaList(apiUrl: string): Promise<SchemaList> {
-	// we have a special /schemas/index.json file that contains a list of all the schemas
-	const response = await fetch(`${apiUrl}/index.json`)
-	if (!response.ok) {
-		throw new Error(`Failed to fetch schema list: ${response.statusText}`)
-	}
-	const schemaList = (await response.json()) as SchemaList
-	if (schemaList.schemas.length === 0) {
-		throw new Error('No schemas found')
-	}
-
-	return schemaList
-}
-
-/**
- * Download a schema from the API.
- */
-async function downloadSchema(downloadUrl: string, downloadToPath: string) {
-	const response = await fetch(downloadUrl)
-	if (!response.ok) {
-		throw new Error(
-			`Failed to download schema ${downloadUrl}: ${response.statusText}`,
-		)
-	}
-	const content = await response.json()
-	// only api-endpoints come as openapi schemas
-	const isOpenApi = downloadUrl.includes('api-endpoints')
-	const processedContent = isOpenApi
-		? ensureUniqueOperationIds(content)
-		: content
-
-	let finalDownloadToPath = downloadToPath
-
-	// make openapi schema files use the .openapi.json extension
-	if (isOpenApi) {
-		finalDownloadToPath = downloadToPath.replace('.json', '.openapi.json')
-	}
-
-	await Bun.write(
-		finalDownloadToPath,
-		JSON.stringify(processedContent, null, 2),
+export async function downloadJsonSchemas(): Promise<void> {
+	const commit = await fetchGitHubJson<GitHubCommit>(
+		`https://api.github.com/repos/${HIGHLEVEL_REPOSITORY}/commits/main`,
 	)
-	console.log(kleur.green(`Downloaded and processed: ${finalDownloadToPath}`))
+	const tree = await fetchGitHubJson<GitHubTree>(
+		`https://api.github.com/repos/${HIGHLEVEL_REPOSITORY}/git/trees/${commit.sha}?recursive=1`,
+	)
+	if (tree.truncated) {
+		throw new Error('HighLevel API docs repository tree was truncated')
+	}
+
+	const paths = tree.tree
+		.filter((item) => item.type === 'blob')
+		.map((item) => item.path)
+	const endpointPaths = paths.filter((item) =>
+		/^apps\/[^/]+\.json$/.test(item),
+	)
+	const webhookPaths = paths.filter(
+		(item) =>
+			item.startsWith('docs/webhook events/') && item.endsWith('.md'),
+	)
+	const commonSchemaPath = 'common/common-schemas.json'
+	const scopesMarkdownPath = 'docs/oauth/Scopes.md'
+
+	if (endpointPaths.length === 0 || webhookPaths.length === 0) {
+		throw new Error('The HighLevel API docs repository has no v2 schemas')
+	}
+	for (const requiredPath of [commonSchemaPath, scopesMarkdownPath]) {
+		if (!paths.includes(requiredPath)) {
+			throw new Error(
+				`The HighLevel API docs repository is missing ${requiredPath}`,
+			)
+		}
+	}
+
+	console.log(kleur.cyan(`Reading HighLevel schemas at ${commit.sha}`))
+	const apiDocuments = await mapWithConcurrency(
+		endpointPaths,
+		8,
+		async (filePath) => {
+			const document = await fetchJsonFile<OpenAPI3>(filePath, commit.sha)
+			if (!document.openapi || !document.paths) {
+				throw new Error(`Invalid OpenAPI schema at ${filePath}`)
+			}
+			return {
+				path: `schemas/v2/api-endpoints/${path.posix
+					.basename(filePath)
+					.replace(/\.json$/, '.openapi.json')}`,
+				content: ensureUniqueOperationIds(document),
+			}
+		},
+	)
+	const commonSchema = await fetchJsonFile<OpenAPI3>(
+		commonSchemaPath,
+		commit.sha,
+	)
+	const webhookDocuments = await mapWithConcurrency(
+		webhookPaths,
+		8,
+		async (filePath) => {
+			const markdown = await fetchTextFile(filePath, commit.sha)
+			const filename = `${path.posix.basename(filePath, '.md')}.json`
+			return {
+				path: `schemas/v2/webhooks/${filename}`,
+				content: await parseWebhookSchema(filename, markdown),
+			}
+		},
+	)
+	const scopesMarkdown = await fetchTextFile(scopesMarkdownPath, commit.sha)
+	const scopesSchemaPath = 'schemas/v2/scopes/scopes.json'
+	const catalogSchemaPath = 'schemas/v2/scopes/catalog.json'
+	const [scopesSchema, catalogSchema] = await Promise.all([
+		Bun.file(scopesSchemaPath).json(),
+		Bun.file(catalogSchemaPath).json(),
+	])
+	const updatedScopes = updateScopeSchemas(
+		scopesMarkdown,
+		scopesSchema,
+		catalogSchema,
+	)
+
+	const stagedFiles: StagedFile[] = [
+		...apiDocuments,
+		{
+			path: 'schemas/v2/common/common-schemas.json',
+			content: commonSchema,
+		},
+		{
+			path: 'schemas/v2/api-endpoints/common-schemas.openapi.json',
+			content: commonSchema,
+		},
+		...webhookDocuments,
+		{ path: scopesSchemaPath, content: updatedScopes.scopesSchema },
+		{ path: catalogSchemaPath, content: updatedScopes.catalogSchema },
+	]
+
+	await Promise.all(
+		stagedFiles.map(async (file) => {
+			const outputPath = path.join(process.cwd(), file.path)
+			await fs.mkdir(path.dirname(outputPath), { recursive: true })
+			await Bun.write(outputPath, JSON.stringify(file.content, null, 2))
+		}),
+	)
+
+	console.log(
+		kleur.green(
+			`Downloaded ${apiDocuments.length} API schemas, ${webhookDocuments.length} webhook schemas, and ${updatedScopes.endpointCount} scope endpoints`,
+		),
+	)
 }
 
-/**
- * Check if the operation is an OperationObject.
- */
+async function fetchGitHubJson<T>(url: string): Promise<T> {
+	const response = await fetch(url, {
+		headers: {
+			Accept: 'application/vnd.github+json',
+			'User-Agent': '@gnosticdev/highlevel-sdk',
+			'X-GitHub-Api-Version': '2022-11-28',
+		},
+	})
+	if (!response.ok) {
+		throw new Error(
+			`Failed to fetch GitHub API ${url}: ${response.statusText}`,
+		)
+	}
+	return (await response.json()) as T
+}
+
+async function fetchTextFile(
+	filePath: string,
+	commitSha: string,
+): Promise<string> {
+	const encodedPath = filePath
+		.split('/')
+		.map((part) => encodeURIComponent(part))
+		.join('/')
+	const url = `https://raw.githubusercontent.com/${HIGHLEVEL_REPOSITORY}/${commitSha}/${encodedPath}`
+	const response = await fetch(url)
+	if (!response.ok) {
+		throw new Error(
+			`Failed to download ${filePath}: ${response.statusText}`,
+		)
+	}
+	return response.text()
+}
+
+async function fetchJsonFile<T>(
+	filePath: string,
+	commitSha: string,
+): Promise<T> {
+	const content = await fetchTextFile(filePath, commitSha)
+	try {
+		return JSON.parse(content) as T
+	} catch (error) {
+		throw new Error(`Invalid JSON in ${filePath}`, { cause: error })
+	}
+}
+
+async function parseWebhookSchema(
+	filename: string,
+	markdown: string,
+): Promise<Record<string, unknown>> {
+	const schemaMatch = markdown.match(
+		/```json(?:\s+json_schema)?\s*\n([\s\S]+?)\n```/,
+	)
+	if (!schemaMatch?.[1]) {
+		throw new Error(`No JSON schema block found in ${filename}`)
+	}
+
+	const patchPath = path.join(WEBHOOK_PATCHES_DIR, filename)
+	if (await Bun.file(patchPath).exists()) {
+		return (await Bun.file(patchPath).json()) as Record<string, unknown>
+	}
+
+	try {
+		const repaired = jsonrepair(schemaMatch[1])
+		const schema = JSON.parse(repaired) as unknown
+		if (!schema || typeof schema !== 'object' || Array.isArray(schema)) {
+			throw new Error('The schema root must be an object')
+		}
+		return schema as Record<string, unknown>
+	} catch (error) {
+		throw new Error(`Invalid JSON schema in ${filename}`, { cause: error })
+	}
+}
+
+async function mapWithConcurrency<T, R>(
+	items: T[],
+	concurrency: number,
+	mapper: (item: T) => Promise<R>,
+): Promise<R[]> {
+	const results: R[] = []
+	let nextIndex = 0
+	const workerCount = Math.min(concurrency, items.length)
+
+	await Promise.all(
+		Array.from({ length: workerCount }, async () => {
+			while (nextIndex < items.length) {
+				const index = nextIndex++
+				const item = items[index]
+				if (item !== undefined) results[index] = await mapper(item)
+			}
+		}),
+	)
+
+	return results
+}
+
 function isOperationObject(
 	operation: OperationObject | ReferenceObject | undefined,
 ): operation is OperationObject {
@@ -151,43 +259,32 @@ function isOperationObject(
 	)
 }
 
-/**
- * OperationIds must be unique within the schema to produce valid typescript types with `openapi-ts`. This function iterates through them and updates the operationId if it is not unique.
- */
-function ensureUniqueOperationIds(
-	schema: import('openapi-typescript').OpenAPI3,
-) {
-	const usedIds = new Set()
+function ensureUniqueOperationIds(schema: OpenAPI3): OpenAPI3 {
+	const usedIds = new Set<string>()
 	const paths = schema.paths
-	if (!paths) {
-		return schema
-	}
+	if (!paths) return schema
 
-	for (const path in paths) {
-		for (const method in paths[path]) {
-			const pathItem = paths[path] as PathItemObject
+	for (const pathName in paths) {
+		const pathItem = paths[pathName] as PathItemObject
+		for (const method in pathItem) {
 			const operation = pathItem[method as Method]
-			if (!isOperationObject(operation)) {
+			if (!isOperationObject(operation) || !operation.operationId)
 				continue
-			}
-			// rename operationId if it is not unique
-			if (operation.operationId) {
-				if (usedIds.has(operation.operationId)) {
-					// construct new operationId from original + method
-					let newId = `${operation.operationId}_${method}`
-					let counter = 1
-					// add a counter to the end of the operationId if it already exists
-					if (usedIds.has(newId)) {
-						while (usedIds.has(newId)) {
-							newId = `${operation.operationId}_${method}_${counter}`
-							counter++
-						}
-					}
-					operation.operationId = newId
-					console.log(`Renamed ${operation.operationId} to ${newId}`)
+
+			const originalId = operation.operationId
+			if (usedIds.has(originalId)) {
+				let newId = `${originalId}_${method}`
+				let counter = 1
+				while (usedIds.has(newId)) {
+					newId = `${originalId}_${method}_${counter}`
+					counter++
 				}
-				usedIds.add(operation.operationId)
+				operation.operationId = newId
+				console.log(
+					`Renamed duplicate operationId ${originalId} to ${newId}`,
+				)
 			}
+			usedIds.add(operation.operationId)
 		}
 	}
 

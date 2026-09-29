@@ -7,7 +7,7 @@ TypeScript SDK for working with HighLevel API v1 and v2 endpoints. Works with an
 
 ## Why Use This SDK?
 
-The HighLevel API is constantly evolving, with updated endpoints being added regularly. This package downloads the latest OpenAPI schemas from the [HighLevel API Docs](https://githhub.com/GoHighLevel/highlevel-api-docs) on a schedule, then uses the [openapi-typescript](https://openapi-ts.dev/introduction) library to generate the types for each endpoint.
+The HighLevel API is constantly evolving, with updated endpoints being added regularly. This package downloads the latest OpenAPI schemas from the [official HighLevel API docs repository](https://github.com/GoHighLevel/highlevel-api-docs) on a schedule, then uses the [openapi-typescript](https://openapi-ts.dev/introduction) library to generate types for each endpoint.
 
 This means that when a new endpoint is added, this package will automatically have support for it. Also, each endpoint has full type safety, and the types are generated from HighLevel's OpenAPI v3 documentation so will always be compatible and up to date.
 
