@@ -117,7 +117,7 @@
   "peerDependencies": {
     "openapi-fetch": "^0.13.8"
   },
-  "packageManager": "bun@1.1.42",
+  "packageManager": "bun@1.4.2",
   "trustedDependencies": [
     "esbuild",
     "lefthook"
