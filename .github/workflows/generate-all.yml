@@ -80,6 +80,12 @@ jobs:
             echo "Generated changes need a release."
           fi
 
+      - name: Verify release package
+        if: steps.pending-release.outputs.has_pending_release == 'true'
+        run: |
+          bun test
+          bun run build
+
       - name: Publish npm package and GitHub release
         if: steps.pending-release.outputs.has_pending_release == 'true'
         env:
@@ -90,4 +96,4 @@ jobs:
             echo "::error::Add the NPM_TOKEN repository secret. It must have publish access to @gnosticdev/highlevel-sdk."
             exit 1
           fi
-          bunx release-it --ci --increment=minor
+          bunx release-it --ci --increment=minor --hooks.before:init= --no-git.requireCleanWorkingDir
