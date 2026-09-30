@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '0 10 * * 1'
   workflow_dispatch:
+    inputs:
+      npm_version_already_published:
+        description: Skip npm publish and finish a release that is already on npm
+        type: boolean
+        required: false
+        default: false
 
 concurrency:
   group: generate-and-release-types
@@ -88,9 +94,20 @@ jobs:
           bun test
           bun run build
 
+      - name: Configure release commit identity
+        if: steps.pending-release.outputs.has_pending_release == 'true'
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Publish npm package and GitHub release
         if: steps.pending-release.outputs.has_pending_release == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKIP_NPM_PUBLISH: ${{ inputs.npm_version_already_published }}
         run: |
-          bunx release-it --ci --increment=minor --hooks.before:init= --no-git.requireCleanWorkingDir --npm.skipChecks
+          release_args=(--ci --increment=minor --hooks.before:init= --no-git.requireCleanWorkingDir --npm.skipChecks)
+          if [[ "$SKIP_NPM_PUBLISH" == "true" ]]; then
+            release_args+=(--npm.publish=false)
+          fi
+          bunx release-it "${release_args[@]}"
