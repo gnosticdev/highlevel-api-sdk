@@ -93,4 +93,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          bunx release-it --ci --increment=minor --hooks.before:init= --no-git.requireCleanWorkingDir
+          bunx release-it --ci --increment=minor --hooks.before:init= --no-git.requireCleanWorkingDir --npm.skipChecks
