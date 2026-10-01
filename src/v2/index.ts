@@ -147,7 +147,6 @@ export function createHighLevelClient<
  * const client = createHighLevelClient({}, 'integration', {
  *   privateToken: 'your-token',
  *   accessType: 'Agency',
- *   scopes: ['saas/company.write']
  * })
  * ```
  */

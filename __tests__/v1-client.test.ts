@@ -42,11 +42,13 @@ describe('V1 Client', () => {
 		})
 
 		it('should use correct baseUrl configuration', async () => {
-			const fetchSpy = spyOn(globalThis, 'fetch')
+			const fetchSpy = spyOn(globalThis, 'fetch').mockResolvedValue(
+				new Response('{}'),
+			)
 			// Test default baseUrl
 			const defaultClient = createHighLevelV1Client({
 				apiKey: mockApiKey,
-				fetch: globalThis.fetch,
+				fetch: fetchSpy,
 			})
 			await defaultClient.GET('/v1/contacts/', {})
 			expect(fetchSpy).toHaveBeenCalled()
@@ -59,7 +61,9 @@ describe('V1 Client', () => {
 
 		it('should use custom baseUrl configuration', async () => {
 			const mockBaseUrl = 'https://postman-echo.com'
-			const fetchSpy = spyOn(globalThis, 'fetch')
+			const fetchSpy = spyOn(globalThis, 'fetch').mockResolvedValue(
+				new Response('{}'),
+			)
 			// Test custom baseUrl
 			const customClient = createHighLevelV1Client({
 				apiKey: mockApiKey,

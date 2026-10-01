@@ -42,10 +42,3 @@ export class HighLevelClient<T extends AccessType> extends BaseHighLevelClient<
 		this.oauth = createClient<Oauth.paths>(this._clientConfig)
 	}
 }
-const client = new HighLevelClient({})
-client.businesses.GET('/businesses/{businessId}', {
-	params: {
-		header: { Version: '2021-07-28' },
-		path: { businessId: '1234567890' },
-	},
-})

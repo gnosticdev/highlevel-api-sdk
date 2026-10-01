@@ -7,22 +7,22 @@ TypeScript SDK for working with HighLevel API v1 and v2 endpoints. Works with an
 
 ## Why Use This SDK?
 
-The HighLevel API is constantly evolving, with updated endpoints being added regularly. This package downloads the latest OpenAPI schemas from the [official HighLevel API docs repository](https://github.com/GoHighLevel/highlevel-api-docs) on a schedule, then uses the [openapi-typescript](https://openapi-ts.dev/introduction) library to generate types for each endpoint.
+The HighLevel API changes often. Each week, a GitHub Action checks the schemas in the [official HighLevel API docs repository](https://github.com/GoHighLevel/highlevel-api-docs). It uses [openapi-typescript](https://openapi-ts.dev/introduction) to generate endpoint types.
 
-This means that when a new endpoint is added, this package will automatically have support for it. Also, each endpoint has full type safety, and the types are generated from HighLevel's OpenAPI v3 documentation so will always be compatible and up to date.
+When the schemas change, the action checks the package. If the checks pass, it publishes a new minor version to npm and creates a GitHub release. The action run summary and release notes list added, changed, and removed operations and schemas. New types are available after this release.
 
 ## Features
 
-- **NEW** Support for [Private Integrations](https://help.gohighlevel.com/support/solutions/articles/155000003054-private-integrations-everything-you-need-to-know)
+- Support for OAuth and [Private Integrations](https://marketplace.gohighlevel.com/docs/Authorization/PrivateIntegrationsToken)
 - Fully typed client SDK (using native `fetch`) built with [openapi-fetch](https://openapi-ts.dev/openapi-fetch/)
 - OAuth2 helpers for working with HighLevel's OAuth2 implementation
 - Scopes builder for easily adding the appropriate scopes to your app
-- Webhooks client with typed responses
+- Webhooks client with typed event handlers
 - Support for both v1 (legacy API keys) and v2 (OAuth & Private Integrations)
 
 ## Resources
 
-- [API v2 Documentation](https://highlevel.stoplight.io/docs/integrations) (OAuth & Private Integrations)
+- [API v2 Documentation](https://marketplace.gohighlevel.com/docs/) (OAuth & Private Integrations)
 - [API v1 Documentation](https://public-api.gohighlevel.com/) (Legacy API Keys)
 
 ## Installation
@@ -41,20 +41,27 @@ npm add @gnosticdev/highlevel-sdk
 
 The HighLevel client uses the v2 API by default (see below for v1 client). It can be created with different configurations:
 
-- **Basic Client**: Without built-in authentication.
+- **Basic Client**: Pass an `openapi-fetch` client config as the first argument. Set a base URL and headers that the client will send by default.
 
     ```ts
-    const client = createHighLevelClient()
+    import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 
-    // or pass in the client config
-    const client = createHighLevelClient()
+    const client = createHighLevelClient({
+      baseUrl: 'https://services.leadconnectorhq.com',
+      headers: {
+        Authorization: `Bearer ${process.env.HIGHLEVEL_API_TOKEN!}`,
+        Version: '2021-07-28',
+      },
+    })
     ```
 
 - **Client with OAuth**: Requires OAuth configuration.
 
     ```ts
-    // The first argument is always the client config, so pass an empty object if you don't need it
-    const client = createHighLevelClient({}, 'oauth', {
+    // The first argument is the openapi-fetch client config.
+    const client = createHighLevelClient({
+      baseUrl: 'https://services.leadconnectorhq.com',
+    }, 'oauth', {
     	clientId: 'your-client-id',
     	clientSecret: 'your-client-secret',
     	redirectUri: 'http://localhost:3000/callback',
@@ -66,12 +73,23 @@ The HighLevel client uses the v2 API by default (see below for v1 client). It ca
 - **Client with Private Integration**: Requires private integration configuration.
 
     ```ts
-    const client = createHighLevelClient({}, 'integration', {
+    const client = createHighLevelClient({
+      baseUrl: 'https://services.leadconnectorhq.com',
+    }, 'integration', {
     	privateToken: process.env.HIGHLEVEL_PRIVATE_TOKEN!,
     	accessType: 'Agency',
-    	scopes: ['saas/company.write', 'saas/company.read'],
     })
     ```
+
+### Choose an authentication method
+
+Use a Private Integration Token (PIT) for a custom integration that you run for one HighLevel agency or sub-account. An admin creates the token in HighLevel settings and selects its scopes there. Keep the token on your server. This SDK adds the `Authorization` and `Version` headers to each request. You do not need to add these headers to each call.
+
+HighLevel's current docs show how to create a PIT in the account settings. They do not document an API that creates a PIT. The SDK cannot create one for each customer. HighLevel describes a PIT as a fixed token and recommends that you rotate it every 90 days. See [Private Integrations](https://marketplace.gohighlevel.com/docs/Authorization/PrivateIntegrationsToken).
+
+Use OAuth when you build an app that users install and approve. HighLevel issues the tokens after the user approves the app. This works for both **Private Apps** and **Public Apps**. A Private App is an OAuth app type. It is not a Private Integration. OAuth is the right choice when each customer must approve access to their own account. Save each new refresh token after a token refresh. See [OAuth 2.0](https://marketplace.gohighlevel.com/docs/Authorization/OAuth2.0).
+
+HighLevel's docs do not say that a PIT is the preferred choice for every app. Choose the token type that fits how the app gets access.
 
 ### Error Handling
 
@@ -81,7 +99,9 @@ The SDK uses `openapi-fetch` under the hood, which returns both `data` and `erro
 import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 
 // Create client with OAuth2 support
-const client = createHighLevelClient({}, 'oauth', {
+const client = createHighLevelClient({
+	baseUrl: 'https://services.leadconnectorhq.com',
+}, 'oauth', {
 	clientId: process.env.HIGHLEVEL_CLIENT_ID!,
 	clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET!,
 	redirectUri: 'http://localhost:3000/oauth/callback',
@@ -100,25 +120,40 @@ const client = createHighLevelClient({}, 'oauth', {
 	},
 })
 
-// Example: Get contacts with error handling
-const { data, error } = await client.contacts.GET('/contacts/', {
-	params: {
-		query: {
-			locationId: '1234567890',
-			query: 'John Doe',
-			limit: 10,
+async function handleOAuthCallback(request: Request) {
+	const authCode = new URL(request.url).searchParams.get('code')
+	if (!authCode) {
+		throw new Error('HighLevel did not return an auth code')
+	}
+
+	// Exchange the code and store the token data.
+	const accessToken = await client.oauth.getAccessToken(authCode)
+	if (!accessToken) {
+		throw new Error('HighLevel did not return an access token')
+	}
+
+	// OAuth endpoint calls need the current access token and API version.
+	const { data, error } = await client.contacts.GET('/contacts/', {
+		params: {
+			header: {
+				Authorization: `Bearer ${accessToken}`,
+				Version: '2021-07-28',
+			},
+			query: {
+				locationId: '1234567890',
+				query: 'John Doe',
+				limit: 10,
+			},
 		},
-	},
-})
+	})
 
-if (error) {
-	console.error('Error fetching contacts:', error.message)
-	// Handle error appropriately
-	return
+	if (error) {
+		console.error('Error fetching contacts:', error.message)
+		return
+	}
+
+	console.log(data.contacts)
 }
-
-// Type-safe response data
-console.log(data.contacts)
 ```
 
 ### OAuth2 Support
@@ -129,19 +164,21 @@ The OAuth client is available on the HighLevelClient instance when created with 
 // Generate authorization URL
 const authUrl = client.oauth.getAuthorizationUrl()
 
-// Exchange auth code for token
-const token = await client.oauth.exchangeToken(authCode)
+// Exchange the auth code and store the token data
+const accessToken = await client.oauth.getAccessToken(authCode)
 
-// Get access token (automatically refreshes if expired)
-const accessToken = await client.oauth.getAccessToken()
+// Later calls refresh the access token when needed
+const currentAccessToken = await client.oauth.getAccessToken()
 ```
+
+Pass the access token in the `Authorization` header for each OAuth API call. The OAuth client stores tokens in memory by default. Use `storageFunction` to save tokens in a database. When you create a new client, load the saved token data from your database and pass it to `client.oauth.storeTokenData()` before you call `getAccessToken()`. Save the new refresh token after each refresh.
 
 ### Using the v1 Client
 
 The v1 client requires an API key and automatically adds the authorization header to all requests.
 
 ```ts
-import { createHighLevelV1Client } from '@gnosticdev/highlevel-sdk'
+import { createHighLevelV1Client } from '@gnosticdev/highlevel-sdk/v1'
 
 const v1Client = createHighLevelV1Client({
 	apiKey: process.env.HIGHLEVEL_API_KEY!,
@@ -166,83 +203,47 @@ console.log(data.contacts)
 
 ### Using the Webhooks Client
 
-The SDK includes a typed client for handling HighLevel webhooks. This provides type safety and validation for incoming webhook payloads:
+The webhooks client lets you register handlers with typed payloads:
 
-````ts
-import { createWebhooksClient } from "@gnosticdev/highlevel-sdk/webhooks"
+```ts
+import { createWebhooksClient } from '@gnosticdev/highlevel-sdk/webhooks'
 
 const webhooks = createWebhooksClient()
 
-// Example: Hono route handler for Contact Create webhook
-app.post('/webhooks/contact-create', async (ctx) => {
-  const { data, error } = await webhooks.ContactCreate.POST({
-    body: ctx.req.body
-  })
-
-  if (error) {
-    console.error('Invalid webhook payload:', error)
-    return res.status(400).json(error)
-  }
-
-  // data is fully typed based on the webhook type
-  console.log('Contact created:', data)
-  res.status(200).end()
+webhooks.on('ContactCreate', async (payload) => {
+  // TypeScript knows the fields in this ContactCreate payload.
+  console.log('Contact created:', payload.firstName, payload.lastName)
 })
+```
 
-// Example: Handle App Installation webhook
-app.post('/webhooks/app-install', async (req, res) => {
-  const { data, error } = await webhooks.AppInstall.POST({
-    body: req.body
-  })
+In your HTTP route, verify the signature and parse the request body. Check the event name, then call `webhooks.handle('ContactCreate', payload)` with that event's payload. The SDK checks that the payload is an object and that a handler exists. It does not verify signatures or validate every payload field.
 
-  if (error) {
-    console.error('Invalid app install payload:', error)
-    return res.status(400).json(error)
-  }
-
-  // Handle new app installation
-  const { locationId, userId, companyId } = data
-  await db.saveNewInstallation({ locationId, userId, companyId })
-
-  res.status(200).end()
-})
-
-Available webhook types include:
-- AppointmentCreate
-- AppInstall
-- ContactCreate
-- ContactUpdate
-- NoteCreate
-- NoteUpdate
-- OpportunityCreate
-- UserCreate
-- And more...
-
-The webhooks client provides full type safety and validation for all webhook payloads defined in the HighLevel API.
+HighLevel's current webhook guide uses the `X-GHL-Signature` header with Ed25519. The client exposes the current public key as `webhooks.WEBHOOK_GHL_PUBLIC_KEY_PEM`. The older `webhooks.WEBHOOK_PUBLIC_KEY_PEM` property is the legacy RSA key. See the [webhook signature guide](./docs/decrypt-payload.md).
 
 #### Webhook Signature Verification
 
-For webhook signature verification and payload decryption, see the [Webhook Payload Decryption documentation](./docs/decrypt-payload.md). Note that signature verification code uses Node.js's `crypto` module and is not included in the SDK to maintain compatibility with all runtimes (Cloudflare Workers, Bun, etc.).
+For a Node.js example of webhook signature verification and payload parsing, see the [Webhook Signature Verification and Payload Parsing guide](./docs/decrypt-payload.md). Signature verification code is not included in the SDK so it can support runtimes with different crypto APIs.
 
 ### Endpoint Types
 
 If you just want to get types for the API endpoints, you can use them like this:
 
 ```ts
-import type * as Locations from "@gnosticdev/highlevel-sdk/types/locations"
+import type * as Locations from '@gnosticdev/highlevel-sdk/types/locations'
 
-// Example: the response type for the `GET /locations/{locationId}` endpoint
-type LocationCustomValues =
-    NonNullable<Locations.operations['get-custom-values']['responses']['200']['content']['application/json']['customValues']>
+// Example: the response type for `GET /locations/{locationId}/customValues`
+type LocationCustomValues = NonNullable<
+  Locations.operations['get-custom-values']['responses']['200']['content']['application/json']['customValues']
+>
 
 const customValues: LocationCustomValues = [{
-    fieldKey: 'contact.lead_source',
-    id: 'lead_source_id',
-    locationId: 'my_location_id',
-    name: 'Lead Source',
-    value: 'Google',
+  fieldKey: 'contact.lead_source',
+  id: 'lead_source_id',
+  locationId: 'my_location_id',
+  name: 'Lead Source',
+  value: 'Google',
 }]
-````
+```
 
 ### Creating a Custom Client
 
@@ -257,7 +258,7 @@ type CustomMenuPaths = CustomMenus.paths
 
 const client = createClient<CustomMenuPaths>({
 	headers: {
-		Authorization: 'Bearer 12345',
+		Authorization: `Bearer ${process.env.HIGHLEVEL_API_TOKEN!}`,
 		Version: '2021-07-28',
 	},
 })
@@ -265,6 +266,9 @@ const client = createClient<CustomMenuPaths>({
 // Use the client with full type safety
 const { data, error } = await client.GET('/custom-menus/', {
 	params: {
+		header: {
+			Version: '2021-07-28',
+		},
 		query: {
 			locationId: '1234567890',
 		},
@@ -291,13 +295,13 @@ type CustomMenuPaths = CustomMenus.paths & Contacts.paths
 
 const client = createClient<CustomMenuPaths>({
 	headers: {
-		Authorization: 'Bearer 12345',
+		Authorization: `Bearer ${process.env.HIGHLEVEL_API_TOKEN!}`,
 		Version: '2021-07-28',
 	},
 })
 ```
 
-**Note:** The `createClient` function is exported from this package and is the same `openapi-fetch` client. Headers passed in the config will be used as default headers for all requests, but you can override them per-request in the `params.header` option.
+**Note:** The `createClient` function is exported from this package and is the same `openapi-fetch` client. Headers passed in the config are request defaults. An operation can still require a header in `params.header` for TypeScript, as shown above. You can override default headers there.
 
 ### Module Exports
 
@@ -307,8 +311,8 @@ The SDK provides several module exports for better organization and tree-shaking
 // Main client
 import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
 
-// OAuth specific functionality
-import { OAuthClient } from '@gnosticdev/highlevel-sdk/oauth'
+// OAuth client implementation
+import { OauthClientImpl } from '@gnosticdev/highlevel-sdk/oauth'
 
 // Scopes builder
 import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
@@ -325,33 +329,27 @@ import type * as Locations from '@gnosticdev/highlevel-sdk/types/locations'
 
 ## Scopes
 
-1. Once you have added your scopes to your app, you can collect them from the dev console on your app's settings page in the Highlevel Marketplace:
+For OAuth, add the scopes to your app in the HighLevel Marketplace. Use `ScopesBuilder` to collect scopes that are valid for an agency or sub-account app:
 
-    ```ts
-    /**
-     * Navigate to your apps' setting page -  `https://marketplace.highlevel.com/app-settins/<your-app-id>/auth`
-     * Press cmd + J on keyboard
-     */
-    $$('.n-tag__content')
-    	.map((scope) => scope.textContent.trim())
-    	.toSorted()
-    ```
+```ts
+import { createHighLevelClient } from '@gnosticdev/highlevel-sdk'
+import { ScopesBuilder } from '@gnosticdev/highlevel-sdk/scopes'
 
-2. Copy the resulting array
-3. Create a new ScopesBuilder instance and paste the scopes to it.
+const scopeBuilder = new ScopesBuilder('Sub-Account')
+scopeBuilder.add(['contacts.readonly', 'locations.readonly'])
 
-    ```ts
-    const client = createHighLevelClient({}, 'oauth', {
-    	clientId: 'your-client-id',
-    	clientSecret: 'your-client-secret',
-    	redirectUri: 'http://localhost:3000/callback',
-    	scopes: [
-    		'locations.write',
-    		'contacts.readonly',
-    		// ... your scopes here
-    	],
-    })
-    ```
+const client = createHighLevelClient({
+  baseUrl: 'https://services.leadconnectorhq.com',
+}, 'oauth', {
+  clientId: process.env.HIGHLEVEL_CLIENT_ID!,
+  clientSecret: process.env.HIGHLEVEL_CLIENT_SECRET!,
+  redirectUri: 'http://localhost:3000/callback',
+  accessType: 'Sub-Account',
+  scopes: [...scopeBuilder.collection],
+})
+```
+
+TypeScript checks scope names against the selected access type. The builder does not add scopes to your HighLevel app or grant access. HighLevel sets Private Integration Token scopes when an admin creates the token.
 
 ## Examples
 

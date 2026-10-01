@@ -87,26 +87,20 @@ describe('Integrations Client', () => {
 		} as const
 
 		it('should automatically add auth header to requests', async () => {
-			mockSpy.mockResolvedValue({
-				data: { 'application/json': mockResponse },
-				response: new Response(),
-				error: undefined,
-			})
 			await client.locations.GET('/locations/{locationId}', {
 				params: {
 					path: {
 						locationId: 'loc123',
 					},
-					header: {
-						Authorization: `Bearer ${client.privateToken}`,
-						Version: '2021-07-28',
-					} satisfies AUTH_HEADERS,
 				},
 			})
-			expect(mockSpy).toHaveBeenCalled()
-			const lastCall = mockSpy.mock.lastCall
-			expect(lastCall).toBeDefined()
-			expect(lastCall).not.toBeEmpty()
+			expect(mockFetch).toHaveBeenCalled()
+			const request = mockFetch.mock.lastCall?.[0] as Request | undefined
+			expect(request).toBeInstanceOf(Request)
+			expect(request?.headers.get('Authorization')).toBe(
+				`Bearer ${client.privateToken}`,
+			)
+			expect(request?.headers.get('Version')).toBe('2021-07-28')
 		})
 
 		it('should handle API errors correctly', async () => {

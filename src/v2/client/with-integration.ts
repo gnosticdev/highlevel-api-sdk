@@ -12,7 +12,7 @@ export type PrivateIntegrationConfig<T extends AccessType> = {
 	/**
 	 * The private integration token.
 	 *
-	 * @see https://help.leadconnectorhq.com/support/solutions/articles/155000002774-private-integrations-everything-you-need-to-know
+	 * @see https://marketplace.gohighlevel.com/docs/Authorization/PrivateIntegrationsToken
 	 */
 	privateToken: string
 }
@@ -26,37 +26,29 @@ export type PrivateIntegrationConfig<T extends AccessType> = {
  * @example
  * ```ts
  * const client = createHighLevelClient({}, 'integration', {
- *   privateToken: 'your-token',
+ *   privateToken: process.env.HIGHLEVEL_PRIVATE_TOKEN!,
  *   accessType: 'Sub-Account',
- *   scopes: ['contacts.readonly']
  * })
  * ```
  * @internal
  */
 export class HighLevelIntegrationClient<
 	T extends AccessType,
-> extends BaseHighLevelClient<T, DefaultOauthClient> {
+> extends BaseHighLevelClient<T, DefaultOauthClient, true> {
 	/**
 	 * The private token for the integration
 	 *
-	 * @see https://help.leadconnectorhq.com/support/solutions/articles/155000002774-private-integrations-everything-you-need-to-know
+	 * @see https://marketplace.gohighlevel.com/docs/Authorization/PrivateIntegrationsToken
 	 */
 	privateToken: string
 	/**
-	 * The scopes for the integration.
-	 *
-	 * _NOTE_: in a private integration, we never send off the scopes like we do in Oauth2, but leaving this here for potential future use.
-	 *
-	 * @example
-	 * ```ts
-	 * const scopes = new ScopesBuilder().all().build()
-	 * ```
+	 * @deprecated Private Integration scopes are selected in HighLevel. This property is not used.
 	 */
 	scopes?: Scopes<T>[]
 
 	constructor(
 		/**
-		 * The integration config uses your private token and scopes to add the appropriate headers to the client.
+		 * HighLevel selects the token's scopes. The SDK uses the token to add auth headers to the client.
 		 */
 		integrationConfig: PrivateIntegrationConfig<T>,
 		/**

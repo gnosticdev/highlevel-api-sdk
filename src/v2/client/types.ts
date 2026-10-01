@@ -10,22 +10,37 @@ export type HTTPMethod =
 	| 'options'
 	| 'trace'
 type RemoveAuthHeaders<T> = T extends {
-	parameters: {
-		header: infer H
-	}
+	parameters: infer P
 }
-	? H extends {
-			Authorization: string
-			Version: string
-		}
-		? {
-				parameters: {
-					header?: Partial<Pick<H, 'Authorization' | 'Version'>> &
-						Omit<H, 'Authorization' | 'Version'>
-				} & Omit<T['parameters'], 'header'>
-			} & Omit<T, 'parameters'>
+	? P extends object
+		? 'header' extends keyof P
+			? NonNullable<P['header']> extends infer H
+				? H extends object
+					? {
+							parameters: Omit<P, 'header'> &
+								({} extends Pick<P, 'header'>
+									? { header?: HeaderWithoutAuth<H> }
+									: [
+												Exclude<
+													RequiredKeys<H>,
+													keyof AUTH_HEADERS
+												>,
+										  ] extends [never]
+										? { header?: HeaderWithoutAuth<H> }
+										: { header: HeaderWithoutAuth<H> })
+						} & Omit<T, 'parameters'>
+					: T
+				: T
+			: T
 		: T
-	: never
+	: T
+
+type RequiredKeys<T extends object> = {
+	[K in keyof T]-?: {} extends Pick<T, K> ? never : K
+}[keyof T]
+
+type HeaderWithoutAuth<T extends object> = Omit<T, keyof AUTH_HEADERS> &
+	Partial<Pick<T, Extract<keyof T, keyof AUTH_HEADERS>>>
 /**
  * An `openapi-fetch` client with optional Authentication headers.
  *
@@ -47,6 +62,12 @@ type OptionalAuthParamsClient<T> =
 export interface ClientWithAuth<
 	TPaths extends {},
 > extends OptionalAuthParamsClient<Client<TPaths>> {}
+
+/** A generated endpoint client, with its auth headers set by the SDK when enabled. */
+export type ClientForAuth<
+	TPaths extends {},
+	TWithAuth extends boolean,
+> = TWithAuth extends true ? ClientWithAuth<TPaths> : Client<TPaths>
 
 /**
  * Authentication headers for the HighLevel v2 API.

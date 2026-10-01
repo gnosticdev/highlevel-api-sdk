@@ -1,9 +1,10 @@
-/**
- * The public key used to verify the webhook signature, for convenience.
- *
- * @see {@link https://marketplace.gohighlevel.com/docs/webhook/WebhookIntegrationGuide/index.html#security-verifying-webhook-authenticity}
- */
-export const GHL_WEBHOOK_PUBLIC_KEY_PEM = `-----BEGIN PUBLIC KEY-----
+/** Current Ed25519 key for HighLevel's `X-GHL-Signature` header. */
+export const GHL_WEBHOOK_ED25519_PUBLIC_KEY_PEM = `-----BEGIN PUBLIC KEY-----
+MCowBQYDK2VwAyEAi2HR1srL4o18O8BRa7gVJY7G7bupbN3H9AwJrHCDiOg=
+-----END PUBLIC KEY-----`
+
+/** Legacy RSA key for HighLevel's `X-WH-Signature` header. */
+export const GHL_WEBHOOK_LEGACY_PUBLIC_KEY_PEM = `-----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAokvo/r9tVgcfZ5DysOSC
 Frm602qYV0MaAiNnX9O8KxMbiyRKWeL9JpCpVpt4XHIcBOK4u3cLSqJGOLaPuXw6
 dO0t6Q/ZVdAV5Phz+ZtzPL16iCGeK9po6D6JHBpbi989mmzMryUnQJezlYJ3DVfB
@@ -17,3 +18,9 @@ HULgCsnuDJHcrGNd5/Ddm5hxGQ0ASitgHeMZ0kcIOwKDOzOU53lDza6/Y09T7sYJ
 PQe7z0cvj7aE4B+Ax1ZoZGPzpJlZtGXCsu9aTEGEnKzmsFqwcSsnw3JB31IGKAyk
 T1hhTiaCeIY/OwwwNUY2yvcCAwEAAQ==
 -----END PUBLIC KEY-----`
+
+/**
+ * @deprecated This is the legacy RSA key for `X-WH-Signature`. Use
+ * `GHL_WEBHOOK_ED25519_PUBLIC_KEY_PEM` for the current `X-GHL-Signature` header.
+ */
+export const GHL_WEBHOOK_PUBLIC_KEY_PEM = GHL_WEBHOOK_LEGACY_PUBLIC_KEY_PEM

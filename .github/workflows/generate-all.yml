@@ -80,6 +80,7 @@ jobs:
           fi
 
           echo "Latest release tag: $latest_tag"
+          echo "latest_tag=$latest_tag" >> "$GITHUB_OUTPUT"
           if git diff --quiet "$latest_tag" HEAD -- schemas/v2 src/v2; then
             echo "has_pending_release=false" >> "$GITHUB_OUTPUT"
             echo "No generated changes need a release."
@@ -87,6 +88,14 @@ jobs:
             echo "has_pending_release=true" >> "$GITHUB_OUTPUT"
             echo "Generated changes need a release."
           fi
+
+      - name: Summarize generated changes
+        if: steps.pending-release.outputs.has_pending_release == 'true'
+        env:
+          RELEASE_BASE_TAG: ${{ steps.pending-release.outputs.latest_tag }}
+        run: |
+          bun scripts/summarize-generated-changes.ts "$RELEASE_BASE_TAG" > "$RUNNER_TEMP/generated-types-summary.md"
+          cat "$RUNNER_TEMP/generated-types-summary.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Verify release package
         if: steps.pending-release.outputs.has_pending_release == 'true'
@@ -106,7 +115,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SKIP_NPM_PUBLISH: ${{ inputs.npm_version_already_published }}
         run: |
-          release_args=(--ci --increment=minor --hooks.before:init= --no-git.requireCleanWorkingDir --npm.skipChecks)
+          release_args=(
+            --ci
+            --increment=minor
+            --hooks.before:init=
+            --no-git.requireCleanWorkingDir
+            --npm.skipChecks
+            --github.autoGenerate=false
+            "--git.changelog=cat $RUNNER_TEMP/generated-types-summary.md"
+          )
           if [[ "$SKIP_NPM_PUBLISH" == "true" ]]; then
             release_args+=(--npm.publish=false)
           fi

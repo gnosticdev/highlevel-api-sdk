@@ -11,10 +11,7 @@
   "github": {
     "autoGenerate": true,
     "makeLatest": true,
-    "release": true,
-    "releaseNotes": {
-      "changelog": "CHANGELOG.md"
-    }
+    "release": true
   },
   "hooks": {
     "after:bump": ["bunx auto-changelog -p"],

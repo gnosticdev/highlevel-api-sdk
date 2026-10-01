@@ -1,33 +1,24 @@
-# Webhook Payload Decryption
+# Webhook Signature Verification and Payload Parsing
 
-This document provides reference code for verifying and decrypting HighLevel webhook payloads. **Note:** This code uses Node.js's `crypto` module and is not included in the SDK to maintain compatibility with all runtimes (Cloudflare Workers, Bun, etc.). You can copy this code into your project if you need webhook signature verification.
+This guide shows how to verify a HighLevel webhook signature and parse its payload. HighLevel's current guide uses the `X-GHL-Signature` header with Ed25519. It says the legacy `X-WH-Signature` header was due to end on September 1, 2026. See the [HighLevel webhook guide](https://marketplace.gohighlevel.com/docs/webhook/WebhookIntegrationGuide).
+
+This code uses Node.js `crypto`. The SDK does not verify signatures, so you can use the Web Crypto API in other runtimes.
 
 ## Webhook Signature Verification
 
-HighLevel webhooks include a signature that can be verified using their public key. This helps ensure the webhook payload is authentic and hasn't been tampered with.
+Verify the raw request body before you parse it. HighLevel signs the request body with its Ed25519 private key. The SDK exposes the current public key for convenience.
 
 ```typescript
 // src/webhooks/verify.ts
 import crypto from 'node:crypto'
-import type { WebhookEventMap } from './types/WebhookEventMap'
+import { createWebhooksClient } from '@gnosticdev/highlevel-sdk/webhooks'
+import type { WebhookEventMap } from '@gnosticdev/highlevel-sdk/webhooks'
 
-export const GHL_WEBHOOK_PUBLIC_KEY_PEM = `-----BEGIN PUBLIC KEY-----
-MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAokvo/r9tVgcfZ5DysOSC
-Frm602qYV0MaAiNnX9O8KxMbiyRKWeL9JpCpVpt4XHIcBOK4u3cLSqJGOLaPuXw6
-dO0t6Q/ZVdAV5Phz+ZtzPL16iCGeK9po6D6JHBpbi989mmzMryUnQJezlYJ3DVfB
-csedpinheNnyYeFXolrJvcsjDtfAeRx5ByHQmTnSdFUzuAnC9/GepgLT9SM4nCpv
-uxmZMxrJt5Rw+VUaQ9B8JSvbMPpez4peKaJPZHBbU3OdeCVx5klVXXZQGNHOs8gF
-3kvoV5rTnXV0IknLBXlcKKAQLZcY/Q9rG6Ifi9c+5vqlvHPCUJFT5XUGG5RKgOKU
-J062fRtN+rLYZUV+BjafxQauvC8wSWeYja63VSUruvmNj8xkx2zE/Juc+yjLjTXp
-IocmaiFeAO6fUtNjDeFVkhf5LNb59vECyrHD2SQIrhgXpO4Q3dVNA5rw576PwTzN
-h/AMfHKIjE4xQA1SZuYJmNnmVZLIZBlQAF9Ntd03rfadZ+yDiOXCCs9FkHibELhC
-HULgCsnuDJHcrGNd5/Ddm5hxGQ0ASitgHeMZ0kcIOwKDOzOU53lDza6/Y09T7sYJ
-PQe7z0cvj7aE4B+Ax1ZoZGPzpJlZtGXCsu9aTEGEnKzmsFqwcSsnw3JB31IGKAyk
-T1hhTiaCeIY/OwwwNUY2yvcCAwEAAQ==
------END PUBLIC KEY-----`
+const webhooks = createWebhooksClient()
+export const GHL_WEBHOOK_ED25519_PUBLIC_KEY_PEM = webhooks.WEBHOOK_GHL_PUBLIC_KEY_PEM
 
 /**
- * Verifies a HighLevel webhook signature using RSA-SHA256.
+ * Verifies the current HighLevel webhook signature using Ed25519.
  *
  * @param opts - Verification options
  * @param opts.rawBody - The raw webhook body as a string or Buffer
@@ -38,30 +29,21 @@ export function verifyGhlWebhookSignature(opts: {
 	rawBody: string | Buffer
 	signatureB64: string
 }): boolean {
-	const verifier = crypto.createVerify('SHA256')
-	if (typeof opts.rawBody === 'string') {
-		verifier.update(opts.rawBody)
-	} else {
-		verifier.update(new Uint8Array(opts.rawBody.buffer))
-	}
-	verifier.end()
-	return verifier.verify(
-		GHL_WEBHOOK_PUBLIC_KEY_PEM,
-		opts.signatureB64,
-		'base64',
-	)
+	const payload = typeof opts.rawBody === 'string' ? Buffer.from(opts.rawBody) : opts.rawBody
+	const signature = Buffer.from(opts.signatureB64, 'base64')
+	return crypto.verify(null, payload, GHL_WEBHOOK_ED25519_PUBLIC_KEY_PEM, signature)
 }
 
 /**
- * Parses a raw webhook body string into a JSON object.
+ * Parses a raw webhook body into a JSON object.
  *
- * @param rawBody - The raw webhook body as a string
+ * @param rawBody - The raw webhook body as a string or Buffer
  * @returns Parsed webhook object with a type property
  */
 export function parseWebhook(
-	rawBody: string,
+	rawBody: string | Buffer,
 ): { type: string } & Record<string, unknown> {
-	return JSON.parse(rawBody)
+	return JSON.parse(typeof rawBody === 'string' ? rawBody : rawBody.toString('utf8'))
 }
 
 /**
@@ -76,7 +58,7 @@ export function asTypedWebhook<T extends keyof WebhookEventMap>(
 	obj: unknown,
 	type: T,
 ): WebhookEventMap[T] {
-	// TS-only cast; if you want runtime safety, wrap with zod/io-ts later.
+	// This checks the event name. It does not validate every payload field.
 	const w = obj as WebhookEventMap[T]
 	if (!w || w.type !== type) throw new Error('Webhook type mismatch')
 	return w
@@ -93,10 +75,13 @@ import {
 } from './webhook-utils'
 import type { WebhookEventMap } from '@gnosticdev/highlevel-sdk/webhooks'
 
-// In your webhook handler (e.g., Express, Hono, etc.)
+// In your webhook handler. Configure middleware to keep the raw request body.
 app.post('/webhooks/highlevel', async (req, res) => {
-	const signature = req.headers['x-ghl-signature'] as string
-	const rawBody = req.body // Make sure to use raw body, not parsed JSON
+	const signature = req.headers['x-ghl-signature']
+	const rawBody = req.body
+	if (typeof signature !== 'string') {
+		return res.status(401).json({ error: 'Missing webhook signature' })
+	}
 
 	// Verify the signature
 	if (
@@ -108,20 +93,18 @@ app.post('/webhooks/highlevel', async (req, res) => {
 		return res.status(401).json({ error: 'Invalid signature' })
 	}
 
-	// Parse and type the webhook
+	// Parse the verified raw body.
 	const parsed = parseWebhook(rawBody)
-	const typedWebhook = asTypedWebhook(
-		parsed,
-		parsed.type as keyof WebhookEventMap,
-	)
 
-	// Handle the webhook based on type
-	switch (typedWebhook.type) {
-		case 'ContactCreate':
-			// typedWebhook is now fully typed as ContactCreate
-			console.log('New contact:', typedWebhook.contact)
+	// Check each supported event before using its typed payload.
+	switch (parsed.type) {
+		case 'ContactCreate': {
+			const contact = asTypedWebhook(parsed, 'ContactCreate')
+			console.log('New contact:', contact.firstName, contact.email)
 			break
-		// ... other webhook types
+		}
+		default:
+			console.log('Unhandled webhook event:', parsed.type)
 	}
 
 	res.status(200).end()
@@ -135,4 +118,4 @@ app.post('/webhooks/highlevel', async (req, res) => {
     - **Bun**: Should work with minimal modifications
     - **Cloudflare Workers**: Use Web Crypto API instead
     - **Deno**: Use Deno's crypto API
-- **Type Safety**: The `asTypedWebhook` function provides TypeScript type safety but minimal runtime validation. Consider using a validation library like Zod for production use.
+- **Type Safety**: The `asTypedWebhook` function checks the event name and returns the matching TypeScript type. It does not validate every field. Use a validation library such as Zod if you need a runtime schema check.

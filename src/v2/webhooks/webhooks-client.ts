@@ -1,6 +1,11 @@
 import { HighLevelSDKError } from '../../lib/errors'
-import { GHL_WEBHOOK_PUBLIC_KEY_PEM } from './public-key'
+import {
+	GHL_WEBHOOK_ED25519_PUBLIC_KEY_PEM,
+	GHL_WEBHOOK_PUBLIC_KEY_PEM,
+} from './public-key'
 import type { WebhookEventMap } from './types/WebhookEventMap'
+
+export type { WebhookEventMap }
 
 type WebhookHandlerMap<T extends keyof WebhookEventMap> = {
 	[K in T]: (payload: WebhookEventMap[K]) => Promise<void> | void
@@ -24,16 +29,23 @@ export type WebhookHandler<T extends keyof WebhookEventMap> = (
 /**
  * Client for handling HighLevel webhook events
  *
- * **Note** You will need to decrypt the raw body of the payload response from HighLevel to get the actual payload.
+ * Verify the webhook signature and parse the request body before passing an event to this client.
+ * This client does not verify signatures or validate every payload field.
  * @see {@link https://marketplace.gohighlevel.com/docs/webhook/WebhookIntegrationGuide}
  */
 export class WebhooksClient {
 	// Use keyof T instead of string to ensure type safety
 	private handlers = new HandlerMap<keyof WebhookEventMap>()
 	/**
-	 * The public key used to verify the webhook signature, for convenience.
+	 * Legacy RSA key for the `X-WH-Signature` header.
+	 * @deprecated Use `WEBHOOK_GHL_PUBLIC_KEY_PEM` for `X-GHL-Signature`.
 	 */
 	public readonly WEBHOOK_PUBLIC_KEY_PEM = GHL_WEBHOOK_PUBLIC_KEY_PEM
+	/**
+	 * The current Ed25519 key for the `X-GHL-Signature` header.
+	 */
+	public readonly WEBHOOK_GHL_PUBLIC_KEY_PEM =
+		GHL_WEBHOOK_ED25519_PUBLIC_KEY_PEM
 
 	/**
 	 * Register a handler for a specific webhook event
@@ -62,18 +74,13 @@ export class WebhooksClient {
 	}
 
 	/**
-	 * Validate and handle an incoming webhook payload
+	 * Send a parsed webhook payload to its registered handler.
 	 *
 	 * @example
 	 * ```ts
-	 * app.post('/webhooks/:event', async (ctx) => {
-	 *   try {
-	 *     await webhooks.handle(ctx.params.event, ctx.request.body)
-	 *     return ctx.status(200).end()
-	 *   } catch (error) {
-	 *     return ctx.status(400).json({ error: error.message })
-	 *   }
-	 * })
+	 * const webhooks = new WebhooksClient()
+	 * // After you verify the request and parse a typed payload:
+	 * await webhooks.handle('ContactCreate', contactPayload)
 	 * ```
 	 */
 	async handle<T extends keyof WebhookEventMap>(
@@ -107,7 +114,7 @@ export class WebhooksClient {
 	 * ```ts
 	 * const webhooks = new WebhooksClient()
 	 *
-	 * const contactType = webhooks.type<'ContactCreate'>()
+	 * const contactType = webhooks.$typeOf<'ContactCreate'>()
 	 * // contactType is fully typed as ContactCreate schema
 	 * ```
 	 */
